@@ -1,6 +1,4 @@
 <resources>
     <string name="app_name">Android Sample</string>
-
-    <string name="algorithmia_api_key">simeyUbLXQ/R8Qga/3ZCRGcr2oR1</string>
-
+    <string name="algorithmia_api_key">YOUR_API_KEY</string>
 </resources>

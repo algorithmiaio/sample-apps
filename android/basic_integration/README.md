@@ -1,6 +1,6 @@
 # Basic Android Integration Sample App
 
-This directory contains a sample app to demonstrate a simple integration of the Algorithmia client into an Android project.
+This directory contains a sample app to demonstrate a simple integration of the Algorithmia client into an Android project. You can either play around with the finished code by cloning this repository and opening it in Android Studio, or you can follow along with our [Basic Android Integration tutorial](http://developers.algorithmia.com/samples/basic-android/) to build it from scratch.
 
 The app allows you to specify an algorithm and its input. When you hit the Run button, the app will make a call to the API and algorithm. The results will be shown below the run button.
 

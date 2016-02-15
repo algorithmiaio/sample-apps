@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>RSS Dashboard - Algorithmia</title>
+
+<!-- Feel free to replace, modify, or tweak with your own styles! -->
+<link rel="stylesheet" media="screen" href="css/main.css">
+<link rel="shortcut icon" href="favicon.png" type="image/png">
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+<!-- This is the Algorithmia JavaScript client. See: https://algorithmia.com/docs/clients/javascript/ -->
+<script src="javascript/algorithmia.js"></script>
+<script src="javascript/main.js"></script>
+</head>
+
+<body>
+  <div class="well">
+    <header>RSS Dashboard</header>
+    <p>
+      This tool takes in a URL to an RSS feed, and offers automatically generated tag suggestions, text summary and sentiment analysis.
+    </p>
+
+    <!-- Inputs -->
+    <div class="form-group" style="margin-bottom: 6px;">
+
+      <label class="block">Select one of our example URLs or input your own below:</label>
+      <select id="urlDD" class="form-control" onchange="updateUrl()" style="max-width: 350px; width: 95%;">
+        <option disabled>Select an example RSS feed</option>
+
+        <!-- Replace these with links to your favorite RSS feeds -->
+        <option value="https://news.ycombinator.com/rss">HackerNews</option>
+        <option value="http://feeds.feedburner.com/codinghorror">Coding Horror</option>
+        <option value="https://www.reddit.com/r/programming/.rss">r/programming</option>
+        <option value="http://www.alistapart.com/feed/rss.xml">A List Apart</option>
+        <option value="http://www.nytimes.com/services/xml/rss/nyt/Technology.xml">NYT Technology</option>
+        <option value="http://blog.algorithmia.com/rss">Algorithmia Blog</option>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <input class="form-control" style="max-width: 350px; width: 95%;" id="inputStrings">
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-primary" onclick="analyze()">Analyze RSS</button>
+      <span class="aspinner hidden" id="algo-spinner"></span>
+      <span id="status-label"></span>
+    </div>
+  
+    <table border="0" cellpadding="0" cellspacing="0" width="75%">
+      <tbody id="output"> 
+      </tbody>
+    </table>
+  </div>
+
+<script>
+  updateUrl();
+  analyze();
+</script>
+
+</body>
+</html>

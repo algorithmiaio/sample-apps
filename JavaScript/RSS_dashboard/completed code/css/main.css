@@ -1,0 +1,21 @@
+@import url("bootstrap.min.css");
+@import url("spinner.css");
+
+header {
+  color: rgb(80, 0, 190);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+table td {
+  padding-bottom: 10px;
+  vertical-align: top;
+}
+
+span.label {
+  font-size: 10px;
+}
+
+form-group {
+  margin-bottom: 6px;
+}

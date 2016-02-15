@@ -2,7 +2,7 @@
 
 Welcome to the RSS Dashboard Workshop! Here you will find the code you need to build your own RSS Dashboard. 
 
-![RSS Dashboard](https://github.com/algorithmiaio/sample-apps/tree/master/JavaScript/RSS_dashboard/readme_resources/final_dashboard.png)
+![RSS Dashboard](https://raw.githubusercontent.com/algorithmiaio/sample-apps/master/JavaScript/RSS_dashboard/readme_resources/final_dashboard.png)
 
 ## Getting started
 
@@ -20,7 +20,7 @@ The JavaScript directory has two files: `algorithmia.js` and `main.js`. The firs
 
 To see what we've already prepared, go ahead and open the `rss_dashboard.html` file in your browser of choice. You should see the following:
 
-![Failed to authenticate](https://github.com/algorithmiaio/sample-apps/tree/master/JavaScript/RSS_dashboard/readme_resources/failed_to_authenticate.png)
+![Failed to authenticate](https://raw.githubusercontent.com/algorithmiaio/sample-apps/master/JavaScript/RSS_dashboard/readme_resources/failed_to_authenticate.png)
 
 This is the base of the RSS Dashboard that we will build out. The first think we'll fix is that handy authentication error you see!
 
@@ -38,7 +38,7 @@ Algorithmia.api_key = "YOUR_API_KEY"
 
 Be sure to replace `YOUR_API_KEY` with the API key from your Algorithmia account! After you replace the API key, refresh the page. You'll be able to see the dashboard now loading and calling the algorithms that are already filled out for you. This will result in the top 6 results from the selected feed displayed as just their titles, like so:
 
-![Authenticated](https://github.com/algorithmiaio/sample-apps/tree/master/JavaScript/RSS_dashboard/readme_resources/authenticated.png)
+![Authenticated](https://raw.githubusercontent.com/algorithmiaio/sample-apps/master/JavaScript/RSS_dashboard/readme_resources/authenticated.png)
 
 ### Make some API calls
 

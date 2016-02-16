@@ -1,8 +1,6 @@
-# RSS Dashboard Workshop
+# RSS Dashboard Sample App
 
-Welcome to the RSS Dashboard Workshop! Here you will find the code you need to build your own RSS Dashboard. 
-
-![RSS Dashboard](https://raw.githubusercontent.com/algorithmiaio/sample-apps/master/JavaScript/RSS_dashboard/readme_resources/final_dashboard.png)
+Welcome to the RSS Dashboard sample app! You can see a live version of this demo at [RSS Dashboard](https://algorithmia.com/demo/rss).
 
 ## Getting started
 
@@ -30,9 +28,7 @@ window.Algorithmia = window.Algorithmia || {};
 Algorithmia.api_key = "YOUR_API_KEY"
 ```
 
-Be sure to replace `YOUR_API_KEY` with the API key from your Algorithmia account! After you replace the API key, refresh the page. You'll be able to see the dashboard now loading and calling the algorithms that are already filled out for you. This will result in the top 6 results from the selected feed displayed as just their titles, like so:
-
-![Authenticated](https://raw.githubusercontent.com/algorithmiaio/sample-apps/master/JavaScript/RSS_dashboard/readme_resources/authenticated.png)
+Be sure to replace `YOUR_API_KEY` with the API key from your Algorithmia account! After you replace the API key, refresh the page. You'll be able to see the dashboard now loading and calling the algorithms that prove the tags, sentiment analysis, and summaries.
 
 ## Ready to build your own Algorithmia based app?
 

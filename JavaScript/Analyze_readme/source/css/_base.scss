@@ -1,0 +1,105 @@
+// Algorithmia Brand Colors
+
+$black-nav                    : #282828;
+$purple-dark                  : #5000be;
+$purple-light                 : #9963ff;
+$purple-lighter               : #b996fc;
+$purple-highlight             : #f6f1ff;
+$gray-brand                   : #999;
+$gray-medium                  : #ddd;
+$gray-light                   : #aaa;
+$gray-lighter                 : #eee;
+$gray-dark                    : #555;
+$gray-darker                  : #222;
+
+// COLORS
+// Color variable recommendation: http://sachagreif.com/sass-color-variables/
+// Better color defaults: http://clrs.cc/
+// ----------------------------------------------------------------------------
+
+// Cool
+
+$aqua: #7fdbff;
+$blue: #0074d9;
+$navy: #001f3f;
+$teal: #39cccc;
+$green: #2ecc40;
+$olive: #3d9970;
+$lime: #01ff70;
+
+// Warm
+
+$yellow: #ffdc00;
+$orange: #ff851b;
+$red: #ff4136;
+$fuchsia: #f012be;
+$purple: #b10dc9;
+$maroon: #85144b;
+
+// Gray Scale
+
+$white: #fff;
+$silver: #ddd;
+$gray: #aaa;
+$black: #000;
+
+// Extra colors
+
+$off-white: #f7f9fb;
+
+// Color Assignments
+
+$page-bg: $off-white;
+$link-color: $blue;
+$text-color: $black;
+
+// Quick Classes
+
+.navy { color: $navy; }
+.blue { color: $blue; }
+.aqua { color: $aqua; }
+.teal { color: $teal; }
+.olive { color: $olive; }
+.green { color: $green; }
+.lime { color: $lime; }
+.yellow { color: $yellow; }
+.orange { color: $orange; }
+.red { color: $red; }
+.fuchsia { color: $fuchsia; }
+.purple { color: $purple-light; }
+.maroon { color: $maroon; }
+.white { color: $white; }
+.silver { color: $silver; }
+.gray { color: $gray-brand; }
+.black { color: $black; }
+
+// Media Queries with IE support: http://jakearchibald.github.io/sass-ie/
+// ----------------------------------------------------------------------------
+
+// Allows fixed media query export (for IE sheet)
+// Make sure you change in IE sheet
+$fix-mqs: false !default;
+
+// Check for export, otherwise build a media query
+@mixin respond-min($width) {
+  @if $fix-mqs {
+    @if $fix-mqs >= $width {
+      @content;
+    }
+  }
+  @else {
+    @media screen and (min-width: $width) {
+      @content;
+    }
+  }
+}
+
+// Prevent IE styles from exporting, unless asked for
+$old-ie: false !default;
+
+// Everything for IE8-
+@mixin old-ie {
+  @if $old-ie {
+    @content;
+  }
+}

@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="panel panel-info">
+    <div class="panel-heading">Definitions & Recommendations</div>
+    <div class="panel-body">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#headers_recommendation_tab" aria-controls="headers" role="tab" data-toggle="tab">Headers</a></li>
+    <li role="presentation"><a href="#code_recommendation_tab" aria-controls="code_samples" role="tab" data-toggle="tab">Code Samples</a></li>
+    <li role="presentation"><a href="#length_recommendation_tab" aria-controls="length" role="tab" data-toggle="tab">Length</a></li>
+    <li role="presentation"><a href="#paragraphs_recommendation_tab" aria-controls="paragraphs" role="tab" data-toggle="tab">Paragraphs</a></li>
+    <li role="presentation"><a href="#images_recommendation_tab" aria-controls="imges" role="tab" data-toggle="tab">Images</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="headers_recommendation_tab"><%= partial "headers" %></div>
+    <div role="tabpanel" class="tab-pane" id="code_recommendation_tab"><%= partial "code_samples" %></div>
+    <div role="tabpanel" class="tab-pane" id="length_recommendation_tab"><%= partial "length" %></div>
+    <div role="tabpanel" class="tab-pane" id="paragraphs_recommendation_tab"><%= partial "paragraphs" %></div>
+    <div role="tabpanel" class="tab-pane" id="images_recommendation_tab"><%= partial "images" %></div>
+  </div>
+  </div>
+  </div>
+</div>

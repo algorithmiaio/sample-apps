@@ -1,0 +1,239 @@
+@import 'compass';
+@import 'normalize';
+@import 'base';
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+@import url("https://fonts.googleapis.com/css?family=Permanent+Marker");
+@import url("https://fonts.googleapis.com/css?family=Quattrocento:400,700");
+
+$marker-font:'Permanent Marker', cursive;
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  // Global styles + mobile
+  color: $text-color;
+  background-color: $page-bg;
+  border-top: 10px solid $black;
+}
+
+.main {
+  margin: 5%;
+  margin-bottom: 220px;
+ 
+  @include respond-min(45em) {
+    margin-left: 15%;
+    margin-right: 15%;
+  }
+}
+
+header {
+  position: relative;
+  top: 0;
+  width: 100%;
+  padding: 1em;
+  margin-bottom: 2em;
+}
+
+.footer {
+  position: absolute;
+  height: 200px;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  vertical-align: baseline;
+
+  @include respond-min(45em) {
+    padding: 1em;
+  }
+  // Align FB share button
+  .fb_iframe_widget {
+    vertical-align: super;
+  }
+
+  #logo {
+    width: 50%;
+    margin: auto;
+  }
+
+  #connect {
+    width: 50%;
+    margin: auto;
+  
+  // Remove webkit engine padding for horizontal centering
+   ul {
+    -webkit-padding-start: 0;
+  }
+
+    li {
+      list-style-type: none;
+      display: inline-block;
+    }
+  }
+
+  .btn {
+    margin: .25em;
+    background-color: $purple-highlight;
+    border: 1px solid $purple-dark;
+    color: $purple-dark;
+    
+    &:hover {
+      background-color: $purple-lighter;
+      border: 1px solid $purple-highlight;
+      color: $purple-highlight;
+    }
+  }
+}
+
+.octocat {
+  display: inline-block;
+  max-height: 200px;
+}
+
+// algorithm-form
+
+.algorithm-form {
+  margin: 5%;
+  text-align: center;
+}
+
+// recommendations
+.tabs {
+  margin-left: 5%;
+  margin-right: 5%;
+  border: 1px solid #ddd;
+  padding: 5%;
+}
+
+
+.inserted-recs {
+  margin: 5%;
+
+
+}
+
+.panel-info {
+  border-color: $purple-dark;
+}
+
+.panel-info > .panel-heading {
+  color: $purple-dark;
+  background-color: $purple-highlight;
+  border-color: $purple-dark;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 800;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+  color:$purple-dark;
+  font-weight: 500;
+}
+
+a {
+  color: $purple-dark;
+}
+
+.btn-primary {
+  background-color: $purple-dark;
+  border: 1px solid $purple-lighter;
+  font-weight: 500;
+  color: $purple-highlight;
+  
+  &:hover {
+    background-color: $purple-highlight;
+    border: 1px solid $purple-dark;
+    color: $purple-dark;
+  }
+}
+
+.btn-info {
+    margin: .25em;
+    background-color: $purple-highlight;
+    border: 1px solid $purple-dark;
+    color: $purple-dark;
+    
+    &:hover {
+      background-color: $purple-lighter;
+      border: 1px solid $purple-highlight;
+      color: $purple-highlight;
+    }
+  }
+
+.score-grade {
+  font-family: $marker-font;
+  font-size: 5em;
+}
+
+#scores {
+  text-align: center;
+
+  .score_caption {
+    // choose font and put it here
+  }
+
+  .row-centered {
+    text-align:center;
+  }
+
+  .col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+  }
+}
+
+#overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: rgba(0,0,0,0.7); /*dim the background*/
+
+  .dots-container {
+    position: absolute;
+    top: 25%;;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+  .dot {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    float: left;
+    margin-right: 20px;
+  }
+
+  .dot1 {
+    background: $purple-light;
+  }
+
+  .dot2 {
+    background: $purple-highlight;
+  }
+
+  .dot3 {
+    background: $purple-lighter;
+  }
+
+  .dot4 {
+    background: $purple-dark;
+  }
+}
+
+.media-heading {
+  padding: 1.5em .5em 1.5em 0;
+}
+
+.operation {
+  font-size: 1.5em;
+  vertical-align: middle;
+}

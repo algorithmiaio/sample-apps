@@ -1,0 +1,4 @@
+source "https://rubygems.org"
+
+gem "middleman"
+gem "sass-media_query_combiner"

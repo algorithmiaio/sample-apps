@@ -32,8 +32,8 @@ function callAlgorithm() {
 
 function parseRecommendations(result) {
 
-  updateLengthRecommentation(result.recommendation.length)
-  updateCodeSampleRecommentation(result.recommendation.pre)
+  updateLengthRecommendation(result.recommendation.length)
+  updateCodeSampleRecommendation(result.recommendation.pre)
   updateImagesRecommentation(result.recommendation.img)
 
   insertHeadersRecommendations(result.recommendation.header)
@@ -133,7 +133,7 @@ function insertParagraphRecommendations(recommendations) {
 
 // OK BELOW //
 
-function updateLengthRecommentation(length_rec) {
+function updateLengthRecommendation(length_rec) {
   var operation  = document.getElementById("length-recommendation-operation");
   var value  = document.getElementById("length-recommendation-value");
   operation.innerHTML = '';
@@ -160,7 +160,7 @@ function updateLengthRecommentation(length_rec) {
   operation.appendChild(icon);
 }
 
-function updateCodeSampleRecommentation(code_rec) {
+function updateCodeSampleRecommendation(code_rec) {
   var operation  = document.getElementById("code-recommendation-operation");
   var value  = document.getElementById("code-recommendation-value");
   operation.innerHTML = '';

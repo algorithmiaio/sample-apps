@@ -103,7 +103,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  middleman
+  middleman (= 3.0.14)
   sass-media_query_combiner
 
 BUNDLED WITH

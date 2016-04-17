@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+  <title>Analyze READMEs with Natural Language Processing & Algorithmia.</title>
+  <meta name="viewport" content="width=device-width">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!--[if lte IE 8]><link rel="stylesheet" href="css/old-ie-f0bd477d.css"><![endif]-->
+  <!--[if gt IE 8]><!--><!--<![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="/vendor/jquery-1.9.1.min-1ec97b49.js"><\/script>')</script>
+  <script src="/vendor/modernizr-2.6.2.min-d0696412.js" type="text/javascript"></script>
+  <script src="/vendor/d3.min-67d801ea.js" type="text/javascript"></script>
+  <script src="/vendor/bootstrap.min-791aa054.js" type="text/javascript"></script>
+  <script src="/vendor/tweenMax.min-7ee24a76.js" type="text/javascript"></script>
+  <link href="vendor/bootstrap.min-8eb176c7.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/all-8cd5ebeb.css">
+
+  
+<meta property="og:title" content="Analyze READMEs with Natural Language Processing & Algorithmia.">
+<meta property="og:url" content="http://localhost:4567">
+<meta property="og:description" content="Think you've got a gret README? Try comparing it to our trained model based on the top repositories and see how you line up.">
+<meta name="description" content="Think you've got a gret README? Try comparing it to our trained model based on the top repositories and see how you line up.">
+
+
+  <meta property="og:image" content="http://localhost:4567/img/Algorithmia_Bintree_Logo.png" >
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-XXXXXXXXX', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+
+<body>
+<!-- Facebook share button -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script> <!-- end Facebook share button -->
+
+  <div class="main">
+  <div id="overlay" class="hidden">
+    <div class="dots-container">
+      <div class="dot dot1"></div>
+      <div class="dot dot2"></div>
+      <div class="dot dot3"></div>
+      <div class="dot dot4"></div>
+    </div>  
+  </div>
+
+  <div class="jumbotron">
+    <div class="row">
+      <div class="col-md-9"><h1>This is the template for single-page demos. </h1></div>
+      <div class="col-md-3"><img class="octocat img-responsive" src="/img/octocat-a349b9b7.png" /></div>
+    </div>
+  </div>
+
+  <div class="explanation">
+    <p>Creating good readmes can be really challenging. This is especially true given the fact that there's no official standard to follow. One approach for solving this problem could be to go through the top starred repositories on github and find common features in each of them. Going through hundreds of repositories can be time consuming, slow process.
+
+    This algorithm uses machine learning models to learn from the 1000 starred repositories for the top 10 programming languages (that has the most repositories) on Github. It gives your project readme a score between 1-10, and makes recommendations to make your readme more similar to the top readmes on GitHub.</p>
+  </div>
+
+  <div class="row">
+    <div class="algorithm-form">
+      <form class="form-inline">
+        <div class="form-group">
+          <label for="repository">Repo:</label>
+          <input type="text" class="form-control " id="repository" placeholder="rspec/rspec-mocks">
+        </div>
+        <button class="btn btn-primary" type="button" onclick="callAlgorithm()">Analyze me!</button>
+          <span class="aspinner hidden" id="algo-spinner"></span>
+          <span id="status-label"></span>
+      </form>
+
+    </div>
+  </div>
+      <div class="row">
+  <div class="panel panel-info">
+    <div class="panel-heading">Your Score Card</div>
+    <div class="panel-body row-centered" id="scores">
+    
+      <div class="col-md-2 score-box col-centered">
+        <div class="score-grade length-score">A</div>
+        <div id="length_caption" class="score_caption">Length</div>
+      </div>
+      <div class="col-md-2 score-box col-centered">
+        <div class="score-grade headers-score">B</div>
+        <div id="headers_caption" class="score_caption">Headers</div>
+      </div>
+      <div class="col-md-2 score-box col-centered">
+        <div class="score-grade paragraph-score">C</div>
+        <div id="paragraph_caption" class="score_caption">Paragraphs</div>
+      </div>
+      <div class="col-md-2 score-box col-centered">
+        <div class="score-grade code-score">D</div>
+        <div id="code_caption" class="score_caption">Code Samples</div>
+      </div>
+      <div class="col-md-2 score-box col-centered">
+        <div class="score-grade image-score">A+</div>
+        <div id="image_caption" class="score_caption ">Images</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+      <div class="row"></div>
+      <div class="row">
+  <div class="panel panel-info">
+    <div class="panel-heading">Definitions & Recommendations</div>
+    <div class="panel-body">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#headers_recommendation_tab" aria-controls="headers" role="tab" data-toggle="tab">Headers</a></li>
+    <li role="presentation"><a href="#code_recommendation_tab" aria-controls="code_samples" role="tab" data-toggle="tab">Code Samples</a></li>
+    <li role="presentation"><a href="#length_recommendation_tab" aria-controls="length" role="tab" data-toggle="tab">Length</a></li>
+    <li role="presentation"><a href="#paragraphs_recommendation_tab" aria-controls="paragraphs" role="tab" data-toggle="tab">Paragraphs</a></li>
+    <li role="presentation"><a href="#images_recommendation_tab" aria-controls="imges" role="tab" data-toggle="tab">Images</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="headers_recommendation_tab"><div class="headers_info"> 
+  <blockquote>
+  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+  </blockquote>
+</div>
+
+<div class="inserted-recs">
+  <div id="headers_recommendation">
+    
+    <ul class="media-list">
+      <li class="media">
+        
+        <div class="media-left media-top">
+          <div class="score-grade headers-score">B</div>
+        </div>
+
+        <div class="media-body">
+          <h3 class="media-heading">— Your Grade</h3>
+          <div id="headers-recommendation-list"></div>
+        </div>
+
+      </li>
+    </ul>
+
+  </div>
+</div></div>
+    <div role="tabpanel" class="tab-pane" id="code_recommendation_tab"><div class="code_info"> 
+  <blockquote>
+  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+  </blockquote>
+</div>
+
+<div class="inserted-recs">
+  <div id="code_recommendation">
+ 
+    <ul class="media-list">
+      <li class="media">
+        
+        <div class="media-left media-top">
+          <div class="score-grade code-score">D</div>
+        </div>
+
+        <div class="media-body">
+          <h3 class="media-heading">— Your Grade</h3>
+
+            <div class="media">
+              <div class="media-left media-top">
+                <div id="code-recommendation-operation" class="operation"></div>
+              </div>
+              <div class="media-body">
+                <h4 id="code-recommendation-value"></h4>
+              </div>
+            </div>
+
+        </div>
+      </li>
+    </ul>
+    
+  </div>
+</div></div>
+    <div role="tabpanel" class="tab-pane" id="length_recommendation_tab"><div class="length_info">
+  <blockquote>
+  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+  </blockquote>
+</div>
+
+<div class="inserted-recs">
+  <div id="length_recommendation">
+
+    <ul class="media-list">
+      <li class="media">
+        <div class="media-left media-top">
+          <div class="score-grade length-score">A</div>
+        </div>
+        <div class="media-body">
+          <h3 class="media-heading">— Your Grade</h3>
+
+            <div class="media">
+              <div class="media-left media-top">
+                <div id="length-recommendation-operation" class="operation"></div>
+              </div>
+              <div class="media-body">
+                <h4 id="length-recommendation-value"></h4>
+              </div>
+            </div>
+
+        </div>
+      </li>
+    </ul>
+  
+  </div>
+</div>
+</div>
+    <div role="tabpanel" class="tab-pane" id="paragraphs_recommendation_tab"><div class="paragraph_info"> 
+  <blockquote>
+  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+  </blockquote>
+</div>
+
+<div class="inserted-recs">
+  <div id="paragraph_recommendation">
+    
+    <ul class="media-list">
+      <li class="media">
+        <div class="media-left media-top">
+          <div class="score-grade paragraph-score">C</div>
+        </div>
+        
+        <div class="media-body">
+          <h3 class="media-heading">— Your Grade</h3>
+          <div  id="paragraphs-recommendation-list"></div>
+        </div>
+
+      </li>
+    </ul>
+
+  </div>
+</div></div>
+    <div role="tabpanel" class="tab-pane" id="images_recommendation_tab"><div class="images_info"> 
+  <blockquote>
+  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+  </blockquote>
+</div>
+
+<div class="inserted-recs">
+  <div id="images_recommendation">
+
+    <ul class="media-list">
+      <li class="media">
+        <div class="media-left media-top">
+          <div class="score-grade image-score">A+</div>
+        </div>
+        <div class="media-body">
+          <h3 class="media-heading">— Your Grade</h3>
+
+            <div class="media">
+              <div class="media-left media-top">
+                <div id="images-recommendation-operation" class="operation"></div>
+              </div>
+              <div class="media-body">
+                <h4 id="images-recommendation-value"></h4>
+              </div>
+            </div>
+
+        </div>
+      </li>
+    </ul>
+
+  </div>
+</div></div>
+  </div>
+  </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div> <!-- main -->
+  <footer class="footer">
+  <div class="social-sharing">
+    <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="box_count"></div>
+
+    <a href="https://twitter.com/share" class="twitter-share-button" data-via="algorithmia" data-size="small">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+    <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+    <script type="IN/Share" data-counter="top"></script>
+  </div>
+
+  <div id="logo">
+    <a href="https://algorithmia.com" target="_blank">
+      <img src="/img/powered-by-algorithmia-220x60-0099010d.png" />
+    </a>
+  </div>
+
+  <div id="connect">
+    <p>Don't want to miss out on the next cool demo?</p>
+      <ul>
+        <li><a href="http://blog.algorithmia.com" class="btn btn-info btn-xs">Check out our blog</a></li>
+        <li><a href="http://blog.algorithmia.com/emergent-future-newsletter/" class="btn btn-info btn-xs">Sign up for our newletter</a></li>
+      <ul>
+  </div>
+</footer>
+
+
+
+  <script src="/js/all-65caeb28.js" type="text/javascript"></script>
+
+</body>
+</html>

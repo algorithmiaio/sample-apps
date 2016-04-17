@@ -1,6 +1,7 @@
 @import 'compass';
 @import 'normalize';
 @import 'base';
+@import 'algo-style';
 @import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
 @import url("https://fonts.googleapis.com/css?family=Permanent+Marker");
 @import url("https://fonts.googleapis.com/css?family=Quattrocento:400,700");
@@ -237,3 +238,11 @@ a {
   font-size: 1.5em;
   vertical-align: middle;
 }
+
+
+//merge githubUICSS
+
+.form-control {
+            width: 420px;
+            display: inline-block;
+            }

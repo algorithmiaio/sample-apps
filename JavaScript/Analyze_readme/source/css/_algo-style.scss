@@ -1,0 +1,258 @@
+@import url(https://fonts.googleapis.com/css?family=Kaushan+Script);
+
+body {
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Verdana, Arial, sans-serif;
+    font-weight: 400;
+    margin-bottom: 60px;
+    color: #444a55;
+    }
+.aspinner {
+    display:           inline-block;
+    height:            22px;
+    width:             22px;
+    margin:            2px;
+    position:          relative;
+    -webkit-animation: rotation 1.0s infinite linear;
+    -moz-animation: rotation 1.0s infinite linear;
+    -o-animation: rotation 1.0s infinite linear;
+      animation: rotation 1.0s infinite linear;
+    border-top:        4px solid rgba(174,174,174,.8);
+    border-right:      4px solid rgba(174,174,174,.2);
+    border-bottom:     4px solid rgba(174,174,174,.2);
+    border-left:       4px solid rgba(174,174,174,.2);
+    border-radius:     100%;
+}
+
+.aspinner-small {
+    height:            18px;
+    width:             18px;
+    margin:            0;
+}
+
+.algo-spinner {
+    visibility:         hidden;
+}
+
+.demo-spinner {
+    margin-bottom: -6px;
+}
+
+.spinme {
+    -webkit-animation: rotation 1.0s infinite linear;
+    -moz-animation: rotation 1.0s infinite linear;
+    -o-animation: rotation 1.0s infinite linear;
+      animation: rotation 1.0s infinite linear;
+}
+
+@-webkit-keyframes rotation {
+from {-webkit-transform: rotate(0deg);}
+to   {-webkit-transform: rotate(359deg);}
+}
+
+@-moz-keyframes rotation {
+from {-moz-transform: rotate(0deg);}
+to   {-moz-transform: rotate(359deg);}
+}
+
+@-o-keyframes rotation {
+from {-o-transform: rotate(0deg);}
+to   {-o-transform: rotate(359deg);}
+}
+
+@keyframes rotation {
+from {transform: rotate(0deg);}
+to   {transform: rotate(359deg);}
+}
+
+.algorithmia-recommends-progress {
+    display: none;
+    width: 0%;
+}
+
+.form-control {
+    width: 420px;
+    display: inline-block;
+}
+
+.algorithmia-recommends-container {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    /*display: none;*/
+    visibility: hidden;
+    min-height: 250px;
+}
+
+#recommendUrl {
+    width: 600px;
+}
+
+/*
+Added by Kyle Leitch on 2 Sept 2015.
+No style above this line has been altered, except the body element
+to which I added color: #444a55. There was no color specified before
+this change.
+*/
+p {
+    line-height: 1.67em;
+}
+
+#content {
+    width: 100%;
+}
+
+#demo-space {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 50px;
+}
+
+.navbar {
+    min-height: 80px;
+    margin-bottom: 0;
+}
+
+.navbar-default {
+    background-color: #444a55;
+    border-bottom: 1px solid #344945;
+}
+
+.navbar-brand {
+    height: 80px;
+}
+
+.navbar-brand > img {
+    height: 45px;
+    width: auto;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #fff;
+    line-height: 45px;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+    color: #c9c7cb;
+}
+
+#pitch {
+    padding: 90px 0;
+    color: #fff;
+}
+
+.main-content {
+    padding-top: 30px;
+}
+
+.hero-background {
+    background-image: url(Hero-1.jpg);
+    background-size: cover;
+    background-position: 50%;
+}
+
+h1 {
+    font-size: 50px;
+    font-weight: 500;
+    padding-bottom: 15px;
+    font-family: 'Lato', sans-serif;
+    /*text-shadow: 0 2px #444a55;*/
+    color: #fff;
+}
+
+h2 {
+    font-size: 35px;
+    font-weight: 200;
+    padding-bottom: 25px;
+    line-height: 56px;
+    font-family: 'Lato', sans-serif;
+    color: #fff;
+}
+
+h3 {
+    color: #4f3393;
+    font-size: 30px;
+    font-weight: 300;
+    padding-bottom: .67em;
+    line-height: 1.33em;
+}
+
+.concept-item h3 {
+    line-height: normal;
+}
+
+h4 {
+    font-weight: 500;
+    font-size: 20px;
+    padding-bottom: .67em;
+    line-height: 1.33em;
+}
+
+.three-step p {
+    font-size: 14px;
+}
+
+.hero-button {
+    max-width: 250px;
+    font-size: 16px;
+    -webkit-box-shadow: 0px 3px 0px 0px #267622;
+    -moz-box-shadow: 0px 3px 0px 0px #267622;
+    box-shadow: 0px 3px 0px 0px #267622;
+}
+
+.concepts {
+    padding: 50px 0;
+    background-color: #ebeefa;
+}
+
+.concept-item {
+    text-align: center;
+}
+
+.three-step i, .large-icon {
+    font-size: 70px;
+    color: #5c7bbd;
+}
+
+footer {
+    padding-top: 50px;
+}
+
+#end-cap {
+    background-color: #ebeefa;
+    padding: 50px 0;
+    margin-top: 50px;
+}
+
+.navbar {
+    min-height: 80px;
+}
+
+.navbar-default {
+    background-color: #444a55;
+    border-color: #344945;
+}
+.navbar-brand {
+    height: 80px;
+}
+.navbar-brand > img {
+    height: 45px;
+    width: auto;
+}
+.algo-reportcardicon {
+    padding-right: 10px !important;
+}
+.fa-check-circle {
+    color: #5cb85c;
+}
+.fa-times-circle {
+    color: #c43b3b;
+}
+.algo-grade {
+    font-size: 72px;
+    font-family: "Kaushan Script", sans-serif;
+}
+.algo-grade-good p {
+    color: #5cb85c;
+}
+.algo-grade-bad p {
+    color: #c43b3b;
+}

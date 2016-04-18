@@ -137,10 +137,10 @@ a {
 }
 
 .btn-primary {
-  background-color: $purple-dark;
-  border: 1px solid $purple-lighter;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+  border: 1px solid;
   font-weight: 500;
-  color: $purple-highlight;
   
   &:hover {
     background-color: $purple-highlight;

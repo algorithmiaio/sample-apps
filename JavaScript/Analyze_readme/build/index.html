@@ -86,35 +86,6 @@
 
     </div>
   </div>
-      <div class="row">
-  <div class="panel panel-info">
-    <div class="panel-heading">Your Score Card</div>
-    <div class="panel-body row-centered" id="scores">
-    
-      <div class="col-md-2 score-box col-centered">
-        <div class="score-grade length-score">A</div>
-        <div id="length_caption" class="score_caption">Length</div>
-      </div>
-      <div class="col-md-2 score-box col-centered">
-        <div class="score-grade headers-score">B</div>
-        <div id="headers_caption" class="score_caption">Headers</div>
-      </div>
-      <div class="col-md-2 score-box col-centered">
-        <div class="score-grade paragraph-score">C</div>
-        <div id="paragraph_caption" class="score_caption">Paragraphs</div>
-      </div>
-      <div class="col-md-2 score-box col-centered">
-        <div class="score-grade code-score">D</div>
-        <div id="code_caption" class="score_caption">Code Samples</div>
-      </div>
-      <div class="col-md-2 score-box col-centered">
-        <div class="score-grade image-score">A+</div>
-        <div id="image_caption" class="score_caption ">Images</div>
-      </div>
-
-    </div>
-  </div>
-</div>
       <div class="row"></div>
       <div class="row">
   
@@ -123,6 +94,9 @@
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active">
+      <a href="#overview_recommendation_tab" aria-controls="headers" role="tab" data-toggle="tab">Overview</a>
+    </li>
+    <li role="presentation">
       <a href="#headers_recommendation_tab" aria-controls="headers" role="tab" data-toggle="tab">Headers</a>
     </li>
     <li role="presentation">
@@ -141,10 +115,13 @@
 
   <!-- Tab panes -->
   <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="overvieww_recommendation_tab"><div class="overview_info"> 
-  <blockquote>
-  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-  </blockquote>
+    <div role="tabpanel" class="tab-pane active" id="overview_recommendation_tab"><div class="overview_info"> 
+<div class="col-md-2 algo-grade algo-grade-good">A+</div>
+  <div class="col-md-10">
+      <blockquote>
+      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </blockquote>
+  </div>
 </div>
 
 <div class="inserted-recs">
@@ -154,7 +131,7 @@
       <li class="media">
         
         <div class="media-left media-top">
-          <div class="score-grade headers-score">B</div>
+          <div class="algo-grade algo-grade-good">B</div>
         </div>
 
         <div class="media-body">
@@ -168,35 +145,40 @@
   </div>
 </div></div>
     <div role="tabpanel" class="tab-pane" id="headers_recommendation_tab"><div class="headers_info"> 
-  <blockquote>
-  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-  </blockquote>
+ <div class="row"> 
+    <div class="col-md-2 algo-grade algo-grade-good">A+</div>
+    <div class="col-md-10">
+        <blockquote>
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+        </blockquote>
+    </div>
+</div>
+<div class="row"> 
+      <div class="inserted-recs">
+          <div id="headers_recommendation">
+            
+            <ul class="media-list">
+              <li class="media">
+                <div class="media-body">
+                  <div id="headers-recommendation-list"></div>
+                
+
+              </li>
+            </ul>
+
+          </div>
+      </div>
+  </div>
 </div>
 
-<div class="inserted-recs">
-  <div id="headers_recommendation">
-    
-    <ul class="media-list">
-      <li class="media">
-        
-        <div class="media-left media-top">
-          <div class="score-grade headers-score">B</div>
-        </div>
-
-        <div class="media-body">
-          <h3 class="media-heading">— Your Grade</h3>
-          <div id="headers-recommendation-list"></div>
-        </div>
-
-      </li>
-    </ul>
-
-  </div>
-</div></div>
+</div>
     <div role="tabpanel" class="tab-pane" id="code_recommendation_tab"><div class="code_info"> 
-  <blockquote>
-  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-  </blockquote>
+  <div class="col-md-2 algo-grade algo-grade-good">A+</div>
+  <div class="col-md-10">
+      <blockquote>
+      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </blockquote>
+  </div>
 </div>
 
 <div class="inserted-recs">
@@ -228,9 +210,12 @@
   </div>
 </div></div>
     <div role="tabpanel" class="tab-pane" id="length_recommendation_tab"><div class="length_info">
-  <blockquote>
-  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-  </blockquote>
+  <div class="col-md-2 algo-grade algo-grade-good">A+</div>
+  <div class="col-md-10">
+      <blockquote>
+      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </blockquote>
+  </div>
 </div>
 
 <div class="inserted-recs">
@@ -261,9 +246,12 @@
 </div>
 </div>
     <div role="tabpanel" class="tab-pane" id="paragraphs_recommendation_tab"><div class="paragraph_info"> 
-  <blockquote>
-  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-  </blockquote>
+  <div class="col-md-2 algo-grade algo-grade-good">A+</div>
+  <div class="col-md-10">
+      <blockquote>
+      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </blockquote>
+  </div>
 </div>
 
 <div class="inserted-recs">
@@ -286,9 +274,12 @@
   </div>
 </div></div>
     <div role="tabpanel" class="tab-pane" id="images_recommendation_tab"><div class="images_info"> 
-  <blockquote>
-  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-  </blockquote>
+  <div class="col-md-2 algo-grade algo-grade-good">A+</div>
+  <div class="col-md-10">
+      <blockquote>
+      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </blockquote>
+  </div>
 </div>
 
 <div class="inserted-recs">
@@ -296,9 +287,7 @@
 
     <ul class="media-list">
       <li class="media">
-        <div class="media-left media-top">
-          <div class="score-grade image-score">A+</div>
-        </div>
+        
         <div class="media-body">
           <h3 class="media-heading">— Your Grade</h3>
 
@@ -351,7 +340,7 @@
 
 
 
-  <script src="/js/all-38c781f6.js" type="text/javascript"></script>
+  <script src="/js/all-f5e91372.js" type="text/javascript"></script>
 
 </body>
 </html>

@@ -172,7 +172,7 @@ function insertParagraphRecommendations(recommendations) {
 
     var media_body = document.createElement('div')
     media_body.className = "panel-body"
-    media_body.innerHTML = "Try adding words with the stems: <span style='color:red;'>" + subValues + "</span"
+    media_body.innerHTML = "Try removing words with the stems: <span style='color:red;'>" + subValues + "</span"
 
     panel.appendChild(media_body)
     list.appendChild(media)

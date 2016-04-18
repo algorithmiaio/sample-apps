@@ -52,68 +52,48 @@ function insertHeadersRecommendations(recommendations) {
     var operation = recs[i].operation
     var value = recs[i].value
 
- 
 // Create child media tiles for reach recommendation
-  if (operation == "insert") {
-    
-    addValues.push(value); 
-
-  }
-  else {
-        subValues.push(value);  
+    if (operation == "insert") {
+      addValues.push(value); 
     }
-
-    
-  
+    else { 
+      subValues.push(value);  
+      }
   } //end for
   
     //Create inserts
     var media = document.createElement('div')
-    media.className = "media"
+    media.className = "col-md-6 media panel panel-default"
 
     var media_header = document.createElement('div')
-    media_header.className = "media-left operation"
+    media_header.className = "panel-heading"
+
+    media_header.innerHTML = "<h3 class='panel-title'>Additions</h3>"
 
     media.appendChild(media_header)
 
-    var icon = document.createElement('span')
-
-    icon.className = "glyphicon glyphicon-pencil"
-
-    media_header.appendChild(icon)
-
     var media_body = document.createElement('div')
-    media_body.className = "media-body"
-    var recommendation = document.createElement('h4')
+    media_body.className = "panel-body"
+    media_body.innerHTML = "Try adding headers to your sections with the stems: <span style='color:green;'>" + addValues 
 
-    recommendation.innerHTML = "Try adding headers to your sections with the stems: <span style='color:green;'>" + addValues + "</span>"
-
-    media_body.appendChild(recommendation)
     media.appendChild(media_body)
     list.appendChild(media)
 
     //Create deletes
     var media = document.createElement('div')
-    media.className = "media"
+    media.className = "col-md-6 media panel panel-default"
 
     var media_header = document.createElement('div')
-    media_header.className = "media-left operation"
+    media_header.className = "panel-heading"
+
+    media_header.innerHTML = "<h3 class='panel-title'>Deletions</h3>"
 
     media.appendChild(media_header)
 
-    var icon = document.createElement('span')
-
-    icon.className = "glyphicon glyphicon-remove"
-
-    media_header.appendChild(icon)
-
     var media_body = document.createElement('div')
-    media_body.className = "media-body"
-    var recommendation = document.createElement('h4')
+    media_body.className = "panel-body"
+    media_body.innerHTML = "Try adding headers to your sections with the stems: <span style='color:red;'>" + subValues 
 
-    recommendation.innerHTML = "Remove the header which starts with the stem: <span style='color:red;'>" + subValues + "</span>"
-    
-    media_body.appendChild(recommendation)
     media.appendChild(media_body)
     list.appendChild(media)
       

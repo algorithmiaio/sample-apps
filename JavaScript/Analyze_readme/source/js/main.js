@@ -116,6 +116,8 @@ function insertParagraphRecommendations(recommendations) {
   var list = document.getElementById('paragraphs-recommendation-list')
   list.innerHTML = ''
   var recs = recommendations
+  var addValues =[]
+  var subValues =[]
 
   for (i = 0; i < recs.length; ++i) {
 
@@ -123,39 +125,57 @@ function insertParagraphRecommendations(recommendations) {
     var value = recs[i].value
 
 // Create child media tiles for reach recommendation
+    if (operation == "insert") {
+      addValues.push(value); 
+    }
+    else { 
+      subValues.push(value);  
+      }
+  } //end for
+  
+    //Create inserts
     var media = document.createElement('div')
-    media.className = "media"
+    media.className = "col-md-6"
+
+    var panel = document.createElement('div')
+    panel.className = "panel panel-default"
 
     var media_header = document.createElement('div')
-    media_header.className = "media-left operation"
+    media_header.className = "panel-heading"
 
-    media.appendChild(media_header)
+    media_header.innerHTML = "<h3 class='panel-title'>Additions</h3>"
 
-    var icon = document.createElement('span')
-
-    if (operation == "insert") {
-      icon.className = "glyphicon glyphicon-pencil"
-    } else {
-      icon.className = "glyphicon glyphicon-remove"
-    }
-
-    media_header.appendChild(icon)
+    media.appendChild(panel)
+    panel.appendChild(media_header)
 
     var media_body = document.createElement('div')
-    media_body.className = "media-body"
-    var recommendation = document.createElement('h4')
+    media_body.className = "panel-body"
+    media_body.innerHTML = "Try adding words with the stems: <span style='color:green;'>" + addValues + "</span"
 
-    if (operation == "insert") {
-      recommendation.innerHTML = "Add words with the stem: <span style='color:green;'>" + value + "</span>" 
-    } else {
-      recommendation.innerHTML = "Remove words which start with the stem: <span style='color:red;'>" + value + "</span>"
-    }
-   
-    media_body.appendChild(recommendation)
-    media.appendChild(media_body)
-
+    panel.appendChild(media_body)
     list.appendChild(media)
-  }
+
+    //Create deletes
+    var media = document.createElement('div')
+    media.className = "col-md-6"
+
+    var panel = document.createElement('div')
+    panel.className = "panel panel-default"
+
+    var media_header = document.createElement('div')
+    media_header.className = "panel-heading"
+
+    media_header.innerHTML = "<h3 class='panel-title'>Deletions</h3>"
+
+    media.appendChild(panel)
+    panel.appendChild(media_header)
+
+    var media_body = document.createElement('div')
+    media_body.className = "panel-body"
+    media_body.innerHTML = "Try adding words with the stems: <span style='color:red;'>" + subValues + "</span"
+
+    panel.appendChild(media_body)
+    list.appendChild(media)
 }
 
 // OK BELOW //
@@ -252,6 +272,7 @@ function parseScores(result) {
   var score = result.score
   var scores = new Array(score.pre, score.header, score.length, score.paragraph, score.img)
   
+  //calculate overall avg score
   var sum =0;
   for (var i = 0; i < scores.length; i++){
     sum += parseInt( scores[i],10);
@@ -260,13 +281,9 @@ function parseScores(result) {
   var overScore = Math.ceil(sum/scores.length);
 
   scores.push(overScore)
-  
-  //debug
-  console.log(overview)
 
   var elements = new Array(overview, code, headers, length, parag, img)
 
-  //debug
   console.log(elements)
 
   for (var i in elements) {

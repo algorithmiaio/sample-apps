@@ -10,7 +10,21 @@ summary: "Think you've got a great README? Try comparing it to our trained model
   <div class="row hero-background">
         <div class="container hero">
           <div id="pitch" class="col-md-12">
-            <span><h1>Algoritmically improve your Github Readme</h1></span>
+            <div class="col-md-6"><h1>Algoritmically improve your Github Readme</h1>
+          
+                  <div class="algorithm-form">
+                    <form>
+                      <div class="form-group">
+                        <p>To try it out, type the address of a git repository to try analysis</p>
+                        <input type="text" class="form-control " id="repository" placeholder="rspec/rspec-mocks">
+                        <button class="btn btn-primary" type="button" onclick="callAlgorithm()">Analyze me!</button>
+                      </div>
+                      <span class="aspinner hidden" id="algo-spinner"></span>
+                      <span id="status-label"></span>
+                    </form>
+                  </div>
+          
+            </div>
           </div>
         </div>
   </div>
@@ -31,19 +45,7 @@ summary: "Think you've got a great README? Try comparing it to our trained model
       This algorithm uses machine learning models to learn from the 1000 starred repositories for the top 10 programming languages (that has the most repositories) on Github. It gives your project readme a score between A-F, and makes recommendations to make your readme more similar to the top readmes on GitHub.</p>
     </div>
 
-    <div class="row">
-      <div class="algorithm-form">
-        <form class="form-inline">
-          <div class="form-group">
-            <label for="repository">Repo:</label>
-            <input type="text" class="form-control " id="repository" placeholder="rspec/rspec-mocks">
-          </div>
-          <button class="btn btn-primary" type="button" onclick="callAlgorithm()">Analyze me!</button>
-            <span class="aspinner hidden" id="algo-spinner"></span>
-            <span id="status-label"></span>
-        </form>
-      </div>
-    </div>
+    
 
     <div class="row"></div>
       <%= partial "recommendations" %>

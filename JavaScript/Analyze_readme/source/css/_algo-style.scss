@@ -145,8 +145,8 @@ p {
 
 .hero-background {
     background-image: url(../img/octocat.jpg);
-    background-size: cover;
-    background-position: 90%;
+    background-size: stretch;
+    background-position: 500px -250px;
 }
 
 h1 {

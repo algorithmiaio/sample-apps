@@ -4,7 +4,17 @@ description: "Think you've got a great README? Try comparing it to our trained m
 url: "http://localhost:4567"
 summary: "Think you've got a great README? Try comparing it to our trained model based on the top repositories and see how you line up."
 ---
-<div class="content-container">
+
+<div class="content-container">  
+
+  <div class="row hero-background">
+        <div class="container hero">
+          <div id="pitch" class="col-md-12">
+            <span><h1>Algoritmically improve your Github Readme</h1></span>
+          </div>
+        </div>
+  </div>
+  
   <div class="main">
     <div id="overlay" class="hidden">
       <div class="dots-container">
@@ -14,13 +24,6 @@ summary: "Think you've got a great README? Try comparing it to our trained model
         <div class="dot dot4"></div>
       </div>  
     </div>
-
-    <div class="jumbotron">
-      <div class="row">
-        <div class="col-md-9"><h1>Algoritmically improve your Github Readme</h1></div>
-      </div>
-    </div>
-
 
     <div class="explanation">
       <p>Creating good readmes can be really challenging. This is especially true given the fact that there's no official standard to follow. One approach for solving this problem could be to go through the top starred repositories on github and find common features in each of them. Going through hundreds of repositories can be time consuming, slow process.
@@ -39,12 +42,12 @@ summary: "Think you've got a great README? Try comparing it to our trained model
             <span class="aspinner hidden" id="algo-spinner"></span>
             <span id="status-label"></span>
         </form>
+      </div>
+    </div>
 
-      </div>
+    <div class="row"></div>
+      <%= partial "recommendations" %>
     </div>
-        <div class="row"></div>
-        <%= partial "recommendations" %>
-      </div>
-    </div>
-  </div> <!-- main -->
+    
 </div>
+  

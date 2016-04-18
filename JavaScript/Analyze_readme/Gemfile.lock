@@ -105,6 +105,3 @@ PLATFORMS
 DEPENDENCIES
   middleman (= 3.0.14)
   sass-media_query_combiner
-
-BUNDLED WITH
-   1.11.2

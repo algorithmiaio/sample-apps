@@ -34,7 +34,7 @@ function parseRecommendations(result) {
 
   updateLengthRecommendation(result.recommendation.length)
   updateCodeSampleRecommendation(result.recommendation.pre)
-  updateImagesRecommentation(result.recommendation.img)
+  updateImagesRecommendation(result.recommendation.img)
 
   insertHeadersRecommendations(result.recommendation.header)
   insertParagraphRecommendations(result.recommendation.paragraph)
@@ -187,7 +187,7 @@ function updateCodeSampleRecommendation(code_rec) {
   operation.appendChild(icon);
 }
 
-function updateImagesRecommentation(img_rec) {
+function updateImagesRecommendation(img_rec) {
   var operation  = document.getElementById("images-recommendation-operation");
   var value  = document.getElementById("images-recommendation-value");
   operation.innerHTML = '';

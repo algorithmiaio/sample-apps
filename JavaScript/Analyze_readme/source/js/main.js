@@ -63,38 +63,46 @@ function insertHeadersRecommendations(recommendations) {
   
     //Create inserts
     var media = document.createElement('div')
-    media.className = "col-md-6 media panel panel-default"
+    media.className = "col-md-6"
+
+    var panel = document.createElement('div')
+    panel.className = "panel panel-default"
 
     var media_header = document.createElement('div')
     media_header.className = "panel-heading"
 
     media_header.innerHTML = "<h3 class='panel-title'>Additions</h3>"
 
-    media.appendChild(media_header)
+    media.appendChild(panel)
+    panel.appendChild(media_header)
 
     var media_body = document.createElement('div')
     media_body.className = "panel-body"
-    media_body.innerHTML = "Try adding headers to your sections with the stems: <span style='color:green;'>" + addValues 
+    media_body.innerHTML = "Try adding headers to your sections with the stems: <span style='color:green;'>" + addValues + "</span"
 
-    media.appendChild(media_body)
+    panel.appendChild(media_body)
     list.appendChild(media)
 
     //Create deletes
     var media = document.createElement('div')
-    media.className = "col-md-6 media panel panel-default"
+    media.className = "col-md-6"
+
+    var panel = document.createElement('div')
+    panel.className = "panel panel-default"
 
     var media_header = document.createElement('div')
     media_header.className = "panel-heading"
 
     media_header.innerHTML = "<h3 class='panel-title'>Deletions</h3>"
 
-    media.appendChild(media_header)
+    media.appendChild(panel)
+    panel.appendChild(media_header)
 
     var media_body = document.createElement('div')
     media_body.className = "panel-body"
-    media_body.innerHTML = "Try adding headers to your sections with the stems: <span style='color:red;'>" + subValues 
+    media_body.innerHTML = "Try adding headers to your sections with the stems: <span style='color:red;'>" + subValues + "</span"
 
-    media.appendChild(media_body)
+    panel.appendChild(media_body)
     list.appendChild(media)
       
      

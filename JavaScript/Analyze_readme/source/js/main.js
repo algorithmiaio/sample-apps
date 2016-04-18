@@ -1,7 +1,7 @@
 // main.js
 
 window.Algorithmia = window.Algorithmia || {};
-Algorithmia.api_key = "simGpDplaouYGZhf2WGltne49SV1"
+Algorithmia.api_key = "simeyUbLXQ/R8Qga/3ZCRGcr2oR1"
 
 function callAlgorithm() {
 

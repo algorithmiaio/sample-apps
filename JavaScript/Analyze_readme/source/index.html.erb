@@ -4,46 +4,47 @@ description: "Think you've got a great README? Try comparing it to our trained m
 url: "http://localhost:4567"
 summary: "Think you've got a great README? Try comparing it to our trained model based on the top repositories and see how you line up."
 ---
+<div class="content-container">
+  <div class="main">
+    <div id="overlay" class="hidden">
+      <div class="dots-container">
+        <div class="dot dot1"></div>
+        <div class="dot dot2"></div>
+        <div class="dot dot3"></div>
+        <div class="dot dot4"></div>
+      </div>  
+    </div>
 
-<div class="main">
-  <div id="overlay" class="hidden">
-    <div class="dots-container">
-      <div class="dot dot1"></div>
-      <div class="dot dot2"></div>
-      <div class="dot dot3"></div>
-      <div class="dot dot4"></div>
-    </div>  
-  </div>
+    <div class="jumbotron">
+      <div class="row">
+        <div class="col-md-9"><h1>Algoritmically improve your Github Readme</h1></div>
+      </div>
+    </div>
 
-  <div class="jumbotron">
+
+    <div class="explanation">
+      <p>Creating good readmes can be really challenging. This is especially true given the fact that there's no official standard to follow. One approach for solving this problem could be to go through the top starred repositories on github and find common features in each of them. Going through hundreds of repositories can be time consuming, slow process.
+
+      This algorithm uses machine learning models to learn from the 1000 starred repositories for the top 10 programming languages (that has the most repositories) on Github. It gives your project readme a score between A-F, and makes recommendations to make your readme more similar to the top readmes on GitHub.</p>
+    </div>
+
     <div class="row">
-      <div class="col-md-9"><h1>Algoritmically improve your Github Readme</h1></div>
+      <div class="algorithm-form">
+        <form class="form-inline">
+          <div class="form-group">
+            <label for="repository">Repo:</label>
+            <input type="text" class="form-control " id="repository" placeholder="rspec/rspec-mocks">
+          </div>
+          <button class="btn btn-primary" type="button" onclick="callAlgorithm()">Analyze me!</button>
+            <span class="aspinner hidden" id="algo-spinner"></span>
+            <span id="status-label"></span>
+        </form>
+
+      </div>
     </div>
-  </div>
-
-
-  <div class="explanation">
-    <p>Creating good readmes can be really challenging. This is especially true given the fact that there's no official standard to follow. One approach for solving this problem could be to go through the top starred repositories on github and find common features in each of them. Going through hundreds of repositories can be time consuming, slow process.
-
-    This algorithm uses machine learning models to learn from the 1000 starred repositories for the top 10 programming languages (that has the most repositories) on Github. It gives your project readme a score between A-F, and makes recommendations to make your readme more similar to the top readmes on GitHub.</p>
-  </div>
-
-  <div class="row">
-    <div class="algorithm-form">
-      <form class="form-inline">
-        <div class="form-group">
-          <label for="repository">Repo:</label>
-          <input type="text" class="form-control " id="repository" placeholder="rspec/rspec-mocks">
-        </div>
-        <button class="btn btn-primary" type="button" onclick="callAlgorithm()">Analyze me!</button>
-          <span class="aspinner hidden" id="algo-spinner"></span>
-          <span id="status-label"></span>
-      </form>
-
+        <div class="row"></div>
+        <%= partial "recommendations" %>
+      </div>
     </div>
-  </div>
-      <div class="row"></div>
-      <%= partial "recommendations" %>
-    </div>
-  </div>
-</div> <!-- main -->
+  </div> <!-- main -->
+</div>

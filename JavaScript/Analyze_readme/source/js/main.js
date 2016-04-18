@@ -242,6 +242,7 @@ function updateImagesRecommendation(img_rec) {
 }
 
 function parseScores(result) {
+  var overview = document.getElementsByClassName("overview-score");
   var length  = document.getElementsByClassName("length-score");
   var headers = document.getElementsByClassName("headers-score");
   var code    = document.getElementsByClassName("code-score");
@@ -250,7 +251,23 @@ function parseScores(result) {
 
   var score = result.score
   var scores = new Array(score.pre, score.header, score.length, score.paragraph, score.img)
-  var elements = new Array(code, headers, length, parag, img)
+  
+  var sum =0;
+  for (var i = 0; i < scores.length; i++){
+    sum += parseInt( scores[i],10);
+  }
+
+  var overScore = Math.ceil(sum/scores.length);
+
+  scores.push(overScore)
+  
+  //debug
+  console.log(overview)
+
+  var elements = new Array(overview, code, headers, length, parag, img)
+
+  //debug
+  console.log(elements)
 
   for (var i in elements) {
     insertGrade(elements[i], scores[i]);
@@ -289,6 +306,7 @@ function insertGrade(elements, score) {
       grade.innerHTML = "C";
     };
   }
+
 };
 
 var numTasks = 0;

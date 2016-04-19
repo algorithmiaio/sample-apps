@@ -280,7 +280,7 @@ function parseScores(result) {
 
   var overScore = Math.ceil(sum/scores.length);
 
-  scores.push(overScore)
+  scores.unshift(overScore)
 
   var elements = new Array(overview, code, headers, length, parag, img)
 

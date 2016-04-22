@@ -32,6 +32,8 @@ function callAlgorithm() {
 
 function parseRecommendations(result) {
 
+
+
   updateLengthRecommendation(result.recommendation.length)
   updateCodeSampleRecommendation(result.recommendation.pre)
   updateImagesRecommendation(result.recommendation.img)
@@ -63,7 +65,7 @@ function insertHeadersRecommendations(recommendations) {
   
     //Create inserts
     var media = document.createElement('div')
-    media.className = "col-md-6"
+    media.className = "col-md-5 col-md-offset-1"
 
     var panel = document.createElement('div')
     panel.className = "panel panel-default"
@@ -76,16 +78,29 @@ function insertHeadersRecommendations(recommendations) {
     media.appendChild(panel)
     panel.appendChild(media_header)
 
+
     var media_body = document.createElement('div')
-    media_body.className = "panel-body"
-    media_body.innerHTML = "Try adding headers to your sections with the stems: <span style='color:green;'>" + addValues + "</span"
+    media_body.className = "panel-body";
+    media_body.innerHTML = "<p>Try adding a few of these sections:</p>";
+
+    for (i = 0; i < addValues.length; i++){
+      var newSpan = document.createElement('span');
+      newSpan.className = "label label-success";
+      newSpan.innerHTML = addValues[i];
+    
+      var space = document.createTextNode(" ");
+      
+      media_body.appendChild(newSpan);     
+      media_body.appendChild(space);
+    }
+
 
     panel.appendChild(media_body)
     list.appendChild(media)
 
     //Create deletes
     var media = document.createElement('div')
-    media.className = "col-md-6"
+    media.className = "col-md-5"
 
     var panel = document.createElement('div')
     panel.className = "panel panel-default"
@@ -100,7 +115,18 @@ function insertHeadersRecommendations(recommendations) {
 
     var media_body = document.createElement('div')
     media_body.className = "panel-body"
-    media_body.innerHTML = "Try adding headers to your sections with the stems: <span style='color:red;'>" + subValues + "</span"
+    media_body.innerHTML = "<p>Try replacing these headers:</p>";
+
+    for (i = 0; i < subValues.length; i++){
+      var newSpan = document.createElement('span');
+      newSpan.className = "label label-danger";
+      newSpan.innerHTML = subValues[i];
+    
+      var space = document.createTextNode(" ");
+      
+      media_body.appendChild(newSpan);     
+      media_body.appendChild(space);
+    }
 
     panel.appendChild(media_body)
     list.appendChild(media)
@@ -135,7 +161,7 @@ function insertParagraphRecommendations(recommendations) {
   
     //Create inserts
     var media = document.createElement('div')
-    media.className = "col-md-6"
+    media.className = "col-md-5 col-md-offset-1"
 
     var panel = document.createElement('div')
     panel.className = "panel panel-default"
@@ -150,14 +176,25 @@ function insertParagraphRecommendations(recommendations) {
 
     var media_body = document.createElement('div')
     media_body.className = "panel-body"
-    media_body.innerHTML = "Try adding words with the stems: <span style='color:green;'>" + addValues + "</span"
+    media_body.innerHTML = "<p>Try using more of these words:</p>";
+
+    for (i = 0; i < addValues.length; i++){
+      var newSpan = document.createElement('span');
+      newSpan.className = "label label-success";
+      newSpan.innerHTML = addValues[i];
+    
+      var space = document.createTextNode(" ");
+      
+      media_body.appendChild(newSpan);     
+      media_body.appendChild(space);
+    }
 
     panel.appendChild(media_body)
     list.appendChild(media)
 
     //Create deletes
     var media = document.createElement('div')
-    media.className = "col-md-6"
+    media.className = "col-md-5"
 
     var panel = document.createElement('div')
     panel.className = "panel panel-default"
@@ -172,8 +209,18 @@ function insertParagraphRecommendations(recommendations) {
 
     var media_body = document.createElement('div')
     media_body.className = "panel-body"
-    media_body.innerHTML = "Try removing words with the stems: <span style='color:red;'>" + subValues + "</span"
+    media_body.innerHTML = "<p>Try replacing these words:</p>";
 
+    for (i = 0; i < subValues.length; i++){
+      var newSpan = document.createElement('span');
+      newSpan.className = "label label-danger";
+      newSpan.innerHTML = subValues[i];
+    
+      var space = document.createTextNode(" ");
+      
+      media_body.appendChild(newSpan);     
+      media_body.appendChild(space);
+    }
     panel.appendChild(media_body)
     list.appendChild(media)
 }
@@ -192,15 +239,15 @@ function updateLengthRecommendation(length_rec) {
     icon.className = "glyphicon glyphicon-ok"
     value.innerHTML = "Juuuust right! Then length of your README is neither too long nor too short."
   } else if (length_rec[0].operation == 'increase'){
-    icon.className = "glyphicon glyphicon-pencil"
+    icon.className = "glyphicon glyphicon-pencil text-primary"
     var rec = "Cat got your tongue? Consider increasing the length of your README by " + length_rec[0].value + " characters."
     value.innerHTML = rec
   } else if (length_rec[0].operation == 'decrease'){
-    icon.className = "glyphicon glyphicon-remove"
+    icon.className = "glyphicon glyphicon-remove text-danger"
     var rec = "Woof, it's a long one! Consider decreasing the length of your README by " + length_rec[0].value + " characters."
     value.innerHTML = rec
   } else {
-    icon.className = "glyphicon glyphicon-ok"
+    icon.className = "glyphicon glyphicon-ok text-success"
     value.innerHTML = "Juuuust right! Then length of your README is neither too long nor too short."
   }
 
@@ -219,15 +266,15 @@ function updateCodeSampleRecommendation(code_rec) {
     icon.className = "glyphicon glyphicon-ok"
     value.innerHTML = "Great work, your code samples are spot on!"
   } else if (code_rec[0].operation == 'increase'){
-    icon.className = "glyphicon glyphicon-pencil"
+    icon.className = "glyphicon glyphicon-pencil text-primary"
     var rec = "Have you thought about adding in code samples? We suggest " + code_rec[0].value + "?"
     value.innerHTML = rec
   } else if (code_rec[0].operation == 'decrease'){
-    icon.className = "glyphicon glyphicon-remove"
+    icon.className = "glyphicon glyphicon-remove text-danger"
     var rec = "You could probably cut down on code samples. How about removing " + code_rec[0].value + "?"
     value.innerHTML = rec
   } else {
-    icon.className = "glyphicon glyphicon-ok"
+    icon.className = "glyphicon glyphicon-ok text-success"
     value.innerHTML = "Great work, your code samples are spot on!"
   }
 
@@ -243,18 +290,18 @@ function updateImagesRecommendation(img_rec) {
   var icon = document.createElement('span')
 
   if (img_rec.length == 0){
-    icon.className = "glyphicon glyphicon-ok"
+    icon.className = "glyphicon glyphicon-ok text-primary"
     value.innerHTML = "No recommendations found for your README's image count. Good job!"
   } else if (img_rec[0].operation == 'decrease'){
-    icon.className = "glyphicon glyphicon-remove"
+    icon.className = "glyphicon glyphicon-remove text-danger"
     var rec = "Consider decreasing the number of images by " + img_rec[0].value
     value.innerHTML = rec
   } else if (img_rec[0].operation == 'increase'){
-    icon.className = "glyphicon glyphicon-pencil"
+    icon.className = "glyphicon glyphicon-pencil text-primary"
     var rec = "Consider increasing the number of images by " + img_rec[0].value
     value.innerHTML = rec
   } else {
-    icon.className = "glyphicon glyphicon-ok"
+    icon.className = "glyphicon glyphicon-ok text-success"
     value.innerHTML = "No recommendations found for your README's image count. Good job!"
   }
 
@@ -300,26 +347,28 @@ function insertGrade(elements, score) {
     var grade = grade_divs[i]
 
     if (score >= 9) {
-      grade.style.color = 'green';
+      grade.style.color = '#5cb85c';
       grade.innerHTML = "A+";
     } else if (score == 8) {
-      grade.style.color = 'green';
+      grade.style.color = '#5cb85c';
       grade.innerHTML = "A";
     } else if (score == 7 || score == 6) {
-      grade.style.color = 'green';
+      grade.style.color = '#5cb85c';
       grade.innerHTML = "B";
     } else if (score == 5) {
-      grade.style.color = 'orange';
+      grade.style.color = '#f0ad4e';
       grade.innerHTML = "C";
     } else if (score == 4) {
-      grade.style.color = 'orange';
+      grade.style.color = '#f0ad4e';
       grade.innerHTML = "C-";
     } else if (score == 3) {
+      grade.style.color = '#777';
       grade.innerHTML = "D";
     } else if (score == 2 || score == 1) {
+      grade.style.color = '#d9534f';
       grade.innerHTML = "F";
     } else {
-      grade.style.color = 'orange';
+      grade.style.color = '#f0ad4e';
       grade.innerHTML = "C";
     };
   }
@@ -336,5 +385,7 @@ function finishTask() {
   numTasks--;
   if(numTasks <= 0) {
     document.getElementById("overlay").classList.add("hidden");
+    document.getElementById("recs").classList.remove("hidden");
+
   }
 }

@@ -15,18 +15,18 @@ html {
 
 body {
   // Global styles + mobile
-  color: $text-color;
+  color: #444a55;
   background-color: $page-bg;
 }
 
 .main {
   margin: 5%;
-  margin-bottom: 220px;
+  /*margin-bottom: 220px;*/
  
-  @include respond-min(45em) {
+/*  @include respond-min(45em) {
     margin-left: 15%;
     margin-right: 15%;
-  }
+  }*/
 }
 
 header {
@@ -39,7 +39,7 @@ header {
 
 .footer {
   position: absolute;
-  height: 200px;
+  height: 30px;
   bottom: 0;
   width: 100%;
   text-align: center;
@@ -108,11 +108,9 @@ header {
 }
 
 
-.inserted-recs {
+/*.inserted-recs {
   margin: 5%;
-
-
-}
+}*/
 
 .panel-info {
   border-color: $purple-dark;
@@ -133,20 +131,49 @@ header {
 }
 
 a {
-  color: $purple-dark;
+  color: #5000be;
 }
 
+a:hover, a:focus{
+  color: #6717ff;
+}
 .btn-primary {
-  background-color: #337ab7;
-  border-color: #2e6da4;
-  border: 1px solid;
+    background-color: #9963ff;
+    font-weight: 500;
+    border-radius: 2px;
+  /*background-color: #337ab7;*/
+  border-color: #9963ff;
+  /*border: 1px solid;*/
   font-weight: 500;
+}
   
-  &:hover {
-    background-color: $purple-highlight;
-    border: 1px solid $purple-dark;
-    color: $purple-dark;
+.btn-primary:hover {
+    background-color: #7830ff;
+    border: 1px solid #7830ff;
+    color: #fff;
   }
+
+.btn-primary:active {
+    background-color: #7830ff;
+    border: 1px solid #7830ff;
+    color: #fff;
+  }
+
+.btn-primary:focus {
+    background-color: #7830ff;
+    border: 1px solid #7830ff;
+    color: #fff;
+  }
+.btn-primary:focus:active {
+    background-color: #7830ff;
+    border: 1px solid #7830ff;
+    color: #fff;
+  }
+.btn-primary:focus:focus {
+    background-color: #7830ff;
+    border: 1px solid #7830ff;
+    color: #fff;
+  
 }
 
 .btn-info {
@@ -160,6 +187,7 @@ a {
       border: 1px solid $purple-highlight;
       color: $purple-highlight;
     }
+
   }
 
 .score-grade {

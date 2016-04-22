@@ -69,8 +69,8 @@ to   {transform: rotate(359deg);}
     width: 0%;
 }
 
-.form-control {
-    width: 420px;
+.form-group .form-control {
+    width: 55%;
     display: inline-block;
 }
 
@@ -145,14 +145,17 @@ p {
 
 .hero-background {
     background-image: url(../img/octocat.png);
-    background-size: stretch;
-    background-position: 500px -150px;
+    background-size: cover;
+    background-position: 50%;
+    background-position-x: 325px;
 }
 
 h1 {
     font-size: 50px;
     font-weight: 500;
     padding-bottom: 15px;
+    margin-bottom: 0px;
+    margin-top: 0px;
     font-family: 'Lato', sans-serif;
     /*text-shadow: 0 2px #444a55;*/
     color: #fff;
@@ -165,6 +168,12 @@ h2 {
     line-height: 56px;
     font-family: 'Lato', sans-serif;
     color: #fff;
+    margin-top: 0px;
+
+}
+
+h2.lead {
+    margin-bottom: 40px;
 }
 
 h3 {
@@ -175,6 +184,9 @@ h3 {
     line-height: 1.33em;
 }
 
+h3.panel-title {
+    padding-bottom: 0px;
+}
 .concept-item h3 {
     line-height: normal;
 }
@@ -184,6 +196,7 @@ h4 {
     font-size: 20px;
     padding-bottom: .67em;
     line-height: 1.33em;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Verdana, Arial, sans-serif;
 }
 
 .three-step p {
@@ -247,7 +260,7 @@ footer {
     color: #c43b3b;
 }
 .algo-grade {
-    font-size: 72px;
+    font-size: 54px;
     font-family: "Kaushan Script", sans-serif;
 }
 .algo-grade-good p {
@@ -264,4 +277,33 @@ footer {
 .jumbotron {
     color: #ffffff;
     background-image: url("../img/octocat.jpg");
+}
+
+.form-group code {
+    background-color: #444a55;
+    color: #fff;
+}
+
+.inserted-recs .media-body {
+    vertical-align: middle;
+}
+
+a>code:hover{
+    color:#9963ff;
+}
+
+.text-warning {
+    color: #f0ad4e;
+}
+
+.text-danger {
+    color: #d9534f;
+}
+
+.text-success {
+    color: #5cb85c;
+}
+
+.text-primary {
+    color: #337ab7;
 }

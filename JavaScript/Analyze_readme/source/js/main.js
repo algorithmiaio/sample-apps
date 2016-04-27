@@ -14,8 +14,13 @@ function callAlgorithm() {
   var repo = document.getElementById("repository").value;
   // remove any whitespaces around the user/repo name
   repo = repo.trim();
+  
+  parseRepo(repo);
+
   // Clear values to prep for new data
   statusLabel.innerHTML = "";
+  
+
 
   // Query algorithm
   Algorithmia.query('nlp/AnalyzeGithubReadme', Algorithmia.api_key, repo, function(error, result) {
@@ -26,16 +31,23 @@ function callAlgorithm() {
       return;
     }
 
-    parseScores(result)
-    parseRecommendations(result)
+    parseScores(result);
+    parseRecommendations(result);
   });
 };
+
+function parseRepo(result){
+  var whatRepo  = document.getElementById("repoanalyzed");
+  whatRepo.innerHTML = '';
+  whatRepo.innerHTML = "We've analyzed the README for <a href='https://github.com/"+result+"' target=_'blank'>" +result+ "</a>, and here's what we've found."
+
+}
 
 function parseRecommendations(result) {
 
 
 
-  updateLengthRecommendation(result.recommendation.length, result.score.length)
+  // updateLengthRecommendation(result.recommendation.length, result.score.length)
   updateCodeSampleRecommendation(result.recommendation.pre, result.score.pre)
   updateImagesRecommendation(result.recommendation.img, result.score.img)
 
@@ -51,10 +63,10 @@ function insertHeadersRecommendations(recommendations, score) {
   headerValue.innerHTML = '';
   var icon = document.createElement('span')
 
-  if (score >= 6){
+  if (score >= 7){
     icon.className = "glyphicon glyphicon-ok text-success"
     headerValue.innerHTML = "Amazing! Your README header score is " + score + " out of 10."
-  } else if (score == 4 || score == 5) {
+  } else if (score == 4 || score == 5 || score == 6) {
     icon.className = "glyphicon glyphicon-ok text-default"
     headerValue.innerHTML = "Your README header score is " + score + " out of 10. There's always room for improvement."
   } else if (score == 3 || score == 2 || score == 1) {
@@ -117,7 +129,7 @@ function insertHeadersRecommendations(recommendations, score) {
     for (i = 0; i < addValues.length; i++){
       if (i < 6) {
         var newSpan = document.createElement('span');
-        newSpan.className = "label label-success";
+        newSpan.className = "label label-default";
         newSpan.innerHTML = addValues[i];
       
         var space = document.createTextNode(" ");
@@ -164,7 +176,7 @@ function insertHeadersRecommendations(recommendations, score) {
     for (i = 0; i < subValues.length; i++){
       if (i < 6){
         var newSpan = document.createElement('span');
-        newSpan.className = "label label-danger";
+        newSpan.className = "label label-default";
         newSpan.innerHTML = subValues[i];
       
         var space = document.createTextNode(" ");
@@ -192,10 +204,10 @@ function insertParagraphRecommendations(recommendations, score) {
   paragraphValue.innerHTML = '';
   var icon = document.createElement('span')
 
-  if (score >= 6){
+  if (score >= 7){
     icon.className = "glyphicon glyphicon-ok text-success"
     paragraphValue.innerHTML = "Amazing! Your README text score is " + score + " out of 10."
-  } else if (score == 4 || score == 5) {
+  } else if (score == 4 || score == 5 || score == 6) {
     icon.className = "glyphicon glyphicon-ok text-default"
     paragraphValue.innerHTML = "Your README text score is " + score + " out of 10. There's always room for improvement."
   } else if (score == 3 || score == 2 || score == 1) {
@@ -258,7 +270,7 @@ function insertParagraphRecommendations(recommendations, score) {
     for (i = 0; i < addValues.length; i++){
       if (i < 6){
         var newSpan = document.createElement('span');
-        newSpan.className = "label label-success";
+        newSpan.className = "label label-default";
         newSpan.innerHTML = addValues[i];
       
         var space = document.createTextNode(" ");
@@ -304,7 +316,7 @@ function insertParagraphRecommendations(recommendations, score) {
     for (i = 0; i < subValues.length; i++){
       if (i < 6) {
         var newSpan = document.createElement('span');
-        newSpan.className = "label label-danger";
+        newSpan.className = "label label-default";
         newSpan.innerHTML = subValues[i];
       
         var space = document.createTextNode(" ");
@@ -328,7 +340,7 @@ function updateLengthRecommendation(length_rec, score) {
   var icon = document.createElement('span')
 
 //
-  if (score >= 6){
+  if (score >= 7){
     if (length_rec.length == 0){
       icon.className = "glyphicon glyphicon-ok text-success"
       value.innerHTML = "Amazing! Your README scored " + score + " out of 10 on character count. We have no recommendations to make."
@@ -344,7 +356,7 @@ function updateLengthRecommendation(length_rec, score) {
       icon.className = "glyphicon glyphicon-ok text-default"
       value.innerHTML = "No recommendations found for your README's character count. Good job!"
     }
-  } else if (score == 4 || score == 5) {
+  } else if (score == 4 || score == 5 || score == 6) {
       if (length_rec.length == 0){
         icon.className = "glyphicon glyphicon-ok text-default"
         value.innerHTML = "Your README scored " + score + " out of 10 on character count. There's always room for improvement, but we don't have a suggestion."
@@ -394,7 +406,7 @@ function updateCodeSampleRecommendation(code_rec, score) {
   var icon = document.createElement('span')
 
 //
-  if (score >= 6){
+  if (score >= 7){
     if (code_rec.length == 0){
       icon.className = "glyphicon glyphicon-ok text-success"
       value.innerHTML = "Amazing! Your README scored " + score + " out of 10 on code samples. We have no recommendations to make."
@@ -410,7 +422,7 @@ function updateCodeSampleRecommendation(code_rec, score) {
       icon.className = "glyphicon glyphicon-ok text-default"
       value.innerHTML = "No recommendations found for your README's code samples count. Good job!"
     }
-  } else if (score == 4 || score == 5) {
+  } else if (score == 4 || score == 5 || score == 6) {
       if (code_rec.length == 0){
         icon.className = "glyphicon glyphicon-ok text-default"
         value.innerHTML = "Your README scored " + score + " out of 10 on code samples. There's always room for improvement, but we don't have a suggestion."
@@ -460,7 +472,7 @@ function updateImagesRecommendation(img_rec, score) {
   var icon = document.createElement('span')
 
 // Scoring for images
-  if (score >= 6){
+  if (score >= 7){
     if (img_rec.length == 0){
       icon.className = "glyphicon glyphicon-ok text-success"
       value.innerHTML = "Amazing! Your README image score is " + score + " out of 10. We have no recommendations to make."
@@ -476,7 +488,7 @@ function updateImagesRecommendation(img_rec, score) {
       icon.className = "glyphicon glyphicon-ok text-default"
       value.innerHTML = "No recommendations found for your README's image count. Good job!"
     }
-  } else if (score == 4 || score == 5) {
+  } else if (score == 4 || score == 5 || score == 6) {
       if (img_rec.length == 0){
         icon.className = "glyphicon glyphicon-ok text-default"
         value.innerHTML = "Your README image score is " + score + " out of 10. There's always room for improvement, but we don't have a suggestion."
@@ -518,14 +530,15 @@ function updateImagesRecommendation(img_rec, score) {
 
 function parseScores(result) {
   var overview = document.getElementsByClassName("overview-score");
-  var length  = document.getElementsByClassName("length-score");
+  // Removing Lenght, bc not correlated with a good result.
+  // var length  = document.getElementsByClassName("length-score");
   var headers = document.getElementsByClassName("headers-score");
   var code    = document.getElementsByClassName("code-score");
   var parag   = document.getElementsByClassName("paragraph-score");
   var img     = document.getElementsByClassName("image-score");
 
   var score = result.score
-  var scores = new Array(score.pre, score.header, score.length, score.paragraph, score.img)
+  var scores = new Array(score.pre, score.header, /*score.length,*/ score.paragraph, score.img)
   
   //calculate overall avg score
   var sum =0;
@@ -537,7 +550,7 @@ function parseScores(result) {
 
   scores.unshift(overScore)
 
-  var elements = new Array(overview, code, headers, length, parag, img)
+  var elements = new Array(overview, code, headers, /*length,*/ parag, img)
 
   console.log(elements)
 
@@ -554,22 +567,22 @@ function insertGrade(elements, score) {
     
     var grade = grade_divs[i]
 
-    if (score >= 9) {
+    if (score >= 10) {
       grade.style.color = '#5cb85c';
       grade.innerHTML = "A+";
-    } else if (score == 8) {
+    } else if (score == 9) {
       grade.style.color = '#5cb85c';
       grade.innerHTML = "A";
-    } else if (score == 7) {
+    } else if (score == 7 || score == 8) {
       grade.style.color = '#5cb85c';
       grade.innerHTML = "B";
-    } else if (score == 5 || score == 6) {
+    } else if (score == 4 || score == 5 || score == 6) {
       grade.style.color = '#f0ad4e';
       grade.innerHTML = "C";
-    } else if (score == 3 || score == 4) {
+    } else if (score == 3 || score == 2) {
       grade.style.color = '#d9534f';
       grade.innerHTML = "D";
-    } else if (score == 2 || score == 1) {
+    } else if (score == 1) {
       grade.style.color = '#d9534f';
       grade.innerHTML = "F";
     } else {

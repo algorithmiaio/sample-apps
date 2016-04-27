@@ -14,6 +14,18 @@ compass_config do |config|
   config.output_style = :expanded
 end
 
+activate :s3_sync do |s3_sync|
+  s3_sync.bucket                     = 'demos.algorithmia.com'
+  s3_sync.region                     = 'us-east-1'
+  s3_sync.prefer_gzip                = true
+  s3_sync.path_style                 = true
+  s3_sync.reduced_redundancy_storage = false
+  s3_sync.acl                        = 'public-read'
+  s3_sync.encryption                 = false
+  s3_sync.prefix                     = 'github-readme-analyzer'
+  s3_sync.version_bucket             = false
+end
+
 ###
 # Page options, layouts, aliases and proxies
 ###
@@ -61,7 +73,7 @@ configure :build do
 
   # Minify Javascript on build
   activate :minify_javascript
-  
+
 
   activate :asset_hash
 
@@ -69,7 +81,7 @@ configure :build do
   # activate :cache_buster
 
   # Use relative URLs
-  # activate :relative_assets
+  activate :relative_assets
 
   # Compress PNGs after build
   # First: gem install middleman-smusher

@@ -1,5 +1,14 @@
-namespace :assets do
-  task :precompile do
-    sh "middleman build"
-  end
+require "rubygems"
+require "bundler/setup"
+
+desc "Generate static site"
+task :generate do
+  sh "middleman build"
 end
+
+
+desc "Generate and publish static site to demos.algorithmia.com"
+task :publish => [:generate] do
+  sh "middleman s3_sync"
+end
+

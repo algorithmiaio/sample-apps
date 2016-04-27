@@ -1,28 +1,28 @@
   <meta name="description" content="<%= current_page.data.summary.lstrip.chomp[0..299] %>">
 
-  <link rel="canonical" href="<%= current_page.data.url %>" />
+  <link rel="canonical" href="http://demos.algorithmia.com/github-readme-analyzer" />
   <meta name="language" content="en">
 
   <meta name="robots" content="index,follow">
-
+<!-- FB -->
   <meta property="og:title" content="<%= current_page.data.title || "Algorithmia" %>">
-  <meta property="og:url" content="<%= current_page.data.url %>">
+  <meta property="og:url" content="http://demos.algorithmia.com/github-readme-analyzer">
   <meta property="og:description" content="<%= current_page.data.summary.lstrip.chomp[0..299] %>">
   <meta property="og:locale" content="en_US" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="<%= current_page.data.url %>/img/octocat-fb.png" />
-  <meta property="og:site_name" content="Algorithmia" />
-  <meta property="og:locale" content="en_US">
-  
 
+[
+  <meta property="og:image" content="<%= image_tag 'octocat-fb.png' %>" />
+  <meta property="og:site_name" content="Algorithmia" />
+  
+<!-- TWTR -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@algorithmia" />
   <meta name="twitter:title" content="<%= current_page.data.title %>" />
   <meta name="twitter:description" content="<%= current_page.data.summary.lstrip.chomp[0..299] %>" />
-  <meta name="twitter:image" content="<%= current_page.data.url %>/img/octocat-twttr.png" />
+  <meta name="twitter:image" content="<%= image_tag 'octocat-twttr.png' %>" />
   <meta name="twitter:creator" content="@matt_kiser" />
 
-
+<!-- OTHER -->
   <meta itemprop="name" content="<%= current_page.data.title %>">
   <meta itemprop="description" content="<%= current_page.data.summary.lstrip.chomp[0..299] %>">
-  <meta itemprop="image" content="<%= current_page.data.url %>">

@@ -3,10 +3,40 @@
 <head>
   <meta charset="utf-8">
   <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-  <title>Analyze READMEs with Natural Language Processing & Algorithmia.</title>
   <meta name="viewport" content="width=device-width">
+
+  <title>GitHub README Analyzer by Algorithmia</title>
+  <meta name="description" content="Think you've got a great GitHub README? Compare yours to the 10,000 most popular repositories on GitHub.">
+
+  <link rel="canonical" href="http://localhost:4567" />
+  <meta name="language" content="en">
+
+  <meta name="robots" content="index,follow">
+
+  <meta property="og:title" content="GitHub README Analyzer by Algorithmia">
+  <meta property="og:url" content="http://localhost:4567">
+  <meta property="og:description" content="Think you've got a great GitHub README? Compare yours to the 10,000 most popular repositories on GitHub.">
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://localhost:4567/img/octocat-fb.png" />
+  <meta property="og:site_name" content="Algorithmia" />
+  <meta property="og:locale" content="en_US">
+  
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@algorithmia" />
+  <meta name="twitter:title" content="GitHub README Analyzer by Algorithmia" />
+  <meta name="twitter:description" content="Think you've got a great GitHub README? Compare yours to the 10,000 most popular repositories on GitHub." />
+  <meta name="twitter:image" content="http://localhost:4567/img/octocat-twttr.png" />
+  <meta name="twitter:creator" content="@matt_kiser" />
+
+
+  <meta itemprop="name" content="GitHub README Analyzer by Algorithmia">
+  <meta itemprop="description" content="Think you've got a great GitHub README? Compare yours to the 10,000 most popular repositories on GitHub.">
+  <meta itemprop="image" content="http://localhost:4567">
+  
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-  <!--[if lte IE 8]><link rel="stylesheet" href="css/old-ie-553ebd1a.css"><![endif]-->
+  <!--[if lte IE 8]><link rel="stylesheet" href="css/old-ie-abaa0e4d.css"><![endif]-->
   <!--[if gt IE 8]><!--><!--<![endif]-->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="/vendor/jquery-1.9.1.min-1ec97b49.js"><\/script>')</script>
@@ -15,82 +45,129 @@
   <script src="/vendor/bootstrap.min-791aa054.js" type="text/javascript"></script>
   <script src="/vendor/tweenMax.min-7ee24a76.js" type="text/javascript"></script>
   <link href="vendor/bootstrap.min-8eb176c7.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/all-5e123295.css">
-
+  <link rel="stylesheet" href="css/all-6c1d4da6.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,700">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,300" rel="stylesheet" type="text/css">
   
-<meta property="og:title" content="Analyze READMEs with Natural Language Processing & Algorithmia.">
-<meta property="og:url" content="http://localhost:4567">
-<meta property="og:description" content="Think you've got a great README? Try comparing it to our trained model based on the top repositories and see how you line up.">
-<meta name="description" content="Think you've got a great README? Try comparing it to our trained model based on the top repositories and see how you line up.">
-
-
-  <meta property="og:image" content="http://localhost:4567/img/Algorithmia_Bintree_Logo.png" >
-
+  
+<!--   Google Analytics -->
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-XXXXXXXXX', 'auto');
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-38617973-1', 'auto');
     ga('send', 'pageview');
+
   </script>
+
 </head>
 
 <body>
-<!-- Facebook share button -->
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script> <!-- end Facebook share button -->
-
-  <div class="main">
-  <div id="overlay" class="hidden">
-    <div class="dots-container">
-      <div class="dot dot1"></div>
-      <div class="dot dot2"></div>
-      <div class="dot dot3"></div>
-      <div class="dot dot4"></div>
-    </div>  
-  </div>
-
-  <div class="jumbotron">
-    <div class="row">
-      <div class="col-md-9"><h1>Algoritmically improve your Github Readme</h1></div>
-      <div class="col-md-3"><img class="octocat img-responsive" src="/img/octocat-659a7eda.jpg" /></div>
-    </div>
-  </div>
-
-
-  <div class="explanation">
-    <p>Creating good readmes can be really challenging. This is especially true given the fact that there's no official standard to follow. One approach for solving this problem could be to go through the top starred repositories on github and find common features in each of them. Going through hundreds of repositories can be time consuming, slow process.
-
-    This algorithm uses machine learning models to learn from the 1000 starred repositories for the top 10 programming languages (that has the most repositories) on Github. It gives your project readme a score between 1-10, and makes recommendations to make your readme more similar to the top readmes on GitHub.</p>
-  </div>
-
-  <div class="row">
-    <div class="algorithm-form">
-      <form class="form-inline">
-        <div class="form-group">
-          <label for="repository">Repo:</label>
-          <input type="text" class="form-control " id="repository" placeholder="rspec/rspec-mocks">
+<div class="outer-container">
+  <div class="navbar navbar-default navbar-static-top navbar-public navbar-dark" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://localhost:4567"><img src="https://algorithmia.com/versioned/images/demos/recommends/c252fbb7a622bafd9d4f38b2e82a608c-logo-white.png" alt="Algorithmia"></a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav pull-right">
+              <li><a href="https://algorithmia.com/algorithms"><span>Algorithms</span></a></li>
+              <li><a href="https://algorithmia.com/use-cases">Use Cases</a></li>
+              <li><a href="https://algorithmia.com/pricing"><span>Pricing</span></a></li>
+              <li><a href="http://blog.algorithmia.com/"><span>Blog</span></a></li>
+              
+                <li>
+                  <a class="nav-link nav-username hidden-sm hidden-xs" href="https://algorithmia.com/signup?invite=OpenMarketplace">
+                    Sign up
+                  </a>
+                </li>
+              
+            </ul>
+          </div>
         </div>
-        <button class="btn btn-primary" type="button" onclick="callAlgorithm()">Analyze me!</button>
-          <span class="aspinner hidden" id="algo-spinner"></span>
-          <span id="status-label"></span>
-      </form>
+</div>
 
+
+    <div class="content-container">  
+  <div class="container" id="content">
+    <div class="row hero-background">
+          <div class="container hero">
+            <div id="pitch" class="col-md-7">
+              <!-- <div class="col-md-8"> -->
+                <h1>GitHub README Analyzer</h1>
+                <h2 class="lead">Algorithmically improve your GitHub README</h2>
+                    
+                      <form>
+                        <div class="form-group">
+                          <p>Type in any GitHub <code>username/repository</code></p>
+                          <input type="text" class="form-control" id="repository" placeholder="rspec/rspec-mocks">
+                          <button class="btn btn-primary" type="button" onclick="callAlgorithm()">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            Analyze It
+                          </button>
+                          <p>
+                            <small>
+                              Examples: <a href"#"><code>fbsamples/f8app</code></a> - <a href="http://algorithmia.com"><code>scikit-learn/scikit-learn</code></a>
+                            </small>
+                          </p>
+
+                        </div>
+                        <span class="aspinner hidden" id="algo-spinner"></span>
+                        <span id="status-label"></span>
+                      </form>
+                    
+              <!-- </div> -->
+            </div>
+          </div>
     </div>
-  </div>
-      <div class="row"></div>
-      <div class="row">
   
-   <h3>Definitions & Recommendations</h3>
+  <div class="row main-content">
+    <div class="container">
+      
+      <div id="overlay" class="hidden">
+        <div class="dots-container">
+          <div class="dot dot1"></div>
+          <div class="dot dot2"></div>
+          <div class="dot dot3"></div>
+          <div class="dot dot4"></div>
+        </div>  
+      </div>
 
+      <div class="row" id="explainer">
+        <div class="col-md-8">
+          <div class="explanation">
+            <h4>
+              Think you've got a great README?
+            </h4>
+            <p>
+              We know writing a README can be a challenge. And, how do you know what makes a README any good? 
+            </p>
+            <p>
+              Instead of guessing, we used natural language processing, and machine learning to train a model on the 10,000 most starred GitHub repositories, across the 10 most popular programming langauges. 
+            </p>
+            <p>
+             Try it out: We'll analyze your README, score it, and provide recommendations for improvement across five categories.
+            </p>
+            <p>
+              Learn more about our <a href="http://blog.algorithmia.com/2016/04/github-readme-analyzer/" target="_blank">data science approach to analyzing GitHub README's</a>. 
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="hidden" id="recs"> 
+        <div class="row">
+  <div class="col-md-12">
+   <h3>Your README Report Card</h3>
+   <p>We've analyzed your GitHub README, and here's what we've found.</p>
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active">
@@ -106,7 +183,7 @@
       <a href="#length_recommendation_tab" aria-controls="length" role="tab" data-toggle="tab">Length</a>
     </li>
     <li role="presentation">
-      <a href="#paragraphs_recommendation_tab" aria-controls="paragraphs" role="tab" data-toggle="tab">Paragraphs</a>
+      <a href="#paragraphs_recommendation_tab" aria-controls="paragraphs" role="tab" data-toggle="tab">Text</a>
     </li>
     <li role="presentation">
       <a href="#images_recommendation_tab" aria-controls="imges" role="tab" data-toggle="tab">Images</a>
@@ -115,232 +192,247 @@
 
   <!-- Tab panes -->
   <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="overview_recommendation_tab"><div class="overview_info"> 
-<div class="col-md-2 algo-grade algo-grade-good">A+</div>
-  <div class="col-md-10">
-      <blockquote>
-      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </blockquote>
+    <div role="tabpanel" class="tab-pane active" id="overview_recommendation_tab"><div class="row">
+  <div class="col-md-1 algo-grade overview-score overview_info"></div>
+  <div class="col-md-8">
+      <h4>Your README's Overall Grade</h4>
+      	<p>
+      		Your overall score is calculated as an average of your README's headers, code samples, length, text, and image scores. Each section provides insights and suggestions for improving the quality of your README relative to the 10,000 popular repositories we've analyzed. 
+      	</p>
+      	<p>
+      		These grades are the result of data science and machine learning, and are provided on a "best effort" basis. Ultimately, you should use your own judgement about what to include, remove, and ignore. Inevitably, there will be results that don't make sense. Feel free to <a href="https://algorithmia.com/contact" target="_blank">contact us</a> if you feel something is particularly egregious. 
+      	</p>
+      	<p>A few assumptions we made when training our model:</p> 
+      	<ul>
+     			<li>
+    				Popular repositories probably have a good, well-documented README
+    			</li>
+    			<li>
+    				Popular repositories have more stars than bad repositories 
+    			</li>
+  			<li>
+  				Each programming language has unique characteristics
+  			</li>
+        </ul>
+        		<p>
+        			In general, we found <b>higher</b> correlations between a README's quality and the specific headers, and the words used throughout. Conversely, we found a <b>lower</b> correlations between a README's length, the number of code samples, the number of images, and the quality of the README. 
+        		</p>
+            <p>
+              In order to correct this, we removed any repository that had fewer than 1,500 characters, zero images, or zero code snippets from our model.
+            </p>
+      	<p>
+      		<b>How was this made?</b>
+      	</p>
+<!--       	<p>
+      		We used a <a href="#">data science approach to analyzing README's</a>, and then <a href="#">hosted our model on Algorithmia</a>, which made it available as a serverless API endpoint.
+        </p> -->
+
+      	<p>
+          Learn more about our <a href="http://blog.algorithmia.com/2016/04/github-readme-analyzer/">data science approach to analyzing GitHub README's</a>, and find the complete code sample in the <a href="https://github.com/algorithmiaio/sample-apps/tree/master/JavaScript/Analyze_readme" target="_blank">Algorithmia Sample Apps repo</a> here, which earned a B grade. 😎 
+      	</p>
+
+  </div>
+</div>
+</div>
+    <div role="tabpanel" class="tab-pane" id="headers_recommendation_tab"><div class="row"> 
+  <div class="col-md-1 algo-grade headers_info headers-score"></div>
+  <div class="col-md-8">
+      <h4>Section Headers</h4>
+        <p>
+          Having clear section headers help users quickly find what they're looking for. Our recommendations provide guidance on what sections you should consider adding, changing, or removing. In many cases, section headers can come in multiple forms. Such as Install, Installing, or Installation. In these situations, we simply pick one, and recommend it. Feel free to pick your own flavor. 
+        </p>
   </div>
 </div>
 
-<div class="inserted-recs">
-  <div id="overview_recommendation">
-    
-    <ul class="media-list">
-      <li class="media">
-        
-        <div class="media-left media-top">
-          <div class="algo-grade algo-grade-good">B</div>
+<div class="row inserted-recs">
+  <div class="col-md-8 col-md-offset-1">   
+      <ul class="media-list">
+        <li class="media">
+          <div class="media-body">
+            <div class="media">
+              <div class="media-left media-top">
+                <div id="header-rec-operation" class="operation"></div>
+              </div>
+              <div class="media-body">
+                <span id="header-rec-value"></span>
+              </div>
+            </div>
         </div>
-
-        <div class="media-body">
-          <h3 class="media-heading">— Your Grade</h3>
-          <div id="overview-recommendation-list"></div>
-        </div>
-
       </li>
     </ul>
-
   </div>
-</div></div>
-    <div role="tabpanel" class="tab-pane" id="headers_recommendation_tab"><div class="headers_info"> 
- <div class="row"> 
-    <div class="col-md-2 algo-grade algo-grade-good">A+</div>
-    <div class="col-md-10">
-        <blockquote>
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-        </blockquote>
+</div>
+
+
+<div class="row" id="headers-recommendation-list"></div></div>
+    <div role="tabpanel" class="tab-pane" id="code_recommendation_tab"><div class="row"> 
+    <div class="col-md-1 algo-grade code_info code-score"></div>
+    <div class="col-md-8">
+        <h4>Code Samples</h4>
+        <p>
+          It should go without saying that code samples are extremely helpful. Many developers jump straight to code examples, rather than reading the documentation. Here, we attempt to make recommendations relative to the average number of code samples in the most popular repositories.
+        </p>
+
+        <p>
+          The average README has 8.33 code samples. 
+        </p>
     </div>
 </div>
-<div class="row"> 
-      <div class="inserted-recs">
-          <div id="headers_recommendation">
-            
-            <ul class="media-list">
-              <li class="media">
-                <div class="media-body">
-                  <div id="headers-recommendation-list"></div>
-                
-
-              </li>
-            </ul>
-
-          </div>
-      </div>
-  </div>
-</div>
-
-</div>
-    <div role="tabpanel" class="tab-pane" id="code_recommendation_tab"><div class="code_info"> 
-  <div class="col-md-2 algo-grade algo-grade-good">A+</div>
-  <div class="col-md-10">
-      <blockquote>
-      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </blockquote>
-  </div>
-</div>
-
-<div class="inserted-recs">
-  <div id="code_recommendation">
- 
-    <ul class="media-list">
-      <li class="media">
-        
-        <div class="media-left media-top">
-          <div class="score-grade code-score">D</div>
-        </div>
-
-        <div class="media-body">
-          <h3 class="media-heading">— Your Grade</h3>
-
+<div class="row inserted-recs" id="code_recommendation">
+  <div class="col-md-8 col-md-offset-1">   
+      <ul class="media-list">
+        <li class="media">
+          <div class="media-body">
             <div class="media">
               <div class="media-left media-top">
                 <div id="code-recommendation-operation" class="operation"></div>
               </div>
               <div class="media-body">
-                <h4 id="code-recommendation-value"></h4>
+                <span id="code-recommendation-value"></span>
               </div>
             </div>
 
         </div>
       </li>
     </ul>
-    
-  </div>
-</div></div>
-    <div role="tabpanel" class="tab-pane" id="length_recommendation_tab"><div class="length_info">
-  <div class="col-md-2 algo-grade algo-grade-good">A+</div>
-  <div class="col-md-10">
-      <blockquote>
-      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </blockquote>
   </div>
 </div>
+</div>
+    <div role="tabpanel" class="tab-pane" id="length_recommendation_tab"><div class="row"> 
+    <div class="col-md-1 algo-grade length_info length-score"></div>
+    <div class="col-md-8">
+         <h4>README Length</h4>
+        <p>
+          The length of a README is an indicator of a well-documented repository. Like with code samples, some developers prefer to look at the code, while others prefer to read the documentation. By thoroughly documentating and describing the functionality of your project, you ensure that developers know how to use and take advantage of your code. 
+        </p>
+        <p>
+          The average README is 9,078 characters long, with a standard deviation of 7,900.16. 
+        </p>
+    </div>
+</div>
 
-<div class="inserted-recs">
-  <div id="length_recommendation">
-
-    <ul class="media-list">
-      <li class="media">
-        <div class="media-left media-top">
-          <div class="score-grade length-score">A</div>
-        </div>
-        <div class="media-body">
-          <h3 class="media-heading">— Your Grade</h3>
-
+<div class="row inserted-recs" id="length_recommendation">
+  <div class="col-md-8 col-md-offset-1">   
+      <ul class="media-list">
+        <li class="media">
+          <div class="media-body">
             <div class="media">
               <div class="media-left media-top">
                 <div id="length-recommendation-operation" class="operation"></div>
               </div>
               <div class="media-body">
-                <h4 id="length-recommendation-value"></h4>
+                <span id="length-recommendation-value"></span>
               </div>
             </div>
-
         </div>
       </li>
     </ul>
-  
   </div>
 </div>
 </div>
-    <div role="tabpanel" class="tab-pane" id="paragraphs_recommendation_tab"><div class="paragraph_info"> 
-  <div class="col-md-2 algo-grade algo-grade-good">A+</div>
-  <div class="col-md-10">
-      <blockquote>
-      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </blockquote>
+    <div role="tabpanel" class="tab-pane" id="paragraphs_recommendation_tab"><div class="row"> 
+  <div class="col-md-1 algo-grade paragraph_info paragraph-score"></div>
+  <div class="col-md-8">
+      <h4>README Text</h4>
+        <p>
+          The text of your README is important, because it explains what your README is about, how it works, why you need it, and more. Your README should be readable, coherent, and clear. 
+        </p>
+        <p>
+          Our model analyzes every word used throughout your README to suggest keywords commonly used in popular README's. For instance, if we recommend that you include a word like "globals," perhaps you should include a sentence or two describing the role of globals in your project.
+        </p>
+      
   </div>
 </div>
 
-<div class="inserted-recs">
-  <div id="paragraph_recommendation">
-    
-    <ul class="media-list">
-      <li class="media">
-        <div class="media-left media-top">
-          <div class="score-grade paragraph-score">C</div>
+<div class="row inserted-recs">
+  <div class="col-md-8 col-md-offset-1">   
+      <ul class="media-list">
+        <li class="media">
+          <div class="media-body">
+            <div class="media">
+              <div class="media-left media-top">
+                <div id="paragraph-rec-operation" class="operation"></div>
+              </div>
+              <div class="media-body">
+                <span id="paragraph-rec-value"></span>
+              </div>
+            </div>
         </div>
-        
-        <div class="media-body">
-          <h3 class="media-heading">— Your Grade</h3>
-          <div  id="paragraphs-recommendation-list"></div>
-        </div>
-
       </li>
     </ul>
-
-  </div>
-</div></div>
-    <div role="tabpanel" class="tab-pane" id="images_recommendation_tab"><div class="images_info"> 
-  <div class="col-md-2 algo-grade algo-grade-good">A+</div>
-  <div class="col-md-10">
-      <blockquote>
-      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </blockquote>
   </div>
 </div>
 
-<div class="inserted-recs">
-  <div id="images_recommendation">
 
-    <ul class="media-list">
-      <li class="media">
-        
-        <div class="media-body">
-          <h3 class="media-heading">— Your Grade</h3>
+<div class="row" id="paragraphs-recommendation-list"></div>
 
+
+
+
+
+
+                                               </div>
+    <div role="tabpanel" class="tab-pane" id="images_recommendation_tab"><div class="row"> 
+    <div class="col-md-1 algo-grade images_info image-score"></div>
+    <div class="col-md-8">
+         <h4>README Images</h4>
+        <p>Popular repositories on GitHub often have images or badges in their README's. The badges indicate things like continious integration, build status, or package manager inclusion. Other types of images, such as screenshots or GIFs, can also be useful in conveying information about the output or how the code works.
+        </p>
+        <p>
+          The average README has 2.89 images. 
+        </p>
+    </div>
+</div>
+
+<div class="row inserted-recs" id="images_recommendation">
+  <div class="col-md-8 col-md-offset-1">   
+      <ul class="media-list">
+        <li class="media">
+          <div class="media-body">
             <div class="media">
               <div class="media-left media-top">
                 <div id="images-recommendation-operation" class="operation"></div>
               </div>
               <div class="media-body">
-                <h4 id="images-recommendation-value"></h4>
+                <span id="images-recommendation-value"></span>
               </div>
             </div>
-
         </div>
       </li>
     </ul>
-
   </div>
-</div></div>
+</div>
+</div>
   </div>
- 
+ </div>
 </div>
 
+      </div>
+      
+      </div>
     </div>
   </div>
-</div> <!-- main -->
-  <footer class="footer">
-  <div class="social-sharing">
-    <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="box_count"></div>
-
-    <a href="https://twitter.com/share" class="twitter-share-button" data-via="algorithmia" data-size="small">Tweet</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
-    <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
-    <script type="IN/Share" data-counter="top"></script>
-  </div>
-
-  <div id="logo">
-    <a href="https://algorithmia.com" target="_blank">
-      <img src="/img/powered-by-algorithmia-220x60-0099010d.png" />
-    </a>
-  </div>
-
-  <div id="connect">
-    <p>Don't want to miss out on the next cool demo?</p>
-      <ul>
-        <li><a href="http://blog.algorithmia.com" class="btn btn-info btn-xs">Check out our blog</a></li>
-      <ul>
-  </div>
+</div>
+  
+    <footer>
+  <div class="container">
+        <div class="pull-left">
+          &copy; Algorithmia 2016
+        </div>
+        <ul class="list-inline pull-right">
+          <li><a href="https://algorithmia.com/about">About</a></li>
+          <li><a href="https://algorithmia.com/terms">Terms</a></li>
+          <li><a href="https://algorithmia.com/privacy">Privacy</a></li>
+          <li><a href="http://blog.algorithmia.com" target="_blank">Blog</a></li>
+          <li><a href="https://angel.co/algorithmia/jobs/" target="_blank">Jobs</a></li><li>
+          </li><li><a href="https://algorithmia.com/contact">Contact</a></li>
+        </ul>
+    </div>
 </footer>
 
 
 
-  <script src="/js/all-f5e91372.js" type="text/javascript"></script>
-
+    <script src="/js/all-1246499d.js" type="text/javascript"></script>
+</div>
 </body>
 </html>

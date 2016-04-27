@@ -1,4 +1,14 @@
-# Analyze READMEs with Algorithmia
+# GitHub README Analyzer by Algorithmia
+
+## Think you've got a great README?
+
+We know writing a README can be a challenge. And, how do you know what makes a README any good? 
+
+Instead of guessing, we used natural language processing, and machine learning to train a model on the 10,000 most starred GitHub repositories, across the 10 most popular programming langauges. 
+
+Try it out: We'll analyze your README, score it, and provide recommendations for improvement across five categories.
+
+Learn more about our [data science approach to analyzing GitHub README's](http://blog.algorithmia.com/2016/04/github-readme-analyzer/). 
 
 ## Run locally
 

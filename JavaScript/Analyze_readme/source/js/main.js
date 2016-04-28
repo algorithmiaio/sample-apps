@@ -21,16 +21,16 @@ function callAlgorithm() {
   statusLabel.innerHTML = "";
   
   // Query algorithm
-  Algorithmia.query('nlp/AnalyzeGithubReadme', Algorithmia.api_key, repo, function(error, result) {
+  Algorithmia.client(Algorithmia.api_key).algo('nlp/AnalyzeGithubReadme').pipe(repo, function(result) {
     finishTask();
-    // Print debug output
-    if(error) {
-      statusLabel.innerHTML = '<span class="text-danger">Failed:(' + error + ')</span>';
+    if(result.error) {
+      // Print error output
+      statusLabel.innerHTML = '<span class="text-danger">Failed:(' + result.error.message + ')</span>';
       return;
+    } else {
+      parseScores(result.result);
+      parseRecommendations(result.result);
     }
-
-    parseScores(result);
-    parseRecommendations(result);
   });
 };
 

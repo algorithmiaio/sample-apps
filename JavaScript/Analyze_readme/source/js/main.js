@@ -513,7 +513,7 @@ function updateImagesRecommendation(img_rec, score) {
         value.innerHTML = rec
       } else {
         icon.className = "glyphicon glyphicon-remove text-default"
-        value.innerHTML = "NWe have no recommendations to make."
+        value.innerHTML = "We have no recommendations to make."
       }
   } else {
     icon.className = "glyphicon glyphicon-ok text-default"

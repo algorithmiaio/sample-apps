@@ -588,6 +588,11 @@ function insertGrade(elements, score) {
 
 };
 
+function analyzeDefault(repo) {
+  document.getElementById("repository").value = repo;
+  callAlgorithm();
+}
+
 var numTasks = 0;
 
 function startTask() {

@@ -20,8 +20,6 @@ function callAlgorithm() {
   // Clear values to prep for new data
   statusLabel.innerHTML = "";
   
-
-
   // Query algorithm
   Algorithmia.query('nlp/AnalyzeGithubReadme', Algorithmia.api_key, repo, function(error, result) {
     finishTask();
@@ -44,9 +42,6 @@ function parseRepo(result){
 }
 
 function parseRecommendations(result) {
-
-
-
   // updateLengthRecommendation(result.recommendation.length, result.score.length)
   updateCodeSampleRecommendation(result.recommendation.pre, result.score.pre)
   updateImagesRecommendation(result.recommendation.img, result.score.img)
@@ -111,7 +106,7 @@ function insertHeadersRecommendations(recommendations, score) {
     var media_header = document.createElement('div')
     media_header.className = "panel-heading"
 
-    media_header.innerHTML = "<h3 class='panel-title'>Consider Adding:</h3>"
+    media_header.innerHTML = "<h3 class='panel-title'>Consider Adding</h3>"
 
     media.appendChild(panel)
     panel.appendChild(media_header)
@@ -153,7 +148,7 @@ function insertHeadersRecommendations(recommendations, score) {
     var media_header = document.createElement('div')
     media_header.className = "panel-heading"
 
-    media_header.innerHTML = "<h3 class='panel-title'>Try Removing:</h3>"
+    media_header.innerHTML = "<h3 class='panel-title'>Try Removing</h3>"
 
     media.appendChild(panel)
     panel.appendChild(media_header)
@@ -354,7 +349,7 @@ function updateLengthRecommendation(length_rec, score) {
       value.innerHTML = rec
     } else {
       icon.className = "glyphicon glyphicon-ok text-default"
-      value.innerHTML = "No recommendations found for your README's character count. Good job!"
+      value.innerHTML = "Good job! We have no recommendations to make."
     }
   } else if (score == 4 || score == 5 || score == 6) {
       if (length_rec.length == 0){
@@ -370,7 +365,7 @@ function updateLengthRecommendation(length_rec, score) {
         value.innerHTML = rec
       } else {
         icon.className = "glyphicon glyphicon-ok text-default"
-        value.innerHTML = "No recommendations found for your README's character count."
+        value.innerHTML = "We have no recommendations to make."
       }
   } else if (score == 3 || score == 2 || score == 1) {
       if (length_rec.length == 0){
@@ -386,11 +381,11 @@ function updateLengthRecommendation(length_rec, score) {
         value.innerHTML = rec
       } else {
         icon.className = "glyphicon glyphicon-remove text-default"
-        value.innerHTML = "No recommendations found for your README's character count."
+        value.innerHTML = "We have no recommendations to make."
       }
   } else {
     icon.className = "glyphicon glyphicon-ok text-default"
-    value.innerHTML = "No recommendations found for your README's character count."
+    value.innerHTML = "We have no recommendations to make."
   }
 //
 
@@ -409,18 +404,18 @@ function updateCodeSampleRecommendation(code_rec, score) {
   if (score >= 7){
     if (code_rec.length == 0){
       icon.className = "glyphicon glyphicon-ok text-success"
-      value.innerHTML = "Amazing! Your README scored " + score + " out of 10 on code samples. We have no recommendations to make."
+      value.innerHTML = "Amazing! Your README scored " + score + " out of 10 on code samples. No need to change anything."
     } else if (code_rec[0].operation == 'decrease'){
       icon.className = "glyphicon glyphicon-ok text-default"
-      var rec = "Excellent. Your README scored " + score + " out of 10 on code samples. Want to improve even more? Try removing up to " + code_rec[0].value + " code samples."
+      var rec = "Excellent. Your README scored " + score + " out of 10 on code samples. You're all set."
       value.innerHTML = rec
     } else if (code_rec[0].operation == 'increase'){
       icon.className = "glyphicon glyphicon-ok text-default"
-      var rec = "Very nice. Your README scored " + score + " out of 10 on code samples. Want to do better? Consider adding " + code_rec[0].value + " or more code samples to improve your score."
+      var rec = "Very nice. Your README scored " + score + " out of 10 on code samples. It wouldn't hurt to add a few more to your README."
       value.innerHTML = rec
     } else {
       icon.className = "glyphicon glyphicon-ok text-default"
-      value.innerHTML = "No recommendations found for your README's code samples count. Good job!"
+      value.innerHTML = "Good job! We have no recommendations to make."
     }
   } else if (score == 4 || score == 5 || score == 6) {
       if (code_rec.length == 0){
@@ -428,15 +423,15 @@ function updateCodeSampleRecommendation(code_rec, score) {
         value.innerHTML = "Your README scored " + score + " out of 10 on code samples. There's always room for improvement, but we don't have a suggestion."
       } else if (code_rec[0].operation == 'decrease'){
         icon.className = "glyphicon glyphicon-ok text-default"
-        var rec = "Your README scored " + score + " out of 10 on code samples. Consider removing up to " + code_rec[0].value + " code samples to improve your score."
+        var rec = "Your README scored " + score + " out of 10 on code samples. Consider removing a few to improve your score."
         value.innerHTML = rec
       } else if (code_rec[0].operation == 'increase'){
         icon.className = "glyphicon glyphicon-ok text-default"
-        var rec = "Your README scored " + score + " out of 10 on code samples. Try adding " + code_rec[0].value + " or more code samples to improve your score."
+        var rec = "Your README scored " + score + " out of 10 on code samples. You're a little light on code samples. It wouldn't hurt to add a few more to your README."
         value.innerHTML = rec
       } else {
         icon.className = "glyphicon glyphicon-ok text-default"
-        value.innerHTML = "No recommendations found for your README's code samples."
+        value.innerHTML = "We have no recommendations to make."
       }
   } else if (score == 3 || score == 2 || score == 1) {
       if (code_rec.length == 0){
@@ -444,19 +439,19 @@ function updateCodeSampleRecommendation(code_rec, score) {
         value.innerHTML = "Uh oh. Your README scored " + score + " out of 10 on code samples. That's pretty low, but we don't have a suggestion for improvement."
       } else if (code_rec[0].operation == 'decrease'){
         icon.className = "glyphicon glyphicon-remove text-default"
-        var rec = "Code overload! Your README scored " + score + " out of 10 on code samples. Consider removing up to " + code_rec[0].value + " code samples to improve your score."
+        var rec = "Code overload! Your README scored " + score + " out of 10 on code samples. Consider removing a few."
         value.innerHTML = rec
       } else if (code_rec[0].operation == 'increase'){
         icon.className = "glyphicon glyphicon-remove text-default"
-        var rec = "Yikes! Your README scored " + score + " out of 10 on code samples. Try adding " + code_rec[0].value + " or more code samples to improve your score."
+        var rec = "Yikes! Your README scored " + score + " out of 10 on code samples. We recommend adding more code samples to your README."
         value.innerHTML = rec
       } else {
         icon.className = "glyphicon glyphicon-remove text-default"
-        value.innerHTML = "No recommendations found for your README's code samples."
+        value.innerHTML = "We have no recommendations to make."
       }
   } else {
     icon.className = "glyphicon glyphicon-ok text-default"
-    value.innerHTML = "No recommendations found for your README's code samples."
+    value.innerHTML = "We have no recommendations to make."
   }
 //
 
@@ -478,15 +473,15 @@ function updateImagesRecommendation(img_rec, score) {
       value.innerHTML = "Amazing! Your README image score is " + score + " out of 10. We have no recommendations to make."
     } else if (img_rec[0].operation == 'decrease'){
       icon.className = "glyphicon glyphicon-ok text-default"
-      var rec = "Excellent. Your README image score is " + score + " out of 10. Want to improve even more? Try removing up to " + img_rec[0].value + " images."
+      var rec = "Excellent. Your README image score is " + score + " out of 10. You're good to go."
       value.innerHTML = rec
     } else if (img_rec[0].operation == 'increase'){
       icon.className = "glyphicon glyphicon-ok text-default"
-      var rec = "Very nice. Your README image score is " + score + " out of 10. Want to do better? Consider adding " + img_rec[0].value + " or more images to improve your score."
+      var rec = "Very nice. Your README image score is " + score + " out of 10."
       value.innerHTML = rec
     } else {
       icon.className = "glyphicon glyphicon-ok text-default"
-      value.innerHTML = "No recommendations found for your README's image count. Good job!"
+      value.innerHTML = "Good job! We have no recommendations to make."
     }
   } else if (score == 4 || score == 5 || score == 6) {
       if (img_rec.length == 0){
@@ -494,35 +489,35 @@ function updateImagesRecommendation(img_rec, score) {
         value.innerHTML = "Your README image score is " + score + " out of 10. There's always room for improvement, but we don't have a suggestion."
       } else if (img_rec[0].operation == 'decrease'){
         icon.className = "glyphicon glyphicon-ok text-default"
-        var rec = "Your README image score is " + score + " out of 10. Consider removing up to " + img_rec[0].value + " images to improve your score."
+        var rec = "Your README image score is " + score + " out of 10. Most README's have fewer images."
         value.innerHTML = rec
       } else if (img_rec[0].operation == 'increase'){
         icon.className = "glyphicon glyphicon-ok text-default"
-        var rec = "Your README image score is " + score + " out of 10. Try adding " + img_rec[0].value + " or more images to improve your score."
+        var rec = "Your README image score is " + score + " out of 10. Most README's have two or more images"
         value.innerHTML = rec
       } else {
         icon.className = "glyphicon glyphicon-ok text-default"
-        value.innerHTML = "No recommendations found for your README's image count."
+        value.innerHTML = "We have no recommendations to make."
       }
   } else if (score == 3 || score == 2 || score == 1) {
       if (img_rec.length == 0){
         icon.className = "glyphicon glyphicon-remove text-default"
-        value.innerHTML = "Uh oh. Your README image score is " + score + " out of 10. That's pretty low, but we don't have a suggestion for improvement."
+        value.innerHTML = "Uh oh. Your README image score is " + score + " out of 10. That's a little low, but we don't have a suggestion for improvement."
       } else if (img_rec[0].operation == 'decrease'){
         icon.className = "glyphicon glyphicon-remove text-default"
-        var rec = "Image overload! Your README image score is " + score + " out of 10. Consider removing up to " + img_rec[0].value + " images to improve your score."
+        var rec = "Image overload! Your README image score is " + score + " out of 10. Consider removing a few."
         value.innerHTML = rec
       } else if (img_rec[0].operation == 'increase'){
         icon.className = "glyphicon glyphicon-remove text-default"
-        var rec = "Yikes! Your README image score is " + score + " out of 10. Try adding " + img_rec[0].value + " or more images to improve your score."
+        var rec = "Yikes! Your README image score is " + score + " out of 10. Most README's have two or more images."
         value.innerHTML = rec
       } else {
         icon.className = "glyphicon glyphicon-remove text-default"
-        value.innerHTML = "No recommendations found for your README's image count."
+        value.innerHTML = "NWe have no recommendations to make."
       }
   } else {
     icon.className = "glyphicon glyphicon-ok text-default"
-    value.innerHTML = "No recommendations found for your README's image count."
+    value.innerHTML = "We have no recommendations to make."
   }
 
   operation.appendChild(icon);

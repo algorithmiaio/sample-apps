@@ -18,7 +18,7 @@
   <meta property="og:description" content="Think you've got a great GitHub README? Compare yours to the 10,000 most popular repositories on GitHub.">
   <meta property="og:locale" content="en_US" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="http://demos.algorithmia.com/github-readme-analyzer/img/octocat-fb-a9653cac.png">
+  <meta property="og:image" content="http://demos.algorithmia.com/github-readme-analyzer/img/octocat-fb-a9653cac.png" />
   <meta property="og:site_name" content="Algorithmia" />
   
 <!-- TWTR -->
@@ -26,7 +26,7 @@
   <meta name="twitter:site" content="@algorithmia" />
   <meta name="twitter:title" content="GitHub README Analyzer by Algorithmia" />
   <meta name="twitter:description" content="Think you've got a great GitHub README? Compare yours to the 10,000 most popular repositories on GitHub." />
-  <meta name="twitter:image" content="http://demos.algorithmia.com/github-readme-analyzer/img/octocat-twttr-ef6a87f8.png">
+  <meta name="twitter:image" content="http://demos.algorithmia.com/github-readme-analyzer/img/octocat-twttr-ef6a87f8.png" />
   <meta name="twitter:creator" content="@matt_kiser" />
 
 <!-- OTHER -->
@@ -36,7 +36,7 @@
 
   
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-  <!--[if lte IE 8]><link rel="stylesheet" href="css/old-ie-097db1c9.css"><![endif]-->
+  <!--[if lte IE 8]><link rel="stylesheet" href="css/old-ie-e0f1a129.css"><![endif]-->
   <!--[if gt IE 8]><!--><!--<![endif]-->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="/vendor/jquery-1.9.1.min-1ec97b49.js"><\/script>')</script>
@@ -45,7 +45,7 @@
   <script src="vendor/bootstrap.min-791aa054.js"></script>
   <script src="vendor/tweenMax.min-7ee24a76.js"></script>
   <link href="vendor/bootstrap.min-8eb176c7.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/all-f15c399e.css">
+  <link rel="stylesheet" href="css/all-e8ee63cb.css">
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,700">
   <link href="https://fonts.googleapis.com/css?family=Lato:400,300" rel="stylesheet" type="text/css">
   
@@ -115,7 +115,7 @@
                           </button>
                           <p>
                             <small>
-                              Examples: <a><code>rust-lang/rust</code></a> - <a><code>scikit-learn/scikit-learn</code></a>
+                              Examples: <a><code onclick="analyzeDefault('rust-lang/rust')">rust-lang/rust</code></a> - <a><code onclick="analyzeDefault('scikit-learn/scikit-learn')">scikit-learn/scikit-learn</code></a>
                             </small>
                           </p>
 
@@ -200,13 +200,13 @@
       		Your overall score is calculated as an average of your README's headers, code samples, text, and image scores. Each section provides insights and suggestions for improving the quality of your README relative to the 10,000 popular repositories we've analyzed. 
       	</p>
       	<p>
-      		These grades are not definitive. Rather, they're the result of machine learning, and are provided on a "best effort" basis. Ultimately, you should use your own judgement about what to include, remove, and ignore. Inevitably, there will be results that don't make sense. <b>tl;dr data science is hard.</b>
+      		These grades are not definitive. Rather, they're the result of machine learning, and are provided on a "best effort" basis. We recognize that the model doesn't account for all the complexity and nuance a README has. Ultimately, you should use your own judgement about what to include, remove, and ignore. Inevitably, there will be results that don't make sense. <b>tl;dr data science is hard.</b>
       	</p>
         <p>
           Feel free to contact us <a href="https://twitter.com/algorithmia" target="_blank">@Algorithmia</a> or by <a href="https://algorithmia.com/contact" target="_blank">email</a> if you feel something is particularly egregious.
         </p>
         <hr>
-      	<p><b>README Assumptions</b></p> 
+      	<p><b>Model Assumptions</b></p> 
       	<ul>
      			<li>
     				Popular repositories probably have a good, well-documented README
@@ -219,10 +219,10 @@
   			</li>
         </ul>
         		<p>
-        			In general, we found <b>higher</b> correlations between a README's quality and the specific headers, and the text used throughout. Conversely, we found a <b>lower</b> correlations between the number of code samples, the number of images, and the quality of the README.
+        			In general, we found a <b>higher</b> correlation between a README's quality and the specific headers, and text used throughout. Conversely, we found a <b>lower</b> correlation between the quality and the number of code samples, and the number of images in the README.
         		</p>
             <p>
-              In order to correct this, we removed any repository that had zero images, or code snippets from our model.
+              In order to correct this, we removed any repository that had zero images, or code snippets from our model, because these are helpful, additive features.
             </p>
             <p>
               <i>Note:</i> If the README you analyze falls outside of the top 10 langauges (i.e. Javascript, Java, Ruby, Python, PHP, HTML, CSS, C++, C, or C#), we default to using a model trained on all of the languages. 
@@ -465,7 +465,7 @@
 
 
 
-    <script src="js/all-73f8d49d.js"></script>
+    <script src="js/all-99a5e53c.js"></script>
 </div>
 </body>
 </html>

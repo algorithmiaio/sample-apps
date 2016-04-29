@@ -5,7 +5,7 @@ url: "http://localhost:4567"
 summary: "Think you've got a great GitHub README? Compare yours to the 10,000 most popular repositories on GitHub."
 ---
 
-<div class="content-container">  
+<div class="content-container">
   <div class="container" id="content">
     <div class="row hero-background">
           <div class="container hero">
@@ -13,8 +13,8 @@ summary: "Think you've got a great GitHub README? Compare yours to the 10,000 mo
               <!-- <div class="col-md-8"> -->
                 <h1>GitHub README Analyzer</h1>
                 <h2 class="lead">An experiment to algorithmically improve your GitHub README</h2>
-                    
-                      <form>
+
+                      <form onsubmit="callAlgorithm(); return false;">
                         <div class="form-group">
                           <p>Type in any GitHub <code>username/repository</code></p>
                           <input type="text" class="form-control" id="repository" placeholder="rspec/rspec-mocks">
@@ -32,22 +32,22 @@ summary: "Think you've got a great GitHub README? Compare yours to the 10,000 mo
                         <span class="aspinner hidden" id="algo-spinner"></span>
                         <span id="status-label"></span>
                       </form>
-                    
+
               <!-- </div> -->
             </div>
           </div>
     </div>
-  
+
   <div class="row main-content">
     <div class="container">
-      
+
       <div id="overlay" class="hidden">
         <div class="dots-container">
           <div class="dot dot1"></div>
           <div class="dot dot2"></div>
           <div class="dot dot3"></div>
           <div class="dot dot4"></div>
-        </div>  
+        </div>
       </div>
 
       <div class="row" id="explainer">
@@ -57,27 +57,27 @@ summary: "Think you've got a great GitHub README? Compare yours to the 10,000 mo
               Think you've got a great README?
             </h4>
             <p>
-              We know writing a README can be a challenge. And, how do you know what makes a README any good? 
+              We know writing a README can be a challenge. And, how do you know what makes a README any good?
             </p>
             <p>
-              Instead of guessing, we tried to train a model using natural language processing, and machine learning. This data science experiment uses the 10,000 most starred GitHub repositories, across the 10 most popular programming languages. 
+              Instead of guessing, we tried to train a model using natural language processing, and machine learning. This data science experiment uses the 10,000 most starred GitHub repositories, across the 10 most popular programming languages.
             </p>
             <p>
              Try it out: We'll analyze your README, score it, and provide recommendations for improvement across four categories.
             </p>
             <p>
-              Learn more about our <a href="http://blog.algorithmia.com/2016/04/github-readme-analyzer/" target="_blank">data science approach to analyzing GitHub README's</a>. 
+              Learn more about our <a href="http://blog.algorithmia.com/2016/04/github-readme-analyzer/" target="_blank">data science approach to analyzing GitHub README's</a>.
             </p>
           </div>
         </div>
       </div>
-      
-      <div class="hidden" id="recs"> 
+
+      <div class="hidden" id="recs">
         <%= partial "recommendations" %>
       </div>
-      
+
       </div>
     </div>
   </div>
 </div>
-  
+

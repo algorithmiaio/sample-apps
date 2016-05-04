@@ -21,7 +21,7 @@ function callAlgorithm() {
   statusLabel.innerHTML = "";
   
   // Query algorithm
-  Algorithmia.client(Algorithmia.api_key).algo('nlp/AnalyzeGithubReadme').pipe(repo, function(result) {
+  Algorithmia.client(Algorithmia.api_key).algo('nlp/AnalyzeGithubReadme/0.1.13').pipe(repo, function(result) {
     finishTask();
     if(result.error) {
       // Print error output

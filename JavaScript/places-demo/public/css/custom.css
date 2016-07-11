@@ -1,0 +1,25 @@
+/*Put Custom Styles Here*/
+
+
+#twoface-demo canvas { 
+  max-width:100%; 
+}
+
+.sample-images {
+	max-width:100%; 
+	border:1px white solid;
+}
+
+pre {
+	padding: 0px;
+	margin: 13px;
+	border: 0px;
+}
+
+.label-success {
+    background-color: #9963ff;
+}
+
+#userImg {
+	width: 100%;
+}

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Colorize Black and White Photos – Algorithmia</title>
+	<link rel="canonical" href="" />
+	<meta name="description" content="Automatically colorize black and white photos, pictures, and images using the Color Image Colorization microservice.">
+	<meta name="robots" content="index,follow">
+
+	<!-- FB -->
+	<meta property="og:title" content="Colorize Black and White Photos">
+	<meta property="og:url" content="">
+	<meta property="og:description" content="Automatically colorize black and white photos, pictures, and images using the Color Image Colorization microservice">
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="website" />
+	<meta property="og:image" content="public/images/hero-fb.png" />
+	<meta property="og:site_name" content="Algorithmia" />
+
+	<!-- TWTR -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@algorithmia" />
+	<meta name="twitter:title" content="Colorize Black and White Photos" />
+	<meta name="twitter:description" content="Automatically colorize black and white photos, pictures, and images using the Color Image Colorization microservice" />
+	<meta name="twitter:image" content="public/images/hero-twttr.png" />
+	<meta name="twitter:creator" content="@matt_kiser" />
+
+	<!-- OTHER -->
+	<meta itemprop="name" content="Colorize Black and White Photos">
+	<meta itemprop="description" content="Automatically colorize black and white photos, pictures, and images using the Color Image Colorization microservice">
+
+	<!-- CSS -->
+	<link href="public/css/bootstrap.min.css" rel="stylesheet">
+	<link href="public/css/all.css" rel="stylesheet">
+	<link href="public/css/custom.css" rel="stylesheet">
+	<link href="public/css/styles/monokai.css" rel="stylesheet">
+
+
+	<link href="https://fonts.googleapis.com/css?family=Lato:400,300" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+
+
+	<!--   Google Analytics -->
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-38617973-1', 'auto');
+	ga('send', 'pageview');
+	</script>
+
+</head>
+<body>
+	<div class="outer-container">
+		<div class="navbar navbar-default navbar-static-top navbar-public navbar-dark" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="">
+						<img src="public/images/logo-white.png" alt="Algorithmia">
+					</a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav pull-right">
+						<li><a href="https://algorithmia.com/algorithms"><span>Algorithms</span></a></li>
+						<li><a href="https://algorithmia.com/use-cases">Use Cases</a></li>
+						<li><a href="https://algorithmia.com/pricing"><span>Pricing</span></a></li>
+						<li><a href="http://blog.algorithmia.com/"><span>Blog</span></a></li>
+						<li>
+							<a class="nav-link nav-username hidden-sm hidden-xs" href="https://algorithmia.com/signup?invite=color">
+								Sign up
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="content-container">
+			<div class="container" id="content">
+				<div class="row hero-background">
+					<div class="container hero">
+						<div id="pitch" class="col-md-7">
+							<h1>Colorize Photos</h1>
+							<h2 class="lead">Use Deep Learning to Automatically Colorize Black and White Photos</h2>
+							<div id="status-label"></div>
+							<form onsubmit="callAlgorithm(); return false;">
+								<div class="form-group well">
+									<p>Paste the URL to an image to colorize it</p>
+									<input type="text" class="form-control" id="imgUrl" placeholder="http://www.algorithmia.com/images/logo-white.png">
+									<button class="btn btn-primary" type="button" onclick="callAlgorithm()">
+										<span class="glyphicon glyphicon-adjust" aria-hidden="true"></span>
+										Colorize It
+									</button>
+									<p>
+										<small>
+											Or, try these sample images:
+										</small>
+									</p>
+									<div class="row">
+										<div class="col-md-2">
+											<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/e/ef/Ocean_beach_at_low_tide_against_the_sun.jpg')"><img src="public/images/water.png" class="sample-images"></a>
+										</div>
+										<div class="col-md-2">
+											<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/c/ce/MaynardYingst_SprintCar.jpg')"><img src="public/images/car.png" class="sample-images"></a>
+										</div>
+										<div class="col-md-2">
+											<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/7/7d/Yosemite_(14359652100).jpg')"><img src="public/images/yosemite.png" class="sample-images"></a>
+										</div>
+										<div class="col-md-2">
+											<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/e/e5/Fire-breather_CIELAB_L*.jpg')"><img src="public/images/fire.png" class="sample-images"></a>
+										</div>
+										<div class="col-md-2">
+											<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/4/4d/Beef_Portrait_(5210343960).jpg')"><img src="public/images/cows.png" class="sample-images"></a>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<div class="row main-content">
+					<div class="container">
+						<div id="overlay" class="hidden">
+							<div class="dots-container">
+								<div class="dot dot1"></div>
+								<div class="dot dot2"></div>
+								<div class="dot dot3"></div>
+								<div class="dot dot4"></div>
+							</div>
+						</div>
+
+						<!-- EXPLANATION PAGE -->
+						<div class="row" id="explainer">
+							<div class="col-md-6">
+								<div class="explanation">
+									<h4>
+										Easily Add Color to Your Black and White Photos
+									</h4>
+									<p>
+										Bring new life to old photos by automatically colorizing them using the Algorithmia API. It's as easy as pasting in a URL above. 
+									</p>
+									<p>
+										The <a href="https://algorithmia.com/algorithms/deeplearning/ColorfulImageColorization" target="_blank">Colorful Image Colorization microservice</a> is a computer vision algorithm trained on a million images from the Imagenet dataset. 
+									</p>
+									<!-- NEED BLOG POST URL -->
+									<p>
+										This microservices is built using the <a href="http://arxiv.org/pdf/1603.08511.pdf" target="_blank">Colorful Image Colorization algorithm created by Richard Zhang, Phillip Isola, and Alexei A. Efros</a>. Learn more about their work <a href="http://richzhang.github.io/colorization/" target="_blank">here</a> and <a href="#">how we built this demo</a>.
+									</p>
+									<p>
+										Let us know what you think <a href="https://twitter.com/algorithmia" target="_blank">@Algorithmia</a> or by <a href="https://algorithmia.com/contact" target="_blank">email</a>.
+									</p>
+									<hr>
+									<p>
+										<b>Join the thousands of developers using Algorithmia to build intelligent apps</b>
+										<br>
+										Create a free Algorithmia account using the code "color" and get an additional 10,000 free credits when you <a href="https://algorithmia.com/signup?invite=color" target="_new">sign up</a>. 
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<!-- RESULTS PAGE -->
+						<div class="row hidden" id="results">
+							<div class="col-md-12">
+								<div class="explanation">
+									<center>
+										<h4>
+											Photo Colorization Before and After<br>
+											<small id="urlAddress"></small>
+										</h4>
+										<figure>
+											<div id="twoface-demo"></div>
+											<figcaption>Drag the purple line to reveal the before and after</figcaption>
+										</figure>
+									</center>
+								</div>
+							</div>
+
+							<div class="col-md-8 col-md-offset-2">
+								<hr>
+								<center>
+									<h4>Built For Developers <br><small>A simple, scalable API for creating smarter products.</small></h4>
+								</center>
+								<pre><code class="python">import Algorithmia
+
+input = {"image": "_IMAGE_URL_"}
+client = Algorithmia.client('_API_KEY_')
+algo = client.algo('deeplearning/ColorfulImageColorization/0.1.4')
+
+print algo.pipe(input)
+</code></pre>
+							</div>
+							<div class="col-md-8 col-md-offset-2">
+								<pre><code class="json">{"output": "data://.algo/temp/image.png"}</code></pre>	
+							</div>
+
+							<div class="col-md-8 col-md-offset-2">	
+								<hr>
+									<center>
+									<p class="lead"><small>
+										<b>Join the thousands of developers using Algorithmia to build intelligent apps</b>
+										<br>
+										Get 10,000 additional credits when you <a href="https://algorithmia.com/signup?invite=color">sign up</a> using the code "color" </small>
+									</p>
+									<p><a href="https://algorithmia.com/signup?invite=color" target="_new" class="btn btn-success btn-lg">Sign Up For Free</a></p>
+								</center>
+								<hr>
+							</div>
+							<div class="col-md-8 col-md-offset-2">
+								<dl>
+								  <dt>Scalable API</dt>
+								  <dd>With an intuitive API, you have access to more than 2,000 algorithmic microservices. Build in your preferred language using Python, JavaScript, Java, Scala, Ruby, or Rust.
+								  </dd>
+								</dl>
+								<dl>
+								  <dt>Managed Platform</dt>
+								  <dd>Focus on building your app. We provide the tools and manage the cloud infrastructure needed to run it at scale. </dd>
+								</dl>
+								<dl>
+									<!-- BLOG POST URL NEEDED -->
+								  <dt>Host Your Trained Models</dt>
+								  <dd>Have a trained machine learning or deep learning model? Turn it into a serverless microservices in minutes. We'll show you how. <a href="#">Learn more</a></dd>
+								</dl>
+								<dl>
+								  <dt>Try For Free</dt>
+								  <dd>Get started for free, and scale with ease. Algorithmia's free tier provides 5,000 free credits per month for apps of any scale. When you're ready to grow, pay only for what you use, making it easy and cost effective to go from prototype to production. </dd>
+								</dl>
+								<hr>
+								<p>
+									Add the <a href="https://algorithmia.com/algorithms/deeplearning/ColorfulImageColorization" target="_blank">Colorful Image Colorization microservice</a> to your app today.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer>
+		<div class="container">
+			<div class="pull-left">
+				&copy; Algorithmia 2016
+			</div>
+			<ul class="list-inline pull-right">
+				<li><a href="https://algorithmia.com/about">About</a></li>
+				<li><a href="https://algorithmia.com/terms">Terms</a></li>
+				<li><a href="https://algorithmia.com/privacy">Privacy</a></li>
+				<li><a href="http://blog.algorithmia.com" target="_blank">Blog</a></li>
+				<li><a href="https://angel.co/algorithmia/jobs/" target="_blank">Jobs</a></li>
+				<li><a href="https://algorithmia.com/contact">Contact</a></li>
+			</ul>
+		</div>
+	</footer>
+
+	<!-- JS -->
+	<script src="public/js/jquery.min.js"></script>
+	<script src="public/js/bootstrap.min.js"></script>
+	<script src="public/js/TweenMax.min.js"></script>
+	<script src="public/js/algorithmia-0.2.0.js"></script>
+	<script src="public/js/twoimages.js"></script>
+	<script src="public/js/main.js"></script>
+	<script src="public/js/dots.js"></script>
+	<script src="public/js/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<script>
+	  window.intercomSettings = {
+	    app_id: "c9fj6354"
+	  };
+	</script>
+	<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/c9fj6354';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+</body>
+</html>

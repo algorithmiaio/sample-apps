@@ -1,6 +1,6 @@
 ## Publishing demos
 
-Most of the demos get published via Grunt tasks.
+Most of the demos get published via Grunt tasks. You'll need to install the Grunt CLI and the AWS grunt plugin: 
 
 ```bash
 npm install -g grunt-cli

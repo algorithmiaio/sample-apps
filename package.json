@@ -1,0 +1,6 @@
+{
+  "name": "sample-apps",
+  "devDependencies": {
+    "grunt-aws-s3": "^0.14.5"
+  }
+}

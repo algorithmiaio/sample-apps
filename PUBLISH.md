@@ -11,8 +11,8 @@ You'll need to create `aws-keys.json` in the repo root:
 
 ```json
 {
-  "key": <ACCESS_KEY_ID>,
-  "secret": <SECRET_ACCESS_KEY>
+  "key": "<ACCESS_KEY_ID>",
+  "secret": "<SECRET_ACCESS_KEY>"
 }
 ```
 
@@ -22,7 +22,7 @@ Then you can publish a demo by slug name, for example:
 grunt publish:colorize-photos
 ```
 
-To list the available Grunt tasks:
+To list the available Grunt tasks (i.e. demos that can be published):
 
 ```
 grunt --help

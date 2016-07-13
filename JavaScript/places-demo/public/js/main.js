@@ -53,6 +53,21 @@ function getPlaces(url){
 }
 
 function addPlaces(result, img){
+
+  for (var i = 0; i < result.length; i++){
+    var num = result[i].prob * 100;
+    var n = num.toFixed(2);
+    n = n + "%"
+
+    var table = document.getElementById("tbody")
+    var row = table.insertRow(-1);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+
+    cell1.innerHTML = '<span class="label label-success">'+result[i].class;+'</span>';
+    cell2.innerHTML = n;
+  }
+
   // Check if img is a Data URI
   var checkImg = img.split(':').shift();
   var prefix = ['data'];
@@ -71,33 +86,22 @@ function addPlaces(result, img){
       } else {
         // Decode base64 img
         var outputImageOriginal = output.result;
-        var src = "data:image/png;base64,";
+        var src = "data:image/jpeg;base64,";
         src += outputImageOriginal;
         // Add img to DOM
         document.getElementById("userImg").src = src;
+        finishTask();
       }
     });
     
   } else {
     // Add img to DOM
     document.getElementById("userImg").src = img;
+    finishTask();
   }
 
-  for (var i = 0; i < result.length; i++){
-    var num = result[i].prob * 100;
-    var n = num.toFixed(2);
-    n = n + "%"
 
-    var table = document.getElementById("tbody")
-    var row = table.insertRow(-1);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
 
-    cell1.innerHTML = '<span class="label label-success">'+result[i].class;+'</span>';
-    cell2.innerHTML = n;
-  }
-
-  finishTask();
 }
 
 function analyzeDefault(img) {

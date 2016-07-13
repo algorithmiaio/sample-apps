@@ -45,7 +45,7 @@ function getPlaces(url){
   }
 
   Algorithmia.client(Algorithmia.api_key)
-  .algo("algo://deeplearning/Places365Classifier/0.1.5")
+  .algo("algo://deeplearning/Places365Classifier/0.1.7")
   .pipe(input)
   .then(function(output){
     addPlaces(output.result.predictions, url);

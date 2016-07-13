@@ -25,8 +25,8 @@ function callAlgorithm() {
   var extensions = ['png','jpg','jpeg','bmp','gif'];
 
   if (extensions.indexOf(checkImg) > -1){
-    // Call the Image Resizing Function
-    imageSize(img);
+    // Call Image Colorization
+    colorify(img);
   } else {
       // Error Handling
     var statusLabel = document.getElementById("status-label")
@@ -36,120 +36,26 @@ function callAlgorithm() {
 
 };
 
-function imageSize(img){
-  var newImage = img.split("/");
-  var imgOutput = "data://.my/colorizer/_new-" + newImage[newImage.length-1]
-  newImage = "data://.my/colorizer/" + newImage[newImage.length-1]; 
-
-  var input = [
-  img, 
-  newImage
-  ];
-
-  // Upload original to Data API  
+function colorify(img) {
   Algorithmia.client(Algorithmia.api_key)
-  .algo("algo://ANaimi/URL2Data/0.1.0")
-  .pipe(input)
-  .then(function(output) {
-    if(output.error){
-      // Error Handling
-      var statusLabel = document.getElementById("status-label")
-      statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh Oh! Something went wrong: ' + output.error.message + ' </div>';
-      taskError();
-    } else {
+    .algo("algo://algorithmiahq/ColorizationDemo/1.0.2")
+    .pipe(img)
+    .then(function(output) {
+      if(output.error) {
+        // Error Handling
+        var statusLabel = document.getElementById("status-label")
+        statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh Oh! Something went wrong: ' + output.error.message + ' </div>';
+        taskError();
+      } else {
+        console.log("got output", output.result);
 
-      var imgInput = [
-        newImage, 
-        "-resize 800",
-        imgOutput
-      ];
+        // Decode base64 imgs
+        var imgOriginal = "data:image/png;base64," + output.result[0];
+        var imgColorized = "data:image/png;base64," + output.result[1];
 
-      // Resize original image to 800px wide
-      Algorithmia.client(Algorithmia.api_key)
-      .algo("algo://bkyan/ImageMagick/0.2.0")
-      .pipe(imgInput)
-      .then(function(output) {
-        if(output.error){
-          // Error Handling
-          var statusLabel = document.getElementById("status-label")
-          statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh Oh! Something went wrong: ' + output.error.message + ' </div>';
-          taskError();
-        } else {
-          // Call colorizer 
-          colorizeIt(output.result, imgOutput);
-        }
-      });
-    }
-  });
-}
-
-function colorizeIt(input, original) {
-	// Call Colorizer Algorithm
-  Algorithmia.client(Algorithmia.api_key)
-  .algo("algo://deeplearning/ColorfulImageColorization/0.1.7")
-  .pipe(input)
-  .then(function(output) {
-    if(output.error){
-      // Error Handling
-      var statusLabel = document.getElementById("status-label")
-      statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh Oh! Something went wrong: ' + output.error.message + ' </div>';
-      taskError();
-    } else {
-
-     // getImg(output.result.output, original);
-     getOriginalImage(original,output.result.output);
-
-   }
- });
-}
-
-function getOriginalImage(img,colorized){
-  // Retrieve original binary from Data API as base64
-  Algorithmia.client(Algorithmia.api_key)
-  .algo("algo://util/Data2Base64/0.1.0")
-  .pipe(img)
-  .then(function(output) {
-    if(output.error){
-      // Error Handling
-      var statusLabel = document.getElementById("status-label")
-      statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh Oh! Something went wrong: ' + output.error.message + ' </div>';
-      taskError();
-    } else {
-      
-      // Decode base64 img
-      var outputImageOriginal = output.result;
-      var src = "data:image/png;base64,";
-      src += outputImageOriginal;
-
-      getColorizedImage(colorized,src)
-
-    }
-  });
-}
-
-function getColorizedImage(img, original){
-  var newImage = img.split("/");
-  newImage = "data://.algo/deeplearning/ColorfulImageColorization/temp/" + newImage[newImage.length-1]; 
-
-  // Retrieve Colorized binary from Data API as base64
-  Algorithmia.client(Algorithmia.api_key)
-  .algo("algo://util/Data2Base64/0.1.0")
-  .pipe(newImage)
-  .then(function(output) {
-    if(output.error){
-      // Error Handling
-      var statusLabel = document.getElementById("status-label")
-      statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh Oh! Something went wrong: ' + output.error.message + ' </div>';
-      taskError();
-    } else {
-      
-      // Decode base64 img
-      var outputImage = output.result;
-      var src = "data:image/png;base64,";
-      src += outputImage;
-      getMeta(original,src);
-    }
-  });
+        getMeta(imgOriginal, imgColorized);
+      }
+    });
 }
 
 function getMeta(original,colorized){   

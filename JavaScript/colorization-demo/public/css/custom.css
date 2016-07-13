@@ -1,12 +1,13 @@
 /*Put Custom Styles Here*/
 
 
-#twoface-demo canvas { 
-  max-width:100%; 
+#twoface-demo canvas {
+  max-width:100%;
+  position: relative;
 }
 
 .sample-images {
-	max-width:100%; 
+	max-width:100%;
 	border:1px white solid;
 }
 

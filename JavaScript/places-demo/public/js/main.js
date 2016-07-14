@@ -10,16 +10,16 @@ function callAlgorithm() {
   // Clear table
   $("#tbody").empty();
   // Clear image
-  var image = document.getElementById("userImg").src 
+  var image = document.getElementById("userImg").src
   image.src = "";
 
   // Get the img URL
   var img = document.getElementById("imgUrl").value;
-  
+
   // Remove any whitespaces around the url
   img = img.trim();
 
-  // Check if URL is an image 
+  // Check if URL is an image
   var checkImg = img.split('.').pop();
   var extensions = ['png','jpg','jpeg','bmp','gif'];
 
@@ -93,7 +93,7 @@ function addPlaces(result, img){
         finishTask();
       }
     });
-    
+
   } else {
     // Add img to DOM
     document.getElementById("userImg").src = img;
@@ -120,6 +120,7 @@ function finishTask() {
     document.getElementById("overlay").classList.add("hidden");
     document.getElementById("explainer").classList.add("hidden");
     document.getElementById("results").classList.remove("hidden");
+    document.getElementById("marketing").classList.remove("hidden");
   }
 }
 
@@ -129,5 +130,6 @@ function taskError() {
   document.getElementById("explainer").classList.add("display");
   document.getElementById("explainer").classList.remove("hidden");
   document.getElementById("results").classList.add("hidden");
+  document.getElementById("marketing").classList.add("hidden");
 
 }

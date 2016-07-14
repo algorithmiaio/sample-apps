@@ -173,7 +173,7 @@
 						</div>
 
 						<!-- RESULTS PAGE -->
-						<div class="row hidden explanation" id="results">
+						<div class="hidden explanation" id="results">
 							<div class="row">
 								<div class="col-md-6">
 									<h4>Your Image</h4>
@@ -192,6 +192,19 @@
 									</table>
 								</div>
 							</div>
+						</div>
+
+						<div class="row" id="social">
+							<div class="col-md-8 col-md-offset-2">
+
+								<a href="https://twitter.com/share" class="twitter-share-button" data-text="Classify Places, Locations, and Scenes in Images" data-via="algorithmia" data-hashtags="classify-places" data-show-count="false">Tweet</a>
+
+								<div class="fb-share-button" data-href="http://demos.algorithmia.com/classify-places/" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fdemos.algorithmia.com%2Fclassify-places%2F&amp;src=sdkpreparse">Share</a></div>
+
+							</div>
+						</div>
+
+						<div class="hidden explanation" id="marketing">
 							<div class="row">
 								<div class="col-md-8 col-md-offset-2">
 									<hr>
@@ -258,7 +271,7 @@ print algo.pipe(input)
 									Add the <a href="https://algorithmia.com/algorithms/deeplearning/Places365Classifier" target="_blank">Places365 Classifier microservice</a> to your app today.
 								</p>
 								<p>
-									Now, researchers and developers can train their deep learning models locally, and <a href="http://blog.algorithmia.com/2016/07/cloud-hosted-deep-learning-models/" target="_blank">deploy them to Algorithmia’s scalable, cloud infrastructure</a>, where they become smart API endpoints for others developers to use. 
+									Now, researchers and developers can train their deep learning models locally, and <a href="http://blog.algorithmia.com/2016/07/cloud-hosted-deep-learning-models/" target="_blank">deploy them to Algorithmia’s scalable, cloud infrastructure</a>, where they become smart API endpoints for others developers to use.
 								</p>
 								<p>
 									This means application developers can now obtain real-time predictions from deep learning models, and build production-ready apps using state-of-the-art machine intelligence in five-lines of code or less.
@@ -305,5 +318,23 @@ print algo.pipe(input)
 	  };
 	</script>
 	<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/c9fj6354';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+
+    <!--- Here be the social sharing scripts --->
+	<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) return;
+	js = d.createElement(s); js.id = id;
+	js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
+	fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+	<style media="screen" type="text/css">
+	.fb_iframe_widget span {
+		vertical-align: baseline !important;
+	}
+	</style>
+
+
 </body>
 </html>

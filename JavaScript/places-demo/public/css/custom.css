@@ -1,12 +1,12 @@
 /*Put Custom Styles Here*/
 
 
-#twoface-demo canvas { 
-  max-width:100%; 
+#twoface-demo canvas {
+  max-width:100%;
 }
 
 .sample-images {
-	max-width:100%; 
+	max-width:100%;
 	border:1px white solid;
 }
 
@@ -22,4 +22,9 @@ pre {
 
 #userImg {
 	width: 100%;
+}
+
+#social {
+	margin-top: 20px;
+	text-align: center;
 }

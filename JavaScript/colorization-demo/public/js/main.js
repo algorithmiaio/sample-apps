@@ -4,7 +4,7 @@
 // paris https://images.unsplash.com/33/YOfYx7zhTvYBGYs6g83s_IMG_8643.jpg
 
 window.Algorithmia = window.Algorithmia || {};
-Algorithmia.api_key = "sim6fN4dbIEi+ORCaElcoOteGB51"
+Algorithmia.api_key = "simeyUbLXQ/R8Qga/3ZCRGcr2oR1"
 var numTasks = 0;
 
 function callAlgorithm() {
@@ -21,24 +21,26 @@ function callAlgorithm() {
   // document.getElementById("urlAddress").innerHTML = img;
 
   // Check if URL is an image
-  var checkImg = img.split('.').pop();
-  var extensions = ['png','jpg','jpeg','bmp','gif'];
-
-  if (extensions.indexOf(checkImg) > -1){
-    // Call Image Colorization
-    colorify(img);
-  } else {
-      // Error Handling
-    var statusLabel = document.getElementById("status-label")
-    statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh Oh! That&apos;s not a PNG, JPG, or GIF.</div>';
-    taskError();
-  }
+  // var checkImg = img.split('.').pop();
+  // var extensions = ['png','jpg','jpeg','bmp','gif'];
+  //
+  // if (extensions.indexOf(checkImg) > -1){
+  //   // Call Image Colorization
+  //   colorify(img);
+  // } else {
+  //     // Error Handling
+  //   var statusLabel = document.getElementById("status-label")
+  //   statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh Oh! That&apos;s not a PNG, JPG, or GIF.</div>';
+  //   taskError();
+  // }
+  colorify(img);
 
 };
 
 function colorify(img) {
   Algorithmia.client(Algorithmia.api_key, "https://api-region-6.algorithmia.com/v1/web/algo")
-    .algo("algo://algorithmiahq/ColorizationDemo/0.1.3")
+    .algo("algo://zeryx/ColorizationDemo2/0.1.3")
+    //   .algo("algo://algorithmiahq/ColorizationDemo/0.1.3")
     .pipe(img)
     .then(function(output) {
       if(output.error) {

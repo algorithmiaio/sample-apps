@@ -14,13 +14,13 @@ function callAlgorithm() {
 
   // Get the img URL
   var img = document.getElementById("imgUrl").value;
-  
+
   // Remove any whitespaces around the url
   img = img.trim();
 
   document.getElementById("urlAddress").innerHTML = img;
 
-  // Check if URL is an image 
+  // Check if URL is an image
   var checkImg = img.split('.').pop();
   var extensions = ['png','jpg','jpeg','bmp','gif'];
 
@@ -58,8 +58,8 @@ function colorify(img) {
     });
 }
 
-function getMeta(original,colorized){   
-  
+function getMeta(original,colorized){
+
   // Get height and width of original image
   var img = new Image();
 
@@ -97,6 +97,8 @@ function finishTask() {
     document.getElementById("overlay").classList.add("hidden");
     document.getElementById("explainer").classList.add("hidden");
     document.getElementById("results").classList.remove("hidden");
+    document.getElementById("marketing").classList.remove("hidden");
+    document.getElementById("social").classList.remove("invisible");
   }
 }
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -147,10 +147,10 @@
 										Easily Add Color to Your Black and White Photos
 									</h4>
 									<p>
-										Bring new life to old photos by automatically colorizing them using the Algorithmia API. It's as easy as pasting in a URL above. 
+										Bring new life to old photos by automatically colorizing them using the Algorithmia API. It's as easy as pasting in a URL above.
 									</p>
 									<p>
-										We're excited to introduce <a href="http://blog.algorithmia.com/2016/07/cloud-hosted-deep-learning-models/" target="_blank">cloud hosted deep learning models</a> on Algorithmia. The <a href="https://algorithmia.com/algorithms/deeplearning/ColorfulImageColorization" target="_blank">Colorful Image Colorization microservice</a> is a computer vision algorithm trained on a million images from the Imagenet dataset. 
+										We're excited to introduce <a href="http://blog.algorithmia.com/2016/07/cloud-hosted-deep-learning-models/" target="_blank">cloud hosted deep learning models</a> on Algorithmia. The <a href="https://algorithmia.com/algorithms/deeplearning/ColorfulImageColorization" target="_blank">Colorful Image Colorization microservice</a> is a computer vision algorithm trained on a million images from the Imagenet dataset.
 									</p>
 									<!-- NEED BLOG POST URL -->
 									<p>
@@ -163,11 +163,13 @@
 									<p>
 										<b>Join the thousands of developers using Algorithmia to build intelligent apps</b>
 										<br>
-										Create a free Algorithmia account using the code "color" and get an additional 10,000 free credits when you <a href="https://algorithmia.com/signup?invite=color" target="_new">sign up</a>. 
+										Create a free Algorithmia account using the code "color" and get an additional 10,000 free credits when you <a href="https://algorithmia.com/signup?invite=color" target="_new">sign up</a>.
 									</p>
 								</div>
 							</div>
 						</div>
+
+
 
 						<!-- RESULTS PAGE -->
 						<div class="row hidden" id="results">
@@ -185,7 +187,19 @@
 									</center>
 								</div>
 							</div>
+						</div>
 
+						<div class="row invisible" id="social">
+							<div class="col-md-8 col-md-offset-2">
+
+								<a href="https://twitter.com/share" class="twitter-share-button" data-text="Colorize Black and White Photos" data-url="http://colorize-it.com" data-via="algorithmia" data-hashtags="colorize-it" data-show-count="false">Tweet</a>
+
+								<div class="fb-share-button" data-href="http://colorize-it.com" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fcolorize-it.com%2F&amp;src=sdkpreparse">Share</a></div>
+								<div id="fb-root"></div>
+							</div>
+						</div>
+
+						<div class="row hidden" id="marketing">
 							<div class="col-md-8 col-md-offset-2">
 								<hr>
 								<center>
@@ -201,10 +215,10 @@ print algo.pipe(input)
 </code></pre>
 							</div>
 							<div class="col-md-8 col-md-offset-2">
-								<pre><code class="json">{"output": "data://.algo/temp/image.png"}</code></pre>	
+								<pre><code class="json">{"output": "data://.algo/temp/image.png"}</code></pre>
 							</div>
 
-							<div class="col-md-8 col-md-offset-2">	
+							<div class="col-md-8 col-md-offset-2">
 								<hr>
 									<center>
 									<p class="lead"><small>
@@ -239,7 +253,7 @@ print algo.pipe(input)
 									Add the <a href="https://algorithmia.com/algorithms/deeplearning/ColorfulImageColorization" target="_blank">Colorful Image Colorization microservice</a> to your app today.
 								</p>
 								<p>
-									Now, researchers and developers can train their deep learning models locally, and <a href="http://blog.algorithmia.com/2016/07/cloud-hosted-deep-learning-models/" target="_blank">deploy them to Algorithmia’s scalable, cloud infrastructure</a>, where they become smart API endpoints for others developers to use. 
+									Now, researchers and developers can train their deep learning models locally, and <a href="http://blog.algorithmia.com/2016/07/cloud-hosted-deep-learning-models/" target="_blank">deploy them to Algorithmia’s scalable, cloud infrastructure</a>, where they become smart API endpoints for others developers to use.
 								</p>
 								<p>
 									This means application developers can now obtain real-time predictions from deep learning models, and build production-ready apps using state-of-the-art machine intelligence in five-lines of code or less.
@@ -286,5 +300,21 @@ print algo.pipe(input)
 	  };
 	</script>
 	<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/c9fj6354';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+
+    <!--- Here be the social sharing scripts --->
+	<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+	<script>(function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) return;
+	js = d.createElement(s); js.id = id;
+	js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=267848543232063";
+	fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+	<style media="screen" type="text/css">
+	.fb_iframe_widget span {
+		vertical-align: baseline !important;
+	}
+	</style>
+
 </body>
 </html>

@@ -27,7 +27,7 @@ function callAlgorithm() {
 
 function colorify(img) {
   Algorithmia.client(Algorithmia.api_key, "https://api-region-6.algorithmia.com/v1/web/algo")
-    .algo("algo://algorithmiahq/ColorizationDemo/0.1.5")
+    .algo("algo://algorithmiahq/ColorizationDemo/0.1.6")
     .pipe(img)
     .then(function(output) {
       if(output.error) {

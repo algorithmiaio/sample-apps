@@ -18,7 +18,7 @@ function callAlgorithm() {
   // Remove any whitespaces around the url
   img = img.trim();
 
-  document.getElementById("urlAddress").innerHTML = img;
+  // document.getElementById("urlAddress").innerHTML = img;
 
   // Check if URL is an image
   var checkImg = img.split('.').pop();

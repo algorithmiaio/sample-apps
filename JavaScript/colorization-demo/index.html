@@ -3,8 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<title>Colorize Black and White Photos – Algorithmia</title>
 	<link rel="canonical" href="http://demos.algorithmia.com/colorize-photos/" />
 	<meta name="description" content="Automatically colorize black and white photos, pictures, and images using the Colorful Image Colorization microservice.">
@@ -96,7 +95,7 @@
 								<div class="form-group well">
 									<p>Paste the URL to an image to colorize it</p>
 									<input type="text" class="form-control" id="imgUrl" placeholder="http://www.algorithmia.com/images/logo-white.png">
-									<button class="btn btn-primary" type="button" onclick="callAlgorithm()">
+									<button class="btn btn-primary mb" type="button" onclick="callAlgorithm()">
 										<span class="glyphicon glyphicon-adjust" aria-hidden="true"></span>
 										Colorize It
 									</button>
@@ -106,19 +105,21 @@
 										</small>
 									</p>
 									<div class="row">
-										<div class="col-md-2">
+										<div class="col-md-2 col-xs-6">
 											<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/e/ef/Ocean_beach_at_low_tide_against_the_sun.jpg')"><img src="public/images/water.png" class="sample-images"></a>
 										</div>
-										<div class="col-md-2">
+										<div class="col-md-2 col-xs-6">
 											<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/c/ce/MaynardYingst_SprintCar.jpg')"><img src="public/images/car.png" class="sample-images"></a>
 										</div>
-										<div class="col-md-2">
+										<div class="clearfix visible-xs-block"></div>
+										<div class="col-md-2 col-xs-6">
 											<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/7/7d/Yosemite_(14359652100).jpg')"><img src="public/images/yosemite.png" class="sample-images"></a>
 										</div>
-										<div class="col-md-2">
+										<div class="col-md-2 col-xs-6">
 											<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/e/e5/Fire-breather_CIELAB_L*.jpg')"><img src="public/images/fire.png" class="sample-images"></a>
 										</div>
-										<div class="col-md-2">
+										<div class="clearfix visible-xs-block"></div>
+										<div class="col-md-2 col-xs-6">
 											<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/4/4d/Beef_Portrait_(5210343960).jpg')"><img src="public/images/cows.png" class="sample-images"></a>
 										</div>
 									</div>

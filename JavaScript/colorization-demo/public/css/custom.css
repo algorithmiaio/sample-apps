@@ -1,5 +1,17 @@
 /*Put Custom Styles Here*/
 
+@media (max-width: 767px){
+	.visible-xs-block {
+		padding-bottom: 10px;
+	    display: block !important;
+	}	
+	.form-control{
+		max-width: 100%;
+	}
+	.mb {
+		margin-top:5px;
+	}
+}
 
 #twoface-demo canvas {
   max-width:100%;
@@ -21,3 +33,4 @@ pre {
 	margin-top: 20px;
 	text-align: center;
 }
+

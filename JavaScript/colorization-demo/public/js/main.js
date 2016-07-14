@@ -97,7 +97,7 @@ function finishTask() {
     document.getElementById("overlay").classList.add("hidden");
     document.getElementById("explainer").classList.add("hidden");
     document.getElementById("results").classList.remove("hidden");
-    document.getElementById("social").classList.remove("invisible");
+    document.getElementById("social").classList.remove("hidden");
     document.getElementById("marketing").classList.remove("hidden");
   }
 }
@@ -108,6 +108,6 @@ function taskError() {
   document.getElementById("explainer").classList.add("display");
   document.getElementById("explainer").classList.remove("hidden");
   document.getElementById("results").classList.add("hidden");
-  document.getElementById("social").classList.add("invisible");
+  document.getElementById("social").classList.add("hidden");
   document.getElementById("marketing").classList.add("hidden");
 }

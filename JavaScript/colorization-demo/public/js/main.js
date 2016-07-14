@@ -42,6 +42,16 @@ function colorify(img) {
         var imgOriginal = "data:image/png;base64," + output.result[0];
         var imgColorized = "data:image/png;base64," + output.result[1];
 
+        // Show the download link if API also returned the URL
+        if(output.result.length > 2) {
+            var resultLink = document.getElementById("resultLink");
+            resultLink.href = output.result[2];
+            resultLink.classList.remove("hidden");
+        } else {
+            resultLink.href = '#';
+            resultLink.classList.add("hidden");
+        }
+
         getMeta(imgOriginal, imgColorized);
       }
     });

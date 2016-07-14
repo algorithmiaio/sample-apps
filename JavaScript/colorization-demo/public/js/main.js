@@ -20,25 +20,14 @@ function callAlgorithm() {
 
   // document.getElementById("urlAddress").innerHTML = img;
 
-  // Check if URL is an image
-  var checkImg = img.split('.').pop();
-  var extensions = ['png','jpg','jpeg','bmp','gif'];
-
-  if (extensions.indexOf(checkImg) > -1){
-    // Call Image Colorization
-    colorify(img);
-  } else {
-      // Error Handling
-    var statusLabel = document.getElementById("status-label")
-    statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh Oh! That&apos;s not a PNG, JPG, or GIF.</div>';
-    taskError();
-  }
+  // Call Image Colorization
+  colorify(img);
 
 };
 
 function colorify(img) {
   Algorithmia.client(Algorithmia.api_key, "https://api-region-6.algorithmia.com/v1/web/algo")
-    .algo("algo://algorithmiahq/ColorizationDemo/0.1.3")
+    .algo("algo://algorithmiahq/ColorizationDemo/0.1.4")
     .pipe(img)
     .then(function(output) {
       if(output.error) {

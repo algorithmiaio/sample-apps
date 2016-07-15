@@ -9,6 +9,7 @@ function TwoFace(id, width, height) {
 
     this.ctx = canvas.getContext('2d');
     this.images = [];
+    canvas.id = 'twoface'
 
     // Event handlers
     canvas.addEventListener('mousemove', handler, false);
@@ -108,7 +109,7 @@ TwoFace.prototype = {
 
     drawHandle: function(ctx) {
         var split = this.divide * this.width;
-        
+
         ctx.fillStyle = "#9963ff";
         ctx.fillRect(split - 1, 0, 5, this.height);
     },

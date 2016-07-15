@@ -25,6 +25,16 @@ function callAlgorithm() {
 
 };
 
+function downloadCanvas(link, canvasId, filename) {
+    link.href = document.getElementById(canvasId).toDataURL();
+    link.download = filename;
+}
+
+document.getElementById('compareLink').addEventListener('click', function() {
+    downloadCanvas(this, 'twoface', 'rendered-comparison.png');
+}, false);
+
+
 function colorify(img) {
   Algorithmia.client(Algorithmia.api_key, "https://api-region-6.algorithmia.com/v1/web/algo")
     .algo("algo://algorithmiahq/ColorizationDemo/0.1.6")
@@ -41,6 +51,15 @@ function colorify(img) {
         // Decode base64 imgs
         var imgOriginal = "data:image/png;base64," + output.result[0];
         var imgColorized = "data:image/png;base64," + output.result[1];
+
+        // Show the download link if API also returned the URL
+        if(output.result.length > 2) {
+            document.getElementById("downloadLinks").classList.remove("hidden");
+            document.getElementById("resultLink").href = output.result[2];
+        } else {
+            document.getElementById("downloadLinks").classList.add("hidden");
+            document.getElementById("resultLink").href = '#';
+        }
 
         getMeta(imgOriginal, imgColorized);
       }

@@ -119,3 +119,45 @@ function taskError() {
   document.getElementById("social").classList.add("invisible");
   document.getElementById("marketing").classList.add("hidden");
 }
+
+
+function initDropzone() {
+  window.Dropzone.autoDiscover = false;
+  var dropzone = new Dropzone("#file-dropzone", {
+    options: {
+      sending: function() {}
+    },
+    acceptedFiles: "image/*",
+    previewTemplate: "<div></div>",
+    maxFilesize: 10,
+    filesizeBase: 1024,
+    createImageThumbnails: false,
+    clickable: true
+  });
+  dropzone.__proto__.cancelUpload = function() {};
+  dropzone.__proto__.uploadFile = function() {};
+  dropzone.__proto__.uploadFiles = function() {};
+
+  dropzone.on("processing", function(file) {
+    var statusLabel = document.getElementById("status-label")
+    statusLabel.innerHTML = "";
+    startTask();
+
+    var reader = new FileReader();
+    reader.addEventListener("load", function () {
+      console.log("Calling algorithm with uploaded image.");
+      colorify(reader.result, function(result) {
+        dropzone.removeFile(file);
+      });
+    }, false);
+    reader.readAsDataURL(file);
+    console.log("Reading uploaded image...");
+  });
+
+  dropzone.on("error", function(file, err) {
+    var statusLabel = document.getElementById("status-label")
+    statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh oh! ' + err + ' </div>';
+    taskError();
+  });
+}
+initDropzone();

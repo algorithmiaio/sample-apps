@@ -91,40 +91,45 @@
 							<h1>Colorize Photos</h1>
 							<h2 class="lead">Use Deep Learning to Automatically Colorize Black and White Photos</h2>
 							<div id="status-label"></div>
-							<form onsubmit="callAlgorithm(); return false;">
-								<div class="form-group well">
-									<p>Paste the URL to an image to colorize it</p>
+							<div class="form-group well">
+								<p>Paste the URL to an image to colorize it</p>
+								<form onsubmit="callAlgorithm(); return false;">
 									<input type="text" class="form-control" id="imgUrl" placeholder="http://www.algorithmia.com/images/logo-white.png">
 									<button class="btn btn-primary mb" type="button" onclick="callAlgorithm()">
 										<span class="glyphicon glyphicon-adjust" aria-hidden="true"></span>
 										Colorize It
 									</button>
-									<p>
-										<small>
-											Or, try these sample images:
-										</small>
-									</p>
-									<div class="row">
-										<div class="col-md-2 col-xs-6">
-											<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/e/ef/Ocean_beach_at_low_tide_against_the_sun.jpg')"><img src="public/images/water.png" class="sample-images"></a>
-										</div>
-										<div class="col-md-2 col-xs-6">
-											<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/c/ce/MaynardYingst_SprintCar.jpg')"><img src="public/images/car.png" class="sample-images"></a>
-										</div>
-										<div class="clearfix visible-xs-block"></div>
-										<div class="col-md-2 col-xs-6">
-											<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/7/7d/Yosemite_(14359652100).jpg')"><img src="public/images/yosemite.png" class="sample-images"></a>
-										</div>
-										<div class="col-md-2 col-xs-6">
-											<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/e/e5/Fire-breather_CIELAB_L*.jpg')"><img src="public/images/fire.png" class="sample-images"></a>
-										</div>
-										<div class="clearfix visible-xs-block"></div>
-										<div class="col-md-2 col-xs-6">
-											<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/4/4d/Beef_Portrait_(5210343960).jpg')"><img src="public/images/cows.png" class="sample-images"></a>
-										</div>
+								</form>
+								<p>
+									<small>
+										Or, try these sample images:
+									</small>
+								</p>
+								<div class="row">
+									<div class="col-md-2 col-xs-6">
+										<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/e/ef/Ocean_beach_at_low_tide_against_the_sun.jpg')"><img src="public/images/water.png" class="sample-images"></a>
+									</div>
+									<div class="col-md-2 col-xs-6">
+										<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/c/ce/MaynardYingst_SprintCar.jpg')"><img src="public/images/car.png" class="sample-images"></a>
+									</div>
+									<div class="clearfix visible-xs-block"></div>
+									<div class="col-md-2 col-xs-6">
+										<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/7/7d/Yosemite_(14359652100).jpg')"><img src="public/images/yosemite.png" class="sample-images"></a>
+									</div>
+									<div class="col-md-2 col-xs-6">
+										<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/e/e5/Fire-breather_CIELAB_L*.jpg')"><img src="public/images/fire.png" class="sample-images"></a>
+									</div>
+									<div class="clearfix visible-xs-block"></div>
+									<div class="col-md-2 col-xs-6">
+										<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/4/4d/Beef_Portrait_(5210343960).jpg')"><img src="public/images/cows.png" class="sample-images"></a>
+									</div>
+									<div class="col-md-2 col-xs-6">
+										<form class="primary-text dropzone" id="file-dropzone" action="javascript:;">
+											<div class="dz-message" data-dz-message>Upload photo</div>
+										</form>
 									</div>
 								</div>
-							</form>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -296,9 +301,10 @@ print algo.pipe(input)
 	<script src="public/js/TweenMax.min.js"></script>
 	<script src="public/js/algorithmia-0.2.0.js"></script>
 	<script src="public/js/twoimages.js"></script>
-	<script src="public/js/main.js"></script>
 	<script src="public/js/dots.js"></script>
 	<script src="public/js/highlight.pack.js"></script>
+	<script src="public/js/dropzone.js"></script>
+	<script src="public/js/main.js"></script>
 	<script>hljs.initHighlightingOnLoad();</script>
 	<script>
 	  window.intercomSettings = {

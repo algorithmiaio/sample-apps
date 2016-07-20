@@ -146,15 +146,15 @@ function initDropzone() {
     var reader = new FileReader();
     reader.addEventListener("load", function () {
       console.log("Calling algorithm with uploaded image.");
-      colorify(reader.result, function(result) {
-        dropzone.removeFile(file);
-      });
+      colorify(reader.result);
+      dropzone.removeFile(file);
     }, false);
     reader.readAsDataURL(file);
     console.log("Reading uploaded image...");
   });
 
   dropzone.on("error", function(file, err) {
+    dropzone.removeFile(file);
     var statusLabel = document.getElementById("status-label")
     statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh oh! ' + err + ' </div>';
     taskError();

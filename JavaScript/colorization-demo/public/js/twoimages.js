@@ -56,6 +56,12 @@ function TwoFace(id, width, height) {
         }
     });
 
+    Object.defineProperty(this, 'offsetWidth', {
+        get: function() {
+            return canvas.offsetWidth;
+        }
+    });
+
     Object.defineProperty(this, 'divide', {
         get: function() {
             return divide;
@@ -115,7 +121,7 @@ TwoFace.prototype = {
     },
 
     mousedown: function(event) {
-        var divide = event._x / this.width;
+        var divide = event._x / this.offsetWidth;
         this.divide = divide;
 
         this.dragstart = true;
@@ -123,13 +129,13 @@ TwoFace.prototype = {
 
     mousemove: function(event) {
         if (this.dragstart === true) {
-            var divide = event._x / this.width;
+            var divide = event._x / this.offsetWidth;
             this.divide = divide;
         }
     },
 
     mouseup: function(event) {
-        var divide = event._x / this.width;
+        var divide = event._x / this.offsetWidth;
         this.divide = divide;
 
         this.dragstart = false;

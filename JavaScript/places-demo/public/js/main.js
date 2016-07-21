@@ -20,36 +20,34 @@ function callAlgorithm() {
   img = img.trim();
 
   // Check if URL is an image
-  var checkImg = img.split('.').pop();
-  var extensions = ['png','jpg','jpeg','bmp','gif'];
-
-  if (extensions.indexOf(checkImg) > -1){
     // Call the Image Resizing Function
     getPlaces(img);
-  } else {
-      // Error Handling
-    var statusLabel = document.getElementById("status-label")
-    statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh Oh! That&apos;s not a PNG, JPG, or GIF.</div>';
-    taskError();
-  }
+
   // getPlaces(img)
   // document.getElementById("urlAddress").innerHTML = img;
 
 
-};
+}
 
-function getPlaces(url){
+function getPlaces(url) {
   var input = {
     "image": url,
     "numResults": 7
-  }
-
+  };
   Algorithmia.client(Algorithmia.api_key)
-  .algo("algo://deeplearning/Places365Classifier/0.1.7")
-  .pipe(input)
-  .then(function(output){
-    addPlaces(output.result.predictions, url);
-  });
+      .algo("algo://deeplearning/Places365Classifier/0.1.9")
+      .pipe(input)
+      .then(function (output) {
+        if (output.error) {
+          // Error Handling
+          var statusLabel = document.getElementById("status-label")
+          statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh Oh! Something went wrong: ' + output.error.message + ' </div>';
+          taskError();
+        } else {
+          addPlaces(output.result.predictions, url);
+          console.log("got output", output.result);
+        }
+      })
 }
 
 function addPlaces(result, img){

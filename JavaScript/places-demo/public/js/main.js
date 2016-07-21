@@ -67,7 +67,7 @@ function addPlaces(result, img){
   }
 
   // Check if img is a Data URI
-  var checkImg = img.split(':').shift();
+  var checkImg = img.split('://').shift();
   var prefix = ['data'];
 
   if (prefix.indexOf(checkImg) > -1){

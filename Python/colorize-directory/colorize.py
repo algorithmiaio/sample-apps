@@ -1,14 +1,13 @@
 #!/usr/bin/python
 
-# USAGE: python colorize.py --api-key "YOUR_API_KEY" --connector-path "dropbox+NAME://path/to/directory"
+# USAGE: python colorize.py --api-key "YOUR_API_KEY" --connector-path "dropbox+NAME://path/to/directory" [--recursive]
 # If you get an error with any of the imports, make sure to run `pip install Algorithmia`
 
 import Algorithmia
 import argparse
 import posixpath
 
-def recursivelyColorize(algo, path, directory):
-    # Start by doing all the files
+def colorizeFilesInDirectory(algo, path, directory):
     for f in directory.files():
         # Check file if file type is supported.
         if f.getName().lower().endswith(('.png','.jpg','.jpeg','.bmp','.gif')):
@@ -28,13 +27,18 @@ def recursivelyColorize(algo, path, directory):
         else:
             print 'File: {} is not a type that is supported.'.format(f.getName())
 
+def recursivelyColorize(algo, path, directory):
+    # Start by doing all the files
+    colorizeFilesInDirectory(algo, path, directory)
+
     for d in directory.dirs():
         recursivelyColorize(algo, posixpath.join(path, d.getName()), d)
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--api-key', required=True)
-    parser.add_argument('--connector-path', required=True)
+    parser.add_argument('--api-key', required=True, help='algorithmia api key')
+    parser.add_argument('--connector-path', required=True, help='s3 or dropbox path for the directory to scan')
+    parser.add_argument('--recursive', action='store_true', help='continue scanning all sub-directories of the connector path')
     args = parser.parse_args()
 
     # Initialize Algorithmia Python client
@@ -46,8 +50,11 @@ def main():
     # The root level directory that we will traverse
     top_level_dir = client.dir(args.connector_path)
 
-    # Colorize each file in each sub directory
-    recursivelyColorize(algo, args.connector_path, top_level_dir)
+    # Colorize the files
+    if args.recursive:
+        recursivelyColorize(algo, args.connector_path, top_level_dir)
+    else:
+        colorizeFilesInDirectory(algo, args.connector_path, top_level_dir)
 
     print 'Done processing!'
 

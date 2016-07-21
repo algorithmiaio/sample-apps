@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 # USAGE: python colorize.py --api-key "YOUR_API_KEY" --connector-path "dropbox+NAME://path/to/directory"
-# If you get an error with any of the imports, make sure to run `pip install -r requirements.txt`
+# If you get an error with any of the imports, make sure to run `pip install Algorithmia`
 
 import Algorithmia
 import argparse
@@ -34,7 +34,7 @@ def recursivelyColorize(algo, path, directory):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--api-key', required=True)
-    parser.add_argument('--connector-path', default='dropbox://') # uses the default dropbox connector is none is specified
+    parser.add_argument('--connector-path', required=True)
     args = parser.parse_args()
 
     # Initialize Algorithmia Python client
@@ -49,7 +49,7 @@ def main():
     # Colorize each file in each sub directory
     recursivelyColorize(algo, args.connector_path, top_level_dir)
 
-    print 'Done processing...'
+    print 'Done processing!'
 
 if __name__ == '__main__':
     main()

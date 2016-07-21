@@ -4,6 +4,28 @@ import Algorithmia
 import argparse
 import posixpath
 
+def recursivelyColorize(algo, path, directory):
+    # Start by doing all the files
+    for f in directory.files():
+
+        # Check file if file type is supported.
+        if f.getName().lower().endswith(('.png','.jpg','.jpeg','.bmp','.gif')):
+            colored_file_name = 'color_' + f.getName()
+
+            # Define input for Algorithm + Parameters
+            algo_input = { 'image':    posixpath.join(path, f.getName()),
+                           'location': posixpath.join(path, colored_file_name) }
+
+            print 'Processing {} and saving to {}'.format(f.getName(), colored_file_name)
+
+            # Call Algorithm
+            output = algo.pipe(algo_input)
+        else:
+            print "File: " + f.getName() +  " is not a type that is supported."
+
+    for d in directory.dirs():
+        recursivelyColorize(algo, posixpath.join(path, d.getName()), d)
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--api-key', required=True)
@@ -13,28 +35,14 @@ def main():
     # Initialize Algorithmia Python client
     client = Algorithmia.client(args.api_key)
 
-    # Pick Algorithm to use
+    # Get the algorithm we plan to use on each picture
     algo = client.algo('deeplearning/ColorfulImageColorization/0.1.16')
 
+    # The root level directory that we will traverse
     top_level_dir = client.dir(args.connector_path)
 
-    # Iterate over regisrered dropbox + folder where my images are.
-    for f in top_level_dir.files():
-
-        # Check file if file type is supported.
-        if f.getName().lower().endswith(('.png','.jpg','.jpeg','.bmp','.gif')):
-            colored_file_name = 'color_' + f.getName()
-
-            # Define input for Algorithm + Parameters
-            algo_input = { 'image':    posixpath.join(args.connector_path, f.getName()),
-                           'location': posixpath.join(args.connector_path, colored_file_name)}
-
-            print 'Processing {} and saving to {}'.format(f.getName(), colored_file_name)
-
-            # Call Algorithm
-            output = algo.pipe(algo_input)
-        else:
-            print "File: " + f.getName() +  " is not a type that is supported."
+    # Colorize each file in each sub directory
+    recursivelyColorize(algo, args.connector_path, top_level_dir)
 
     print "Done processing..."
 

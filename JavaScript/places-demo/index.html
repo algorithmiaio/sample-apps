@@ -93,40 +93,45 @@
 							<h1>Scene Recognition</h1>
 							<h2 class="lead">Use Deep Learning to Identify and Classify Places</h2>
 							<div id="status-label"></div>
-							<form onsubmit="callAlgorithm(); return false;">
-								<div class="form-group well">
+							<div class="form-group well">
+								<form onsubmit="callAlgorithm(); return false;">
 									<p>Paste the URL to an image to classify it</p>
 									<input type="text" class="form-control" id="imgUrl" placeholder="http://www.algorithmia.com/images/logo-white.png">
 									<button class="btn btn-primary" type="button" onclick="callAlgorithm()">
 										<span class="fa fa-magic" aria-hidden="true"></span>
 										Classify It
 									</button>
+								</form>
 
-									<p>
-										<small>
-											Or, try these sample images:
-										</small>
-									</p>
+								<p>
+									<small>
+										Or, try these sample images:
+									</small>
+								</p>
 
-									<div class="row">
-										<div class="col-md-2">
-											<a onclick="analyzeDefault('data://demo/places/alley.jpeg')"><img src="public/images/alley.png" class="sample-images"></a>
-										</div>
-										<div class="col-md-2">
-											<a onclick="analyzeDefault('data://demo/places/dock.jpeg')"><img src="public/images/dock.png" class="sample-images"></a>
-										</div>
-										<div class="col-md-2">
-											<a onclick="analyzeDefault('data://demo/places/canyon.jpeg')"><img src="public/images/canyon.png" class="sample-images"></a>
-										</div>
-										<div class="col-md-2">
-											<a onclick="analyzeDefault('data://demo/places/skyscraper.jpeg')"><img src="public/images/skyscraper.png" class="sample-images"></a>
-										</div>
-										<div class="col-md-2">
-											<a onclick="analyzeDefault('data://demo/places/airplane.jpeg')"><img src="public/images/airplane.png" class="sample-images"></a>
-										</div>
+								<div class="row">
+									<div class="col-md-2">
+										<a onclick="analyzeDefault('data://demo/places/alley.jpeg')"><img src="public/images/alley.png" class="sample-images"></a>
+									</div>
+									<div class="col-md-2">
+										<a onclick="analyzeDefault('data://demo/places/dock.jpeg')"><img src="public/images/dock.png" class="sample-images"></a>
+									</div>
+									<div class="col-md-2">
+										<a onclick="analyzeDefault('data://demo/places/canyon.jpeg')"><img src="public/images/canyon.png" class="sample-images"></a>
+									</div>
+									<div class="col-md-2">
+										<a onclick="analyzeDefault('data://demo/places/skyscraper.jpeg')"><img src="public/images/skyscraper.png" class="sample-images"></a>
+									</div>
+									<div class="col-md-2">
+										<a onclick="analyzeDefault('data://demo/places/airplane.jpeg')"><img src="public/images/airplane.png" class="sample-images"></a>
+									</div>
+									<div class="col-md-2 col-xs-6">
+										<form class="primary-text dropzone" id="file-dropzone" action="javascript:;">
+											<div class="dz-message" data-dz-message>Upload photo</div>
+										</form>
 									</div>
 								</div>
-							</form>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -216,7 +221,7 @@
 
 input = {"image": "_IMAGE_URL_"}
 client = Algorithmia.client('_API_KEY_')
-algo = client.algo('deeplearning/Places365Classifier/0.1.5')
+algo = client.algo('deeplearning/Places365Classifier/0.1.8')
 
 print algo.pipe(input)
 </code></pre>
@@ -308,9 +313,10 @@ print algo.pipe(input)
 	<script src="public/js/bootstrap.min.js"></script>
 	<script src="public/js/TweenMax.min.js"></script>
 	<script src="public/js/algorithmia-0.2.0.js"></script>
-	<script src="public/js/main.js"></script>
 	<script src="public/js/dots.js"></script>
 	<script src="public/js/highlight.pack.js"></script>
+	<script src="public/js/dropzone.js"></script>
+	<script src="public/js/main.js"></script>
 	<script>hljs.initHighlightingOnLoad();</script>
 	<script>
 	  window.intercomSettings = {

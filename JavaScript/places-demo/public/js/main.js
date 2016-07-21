@@ -4,14 +4,6 @@ var numTasks = 0;
 
 function callAlgorithm() {
   startTask();
-  // Clear error messages
-  var statusLabel = document.getElementById("status-label")
-  statusLabel.innerHTML = "";
-  // Clear table
-  $("#tbody").empty();
-  // Clear image
-  var image = document.getElementById("userImg").src
-  image.src = "";
 
   // Get the img URL
   var img = document.getElementById("imgUrl").value;
@@ -67,7 +59,7 @@ function addPlaces(result, img){
   }
 
   // Check if img is a Data URI
-  var checkImg = img.split(':').shift();
+  var checkImg = img.split('://').shift();
   var prefix = ['data'];
 
   if (prefix.indexOf(checkImg) > -1){
@@ -110,6 +102,15 @@ function analyzeDefault(img) {
 function startTask() {
   numTasks++;
   document.getElementById("overlay").classList.remove("hidden");
+
+  // Clear error messages
+  var statusLabel = document.getElementById("status-label")
+  statusLabel.innerHTML = "";
+  // Clear table
+  $("#tbody").empty();
+  // Clear image
+  var image = document.getElementById("userImg").src
+  image.src = "";
 }
 
 function finishTask() {
@@ -133,3 +134,43 @@ function taskError() {
   document.getElementById("marketing").classList.add("hidden");
 
 }
+
+
+function initDropzone() {
+  window.Dropzone.autoDiscover = false;
+  var dropzone = new Dropzone("#file-dropzone", {
+    options: {
+      sending: function() {}
+    },
+    acceptedFiles: "image/*",
+    previewTemplate: "<div></div>",
+    maxFilesize: 10,
+    filesizeBase: 1024,
+    createImageThumbnails: false,
+    clickable: true
+  });
+  dropzone.__proto__.cancelUpload = function() {};
+  dropzone.__proto__.uploadFile = function() {};
+  dropzone.__proto__.uploadFiles = function() {};
+
+  dropzone.on("processing", function(file) {
+    startTask();
+
+    var reader = new FileReader();
+    reader.addEventListener("load", function () {
+      console.log("Calling algorithm with uploaded image.");
+      getPlaces(reader.result);
+      dropzone.removeFile(file);
+    }, false);
+    reader.readAsDataURL(file);
+    console.log("Reading uploaded image...");
+  });
+
+  dropzone.on("error", function(file, err) {
+    dropzone.removeFile(file);
+    var statusLabel = document.getElementById("status-label")
+    statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh oh! ' + err + ' </div>';
+    taskError();
+  });
+}
+initDropzone();

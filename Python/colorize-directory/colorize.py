@@ -1,5 +1,8 @@
 #!/usr/bin/python
 
+# USAGE: python colorize.py --api-key "YOUR_API_KEY" --connector-path "dropbox+NAME://path/to/directory"
+# If you get an error with any of the imports, make sure to run `pip install -r requirements.txt`
+
 import Algorithmia
 import argparse
 import posixpath
@@ -7,7 +10,6 @@ import posixpath
 def recursivelyColorize(algo, path, directory):
     # Start by doing all the files
     for f in directory.files():
-
         # Check file if file type is supported.
         if f.getName().lower().endswith(('.png','.jpg','.jpeg','.bmp','.gif')):
             colored_file_name = 'color_' + f.getName()
@@ -21,7 +23,7 @@ def recursivelyColorize(algo, path, directory):
             # Call Algorithm
             output = algo.pipe(algo_input)
         else:
-            print "File: " + f.getName() +  " is not a type that is supported."
+            print 'File: {} is not a type that is supported.'.format(f.getName())
 
     for d in directory.dirs():
         recursivelyColorize(algo, posixpath.join(path, d.getName()), d)
@@ -44,7 +46,7 @@ def main():
     # Colorize each file in each sub directory
     recursivelyColorize(algo, args.connector_path, top_level_dir)
 
-    print "Done processing..."
+    print 'Done processing...'
 
 if __name__ == '__main__':
     main()

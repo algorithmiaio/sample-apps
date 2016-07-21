@@ -12,7 +12,10 @@ def recursivelyColorize(algo, path, directory):
     for f in directory.files():
         # Check file if file type is supported.
         if f.getName().lower().endswith(('.png','.jpg','.jpeg','.bmp','.gif')):
-            colored_file_name = 'color_' + f.getName()
+            colored_file_name = 'color_{}'.format(f.getName())
+
+            if not colored_file_name.lower().endswith('.png'):
+                colored_file_name += '.png'
 
             # Define input for Algorithm + Parameters
             algo_input = { 'image':    posixpath.join(path, f.getName()),

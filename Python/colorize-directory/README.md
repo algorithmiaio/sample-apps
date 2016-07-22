@@ -5,19 +5,21 @@ file in a directory and optionally all children directories. Once it is done, yo
 version of the file. The algorithm uses the PNG format so these colorized images are in that format even if they started in a different format.
 
 You need to have the Algorithmia Python package to run this application. To do that, run
-    `pip install Algorithmia`
+
+    pip install Algorithmia
 
 Before running this algorithm, you need to have an S3 or Dropbox [data connector setup](algorithmia.com/data).
 
 Once you have your connector and api key, you can run this program through the following command:
 
-    `python colorize.py --api-key "YOUR_API_KEY" --connector-path "dropbox+NAME://path/to/directory"`
+    python colorize.py --api-key "YOUR_API_KEY" --connector-path "dropbox+NAME://path/to/directory"
 
 And if you want to run this on your default dropbox connector, you can drop the "+NAME" part. All of this holds true for S3 connectors as well. So, if you want to run this on the default S3 connector, you would run:
 
-    `python colorize.py --api-key "YOUR_API_KEY" --connector-path "s3://path/to/directory"`
+    python colorize.py --api-key "YOUR_API_KEY" --connector-path "s3://path/to/directory"
 
 If you have sub directories and would like to perform this operation to all files in all sub directories, use the --recursive flag:
-    `python colorize.py --api-key "YOUR_API_KEY" --connector-path "s3://root/directory" --recursive`
+
+    python colorize.py --api-key "YOUR_API_KEY" --connector-path "s3://root/directory" --recursive
 
 If you have any other questions of comments, you can find more information in the [Algorithmia Developer Center](developers.algorithmia.com) or the [API Docs](docs.algorithmia.com).

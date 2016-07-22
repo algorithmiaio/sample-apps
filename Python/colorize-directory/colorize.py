@@ -22,8 +22,11 @@ def colorizeFilesInDirectory(algo, path, directory):
 
             print 'Processing {} and saving to {}'.format(f.getName(), colored_file_name)
 
-            # Call Algorithm
-            output = algo.pipe(algo_input)
+            try:
+                # Call Algorithm
+                output = algo.pipe(algo_input)
+            except Exception:
+                print '  Failed to process {}. Skipping...'.format(f.getName())
         else:
             print 'File: {} is not a type that is supported.'.format(f.getName())
 
@@ -46,6 +49,7 @@ def main():
 
     # Get the algorithm we plan to use on each picture
     algo = client.algo('deeplearning/ColorfulImageColorization/0.1.16')
+    algo.set_options(timeout=600) # This is a slow algorithm, so let's bump up the timeout to 10 minutes
 
     # The root level directory that we will traverse
     top_level_dir = client.dir(args.connector_path)

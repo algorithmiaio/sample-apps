@@ -4,11 +4,11 @@
 // paris https://images.unsplash.com/33/YOfYx7zhTvYBGYs6g83s_IMG_8643.jpg
 
 window.Algorithmia = window.Algorithmia || {};
-Algorithmia.api_key = "simeyUbLXQ/R8Qga/3ZCRGcr2oR1"
+Algorithmia.api_key = "simeyUbLXQ/R8Qga/3ZCRGcr2oR1";
 var numTasks = 0;
 
 function callAlgorithm() {
-  var statusLabel = document.getElementById("status-label")
+  var statusLabel = document.getElementById("status-label");
   statusLabel.innerHTML = "";
   startTask();
 

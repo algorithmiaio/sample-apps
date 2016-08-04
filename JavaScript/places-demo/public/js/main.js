@@ -1,5 +1,5 @@
 window.Algorithmia = window.Algorithmia || {};
-Algorithmia.api_key = "simeyUbLXQ/R8Qga/3ZCRGcr2oR1"
+Algorithmia.api_key = "simXy0OhJ0Yi7WR3m4osSRiRrdG1"
 var numTasks = 0;
 
 function callAlgorithm() {

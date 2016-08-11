@@ -37,7 +37,7 @@ document.getElementById('compareLink').addEventListener('click', function() {
 
 function colorify(img) {
   Algorithmia.client(Algorithmia.api_key)
-    .algo("algo://algorithmiahq/ColorizationDemo/1.1.6")
+    .algo("algo://algorithmiahq/ColorizationDemo/1.1.12")
     .pipe(img)
     .then(function(output) {
       if(output.error) {

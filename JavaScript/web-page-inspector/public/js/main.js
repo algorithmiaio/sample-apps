@@ -220,7 +220,10 @@ function analyzeDefault(url) {
 function startTask() {
   numTasks++;
   document.getElementById("overlay").classList.remove("hidden");
-
+  
+  // Remove anchor hash
+  removeHash();
+  
   // Clear error messages
   var statusLabel = document.getElementById("status-label")
   statusLabel.innerHTML = "";
@@ -243,11 +246,17 @@ function startTask() {
   document.getElementById("negative").innerHTML = " ";
 };
 
+function removeHash () { 
+    history.pushState("", document.title, window.location.pathname + window.location.search);
+}
+
 function finishTask() {
   numTasks--;
   if(numTasks <= 0) {
     document.getElementById("overlay").classList.add("hidden");
     document.getElementById("results").classList.remove("hidden");
+    // Scroll to results
+    location.hash = '#resultspage';
   }
 };
 

@@ -144,9 +144,10 @@ ga('send', 'pageview');
 
 						<!-- RESULTS PAGE -->
 						<div class="hidden" id="results">
+						<a name="resultspage"></a>
 							<div class="row">
 								<div class="col-md-10">
-									<h4>URL Successfully Analyzed <small>Here's the structured data we found</small></h4>
+									<h4>URL Successfully Analyzed <br><small>Here's the structured data we found</small></h4>
 									<p>
 										<strong>How it works:</strong> Web Page Inspector attempts to extract the title, full text, both a short and long summary, permalink, social share count, tags, sentiment, and more from a valid URL. In this demo we provie both a UI of the metadata, as well as the raw JSON response. 
 									</p>
@@ -168,7 +169,9 @@ ga('send', 'pageview');
 											<div role="tabpanel" class="tab-pane active" id="home">
 												<div class="col-md-10">
 													<h4>Extracted Metadata</h4>
-													<p>Here's what we found. Blah blah taco taco taco blah blah blah tacos and cats cats and taco tacocats stacocats</p>
+													<p>
+														Here's the structured data we were able to parse for the URL: 
+													</p>
 													
 													<dl class="dl-horizontal">
 														<dt>Title</dt>
@@ -206,8 +209,8 @@ ga('send', 'pageview');
 											</div>
 											<div role="tabpanel" class="tab-pane" id="profile">
 												<div class="col-md-10">
-													<h4>Raw JSON Response</h4>
-														<p>Here's what we found. Blah blah taco taco taco blah blah blah tacos and cats cats and taco tacocats stacocats</p>
+													<h4>JSON Object</h4>
+														<p>This is the JSON response for the URL:</p>
 												</div>
 												<div class="col-md-10 col-md-offset-1">
 													<pre><code class="json" id="code"></code></pre>

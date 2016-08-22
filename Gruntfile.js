@@ -14,6 +14,7 @@ module.exports = function(grunt) {
   var demos = [
     { slug: 'colorize-photos', dist: 'JavaScript/colorization-demo/' },
     { slug: 'classify-places', dist: 'JavaScript/places-demo/'},
+    { slug: 'web-page-inspector', dist: 'JavaScript/web-page-inspector'},
   ];
 
 

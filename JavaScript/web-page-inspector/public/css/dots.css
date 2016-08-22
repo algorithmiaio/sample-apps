@@ -1,0 +1,40 @@
+#overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: rgba(0,0,0,0.7); 
+}
+
+.dots-container {
+    position: absolute;
+    top: 30%;;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+.dot {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    float: left;
+    margin-right: 20px;
+}
+
+.dot1 {
+    background: #9963ff;
+}
+
+.dot2 {
+    background: #f6f1ff;
+}
+
+.dot3 {
+    background: #b996fc;
+}
+
+.dot4 {
+    background: #5000be;
+}

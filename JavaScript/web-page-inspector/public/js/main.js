@@ -36,7 +36,7 @@ function ValidURL(url) {
 function getMeta(url){
   console.log("calling algorithm")
   Algorithmia.client(Algorithmia.api_key)
-   .algo("algo://outofstep/MegaAnalyzeURL/0.1.5")
+   .algo("algo://outofstep/MegaAnalyzeURL/0.1.6")
    .pipe(url)
    .then(function(output) {
       if (output.error) {
@@ -72,16 +72,19 @@ function addMeta(data){
 
 // Add Sentiment Analysis
   if (data.socialsentiment){
+    console.log(data.socialsentiment[0].compound);
     var posi = (data.socialsentiment[0].positive * 100).toFixed(2);
-    var neutra = (data.socialsentiment[0].neutral * 100).toFixed(2);
     var negi = (data.socialsentiment[0].negative * 100).toFixed(2);
+    posi = parseInt(posi,10);
+    negi = parseInt(negi,10);
+    var neutra = 100-(posi+negi);
     posi = posi+"%";
     neutra = neutra+"%";
     negi = negi+"%";
     document.getElementById("positive").innerHTML = "<div class=\"progress-bar progress-bar-success\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+posi+"\">"+posi+" Positive</div>";
     document.getElementById("neutral").innerHTML = "<div class=\"progress-bar progress-bar-warning\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+neutra+"\">"+neutra+" Neutral</div>";
     document.getElementById("negative").innerHTML = "<div class=\"progress-bar progress-bar-danger\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+negi+"\">"+negi+" Negative</div>";
-  } 
+  }
 
 // Add Tags
   var tags = document.getElementById("tags")
@@ -89,10 +92,10 @@ function addMeta(data){
     var newSpan = document.createElement('span');
     newSpan.className = "label label-default";
     newSpan.innerHTML = i;
-    
+
     var space = document.createTextNode(" ");
-    
-    tags.appendChild(newSpan);     
+
+    tags.appendChild(newSpan);
     tags.appendChild(space);
   };
 
@@ -103,13 +106,14 @@ function addMeta(data){
     var listLink = document.createElement('a');
     listLink.setAttribute('href', data.links[i]);
     listLink.innerHTML = data.links[i];
-        
-    links.appendChild(listItem);     
+
+    links.appendChild(listItem);
     listItem.appendChild(listLink);
   };
 
 // Add social shares
   var shares = document.getElementById("socialshares");
+  console.log(data.socialshares);
   if (data.socialshares.facebook_likes > 0) {
     var span = document.createElement('span');
     span.className = "label label-default";
@@ -118,7 +122,7 @@ function addMeta(data){
     var innerSpan = document.createElement('span');
     innerSpan.className = "badge";
     innerSpan.innerHTML = data.socialshares.facebook_likes;
-    
+
     var space = document.createTextNode(" ");
 
     span.appendChild(innerSpan);
@@ -134,7 +138,7 @@ function addMeta(data){
     var innerSpan = document.createElement('span');
     innerSpan.className = "badge";
     innerSpan.innerHTML = data.socialshares.facebook_shares;
-    
+
     var space = document.createTextNode(" ");
 
     span.appendChild(innerSpan);
@@ -150,7 +154,7 @@ function addMeta(data){
     var innerSpan = document.createElement('span');
     innerSpan.className = "badge";
     innerSpan.innerHTML = data.socialshares.facebook_comments;
-    
+
     var space = document.createTextNode(" ");
 
     span.appendChild(innerSpan);
@@ -166,7 +170,7 @@ function addMeta(data){
     var innerSpan = document.createElement('span');
     innerSpan.className = "badge";
     innerSpan.innerHTML = data.socialshares.linkedIn;
-    
+
     var space = document.createTextNode(" ");
 
     span.appendChild(innerSpan);
@@ -182,7 +186,7 @@ function addMeta(data){
     var innerSpan = document.createElement('span');
     innerSpan.className = "badge";
     innerSpan.innerHTML = data.socialshares.pinterest;
-    
+
     var space = document.createTextNode(" ");
 
     span.appendChild(innerSpan);
@@ -220,14 +224,14 @@ function analyzeDefault(url) {
 function startTask() {
   numTasks++;
   document.getElementById("overlay").classList.remove("hidden");
-  
+
   // Remove anchor hash
   removeHash();
-  
+
   // Clear error messages
   var statusLabel = document.getElementById("status-label")
   statusLabel.innerHTML = "";
-  
+
   // Clear contents
   document.getElementById("title").textContent = " ";
   document.getElementById("thumb").src = " ";
@@ -246,7 +250,7 @@ function startTask() {
   document.getElementById("negative").innerHTML = " ";
 };
 
-function removeHash () { 
+function removeHash () {
     history.pushState("", document.title, window.location.pathname + window.location.search);
 }
 

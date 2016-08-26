@@ -25,6 +25,10 @@
 	border:1px white solid;
 }
 
+.progress {
+	margin-bottom: 0px;
+}
+
 dd {
 	padding-bottom: 10px;
 }

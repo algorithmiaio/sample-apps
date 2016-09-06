@@ -10,7 +10,6 @@ var numTasks = 0;
 function callAlgorithm() {
   var statusLabel = document.getElementById("status-label");
   statusLabel.innerHTML = "";
-  startTask();
 
   // Get the img URL
   var img = document.getElementById("imgUrl").value;
@@ -18,10 +17,12 @@ function callAlgorithm() {
   // Remove any whitespaces around the url
   img = img.trim();
 
-  // document.getElementById("urlAddress").innerHTML = img;
+  if(typeof(img) == "string" && img !== "") {
+    startTask();
 
-  // Call Image Colorization
-  colorify(img);
+    // Call Image Colorization
+    colorify(img);
+  }
 
 };
 

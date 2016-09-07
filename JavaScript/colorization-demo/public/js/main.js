@@ -4,7 +4,7 @@
 // paris https://images.unsplash.com/33/YOfYx7zhTvYBGYs6g83s_IMG_8643.jpg
 
 window.Algorithmia = window.Algorithmia || {};
-Algorithmia.api_key = "simT5hbarHkJ0y24isRZs2Gcb0g1";
+Algorithmia.api_key = "simlWDRXPhYo0iAhB053QL1kQLY1";
 var numTasks = 0;
 
 function callAlgorithm() {

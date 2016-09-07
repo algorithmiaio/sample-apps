@@ -1,0 +1,42 @@
+/*Put Custom Styles Here*/
+
+@media (max-width: 767px){
+	.visible-xs-block {
+		padding-bottom: 10px;
+	    display: block !important;
+	}
+	.form-control{
+		max-width: 100%;
+	}
+	.mb {
+		margin-top:5px;
+	}
+}
+
+pre {
+	padding: 0px;
+	margin: 13px;
+	border: 0px;
+}
+
+#social {
+	margin-top: 20px;
+	text-align: center;
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px) {
+	.dz-message { height: 109px; line-height: 109px; padding-top: 0px }
+}
+@media only screen and (min-width : 360px) {
+	.dz-message { height: 129px; line-height: 129px; padding-top: 0px }
+}
+@media only screen and (min-width : 768px) {
+	.dz-message { height: 300px; line-height: 300px; padding-top: 0px;}
+}
+@media only screen and (min-width : 992px) {
+	.dz-message { height: 60px; line-height: normal; padding-top: 8px; }
+}
+@media only screen and (min-width : 1200px) {
+	.dz-message { height: 79px; line-height: normal; padding-top: 20px; }
+}

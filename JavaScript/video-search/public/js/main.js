@@ -31,12 +31,12 @@ function search(query) {
   // finishTask();
 
   var algoInput = {
-    "files": ["data://zeryx/Temp/YW4ARf23to4.json"],
+    "collections": ["data://zeryx/Demo"],
     "keyword": query,
-    "minConfidence": 0.0125
+    "minConfidence": 0.25
   };
   Algorithmia.client(Algorithmia.api_key)
-    .algo("algo://algorithmiahq/VideoClassificationDemo/0.4.0")
+    .algo("algo://algorithmiahq/VideoClassificationDemo/0.5.1")
     .pipe(algoInput)
     .then(function(output) {
       if(output.error) {
@@ -140,6 +140,7 @@ window.player = null;
 // 3. This function creates an <iframe> (and YouTube player)
 //    after the API code downloads.
 function onYouTubeIframeAPIReady() {
+  console.log("YT ready");
   player = new YT.Player('player', {
     // height: '390',
     // width: '640',
@@ -164,7 +165,4 @@ function onPlayerStateChange(event) {
   // if (event.data == YT.PlayerState.PLAYING &&) {
   //   setTimeout(stopVideo, 6000);
   // }
-}
-function stopVideo() {
-  player.stopVideo();
 }

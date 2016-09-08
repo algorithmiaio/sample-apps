@@ -24,41 +24,29 @@ function callAlgorithm() {
 function search(query) {
   console.log("Searching for tag", query);
 
-  renderSearchResults([
-    {title: "Deadmau5 - Ghosts N Stuff", videoId: "3Gb3faOzvBk", firstFrame: 10, lastFrame: 100},
-    {title: "Sean Mackey - Discover", videoId: "Ts2I4ffd4p8", firstFrame: 20, lastFrame: 200}
-  ]);
+  // renderSearchResults([
+  //   {title: "Deadmau5 - Ghosts N Stuff", videoId: "3Gb3faOzvBk", firstFrame: 10, lastFrame: 100},
+  //   {title: "Sean Mackey - Discover", videoId: "Ts2I4ffd4p8", firstFrame: 20, lastFrame: 200}
+  // ]);
+  // finishTask();
 
-  finishTask();
+  Algorithmia.client(Algorithmia.api_key)
+    .algo("algo://algorithmiahq/VideoClassificationDemo")
+    .pipe(query)
+    .then(function(output) {
+      if(output.error) {
+        // Error Handling
+        var statusLabel = document.getElementById("status-label")
+        statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh Oh! Something went wrong: ' + output.error.message + ' </div>';
+        taskError();
+      } else {
+        console.log("got output", output.result);
 
-  // Algorithmia.client(Algorithmia.api_key)
-  //   .algo("algo://algorithmiahq/VideoSearchDemo/1.0.0")
-  //   .pipe(img)
-  //   .then(function(output) {
-  //     if(output.error) {
-  //       // Error Handling
-  //       var statusLabel = document.getElementById("status-label")
-  //       statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh Oh! Something went wrong: ' + output.error.message + ' </div>';
-  //       taskError();
-  //     } else {
-  //       console.log("got output", output.result);
-
-  //       // Decode base64 imgs
-  //       var imgOriginal = "data:image/png;base64," + output.result[0];
-  //       var imgColorized = "data:image/png;base64," + output.result[1];
-
-  //       // Show the download link if API also returned the URL
-  //       if(output.result.length > 2) {
-  //           document.getElementById("downloadLinks").classList.remove("hidden");
-  //           document.getElementById("resultLink").href = output.result[2];
-  //       } else {
-  //           document.getElementById("downloadLinks").classList.add("hidden");
-  //           document.getElementById("resultLink").href = '#';
-  //       }
-
-  //       getMeta(imgOriginal, imgColorized);
-  //     }
-  //   });
+        // Render search results
+        renderSearchResults(output.result);
+        finishTask();
+      }
+    });
 }
 
 function renderSearchResults(results) {
@@ -150,7 +138,7 @@ function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
     // height: '390',
     // width: '640',
-    videoId: '3Gb3faOzvBk',
+    // videoId: '3Gb3faOzvBk',
     events: {
       'onReady': onPlayerReady,
       'onStateChange': onPlayerStateChange

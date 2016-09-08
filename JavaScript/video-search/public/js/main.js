@@ -31,12 +31,12 @@ function search(query) {
   // finishTask();
 
   var algoInput = {
-    "files": ["data://zeryx/Temp/YW4ARf23to4.json"],
+    "collections": ["data://zeryx/Demo"],
     "keyword": query,
-    "minConfidence": 0.0125
+    "minConfidence": 0.1
   };
   Algorithmia.client(Algorithmia.api_key)
-    .algo("algo://algorithmiahq/VideoClassificationDemo/0.4.0")
+    .algo("algo://algorithmiahq/VideoClassificationDemo/0.5.0")
     .pipe(algoInput)
     .then(function(output) {
       if(output.error) {

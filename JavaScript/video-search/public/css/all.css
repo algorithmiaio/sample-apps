@@ -267,6 +267,8 @@ a>code:hover{
 .video-info {
   display: inline-block;
   margin-left: 10px;
+  position: relative;
+  top: 20px;
 }
 
 .video-title {

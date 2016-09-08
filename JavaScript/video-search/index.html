@@ -69,15 +69,7 @@
 				</div>
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav pull-right">
-						<li><a href="https://algorithmia.com/algorithms"><span>Algorithms</span></a></li>
-						<li><a href="https://algorithmia.com/use-cases">Use Cases</a></li>
-						<li><a href="https://algorithmia.com/pricing"><span>Pricing</span></a></li>
-						<li><a href="http://blog.algorithmia.com/"><span>Blog</span></a></li>
-						<li>
-							<a class="nav-link nav-username hidden-sm hidden-xs" href="https://algorithmia.com/signup?invite=color">
-								Sign up
-							</a>
-						</li>
+						<li><a href="https://algorithmia.com/">Algorithm API marketplace</a></li>
 					</ul>
 				</div>
 			</div>
@@ -127,6 +119,7 @@
 									<h4>
 										Use deep learning image tagging to search arbitrary video
 									</h4>
+									<img src="public/images/diagram.jpg">
 									<p>
 										Let us know what you think <a href="https://twitter.com/algorithmia" target="_blank">@Algorithmia</a> or by <a href="https://algorithmia.com/contact" target="_blank">email</a>.
 									</p>
@@ -156,80 +149,7 @@
 								</div>
 							</div>
 						</div>
-<!-- 
-						<div class="row invisible" id="social">
-							<div class="col-md-8 col-md-offset-2">
 
-								<a href="https://twitter.com/share" class="twitter-share-button" data-text="Colorize Black and White Photos" data-via="algorithmia" data-hashtags="colorizeit" data-show-count="false">Tweet</a>
-
-								<div class="fb-share-button" data-href="http://colorize-it.com" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fcolorize-it.com%2F&amp;src=sdkpreparse">Share</a></div>
-							</div>
-						</div>
- -->
-						<div class="row hidden" id="marketing">
-							<div class="col-md-8 col-md-offset-2">
-								<hr>
-								<center>
-									<h4>Built For Developers <br><small>A simple, scalable API for creating smarter products.</small></h4>
-								</center>
-								<pre><code class="python">import Algorithmia
-
-input = {"image": "_IMAGE_URL_"}
-client = Algorithmia.client('_API_KEY_')
-algo = client.algo('deeplearning/ColorfulImageColorization/0.1.16')
-
-print algo.pipe(input)
-</code></pre>
-							</div>
-							<div class="col-md-8 col-md-offset-2">
-								<pre><code class="json">{"output": "data://.algo/temp/image.png"}</code></pre>
-							</div>
-
-							<div class="col-md-8 col-md-offset-2">
-								<hr>
-									<center>
-									<p class="lead"><small>
-										<b>Join the thousands of developers using Algorithmia to build intelligent apps</b>
-										<br>
-										Get 10,000 additional credits when you <a href="https://algorithmia.com/signup?invite=color">sign up</a> using the code "color" </small>
-									</p>
-									<p><a href="https://algorithmia.com/signup?invite=color" target="_new" class="btn btn-success btn-lg">Sign Up For Free</a></p>
-								</center>
-								<hr>
-							</div>
-							<div class="col-md-8 col-md-offset-2">
-								<dl>
-								  <dt>Scalable API</dt>
-								  <dd>With an intuitive API, you have access to more than 2,200 algorithmic microservices. Build in your preferred language using Python, JavaScript, Java, Scala, Ruby, or Rust. <a href="http://developers.algorithmia.com/application-development/guides/" target="_blank">Learn more</a>
-								  </dd>
-								</dl>
-								<dl>
-								  <dt>Managed Platform</dt>
-								  <dd>Focus on building your app. We provide the tools and manage the cloud infrastructure needed to run it at scale. <a href="http://blog.algorithmia.com/2016/07/cloud-hosted-deep-learning-models/" target="_blank">Learn more</a></dd>
-								</dl>
-								<dl>
-								  <dt>Host Your Trained Models</dt>
-								  <dd>Have a trained machine learning or deep learning model? Turn it into a serverless microservices in minutes. We'll show you how. <a href="http://developers.algorithmia.com/algorithm-development/model-guides/" target="_blank">Learn more</a></dd>
-								</dl>
-								<dl>
-								  <dt>Try For Free</dt>
-								  <dd>Get started for free, and scale with ease. Algorithmia's free tier provides 5,000 free credits per month for apps of any scale. When you're ready to grow, pay only for what you use, making it easy and cost effective to go from prototype to production. <a href="https://algorithmia.com/signup?invite=color" target="_blank">Sign Up</a></dd>
-								</dl>
-								<hr>
-								<p>
-									Add the <a href="https://algorithmia.com/algorithms/deeplearning/ColorfulImageColorization" target="_blank">Colorful Image Colorization microservice</a> to your app today.
-								</p>
-								<p>
-									Now, researchers and developers can train their deep learning models locally, and <a href="http://blog.algorithmia.com/2016/07/cloud-hosted-deep-learning-models/" target="_blank">deploy them to Algorithmia’s scalable, cloud infrastructure</a>, where they become smart API endpoints for others developers to use.
-								</p>
-								<p>
-									This means application developers can now obtain real-time predictions from deep learning models, and build production-ready apps using state-of-the-art machine intelligence in five-lines of code or less.
-								</p>
-								<p>
-									Algorithms like this image colorizer join our collection of more than 2,200 algorithmic microservices.
-								</p>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -240,14 +160,6 @@ print algo.pipe(input)
 			<div class="pull-left">
 				&copy; Algorithmia 2016
 			</div>
-			<ul class="list-inline pull-right">
-				<li><a href="https://algorithmia.com/about">About</a></li>
-				<li><a href="https://algorithmia.com/terms">Terms</a></li>
-				<li><a href="https://algorithmia.com/privacy">Privacy</a></li>
-				<li><a href="http://blog.algorithmia.com" target="_blank">Blog</a></li>
-				<li><a href="https://angel.co/algorithmia/jobs/" target="_blank">Jobs</a></li>
-				<li><a href="https://algorithmia.com/contact">Contact</a></li>
-			</ul>
 		</div>
 	</footer>
 
@@ -255,35 +167,12 @@ print algo.pipe(input)
 	<script src="https://www.youtube.com/iframe_api"></script>
 	<script src="public/js/jquery.min.js"></script>
 	<script src="public/js/bootstrap.min.js"></script>
-	<script src="public/js/TweenMax.min.js"></script>
 	<script src="public/js/algorithmia-0.2.0.js"></script>
 	<script src="public/js/twoimages.js"></script>
 	<script src="public/js/dots.js"></script>
 	<script src="public/js/highlight.pack.js"></script>
 	<script src="public/js/main.js"></script>
 	<script>hljs.initHighlightingOnLoad();</script>
-	<script>
-	  window.intercomSettings = {
-	    app_id: "c9fj6354"
-	  };
-	</script>
-	<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/c9fj6354';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
-
-    <!-- Here be the social sharing scripts -->
-	<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-	<div id="fb-root"></div>
-	<script>(function(d, s, id) {
-	var js, fjs = d.getElementsByTagName(s)[0];
-	if (d.getElementById(id)) return;
-	js = d.createElement(s); js.id = id;
-	js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
-	fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));</script>
-	<style media="screen" type="text/css">
-	.fb_iframe_widget span {
-		vertical-align: baseline !important;
-	}
-	</style>
 
 </body>
 </html>

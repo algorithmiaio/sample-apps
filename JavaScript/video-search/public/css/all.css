@@ -263,3 +263,23 @@ a>code:hover{
   background-color:rgba(68,74,85,0.5);
   border: 0px;
 }
+
+.video-info {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.video-title {
+  font-size: large;
+}
+
+.thumb {
+  width: 100px;
+  /*height: 56px;*/
+  display: inline-block;
+}
+
+li {
+  margin-top: 10px;
+  clear: both;
+}

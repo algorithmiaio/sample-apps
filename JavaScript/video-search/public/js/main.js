@@ -68,6 +68,13 @@ function renderSearchResults(results) {
   for(var i = 0; i < results.length; i++) {
     var doc = results[i];
     var li = document.createElement("li");
+
+    var thumb = document.createElement("img");
+    thumb.src = "http://img.youtube.com/vi/" + doc.videoId + "/0.jpg"
+    thumb.classList.add("thumb")
+
+    var info = document.createElement("div");
+    info.classList.add("video-info");
     var link = document.createElement("a");
     link.innerText = doc.title;
     link.onclick = jumpToVideo(doc, 0);
@@ -78,12 +85,22 @@ function renderSearchResults(results) {
     linkLast.innerText = "Last";
     linkLast.onclick = jumpToVideo(doc, doc.lastFrame);
     var linkDiv = document.createElement("div");
+    linkDiv.classList.add("video-title");
     linkDiv.appendChild(link);
-    li.appendChild(linkDiv);
-    li.appendChild(linkFirst);
-    li.appendChild(linkLast);
+    info.appendChild(linkDiv);
+    info.appendChild(linkFirst);
+    info.appendChild(document.createTextNode(" (" + formatTime(doc.firstFrame) + ") "));
+    info.appendChild(linkLast);
+    info.appendChild(document.createTextNode(" (" + formatTime(doc.lastFrame) + ")"));
+
+    li.appendChild(thumb);
+    li.appendChild(info);
     output.appendChild(li);
   }
+}
+
+function formatTime(seconds) {
+  return Math.floor(seconds / 60) + ":" + Math.floor(seconds % 60);
 }
 
 function jumpToVideo(doc, time) {
@@ -106,7 +123,6 @@ function finishTask() {
     document.getElementById("overlay").classList.add("hidden");
     document.getElementById("explainer").classList.add("hidden");
     document.getElementById("results").classList.remove("hidden");
-    document.getElementById("marketing").classList.remove("hidden");
   }
 }
 
@@ -116,7 +132,6 @@ function taskError() {
   document.getElementById("explainer").classList.add("display");
   document.getElementById("explainer").classList.remove("hidden");
   document.getElementById("results").classList.add("hidden");
-  document.getElementById("marketing").classList.add("hidden");
 }
 
 document.getElementById("search-form").onsubmit = function(e) {

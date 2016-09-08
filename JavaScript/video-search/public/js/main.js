@@ -4,7 +4,7 @@
 // paris https://images.unsplash.com/33/YOfYx7zhTvYBGYs6g83s_IMG_8643.jpg
 
 window.Algorithmia = window.Algorithmia || {};
-Algorithmia.api_key = "simT5hbarHkJ0y24isRZs2Gcb0g1";
+Algorithmia.api_key = "sim4m8jnVOF3086ujBXdiYteIS01";
 var numTasks = 0;
 
 function callAlgorithm() {
@@ -30,9 +30,14 @@ function search(query) {
   // ]);
   // finishTask();
 
+  var algoInput = {
+    "files": ["data://zeryx/Temp/YW4ARf23to4.json"],
+    "keyword": query,
+    "minConfidence": 0.0125
+  };
   Algorithmia.client(Algorithmia.api_key)
-    .algo("algo://algorithmiahq/VideoClassificationDemo")
-    .pipe(query)
+    .algo("algo://algorithmiahq/VideoClassificationDemo/0.1.0")
+    .pipe(algoInput)
     .then(function(output) {
       if(output.error) {
         // Error Handling
@@ -68,18 +73,18 @@ function renderSearchResults(results) {
     link.onclick = jumpToVideo(doc, 0);
     var linkFirst = document.createElement("a");
     linkFirst.innerText = "First";
-    linkFirst.onclick = jumpToVideo(doc, doc.firstFrame);
+    linkFirst.onclick = jumpToVideo(doc, doc.startFrame);
     var linkLast = document.createElement("a");
     linkLast.innerText = "Last";
-    linkLast.onclick = jumpToVideo(doc, doc.lastFrame);
+    linkLast.onclick = jumpToVideo(doc, doc.stopFrame);
     var linkDiv = document.createElement("div");
     linkDiv.classList.add("video-title");
     linkDiv.appendChild(link);
     info.appendChild(linkDiv);
     info.appendChild(linkFirst);
-    info.appendChild(document.createTextNode(" (" + formatTime(doc.firstFrame) + ") "));
+    info.appendChild(document.createTextNode(" (" + formatTime(doc.startFrame) + ") "));
     info.appendChild(linkLast);
-    info.appendChild(document.createTextNode(" (" + formatTime(doc.lastFrame) + ")"));
+    info.appendChild(document.createTextNode(" (" + formatTime(doc.stopFrame) + ")"));
 
     li.appendChild(thumb);
     li.appendChild(info);

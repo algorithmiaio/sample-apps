@@ -140,6 +140,7 @@ window.player = null;
 // 3. This function creates an <iframe> (and YouTube player)
 //    after the API code downloads.
 function onYouTubeIframeAPIReady() {
+  console.log("YT ready");
   player = new YT.Player('player', {
     // height: '390',
     // width: '640',
@@ -164,7 +165,4 @@ function onPlayerStateChange(event) {
   // if (event.data == YT.PlayerState.PLAYING &&) {
   //   setTimeout(stopVideo, 6000);
   // }
-}
-function stopVideo() {
-  player.stopVideo();
 }

@@ -48,7 +48,11 @@ function search(query) {
         console.log("got output", output.result);
 
         // Render search results
-        renderSearchResults(output.result);
+        try {
+          renderSearchResults(output.result);
+        } catch(e) {
+          console.log("error rendering", e);
+        }
         finishTask();
       }
     });
@@ -60,6 +64,7 @@ function renderSearchResults(results) {
   output.innerHTML = "";
   for(var i = 0; i < results.length; i++) {
     var doc = results[i];
+    console.log("renderSearchResults doc", doc);
     var li = document.createElement("li");
 
     var thumb = document.createElement("img");
@@ -68,23 +73,34 @@ function renderSearchResults(results) {
 
     var info = document.createElement("div");
     info.classList.add("video-info");
+
+    // Main youtube link
     var link = document.createElement("a");
     link.innerText = doc.title;
     link.onclick = jumpToVideo(doc, 0);
-    var linkFirst = document.createElement("a");
-    linkFirst.innerText = "First";
-    linkFirst.onclick = jumpToVideo(doc, doc.startFrame);
-    var linkLast = document.createElement("a");
-    linkLast.innerText = "Last";
-    linkLast.onclick = jumpToVideo(doc, doc.stopFrame);
     var linkDiv = document.createElement("div");
     linkDiv.classList.add("video-title");
     linkDiv.appendChild(link);
     info.appendChild(linkDiv);
+
+    // Stats and metadata
+    var linkFirst = document.createElement("a");
+    linkFirst.innerText = formatTime(doc.startFrame);
+    linkFirst.onclick = jumpToVideo(doc, doc.startFrame);
+    var linkLast = document.createElement("a");
+    linkLast.innerText = formatTime(doc.stopFrame);
+    linkLast.onclick = jumpToVideo(doc, doc.stopFrame);
+
+    info.appendChild(document.createTextNode("Appearance: "));
     info.appendChild(linkFirst);
-    info.appendChild(document.createTextNode(" (" + formatTime(doc.startFrame) + ") "));
+    info.appendChild(document.createTextNode(" - "));
     info.appendChild(linkLast);
-    info.appendChild(document.createTextNode(" (" + formatTime(doc.stopFrame) + ")"));
+    // info.appendChild(document.createTextNode(")"));
+
+    // Score
+    var scoreDiv = document.createElement("div");
+    scoreDiv.appendChild(document.createTextNode("Score: " + doc.avgConfidence.toFixed(3)));
+    info.appendChild(scoreDiv);
 
     li.appendChild(thumb);
     li.appendChild(info);

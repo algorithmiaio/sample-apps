@@ -31,7 +31,7 @@ function search(query) {
   // finishTask();
 
   var algoInput = {
-    "collections": ["s3+madeByJames://video-processing1/json"],
+    "collections": ["data://zeryx/Demo"],
     "keyword": query,
     "minConfidence": 0.15
   };

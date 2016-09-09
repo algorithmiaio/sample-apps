@@ -36,7 +36,7 @@ function search(query) {
     "minConfidence": 0.10
   };
   Algorithmia.client(Algorithmia.api_key)
-    .algo("algo://algorithmiahq/VideoClassificationDemo/0.5.4")
+    .algo("algo://algorithmiahq/VideoClassificationDemo/0.5.5")
     .pipe(algoInput)
     .then(function(output) {
       if(output.error) {

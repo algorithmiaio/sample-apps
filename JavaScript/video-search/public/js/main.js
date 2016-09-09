@@ -109,7 +109,11 @@ function renderSearchResults(results) {
 }
 
 function formatTime(seconds) {
-  return Math.floor(seconds / 60) + ":" + Math.floor(seconds % 60);
+  var mod60 = Math.floor(seconds % 60);
+  if (mod60 < 10) {
+    mod60 = "0" + mod60;
+  }
+  return Math.floor(seconds / 60) + ":" + mod60;
 }
 
 function jumpToVideo(doc, time) {

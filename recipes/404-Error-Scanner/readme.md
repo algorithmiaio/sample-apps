@@ -2,7 +2,7 @@
 
 The [404 Error Scanner microservice](https://algorithmia.com/algorithms/web/ErrorScanner) from Algorithmia is a useful tool for developers, data analysts, and content managers that need to validate URLs and keep tabs on broken links in a scalable and systematic way.
 
-This is a simple Python script for creating a a nicely formatted broken link report email using Algorithmia and and [Mailgun](https://www.mailgun.com/).
+This is a simple Python script for creating a nicely formatted broken link report email using Algorithmia and and [Mailgun](https://www.mailgun.com/).
 
 ## Getting Started
 

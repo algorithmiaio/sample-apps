@@ -33,7 +33,7 @@ function search(query) {
   var algoInput = {
     "collections": ["data://zeryx/Demo"],
     "keyword": query,
-    "minConfidence": 0.25
+    "minConfidence": 0.20
   };
   Algorithmia.client(Algorithmia.api_key)
     .algo("algo://algorithmiahq/VideoClassificationDemo/0.5.3")

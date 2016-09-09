@@ -13,7 +13,7 @@ pip install algorithmia
 
 Then create a free [Mailgun account](https://mailgun.com/signup).
 
-Detailed instructions can be found in the [how to find broken links and email yourself a 404 Not Found report](How to Find Broken Links and Email Yourself a 404 Not Found Report) blog post. 
+Detailed instructions can be found in the [how to find broken links and email yourself a 404 Not Found report](http://blog.algorithmia.com/broken-links-404-not-found-report/) blog post. 
 
 Learn more about how the [404 Error Scanner microservice](http://blog.algorithmia.com/404-error-scanner-algorithm-find-broken-links/) here.
 

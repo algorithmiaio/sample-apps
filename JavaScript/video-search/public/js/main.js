@@ -33,7 +33,7 @@ function search(query) {
   var algoInput = {
     "collections": ["s3+madeByJames://video-processing1/json"],
     "keyword": query,
-    "minConfidence": 0.10
+    "minConfidence": 0.15
   };
   Algorithmia.client(Algorithmia.api_key)
     .algo("algo://algorithmiahq/VideoClassificationDemo/0.5.5")

@@ -31,7 +31,7 @@ function search(query) {
   // finishTask();
 
   var algoInput = {
-    "collections": ["data://zeryx/Demo"],
+    "collections": ["data://zeryx/Demo", "data://demo/VideoSearchDemo"],
     "keyword": query,
     "minConfidence": 0.15
   };

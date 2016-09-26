@@ -1,6 +1,6 @@
 # Crawl, Scrape, and Analyze Websites
 
-The [Analyze URL](https://algorithmia.com/algorithms/web/AnalyzeURL) from Algorithmia is a useful tool for developers that need a straight-forward to scrape a single web pages, and consistently extract structured data from any URL.
+The [Analyze URL microservice](https://algorithmia.com/algorithms/web/AnalyzeURL) from Algorithmia is a useful tool for developers that need a straight-forward to scrape a single web pages, and consistently extract structured data from any URL.
 
 Analyze URL works as a simple API endpoint that’s always on and available.
 

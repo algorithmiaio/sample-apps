@@ -1,0 +1,276 @@
+@import 'custom.css';
+@import 'dots.css';
+
+
+/* HTML ELEMENTS */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Verdana, Arial, sans-serif;
+  font-weight: 400;
+  margin-bottom: 60px;
+  color: rgba(0,0,0,.87);
+  font-size: 16px;
+}
+
+header {
+  position: relative;
+  top: 0;
+  width: 100%;
+  padding: 1em;
+  margin-bottom: 2em;
+}
+
+footer {
+  position: absolute;
+  height: 30px;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  vertical-align: baseline;
+
+  @include respond-min(45em) {
+    padding: 1em;
+  }
+}
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Raleway', Helvetica;
+  padding: 0;
+  margin: 0 0 32px 0;
+  color: rgba(0,0,0,.87);
+  font-weight: 200;
+}
+h1 {
+  font-size: 72px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+h2 {font-size: 48px;}
+h3 {font-weight: 700;}
+h3,
+h4 {font-size: 24px;}
+
+
+/* additional header styling */
+.has-subcontent  {margin-bottom: 8px;}
+.secondary       {color: rgba(0,0,0,.54);}
+.secondary-white {color: rgba(255,255,255,.7);}
+
+
+p {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.67em;
+  color: rgba(0,0,0,.87);
+}
+p.primary {}
+
+ul {-webkit-padding-start: 0;}
+
+li {
+  list-style-type: none;
+  display: inline-block;
+}
+
+/* GENERAL */
+.navbar {
+  min-height: 80px;
+  margin-bottom: 0;
+}
+
+.navbar-brand {
+  height: 80px;
+}
+
+.navbar-brand > img {
+  height: 45px;
+  width: auto;
+}
+
+.navbar-default {
+  background-color: #444a55;
+  border-bottom: 0px;
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: #fff;
+  line-height: 45px;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+  color: #c9c7cb;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+  color:$purple-dark;
+  font-weight: 500;
+}
+
+/* links */
+a {
+  color: #5000BE;
+}
+
+a:hover, a:focus{
+  color: #6717ff;
+  text-decoration: underline;
+}
+
+/* BUTTONS */
+.btn {
+  font-family: 'OpenSans', Helvetica;
+  font-size: 14px;
+  font-weight: 400;
+  border-radius: 0;
+  padding: 12px 24px;
+  letter-spacing: 1px;
+}
+.btn-purple {
+    color: #FFF;
+    background-color: #5000BE;
+    border: 1px solid #5000BE;
+}
+.btn-purple:hover {
+    color: #5000BE;
+    background-color: #FFF;
+    transition: ease-in-out .3s;    
+}
+.btn-purple:focus {
+    color: #5000BE;
+    background-color: #FFF;
+}
+
+.btn-purple-secondary {
+    color: #5000BE;
+    background-color: transparent;
+    border: 1px solid #5000BE;
+}
+.btn-purple-secondary:hover {
+    color: #FFF;
+    background-color: #5000BE;
+    transition: ease-in-out .3s;    
+}
+.btn-purple-secondary:focus {
+    color: #FFF;
+    background-color: #5000BE;
+}
+
+.btn-green {
+    color: #FFF;
+    background-color: #5CB85C;
+    border: 1px solid #5CB85C;
+}
+.btn-green:hover {
+  color: #5CB85C;
+  background-color: #FFF;
+  transition: ease-in-out .3s;
+}
+.btn-green:focus {
+  color: #5CB85C;
+  background-color: #FFF;
+}
+
+.btn-right,
+.sub-link {text-align: right;}
+
+.border-bottom {border-bottom: 1px solid rgba(0,0,0,.12);}
+
+.media-heading {
+  padding: 1.5em .5em 1.5em 0;
+}
+
+.operation {
+  font-size: 1.5em;
+  vertical-align: middle;
+}
+
+.form-group code {
+    background-color: #444a55;
+    color: #fff;
+}
+
+/* dont change the side padding, will mess with container padding */
+.whitespace {padding-top: 64px; padding-bottom: 64px;}
+
+code {cursor: pointer;}
+a > code:hover{color:#9963ff;}
+
+.form-control {
+  width: 100%;
+  display: inline-block;
+  margin-bottom: 32px;
+}
+.col-centered {
+  float: none;
+  margin: 0 auto;
+}
+
+/* HERO */
+.card {
+  padding: 24px;
+  padding-bottom: 32px;
+  background-color: rgba(255,255,255,.7);
+}
+.hero-background {
+    background-image: url(../images/alley/smooth_ride.jpg);
+    background-size: cover;
+    background-position: 50%;
+    /*background-position-x: 325px;*/
+}
+.grey-background {background-color: #F1F1F1;}
+
+#content    {width: 100%;}
+.full-width {width: 100%;}
+#pitch {
+    padding: 90px 0;
+    color: #fff;
+}
+.main-content {padding-top: 30px;}
+
+/* RESULTS */
+.results          {text-align: center; height: 60vh;}
+.results-img      {height: 100%;}
+.results-img img  {max-width: 100%; height: 100%;}
+.thumbnails {
+  padding-top: 32px;
+  width: 75%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.thumb     {height: 100%; margin-bottom: 24px;}
+.thumb img {width: 100%;}
+.thumb p   {text-align: left;}
+
+#selected img {opacity: .5}
+#selected p   {color: rgba(0,0,0,.87);}
+
+.download  {float: left;}
+.share     {float: right;}
+.share img {width: 24px; margin-right: 12px;}
+
+@media (min-width: 768px) and (max-width: 992px){
+  /* SAMPLE IMGS */
+  .sample-images {padding-bottom: 24px;}
+  /* FEATURES */
+  .feature {padding-bottom: 64px;}
+  /* RESULTS */
+  .thumbnails {width: 100%;}
+}
+@media (max-width: 767px) {
+  /* SAMPLE IMGS */
+  .sample-images {padding-bottom: 24px;}
+  /* FEATURES */
+  .feature {padding-bottom: 64px;}
+
+  /* RESULTS */
+  .thumbnails {width: 100%;}
+}
+

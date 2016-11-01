@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- TODO: Update meta tags -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>Colorize Black and White Photos – Algorithmia</title>
+	<link rel="canonical" href="http://demos.algorithmia.com/colorize-photos/" />
+	<meta name="description" content="Automatically colorize black and white photos, pictures, and images using the Colorful Image Colorization microservice.">
+	<meta name="robots" content="index,follow">
+
+	<!-- FB -->
+	<meta property="og:title" content="Colorize Black and White Photos">
+	<meta property="og:url" content="http://demos.algorithmia.com/colorize-photos/">
+	<meta property="og:description" content="Automatically colorize black and white photos, pictures, and images using the Colorful Image Colorization microservice">
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="website" />
+	<meta property="og:image" content="http://demos.algorithmia.com/colorize-photos/public/images/hero-fb.png" />
+	<meta property="og:site_name" content="Algorithmia" />
+
+	<!-- TWTR -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@algorithmia" />
+	<meta name="twitter:title" content="Colorize Black and White Photos" />
+	<meta name="twitter:description" content="Automatically colorize black and white photos, pictures, and images using the Colorful Image Colorization microservice" />
+	<meta name="twitter:image" content="http://demos.algorithmia.com/colorize-photos/public/images/hero-twttr.png" />
+	<meta name="twitter:creator" content="@matt_kiser" />
+
+	<!-- OTHER -->
+	<meta itemprop="name" content="Colorize Black and White Photos">
+	<meta itemprop="description" content="Automatically colorize black and white photos, pictures, and images using the Colorful Image Colorization microservice">
+
+	<!-- CSS -->
+    <link rel="shortcut icon" href="public/images/favicon-bw.png" type="image/png">
+	<link href="public/css/bootstrap.min.css" rel="stylesheet">
+	<link href="public/css/all.css" rel="stylesheet">
+	<link href="public/css/custom.css" rel="stylesheet">
+	<link href="public/css/styles/monokai.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato:400,300" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+
+
+	<!--   Google Analytics -->
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-38617973-1', 'auto');
+	ga('send', 'pageview');
+	</script>
+
+</head>
+<body>
+	<div class="navbar navbar-default navbar-static-top navbar-public navbar-dark" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="">
+					<img src="public/images/logo-white.png" alt="Algorithmia">
+				</a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav pull-right">
+					<li><a href="https://algorithmia.com/algorithms"><span>Algorithms</span></a></li>
+					<li><a href="https://algorithmia.com/use-cases">Use Cases</a></li>
+					<li><a href="https://algorithmia.com/pricing"><span>Pricing</span></a></li>
+					<li><a href="http://blog.algorithmia.com/"><span>Blog</span></a></li>
+					<li>
+						<a class="nav-link nav-username hidden-sm hidden-xs" href="https://algorithmia.com/signup?invite=color">
+							Sign up
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="hero-background">
+		<div class="container whitespace">
+			<div class="row">
+				<div class="col-xs-12 col-md-9">
+					<h1>Deep Filter</h1>
+					<h4 class="secondary-white">Use deep learning to automatically filter any photo.</h4>
+				</div>
+				<div id="status-label"></div>
+				<div class="col-xs-12 col-md-6">
+					<div class="card">
+						<h4 class="has-subcontent">Try it out</h4>
+						<p>Paste an image URL or 
+							<a href=""><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> UPLOAD AN IMAGE</a>
+						</p>
+						<form onsubmit="callAlgorithm(); return false;" class="btn-right">
+							<input type="text" class="form-control" id="imgUrl" placeholder="">
+							<button class="btn btn-purple btn-right" type="button" onclick="callAlgorithm()">
+								FILTER
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div id="overlay" class="hidden">
+			<div class="dots-container">
+				<div class="dot dot1"></div>
+				<div class="dot dot2"></div>
+				<div class="dot dot3"></div>
+				<div class="dot dot4"></div>
+			</div>
+		</div>
+	</div>
+
+	<!-- SAMPLE IMAGES -->
+	<div class="grey-background">
+		<div class="container whitespace">
+			<h4>Or filter a sample image</h4>
+			<div class="row">
+				<div class="col-md-3 col-xs-6">
+					<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/4/4d/Beef_Portrait_(5210343960).jpg')"><img src="https://images.unsplash.com/reserve/E5CwLOxQSFimIXJurfpq_IMG_6424%20(1).jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=6c9b9301641b53cba1d1d4084726ab04" class="sample-images"></a>
+				</div>
+				<div class="col-md-3 col-xs-6">
+					<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/4/4d/Beef_Portrait_(5210343960).jpg')"><img src="https://images.unsplash.com/photo-1454991727061-be514eae86f7?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=72e84205ce9da3b4c9e689289faba164" class="sample-images"></a>
+				</div>
+				<div class="col-md-3 col-xs-6">
+					<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/4/4d/Beef_Portrait_(5210343960).jpg')"><img src="https://images.unsplash.com/photo-1468648746436-83fc69277650?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=26220f195f83dfd428c67aae940914fd" class="sample-images"></a>
+				</div>
+				<div class="col-md-3 col-xs-6">
+					<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/4/4d/Beef_Portrait_(5210343960).jpg')"><img src="https://images.unsplash.com/photo-1474871256005-cbf50b902421?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=44cdc3468182f5c4fb2b36ae0860cf5d" class="sample-images"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- RESULTS -->
+	<div class="container results whitespace">
+		<div class="results-img">
+			<img src="public/images/alley/smooth_ride.jpg" class="has-subcontent">
+			<div class="row">
+				<div class="col-md-6 col-centered">
+					<p>
+						<span class="download"><a href=""><span class="glyphicon glyphicon-download" aria-hidden="true"></span> DOWNLOAD</a></span>
+						<span class="share">
+							<a href=""><img src="public/images/facebook.svg"></a>
+							<a href=""><img src="public/images/twitter.svg"></a>
+						</span>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- RESULTS THUMBNAILS -->
+	<div class="grey-background thumbnails-container">
+		<div class="container">
+			<div class="row thumbnails">
+				<div class="col-md-4 col-xs-4 thumb">
+					<img src="public/images/alley/original.jpeg">
+					<p class="secondary">Original</p>
+				</div>
+				<div class="col-md-4 col-xs-4 thumb" id="selected">
+					<img src="public/images/alley/smooth_ride.jpg">
+					<p class="secondary">Smooth Ride</p>
+				</div>
+				<div class="col-md-4 col-xs-4 thumb">
+					<img src="public/images/alley/space_pizza.jpg">
+					<p class="secondary">Space Pizza</p>
+				</div>
+				<div class="col-md-4 col-xs-4 thumb">
+					<img src="public/images/alley/purple_pond.jpg">
+					<p class="secondary">Purple Pond</p>
+				</div>
+				<div class="col-md-4 col-xs-4 thumb">
+					<img src="public/images/alley/sunday.jpg">
+					<p class="secondary">Sunday</p>
+				</div>
+				<div class="col-md-4 col-xs-4 thumb">
+					<img src="public/images/alley/alien_goggles.jpg">
+					<p class="secondary">Alien Goggles</p>
+				</div>
+			</div>
+			<p class="sub-link">Want more filters? <a href="">Sign up</a></p>
+		</div>
+	</div>
+
+	<!-- BUILT FOR DEVS -->
+	<div class="border-bottom">
+		<div class="container whitespace">
+			<div class="row">
+				<div class="col-md-12">
+					<h2 class="has-subcontent">Built for developers</h2>
+					<h4 class="secondary">A simple, scalable API for creating smarter products</h4>
+						<h4 class="has-subcontent">Input</h4>
+						<pre><code class="python">import Algorithmia
+input = {"image": "_IMAGE_URL_"}
+client = Algorithmia.client('_API_KEY_')
+algo = client.algo('deeplearning/Places365Classifier/0.1.8')
+
+print algo.pipe(input)
+	</code></pre>
+						<h4 class="has-subcontent">Output</h4>
+						<pre><code class="json">{
+"predictions": [
+	{"class": "tower", "prob": 0.6098036170005801},
+	{"class": "skyscraper", "prob": 0.14249812066555023},
+	{"class": "office_building", "prob": 0.04916094988584519},
+	{"class": "downtown", "prob": 0.02924365177750587},
+	{"class": "church/outdoor", "prob": 0.028504755347967155}
+]
+}</code></pre>
+					<button class="btn btn-purple-secondary" type="button" onclick="callAlgorithm()">
+						VIEW FULL ALGORITHM
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- JOIN -->
+	<div class="container whitespace">
+		<div class="row">
+			<div class="col-xs-12 col-md-9">
+				<h2>Join the thousands of developers using Algorithmia to build intelligent apps</h2>
+				<h4>Get 10,000 additional credits when you sign up using the code "deepfilter"</h4>
+				<button class="btn btn-green" type="button" onclick="callAlgorithm()">
+					SIGN UP FOR FREE
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- FEATURES -->
+	<div class="grey-background">
+		<div class="container whitespace">
+			<div class="row">
+				<div class="col-md-3 feature">
+					<h4>Scalable API</h4>
+					<p>With an intuitive API, you have access to more than 2,200 algorithmic microservices. Build in your preferred language using Python, JavaScript, Java, Scala, Ruby, or Rust.</p>
+					<a href="">Learn more</a>
+				</div>
+				<div class="col-md-3 feature">
+					<h4>Managed Platform</h4>
+					<p>Focus on building your app. We provide the tools and manage the cloud infrastructure needed to run it at scale.</p>
+					<a href="">Learn more</a>
+				</div>
+				<div class="col-md-3 feature">
+					<h4>Host trained models</h4>
+					<p>Have a trained machine learning or deep learning model? Turn it into a serverless microservices in minutes. We'll show you how.</p>
+					<a href="">Learn more</a>
+				</div>
+				<div class="col-md-3 feature">
+					<h4>Try for free</h4>
+					<p>Get started for free, and scale with ease. Algorithmia's free tier provides 5,000 free credits per month for apps of any scale. When you're ready to grow, pay only for what you use, making it easy and cost effective to go from prototype to production.</p>
+					<a href="">Sign up</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- ADD ALGORITHM -->
+	<div class="border-bottom">
+		<div class="container whitespace">
+			<div class="row">
+				<div class="col-md-9">
+				<h2>Add the Deep Image Fitler microservice to your app today</h2>
+				<p>Now, researchers and developers can train their deep learning models locally, and <a href="">deploy them to Algorithmia’s scalable, cloud infrastructure</a>, where they become smart API endpoints for others developers to use.</p>
+				<p>This means application developers can now obtain real-time predictions from deep learning models, and build production-ready apps using state-of-the-art machine intelligence in five-lines of code or less.</p>
+				<p>Algorithms like this image colorizer join our collection of more than 2,200 algorithmic microservices.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer>
+		<div class="container">
+			<div class="pull-left">
+				&copy; Algorithmia 2016
+			</div>
+			<ul class="list-inline pull-right">
+				<li><a href="https://algorithmia.com/about">About</a></li>
+				<li><a href="https://algorithmia.com/terms">Terms</a></li>
+				<li><a href="https://algorithmia.com/privacy">Privacy</a></li>
+				<li><a href="http://blog.algorithmia.com" target="_blank">Blog</a></li>
+				<li><a href="https://angel.co/algorithmia/jobs/" target="_blank">Jobs</a></li>
+				<li><a href="https://algorithmia.com/contact">Contact</a></li>
+			</ul>
+		</div>
+	</footer>
+
+	<!-- JS -->
+	<script src="public/js/jquery.min.js"></script>
+	<script src="public/js/bootstrap.min.js"></script>
+	<script src="public/js/TweenMax.min.js"></script>
+	<script src="public/js/algorithmia-0.2.0.js"></script>
+	<script src="public/js/twoimages.js"></script>
+	<script src="public/js/dots.js"></script>
+	<script src="public/js/highlight.pack.js"></script>
+	<script src="public/js/dropzone.js"></script>
+	<script src="public/js/main.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<script>
+	  window.intercomSettings = {
+	    app_id: "c9fj6354"
+	  };
+	</script>
+	<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/c9fj6354';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+
+    <!-- Here be the social sharing scripts -->
+	<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) return;
+	js = d.createElement(s); js.id = id;
+	js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
+	fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+	<style media="screen" type="text/css">
+	.fb_iframe_widget span {
+		vertical-align: baseline !important;
+	}
+	</style>
+
+</body>
+</html>

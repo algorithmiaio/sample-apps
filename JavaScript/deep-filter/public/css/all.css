@@ -58,10 +58,10 @@ h4 {font-size: 24px;}
 
 
 /* additional header styling */
+.header-white    {color: #FFF;}
 .has-subcontent  {margin-bottom: 8px;}
 .secondary       {color: rgba(0,0,0,.54);}
 .secondary-white {color: rgba(255,255,255,.7);}
-
 
 p {
   font-family: 'Open Sans', sans-serif;
@@ -91,7 +91,7 @@ li {
 
 .navbar-brand > img {
   height: 45px;
-  width: auto;
+  width: 250px;
 }
 
 .navbar-default {
@@ -206,12 +206,16 @@ a > code:hover{color:#9963ff;}
   width: 100%;
   display: inline-block;
   margin-bottom: 32px;
+  border-radius: 0px;
 }
 .col-centered {
   float: none;
   margin: 0 auto;
 }
-
+.black-back {padding: 0 8px; background-color: rgba(0,0,0,.18);}
+.glyphicon.purple {color: #5000BE;}
+.glyphicon-chevron-left,
+.glyphicon-chevron-right {font-size: 24px; padding: 32px;}
 /* HERO */
 .card {
   padding: 24px;
@@ -249,7 +253,14 @@ a > code:hover{color:#9963ff;}
 .thumb img {width: 100%;}
 .thumb p   {text-align: left;}
 
+#selected {
+  background-image: url(../images/icon_check.svg);
+  background-position: center 40%;
+  background-size: 64px 64px;
+  background-repeat: no-repeat;
+}
 #selected img {opacity: .5}
+/*#selected img:before {position: absolute; top: 45%; content: "&#xe199";}*/
 #selected p   {color: rgba(0,0,0,.87);}
 
 .download  {float: left;}
@@ -257,6 +268,8 @@ a > code:hover{color:#9963ff;}
 .share img {width: 24px; margin-right: 12px;}
 
 @media (min-width: 768px) and (max-width: 992px){
+  .glyphicon-chevron-left,
+  .glyphicon-chevron-right {padding: 4px;}
   /* SAMPLE IMGS */
   .sample-images {padding-bottom: 24px;}
   /* FEATURES */
@@ -265,12 +278,34 @@ a > code:hover{color:#9963ff;}
   .thumbnails {width: 100%;}
 }
 @media (max-width: 767px) {
+  h1 {font-size: 48px}
+  .navbar-brand > img {
+  height: 45px;
+  width: 200px;
+}
+  .col-centered {
+    margin: 0 12px;
+  }
+  .glyphicon-chevron-left,
+  .glyphicon-chevron-right {padding: 8px;}
+
   /* SAMPLE IMGS */
   .sample-images {padding-bottom: 24px;}
   /* FEATURES */
   .feature {padding-bottom: 64px;}
 
   /* RESULTS */
+  .results-img {position: relative;}
+  .glyphicon-chevron-left  {position: absolute; left:  0; top: 45%; color: #FFF;}
+  .glyphicon-chevron-right {position: absolute; right: 0; top: 45%; color: #FFF;}
+  .results-img > img  {max-width: 100%; max-height: 100%;}
   .thumbnails {width: 100%;}
+
+  #selected {
+  background-image: url(../images/icon_check.svg);
+  background-position: center 20%;
+  background-size: 32px 32px;
+  background-repeat: no-repeat;
+}
 }
 

@@ -64,7 +64,7 @@
 					<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="">
-					<img src="public/images/logo-white.png" alt="Algorithmia">
+					<img src="public/images/algoWhite.svg" alt="Algorithmia">
 				</a>
 			</div>
 			<div class="navbar-collapse collapse">
@@ -87,18 +87,18 @@
 		<div class="container whitespace">
 			<div class="row">
 				<div class="col-xs-12 col-md-9">
-					<h1>Deep Filter</h1>
-					<h4 class="secondary-white">Use deep learning to automatically filter any photo.</h4>
+					<h1><span class="black-back">Deep Filter</span></h1>
+					<h4 class="header-white"><span class="black-back">Use deep learning to automatically filter any photo</span></h4>
 				</div>
 				<div id="status-label"></div>
 				<div class="col-xs-12 col-md-6">
 					<div class="card">
 						<h4 class="has-subcontent">Try it out</h4>
-						<p>Paste an image URL or 
+						<p>Paste an image URL or <br class="hidden-md hidden-lg hidden-xl"> 
 							<a href=""><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> UPLOAD AN IMAGE</a>
 						</p>
 						<form onsubmit="callAlgorithm(); return false;" class="btn-right">
-							<input type="text" class="form-control" id="imgUrl" placeholder="">
+							<input type="text" class="form-control" id="imgUrl" placeholder="https://unsplash.com/image.jpg">
 							<button class="btn btn-purple btn-right" type="button" onclick="callAlgorithm()">
 								FILTER
 							</button>
@@ -126,16 +126,16 @@
 			<h4>Or filter a sample image</h4>
 			<div class="row">
 				<div class="col-md-3 col-xs-6">
-					<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/4/4d/Beef_Portrait_(5210343960).jpg')"><img src="https://images.unsplash.com/reserve/E5CwLOxQSFimIXJurfpq_IMG_6424%20(1).jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=6c9b9301641b53cba1d1d4084726ab04" class="sample-images"></a>
+					<a onclick=""><img src="https://images.unsplash.com/reserve/E5CwLOxQSFimIXJurfpq_IMG_6424%20(1).jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=6c9b9301641b53cba1d1d4084726ab04" class="sample-images"></a>
 				</div>
 				<div class="col-md-3 col-xs-6">
-					<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/4/4d/Beef_Portrait_(5210343960).jpg')"><img src="https://images.unsplash.com/photo-1454991727061-be514eae86f7?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=72e84205ce9da3b4c9e689289faba164" class="sample-images"></a>
+					<a onclick=""><img src="https://images.unsplash.com/photo-1454991727061-be514eae86f7?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=72e84205ce9da3b4c9e689289faba164" class="sample-images"></a>
 				</div>
 				<div class="col-md-3 col-xs-6">
-					<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/4/4d/Beef_Portrait_(5210343960).jpg')"><img src="https://images.unsplash.com/photo-1468648746436-83fc69277650?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=26220f195f83dfd428c67aae940914fd" class="sample-images"></a>
+					<a onclick=""><img src="https://images.unsplash.com/photo-1468648746436-83fc69277650?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=26220f195f83dfd428c67aae940914fd" class="sample-images"></a>
 				</div>
 				<div class="col-md-3 col-xs-6">
-					<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/4/4d/Beef_Portrait_(5210343960).jpg')"><img src="https://images.unsplash.com/photo-1474871256005-cbf50b902421?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=44cdc3468182f5c4fb2b36ae0860cf5d" class="sample-images"></a>
+					<a onclick=""><img src="https://images.unsplash.com/photo-1474871256005-cbf50b902421?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=44cdc3468182f5c4fb2b36ae0860cf5d" class="sample-images"></a>
 				</div>
 			</div>
 		</div>
@@ -143,8 +143,12 @@
 
 	<!-- RESULTS -->
 	<div class="container results whitespace">
-		<div class="results-img">
+		<div class="results-img row">
+			<span class="glyphicon glyphicon-chevron-left purple hidden-xs"></span>
+			<span class="glyphicon glyphicon-chevron-left hidden-sm hidden-md hidden-lg hidden-xl"></span>
 			<img src="public/images/alley/smooth_ride.jpg" class="has-subcontent">
+			<span class="glyphicon glyphicon-chevron-right purple hidden-xs"></span>
+			<span class="glyphicon glyphicon-chevron-right hidden-sm hidden-md hidden-lg hidden-xl"></span>
 			<div class="row">
 				<div class="col-md-6 col-centered">
 					<p>
@@ -271,7 +275,7 @@ print algo.pipe(input)
 		<div class="container whitespace">
 			<div class="row">
 				<div class="col-md-9">
-				<h2>Add the Deep Image Fitler microservice to your app today</h2>
+				<h2>Add the Deep Image Filter microservice to your app today</h2>
 				<p>Now, researchers and developers can train their deep learning models locally, and <a href="">deploy them to Algorithmia’s scalable, cloud infrastructure</a>, where they become smart API endpoints for others developers to use.</p>
 				<p>This means application developers can now obtain real-time predictions from deep learning models, and build production-ready apps using state-of-the-art machine intelligence in five-lines of code or less.</p>
 				<p>Algorithms like this image colorizer join our collection of more than 2,200 algorithmic microservices.</p>

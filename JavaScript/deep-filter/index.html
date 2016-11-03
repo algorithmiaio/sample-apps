@@ -84,26 +84,44 @@
 	</div>
 
 	<div class="hero-background">
-		<div class="container whitespace">
+		<div class="container whitespace hero-whitespace">
 			<div class="row">
 				<div class="col-xs-12 col-md-9">
-					<h1><span class="black-back">Deep Filter</span></h1>
-					<h4 class="header-white"><span class="black-back">Use deep learning to automatically filter any photo</span></h4>
+					<h1>Deep Filter</h1>
+					<h3 class="header-white hero-subheader">Use deep learning to automatically filter any photo</h3>
 				</div>
 				<div id="status-label"></div>
-				<div class="col-xs-12 col-md-6">
+				<div class="col-xs-12 col-md-7 mobile-no-padding">
 					<div class="card">
 						<h4 class="has-subcontent">Try it out</h4>
-						<p>Paste an image URL or <br class="hidden-md hidden-lg hidden-xl"> 
+						<p>Paste an image URL or <br class="hidden-sm hidden-md hidden-lg hidden-xl"> 
 							<a href=""><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> UPLOAD AN IMAGE</a>
 						</p>
-						<form onsubmit="callAlgorithm(); return false;" class="btn-right">
+						<form onsubmit="callAlgorithm(); return false;" class="mobile-btn-right">
 							<input type="text" class="form-control" id="imgUrl" placeholder="https://unsplash.com/image.jpg">
-							<button class="btn btn-purple btn-right" type="button" onclick="callAlgorithm()">
-								FILTER
-							</button>
+							<button class="btn btn-purple btn-right" type="button" onclick="callAlgorithm()">FILTER</button>
 						</form>
 					</div>
+
+					<!-- SAMPLE IMAGES -->
+					<div class="sample-images grey-background">
+						<p class="primary has-subcontent">Or filter a sample image</p>
+						<div class="row">
+							<div class="col-xs-6 col-sm-3 col-md-3">
+								<a onclick=""><img src="https://images.unsplash.com/reserve/E5CwLOxQSFimIXJurfpq_IMG_6424%20(1).jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=6c9b9301641b53cba1d1d4084726ab04" class="sample-img"></a>
+							</div>
+							<div class="col-xs-6 col-sm-3 col-md-3">
+								<a onclick=""><img src="https://images.unsplash.com/photo-1454991727061-be514eae86f7?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=72e84205ce9da3b4c9e689289faba164" class="sample-img"></a>
+							</div>
+							<div class="col-xs-6 col-sm-3 col-md-3">
+								<a onclick=""><img src="https://images.unsplash.com/photo-1468648746436-83fc69277650?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=26220f195f83dfd428c67aae940914fd" class="sample-img"></a>
+							</div>
+							<div class="col-xs-6 col-sm-3 col-md-3">
+								<a onclick=""><img src="https://images.unsplash.com/photo-1474871256005-cbf50b902421?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=44cdc3468182f5c4fb2b36ae0860cf5d" class="sample-img"></a>
+							</div>
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</div>
@@ -120,26 +138,7 @@
 		</div>
 	</div>
 
-	<!-- SAMPLE IMAGES -->
-	<div class="grey-background">
-		<div class="container whitespace">
-			<h4>Or filter a sample image</h4>
-			<div class="row">
-				<div class="col-md-3 col-xs-6">
-					<a onclick=""><img src="https://images.unsplash.com/reserve/E5CwLOxQSFimIXJurfpq_IMG_6424%20(1).jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=6c9b9301641b53cba1d1d4084726ab04" class="sample-images"></a>
-				</div>
-				<div class="col-md-3 col-xs-6">
-					<a onclick=""><img src="https://images.unsplash.com/photo-1454991727061-be514eae86f7?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=72e84205ce9da3b4c9e689289faba164" class="sample-images"></a>
-				</div>
-				<div class="col-md-3 col-xs-6">
-					<a onclick=""><img src="https://images.unsplash.com/photo-1468648746436-83fc69277650?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=26220f195f83dfd428c67aae940914fd" class="sample-images"></a>
-				</div>
-				<div class="col-md-3 col-xs-6">
-					<a onclick=""><img src="https://images.unsplash.com/photo-1474871256005-cbf50b902421?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=44cdc3468182f5c4fb2b36ae0860cf5d" class="sample-images"></a>
-				</div>
-			</div>
-		</div>
-	</div>
+
 
 	<!-- RESULTS -->
 	<div class="container results whitespace">
@@ -164,7 +163,7 @@
 	</div>
 
 	<!-- RESULTS THUMBNAILS -->
-	<div class="grey-background thumbnails-container">
+	<div class="grey-background results-thumbnails">
 		<div class="container">
 			<div class="row thumbnails">
 				<div class="col-md-4 col-xs-4 thumb">
@@ -221,9 +220,9 @@ print algo.pipe(input)
 	{"class": "church/outdoor", "prob": 0.028504755347967155}
 ]
 }</code></pre>
-					<button class="btn btn-purple-secondary" type="button" onclick="callAlgorithm()">
+					<a href="https://algorithmia.com/algorithms/deeplearning/DeepFilter" class="btn btn-purple-secondary">
 						VIEW FULL ALGORITHM
-					</button>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -235,9 +234,9 @@ print algo.pipe(input)
 			<div class="col-xs-12 col-md-9">
 				<h2>Join the thousands of developers using Algorithmia to build intelligent apps</h2>
 				<h4>Get 10,000 additional credits when you sign up using the code "deepfilter"</h4>
-				<button class="btn btn-green" type="button" onclick="callAlgorithm()">
+				<a href="https://algorithmia.com/signup?invite=places" class="btn btn-green">
 					SIGN UP FOR FREE
-				</button>
+				</a>
 			</div>
 		</div>
 	</div>

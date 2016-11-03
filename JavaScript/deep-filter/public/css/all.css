@@ -62,6 +62,7 @@ h4 {font-size: 24px;}
 .has-subcontent  {margin-bottom: 8px;}
 .secondary       {color: rgba(0,0,0,.54);}
 .secondary-white {color: rgba(255,255,255,.7);}
+.hero-subheader  {margin-bottom: 64px;}
 
 p {
   font-family: 'Open Sans', sans-serif;
@@ -70,7 +71,11 @@ p {
   line-height: 1.67em;
   color: rgba(0,0,0,.87);
 }
-p.primary {}
+p.primary {
+  font-family: 'Raleway', Helvetica;
+  font-size: 20px;
+  font-weight: 300;
+}
 
 ul {-webkit-padding-start: 0;}
 
@@ -203,7 +208,7 @@ code {cursor: pointer;}
 a > code:hover{color:#9963ff;}
 
 .form-control {
-  width: 100%;
+  max-width: 75%;
   display: inline-block;
   margin-bottom: 32px;
   border-radius: 0px;
@@ -216,6 +221,7 @@ a > code:hover{color:#9963ff;}
 .glyphicon.purple {color: #5000BE;}
 .glyphicon-chevron-left,
 .glyphicon-chevron-right {font-size: 24px; padding: 32px;}
+
 /* HERO */
 .card {
   padding: 24px;
@@ -227,6 +233,10 @@ a > code:hover{color:#9963ff;}
     background-size: cover;
     background-position: 50%;
     /*background-position-x: 325px;*/
+}
+.sample-images {
+  padding: 24px;
+  padding-bottom: 32px;
 }
 .grey-background {background-color: #F1F1F1;}
 
@@ -253,6 +263,9 @@ a > code:hover{color:#9963ff;}
 .thumb img {width: 100%;}
 .thumb p   {text-align: left;}
 
+.results,
+.results-thumbnails {display: none;}
+
 #selected {
   background-image: url(../images/icon_check.svg);
   background-position: center 40%;
@@ -271,26 +284,38 @@ a > code:hover{color:#9963ff;}
   .glyphicon-chevron-left,
   .glyphicon-chevron-right {padding: 4px;}
   /* SAMPLE IMGS */
-  .sample-images {padding-bottom: 24px;}
+  .sample-img {padding-bottom: 24px;}
   /* FEATURES */
   .feature {padding-bottom: 64px;}
   /* RESULTS */
   .thumbnails {width: 100%;}
 }
+/* MOBILE */
 @media (max-width: 767px) {
   h1 {font-size: 48px}
   .navbar-brand > img {
-  height: 45px;
-  width: 200px;
-}
+    height: 45px;
+    width: 200px;
+  }
+  /* dont change the side padding, will mess with container padding */
+  .whitespace         {padding-top: 32px; padding-bottom: 32px;}
+  .hero-whitespace    {padding-bottom: 0;}
+  .mobile-no-padding  {padding-left: 0; padding-right: 0;}
+  .hero-subheader     {margin-bottom: 32px;}
+
+  .card {background-color: rgba(255,255,255,.9);}
+  .mobile-btn-right {text-align: right;}
   .col-centered {
     margin: 0 12px;
   }
+
+  .hero-background {background-position: 10%;}
+
   .glyphicon-chevron-left,
   .glyphicon-chevron-right {padding: 8px;}
 
   /* SAMPLE IMGS */
-  .sample-images {padding-bottom: 24px;}
+  .sample-img {padding-bottom: 24px;}
   /* FEATURES */
   .feature {padding-bottom: 64px;}
 

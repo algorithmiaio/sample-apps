@@ -221,6 +221,11 @@ a:hover, a:focus{
   padding: 24px;
   padding-bottom: 32px;
 }
+.filter-form {
+    /* vertical center */
+  display:        flex;
+  align-items:    center;
+}
 
 /* RESULTS */
 /* full section */
@@ -284,6 +289,8 @@ a > code:hover{color:#9963ff;}
   max-width: 75%;
   display: inline-block;
   border-radius: 0px;
+  font-size: 16px;
+  height: 46px;
 }
 
 /* TABLET (sm) */
@@ -336,6 +343,11 @@ a > code:hover{color:#9963ff;}
   .hero-background {background-position: 10%;}
   .hero-subheader  {margin-bottom: 32px;}
   .form-control    {margin-bottom: 12px;}
+  .filter-form {
+    /* vertical center */
+    display:        block;
+    align-items:    stretch;
+  }
 
   /* SAMPLE IMGS */
   .sample-img {padding-bottom: 24px;}

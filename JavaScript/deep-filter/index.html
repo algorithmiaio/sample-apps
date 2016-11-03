@@ -37,8 +37,7 @@
 	<link href="public/css/all.css" rel="stylesheet">
 	<link href="public/css/custom.css" rel="stylesheet">
 	<link href="public/css/styles/monokai.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Lato:400,300" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Raleway:300,400" rel="stylesheet">
 
 
 	<!--   Google Analytics -->
@@ -84,7 +83,7 @@
 	</div>
 
 	<div class="hero-background">
-		<div class="container whitespace hero-whitespace">
+		<div class="container whitespace mobile-whitespace">
 			<div class="row">
 				<div class="col-xs-12 col-md-9">
 					<h1>Deep Filter</h1>
@@ -141,52 +140,51 @@
 
 
 	<!-- RESULTS -->
-	<div class="container results whitespace">
-		<div class="results-img row">
-			<span class="glyphicon glyphicon-chevron-left purple hidden-xs"></span>
-			<span class="glyphicon glyphicon-chevron-left hidden-sm hidden-md hidden-lg hidden-xl"></span>
-			<img src="public/images/alley/smooth_ride.jpg" class="has-subcontent">
-			<span class="glyphicon glyphicon-chevron-right purple hidden-xs"></span>
-			<span class="glyphicon glyphicon-chevron-right hidden-sm hidden-md hidden-lg hidden-xl"></span>
-			<div class="row">
-				<div class="col-md-6 col-centered">
-					<p>
-						<span class="download"><a href=""><span class="glyphicon glyphicon-download" aria-hidden="true"></span> DOWNLOAD</a></span>
-						<span class="share">
-							<a href=""><img src="public/images/facebook.svg"></a>
-							<a href=""><img src="public/images/twitter.svg"></a>
-						</span>
-					</p>
-				</div>
+	<div class="container whitespace tablet-whitespace" id="results">
+		<div class="results-img">
+			<span class="glyphicon glyphicon-chevron-left"></span>
+ 			<img src="public/images/alley/smooth_ride.jpg" class="has-subcontent">
+<!--  			<img src="https://images.unsplash.com/photo-1466496224275-4cbf790b285b?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=be87013898645ddf7875b7340c4ba2a2" class="has-subcontent">
+ -->			<span class="glyphicon glyphicon-chevron-right"></span>
+		</div>
+		<div class="row img-functions">
+			<div class="col-md-11 col-lg-8 col-centered">
+				<p>
+					<span class="download"><a href=""><span class="glyphicon glyphicon-download" aria-hidden="true"></span> DOWNLOAD</a></span>
+					<span class="share">
+						<a href=""><img src="public/images/facebook.svg"></a>
+						<a href=""><img src="public/images/twitter.svg"></a>
+					</span>
+				</p>
 			</div>
 		</div>
 	</div>
 
 	<!-- RESULTS THUMBNAILS -->
-	<div class="grey-background results-thumbnails">
+	<div class="grey-background results-thumbnails" id="results-thumbnails">
 		<div class="container">
 			<div class="row thumbnails">
-				<div class="col-md-4 col-xs-4 thumb">
-					<img src="public/images/alley/original.jpeg">
+				<div class="col-xs-6 col-sm-4 col-md-4 thumb">
+ 					<img src="public/images/alley/original.jpeg">
 					<p class="secondary">Original</p>
 				</div>
-				<div class="col-md-4 col-xs-4 thumb" id="selected">
+				<div class="col-xs-6 col-sm-4 col-md-4 thumb" id="selected">
 					<img src="public/images/alley/smooth_ride.jpg">
 					<p class="secondary">Smooth Ride</p>
 				</div>
-				<div class="col-md-4 col-xs-4 thumb">
+				<div class="col-xs-6 col-sm-4 col-md-4 thumb">
 					<img src="public/images/alley/space_pizza.jpg">
 					<p class="secondary">Space Pizza</p>
 				</div>
-				<div class="col-md-4 col-xs-4 thumb">
+				<div class="col-xs-6 col-sm-4 col-md-4 thumb">
 					<img src="public/images/alley/purple_pond.jpg">
 					<p class="secondary">Purple Pond</p>
 				</div>
-				<div class="col-md-4 col-xs-4 thumb">
+				<div class="col-xs-6 col-sm-4 col-md-4 thumb">
 					<img src="public/images/alley/sunday.jpg">
 					<p class="secondary">Sunday</p>
 				</div>
-				<div class="col-md-4 col-xs-4 thumb">
+				<div class="col-xs-6 col-sm-4 col-md-4 thumb">
 					<img src="public/images/alley/alien_goggles.jpg">
 					<p class="secondary">Alien Goggles</p>
 				</div>
@@ -196,7 +194,7 @@
 	</div>
 
 	<!-- BUILT FOR DEVS -->
-	<div class="border-bottom">
+	<section class="border-bottom">
 		<div class="container whitespace">
 			<div class="row">
 				<div class="col-md-12">
@@ -226,10 +224,10 @@ print algo.pipe(input)
 				</div>
 			</div>
 		</div>
-	</div>
+	</section>
 
 	<!-- JOIN -->
-	<div class="container whitespace">
+	<section class="container whitespace">
 		<div class="row">
 			<div class="col-xs-12 col-md-9">
 				<h2>Join the thousands of developers using Algorithmia to build intelligent apps</h2>
@@ -239,10 +237,10 @@ print algo.pipe(input)
 				</a>
 			</div>
 		</div>
-	</div>
+	</section>
 
 	<!-- FEATURES -->
-	<div class="grey-background">
+	<section class="grey-background">
 		<div class="container whitespace">
 			<div class="row">
 				<div class="col-md-3 feature">
@@ -267,10 +265,10 @@ print algo.pipe(input)
 				</div>
 			</div>
 		</div>
-	</div>
+	</section>
 
 	<!-- ADD ALGORITHM -->
-	<div class="border-bottom">
+	<section class="border-bottom">
 		<div class="container whitespace">
 			<div class="row">
 				<div class="col-md-9">
@@ -281,7 +279,7 @@ print algo.pipe(input)
 				</div>
 			</div>
 		</div>
-	</div>
+	</section>
 	<footer>
 		<div class="container">
 			<div class="pull-left">

@@ -10,7 +10,7 @@ html {
 
 body {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Verdana, Arial, sans-serif;
-  font-weight: 400;
+  font-weight: 300;
   margin-bottom: 60px;
   color: rgba(0,0,0,.87);
   font-size: 16px;
@@ -56,7 +56,6 @@ h3 {font-weight: 700;}
 h3,
 h4 {font-size: 24px;}
 
-
 /* additional header styling */
 .header-white    {color: #FFF;}
 .has-subcontent  {margin-bottom: 8px;}
@@ -90,9 +89,7 @@ li {
   margin-bottom: 0;
 }
 
-.navbar-brand {
-  height: 80px;
-}
+.navbar-brand {height: 80px;}
 
 .navbar-brand > img {
   height: 45px;
@@ -109,9 +106,7 @@ li {
   line-height: 45px;
 }
 
-.navbar-default .navbar-nav>li>a:hover {
-  color: #c9c7cb;
-}
+.navbar-default .navbar-nav>li>a:hover {color: #c9c7cb;}
 
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
   color:$purple-dark;
@@ -119,9 +114,7 @@ li {
 }
 
 /* links */
-a {
-  color: #5000BE;
-}
+a {color: #5000BE;}
 
 a:hover, a:focus{
   color: #6717ff;
@@ -182,14 +175,10 @@ a:hover, a:focus{
   background-color: #FFF;
 }
 
-.btn-right,
+/* When you need to align element on the right */
 .sub-link {text-align: right;}
 
-.border-bottom {border-bottom: 1px solid rgba(0,0,0,.12);}
-
-.media-heading {
-  padding: 1.5em .5em 1.5em 0;
-}
+.media-heading {padding: 1.5em .5em 1.5em 0;}
 
 .operation {
   font-size: 1.5em;
@@ -197,75 +186,87 @@ a:hover, a:focus{
 }
 
 .form-group code {
-    background-color: #444a55;
-    color: #fff;
+  background-color: #444a55;
+  color: #fff;
 }
 
-/* dont change the side padding, will mess with container padding */
-.whitespace {padding-top: 64px; padding-bottom: 64px;}
+/* SECTION STYLING */
+/* Add whitespace around section */
+.whitespace {padding-top: 64px; padding-bottom: 64px;} /* dont change the side padding, will mess with container padding */
+/* grey back used for sections */
+.grey-background {background-color: #F1F1F1;}
+/* Used as border for sections */
+.border-bottom {border-bottom: 1px solid rgba(0,0,0,.12);}
 
-code {cursor: pointer;}
-a > code:hover{color:#9963ff;}
-
-.form-control {
-  max-width: 75%;
-  display: inline-block;
-  margin-bottom: 32px;
-  border-radius: 0px;
-}
+/* To center a single column */
 .col-centered {
   float: none;
   margin: 0 auto;
 }
+/* Make text more readable on background */
 .black-back {padding: 0 8px; background-color: rgba(0,0,0,.18);}
-.glyphicon.purple {color: #5000BE;}
-.glyphicon-chevron-left,
-.glyphicon-chevron-right {font-size: 24px; padding: 32px;}
 
 /* HERO */
+.hero-background {
+  background-image: url(../images/alley/smooth_ride.jpg);
+  background-size: cover;
+  background-position: 50%;
+}
 .card {
   padding: 24px;
   padding-bottom: 32px;
   background-color: rgba(255,255,255,.7);
 }
-.hero-background {
-    background-image: url(../images/alley/smooth_ride.jpg);
-    background-size: cover;
-    background-position: 50%;
-    /*background-position-x: 325px;*/
-}
 .sample-images {
   padding: 24px;
   padding-bottom: 32px;
 }
-.grey-background {background-color: #F1F1F1;}
-
-#content    {width: 100%;}
-.full-width {width: 100%;}
-#pitch {
-    padding: 90px 0;
-    color: #fff;
-}
-.main-content {padding-top: 30px;}
 
 /* RESULTS */
-.results          {text-align: center; height: 60vh;}
-.results-img      {height: 100%;}
-.results-img img  {max-width: 100%; height: 100%;}
+/* full section */
+#results          {text-align: center;}
+/* featured img */
+.results-img      {height: 100%; position: relative;}
+.results-img img  {
+  max-width: 100%;
+  min-height: auto;
+  max-height: 80vh;
+}
+
+/* Next/Back icons */
+.glyphicon.purple {color: #5000BE;}
+.glyphicon-chevron-left,
+.glyphicon-chevron-right {font-size: 24px; padding: 12px; color: #5000BE; background-color: rgba(255,255,255,.5);}
+
+.glyphicon-chevron-left  {position: absolute; left:  5%; top: 45%;}
+.glyphicon-chevron-right {position: absolute; right: 5%; top: 45%;}
+.glyphicon-chevron-left:hover,
+.glyphicon-chevron-right:hover,
+.glyphicon-chevron-left:focus,
+.glyphicon-chevron-right:focus {color: #FFF; background-color: rgba(80,0,190,1);}
+
+/* Results img functions */
+.img-functions {padding-bottom: 32px;}
+.download  {float: left;}
+.share     {float: right;}
+.share img {width: 24px; margin-right: 12px;}
+
+/* RESULTS THUMBNAILS */
 .thumbnails {
   padding-top: 32px;
   width: 75%;
   text-align: center;
   margin: 0 auto;
 }
-
 .thumb     {height: 100%; margin-bottom: 24px;}
 .thumb img {width: 100%;}
 .thumb p   {text-align: left;}
 
-.results,
-.results-thumbnails {display: none;}
+/* Hides results if none */
+#results,
+#results-thumbnails {display: none;}
 
+/* Styling the selected results img thumbnail */
 #selected {
   background-image: url(../images/icon_check.svg);
   background-position: center 40%;
@@ -273,16 +274,30 @@ a > code:hover{color:#9963ff;}
   background-repeat: no-repeat;
 }
 #selected img {opacity: .5}
-/*#selected img:before {position: absolute; top: 45%; content: "&#xe199";}*/
 #selected p   {color: rgba(0,0,0,.87);}
 
-.download  {float: left;}
-.share     {float: right;}
-.share img {width: 24px; margin-right: 12px;}
+/* CODE */
+code          {cursor: pointer;}
+a > code:hover{color:#9963ff;}
 
+.form-control {
+  max-width: 75%;
+  display: inline-block;
+  border-radius: 0px;
+}
+
+/* TABLET (sm) */
 @media (min-width: 768px) and (max-width: 992px){
+  .tablet-whitespace   {padding-bottom: 0;}
   .glyphicon-chevron-left,
   .glyphicon-chevron-right {padding: 4px;}
+  .glyphicon-chevron-left,
+  .glyphicon-chevron-right {padding: 4px; color: #FFF; border: none; background-color: rgba(80,0,190,.38);}
+  .glyphicon-chevron-left:hover,
+  .glyphicon-chevron-right:hover,
+  .glyphicon-chevron-left:focus,
+  .glyphicon-chevron-right:focus {background-color: rgba(80,0,190,1);}
+
   /* SAMPLE IMGS */
   .sample-img {padding-bottom: 24px;}
   /* FEATURES */
@@ -290,47 +305,50 @@ a > code:hover{color:#9963ff;}
   /* RESULTS */
   .thumbnails {width: 100%;}
 }
-/* MOBILE */
+
+/* MOBILE (xs) */
 @media (max-width: 767px) {
-  h1 {font-size: 48px}
   .navbar-brand > img {
     height: 45px;
     width: 200px;
   }
-  /* dont change the side padding, will mess with container padding */
-  .whitespace         {padding-top: 32px; padding-bottom: 32px;}
-  .hero-whitespace    {padding-bottom: 0;}
-  .mobile-no-padding  {padding-left: 0; padding-right: 0;}
-  .hero-subheader     {margin-bottom: 32px;}
+
+  /* reduce large header */
+  h1 {font-size: 48px}
+
+  /* Clean up spacing on mobile */
+  .whitespace          {padding-top: 32px; padding-bottom: 32px;} /* dont change the side padding, will mess with container padding */
+  .tablet-whitespace,
+  .mobile-whitespace   {padding-bottom: 0;}
+  .mobile-no-padding   {padding-left: 0; padding-right: 0;}
+  .col-centered        {margin: 0 12px;}
+  .glyphicon-chevron-left,
+  .glyphicon-chevron-right {padding: 4px; color: #FFF; border: none; background-color: rgba(80,0,190,.38);}
+  .glyphicon-chevron-left:hover,
+  .glyphicon-chevron-right:hover,
+  .glyphicon-chevron-left:focus,
+  .glyphicon-chevron-right:focus {background-color: rgba(80,0,190,1);}
 
   .card {background-color: rgba(255,255,255,.9);}
   .mobile-btn-right {text-align: right;}
-  .col-centered {
-    margin: 0 12px;
-  }
 
+  /* HERO */
   .hero-background {background-position: 10%;}
-
-  .glyphicon-chevron-left,
-  .glyphicon-chevron-right {padding: 8px;}
+  .hero-subheader  {margin-bottom: 32px;}
+  .form-control    {margin-bottom: 12px;}
 
   /* SAMPLE IMGS */
   .sample-img {padding-bottom: 24px;}
   /* FEATURES */
-  .feature {padding-bottom: 64px;}
+  .feature    {padding-bottom: 64px;}
 
-  /* RESULTS */
-  .results-img {position: relative;}
-  .glyphicon-chevron-left  {position: absolute; left:  0; top: 45%; color: #FFF;}
-  .glyphicon-chevron-right {position: absolute; right: 0; top: 45%; color: #FFF;}
-  .results-img > img  {max-width: 100%; max-height: 100%;}
+  /* Fix img sizing */
   .thumbnails {width: 100%;}
-
   #selected {
-  background-image: url(../images/icon_check.svg);
-  background-position: center 20%;
-  background-size: 32px 32px;
-  background-repeat: no-repeat;
-}
+    background-image: url(../images/icon_check.svg);
+    background-position: center 30%;
+    background-size: 64px 64px;
+    background-repeat: no-repeat;
+  }
 }
 

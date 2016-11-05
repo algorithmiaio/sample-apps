@@ -5,15 +5,15 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<title>Colorize Black and White Photos – Algorithmia</title>
-	<link rel="canonical" href="http://demos.algorithmia.com/colorize-photos/" />
-	<meta name="description" content="Automatically colorize black and white photos, pictures, and images using the Colorful Image Colorization microservice.">
+	<title>Deep Filter – Neural Style Transfer – Algorithmia</title>
+	<link rel="canonical" href="http://demos.algorithmia.com/deep-filter/" />
+	<meta name="description" content="Use deep learning to automatically filter any photo using the Deep Filter microservice.">
 	<meta name="robots" content="index,follow">
 
 	<!-- FB -->
 	<meta property="og:title" content="Colorize Black and White Photos">
-	<meta property="og:url" content="http://demos.algorithmia.com/colorize-photos/">
-	<meta property="og:description" content="Automatically colorize black and white photos, pictures, and images using the Colorful Image Colorization microservice">
+	<meta property="og:url" content="http://demos.algorithmia.com/deep-filter/">
+	<meta property="og:description" content="Use deep learning to automatically filter any photo using the Deep Filter microservice">
 	<meta property="og:locale" content="en_US" />
 	<meta property="og:type" content="website" />
 	<meta property="og:image" content="http://demos.algorithmia.com/colorize-photos/public/images/hero-fb.png" />
@@ -23,7 +23,7 @@
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@algorithmia" />
 	<meta name="twitter:title" content="Colorize Black and White Photos" />
-	<meta name="twitter:description" content="Automatically colorize black and white photos, pictures, and images using the Colorful Image Colorization microservice" />
+	<meta name="twitter:description" content="Use deep learning to automatically filter any photo using the Deep Filter microservice" />
 	<meta name="twitter:image" content="http://demos.algorithmia.com/colorize-photos/public/images/hero-twttr.png" />
 	<meta name="twitter:creator" content="@matt_kiser" />
 
@@ -107,16 +107,16 @@
 						<p class="primary has-subcontent">Or filter a sample image</p>
 						<div class="row">
 							<div class="col-xs-6 col-sm-3 col-md-3">
-								<a onclick=""><img src="https://images.unsplash.com/reserve/E5CwLOxQSFimIXJurfpq_IMG_6424%20(1).jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=6c9b9301641b53cba1d1d4084726ab04" class="sample-img"></a>
+								<a onclick="analyzeDefault('https://images.unsplash.com/reserve/E5CwLOxQSFimIXJurfpq_IMG_6424%20(1).jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=6c9b9301641b53cba1d1d4084726ab04')"><img src="https://images.unsplash.com/reserve/E5CwLOxQSFimIXJurfpq_IMG_6424%20(1).jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=6c9b9301641b53cba1d1d4084726ab04" class="sample-img"></a>
 							</div>
 							<div class="col-xs-6 col-sm-3 col-md-3">
-								<a onclick=""><img src="https://images.unsplash.com/photo-1454991727061-be514eae86f7?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=72e84205ce9da3b4c9e689289faba164" class="sample-img"></a>
+								<a onclick="analyzeDefault('https://images.unsplash.com/photo-1454991727061-be514eae86f7?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=72e84205ce9da3b4c9e689289faba164')"><img src="https://images.unsplash.com/photo-1454991727061-be514eae86f7?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=72e84205ce9da3b4c9e689289faba164" class="sample-img"></a>
 							</div>
 							<div class="col-xs-6 col-sm-3 col-md-3">
-								<a onclick=""><img src="https://images.unsplash.com/photo-1468648746436-83fc69277650?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=26220f195f83dfd428c67aae940914fd" class="sample-img"></a>
+								<a onclick="analyzeDefault('https://images.unsplash.com/photo-1468648746436-83fc69277650?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=26220f195f83dfd428c67aae940914fd')"><img src="https://images.unsplash.com/photo-1468648746436-83fc69277650?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=26220f195f83dfd428c67aae940914fd" class="sample-img"></a>
 							</div>
 							<div class="col-xs-6 col-sm-3 col-md-3">
-								<a onclick=""><img src="https://images.unsplash.com/photo-1474871256005-cbf50b902421?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=44cdc3468182f5c4fb2b36ae0860cf5d" class="sample-img"></a>
+								<a onclick="analyzeDefault('https://images.unsplash.com/photo-1474871256005-cbf50b902421?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=44cdc3468182f5c4fb2b36ae0860cf5d')"><img src="https://images.unsplash.com/photo-1474871256005-cbf50b902421?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=44cdc3468182f5c4fb2b36ae0860cf5d" class="sample-img"></a>
 							</div>
 						</div>
 					</div>
@@ -301,7 +301,7 @@ print algo.pipe(input)
 	<script src="public/js/bootstrap.min.js"></script>
 	<script src="public/js/TweenMax.min.js"></script>
 	<script src="public/js/algorithmia-0.2.0.js"></script>
-	<script src="public/js/twoimages.js"></script>
+	<!-- <script src="public/js/twoimages.js"></script> -->
 	<script src="public/js/dots.js"></script>
 	<script src="public/js/highlight.pack.js"></script>
 	<script src="public/js/dropzone.js"></script>
@@ -315,13 +315,13 @@ print algo.pipe(input)
 	<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/c9fj6354';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
 
     <!-- Here be the social sharing scripts -->
-	<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+	<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
 	var js, fjs = d.getElementsByTagName(s)[0];
 	if (d.getElementById(id)) return;
 	js = d.createElement(s); js.id = id;
-	js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
+	js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
 	fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));</script>
 	<style media="screen" type="text/css">

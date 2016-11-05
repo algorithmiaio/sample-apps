@@ -4,7 +4,7 @@
 // paris https://images.unsplash.com/33/YOfYx7zhTvYBGYs6g83s_IMG_8643.jpg
 
 window.Algorithmia = window.Algorithmia || {};
-Algorithmia.api_key = "simlWDRXPhYo0iAhB053QL1kQLY1";
+Algorithmia.api_key = "simZfwrSvLraXpTAgJpIL53Ugji1";
 var numTasks = 0;
 
 function callAlgorithm() {
@@ -31,15 +31,22 @@ function downloadCanvas(link, canvasId, filename) {
     link.download = filename;
 }
 
-document.getElementById('compareLink').addEventListener('click', function() {
-    downloadCanvas(this, 'twoface', 'rendered-comparison.png');
-}, false);
+// document.getElementById('compareLink').addEventListener('click', function() {
+//     downloadCanvas(this, 'twoface', 'rendered-comparison.png');
+// }, false);
 
 
 function colorify(img) {
+
+  var algoInput = {
+    "images": [img],
+    "savePaths": ["data://.algo/temp/output.jpg"],
+    "filterName": "space_pizza"
+  };
+
   Algorithmia.client(Algorithmia.api_key)
-    .algo("algo://algorithmiahq/ColorizationDemo/1.1.14")
-    .pipe(img)
+    .algo("algo://deeplearning/DeepFilter/0.3.2")
+    .pipe(algoInput)
     .then(function(output) {
       if(output.error) {
         // Error Handling
@@ -76,9 +83,9 @@ function getMeta(original,colorized){
     width = this.width;
     height = this.height;
 
-    var twoface = TwoFace('twoface-demo', width, height);
-    twoface.add(original);
-    twoface.add(colorized);
+    // var twoface = TwoFace('twoface-demo', width, height);
+    // twoface.add(original);
+    // twoface.add(colorized);
 
       // Finish Task
       finishTask();
@@ -96,8 +103,8 @@ function analyzeDefault(img) {
 function startTask() {
   numTasks++;
   document.getElementById("overlay").classList.remove("hidden");
-  var clear = document.getElementById("twoface-demo");
-  clear.innerHTML = '';
+  // var clear = document.getElementById("twoface-demo");
+  // clear.innerHTML = '';
 }
 
 function finishTask() {

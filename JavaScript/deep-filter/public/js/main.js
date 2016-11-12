@@ -37,10 +37,11 @@ function downloadCanvas(link, canvasId, filename) {
 
 
 function colorify(img) {
+  var uuid = Math.random().toString(36).substring(7);
 
   var algoInput = {
     "images": [img],
-    "savePaths": ["data://.algo/temp/output.jpg"],
+    "savePaths": ["s3+turing://algorithmia-demos/deepstyle/" +  uuid + ".jpg"],
     "filterName": "space_pizza"
   };
 

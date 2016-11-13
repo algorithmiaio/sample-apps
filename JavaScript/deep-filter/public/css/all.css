@@ -268,8 +268,8 @@ a:hover, a:focus{
 .thumb p   {text-align: left;}
 
 /* Hides results if none */
-#results,
-#results-thumbnails {display: none;}
+// #results,
+// #results-thumbnails {display: none;}
 
 /* Styling the selected results img thumbnail */
 #selected {

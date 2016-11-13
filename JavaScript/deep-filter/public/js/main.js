@@ -51,26 +51,23 @@ function colorify(img) {
     .then(function(output) {
       if(output.error) {
         // Error Handling
-        var statusLabel = document.getElementById("status-label")
+        var statusLabel = document.getElementById("status-label");
         statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh Oh! Something went wrong: ' + output.error.message + ' </div>';
         taskError();
       } else {
         console.log("got output", output.result);
 
-        // Decode base64 imgs
-        var imgOriginal = "data:image/png;base64," + output.result[0];
-        var imgColorized = "data:image/png;base64," + output.result[1];
+        if(output.result.savePaths.length == 1) {
+          var url = output.result.savePaths[0];
+          url = url.replace("s3+turing://", "https://s3.amazonaws.com/");
+          // Display stylized image
+          document.getElementById("downloadLinks").classList.remove("hidden");
+          document.getElementById("resultLink").href = url;
+          document.getElementById("resultImg").src = url;
 
-        // Show the download link if API also returned the URL
-        if(output.result.length > 2) {
-            document.getElementById("downloadLinks").classList.remove("hidden");
-            document.getElementById("resultLink").href = output.result[2];
-        } else {
-            document.getElementById("downloadLinks").classList.add("hidden");
-            document.getElementById("resultLink").href = '#';
+          finishTask();
         }
 
-        getMeta(imgOriginal, imgColorized);
       }
     });
 }
@@ -83,10 +80,6 @@ function getMeta(original,colorized){
   img.onload = function(){
     width = this.width;
     height = this.height;
-
-    // var twoface = TwoFace('twoface-demo', width, height);
-    // twoface.add(original);
-    // twoface.add(colorized);
 
       // Finish Task
       finishTask();

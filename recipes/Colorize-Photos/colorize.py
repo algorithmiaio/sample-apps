@@ -48,7 +48,7 @@ def main():
     client = Algorithmia.client(args.api_key)
 
     # Get the algorithm we plan to use on each picture
-    algo = client.algo('deeplearning/ColorfulImageColorization/0.1.16')
+    algo = client.algo('deeplearning/ColorfulImageColorization/1.0.1')
     algo.set_options(timeout=600) # This is a slow algorithm, so let's bump up the timeout to 10 minutes
 
     # The root level directory that we will traverse

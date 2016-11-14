@@ -3,6 +3,10 @@
 // rock https://images.unsplash.com/reserve/yZfr4jmxQyuaE132MWZm_stagnes.jpg
 // paris https://images.unsplash.com/33/YOfYx7zhTvYBGYs6g83s_IMG_8643.jpg
 
+var defaultFilters = [
+  "", "smooth_ride", "space_pizza", "purple_pond", "sunday", "alien_goggles"
+];
+
 window.Algorithmia = window.Algorithmia || {};
 Algorithmia.api_key = "simZfwrSvLraXpTAgJpIL53Ugji1";
 var numTasks = 0;
@@ -20,29 +24,19 @@ function callAlgorithm() {
   if(typeof(img) == "string" && img !== "") {
     startTask();
 
-    // Call Image Colorization
-    colorify(img);
+    // Call deep filter
+    generateStylizedImage(img, "space_pizza");
   }
 
 };
 
-function downloadCanvas(link, canvasId, filename) {
-    link.href = document.getElementById(canvasId).toDataURL();
-    link.download = filename;
-}
-
-// document.getElementById('compareLink').addEventListener('click', function() {
-//     downloadCanvas(this, 'twoface', 'rendered-comparison.png');
-// }, false);
-
-
-function colorify(img) {
+function generateStylizedImage(img, filterName) {
   var uuid = Math.random().toString(36).substring(7);
 
   var algoInput = {
     "images": [img],
     "savePaths": ["s3+turing://algorithmia-demos/deepstyle/" +  uuid + ".jpg"],
-    "filterName": "space_pizza"
+    "filterName": filterName
   };
 
   Algorithmia.client(Algorithmia.api_key)
@@ -72,23 +66,6 @@ function colorify(img) {
     });
 }
 
-function getMeta(original,colorized){
-
-  // Get height and width of original image
-  var img = new Image();
-
-  img.onload = function(){
-    width = this.width;
-    height = this.height;
-
-      // Finish Task
-      finishTask();
-
-    };
-
-  img.src = colorized;
-}
-
 function analyzeDefault(img) {
 	document.getElementById("imgUrl").value = img;
 	callAlgorithm();
@@ -97,8 +74,6 @@ function analyzeDefault(img) {
 function startTask() {
   numTasks++;
   document.getElementById("overlay").classList.remove("hidden");
-  // var clear = document.getElementById("twoface-demo");
-  // clear.innerHTML = '';
 }
 
 function finishTask() {

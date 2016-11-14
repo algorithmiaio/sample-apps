@@ -13,11 +13,6 @@
 	}
 }
 
-#twoface-demo canvas {
-  max-width:100%;
-  position: relative;
-}
-
 .sample-img {
 	max-width:100%;
 }
@@ -37,14 +32,14 @@ code {cursor: default;}
 	cursor: pointer;
 }
 
-.dz-message {
-	border: 1px dashed white;
-	text-align: center;
-	cursor: pointer;
-	background-color: rgba(90, 90, 90, .8);
-	font-size: 13px;
-	max-width: 300px;
-}
+// .dz-message {
+// 	border: 1px dashed white;
+// 	text-align: center;
+// 	cursor: pointer;
+// 	background-color: rgba(90, 90, 90, .8);
+// 	font-size: 13px;
+// 	max-width: 300px;
+// }
 
 /* Custom, iPhone Retina */
 @media only screen and (min-width : 320px) {

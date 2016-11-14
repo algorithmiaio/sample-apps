@@ -17,6 +17,13 @@
 	max-width:100%;
 }
 
+.faded {
+	opacity: 0.5;
+	filter: blur(3px);
+	transition: opacity 2s;
+	// transition: filter 2s;
+}
+
 pre {
 	padding: 0;
 	margin-bottom: 32px;

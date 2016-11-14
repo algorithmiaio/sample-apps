@@ -272,14 +272,14 @@ a:hover, a:focus{
 // #results-thumbnails {display: none;}
 
 /* Styling the selected results img thumbnail */
-#selected {
+.selected {
   background-image: url(../images/icon_check.svg);
   background-position: center 40%;
   background-size: 64px 64px;
   background-repeat: no-repeat;
 }
-#selected img {opacity: .5}
-#selected p   {color: rgba(0,0,0,.87);}
+.selected img {opacity: .5}
+.selected p   {color: rgba(0,0,0,.87);}
 
 /* CODE */
 code          {cursor: pointer;}

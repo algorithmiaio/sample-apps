@@ -3,13 +3,39 @@
 // rock https://images.unsplash.com/reserve/yZfr4jmxQyuaE132MWZm_stagnes.jpg
 // paris https://images.unsplash.com/33/YOfYx7zhTvYBGYs6g83s_IMG_8643.jpg
 
+// Filter selection
 var defaultFilters = [
   "", "smooth_ride", "space_pizza", "purple_pond", "sunday", "alien_goggles"
 ];
+var currentFilter = "smooth_ride";
+
 
 window.Algorithmia = window.Algorithmia || {};
 Algorithmia.api_key = "simZfwrSvLraXpTAgJpIL53Ugji1";
 var numTasks = 0;
+
+function updateStyleButtons() {
+  var styleButtons = document.getElementsByClassName("style-thumb");
+  for(var i = 0; i < styleButtons.length; i++) {
+    var button = styleButtons[i];
+    button.onclick = changeStyle;
+    var styleName = button.getAttribute("data-style");
+    if(styleName === currentFilter) {
+      button.classList.add("selected")
+    } else {
+      button.classList.remove("selected")
+    }
+  }
+}
+
+function changeStyle(event, b) {
+  newStyle = this.getAttribute("data-style");
+  if(newStyle !== currentFilter) {
+    console.log("Changing style to " + newStyle);
+    currentFilter = newStyle;
+    updateStyleButtons();
+  }
+}
 
 function callAlgorithm() {
   var statusLabel = document.getElementById("status-label");
@@ -25,10 +51,14 @@ function callAlgorithm() {
     startTask();
 
     // Call deep filter
-    generateStylizedImage(img, "space_pizza");
+    generateStylizedImage(img, currentFilter);
   }
 
 };
+
+function setStyle(style) {
+  currentFilter = style;
+}
 
 function generateStylizedImage(img, filterName) {
   var uuid = Math.random().toString(36).substring(7);
@@ -57,7 +87,9 @@ function generateStylizedImage(img, filterName) {
           // Display stylized image
           document.getElementById("downloadLinks").classList.remove("hidden");
           document.getElementById("resultLink").href = url;
-          document.getElementById("resultImg").src = url;
+          var resultImg = document.getElementById("resultImg")
+          resultImg.src = url;
+          resultImg.classList.remove("faded");
 
           finishTask();
         }
@@ -137,4 +169,6 @@ function initDropzone() {
     taskError();
   });
 }
+
+updateStyleButtons();
 initDropzone();

@@ -12,7 +12,7 @@ function cycleColors() {
             var canvas = document.getElementById("resultCanvas");
             shiftHue(img, canvas, hueOffset, 0, 0);
             hueOffset = (hueOffset + 0.01) % 1;
-        }, 100);
+        }, 60);
     }
 }
 

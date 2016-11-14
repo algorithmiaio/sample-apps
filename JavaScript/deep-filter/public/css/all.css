@@ -232,10 +232,22 @@ a:hover, a:focus{
 #results          {text-align: center;}
 /* featured img */
 .results-img      {height: 100%; position: relative;}
-.results-img img  {
+#resultImg {
   max-width: 100%;
   min-height: auto;
   max-height: 80vh;
+  background-color: red;
+}
+#resultCanvas {
+  max-width: 100%;
+  min-height: auto;
+  max-height: 80vh;
+  // position: absolute;
+  // bottom: 0;
+  // top: 0;
+  // left: 0;
+  // right: 0;
+  background-color: green;
 }
 
 /* Next/Back icons */

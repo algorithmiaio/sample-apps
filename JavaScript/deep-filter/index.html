@@ -147,21 +147,22 @@
 		<div class="results-img">
 			<span class="glyphicon glyphicon-chevron-left"></span>
 			<img id="resultImg" src="public/images/alley/smooth_ride.jpg" class="has-subcontent faded">
-<!--  			<img src="https://images.unsplash.com/photo-1466496224275-4cbf790b285b?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=be87013898645ddf7875b7340c4ba2a2" class="has-subcontent">
- -->			<span class="glyphicon glyphicon-chevron-right"></span>
+			<canvas id="resultCanvas" class="has-subcontent faded">
+			<span class="glyphicon glyphicon-chevron-right"></span>
 		</div>
 		<div class="row img-functions">
 			<div class="col-md-11 col-lg-8 col-centered">
-				<p>
-					<div class="hidden" id="downloadLinks" style="margin-top:15px">
-						<a id="resultLink" href="#" onclick="ga('send', 'event', 'colorized', 'download');" download="colorized.png">DOWNLOAD</a>
-					</div>
-					<!-- <span class="download"><a href=""><span class="glyphicon glyphicon-download" aria-hidden="true"></span> DOWNLOAD</a></span> -->
-					<span class="share">
-						<a href=""><img src="public/images/facebook.svg"></a>
-						<a href=""><img src="public/images/twitter.svg"></a>
-					</span>
-				</p>
+				<div>
+					<input type="range">
+				</div>
+				<div class="hidden" id="downloadLinks">
+					<a id="resultLink" href="#" onclick="ga('send', 'event', 'colorized', 'download');" download="colorized.png">DOWNLOAD</a>
+				</div>
+				<!-- <span class="download"><a href=""><span class="glyphicon glyphicon-download" aria-hidden="true"></span> DOWNLOAD</a></span> -->
+				<span class="share">
+					<a href=""><img src="public/images/facebook.svg"></a>
+					<a href=""><img src="public/images/twitter.svg"></a>
+				</span>
 			</div>
 		</div>
 	</div>

@@ -1,23 +1,12 @@
 // http://stackoverflow.com/questions/24218783/javascript-canvas-pixel-manipulation
 
-// Provides a new canvas containing [img] where
-// all pixels having a hue less than [tolerance] 
-// distant from [tgtHue] will be replaced by [newHue]
-function shiftHue(img, tgtHue, newHue, tolerance) {
-    // normalize inputs
-    var normalizedTargetHue = tgtHue / 360;
-    var normalizedNewHue = newHue / 360;
-    var normalizedTolerance = tolerance / 360;
-    // create output canvas
-    var cv2 = document.createElement('canvas');
-    cv2.width = img.width;
-    cv2.height = img.height;
-    var ctx2 = cv2.getContext('2d');
-    ctx2.drawImage(img, 0, 0);
+// Provides a new canvas containing [img] with adjhust HSV
+function shiftHue(canvas, dh, ds, dv) {
+    var ctx2 = canvas.getContext('2d');
     // get canvad img data 
-    var imgData = ctx2.getImageData(0, 0, img.width, img.height);
+    var imgData = ctx2.getImageData(0, 0, canvas.width, canvas.height);
     var data = imgData.data;
-    var lastIndex = img.width * img.height * 4;
+    var lastIndex = canvas.width * canvas.height * 4;
     var rgb = [0, 0, 0];
     var hsv = [0.0, 0.0, 0.0];
     // loop on all pixels
@@ -28,20 +17,98 @@ function shiftHue(img, tgtHue, newHue, tolerance) {
         var b = data[i + 2];
         // convert to hsv
         RGB2HSV(r, g, b, hsv);
-        // change color if hue near enough from tgtHue
-        var hueDelta = hsv[0] - normalizedTargetHue;
-        if (Math.abs(hueDelta) < normalizedTolerance) {
-            // adjust hue
-            // ??? or do not add the delta ???
-            hsv[0] = normalizedNewHue  //+ hueDelta;
-            // convert back to rgb
-            hsvToRgb(rgb, hsv);
-            // store
-            data[i] = rgb[0];
-            data[i + 1] = rgb[1];
-            data[i + 2] = rgb[2];
-        }
+        // adjust HSV
+        hsv[0] = (hsv[0] + dh) % 1;
+        hsv[1] = hsv[1] + ds;
+        hsv[2] = hsv[2] + dv;
+        // convert back to rgb
+        hsvToRgb(rgb, hsv);
+        // store
+        data[i] = rgb[0];
+        data[i + 1] = rgb[1];
+        data[i + 2] = rgb[2];
     }
     ctx2.putImageData(imgData, 0, 0);
-    return cv2;
+}
+
+//      UTILITIES
+
+// ------------------------------------------
+// converts r,b,b to h,s,v
+//  r,g,b are [0-255]
+//  h,s,v are [0-1] X [0-1] X [0-255]
+// Source :  Lol Software :  http://lolengine.net/blog/2013/01/13/fast-rgb-to-hsv
+function RGB2HSV(r, g, b, hsv) {
+    var K = 0.0,
+        swap = 0;
+    if (g < b) {
+        swap = g;
+        g = b;
+        b = swap;
+        K = -1.0;
+    }
+    if (r < g) {
+        swap = r;
+        r = g;
+        g = swap;
+        K = -2.0 / 6.0 - K;
+    }
+    var chroma = r - (g < b ? g : b);
+    hsv[0] = Math.abs(K + (g - b) / (6.0 * chroma + 1e-20));
+    hsv[1] = chroma / (r + 1e-20);
+    hsv[2] = r;
+}
+
+// ------------------------------------------
+//  r,g,b are [0-255]
+//  h,s,v are [0-1] X [0-1] X [0-255]
+// Source :  Lol Software :  https://github.com/kobalicek/rgbhsv
+function hsvToRgb(rgb, hsv) {
+    var h = hsv[0];
+    var s = hsv[1];
+    var v = hsv[2];
+
+    // The HUE should be at range [0, 1], convert 1.0 to 0.0 if needed.
+    if (h >= 1.0) h -= 1.0;
+
+    h *= 6.0;
+    var index = Math.floor(h);
+
+    var f = h - index;
+    var p = v * (1.0 - s);
+    var q = v * (1.0 - s * f);
+    var t = v * (1.0 - s * (1.0 - f));
+
+    switch (index) {
+        case 0:
+            rgb[0] = v;
+            rgb[1] = t;
+            rgb[2] = p;
+            return;
+        case 1:
+            rgb[0] = q;
+            rgb[1] = v;
+            rgb[2] = p;
+            return;
+        case 2:
+            rgb[0] = p;
+            rgb[1] = v;
+            rgb[2] = t;
+            return;
+        case 3:
+            rgb[0] = p;
+            rgb[1] = q;
+            rgb[2] = v;
+            return;
+        case 4:
+            rgb[0] = t;
+            rgb[1] = p;
+            rgb[2] = v;
+            return;
+        case 5:
+            rgb[0] = v;
+            rgb[1] = p;
+            rgb[2] = q;
+            return;
+    }
 }

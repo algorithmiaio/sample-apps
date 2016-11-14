@@ -78,16 +78,17 @@ function generateStylizedImage(img, filterName) {
         statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh Oh! Something went wrong: ' + output.error.message + ' </div>';
         taskError();
       } else {
-        console.log("got output", output.result);
-
         if(output.result.savePaths.length == 1) {
           var url = output.result.savePaths[0];
           url = url.replace("s3+turing://", "https://s3.amazonaws.com/");
+          console.log("got output", url);
 
           // Display stylized image
           displayImg(url);
 
           finishTask();
+        } else {
+          console.error("Unexpected result from DeepFilter", output);
         }
 
       }
@@ -95,12 +96,38 @@ function generateStylizedImage(img, filterName) {
 }
 
 function displayImg(url) {
-  // Update image and links
+  Algorithmia.client(Algorithmia.api_key)
+    .algo("algo://util/data2base64")
+    .pipe(url)
+    .then(function(output) {
+      var base64 = "data:image/jpeg;base64," + output.result.replace(/\n/g,"");
+      displayImgBase64(url, base64);
+    });
+}
+
+function displayImgBase64(url, base64) {
+  console.log("got base 64");
+
+  // Update download link
   document.getElementById("resultLink").href = url;
-  var resultImg = document.getElementById("resultImg")
+
+  // Update stylized image
+  var img = document.getElementById("resultImg")
   // resultImg.crossOrigin = ""; // necessary for canvas to access image data
-  resultImg.src = url;
-  resultImg.classList.remove("faded");
+  img.setAttribute("src", base64);
+  img.classList.remove("faded");
+
+  // Update stylized canvas
+  var canvas = document.getElementById("resultCanvas");
+  canvas.width = img.width;
+  canvas.height = img.height;
+  var ctx = canvas.getContext("2d");
+  var image = new Image();
+  image.onload = function() {
+    ctx.drawImage(image, 0, 0, img.width, img.height);
+    canvas.classList.remove("faded");
+  };
+  image.src = base64;
 
   // Show results if not already showing
   var resultsDiv = document.getElementById("results");
@@ -117,6 +144,8 @@ function analyzeDefault(img) {
 function startTask() {
   numTasks++;
   document.getElementById("overlay").classList.remove("hidden");
+  document.getElementById("resultImg").classList.add("faded");
+  document.getElementById("resultCanvas").classList.add("faded");
 }
 
 function finishTask() {

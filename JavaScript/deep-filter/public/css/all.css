@@ -236,7 +236,6 @@ a:hover, a:focus{
   max-width: 100%;
   min-height: auto;
   max-height: 80vh;
-  background-color: red;
 }
 #resultCanvas {
   max-width: 100%;
@@ -247,7 +246,6 @@ a:hover, a:focus{
   // top: 0;
   // left: 0;
   // right: 0;
-  background-color: green;
 }
 
 /* Next/Back icons */

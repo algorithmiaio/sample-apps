@@ -5,10 +5,12 @@
 
 // Filter selection
 var defaultFilters = [
-  "", "smooth_ride", "space_pizza", "purple_pond", "sunday", "alien_goggles"
+  "none", "smooth_ride", "space_pizza", "purple_pond", "sunday", "alien_goggles"
 ];
 var currentFilter = "smooth_ride";
 
+var resultImg = document.getElementById("resultImg")
+var resultCanvas = document.getElementById("resultCanvas");
 
 window.Algorithmia = window.Algorithmia || {};
 Algorithmia.api_key = "simZfwrSvLraXpTAgJpIL53Ugji1";
@@ -38,6 +40,19 @@ function changeStyle(event, b) {
     updateStyleButtons();
     callAlgorithm();
   }
+}
+
+function prevStyle() {
+  var index = defaultFilters.indexOf(currentFilter);
+  currentFilter = defaultFilters[(index + 5) % defaultFilters.length];
+  updateStyleButtons();
+  callAlgorithm();
+}
+function nextStyle() {
+  var index = defaultFilters.indexOf(currentFilter);
+  currentFilter = defaultFilters[(index + 1) % defaultFilters.length];
+  updateStyleButtons();
+  callAlgorithm();
 }
 
 function callAlgorithm() {
@@ -116,20 +131,17 @@ function displayImgBase64(url, base64) {
   document.getElementById("resultLink").href = url;
 
   // Update stylized image
-  var img = document.getElementById("resultImg")
   // resultImg.crossOrigin = ""; // necessary for canvas to access image data
-  img.setAttribute("src", base64);
-  img.classList.remove("faded");
+  resultImg.setAttribute("src", base64);
 
   // Update stylized canvas
-  var canvas = document.getElementById("resultCanvas");
-  var ctx = canvas.getContext("2d");
-  img.onload = function() {
-    // console.log("copying to canvas " + img.height + " " + img.width);
-    canvas.width = img.width;
-    canvas.height = img.height;
-    ctx.drawImage(img, 0, 0, img.width, img.height);
-    canvas.classList.remove("faded");
+  var ctx = resultCanvas.getContext("2d");
+  resultImg.onload = function() {
+    resultCanvas.width = resultImg.width;
+    resultCanvas.height = resultImg.height;
+    // ctx.drawImage(img, 0, 0, resultImg.width, resultImg.height);
+    resetColors();
+    resultCanvas.classList.remove("faded");
   };
 
   // Show results if not already showing

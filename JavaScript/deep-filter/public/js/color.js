@@ -15,16 +15,22 @@ function cycleColors() {
         job = 0;
     } else {
         job = setInterval(function() {
-            adjustH.value = (Number(adjustH.value) + 1) % 100;
+            adjustH.value = (Number(adjustH.value) + 1) % 200;
             updateColors();
         }, 60);
     }
 }
 
 function updateColors() {
-    var h = (adjustH.value - 50) / 100;
-    var s = (adjustS.value - 50) / 50;
+    var h = (adjustH.value - 100) / 200;
+    var s = (adjustS.value - 100) / 200;
     shiftHue(img, canvas, h, s, 0)
+}
+
+function resetColors() {
+    adjustH.value = 100;
+    adjustS.value = 100;
+    updateColors();
 }
 
 // Provides a new canvas containing [img] with adjhust HSV
@@ -48,10 +54,9 @@ function shiftHue(img, canvas, dh, ds, dv) {
         RGB2HSV(r, g, b, hsv);
         // adjust HSV
         hsv[0] = (hsv[0] + dh + 1) % 1;
-        hsv[1] = hsv[1] + ds;
+        // hsv[1] = hsv[1] + ds;
+        hsv[1] = Math.max(0,Math.min(1, hsv[1] + ds));
         hsv[2] = hsv[2] + dv;
-        // hsv[1] = Math.max(0,Math.min(1, hsv[1] + ds));
-        // hsv[2] = Math.max(0,Math.min(1, hsv[2] + dv));
         // convert back to rgb
         hsvToRgb(rgb, hsv);
         // store

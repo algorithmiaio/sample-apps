@@ -26,6 +26,8 @@
 #resultImg {
 	margin-bottom: -100%;
 	opacity: 0;
+	z-index: 100;
+	visibility: hidden;
 }
 
 .faded {
@@ -78,4 +80,8 @@ code {cursor: default;}
 
 #downloadLinks {
   margin-top: 15px;
+}
+
+.style-thumb {
+	cursor: pointer;
 }

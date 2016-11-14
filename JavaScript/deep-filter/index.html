@@ -145,16 +145,16 @@
 	<!-- RESULTS -->
 	<div class="container whitespace tablet-whitespace" id="results">
 		<div class="results-img">
-			<span class="glyphicon glyphicon-chevron-left"></span>
-			<img id="resultImg" src="public/images/alley/smooth_ride.jpg" class="has-subcontent faded">
+			<span class="glyphicon glyphicon-chevron-left" onclick="prevStyle()"></span>
+			<img id="resultImg" src="public/images/alley/smooth_ride.jpg" class="has-subcontent">
 			<canvas id="resultCanvas" class="has-subcontent faded"></canvas>
-			<span class="glyphicon glyphicon-chevron-right"></span>
+			<span class="glyphicon glyphicon-chevron-right" onclick="nextStyle()"></span>
 		</div>
 		<div class="row img-functions">
 			<div class="col-md-11 col-lg-8 col-centered">
 				<div>
-					<label>Hue</label><input type="range" id="adjustH" min="0" max="100" value="50">
-					<label>Saturation</label><input type="range" id="adjustS" min="0" max="100" value="50">
+					<label>Hue</label><input type="range" id="adjustH" min="0" max="200" value="100">
+					<label>Saturation</label><input type="range" id="adjustS" min="0" max="200" value="100">
 					<button class="btn btn-default" onclick="cycleColors()">Cycle Colors</button>
 				</div>
 				<div class="hidden" id="downloadLinks">

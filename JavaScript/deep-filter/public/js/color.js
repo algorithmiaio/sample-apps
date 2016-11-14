@@ -23,7 +23,7 @@ function cycleColors() {
 
 function updateColors() {
     var h = (adjustH.value - 100) / 200;
-    var s = (adjustS.value - 100) / 200;
+    var s = (adjustS.value) / 100;
     shiftHue(img, canvas, h, s, 0)
 }
 
@@ -34,6 +34,9 @@ function resetColors() {
 }
 
 // Provides a new canvas containing [img] with adjhust HSV
+// dh is hue offset in 0..1
+// ds is saturation multiple
+// dv is value offset
 function shiftHue(img, canvas, dh, ds, dv) {
     // console.log("shitfHue(h=" + dh + ", s=" + ds);
     var ctx2 = canvas.getContext('2d');
@@ -55,7 +58,7 @@ function shiftHue(img, canvas, dh, ds, dv) {
         // adjust HSV
         hsv[0] = (hsv[0] + dh + 1) % 1;
         // hsv[1] = hsv[1] + ds;
-        hsv[1] = Math.max(0,Math.min(1, hsv[1] + ds));
+        hsv[1] = Math.max(0,Math.min(1, hsv[1] * ds));
         hsv[2] = hsv[2] + dv;
         // convert back to rgb
         hsvToRgb(rgb, hsv);

@@ -92,13 +92,13 @@
 				<div class="col-xs-12 col-md-7 mobile-no-padding">
 					<div class="card">
 						<h3 class="has-subcontent">Try it out</h3>
-						<div id="status-label"></div>
 						<span class="card-directions">Paste an image URL or 
 							<form class="primary-text dropzone" id="file-dropzone" action="javascript:;">
 								<span class="dz-message" data-dz-message><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> UPLOAD AN IMAGE</span>
 								<!-- <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> UPLOAD AN IMAGE -->
 							</form>
 						</span>
+						<div id="status-label"></div>
 						<form onsubmit="callAlgorithm(); return false;" class="filter-form mobile-btn-right">
 							<input type="text" class="form-control" id="imgUrl" placeholder="https://unsplash.com/image.jpg">
 							<button class="btn btn-purple" type="button" onclick="callAlgorithm()">FILTER</button>
@@ -139,8 +139,6 @@
 			</div>
 		</div>
 	</div>
-
-
 
 	<!-- RESULTS -->
 	<div class="container results-section" id="results">

@@ -148,6 +148,9 @@ function displayImgBase64(url, base64) {
   var resultsDiv = document.getElementById("results");
   resultsDiv.style.display = "block";
   resultsDiv.style.height = "";
+  var resultsThumbsDiv = document.getElementById("results-thumbnails");
+  resultsThumbsDiv.style.display = "block";
+  resultsThumbsDiv.style.height = "";
   document.getElementById("downloadLinks").classList.remove("hidden");
 }
 

@@ -9,18 +9,24 @@
 		max-width: 100%;
 	}
 	.mb {
-		margin-top:5px;
+		margin-top: 5px;
 	}
 }
 
 .sample-img {
-	max-width:100%;
+	max-width: 100%;
+}
+
+#results {
+	transition: height 2s;
+	overflow: hidden;
+	display: none;
 }
 
 .faded {
 	opacity: 0.5;
 	filter: blur(3px);
-	transition: opacity 2s;
+	// transition: opacity 2s;
 	// transition: filter 2s;
 }
 

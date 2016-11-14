@@ -84,18 +84,30 @@ function generateStylizedImage(img, filterName) {
         if(output.result.savePaths.length == 1) {
           var url = output.result.savePaths[0];
           url = url.replace("s3+turing://", "https://s3.amazonaws.com/");
+
           // Display stylized image
-          document.getElementById("downloadLinks").classList.remove("hidden");
-          document.getElementById("resultLink").href = url;
-          var resultImg = document.getElementById("resultImg")
-          resultImg.src = url;
-          resultImg.classList.remove("faded");
+          displayImg(url);
 
           finishTask();
         }
 
       }
     });
+}
+
+function displayImg(url) {
+  // Update image and links
+  document.getElementById("resultLink").href = url;
+  var resultImg = document.getElementById("resultImg")
+  // resultImg.crossOrigin = ""; // necessary for canvas to access image data
+  resultImg.src = url;
+  resultImg.classList.remove("faded");
+
+  // Show results if not already showing
+  var resultsDiv = document.getElementById("results");
+  resultsDiv.style.display = "block";
+  resultsDiv.style.height = "";
+  document.getElementById("downloadLinks").classList.remove("hidden");
 }
 
 function analyzeDefault(img) {

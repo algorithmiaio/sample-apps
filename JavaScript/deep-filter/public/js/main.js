@@ -122,17 +122,15 @@ function displayImgBase64(url, base64) {
   img.classList.remove("faded");
 
   // Update stylized canvas
-  console.log("copying to canvas " + img.height + " " + img.width);
   var canvas = document.getElementById("resultCanvas");
-  canvas.width = img.width;
-  canvas.height = img.height;
   var ctx = canvas.getContext("2d");
-  var image = new Image();
-  image.onload = function() {
-    ctx.drawImage(image, 0, 0, img.width, img.height);
+  img.onload = function() {
+    console.log("copying to canvas " + img.height + " " + img.width);
+    canvas.width = img.width;
+    canvas.height = img.height;
+    ctx.drawImage(img, 0, 0, img.width, img.height);
     canvas.classList.remove("faded");
   };
-  image.src = base64;
 
   // Show results if not already showing
   var resultsDiv = document.getElementById("results");

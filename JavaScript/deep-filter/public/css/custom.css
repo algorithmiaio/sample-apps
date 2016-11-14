@@ -23,6 +23,11 @@
 	display: none;
 }
 
+#resultImg {
+	margin-bottom: -100%;
+	opacity: 0;
+}
+
 .faded {
 	opacity: 0.5;
 	filter: blur(3px);

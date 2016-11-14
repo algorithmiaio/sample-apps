@@ -1,22 +1,26 @@
 // http://stackoverflow.com/questions/24218783/javascript-canvas-pixel-manipulation
 
 var job = 0;
+var hueOffset = 0;
 function cycleColors() {
     if(job) {
         clearInterval(job);
         job = 0;
     } else {
         job = setInterval(function(){
+            var img = document.getElementById("resultImg");
             var canvas = document.getElementById("resultCanvas");
-            shiftHue(canvas, 0.01, 0, 0);
+            shiftHue(img, canvas, hueOffset, 0, 0);
+            hueOffset = (hueOffset + 0.01) % 1;
         }, 100);
     }
 }
 
 // Provides a new canvas containing [img] with adjhust HSV
-function shiftHue(canvas, dh, ds, dv) {
+function shiftHue(img, canvas, dh, ds, dv) {
     var ctx2 = canvas.getContext('2d');
-    // get canvad img data 
+    ctx2.drawImage(img, 0, 0, img.width, img.height);
+    // get canvad img data
     var imgData = ctx2.getImageData(0, 0, canvas.width, canvas.height);
     var data = imgData.data;
     var lastIndex = canvas.width * canvas.height * 4;

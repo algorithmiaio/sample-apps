@@ -208,7 +208,7 @@ a:hover, a:focus{
 
 /* HERO */
 .hero-background {
-  background-image: url(../images/alley/smooth_ride.jpg);
+  background-image: url(../images/needle1.jpg);
   background-size: cover;
   background-position: 50%;
 }
@@ -351,7 +351,7 @@ a > code:hover{color:#9963ff;}
 
   /* HERO */
   .hero-background {background-position: 10%;}
-  .hero-subheader  {margin-bottom: 32px;}
+  /*.hero-subheader  {margin-bottom: 32px;}*/
   .form-control    {margin-bottom: 12px;}
   .filter-form {
     /* vertical center */

@@ -51,17 +51,21 @@ function callAlgorithm() {
   img = img.trim();
 
   if(typeof(img) == "string" && img !== "") {
-    startTask();
-
-    // Call deep filter
-    generateStylizedImage(img, currentFilter);
+    if(currentFilter == "none") {
+      // Display original image
+      displayImg(img)
+    } else {
+      // Call deep filter
+      generateStylizedImage(img, currentFilter);
+    }
   }
 
 };
 
 function generateStylizedImage(img, filterName) {
-  var uuid = Math.random().toString(36).substring(7);
+  startTask();
 
+  var uuid = Math.random().toString(36).substring(7);
   var algoInput = {
     "images": [img],
     "savePaths": ["s3+turing://algorithmia-demos/deepstyle/" +  uuid + ".jpg"],
@@ -118,6 +122,7 @@ function displayImgBase64(url, base64) {
   img.classList.remove("faded");
 
   // Update stylized canvas
+  console.log("copying to canvas " + img.height + " " + img.width);
   var canvas = document.getElementById("resultCanvas");
   canvas.width = img.width;
   canvas.height = img.height;

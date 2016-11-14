@@ -14,6 +14,7 @@ window.Algorithmia = window.Algorithmia || {};
 Algorithmia.api_key = "simZfwrSvLraXpTAgJpIL53Ugji1";
 var numTasks = 0;
 
+// Update the style thumbnail view state
 function updateStyleButtons() {
   var styleButtons = document.getElementsByClassName("style-thumb");
   for(var i = 0; i < styleButtons.length; i++) {
@@ -28,12 +29,14 @@ function updateStyleButtons() {
   }
 }
 
+// Called when a user clicks on a style thumbnail
 function changeStyle(event, b) {
   newStyle = this.getAttribute("data-style");
   if(newStyle !== currentFilter) {
     console.log("Changing style to " + newStyle);
     currentFilter = newStyle;
     updateStyleButtons();
+    callAlgorithm();
   }
 }
 
@@ -55,10 +58,6 @@ function callAlgorithm() {
   }
 
 };
-
-function setStyle(style) {
-  currentFilter = style;
-}
 
 function generateStylizedImage(img, filterName) {
   var uuid = Math.random().toString(36).substring(7);

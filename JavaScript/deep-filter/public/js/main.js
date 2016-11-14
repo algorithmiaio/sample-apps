@@ -125,7 +125,7 @@ function displayImgBase64(url, base64) {
   var canvas = document.getElementById("resultCanvas");
   var ctx = canvas.getContext("2d");
   img.onload = function() {
-    console.log("copying to canvas " + img.height + " " + img.width);
+    // console.log("copying to canvas " + img.height + " " + img.width);
     canvas.width = img.width;
     canvas.height = img.height;
     ctx.drawImage(img, 0, 0, img.width, img.height);

@@ -1,23 +1,35 @@
 // http://stackoverflow.com/questions/24218783/javascript-canvas-pixel-manipulation
 
+// Init
+var img = document.getElementById("resultImg");
+var canvas = document.getElementById("resultCanvas");
+var adjustH = document.getElementById("adjustH");
+var adjustS = document.getElementById("adjustS");
+adjustH.oninput = updateColors;
+adjustS.oninput = updateColors;
+
 var job = 0;
-var hueOffset = 0;
 function cycleColors() {
     if(job) {
         clearInterval(job);
         job = 0;
     } else {
-        job = setInterval(function(){
-            var img = document.getElementById("resultImg");
-            var canvas = document.getElementById("resultCanvas");
-            shiftHue(img, canvas, hueOffset, 0, 0);
-            hueOffset = (hueOffset + 0.01) % 1;
+        job = setInterval(function() {
+            adjustH.value = (Number(adjustH.value) + 1) % 100;
+            updateColors();
         }, 60);
     }
 }
 
+function updateColors() {
+    var h = (adjustH.value - 50) / 100;
+    var s = (adjustS.value - 50) / 50;
+    shiftHue(img, canvas, h, s, 0)
+}
+
 // Provides a new canvas containing [img] with adjhust HSV
 function shiftHue(img, canvas, dh, ds, dv) {
+    // console.log("shitfHue(h=" + dh + ", s=" + ds);
     var ctx2 = canvas.getContext('2d');
     ctx2.drawImage(img, 0, 0, img.width, img.height);
     // get canvad img data
@@ -35,9 +47,11 @@ function shiftHue(img, canvas, dh, ds, dv) {
         // convert to hsv
         RGB2HSV(r, g, b, hsv);
         // adjust HSV
-        hsv[0] = (hsv[0] + dh) % 1;
+        hsv[0] = (hsv[0] + dh + 1) % 1;
         hsv[1] = hsv[1] + ds;
         hsv[2] = hsv[2] + dv;
+        // hsv[1] = Math.max(0,Math.min(1, hsv[1] + ds));
+        // hsv[2] = Math.max(0,Math.min(1, hsv[2] + dv));
         // convert back to rgb
         hsvToRgb(rgb, hsv);
         // store

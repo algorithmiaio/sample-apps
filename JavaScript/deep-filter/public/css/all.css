@@ -224,7 +224,7 @@ a:hover, a:focus{
 
 /* HERO */
 .hero-background {
-  background-image: url(../images/seattleFaded.jpg);
+  background-image: url(../images/seattle.jpg);
   background-size: cover;
   background-position: 50%;
 }
@@ -302,7 +302,7 @@ a:hover, a:focus{
 /* Styling the selected results img thumbnail */
 .selected {
   background-image: url(../images/icon_check.svg);
-  background-position: center 40%;
+  background-position: center 30%;
   background-size: 64px 64px;
   background-repeat: no-repeat;
 }
@@ -340,10 +340,10 @@ a > code:hover{color:#9963ff;}
 
   .thumbnails .thumb:nth-child(3n+1) {clear: left;}
 
-  .selected {
+/*  .selected {
     background-position: center 30%;
     background-size: 64px 64px;
-  }
+  }*/
 
   /* FEATURES */
   #feature-row {}
@@ -361,6 +361,12 @@ a > code:hover{color:#9963ff;}
   .navbar-brand > img {
     height: 45px;
     width: 200px;
+  }
+
+  .hero-background {
+    background-image: url(../images/seattleMobile.jpg);
+    background-size: cover;
+    background-position: 50%;
   }
 
   /* reduce large header */
@@ -403,10 +409,10 @@ a > code:hover{color:#9963ff;}
   /* Fix img sizing */
   .thumbnails {width: 100%;}
 
-  .selected {
+/*  .selected {
     background-position: center 30%;
     background-size: 32px 32px;
-  }
+  }*/
 
   .thumbnails .thumb:nth-child(3n+1) {clear: none;}
 

@@ -215,12 +215,12 @@ function initDropzone() {
   dropzone.on("processing", function(file) {
     var statusLabel = document.getElementById("status-label")
     statusLabel.innerHTML = "";
-    startTask();
+    // startTask();
 
     var reader = new FileReader();
     reader.addEventListener("load", function () {
       console.log("Calling algorithm with uploaded image.");
-      colorify(reader.result);
+      generateStylizedImage(reader.result, currentFilter);
       dropzone.removeFile(file);
     }, false);
     reader.readAsDataURL(file);

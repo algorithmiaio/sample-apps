@@ -177,9 +177,13 @@ a:hover, a:focus{
 .btn-edit {
   font-size: 12px;
   padding: 8px 12px;
-  border: none;
   float: right;
 }
+.btn-edit:focus {
+  background-color: #fff;
+  color: #5000BE;
+}
+
 #img-options-btn {
 
 }
@@ -286,10 +290,11 @@ a:hover, a:focus{
 /* RESULTS THUMBNAILS */
 .thumbnails {
   padding-top: 32px;
-  width: 75%;
+  width: 50%;
   text-align: center;
   margin: 0 auto;
 }
+.thumbnails .thumb:nth-child(3n+1) {clear: left;}
 .thumb     {height: 100%; margin-bottom: 24px;}
 .thumb img {width: 100%;}
 .thumb p   {text-align: left;}
@@ -388,6 +393,7 @@ a > code:hover{color:#9963ff;}
   /* SAMPLE IMGS */
   .sample-center {text-align: center;}
   .sample-img {padding-bottom: 24px;}
+
   /* FEATURES */
   .feature    {padding-bottom: 64px;}
   #feature-row .feature:last-of-type {padding-bottom: 0;}
@@ -400,5 +406,10 @@ a > code:hover{color:#9963ff;}
     background-size: 64px 64px;
     background-repeat: no-repeat;
   }
+
+  .thumbnails .thumb:nth-child(3n+1) {clear: none;}
+
+  .thumbnails .thumb:nth-child(3) {clear: left;}
+  .thumbnails .thumb:nth-child(5) {clear: left;}
 }
 

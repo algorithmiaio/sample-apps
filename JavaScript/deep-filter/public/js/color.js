@@ -24,7 +24,7 @@ function cycleColors() {
 function updateColors() {
     var h = (adjustH.value - 100) / 200;
     var s = (adjustS.value) / 100;
-    shiftHue(img, canvas, h, s, 0)
+    shiftHue(img, canvas, h, s, 0);
 }
 
 function resetColors() {

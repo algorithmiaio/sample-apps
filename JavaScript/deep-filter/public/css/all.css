@@ -258,8 +258,6 @@ a:hover, a:focus{
 }
 .results-section {
   max-width: 100%;
-  min-height: auto;
-  max-height: 90vh;
 }
 #resultCanvas {
   max-height: 60vh;

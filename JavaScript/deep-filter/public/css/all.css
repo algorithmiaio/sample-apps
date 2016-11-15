@@ -254,6 +254,7 @@ a:hover, a:focus{
 }
 .results-section {
   max-width: 100%;
+  padding-bottom: 12px;
 }
 #resultCanvas {
   max-height: 60vh;
@@ -274,14 +275,16 @@ a:hover, a:focus{
 
 /* Results img functions */
 .img-functions {padding-bottom: 8px;}
+.edit-functions {text-align: center;}
 #downloadLinks {display: inline-block;}
 .share     {float: right;}
 .share img {width: 24px; margin-right: 12px;}
 
+.btn-options-row {text-align: right;}
 /* show/hide img options */
-.edit-btn {float: right;}
+.edit-btn    {}
 #img-options {display: none;}
-.show {display: block;}
+.show        {display: block;}
 
 /* RESULTS THUMBNAILS */
 .thumbnails {

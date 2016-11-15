@@ -148,12 +148,14 @@
 			<canvas id="resultCanvas" class="faded"></canvas>
 			<span class="glyphicon glyphicon-chevron-right" onclick="nextStyle()"></span>
 		</div>
-		<button onclick="showImgOptions()" class="btn btn-purple-secondary btn-edit" id="img-options-btn">IMAGE OPTIONS</button>
+		<div class="row options-btn-row">
+			<button onclick="showImgOptions()" class="btn btn-purple-secondary btn-edit" id="img-options-btn">IMAGE OPTIONS</button>
+		</div>
 		<div id="img-options">
 			<div class="row img-functions">
 				<div class="col-md-11 col-lg-8 col-centered">
 					<div class="hidden" id="downloadLinks">
-						<a id="resultLink" href="#" onclick="ga('send', 'event', 'colorized', 'download');" download="colorized.png"><span class="glyphicon glyphicon-download" aria-hidden="true" class="download"></span> DOWNLOAD</a>
+						<a id="resultLink" href="#" onclick="ga('send', 'event', 'colorized', 'download');" download="colorized.png"><span class="glyphicon glyphicon-download" aria-hidden="true" class="download"></span> DOWNLOAD IMAGE</a>
 					</div>
 					<!-- <span class="download"><a href=""><span class="glyphicon glyphicon-download" aria-hidden="true"></span> DOWNLOAD</a></span> -->
 					<!-- <span class="share">
@@ -162,7 +164,7 @@
 					</span> -->
 				</div>
 			</div>
-			<div class="row img-functions">
+			<div class="row img-functions edit-functions">
 				<div class="col-md-11 col-lg-8 col-centered">
 					<div>
 						<label>Hue</label><input type="range" id="adjustH" min="0" max="200" value="100" class="edit-input">

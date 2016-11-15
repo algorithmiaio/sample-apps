@@ -154,6 +154,13 @@ function displayImgBase64(url, base64) {
   document.getElementById("downloadLinks").classList.remove("hidden");
 }
 
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function showImgOptions() {
+    document.getElementById("img-options").classList.toggle("show");
+    document.getElementById("img-options-btn").classList.toggle("btn-selected");
+}
+
 function analyzeDefault(img) {
 	document.getElementById("imgUrl").value = img;
 	callAlgorithm();

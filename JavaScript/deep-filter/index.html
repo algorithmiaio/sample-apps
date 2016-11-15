@@ -110,13 +110,13 @@
 						<h4 class="has-subcontent">Or filter a sample image</h4>
 						<div class="row">
 							<div class="col-xs-6 col-sm-3 col-md-3 sample-center">
-								<a onclick="analyzeDefault('https://images.unsplash.com/reserve/E5CwLOxQSFimIXJurfpq_IMG_6424%20(1).jpg?w=1600&ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=6c9b9301641b53cba1d1d4084726ab04')"><img src="https://images.unsplash.com/reserve/E5CwLOxQSFimIXJurfpq_IMG_6424%20(1).jpg?w=128" class="sample-img"></a>
+								<a onclick="analyzeDefault('https://images.unsplash.com/photo-1479088360436-ef9dbade3214?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=b37ce33a6c3b8540e2386b7feceb02ef')"><img src="public/images/sample01.jpeg" class="sample-img"></a>
 							</div>
 							<div class="col-xs-6 col-sm-3 col-md-3 sample-center">
-								<a onclick="analyzeDefault('https://images.unsplash.com/photo-1454991727061-be514eae86f7?w=1600&ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=72e84205ce9da3b4c9e689289faba164')"><img src="https://images.unsplash.com/photo-1454991727061-be514eae86f7?w=128" class="sample-img"></a>
+								<a onclick="analyzeDefault('https://images.unsplash.com/photo-1445462657202-a0893228a1e1?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=063dd4946608a5570bd835d22e977acc')"><img src="public/images/sample02.jpeg" class="sample-img"></a>
 							</div>
 							<div class="col-xs-6 col-sm-3 col-md-3 sample-center">
-								<a onclick="analyzeDefault('https://images.unsplash.com/photo-1468648746436-83fc69277650?w=1600&ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=26220f195f83dfd428c67aae940914fd')"><img src="https://images.unsplash.com/photo-1468648746436-83fc69277650?w=128" class="sample-img"></a>
+								<a onclick="analyzeDefault('https://images.unsplash.com/photo-1430026996702-608b84ce9281?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=bc612c816d9b222124db4eb20ee53c6c')"><img src="public/images/sample03.jpeg" class="sample-img"></a>
 							</div>
 							<div class="col-xs-6 col-sm-3 col-md-3 sample-center">
 								<a onclick="analyzeDefault('https://images.unsplash.com/photo-1474871256005-cbf50b902421?w=1600&ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=44cdc3468182f5c4fb2b36ae0860cf5d')"><img src="https://images.unsplash.com/photo-1474871256005-cbf50b902421?w=128" class="sample-img"></a>
@@ -148,26 +148,29 @@
 			<canvas id="resultCanvas" class="faded"></canvas>
 			<span class="glyphicon glyphicon-chevron-right" onclick="nextStyle()"></span>
 		</div>
-		<div class="row img-functions">
-			<div class="col-md-11 col-lg-8 col-centered">
-				<div class="hidden" id="downloadLinks">
-					<a id="resultLink" href="#" onclick="ga('send', 'event', 'colorized', 'download');" download="colorized.png"><span class="glyphicon glyphicon-download" aria-hidden="true" class="download"></span> DOWNLOAD</a>
+		<button onclick="showImgOptions()" class="btn btn-purple-secondary btn-edit" id="img-options-btn">IMAGE OPTIONS</button>
+		<div id="img-options">
+			<div class="row img-functions">
+				<div class="col-md-11 col-lg-8 col-centered">
+					<div class="hidden" id="downloadLinks">
+						<a id="resultLink" href="#" onclick="ga('send', 'event', 'colorized', 'download');" download="colorized.png"><span class="glyphicon glyphicon-download" aria-hidden="true" class="download"></span> DOWNLOAD</a>
+					</div>
+					<!-- <span class="download"><a href=""><span class="glyphicon glyphicon-download" aria-hidden="true"></span> DOWNLOAD</a></span> -->
+					<span class="share">
+						<a href=""><img src="public/images/facebook.svg"></a>
+						<a href=""><img src="public/images/twitter.svg"></a>
+					</span>
 				</div>
-				<!-- <span class="download"><a href=""><span class="glyphicon glyphicon-download" aria-hidden="true"></span> DOWNLOAD</a></span> -->
-				<span class="share">
-					<a href=""><img src="public/images/facebook.svg"></a>
-					<a href=""><img src="public/images/twitter.svg"></a>
-				</span>
 			</div>
-		</div>
-		<div class="row img-functions">
-			<div class="col-md-11 col-lg-8 col-centered">
-				<div>
-					<label>Hue</label><input type="range" id="adjustH" min="0" max="200" value="100">
-					<label>Saturation</label><input type="range" id="adjustS" min="0" max="200" value="100">
-					<!-- <button class="btn btn-default" onclick="cycleColors()">Cycle Colors</button> -->
-				</div>
+			<div class="row img-functions">
+				<div class="col-md-11 col-lg-8 col-centered">
+					<div>
+						<label>Hue</label><input type="range" id="adjustH" min="0" max="200" value="100" class="edit-input">
+						<label>Saturation</label><input type="range" id="adjustS" min="0" max="200" value="100" class="edit-input">
+						<button class="btn btn-purple-secondary" onclick="cycleColors()">Cycle Colors</button>
+					</div>
 
+				</div>
 			</div>
 		</div>
 	</div>

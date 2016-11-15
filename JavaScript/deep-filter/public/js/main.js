@@ -11,6 +11,7 @@ var currentFilter = "smooth_ride";
 
 var resultImg = document.getElementById("resultImg")
 var resultCanvas = document.getElementById("resultCanvas");
+var downloadLink = document.getElementById("resultLink");
 
 window.Algorithmia = window.Algorithmia || {};
 Algorithmia.api_key = "simZfwrSvLraXpTAgJpIL53Ugji1";
@@ -103,9 +104,10 @@ function generateStylizedImage(img, filterName) {
           console.log("got output", url);
 
           // Display stylized image
-          displayImg(url);
+          displayImg(url, function() {
+            finishTask();
+          });
 
-          finishTask();
         } else {
           console.error("Unexpected result from DeepFilter", output);
         }
@@ -114,21 +116,22 @@ function generateStylizedImage(img, filterName) {
     });
 }
 
-function displayImg(url) {
+function displayImg(url, cb) {
   Algorithmia.client(Algorithmia.api_key)
     .algo("algo://util/data2base64")
     .pipe(url)
     .then(function(output) {
       var base64 = "data:image/jpeg;base64," + output.result.replace(/\n/g,"");
-      displayImgBase64(url, base64);
+      displayImgBase64(url, base64, cb);
     });
 }
 
-function displayImgBase64(url, base64) {
+function displayImgBase64(url, base64, cb) {
   console.log("got base 64");
 
   // Update download link
-  document.getElementById("resultLink").href = url;
+  downloadLink.href = url;
+  // downloadLink.onclick = clickDownload;
 
   // Update stylized image
   // resultImg.crossOrigin = ""; // necessary for canvas to access image data
@@ -142,6 +145,12 @@ function displayImgBase64(url, base64) {
     // ctx.drawImage(img, 0, 0, resultImg.width, resultImg.height);
     resetColors();
     resultCanvas.classList.remove("faded");
+
+    // Scroll to image
+    resultCanvas.scrollIntoView();
+
+    // Done
+    if(cb) cb();
   };
 
   // Show results if not already showing
@@ -159,6 +168,18 @@ toggle between hiding and showing the dropdown content */
 function showImgOptions() {
     document.getElementById("img-options").classList.toggle("show");
     document.getElementById("img-options-btn").classList.toggle("btn-selected");
+}
+
+function clickDownload(e) {
+  var link = document.createElement("a");
+  link.download = "stylized.png";
+  link.href = canvas.toDataURL();
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  delete link;
+  e.preventDefault();
+  return false;
 }
 
 function analyzeDefault(img) {

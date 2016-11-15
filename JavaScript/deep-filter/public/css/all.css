@@ -48,7 +48,9 @@ h4 {
 h1 {
   font-size: 72px;
   /*color: #fff;*/
-  margin-bottom: 8px;
+  margin-bottom: 0px;
+  padding: 8px 0;
+  padding-left: 8px;
 }
 h2 {font-size: 48px;}
 h3 {font-weight: 700;}
@@ -60,7 +62,7 @@ h4 {font-size: 24px;}
 .has-subcontent  {margin-bottom: 8px;}
 .secondary       {color: rgba(0,0,0,.54);}
 .secondary-white {color: rgba(255,255,255,.7);}
-.hero-subheader  {margin-bottom: 64px;}
+.hero-subheader  {margin-bottom: 64px; padding: 0 8px 8px 8px;}
 
 p {
   font-family: 'Open Sans', sans-serif;
@@ -222,7 +224,7 @@ a:hover, a:focus{
   margin: 0 auto;
 }
 /* Make text more readable on background */
-.readable {background-color: rgba(255,255,255,.7);}
+.readable {background-color: rgba(255,255,255,.8);}
 
 /* HERO */
 .hero-background {
@@ -233,7 +235,7 @@ a:hover, a:focus{
 .card {
   padding: 24px;
   padding-bottom: 32px;
-  background-color: rgba(255,255,255,.8);
+  background-color: rgba(255,255,255,.85);
 }
 .sample-images {
   padding: 24px;
@@ -257,10 +259,10 @@ a:hover, a:focus{
 .results-section {
   max-width: 100%;
   min-height: auto;
-  max-height: 80vh;
+  max-height: 90vh;
 }
 #resultCanvas {
-  max-height: 50vh;
+  max-height: 60vh;
   max-width: 100%;
 }
 
@@ -290,11 +292,11 @@ a:hover, a:focus{
 /* RESULTS THUMBNAILS */
 .thumbnails {
   padding-top: 32px;
-  width: 50%;
+  /*width: 50%;*/
   text-align: center;
   margin: 0 auto;
 }
-.thumbnails .thumb:nth-child(3n+1) {clear: left;}
+/*.thumbnails .thumb:nth-child(3n+1) {clear: left;}*/
 .thumb     {height: 100%; margin-bottom: 24px;}
 .thumb img {width: 100%;}
 .thumb p   {text-align: left;}
@@ -340,8 +342,14 @@ a > code:hover{color:#9963ff;}
   .readable {background-color: rgba(255,255,255,.7);}
 
   /* SAMPLE IMGS */
-  .sample-img {padding-bottom: 24px;}
+  .sample-img {padding-bottom: 0;}
 
+  .thumbnails .thumb:nth-child(3n+1) {clear: left;}
+
+  .selected {
+    background-position: center 30%;
+    background-size: 64px 64px;
+  }
 
   /* FEATURES */
   #feature-row {}
@@ -392,7 +400,7 @@ a > code:hover{color:#9963ff;}
 
   /* SAMPLE IMGS */
   .sample-center {text-align: center;}
-  .sample-img {padding-bottom: 24px;}
+  .sample-img    {padding-bottom: 24px;}
 
   /* FEATURES */
   .feature    {padding-bottom: 64px;}
@@ -400,11 +408,10 @@ a > code:hover{color:#9963ff;}
 
   /* Fix img sizing */
   .thumbnails {width: 100%;}
-  #selected {
-    background-image: url(../images/icon_check.svg);
+
+  .selected {
     background-position: center 30%;
-    background-size: 64px 64px;
-    background-repeat: no-repeat;
+    background-size: 32px 32px;
   }
 
   .thumbnails .thumb:nth-child(3n+1) {clear: none;}

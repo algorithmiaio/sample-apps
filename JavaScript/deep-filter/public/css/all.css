@@ -156,10 +156,10 @@ a:hover, a:focus{
     background-color: #5000BE;
     transition: ease-in-out .3s;    
 }
-.btn-purple-secondary:focus {
+/*.btn-purple-secondary:focus {
     color: #FFF;
     background-color: #5000BE;
-}
+}*/
 
 .btn-green {
     color: #FFF;
@@ -181,17 +181,13 @@ a:hover, a:focus{
   padding: 8px 12px;
   float: right;
 }
-.btn-edit:focus {
-  background-color: #fff;
-  color: #5000BE;
-}
+/*.btn-edit:focus {
+  color: #FFF;
+}*/
 
-#img-options-btn {
-
-}
 .btn-selected {
   background-color: #5000BE;
-  color: #FFF;
+  color: #FFF!important;
 }
 
 /* When you need to align element on the right */

@@ -89,7 +89,7 @@ function generateStylizedImage(img, filterName) {
   };
 
   Algorithmia.client(Algorithmia.api_key)
-    .algo("algo://deeplearning/DeepFilter/0.3.2")
+    .algo("algo://deeplearning/DeepFilter/0.3.3")
     .pipe(algoInput)
     .then(function(output) {
       if(output.error) {

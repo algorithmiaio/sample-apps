@@ -13,6 +13,8 @@ var resultImg = document.getElementById("resultImg")
 var resultCanvas = document.getElementById("resultCanvas");
 var downloadLink = document.getElementById("resultLink");
 
+var currentImg = "";
+
 window.Algorithmia = window.Algorithmia || {};
 Algorithmia.api_key = "simZfwrSvLraXpTAgJpIL53Ugji1";
 var numTasks = 0;
@@ -47,13 +49,13 @@ function prevStyle() {
   var index = defaultFilters.indexOf(currentFilter);
   currentFilter = defaultFilters[(index + 5) % defaultFilters.length];
   updateStyleButtons();
-  callAlgorithm();
+  generateStylizedImage(currentImg, currentFilter);
 }
 function nextStyle() {
   var index = defaultFilters.indexOf(currentFilter);
   currentFilter = defaultFilters[(index + 1) % defaultFilters.length];
   updateStyleButtons();
-  callAlgorithm();
+  generateStylizedImage(currentImg, currentFilter);
 }
 
 function callAlgorithm() {
@@ -61,24 +63,33 @@ function callAlgorithm() {
   statusLabel.innerHTML = "";
 
   // Get the img URL
-  var img = document.getElementById("imgUrl").value;
+  currentImg = document.getElementById("imgUrl").value;
 
   // Remove any whitespaces around the url
-  img = img.trim();
+  currentImg = currentImg.trim();
 
-  if(typeof(img) == "string" && img !== "") {
-    if(currentFilter == "none") {
-      // Display original image
-      displayImg(img)
-    } else {
-      // Call deep filter
-      generateStylizedImage(img, currentFilter);
-    }
+  if(typeof(currentImg) == "string" && currentImg !== "") {
+    // Display stylized image
+    generateStylizedImage(currentImg, currentFilter);
   }
 
 };
 
 function generateStylizedImage(img, filterName) {
+  console.log("generateStylizedImage", img.substring(0,20), filterName);
+  if(img === "") {
+    return;
+  }
+  if(filterName === "none") {
+    // Display original image
+    if(img.startsWith("data:image/jpeg;base64,")) {
+      displayImgBase64(img, img);
+    } else {
+      displayImg(img);
+    }
+    return;
+  }
+
   startTask();
 
   var uuid = Math.random().toString(36).substring(7);
@@ -157,9 +168,9 @@ function displayImgBase64(url, base64, cb) {
   var resultsDiv = document.getElementById("results");
   resultsDiv.style.display = "block";
   resultsDiv.style.height = "";
-  var resultsThumbsDiv = document.getElementById("results-thumbnails");
-  resultsThumbsDiv.style.display = "block";
-  resultsThumbsDiv.style.height = "";
+  // var resultsThumbsDiv = document.getElementById("results-thumbnails");
+  // resultsThumbsDiv.style.display = "block";
+  // resultsThumbsDiv.style.height = "";
   document.getElementById("downloadLinks").classList.remove("hidden");
 }
 
@@ -227,6 +238,7 @@ function initDropzone() {
   dropzone.__proto__.uploadFiles = function() {};
 
   dropzone.on("processing", function(file) {
+    document.getElementById("imgUrl").value = "";
     var statusLabel = document.getElementById("status-label")
     statusLabel.innerHTML = "";
     // startTask();
@@ -234,7 +246,8 @@ function initDropzone() {
     var reader = new FileReader();
     reader.addEventListener("load", function () {
       console.log("Calling algorithm with uploaded image.");
-      generateStylizedImage(reader.result, currentFilter);
+      currentImg = reader.result;
+      generateStylizedImage(currentImg, currentFilter);
       dropzone.removeFile(file);
     }, false);
     reader.readAsDataURL(file);

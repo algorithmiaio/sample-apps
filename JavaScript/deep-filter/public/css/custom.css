@@ -64,6 +64,8 @@ img.sample-img {
 }
 .dz-message:hover{ text-decoration: underline;}
 
+.alert {margin-bottom: 8px;}
+
 /*// 	border: 1px dashed white;
 // 	text-align: center;
 // 	background-color: rgba(90, 90, 90, .8);

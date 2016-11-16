@@ -72,7 +72,7 @@ function callAlgorithm() {
     generateStylizedImage(currentImg, currentFilter);
   } else {
     var statusLabel = document.getElementById("status-label");
-    statusLabel.innerHTML = "Image url required";
+    statusLabel.innerHTML = '<div class="alert alert-warning" role="alert">Oops! Please enter an image URL first</div>';
   }
 
 };

@@ -149,7 +149,7 @@
 				<canvas id="resultCanvas" class="faded"></canvas>
 				<span class="glyphicon glyphicon-chevron-right" onclick="nextStyle()"></span>
 			</div>
-			<div class="col-md-10 col-centered share-row">
+			<div class="col-xs-12 col-md-10 col-centered share-row">
 				<div class="hidden" id="downloadLinks">
 					<a id="resultLink" href="#" onclick="ga('send', 'event', 'colorized', 'download');" download="colorized.png"><span class="glyphicon glyphicon-download" aria-hidden="true" class="download"></span> DOWNLOAD IMAGE</a>
 				</div>
@@ -159,17 +159,17 @@
 					<a href=""><img src="public/images/twitter.svg"></a>
 				</span>
 			</div>
-			<div class="container no-whitespace">
-			    <div class="row">
+		    <div class="row">
+		    	<div class="col-md-12">
 			      <ul class="nav nav-tabs">
 			        <li role="presentation" class="active"><a href="#filters" data-toggle="tab" role="tab">Filters</a></li>
 			        <li role="presentation"><a href="#image-options" data-toggle="tab" role="tab">Edit</a></li>
 			      </ul>
-				</div>
+			  </div>
 			</div>
 			<!-- THUMBNAILS -->
 			<div class="tab-content">
-				<div class="container no-whitespace tab-pane active" id="filters" role="tabpanel">
+				<div class="tab-pane active" id="filters" role="tabpanel">
 					<div class="row thumbnails">
 						<div class="col-xs-6 col-sm-4 col-md-2 thumb style-thumb" data-style="none">
 							<img src="public/images/thumb/unfiltered.jpg">
@@ -198,7 +198,7 @@
 					</div>
 				</div>
 				<!-- EDIT TOOLS -->
-				<div class="container no-whitespace tab-pane" id="image-options" role="tabpanel">
+				<div class="tab-pane" id="image-options" role="tabpanel">
 					<div class="row img-functions edit-functions">
 						<div class="col-md-11 col-lg-8 col-centered">
 							<div>

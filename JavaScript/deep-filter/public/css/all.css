@@ -109,10 +109,30 @@ li {
 
 .navbar-default .navbar-nav>li>a:hover {color: #c9c7cb;}
 
+
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
-  color:$purple-dark;
-  font-weight: 500;
+  color: #5000BE;
+  font-weight: 300;
+  border: 1px solid #5000BE;
+  border-bottom-color: transparent;
 }
+
+.nav-tabs {
+  border-bottom: 1px solid #5000BE;
+  margin-bottom: 24px;
+}
+.nav-tabs>li>a {
+  color: rgba(0,0,0,.54);
+  border-radius: 0;
+}
+
+.nav-tabs>li>a:hover {
+  background-color: transparent;
+  border-color: transparent;
+  color: #5000BE;
+}
+
+.tab-content {margin-bottom: 32px;}
 
 /* links */
 a {color: #5000BE;}
@@ -246,7 +266,12 @@ a:hover, a:focus{
 
 /* RESULTS */
 /* featured img */
-.results-img      {height: 100%; position: relative; text-align: center;}
+.results-img {
+  height: 100%;
+  position: relative;
+  text-align: center;
+}
+.share-row {margin-bottom: 64px;}
 #resultImg {
 /*  max-width: 100%;
   min-height: auto;
@@ -274,8 +299,7 @@ a:hover, a:focus{
 .glyphicon-chevron-right:focus {color: #FFF; background-color: rgba(80,0,190,1);}
 
 /* Results img functions */
-.img-functions {padding-bottom: 8px;}
-.edit-functions {text-align: center;}
+.edit-functions {text-align: center; padding-bottom: 8px;}
 #downloadLinks {display: inline-block;}
 .share     {float: right;}
 .share img {width: 24px; margin-right: 12px;}
@@ -283,12 +307,11 @@ a:hover, a:focus{
 .btn-options-row {text-align: right;}
 /* show/hide img options */
 .edit-btn    {}
-#img-options {display: none;}
+/*#img-options {display: none;}*/
 .show        {display: block;}
 
 /* RESULTS THUMBNAILS */
 .thumbnails {
-  padding-top: 32px;
   /*width: 50%;*/
   text-align: center;
   margin: 0 auto;
@@ -380,13 +403,13 @@ a > code:hover{color:#9963ff;}
   .tablet-whitespace,
   .mobile-whitespace   {padding-bottom: 0;}
   .mobile-no-padding   {padding-left: 0; padding-right: 0;}
-  .col-centered        {margin: 0 12px;}
   .glyphicon-chevron-left,
   .glyphicon-chevron-right {padding: 4px; color: #FFF; border: none; background-color: rgba(80,0,190,.38);}
   .glyphicon-chevron-left:hover,
   .glyphicon-chevron-right:hover,
   .glyphicon-chevron-left:focus,
   .glyphicon-chevron-right:focus {background-color: rgba(80,0,190,1);}
+  .share-row {margin-bottom: 24px;}
 
   .card {background-color: rgba(255,255,255,.9);}
   .mobile-btn-right {text-align: right;}

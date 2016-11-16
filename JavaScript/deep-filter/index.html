@@ -39,7 +39,6 @@
 	<link href="public/css/styles/monokai.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Raleway:300,400" rel="stylesheet">
 
-
 	<!--   Google Analytics -->
 	<script>
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -141,73 +140,83 @@
 	</div>
 
 	<!-- RESULTS -->
-	<div class="container results-section" id="results">
-		<div class="results-img">
-			<span class="glyphicon glyphicon-chevron-left" onclick="prevStyle()"></span>
-			<img id="resultImg">
-			<canvas id="resultCanvas" class="faded"></canvas>
-			<span class="glyphicon glyphicon-chevron-right" onclick="nextStyle()"></span>
-		</div>
-		<div class="row options-btn-row">
-			<button onclick="showImgOptions()" class="btn btn-purple-secondary btn-edit" id="img-options-btn">IMAGE OPTIONS</button>
-		</div>
-		<div id="img-options">
-			<div class="row img-functions">
-				<div class="col-md-11 col-lg-8 col-centered">
-					<div class="hidden" id="downloadLinks">
-						<a id="resultLink" href="#" onclick="ga('send', 'event', 'colorized', 'download');" download="colorized.png"><span class="glyphicon glyphicon-download" aria-hidden="true" class="download"></span> DOWNLOAD IMAGE</a>
-					</div>
-					<!-- <span class="download"><a href=""><span class="glyphicon glyphicon-download" aria-hidden="true"></span> DOWNLOAD</a></span> -->
-					<!-- <span class="share">
-						<a href=""><img src="public/images/facebook.svg"></a>
-						<a href=""><img src="public/images/twitter.svg"></a>
-					</span> -->
+	<div class="border-bottom">
+		<section class="container results-section" id="results">
+			<!-- IMAGE -->
+			<div class="results-img">
+				<span class="glyphicon glyphicon-chevron-left" onclick="prevStyle()"></span>
+				<img id="resultImg">
+				<canvas id="resultCanvas" class="faded"></canvas>
+				<span class="glyphicon glyphicon-chevron-right" onclick="nextStyle()"></span>
+			</div>
+			<div class="col-md-10 col-centered share-row">
+				<div class="hidden" id="downloadLinks">
+					<a id="resultLink" href="#" onclick="ga('send', 'event', 'colorized', 'download');" download="colorized.png"><span class="glyphicon glyphicon-download" aria-hidden="true" class="download"></span> DOWNLOAD IMAGE</a>
+				</div>
+				<!-- <span class="download"><a href=""><span class="glyphicon glyphicon-download" aria-hidden="true"></span> DOWNLOAD</a></span> -->
+				<span class="share">
+					<a href=""><img src="public/images/facebook.svg"></a>
+					<a href=""><img src="public/images/twitter.svg"></a>
+				</span>
+			</div>
+			<div class="container no-whitespace">
+			    <div class="row">
+			      <ul class="nav nav-tabs">
+			        <li role="presentation" class="active"><a href="#filters" data-toggle="tab" role="tab">Filters</a></li>
+			        <li role="presentation"><a href="#image-options" data-toggle="tab" role="tab">Edit</a></li>
+			      </ul>
 				</div>
 			</div>
-			<div class="row img-functions edit-functions">
-				<div class="col-md-11 col-lg-8 col-centered">
-					<div>
-						<label>Hue</label><input type="range" id="adjustH" min="0" max="200" value="100" class="edit-input">
-						<label>Saturation</label><input type="range" id="adjustS" min="0" max="200" value="100" class="edit-input">
-						<button class="btn btn-purple-secondary" onclick="cycleColors()">Cycle Colors</button>
+			<!-- THUMBNAILS -->
+			<div class="tab-content">
+				<div class="container no-whitespace tab-pane active" id="filters" role="tabpanel">
+					<div class="row thumbnails">
+						<div class="col-xs-6 col-sm-4 col-md-2 thumb style-thumb" data-style="none">
+							<img src="public/images/thumb/unfiltered.jpg">
+							<p class="secondary">Unfiltered</p>
+						</div>
+						<div class="col-xs-6 col-sm-4 col-md-2 thumb style-thumb" data-style="smooth_ride">
+							<img src="public/images/thumb/smooth_ride.jpg">
+							<p class="secondary">Smooth Ride</p>
+						</div>
+						<div class="col-xs-6 col-sm-4 col-md-2 thumb style-thumb" data-style="space_pizza">
+							<img src="public/images/thumb/space_pizza.jpg">
+							<p class="secondary">Space Pizza</p>
+						</div>
+						<div class="col-xs-6 col-sm-4 col-md-2 thumb style-thumb" data-style="purple_pond">
+							<img src="public/images/thumb/purple_pond.jpg">
+							<p class="secondary">Purple Pond</p>
+						</div>
+						<div class="col-xs-6 col-sm-4 col-md-2 thumb style-thumb" data-style="sunday">
+							<img src="public/images/thumb/sunday.jpg">
+							<p class="secondary">Sunday</p>
+						</div>
+						<div class="col-xs-6 col-sm-4 col-md-2 thumb style-thumb" data-style="alien_goggles">
+							<img src="public/images/thumb/alien_goggles.jpg">
+							<p class="secondary">Alien Goggles</p>
+						</div>
 					</div>
-
 				</div>
-			</div>
-		</div>
+				<!-- EDIT TOOLS -->
+				<div class="container no-whitespace tab-pane" id="image-options" role="tabpanel">
+					<div class="row img-functions edit-functions">
+						<div class="col-md-11 col-lg-8 col-centered">
+							<div>
+								<label>Hue</label><input type="range" id="adjustH" min="0" max="200" value="100" class="edit-input">
+								<label>Saturation</label><input type="range" id="adjustS" min="0" max="200" value="100" class="edit-input">
+								<!-- <button class="btn btn-purple-secondary" onclick="cycleColors()">Cycle Colors</button> -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> <!-- END TAB-CONTENT -->
+			<p class="sub-link">Want more filters? <a href="">Sign up</a></p>
+		</section>
 	</div>
 
 	<!-- RESULTS THUMBNAILS -->
 	<div class="grey-background results-thumbnails" id="results-thumbnails">
-		<div class="container no-whitespace">
-			<div class="row thumbnails">
-				<div class="col-xs-6 col-sm-4 col-md-2 thumb style-thumb" data-style="none">
-					<img src="public/images/thumb/unfiltered.jpg">
-					<p class="secondary">Unfiltered</p>
-				</div>
-				<div class="col-xs-6 col-sm-4 col-md-2 thumb style-thumb" data-style="smooth_ride">
-					<img src="public/images/thumb/smooth_ride.jpg">
-					<p class="secondary">Smooth Ride</p>
-				</div>
-				<div class="col-xs-6 col-sm-4 col-md-2 thumb style-thumb" data-style="space_pizza">
-					<img src="public/images/thumb/space_pizza.jpg">
-					<p class="secondary">Space Pizza</p>
-				</div>
-				<div class="col-xs-6 col-sm-4 col-md-2 thumb style-thumb" data-style="purple_pond">
-					<img src="public/images/thumb/purple_pond.jpg">
-					<p class="secondary">Purple Pond</p>
-				</div>
-				<div class="col-xs-6 col-sm-4 col-md-2 thumb style-thumb" data-style="sunday">
-					<img src="public/images/thumb/sunday.jpg">
-					<p class="secondary">Sunday</p>
-				</div>
-				<div class="col-xs-6 col-sm-4 col-md-2 thumb style-thumb" data-style="alien_goggles">
-					<img src="public/images/thumb/alien_goggles.jpg">
-					<p class="secondary">Alien Goggles</p>
-				</div>
-			</div>
-			<p class="sub-link">Want more filters? <a href="">Sign up</a></p>
-		</div>
+
 	</div>
 
 	<!-- BUILT FOR DEVS -->

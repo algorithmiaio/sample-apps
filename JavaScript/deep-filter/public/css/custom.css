@@ -34,7 +34,7 @@
 	transition: opacity 0.5s linear;
 	// transition: -webkit-filter 0.5s linear;
 }
-.edit-input {margin-bottom: 12px;}
+.edit-input {margin-bottom: 24px;}
 #edit-img 	{display: none;}
 
 .faded {

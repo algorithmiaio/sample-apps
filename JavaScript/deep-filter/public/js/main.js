@@ -163,13 +163,6 @@ function displayImgBase64(url, base64, cb) {
   document.getElementById("downloadLinks").classList.remove("hidden");
 }
 
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function showImgOptions() {
-    document.getElementById("img-options").classList.toggle("show");
-    document.getElementById("img-options-btn").classList.toggle("btn-selected");
-}
-
 function clickDownload(e) {
   var link = document.createElement("a");
   link.download = "stylized.png";

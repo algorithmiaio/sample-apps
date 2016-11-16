@@ -41,7 +41,7 @@ function changeStyle(event, b) {
     console.log("Changing style to " + newStyle);
     currentFilter = newStyle;
     updateStyleButtons();
-    callAlgorithm();
+    generateStylizedImage(currentImg, currentFilter);
   }
 }
 
@@ -63,14 +63,16 @@ function callAlgorithm() {
   statusLabel.innerHTML = "";
 
   // Get the img URL
-  currentImg = document.getElementById("imgUrl").value;
-
-  // Remove any whitespaces around the url
-  currentImg = currentImg.trim();
+  currentImg = document.getElementById("imgUrl").value.trim();
+  currentFilter = "smooth_ride";
+  updateStyleButtons();
 
   if(typeof(currentImg) == "string" && currentImg !== "") {
     // Display stylized image
     generateStylizedImage(currentImg, currentFilter);
+  } else {
+    var statusLabel = document.getElementById("status-label");
+    statusLabel.innerHTML = "Image url required";
   }
 
 };
@@ -78,6 +80,7 @@ function callAlgorithm() {
 function generateStylizedImage(img, filterName) {
   console.log("generateStylizedImage", img.substring(0,20), filterName);
   if(img === "") {
+    console.error("Image cannot be empty");
     return;
   }
   if(filterName === "none") {
@@ -247,6 +250,8 @@ function initDropzone() {
     reader.addEventListener("load", function () {
       console.log("Calling algorithm with uploaded image.");
       currentImg = reader.result;
+      currentFilter = "smooth_ride";
+      updateStyleButtons();
       generateStylizedImage(currentImg, currentFilter);
       dropzone.removeFile(file);
     }, false);

@@ -1,0 +1,180 @@
+/*Put Custom Styles Here*/
+
+@media (max-width: 767px){
+	.visible-xs-block {
+		padding-bottom: 10px;
+	    display: block !important;
+	}
+	.form-control{
+		max-width: 100%;
+	}
+	.mb {
+		margin-top: 5px;
+	}
+}
+
+.sample-img {
+	max-width: 100%;
+}
+
+#results,
+#results-thumbnails {
+	transition: height 2s;
+	overflow: hidden;
+	display: none;
+}
+
+#resultImg {
+	margin-bottom: -100%;
+	opacity: 0;
+	z-index: 100;
+	display: none;
+}
+#resultCanvas {
+	transition: opacity 0.5s linear;
+	// transition: -webkit-filter 0.5s linear;
+}
+.edit-input {margin-bottom: 24px;}
+#edit-img 	{display: none;}
+
+.faded {
+	opacity: 0.5;
+	-webkit-filter: blur(3px);
+					filter: blur(3px);
+}
+
+pre {
+	padding: 0;
+	margin-bottom: 32px;
+	border: 0px;
+}
+code {cursor: default;}
+#social {
+	margin-top: 20px;
+	text-align: center;
+}
+
+img.sample-img {
+	cursor: pointer;
+}
+
+.dz-message {
+ 	color: #5000BE;
+ 	cursor: pointer;
+}
+.dz-message:hover{ text-decoration: underline;}
+
+.alert {margin-bottom: 8px;}
+
+/*// 	border: 1px dashed white;
+// 	text-align: center;
+// 	background-color: rgba(90, 90, 90, .8);
+// 	font-size: 13px;
+// 	max-width: 300px;
+// }*/
+
+/* Custom, iPhone Retina */
+/*@media only screen and (min-width : 320px) {
+	.dz-message { height: 109px; line-height: 109px; padding-top: 0px }
+}
+@media only screen and (min-width : 360px) {
+	.dz-message { height: 129px; line-height: 129px; padding-top: 0px }
+}
+@media only screen and (min-width : 768px) {
+	.dz-message { height: 300px; line-height: 300px; padding-top: 0px;}
+}
+@media only screen and (min-width : 992px) {
+	.dz-message { height: 60px; line-height: normal; padding-top: 8px; }
+}
+@media only screen and (min-width : 1200px) {
+	.dz-message { height: 79px; line-height: normal; padding-top: 20px; }
+}*/
+
+.style-thumb {
+	cursor: pointer;
+}
+
+/* Styling input range slider */
+input[type=range] {
+  -webkit-appearance: none;
+  margin-top: 8px;
+  margin-bottom: 32px;
+  width: 100%;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 1px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: #5000BE;
+  border-radius: 0;
+  border: 1px solid #5000BE;
+}
+input[type=range]::-webkit-slider-thumb {
+  border: 1px solid #5000BE;
+  height: 16px;
+  width: 16px;
+  border-radius: 100%;
+  background: #FFF;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -8px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #5000BE;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 1px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: #5000BE;
+  border-radius: 0;
+  border: 1px solid #5000BE;
+}
+input[type=range]::-moz-range-thumb {
+  border: 1px solid #5000BE;
+  height: 16px;
+  width: 16px;
+  border-radius: 100%;
+  background: #FFF;
+  cursor: pointer;
+  margin-top: -8px;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 1px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: #5000BE;
+  border-radius: 0;
+  border: 1px solid #5000BE;
+}
+input[type=range]::-ms-fill-lower {
+  background: #5000BE;
+  border: 1px solid #5000BE;
+  border-radius: 0;
+}
+input[type=range]::-ms-fill-upper {
+  background: #5000BE;
+  border: 1px solid #5000BE;
+  border-radius: 0;
+}
+input[type=range]::-ms-thumb {
+  border: 1px solid #5000BE;
+  height: 16px;
+  width: 16px;
+  border-radius: 100%;
+  background: #FFF;
+  cursor: pointer;
+  margin-top: -8px;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #5000BE;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #5000BE;
+}

@@ -65,6 +65,7 @@ function callAlgorithm() {
   // Get the img URL
   currentImg = document.getElementById("imgUrl").value.trim();
   currentFilter = "smooth_ride";
+  $('a[href="#filters"]').tab('show');
   updateStyleButtons();
 
   if(typeof(currentImg) == "string" && currentImg !== "") {

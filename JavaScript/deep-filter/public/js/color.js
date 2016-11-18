@@ -33,7 +33,7 @@ function resetColors() {
     updateColors();
 }
 
-// Provides a new canvas containing [img] with adjhust HSV
+// Copies the img to canvas with adjusted HSV
 // dh is hue offset in 0..1
 // ds is saturation multiple
 // dv is value offset

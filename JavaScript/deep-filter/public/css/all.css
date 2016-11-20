@@ -281,6 +281,7 @@ a:hover, a:focus{
   max-width: 100%;
   padding-bottom: 12px;
 }
+#resultImg,
 #resultCanvas {
   max-height: 60vh;
   max-width: 100%;

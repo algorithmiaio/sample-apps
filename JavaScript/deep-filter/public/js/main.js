@@ -15,6 +15,37 @@ var downloadLink = document.getElementById("resultLink");
 
 var currentImg = "";
 
+var imageCache = {
+  "https://images.unsplash.com/photo-1479088360436-ef9dbade3214?w=1600&ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=b37ce33a6c3b8540e2386b7feceb02ef": {
+    "smooth_ride": "https://s3.amazonaws.com/algorithmia-demos/deepstyle/bsen94ybp3nrelkjfw29.jpg",
+    "space_pizza": "https://s3.amazonaws.com/algorithmia-demos/deepstyle/5w0dejyb2vsuxh1714i.jpg",
+    "purple_pond": "https://s3.amazonaws.com/algorithmia-demos/deepstyle/j3otp9kp54r2yh4fs9k9.jpg",
+    "sunday": "https://s3.amazonaws.com/algorithmia-demos/deepstyle/7rhfdzkpkmr0hz4obt9.jpg",
+    "alien_goggles": "https://s3.amazonaws.com/algorithmia-demos/deepstyle/2qijphqir5r5espjh5mi.jpg",
+  },
+  "https://images.unsplash.com/photo-1445462657202-a0893228a1e1?w=1600&ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=063dd4946608a5570bd835d22e977acc": {
+    "smooth_ride": "https://s3.amazonaws.com/algorithmia-demos/deepstyle/gz6mlh80lntihg9icnmi.jpg",
+    "space_pizza": "https://s3.amazonaws.com/algorithmia-demos/deepstyle/cc7vrbl9vnw8f10jm7vi.jpg",
+    "purple_pond": "https://s3.amazonaws.com/algorithmia-demos/deepstyle/jeer6xaqxeir5q3kgldi.jpg",
+    "sunday": "https://s3.amazonaws.com/algorithmia-demos/deepstyle/n7cpfhs5nzye2g4aemi.jpg",
+    "alien_goggles": "https://s3.amazonaws.com/algorithmia-demos/deepstyle/586mmo5ugzzfus5j0pb9.jpg",
+  },
+  "https://images.unsplash.com/photo-1430026996702-608b84ce9281?w=1600&ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=bc612c816d9b222124db4eb20ee53c6c": {
+    "smooth_ride": "https://s3.amazonaws.com/algorithmia-demos/deepstyle/v1vhntocxl0ok2anstt9.jpg",
+    "space_pizza": "https://s3.amazonaws.com/algorithmia-demos/deepstyle/xydmunpor3pnfczyqfr.jpg",
+    "purple_pond": "https://s3.amazonaws.com/algorithmia-demos/deepstyle/pegvp4dv42j36qvq85mi.jpg",
+    "sunday": "https://s3.amazonaws.com/algorithmia-demos/deepstyle/s5k1e4ljcpa37wj0pb9.jpg",
+    "alien_goggles": "https://s3.amazonaws.com/algorithmia-demos/deepstyle/7j308jv5urfsne0esif6r.jpg",
+  },
+  "https://images.unsplash.com/photo-1469173479606-ada03df615ac?w=1600&ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=70e6435426e4d119a4e9f84fd94d7a64": {
+    "smooth_ride": "https://s3.amazonaws.com/algorithmia-demos/deepstyle/szjdbwgi39x29j1kmx6r.jpg",
+    "space_pizza": "https://s3.amazonaws.com/algorithmia-demos/deepstyle/nyi6t0wgfxu06sjj1yvi.jpg",
+    "purple_pond": "https://s3.amazonaws.com/algorithmia-demos/deepstyle/ymq1495v3sc9w5xez5mi.jpg",
+    "sunday": "https://s3.amazonaws.com/algorithmia-demos/deepstyle/qrwjg4fg38exkekrcnmi.jpg",
+    "alien_goggles": "https://s3.amazonaws.com/algorithmia-demos/deepstyle/f9374puunw5fwnyojemi.jpg",
+  }
+};
+
 window.Algorithmia = window.Algorithmia || {};
 Algorithmia.api_key = "simZfwrSvLraXpTAgJpIL53Ugji1";
 var numTasks = 0;
@@ -92,6 +123,12 @@ function generateStylizedImage(img, filterName) {
       displayImg(img);
     }
     return;
+  }
+
+  // Check cache
+  if(imageCache[img] && imageCache[img][filterName]) {
+    var cacheUrl = imageCache[img][filterName];
+    displayImg(cacheUrl);
   }
 
   startTask();

@@ -169,13 +169,25 @@ function generateStylizedImage(img, filterName) {
 }
 
 function displayImg(url, cb) {
-  Algorithmia.client(Algorithmia.api_key)
-    .algo("algo://util/data2base64")
-    .pipe(url)
-    .then(function(output) {
-      var base64 = "data:image/jpeg;base64," + output.result.replace(/\n/g,"");
-      displayImgBase64(url, base64, cb);
-    });
+  resultImg.src = url;
+  resultImg.onload = function() {
+    // Scroll to image
+    resultImg.scrollIntoView();
+    showResults();
+
+    if(cb) cb();
+  }
+
+  // Update download link
+  downloadLink.href = url;
+
+  // Algorithmia.client(Algorithmia.api_key)
+  //   .algo("algo://util/data2base64")
+  //   .pipe(url)
+  //   .then(function(output) {
+  //     var base64 = "data:image/jpeg;base64," + output.result.replace(/\n/g,"");
+  //     displayImgBase64(url, base64, cb);
+  //   });
 }
 
 function displayImgBase64(url, base64, cb) {
@@ -192,20 +204,24 @@ function displayImgBase64(url, base64, cb) {
   // Update stylized canvas
   var ctx = resultCanvas.getContext("2d");
   resultImg.onload = function() {
-    resultCanvas.width = resultImg.width;
-    resultCanvas.height = resultImg.height;
-    // ctx.drawImage(img, 0, 0, resultImg.width, resultImg.height);
-    resetColors();
-    resultCanvas.classList.remove("faded");
+    // resultCanvas.width = resultImg.width;
+    // resultCanvas.height = resultImg.height;
+    // // ctx.drawImage(img, 0, 0, resultImg.width, resultImg.height);
+    // resetColors();
+    // resultCanvas.classList.remove("faded");
 
     // Scroll to image
-    resultCanvas.scrollIntoView();
+    resultImg.scrollIntoView();
 
     // Done
     if(cb) cb();
   };
 
   // Show results if not already showing
+  showResults();
+}
+
+function showResults() {
   var resultsDiv = document.getElementById("results");
   resultsDiv.style.display = "block";
   resultsDiv.style.height = "";
@@ -213,6 +229,7 @@ function displayImgBase64(url, base64, cb) {
   // resultsThumbsDiv.style.display = "block";
   // resultsThumbsDiv.style.height = "";
   document.getElementById("downloadLinks").classList.remove("hidden");
+  resultImg.classList.remove("faded");
 }
 
 function clickDownload(e) {
@@ -236,7 +253,7 @@ function startTask() {
   numTasks++;
   document.getElementById("overlay").classList.remove("hidden");
   document.getElementById("resultImg").classList.add("faded");
-  document.getElementById("resultCanvas").classList.add("faded");
+  // document.getElementById("resultCanvas").classList.add("faded");
 }
 
 function finishTask() {

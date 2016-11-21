@@ -24,6 +24,7 @@
 	display: none;
 }
 
+/*
 #resultImg {
 	margin-bottom: -100%;
 	opacity: 0;
@@ -34,6 +35,7 @@
 	transition: opacity 0.5s linear;
 	// transition: -webkit-filter 0.5s linear;
 }
+*/
 .edit-input {margin-bottom: 24px;}
 #edit-img 	{display: none;}
 

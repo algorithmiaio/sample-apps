@@ -83,9 +83,10 @@ li {
 }
 
 /* Links */
-a {color: #5000BE;}
+a,
+a:focus {color: #5000BE; text-decoration: none;}
 
-a:hover, a:focus{
+a:hover {
   color: #6717ff;
   text-decoration: underline;
 }
@@ -143,7 +144,8 @@ a:hover, a:focus{
   letter-spacing: 1px;
 }
 /* Purple with white */
-.btn-purple {
+.btn-purple,
+.btn-purple:focus {
   color: #FFF;
   background-color: #5000BE;
   border: 1px solid #5000BE;
@@ -153,13 +155,9 @@ a:hover, a:focus{
   background-color: #FFF;
   transition: ease-in-out .3s;    
 }
-.btn-purple:focus {
-  color: #FFF;
-  background-color: #5000BE;
-  border: 1px solid #5000BE;
-}
 /* White with purple */
-.btn-purple-secondary {
+.btn-purple-secondary,
+.btn-purple-secondary:focus {
   color: #5000BE;
   background-color: transparent;
   border: 1px solid #5000BE;
@@ -169,13 +167,9 @@ a:hover, a:focus{
   background-color: #5000BE;
   transition: ease-in-out .3s;    
 }
-.btn-purple-secondary:focus {
-  color: #5000BE;
-  background-color: #FFF;
-  border: 1px solid #5000BE;
-}
 /* Green with white */
-.btn-green {
+.btn-green,
+.btn-green:focus {
   color: #FFF;
   background-color: #5CB85C;
   border: 1px solid #5CB85C;
@@ -184,10 +178,6 @@ a:hover, a:focus{
   color: #5CB85C;
   background-color: #FFF;
   transition: ease-in-out .3s;
-}
-.btn-green:focus {
-  color: #5CB85C;
-  background-color: #FFF;
 }
 
 /* Align element on the right */

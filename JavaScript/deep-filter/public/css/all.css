@@ -144,39 +144,41 @@ a:hover, a:focus{
 }
 /* Purple with white */
 .btn-purple {
-    color: #FFF;
-    background-color: #5000BE;
-    border: 1px solid #5000BE;
+  color: #FFF;
+  background-color: #5000BE;
+  border: 1px solid #5000BE;
 }
 .btn-purple:hover {
-    color: #5000BE;
-    background-color: #FFF;
-    transition: ease-in-out .3s;    
+  color: #5000BE;
+  background-color: #FFF;
+  transition: ease-in-out .3s;    
 }
 .btn-purple:focus {
-    color: #5000BE;
-    background-color: #FFF;
+  color: #FFF;
+  background-color: #5000BE;
+  border: 1px solid #5000BE;
 }
 /* White with purple */
 .btn-purple-secondary {
-    color: #5000BE;
-    background-color: transparent;
-    border: 1px solid #5000BE;
+  color: #5000BE;
+  background-color: transparent;
+  border: 1px solid #5000BE;
 }
 .btn-purple-secondary:hover {
-    color: #FFF;
-    background-color: #5000BE;
-    transition: ease-in-out .3s;    
+  color: #FFF;
+  background-color: #5000BE;
+  transition: ease-in-out .3s;    
 }
-/*.btn-purple-secondary:focus {
-    color: #FFF;
-    background-color: #5000BE;
-}*/
+.btn-purple-secondary:focus {
+  color: #5000BE;
+  background-color: #FFF;
+  border: 1px solid #5000BE;
+}
 /* Green with white */
 .btn-green {
-    color: #FFF;
-    background-color: #5CB85C;
-    border: 1px solid #5CB85C;
+  color: #FFF;
+  background-color: #5CB85C;
+  border: 1px solid #5CB85C;
 }
 .btn-green:hover {
   color: #5CB85C;

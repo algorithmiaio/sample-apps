@@ -271,7 +271,7 @@ a:hover, a:focus{
   position: relative;
   text-align: center;
 }
-.share-row {margin-bottom: 64px;}
+.share-row {margin-top: 8px; margin-bottom: 32px;}
 .results-section {
   max-width: 100%;
   padding-bottom: 12px;

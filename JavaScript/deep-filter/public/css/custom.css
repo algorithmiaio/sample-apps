@@ -25,15 +25,15 @@
 }
 
 #resultImg {
-	transition: opacity 0.5s linear;
-	transition: -webkit-filter 0.5s linear;
+  /*transition: opacity 0.5s, filter 0.5s, -webkit-filter 0.5s;*/
+  transition: filter 0.5s, -webkit-filter 0.5s;
 }
 
 .edit-input {margin-bottom: 24px;}
 #edit-img 	{display: none;}
 
 .faded {
-	opacity: 0.5;
+	/*opacity: 0.5;*/
 	-webkit-filter: blur(3px);
 					filter: blur(3px);
 }

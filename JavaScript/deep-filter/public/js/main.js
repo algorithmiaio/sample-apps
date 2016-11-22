@@ -9,7 +9,8 @@ var defaultFilters = [
 ];
 var currentFilter = "smooth_ride";
 
-var resultImg = document.getElementById("resultImg")
+var resultsDiv = document.getElementById("results");
+var resultImg = document.getElementById("resultImg");
 var resultCanvas = document.getElementById("resultCanvas");
 var downloadLink = document.getElementById("resultLink");
 
@@ -136,7 +137,7 @@ function displayImg(url, cb) {
   resultImg.src = url;
   resultImg.onload = function() {
     // Scroll to image
-    resultImg.scrollIntoView();
+    resultsDiv.scrollIntoView();
     showResults();
 
     if(cb) cb();

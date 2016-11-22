@@ -272,17 +272,11 @@ a:hover, a:focus{
   text-align: center;
 }
 .share-row {margin-bottom: 64px;}
-#resultImg {
-/*  max-width: 100%;
-  min-height: auto;
-  max-height: 80vh;*/
-}
 .results-section {
   max-width: 100%;
   padding-bottom: 12px;
 }
-#resultImg,
-#resultCanvas {
+#resultImg {
   max-height: 60vh;
   max-width: 100%;
 }

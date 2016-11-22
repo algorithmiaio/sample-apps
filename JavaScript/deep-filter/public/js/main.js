@@ -99,22 +99,23 @@ function generateStylizedImage(img, filterName) {
   var uuid = Math.random().toString(36).substring(7);
   var algoInput = {
     "images": [img],
-    "savePaths": ["s3+turing://algorithmia-demos/deepstyle/" +  uuid + ".jpg"],
-    "filterName": filterName
+    "filterName": filterName,
+    "savePrefix": "s3+turing://algorithmia-demos/deepstyle/"
   };
 
   Algorithmia.client(Algorithmia.api_key)
-    .algo("algo://deeplearning/DeepFilter/0.3.3")
+    .algo("algo://algorithmiahq/DeepFilterDemo/0.1.5")
     .pipe(algoInput)
     .then(function(output) {
       if(output.error) {
         // Error Handling
+        console.error("Algorithm error: ", output.error);
         var statusLabel = document.getElementById("status-label");
         statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh Oh! Something went wrong: ' + output.error.message + ' </div>';
         taskError();
       } else {
-        if(output.result.savePaths.length == 1) {
-          var url = output.result.savePaths[0];
+        if(output.result.stylizedImage) {
+          var url = output.result.stylizedImage;
           url = url.replace("s3+turing://", "https://s3.amazonaws.com/");
           console.log("got output", url);
 
@@ -143,14 +144,6 @@ function displayImg(url, cb) {
 
   // Update download link
   downloadLink.href = url;
-
-  // Algorithmia.client(Algorithmia.api_key)
-  //   .algo("algo://util/data2base64")
-  //   .pipe(url)
-  //   .then(function(output) {
-  //     var base64 = "data:image/jpeg;base64," + output.result.replace(/\n/g,"");
-  //     displayImgBase64(url, base64, cb);
-  //   });
 }
 
 function displayImgBase64(url, base64, cb) {
@@ -158,20 +151,12 @@ function displayImgBase64(url, base64, cb) {
 
   // Update download link
   downloadLink.href = url;
-  // downloadLink.onclick = clickDownload;
 
   // Update stylized image
-  // resultImg.crossOrigin = ""; // necessary for canvas to access image data
   resultImg.setAttribute("src", base64);
 
   // Update stylized canvas
-  var ctx = resultCanvas.getContext("2d");
   resultImg.onload = function() {
-    // resultCanvas.width = resultImg.width;
-    // resultCanvas.height = resultImg.height;
-    // // ctx.drawImage(img, 0, 0, resultImg.width, resultImg.height);
-    // resetColors();
-    // resultCanvas.classList.remove("faded");
 
     // Scroll to image
     resultImg.scrollIntoView();
@@ -216,7 +201,6 @@ function startTask() {
   numTasks++;
   document.getElementById("overlay").classList.remove("hidden");
   document.getElementById("resultImg").classList.add("faded");
-  // document.getElementById("resultCanvas").classList.add("faded");
 }
 
 function finishTask() {

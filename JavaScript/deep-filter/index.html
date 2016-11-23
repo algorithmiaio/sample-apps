@@ -5,15 +5,15 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<title>Deep Filter – Neural Style Transfer – Algorithmia</title>
+	<title>Style Transfer Using Deep Learning – Algorithmia</title>
 	<link rel="canonical" href="http://demos.algorithmia.com/deep-filter/" />
-	<meta name="description" content="Use deep learning to automatically filter any photo using the Deep Filter microservice.">
+	<meta name="description" content="Using deep learning to reimagine one image in the style of another image.">
 	<meta name="robots" content="index,follow">
 
 	<!-- FB -->
-	<meta property="og:title" content="Deep Filter - Neural Style Transfer">
+	<meta property="og:title" content="Style Transfer Using Deep Learning">
 	<meta property="og:url" content="http://demos.algorithmia.com/deep-filter/">
-	<meta property="og:description" content="Use deep learning to automatically filter any photo using the Deep Filter microservice">
+	<meta property="og:description" content="Using deep learning for artistic style transfer">
 	<meta property="og:locale" content="en_US" />
 	<meta property="og:type" content="website" />
 	<meta property="og:image" content="http://demos.algorithmia.com/colorize-photos/public/images/hero-fb.png" />
@@ -22,14 +22,14 @@
 	<!-- TWTR -->
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@algorithmia" />
-	<meta name="twitter:title" content="Colorize Black and White Photos" />
-	<meta name="twitter:description" content="Use deep learning to automatically filter any photo using the Deep Filter microservice" />
+	<meta name="twitter:title" content="Style Transfer Using Deep Learning" />
+	<meta name="twitter:description" content="Using deep learning for artistic style transfer" />
 	<meta name="twitter:image" content="http://demos.algorithmia.com/colorize-photos/public/images/hero-twttr.png" />
 	<meta name="twitter:creator" content="@matt_kiser" />
 
 	<!-- OTHER -->
-	<meta itemprop="name" content="Colorize Black and White Photos">
-	<meta itemprop="description" content="Automatically colorize black and white photos, pictures, and images using the Colorful Image Colorization microservice">
+	<meta itemprop="name" content="Style Transfer Using Deep Learning">
+	<meta itemprop="description" content="Using deep learning to reimagine one image in the style of another image.">
 
 	<!-- CSS -->
     <link rel="shortcut icon" href="public/images/favicon-bw.png" type="image/png">
@@ -72,7 +72,7 @@
 					<li><a href="https://algorithmia.com/pricing"><span>Pricing</span></a></li>
 					<li><a href="http://blog.algorithmia.com/"><span>Blog</span></a></li>
 					<li>
-						<a class="nav-link nav-username hidden-sm hidden-xs" href="https://algorithmia.com/signup?invite=color">
+						<a class="nav-link nav-username hidden-sm hidden-xs" href="https://algorithmia.com/signup?invite=deepfilter">
 							Sign up
 						</a>
 					</li>
@@ -85,15 +85,15 @@
 		<div class="container mobile-whitespace">
 			<div class="row">
 				<div class="col-xs-12 col-md-7">
-					<h1 class="readable">Deep Filter</h1>
-					<h4 class="hero-subheader readable">Use deep learning to automatically filter any photo</h4>
+					<h1 class="readable">Deep Style</h1>
+					<h4 class="hero-subheader readable">Using deep learning for artistic style transfer</h4>
 				</div>
 				<div class="col-xs-12 col-md-7 mobile-no-padding">
 					<div class="card">
-						<h3 class="has-subcontent">Try it out</h3>
-						<span class="card-directions">Paste an image URL or 
+						<h3 class="has-subcontent">Try Deep Style Transfer</h3>
+						<span class="card-directions">Paste the URL to an image or 
 							<form class="primary-text dropzone" id="file-dropzone" action="javascript:;">
-								<span class="dz-message" data-dz-message><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> UPLOAD AN IMAGE</span>
+								<span class="dz-message" data-dz-message><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> UPLOAD</span>
 								<!-- <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> UPLOAD AN IMAGE -->
 							</form>
 						</span>
@@ -106,7 +106,7 @@
 
 					<!-- SAMPLE IMAGES -->
 					<div class="sample-images grey-background">
-						<h4 class="has-subcontent">Or filter a sample image</h4>
+						<h4 class="has-subcontent">Or, filter a sample image</h4>
 						<div class="row">
 							<div class="col-xs-6 col-sm-3 col-md-3 sample-center">
 								<a onclick="analyzeDefault('https://images.unsplash.com/photo-1479088360436-ef9dbade3214?w=1600&ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=b37ce33a6c3b8540e2386b7feceb02ef')"><img src="public/images/sample01.jpeg" class="sample-img"></a>
@@ -202,7 +202,7 @@
 					</div>
 				</div>
 			</div> <!-- END TAB-CONTENT -->
-			<p class="sub-link">Want more filters? <a href="">Sign up</a></p>
+			<p class="sub-link"><a href="http://blog.algorithmia.com/deep-filter-getting-started-style-transfer">Want to learn more about style transfer?</a></p>
 		</section>
 	</div>
 
@@ -211,9 +211,9 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-9">
-					<h2 class="has-subcontent">Built for developers</h2>
-					<h4 class="secondary">A simple, scalable API for creating smarter products</h4>
-						<h4 class="has-subcontent">Input</h4>
+					<h2 class="has-subcontent">Built For Developers</h2>
+					<h4 class="secondary">A simple, scalable API for machine intelligence</h4>
+						<h4 class="has-subcontent">Sample Input</h4>
 						<pre><code class="python">import Algorithmia
 input = {"image": "_IMAGE_URL_"}
 client = Algorithmia.client('_API_KEY_')
@@ -221,14 +221,14 @@ algo = client.algo('deeplearning/DeepFilter/0.5.0')
 
 print algo.pipe(input)
 	</code></pre>
-						<h4 class="has-subcontent">Output</h4>
+						<h4 class="has-subcontent">Sample Output</h4>
 						<pre><code class="json">{
   "savePaths": [
     "_IMAGE_URL_"
   ]
 }</code></pre>
 					<a href="https://algorithmia.com/algorithms/deeplearning/DeepFilter" class="btn btn-purple-secondary">
-						VIEW FULL ALGORITHM
+						LEARN MORE
 					</a>
 				</div>
 			</div>
@@ -239,9 +239,9 @@ print algo.pipe(input)
 	<section class="container">
 		<div class="row">
 			<div class="col-xs-12 col-md-9">
-				<h2>Join the thousands of developers using Algorithmia to build intelligent apps</h2>
+				<h2>Join the thousands of developers already building intelligent apps</h2>
 				<h4>Get 10,000 additional credits when you sign up using the code "deepfilter"</h4>
-				<a href="https://algorithmia.com/signup?invite=places" class="btn btn-green">
+				<a href="https://algorithmia.com/signup?invite=deepfilter" class="btn btn-green">
 					SIGN UP FOR FREE
 				</a>
 			</div>
@@ -252,26 +252,26 @@ print algo.pipe(input)
 	<section class="grey-background">
 		<div class="container">
 			<div class="row" id="feature-row">
-				<div class="col-sm-6 col-md-3 feature">
-					<h4>Scalable API</h4>
-					<p>With an intuitive API, you have access to more than 2,200 algorithmic microservices. Build in your preferred language using Python, JavaScript, Java, Scala, Ruby, or Rust.</p>
-					<a href="">Learn more</a>
+				<div class="col-sm-6 col-md-4 feature">
+					<h4>Algorithms as a Microservice</h4>
+					<p>Leverage an ever-growing library of more than 2,200 algorithmic microservices via an intuitive API. We provide the tools and manage the cloud infrastructure needed to run it at scale.</p>
+					<a href="http://developers.algorithmia.com/application-development/guides/">Learn more</a>
 				</div>
-				<div class="col-sm-6 col-md-3 feature">
-					<h4>Managed Platform</h4>
-					<p>Focus on building your app. We provide the tools and manage the cloud infrastructure needed to run it at scale.</p>
-					<a href="">Learn more</a>
+				<div class="col-sm-6 col-md-4 feature">
+					<h4>Web Services for Business Logic</h4>
+					<p>Instantly deploy your backend code as an API for public or private consumption. Every algorithm runs as it's own microservice, making each composable, interoperable, and secure. </p>
+					<a href="http://blog.algorithmia.com/algorithms-as-microservices/">Learn more</a>
 				</div>
-				<div class="col-sm-6 col-md-3 feature">
-					<h4>Host trained models</h4>
-					<p>Have a trained machine learning or deep learning model? Turn it into a serverless microservices in minutes. We'll show you how.</p>
-					<a href="">Learn more</a>
+				<div class="col-sm-6 col-md-4 feature">
+					<h4>Hosted Trained Models</h4>
+					<p>Have a trained machine learning or deep learning model? Turn it into a serverless microservices in minutes. We'll show you how to get started for free, and scale with ease. </p>
+					<a href="http://developers.algorithmia.com/algorithm-development/model-guides/">Learn more</a>
 				</div>
-				<div class="col-sm-6 col-md-3 feature">
+				<!-- <div class="col-sm-6 col-md-3 feature">
 					<h4>Try for free</h4>
 					<p>Get started for free, and scale with ease. Algorithmia's free tier provides 5,000 free credits per month for apps of any scale. When you're ready to grow, pay only for what you use, making it easy and cost effective to go from prototype to production.</p>
 					<a href="">Sign up</a>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</section>
@@ -281,14 +281,22 @@ print algo.pipe(input)
 		<div class="container">
 			<div class="row">
 				<div class="col-md-9">
-				<h2>Add the Deep Image Filter microservice to your app today</h2>
-				<p>Now, researchers and developers can train their deep learning models locally, and <a href="">deploy them to Algorithmia’s scalable, cloud infrastructure</a>, where they become smart API endpoints for others developers to use.</p>
-				<p>This means application developers can now obtain real-time predictions from deep learning models, and build production-ready apps using state-of-the-art machine intelligence in five-lines of code or less.</p>
-				<p>Algorithms like this deep image filter join our collection of more than 2,500 algorithmic microservices.</p>
+				<h2>Add Style Transfer to Your App</h2>
+				<p><a href="https://algorithmia.com/algorithms/deeplearning/DeepFilter">Deep Filter</a> is an implementation of <a href="https://arxiv.org/abs/1603.03417">Texture Networks: Feed-forward Synthesis of Textures and Stylized Images</a>, to create interesting and creative photo filters.</p>
+				<p>Learn more about Deep Filter with our guide to <a href="http://blog.algorithmia.com/deep-filter-getting-started-style-transfer/">getting started with style transfer</a></p>
+				<hr>
+				<h3>Want To Train Your Own Filters?</h3>
+				<p>We've open sourced our training AMI to expose the pipeline needed to train your own filters. This is the same pipeline we used with Deep Filter.</p>
+				<p>The train your own model takes approximately 26 hours end-to-end and will cost between $10 and $25 using <a href="https://aws.amazon.com/ec2/instance-types/p2/">Amazon EC2 P2 instances</a>.</p>
+				<p>Once you're finished with the tutorial, you’ll have a custom style transfer filter to use in your app.</p>
+				<a href="" class="btn btn-purple-secondary">
+						READ THE TUTORIAL
+				</a>
 				</div>
 			</div>
 		</div>
 	</section>
+
 	<footer>
 		<div class="container no-whitespace">
 			<div class="pull-left">
@@ -313,7 +321,6 @@ print algo.pipe(input)
 	<script src="public/js/dots.js"></script>
 	<script src="public/js/highlight.pack.js"></script>
 	<script src="public/js/dropzone.js"></script>
-	<!-- <script src="public/js/color.js"></script> -->
 	<script src="public/js/main.js"></script>
 	<script>hljs.initHighlightingOnLoad();</script>
 	<script>

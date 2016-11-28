@@ -5,7 +5,7 @@
 
 // Filter selection
 var defaultFilters = [
-  "none", "smooth_ride", "space_pizza", "purple_pond", "sunday", "alien_goggles"
+  "none", "smooth_ride", "crafty_painting", "purple_pond", "sunday", "oily_mcoilface"
 ];
 var currentFilter = "smooth_ride";
 

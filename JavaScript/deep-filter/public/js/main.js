@@ -136,8 +136,6 @@ function generateStylizedImage(img, filterName) {
 function displayImg(url, cb) {
   resultImg.src = url;
   resultImg.onload = function() {
-    // Scroll to image
-    resultsDiv.scrollIntoView();
     showResults();
 
     if(cb) cb();
@@ -179,6 +177,10 @@ function showResults() {
   // resultsThumbsDiv.style.height = "";
   document.getElementById("downloadLinks").classList.remove("hidden");
   resultImg.classList.remove("faded");
+  document.getElementById("results").classList.remove("hidden");
+
+  // Scroll to image
+  resultsDiv.scrollIntoView(true);
 }
 
 function clickDownload(e) {
@@ -209,7 +211,8 @@ function finishTask() {
   if(numTasks <= 0) {
     document.getElementById("overlay").classList.add("hidden");
     // document.getElementById("explainer").classList.add("hidden");
-    document.getElementById("results").classList.remove("hidden");
+    // document.getElementById("results").classList.remove("hidden");
+    // document.getElementById("resultImg").classList.remove("faded");
     // document.getElementById("social").classList.remove("invisible");
     // document.getElementById("marketing").classList.remove("hidden");
   }

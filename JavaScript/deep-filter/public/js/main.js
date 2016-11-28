@@ -105,7 +105,7 @@ function generateStylizedImage(img, filterName) {
   };
 
   Algorithmia.client(Algorithmia.api_key)
-    .algo("algo://algorithmiahq/DeepFilterDemo/0.1.9")
+    .algo("algo://algorithmiahq/DeepFilterDemo/0.1.10")
     .pipe(algoInput)
     .then(function(output) {
       if(output.error) {
@@ -156,9 +156,7 @@ function displayImgBase64(url, base64, cb) {
 
   // Update stylized canvas
   resultImg.onload = function() {
-
-    // Scroll to image
-    resultImg.scrollIntoView();
+    showResults();
 
     // Done
     if(cb) cb();

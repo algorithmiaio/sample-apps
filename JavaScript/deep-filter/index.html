@@ -215,16 +215,16 @@
 					<h4 class="secondary">A simple, scalable API for machine intelligence</h4>
 						<h4 class="has-subcontent">Sample Input</h4>
 						<pre><code class="python">import Algorithmia
-input = {"image": "_IMAGE_URL_"}
+input = {"images": ["_IMAGE_URL_"], "savePaths": ["_OUTPUT_URL_"], "filterName": "space_pizza"}
 client = Algorithmia.client('_API_KEY_')
-algo = client.algo('deeplearning/DeepFilter/0.5.0')
+algo = client.algo('deeplearning/DeepFilter/0.5.3')
 
 print algo.pipe(input)
 	</code></pre>
 						<h4 class="has-subcontent">Sample Output</h4>
 						<pre><code class="json">{
   "savePaths": [
-    "_IMAGE_URL_"
+    "_OUTPUT_URL_"
   ]
 }</code></pre>
 					<a href="https://algorithmia.com/algorithms/deeplearning/DeepFilter" class="btn btn-purple-secondary">

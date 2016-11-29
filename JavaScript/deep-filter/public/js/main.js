@@ -111,9 +111,11 @@ function generateStylizedImage(img, filterName) {
       if(output.error) {
         // Error Handling
         console.error("Algorithm error: ", output.error);
-        var statusLabel = document.getElementById("status-label");
-        statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh Oh! Something went wrong: ' + output.error.message + ' </div>';
-        taskError();
+        if(output.error.message.indexOf("Image/Url is invalid") >= 0) {
+          taskError("Image/Url is invalid");
+        } else {
+          taskError(output.error.message);
+        }
       } else {
         if(output.result.stylizedImage) {
           var url = output.result.stylizedImage;
@@ -216,7 +218,7 @@ function finishTask() {
   }
 }
 
-function taskError() {
+function taskError(err) {
   numTasks = 0;
   document.getElementById("overlay").classList.add("hidden");
   // document.getElementById("explainer").classList.add("display");
@@ -224,6 +226,9 @@ function taskError() {
   document.getElementById("results").classList.add("hidden");
   // document.getElementById("social").classList.add("invisible");
   // document.getElementById("marketing").classList.add("hidden");
+
+  var statusLabel = document.getElementById("status-label")
+  statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh oh! ' + err + ' </div>';
 }
 
 
@@ -265,9 +270,7 @@ function initDropzone() {
 
   dropzone.on("error", function(file, err) {
     dropzone.removeFile(file);
-    var statusLabel = document.getElementById("status-label")
-    statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh oh! ' + err + ' </div>';
-    taskError();
+    taskError(err);
   });
 }
 

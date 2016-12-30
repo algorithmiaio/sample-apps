@@ -1,4 +1,4 @@
-"""Retrieve text content, sentiment from URL."""
+"""Retrieve urls, text content, and sentiment from URL."""
 
 import Algorithmia
 

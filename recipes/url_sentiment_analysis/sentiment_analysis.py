@@ -37,6 +37,7 @@ def find_sentiment():
 
         algo_final = [{"url": doc["url"], "sent": sent["sentiment"], "content": sent[
             "document"]} for sent in algo_response for doc in data]
+        print(algo_final)
         return algo_final
 
     except Exception as e:

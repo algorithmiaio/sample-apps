@@ -32,13 +32,11 @@
 
 	<!-- CSS -->
     <link rel="shortcut icon" href="public/images/favicon-bw.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway" rel="stylesheet">
 	<link href="public/css/bootstrap.min.css" rel="stylesheet">
-	<link href="public/css/all.css" rel="stylesheet">
+	<link href="public/css/all_new.css" rel="stylesheet">
 	<link href="public/css/custom.css" rel="stylesheet">
-	<link href="public/css/styles/monokai.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Lato:400,300" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
-
+	<link href="public/css/monokai.css" rel="stylesheet">
 
 	<!--   Google Analytics -->
 	<script>
@@ -53,109 +51,131 @@
 
 </head>
 <body>
-	<div class="outer-container">
-		<div class="navbar navbar-default navbar-static-top navbar-public navbar-dark" role="navigation">
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="">
-						<img src="public/images/logo-white.png" alt="Algorithmia">
-					</a>
+	<nav class="navbar navbar-static-top navbar-inverse" role="navigation">
+		<div class="container no-padding">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="">
+					<img src="public/images/algoWhite.svg" alt="Algorithmia">
+				</a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav pull-right">
+					<li><a href="https://algorithmia.com/algorithms"><span>Algorithms</span></a></li>
+					<li><a href="https://algorithmia.com/use-cases">Use Cases</a></li>
+					<li><a href="https://algorithmia.com/pricing"><span>Pricing</span></a></li>
+					<li><a href="http://blog.algorithmia.com/"><span>Blog</span></a></li>
+					<li>
+						<a class="nav-link nav-username hidden-sm hidden-xs" href="https://algorithmia.com/signup">
+							Sign up
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<section class="hero purple-grad-background">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1>Search Unstructured Video</h1>
+					<h4 class="secondary-light whitespace-md">Use Computer Vision and Deep Learning to search untagged video</h4>
 				</div>
-				<div class="navbar-collapse collapse">
-					<ul class="nav navbar-nav pull-right">
-						<li><a href="https://algorithmia.com/">Algorithm API marketplace</a></li>
-					</ul>
+				<div class="col-sm-12 col-md-8">
+					<div class="card">
+						<div id="status-label"></div>
+						<h4>Search our video database for an object</h4>
+						<p class="secondary whitespace-none">Examples: chair, couch, rabbit, elephant</p>
+						<form class="search-form">
+							<input type="text" class="form-control" id="search-query" placeholder="Search">
+							<a class="btn btn-primary">
+								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+								Search
+							</a>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
+	</section>
 
-		<div class="content-container">
-			<div class="container" id="content">
-				<div class="row hero-background">
-					<div class="container hero">
-						<div id="pitch" class="col-md-7">
-							<h1>Search Unstructured Video</h1>
-							<h2 class="lead">Use Deep Learning to search untagged video</h2>
-							<div id="status-label"></div>
-							<div class="form-group well">
-								<form id="search-form">
-									<input type="text" class="form-control" id="search-query" placeholder="Enter search term here...">
-									<button class="btn btn-primary mb" type="submit">
-										<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-										Search
-									</button>
-								</form>
-								<p style="margin-bottom: 0">Example tags: chair, couch, rabbit, elephant</p>
-							</div>
-						</div>
-						<div class="col-md-5">
-							<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/3Gb3faOzvBk" frameborder="0" allowfullscreen></iframe> -->
-							<div id="player"></div>
-						</div>
-					</div>
-				</div>
-
-				<div class="row main-content">
-					<div class="container">
-						<div id="overlay" class="hidden">
-							<div class="dots-container">
-								<div class="dot dot1"></div>
-								<div class="dot dot2"></div>
-								<div class="dot dot3"></div>
-								<div class="dot dot4"></div>
-							</div>
-						</div>
-
-						<!-- EXPLANATION PAGE -->
-						<div class="row" id="explainer">
-							<div class="col-md-12">
-								<div class="explanation">
-									<h4>
-										Use deep learning image tagging to search arbitrary video
-									</h4>
-									<img src="public/images/diagram3.png" style="max-width: 100%;">
-									<hr>
-									<p>
-										<b>Join the thousands of developers using Algorithmia to build intelligent apps</b>
-										<br>
-										Create a free Algorithmia account using the code "color" and get an additional 10,000 free credits when you <a href="https://algorithmia.com/signup?invite=color" target="_new">sign up</a>.
-									</p>
-								</div>
-							</div>
-						</div>
-
-						<!-- RESULTS PAGE -->
-						<div class="row hidden" id="results">
-							<div class="col-md-12">
-								<div class="explanation">
-									<center>
-										<h4>
-											Search Results
-										</h4>
-									</center>
-
-									<ol id="search-results">
-									</ol>
-
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</div>
+	<div id="overlay" class="hidden">
+		<div class="dots-container">
+			<div class="dot dot1"></div>
+			<div class="dot dot2"></div>
+			<div class="dot dot3"></div>
+			<div class="dot dot4"></div>
 		</div>
 	</div>
-	<footer>
+
+	<!-- RESULTS -->
+	<section class="section-split" id="results">
 		<div class="container">
-			<div class="pull-left">
-				&copy; Algorithmia 2016
+			<div class="row">
+				<div class="col-md-12">
+					<div class="explanation">
+						<h2 class="whitespace-sm">Search results</h2>
+						<h4 class="whitespace-lg">Your object was found in these videos</h4>
+						<ul id="search-results">
+							<li class="row"><div class="col-md-4"><img src="http://img.youtube.com/vi/u03AWSZGavk/0.jpg" class="thumb"></div><div class="col-md-8"><h4>Mega Yacht Top 5 Walk Through</h4><p class="whitespace-sm">Appearance: <a>2:02</a> - <a>2:03</a></p><p>Confidence: 44.5%</p></div></li>
+							<li class="row"><div class="col-md-4"><img src="http://img.youtube.com/vi/Z3Q0FZUKHkY/0.jpg" class="thumb"></div><div class="col-md-8"><h4>The New Tube for London</h4><p class="whitespace-sm">Appearance: <a>2:02</a> - <a>2:03</a></p><p>Confidence: 44.5%</p></div></li>
+							<li class="row"><div class="col-md-4"><img src="http://img.youtube.com/vi/YW4ARf23to4/0.jpg" class="thumb"></div><div class="col-md-8"><h4>Al Mourjan Business Lounge - Qatar Airways - Doha Qatar</h4><p class="whitespace-sm">Appearance: <a>2:02</a> - <a>2:03</a></p><p>Confidence: 44.5%</p></div></li>
+							<li class="row"><div class="col-md-4"><img src="http://img.youtube.com/vi/K27wnFWAfh8/0.jpg" class="thumb"></div><div class="col-md-8"><h4>A tour of my HOUSE BOAT!</h4><p class="whitespace-sm">Appearance: <a>2:02</a> - <a>2:03</a></p><p>Confidence: 44.5%</p></div></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- EXPLANATION -->
+	<section class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="whitespace-sm">How it works</h2>
+				<h4 class="whitespace">Computer vision searches each video frame and recognizes your object</h4>
+				<img src="public/images/diagram3.png">
+			</div>
+		</div>
+	</section>
+
+	<!-- JOIN -->
+	<section class="grey-background">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>Join The Thousands of Developers Already Building Intelligent Apps</h2>
+					<h4>Get 10,000 additional credits when you sign up using the code "color"</h4>
+					<a href="https://algorithmia.com/signup?invite=color" class="btn btn-success">
+						SIGN UP FOR FREE
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer>
+		<div class="container md-padding">
+			<div class="row row-sm">
+				<div class="col-md-12">
+					<div class="pull-left">
+						&copy; Algorithmia 2017
+					</div>
+					<ul class="list-inline pull-right">
+						<li><a href="https://algorithmia.com/about">About</a></li>
+						<li><a href="https://algorithmia.com/terms">Terms</a></li>
+						<li><a href="https://algorithmia.com/privacy">Privacy</a></li>
+						<li><a href="http://blog.algorithmia.com" target="_blank">Blog</a></li>
+						<li><a href="https://angel.co/algorithmia/jobs/" target="_blank">Jobs</a></li>
+						<li><a href="https://algorithmia.com/contact">Contact</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</footer>
@@ -168,7 +188,7 @@
 	<script src="public/js/dots.js"></script>
 	<script src="public/js/highlight.pack.js"></script>
 	<script src="public/js/main.js"></script>
-	<script src="https://www.youtube.com/iframe_api"></script>
+	<!-- <script src="https://www.youtube.com/iframe_api"></script> -->
 	<script>hljs.initHighlightingOnLoad();</script>
 
 </body>

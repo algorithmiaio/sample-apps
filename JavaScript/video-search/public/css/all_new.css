@@ -1,0 +1,377 @@
+/* 
+*  SITEWIDE GENERAL STYLING
+*  Default style is for xs screens. Necessary responsive adjustments are made in media queries
+*  Variables in variables.less
+*/
+
+/* Wrap file in an .all tag (Temporary solution to avoid style conflicts) */
+html,
+body {
+    font-size:   16px;
+    font-size:   1em;
+    font-family: 'Open Sans', Georgia, serif;
+}
+
+/*STRUCTURE*/
+
+/*$CONTAINER*/
+/* Adds default padding to top of container. Balances whitespace from rows */
+.container            {padding-top: 64px;}
+.container.md-padding {padding-top: 32px;}
+.container.sm-padding {padding-top: 16px;}
+.container.no-padding {padding-top: 0;}
+
+/* $ROWS */
+/* Adds whitespace to rows */
+.row    {margin-bottom: 64px;}
+/* Requires .row class */
+.row-md {margin-bottom: 32px;}
+.row-sm {margin-bottom: 16px;}
+/* Centers element(s) using flexbox. Place on parent. */
+.vert-center {
+   display:                 -webkit-flex;
+   display:                 flex;
+   -webkit-flex-direction:  row;
+   flex-direction:          row;
+   -webkit-align-items:     center;
+   align-items:             center;
+   -webkit-justify-content: center;
+   justify-content:         center;
+}
+/* Aligns an element to the bottom of the container. */
+.flex-bottom {
+   display: -webkit-flex;
+   display: flex;
+   -webkit-flex-direction: column;
+   flex-direction: column;
+   -webkit-align-items: flex-end;
+   align-items: flex-end;
+}
+/* Center a single column row. Place after col-*-* class. */
+.col-centered {float: none; margin: 0 auto;}
+
+/* GENERAL ELEMENTS */
+/* Background colors for sections. Place outside of container for full page width */
+.purple-background      {background-color: #5000BE;}
+.purple-grad-background {background: linear-gradient(#6730B0, #492CAB);}
+.grey-background        {background-color: #F1F1F1;}
+/* Breaks up two ligth sections. Place outside of container for full page width. On container for container width. */
+.section-split          {border-bottom:    1px solid rgba(0,0,0,.12);}
+
+/* $NAVIGATION */
+/* navbar on top */
+.navbar {
+    background-color: #444A55;
+    margin-bottom: 0;
+}
+.navbar-inverse .navbar-nav>li>a {color: white;}
+.navbar-inverse .navbar-nav>li>a:hover {color: #C9C7CB;}
+.navbar-brand > img {
+    width: 200px;
+}
+.navbar-inverse .navbar-nav>li>a
+/* Nav Tabs. Default size is for xs screens */ 
+.nav-tabs {
+    border-bottom: 1px solid #5000BE;
+    font-size: 12px;
+    border-radius: 0;
+    font-weight: 300;
+}
+.nav-tabs > li {
+    float:      none;
+    display:    inline-block;
+}
+/* Not active. Grey with no border. */
+.nav-tabs>li>a       {color: rgba(0,0,0,.54); padding: 4px;}
+.nav-tabs>li>a:hover {
+    color:            #5000BE;
+    background-color: transparent;
+    border: 1px solid transparent;
+    cursor:           pointer;
+}
+/* Active. Purple with border. */
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:focus,
+.nav-tabs>li.active>a:hover {
+    background-color:    #FFFFFF;
+    color:               #5000BE;
+    font-weight:         300;
+    border:              1px solid #5000BE;
+    border-bottom-color: #FFFFFF;
+    border-radius:       0;
+}
+footer {border-top: 1px solid rgba(0,0,0,.12);}
+
+/* $HEADERS*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family:    'Raleway', Helvetica, sans-serif;
+    padding:        0;
+    letter-spacing: 0.04rem;
+}
+/* Used only for the hero */
+h1 {
+    font-size:      72px;
+    color:          #FFFFFF;
+    margin:         0;
+    text-shadow:    1px 3px 0 rgba(0,0,0,.12);
+}
+/* Used for section headers */
+h2 {
+    margin:    0 0 32px 0;
+    color:     rgba(0,0,0,.87);
+    font-size: 48px;
+}
+h3,
+h4 {
+    color:  rgba(0,0,0,.87);
+    margin: 0 0 8px 0;
+}
+h3,
+h4 {font-size:   24px;}
+h3 {font-weight: 700;}
+h1,
+h2,
+h4 {font-weight: 300;}
+
+/* $BODY */
+p,
+p.lg {
+    font-family:    'Open Sans', Georgia, serif;
+    color:          rgba(0,0,0,.87);
+    letter-spacing: 0.02rem;
+    line-height:    1.45;
+    margin:         0 0 16px 0;
+}
+p {
+    font-size:   1rem;
+    font-weight: 400;
+}
+/* Used for more prominent body text */
+p.lg {
+    font-size:   20px;
+    font-weight: 300;
+}
+
+img       {max-width: 100%;}
+.img-fill {width: 100%;}
+/* Colors for text. (Default is dark) */
+.secondary       {color: rgba(0,0,0,.54);}
+.light           {color: #FFFFFF;}
+.secondary-light {color: rgba(255,255,255,.7);}
+
+/* These names make more sense. Hopefully eliminate !important */
+.whitespace-none {margin-bottom: 0;}
+.whitespace-sm   {margin-bottom: 8px;}
+.whitespace      {margin-bottom: 16px;}
+.whitespace-md   {margin-bottom: 32px;}
+.whitespace-lg   {margin-bottom: 64px;}
+
+
+/* $LINKS */
+/* Purple with underline hover (Default link style) */
+a {
+    color:           #5000BE;
+    text-decoration: none;
+    cursor:          pointer;
+    font-family:     'Open Sans', Georgia, serif;
+    letter-spacing:  0.02rem;
+}
+/* For links on a dark background */
+a.light        {color: #FFFFFF; text-decoration: underline;}
+/* Hover state */
+a:hover        {color: #5000BE; text-decoration: underline;}
+a.light:hover  {color: #FFFFFF; text-decoration: none;}
+
+
+/* $BUTTONS */
+.btn {
+    display:         inline-block;
+    font-family:     'Open Sans', Georgia, serif;
+    text-transform:  uppercase;
+    text-decoration: none;
+    font-size:       1rem;
+    font-weight:     400;
+    border-radius:   0;
+    padding:         8px 16px;
+    margin:          0 0 32px 0;
+    letter-spacing:  0.08rem;
+    line-height:     1.45;
+    cursor:          pointer;
+}
+.btn:hover {
+    transition: ease-in-out .3s;
+    text-decoration: none;  
+}
+/* Purple with white */
+.btn-primary {
+    color:            #FFFFFF;
+    background-color: #5000BE;
+    border: 1px solid #FFFFFF;
+}
+.btn-primary:hover {
+    color:            #5000BE;
+    background-color: #FFFFFF;
+    text-decoration:  none;
+    border: 1px solid #5000BE;
+}
+.btn-primary:focus {
+    text-decoration:  none;
+    background-color: #5000BE;
+    color:            #FFFFFF;
+    border: 1px solid #FFFFFF;
+}
+
+/* White with purple */
+.btn-primary-inverted {
+    color:            #5000BE;
+    background-color: #FFFFFF;
+    border: 1px solid #5000BE;
+}
+.btn-primary-inverted:hover {
+    color:            #FFFFFF;
+    background-color: #5000BE;
+    border: 1px solid #FFFFFF;
+}
+.btn-primary-inverted:focus {
+    color:            #5000BE;
+    background-color: #FFFFFF;
+    text-decoration:  none;
+    border: 1px solid #5000BE;
+}
+
+/* Blue with white */
+.btn-info {
+    color:            #FFFFFF;
+    background-color: #0055BE;
+    border: 1px solid #FFFFFF;
+}
+.btn-info:hover {
+    color:            #0055BE;
+    background-color: #FFFFFF;
+    text-decoration:  none;
+    border: 1px solid #0055BE;
+}
+.btn-info:focus {
+    color:            #FFFFFF;
+    background-color: #0055BE;
+    text-decoration:  none;
+    border: 1px solid #FFFFFF;
+}
+
+/* White with blue */
+.btn-info-inverted {
+    color:            #0055BE;
+    background-color: #FFFFFF;
+    border: 1px solid #0055BE;
+}
+.btn-info-inverted:hover {
+    color:            #FFFFFF;
+    background-color: #0055BE;
+    border: 1px solid #FFFFFF;
+}
+.btn-info-inverted:focus {
+    color:            #0055BE;
+    background-color: #FFFFFF;
+    text-decoration:  none;
+    border: 1px solid #0055BE;
+}
+
+/* Green with white */
+.btn-success {
+    color:            #FFFFFF;
+    background-color: #5CB85C;
+    border: 1px solid #5CB85C;
+}
+.btn-success:hover {
+    color:            #5CB85C;
+    background-color: #FFFFFF;
+    border: 1px solid #5CB85C;
+}
+.btn-success:focus {
+    color:            #FFFFFF;
+    background-color: #5CB85C;
+    text-decoration:  none;
+    border: 1px solid #5CB85C;
+}
+
+/* White with green */
+.btn-success-inverted {
+    color:            #5CB85C;
+    background-color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+}
+.btn-success-inverted:hover {
+    color:            #FFFFFF;
+    background-color: #5CB85C;
+    border: 1px solid #FFFFFF;
+}
+.btn-success-inverted:focus {
+    color:            #5CB85C;
+    background-color: #FFFFFF;
+    text-decoration:  none;
+    border: 1px solid #FFFFFF;
+}
+
+/* Moves btn to right side. Place on parent */
+.btn-right {text-align: right;}
+
+/* $ICONS */
+.icons       {display: block;}
+.social-icon {
+    width:        24px;
+    max-height:   24px;
+    display:      inline-block;
+    margin-right: 8px;
+}
+.social-icon:hover {opacity: .7;}
+
+/* $FORMS */
+.card {
+  padding: 24px;
+  padding-bottom: 32px;
+  background-color: rgba(255,255,255,.85);
+}
+form {
+    font-size:      1rem;
+    height:         46px;
+    /* vertical center */
+    display:        flex;
+    align-items:    center;
+}
+form:focus {
+    border: 1px solid #5000BE;
+    -webkit-box-shadow: none;
+    box-shadow:         none;
+}
+form .btn {margin-bottom: 0;}
+
+.form-control {
+    font-family: 
+    display: inline-block;
+    max-width: 100%;
+    border-radius: 0;
+    height: 41px;
+}
+
+/* $MEDIA QUERIES */
+/* Extra small devices (phones, less than 768px) */
+/* This should be the default AKA no styles here */
+@media (min-width: @screen-xs-min) {}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: @screen-sm-min) {
+    /* Bump up tab size for larger screens */
+    .nav-tabs      {font-size: 20px;}
+    .nav-tabs>li>a {padding:   8px 16px;}
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) {}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: @screen-lg-min) {}

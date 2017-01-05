@@ -1,5 +1,11 @@
 /*Put Custom Styles Here*/
 
+
+/* Search results */
+#search-results {list-style-type: none; padding: 0; margin: 0;}
+
+
+
 @media (max-width: 767px){
 	.visible-xs-block {
 		padding-bottom: 10px;

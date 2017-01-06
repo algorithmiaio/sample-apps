@@ -68,6 +68,9 @@ body {
     /* vertical center */
     display:        flex;
     align-items:    center;
+    
+    border-bottom: none;
+    box-shadow: 0 3px 10px 0 rgba(0,0,0,.54);
 }
 .navbar-inverse .navbar-nav>li>a       {color: white;}
 .navbar-inverse .navbar-nav>li>a:hover {color: #C9C7CB;}
@@ -105,7 +108,14 @@ body {
     border-bottom-color: #FFFFFF;
     border-radius:       0;
 }
-footer {border-top: 1px solid rgba(0,0,0,.12);}
+/* $HERO */
+.hero {
+    padding-top: 4rem; /* makes up for fixed nav */
+}
+/* $FOOTER */
+footer {
+    border-top: 1px solid rgba(0,0,0,.12);
+}
 
 /* $HEADERS*/
 h1,
@@ -172,11 +182,11 @@ img       {max-width: 100%;}
 .secondary-light {color: rgba(255,255,255,.7);}
 
 /* These names make more sense. Hopefully eliminate !important */
-.whitespace-none {margin-bottom: 0;}
-.whitespace-sm   {margin-bottom: .5rem;}
-.whitespace      {margin-bottom: 1rem;}
-.whitespace-md   {margin-bottom: 2rem;}
-.whitespace-lg   {margin-bottom: 4rem;}
+.whitespace-none {margin-bottom: 0!important;}
+.whitespace-sm   {margin-bottom: .5rem!important;}
+.whitespace      {margin-bottom: 1rem!important;}
+.whitespace-md   {margin-bottom: 2rem!important;}
+.whitespace-lg   {margin-bottom: 4rem!important;}
 
 /* $LINKS */
 /* Purple with underline hover (Default link style) */
@@ -199,10 +209,9 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
     font-family:     'Open Sans', Georgia, serif;
     text-transform:  uppercase;
     text-decoration: none;
-    font-size:       1rem;
     font-weight:     400;
     border-radius:   0;
-    padding:         .5rem 1rem;
+    padding:         .5rem 1rem!important; /* for navbar */
     margin:          0 0 2rem 0;
     letter-spacing:  0.08rem;
     line-height:     1.45;
@@ -216,7 +225,7 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
 .btn-primary {
     color:            #FFFFFF;
     background-color: #5000BE;
-    border: 1px solid #FFFFFF;
+    border: 1px solid #5000BE;
 }
 .btn-primary:hover {
     color:            #5000BE;
@@ -293,7 +302,7 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
     border: 1px solid #5CB85C;
 }
 .btn-success:hover {
-    color:            #5CB85C;
+    color:            #5CB85C!important; /* for the navbar */
     background-color: #FFFFFF;
     border: 1px solid #5CB85C;
 }

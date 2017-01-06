@@ -57,7 +57,7 @@ body {
 .purple-grad-background {background: linear-gradient(#6730B0, #492CAB);}
 .grey-background        {background-color: #F1F1F1;}
 /* Breaks up two ligth sections. Place outside of container for full page width. On container for container width. */
-.section-split          {border-bottom: 1px solid rgba(0,0,0,.12);}
+.border-bottom          {border-bottom: 1px solid rgba(0,0,0,.12);}
 
 /* $NAVIGATION */
 /* navbar on top */
@@ -77,7 +77,11 @@ body {
 .navbar-brand > img {
     width: 230px;
 }
-.navbar-inverse .navbar-nav>li>a
+.navbar-inverse .navbar-nav>li>a {}
+.navbar-btn {
+    margin-top: 8px!important; /* for navbar */
+    margin-bottom: 8px!important;
+}
 /* Nav Tabs. Default size is for xs screens */ 
 .nav-tabs {
     border-bottom: 1px solid #5000BE;
@@ -229,29 +233,29 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
 }
 .btn-primary:hover {
     color:            #5000BE;
-    background-color: #FFFFFF;
+    background-color: transparent;
     text-decoration:  none;
     border: 1px solid #5000BE;
 }
 .btn-primary:focus {
     text-decoration:  none;
     background-color: #5000BE;
-    color:            #FFFFFF;
+    color:            transparent;
     border: 1px solid #FFFFFF;
 }
 
 /* White with purple */
-.btn-primary-inverted {
+.btn-primary-inverse {
     color:            #5000BE;
     background-color: #FFFFFF;
     border: 1px solid #5000BE;
 }
-.btn-primary-inverted:hover {
+.btn-primary-inverse:hover {
     color:            #FFFFFF;
     background-color: #5000BE;
     border: 1px solid #FFFFFF;
 }
-.btn-primary-inverted:focus {
+.btn-primary-inverse:focus {
     color:            #5000BE;
     background-color: #FFFFFF;
     text-decoration:  none;
@@ -278,17 +282,17 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
 }
 
 /* White with blue */
-.btn-info-inverted {
+.btn-info-inverse {
     color:            #0055BE;
     background-color: #FFFFFF;
     border: 1px solid #0055BE;
 }
-.btn-info-inverted:hover {
+.btn-info-inverse:hover {
     color:            #FFFFFF;
     background-color: #0055BE;
     border: 1px solid #FFFFFF;
 }
-.btn-info-inverted:focus {
+.btn-info-inverse:focus {
     color:            #0055BE;
     background-color: #FFFFFF;
     text-decoration:  none;
@@ -303,28 +307,28 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
 }
 .btn-success:hover {
     color:            #5CB85C!important; /* for the navbar */
-    background-color: #FFFFFF;
+    background-color: transparent;
     border: 1px solid #5CB85C;
 }
 .btn-success:focus {
     color:            #FFFFFF;
-    background-color: #5CB85C;
+    background-color: transparent;
     text-decoration:  none;
     border: 1px solid #5CB85C;
 }
 
 /* White with green */
-.btn-success-inverted {
-    color:            #5CB85C;
-    background-color: #FFFFFF;
-    border: 1px solid #FFFFFF;
+.btn-success-inverse {
+    color:            #5CB85C!important; /* for the navbar */
+    background-color: transparent;
+    border: 1px solid #5CB85C;
 }
-.btn-success-inverted:hover {
-    color:            #FFFFFF;
-    background-color: #5CB85C;
-    border: 1px solid #FFFFFF;
+.btn-success-inverse:hover {
+    color:            #FFFFFF!important;
+    background-color: #5CB85C!important;
+    border: 1px solid #5CB85C;
 }
-.btn-success-inverted:focus {
+.btn-success-inverse:focus {
     color:            #5CB85C;
     background-color: #FFFFFF;
     text-decoration:  none;

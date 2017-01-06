@@ -10,23 +10,24 @@ body {
     font-size:   16px;
     font-size:   1em;
     font-family: 'Open Sans', Georgia, serif;
+    font-weight: 300;
 }
 
 /*STRUCTURE*/
 
 /*$CONTAINER*/
 /* Adds default padding to top of container. Balances whitespace from rows */
-.container            {padding-top: 64px;}
-.container.md-padding {padding-top: 32px;}
-.container.sm-padding {padding-top: 16px;}
+.container            {padding-top: 4rem;}
+.container.md-padding {padding-top: 2rem;}
+.container.sm-padding {padding-top: 1rem;}
 .container.no-padding {padding-top: 0;}
 
 /* $ROWS */
 /* Adds whitespace to rows */
-.row    {margin-bottom: 64px;}
+.row    {margin-bottom: 4rem;}
 /* Requires .row class */
-.row-md {margin-bottom: 32px;}
-.row-sm {margin-bottom: 16px;}
+.row-md {margin-bottom: 2rem;}
+.row-sm {margin-bottom: 1rem;}
 /* Centers element(s) using flexbox. Place on parent. */
 .vert-center {
    display:                 -webkit-flex;
@@ -56,24 +57,28 @@ body {
 .purple-grad-background {background: linear-gradient(#6730B0, #492CAB);}
 .grey-background        {background-color: #F1F1F1;}
 /* Breaks up two ligth sections. Place outside of container for full page width. On container for container width. */
-.section-split          {border-bottom:    1px solid rgba(0,0,0,.12);}
+.section-split          {border-bottom: 1px solid rgba(0,0,0,.12);}
 
 /* $NAVIGATION */
 /* navbar on top */
 .navbar {
+    min-height: 4rem;
     background-color: #444A55;
     margin-bottom: 0;
+    /* vertical center */
+    display:        flex;
+    align-items:    center;
 }
-.navbar-inverse .navbar-nav>li>a {color: white;}
+.navbar-inverse .navbar-nav>li>a       {color: white;}
 .navbar-inverse .navbar-nav>li>a:hover {color: #C9C7CB;}
 .navbar-brand > img {
-    width: 200px;
+    width: 230px;
 }
 .navbar-inverse .navbar-nav>li>a
 /* Nav Tabs. Default size is for xs screens */ 
 .nav-tabs {
     border-bottom: 1px solid #5000BE;
-    font-size: 12px;
+    font-size: .75rem;
     border-radius: 0;
     font-weight: 300;
 }
@@ -82,7 +87,7 @@ body {
     display:    inline-block;
 }
 /* Not active. Grey with no border. */
-.nav-tabs>li>a       {color: rgba(0,0,0,.54); padding: 4px;}
+.nav-tabs>li>a       {color: rgba(0,0,0,.54); padding: .25rem;}
 .nav-tabs>li>a:hover {
     color:            #5000BE;
     background-color: transparent;
@@ -115,28 +120,28 @@ h6 {
 }
 /* Used only for the hero */
 h1 {
-    font-size:      72px;
+    font-size:      4rem;
     color:          #FFFFFF;
     margin:         0;
     text-shadow:    1px 3px 0 rgba(0,0,0,.12);
 }
 /* Used for section headers */
 h2 {
-    margin:    0 0 32px 0;
+    margin:    0 0 2rem 0;
     color:     rgba(0,0,0,.87);
-    font-size: 48px;
+    font-size: 3rem;
 }
 h3,
 h4 {
+    font-size:   1.5rem;
     color:  rgba(0,0,0,.87);
-    margin: 0 0 8px 0;
+    margin: 0 0 .5rem 0;
 }
-h3,
-h4 {font-size:   24px;}
 h3 {font-weight: 700;}
 h1,
 h2,
 h4 {font-weight: 300;}
+h4 {color: rgba(0,0,0,.54);}
 
 /* $BODY */
 p,
@@ -145,7 +150,7 @@ p.lg {
     color:          rgba(0,0,0,.87);
     letter-spacing: 0.02rem;
     line-height:    1.45;
-    margin:         0 0 16px 0;
+    margin:         0 0 1rem 0;
 }
 p {
     font-size:   1rem;
@@ -153,24 +158,25 @@ p {
 }
 /* Used for more prominent body text */
 p.lg {
-    font-size:   20px;
+    font-size:   1.25rem;
     font-weight: 300;
 }
 
 img       {max-width: 100%;}
 .img-fill {width: 100%;}
+
 /* Colors for text. (Default is dark) */
+.dark            {color: rgba(0,0,0,.87);}
 .secondary       {color: rgba(0,0,0,.54);}
 .light           {color: #FFFFFF;}
 .secondary-light {color: rgba(255,255,255,.7);}
 
 /* These names make more sense. Hopefully eliminate !important */
 .whitespace-none {margin-bottom: 0;}
-.whitespace-sm   {margin-bottom: 8px;}
-.whitespace      {margin-bottom: 16px;}
-.whitespace-md   {margin-bottom: 32px;}
-.whitespace-lg   {margin-bottom: 64px;}
-
+.whitespace-sm   {margin-bottom: .5rem;}
+.whitespace      {margin-bottom: 1rem;}
+.whitespace-md   {margin-bottom: 2rem;}
+.whitespace-lg   {margin-bottom: 4rem;}
 
 /* $LINKS */
 /* Purple with underline hover (Default link style) */
@@ -187,7 +193,6 @@ a.light        {color: #FFFFFF; text-decoration: underline;}
 a:hover        {color: #5000BE; text-decoration: underline;}
 a.light:hover  {color: #FFFFFF; text-decoration: none;}
 
-
 /* $BUTTONS */
 .btn {
     display:         inline-block;
@@ -197,8 +202,8 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
     font-size:       1rem;
     font-weight:     400;
     border-radius:   0;
-    padding:         8px 16px;
-    margin:          0 0 32px 0;
+    padding:         .5rem 1rem;
+    margin:          0 0 2rem 0;
     letter-spacing:  0.08rem;
     line-height:     1.45;
     cursor:          pointer;
@@ -323,55 +328,28 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
 /* $ICONS */
 .icons       {display: block;}
 .social-icon {
-    width:        24px;
-    max-height:   24px;
+    width:        1.5rem;
+    max-height:   1.5rem;
     display:      inline-block;
-    margin-right: 8px;
+    margin-right: .5rem;
 }
 .social-icon:hover {opacity: .7;}
-
-/* $FORMS */
-.card {
-  padding: 24px;
-  padding-bottom: 32px;
-  background-color: rgba(255,255,255,.85);
-}
-form {
-    font-size:      1rem;
-    height:         46px;
-    /* vertical center */
-    display:        flex;
-    align-items:    center;
-}
-form:focus {
-    border: 1px solid #5000BE;
-    -webkit-box-shadow: none;
-    box-shadow:         none;
-}
-form .btn {margin-bottom: 0;}
-
-.form-control {
-    font-family: 
-    display: inline-block;
-    max-width: 100%;
-    border-radius: 0;
-    height: 41px;
-}
 
 /* $MEDIA QUERIES */
 /* Extra small devices (phones, less than 768px) */
 /* This should be the default AKA no styles here */
-@media (min-width: @screen-xs-min) {}
+/*@media (min-width: @screen-xs-min) {}*/
 
 /* Small devices (tablets, 768px and up) */
-@media (min-width: @screen-sm-min) {
+@media (min-width: 768px;) {
     /* Bump up tab size for larger screens */
-    .nav-tabs      {font-size: 20px;}
-    .nav-tabs>li>a {padding:   8px 16px;}
+    .nav-tabs           {font-size: 1.25rem;}
+    .nav-tabs>li>a      {padding:   .5rem 1rem;}
+    .navbar-brand > img {width:     250px;}
 }
 
 /* Medium devices (desktops, 992px and up) */
-@media (min-width: @screen-md-min) {}
+@media (min-width: 992px;) {}
 
 /* Large devices (large desktops, 1200px and up) */
-@media (min-width: @screen-lg-min) {}
+@media (min-width: 1200px;) {}

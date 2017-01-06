@@ -1,5 +1,5 @@
 window.Algorithmia = window.Algorithmia || {};
-Algorithmia.api_key = "simVA6mMJbemgUKK4ovk241xVrN1"
+Algorithmia.api_key = "YOUR_API_KEY"
 
 function updateUrl() {
 

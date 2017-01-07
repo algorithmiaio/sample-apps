@@ -1,5 +1,13 @@
-@import url("bootstrap.min.css");
 @import url("spinner.css");
+
+
+.card {
+  padding: 1.5rem;
+
+  background-color: rgba(255,255,255,.7);
+  border-radius: 0;
+  box-shadow: 2px 3px 10px 0 rgba(0,0,0,.54);
+}
 
 header {
   color: rgb(80, 0, 190);
@@ -8,7 +16,7 @@ header {
 }
 
 table td {
-  padding-bottom: 10px;
+  padding-bottom: 3rem;
   vertical-align: top;
 }
 

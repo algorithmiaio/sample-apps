@@ -1,5 +1,5 @@
 window.Algorithmia = window.Algorithmia || {};
-Algorithmia.api_key = "YOUR_API_KEY"
+Algorithmia.api_key = "YOUR_API_KEY_HERE"
 
 function updateUrl() {
 
@@ -51,8 +51,8 @@ function analyze() {
           output.appendChild(row);
           var itemHTML = '<td>' + (Number(index) + 1) + '.&nbsp;</td>';
           itemHTML += '<td>';
-          itemHTML += '<div><a href="' + itemUrl + '">' + item.title + '</a></div>';
-          itemHTML += '<div class="summary small"></div>';
+          itemHTML += '<div><p class="lg whitespace-sm"><a href="' + itemUrl + '">' + item.title + '</a></p></div>';
+          itemHTML += '<div class="summary"></div>';
           itemHTML += '<div class="tags"></div>';
           itemHTML += '</td>';
           itemHTML += '<td class="sentiment" width="20"></td>';

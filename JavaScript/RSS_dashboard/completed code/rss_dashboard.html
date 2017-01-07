@@ -4,7 +4,9 @@
 <title>RSS Dashboard - Algorithmia</title>
 
 <!-- Feel free to replace, modify, or tweak with your own styles! -->
-<link rel="stylesheet" media="screen" href="css/main.css">
+<link rel="stylesheet" media="screen" href="css/bootstrap.min.css">
+<link rel="stylesheet" media="screen" href="css/all.css">
+<link rel="stylesheet" media="screen" href="css/custom.css">
 <link rel="shortcut icon" href="favicon.png" type="image/png">
 <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 
@@ -14,21 +16,50 @@
 </head>
 
 <body>
-  <section class="container">
-    <div class="row">
+<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+  <div class="container no-padding">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="">
+        <img src="public/images/algoWhite.svg" alt="Algorithmia">
+      </a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav pull-right">
+        <li><a href="https://algorithmia.com/algorithms"><span>Algorithms</span></a></li>
+        <li><a href="https://algorithmia.com/use-cases">Use Cases</a></li>
+        <li><a href="https://algorithmia.com/pricing"><span>Pricing</span></a></li>
+        <li><a href="http://blog.algorithmia.com/"><span>Blog</span></a></li>
+        <li>
+          <a class="nav-link nav-username btn btn-success whitespace-none hidden-sm hidden-xs" href="https://algorithmia.com/signup">
+            Sign up
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section class="hero purple-grad-background">
+  <div class="container">
+
+    <div class="row row-sm">
       <div class="col-md-12">
         <h1>RSS Dashboard</h1>
-        <h4>
-          This tool takes in a URL to an RSS feed, and offers automatically generated tag suggestions, text summary, and sentiment analysis.
-        </h4>
+        <h4 class="secondary-light whitespace-md">This tool takes in a URL to an RSS feed, and offers automatically generated tag suggestions, text summary, and sentiment analysis.</h4>
       </div>
     </div>
 
-    <!-- Inputs -->
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-6">
+      <div class="card">
+        <!-- Inputs -->
         <div class="form-group" style="margin-bottom: 6px;">
-
           <label class="block">Select an example RSS feed:</label>
           <select id="urlDD" class="form-control" onchange="updateUrl()" style="max-width: 350px; width: 95%;">
             <option disabled>Select an example RSS feed</option>
@@ -42,38 +73,34 @@
             <option value="http://blog.algorithmia.com/rss">Algorithmia Blog</option>
           </select>
         </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12">
+           
         <label class="block">Or input your own:</label>
         <div class="form-group">
           <input class="form-control" style="max-width: 350px; width: 95%;" id="inputStrings">
         </div>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col-md-12">
         <div class="form-group">
-          <button class="btn btn-primary" onclick="analyze()">Analyze RSS</button>
+          <button class="btn btn-primary whitespace-none" onclick="analyze()">Analyze RSS</button>
           <span class="aspinner hidden" id="algo-spinner"></span>
           <span id="status-label"></span>
         </div>
+
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="row">
-      <div class="col-md-12">
-        <table border="0" cellpadding="0" cellspacing="0" width="75%">
-          <tbody id="output"> 
-          </tbody>
-        </table>
-      </div>
+<section class="container">    
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="border-bottom">Results</h2>
+      <table border="0" cellpadding="0" cellspacing="0" width="75%">
+        <tbody id="output"> 
+        </tbody>
+      </table>
     </div>
-
-  </section>
+  </div>
+</section>
 
 <script>
   updateUrl();

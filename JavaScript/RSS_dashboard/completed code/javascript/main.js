@@ -1,5 +1,5 @@
 window.Algorithmia = window.Algorithmia || {};
-Algorithmia.api_key = ""
+Algorithmia.api_key = "YOUR_API_KEY_HERE"
 
 function updateUrl() {
 
@@ -49,10 +49,11 @@ function analyze() {
           // Create table and elements into which we will stick the results of our algorithms
           var row = document.createElement("tr");
           output.appendChild(row);
-          var itemHTML = '<td>' + (Number(index) + 1) + '.&nbsp;</td>';
+          var itemHTML = '<td class="list-number">' + (Number(index) + 1) + '.&nbsp;</td>';
           itemHTML += '<td>';
-          itemHTML += '<div><p class="lg whitespace-sm"><a href="' + itemUrl + '">' + item.title + '</a></p></div>';
+          itemHTML += '<div><h4 class="result"><a href="' + itemUrl + '">' + item.title + '</a></p></div>';
           itemHTML += '<div class="summary"></div>';
+          itemHTML += '<p class="tag-label">Generated tags:</p>';
           itemHTML += '<div class="tags"></div>';
           itemHTML += '</td>';
           itemHTML += '<td class="sentiment"></td>';
@@ -131,11 +132,11 @@ function sentiment(itemText, sentimentElement) {
   startTask();
 
   var smileys = [
-    '<i class="fa fa-frown-o"></i>',
-    '<i class="fa fa-frown-o"></i>',
-    '<i class="fa fa-meh-o"></i>',
-    '<i class="fa fa-smile-o"></i>',
-    '<i class="fa fa-smile-o"></i>'
+    'Sentiment Analysis: <i class="fa fa-frown-o"></i>',
+    'Sentiment Analysis: <i class="fa fa-frown-o"></i>',
+    'Sentiment Analysis: <i class="fa fa-meh-o"></i>',
+    'Sentiment Analysis: <i class="fa fa-smile-o"></i>',
+    'Sentiment Analysis: <i class="fa fa-smile-o"></i>'
   ];
 
   // Query sentiment analysis

@@ -134,7 +134,7 @@ h6 {
 }
 /* Used only for the hero */
 h1 {
-    font-size:      4rem;
+    font-size:      3rem;
     color:          #FFFFFF;
     margin:         0;
     text-shadow:    1px 3px 0 rgba(0,0,0,.12);
@@ -216,7 +216,6 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
     font-weight:     400;
     border-radius:   0;
     padding:         .5rem 1rem!important; /* for navbar */
-    margin:          0 0 2rem 0;
     letter-spacing:  0.08rem;
     line-height:     1.45;
     cursor:          pointer;
@@ -359,6 +358,7 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
     .nav-tabs           {font-size: 1.25rem;}
     .nav-tabs>li>a      {padding:   .5rem 1rem;}
     .navbar-brand > img {width:     250px;}
+    h1 {font-size: 4em;}
 }
 
 /* Medium devices (desktops, 992px and up) */

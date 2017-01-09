@@ -8,16 +8,15 @@
 
 .card {
   padding: 1.5rem;
-
   background-color: rgba(255,255,255,.7);
   border-radius: 0;
   box-shadow: 2px 3px 10px 0 rgba(0,0,0,.54);
-
 }
 
 .form-control {
   width: 95%;
 }
+.text-danger {display: block; margin-top: .5rem;}
 
 header {
   color: rgb(80, 0, 190);
@@ -25,15 +24,24 @@ header {
   font-weight: bold;
 }
 
+.list-number {font-weight: 700; padding-top: .25rem;}
 table td {
-  padding-bottom: 3rem;
+  padding-bottom: 4rem;
   vertical-align: top;
 }
+.summary     {margin-bottom: .5rem;}
+.sentiment   {padding-left: .5rem; font-size: .75rem; font-weight: 700;}
+.sentiment i {font-size: 2rem;}
 
+.fa-frown-o {color: #4640FF;}
+.fa-meh-o   {color: #777777;}
+.fa-smile-o {color: #5cb85c;}
+.tag-label {margin-bottom: 0;}
 span.label {
-  font-size: 10px;
+  font-size: .75rem;
+  line-height: 2;
 }
 
-form-group {
+.form-group {
   margin-bottom: 6px;
 }

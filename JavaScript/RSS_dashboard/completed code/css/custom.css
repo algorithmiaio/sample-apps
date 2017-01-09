@@ -1,5 +1,10 @@
 @import url("spinner.css");
 
+.hero {    
+    background-image: url(../images/newspaper.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
 .card {
   padding: 1.5rem;
@@ -7,6 +12,11 @@
   background-color: rgba(255,255,255,.7);
   border-radius: 0;
   box-shadow: 2px 3px 10px 0 rgba(0,0,0,.54);
+
+}
+
+.form-control {
+  width: 95%;
 }
 
 header {

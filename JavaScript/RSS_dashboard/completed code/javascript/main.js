@@ -1,5 +1,5 @@
 window.Algorithmia = window.Algorithmia || {};
-Algorithmia.api_key = "YOUR_API_KEY_HERE"
+Algorithmia.api_key = ""
 
 function updateUrl() {
 
@@ -55,7 +55,7 @@ function analyze() {
           itemHTML += '<div class="summary"></div>';
           itemHTML += '<div class="tags"></div>';
           itemHTML += '</td>';
-          itemHTML += '<td class="sentiment" width="20"></td>';
+          itemHTML += '<td class="sentiment"></td>';
           row.innerHTML += itemHTML;
 
           var summaryElement = row.getElementsByClassName("summary")[0];

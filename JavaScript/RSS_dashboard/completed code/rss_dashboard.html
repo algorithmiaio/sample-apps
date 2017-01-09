@@ -26,7 +26,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="">
-        <img src="public/images/algoWhite.svg" alt="Algorithmia">
+        <img src="../images/algoWhite.svg" alt="Algorithmia">
       </a>
     </div>
     <div class="navbar-collapse collapse">
@@ -57,34 +57,36 @@
 
     <div class="row">
       <div class="col-md-6">
-      <div class="card">
+      <div class="blur-container">
+        <div class="blur"></div>
+        <div class="card">
         <!-- Inputs -->
-        <div class="form-group" style="margin-bottom: 6px;">
-          <label class="block">Select an example RSS feed:</label>
-          <select id="urlDD" class="form-control" onchange="updateUrl()" style="max-width: 350px; width: 95%;">
-            <option disabled>Select an example RSS feed</option>
+          <div class="form-group">
+            <label class="block">Select an example RSS feed:</label>
+            <select id="urlDD" class="form-control" onchange="updateUrl()">
+              <option disabled>Select an example RSS feed</option>
 
-            <!-- Replace these with links to your favorite RSS feeds -->
-            <option value="https://news.ycombinator.com/rss">HackerNews</option>
-            <option value="http://feeds.feedburner.com/codinghorror">Coding Horror</option>
-            <option value="https://www.reddit.com/r/programming/.rss">r/programming</option>
-            <option value="http://www.alistapart.com/feed/rss.xml">A List Apart</option>
-            <option value="http://www.nytimes.com/services/xml/rss/nyt/Technology.xml">NYT Technology</option>
-            <option value="http://blog.algorithmia.com/rss">Algorithmia Blog</option>
-          </select>
-        </div>
-           
-        <label class="block">Or input your own:</label>
-        <div class="form-group">
-          <input class="form-control" style="max-width: 350px; width: 95%;" id="inputStrings">
-        </div>
+              <!-- Replace these with links to your favorite RSS feeds -->
+              <option value="https://news.ycombinator.com/rss">HackerNews</option>
+              <option value="http://feeds.feedburner.com/codinghorror">Coding Horror</option>
+              <option value="https://www.reddit.com/r/programming/.rss">r/programming</option>
+              <option value="http://www.alistapart.com/feed/rss.xml">A List Apart</option>
+              <option value="http://www.nytimes.com/services/xml/rss/nyt/Technology.xml">NYT Technology</option>
+              <option value="http://blog.algorithmia.com/rss">Algorithmia Blog</option>
+            </select>
+          </div>
+             
+          <label class="block">Or input your own:</label>
+          <div class="form-group">
+            <input class="form-control" id="inputStrings">
+          </div>
 
-        <div class="form-group">
-          <button class="btn btn-primary whitespace-none" onclick="analyze()">Analyze RSS</button>
-          <span class="aspinner hidden" id="algo-spinner"></span>
-          <span id="status-label"></span>
+          <div class="form-group">
+            <button class="btn btn-primary whitespace-none" onclick="analyze()">Analyze RSS</button>
+            <span class="aspinner hidden" id="algo-spinner"></span>
+            <span id="status-label"></span>
+          </div>
         </div>
-
       </div>
     </div>
   </div>

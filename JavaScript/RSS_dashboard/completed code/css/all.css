@@ -79,7 +79,7 @@ body {
 }
 .navbar-inverse .navbar-nav>li>a {}
 .navbar-btn {
-    margin-top: 8px!important; /* for navbar */
+    margin-top:    8px!important; /* for navbar */
     margin-bottom: 8px!important;
 }
 /* Nav Tabs. Default size is for xs screens */ 
@@ -240,7 +240,7 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
 .btn-primary:focus {
     text-decoration:  none;
     background-color: #5000BE;
-    color:            transparent;
+    color:            #FFFFFF;
     border: 1px solid #FFFFFF;
 }
 

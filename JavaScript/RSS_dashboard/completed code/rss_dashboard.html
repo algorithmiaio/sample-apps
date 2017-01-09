@@ -5,6 +5,7 @@
 
 <!-- Feel free to replace, modify, or tweak with your own styles! -->
 <link rel="stylesheet" media="screen" href="css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700|Raleway:300,400,700" rel="stylesheet">
 <link rel="stylesheet" media="screen" href="css/all.css">
 <link rel="stylesheet" media="screen" href="css/custom.css">
 <link rel="shortcut icon" href="favicon.png" type="image/png">
@@ -36,8 +37,8 @@
         <li><a href="https://algorithmia.com/pricing"><span>Pricing</span></a></li>
         <li><a href="http://blog.algorithmia.com/"><span>Blog</span></a></li>
         <li>
-          <a class="nav-link nav-username btn btn-success whitespace-none hidden-sm hidden-xs" href="https://algorithmia.com/signup">
-            Sign up
+          <a class="btn btn-success-inverse navbar-btn hidden-sm hidden-xs" href="https://algorithmia.com/signup">
+              Sign up
           </a>
         </li>
       </ul>
@@ -49,7 +50,7 @@
   <div class="container">
 
     <div class="row row-sm">
-      <div class="col-md-12">
+      <div class="col-md-12 col-lg-8">
         <h1>RSS Dashboard</h1>
         <h4 class="secondary-light whitespace-md">This tool takes in a URL to an RSS feed, and offers automatically generated tag suggestions, text summary, and sentiment analysis.</h4>
       </div>
@@ -57,8 +58,6 @@
 
     <div class="row">
       <div class="col-md-6">
-      <div class="blur-container">
-        <div class="blur"></div>
         <div class="card">
         <!-- Inputs -->
           <div class="form-group">
@@ -96,6 +95,7 @@
   <div class="row">
     <div class="col-md-12">
       <h2 class="border-bottom">Results</h2>
+      <h4 id="hide-if-results">Analyze an RSS feed to get results.</h4>
       <table border="0" cellpadding="0" cellspacing="0" width="75%">
         <tbody id="output"> 
         </tbody>

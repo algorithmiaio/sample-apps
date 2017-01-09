@@ -77,7 +77,6 @@ body {
 .navbar-brand > img {
     width: 230px;
 }
-.navbar-inverse .navbar-nav>li>a {}
 .navbar-btn {
     margin-top: 8px!important; /* for navbar */
     margin-bottom: 8px!important;
@@ -354,7 +353,7 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
 /*@media (min-width: @screen-xs-min) {}*/
 
 /* Small devices (tablets, 768px and up) */
-@media (min-width: 768px;) {
+@media (min-width: 768px) {
     /* Bump up tab size for larger screens */
     .nav-tabs           {font-size: 1.25rem;}
     .nav-tabs>li>a      {padding:   .5rem 1rem;}
@@ -362,7 +361,7 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
 }
 
 /* Medium devices (desktops, 992px and up) */
-@media (min-width: 992px;) {}
+@media (min-width: 992px) {}
 
 /* Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px;) {}
+@media (min-width: 1200px) {}

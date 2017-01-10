@@ -70,16 +70,14 @@ body {
     align-items:    center;
     
     border-bottom: none;
-    box-shadow: 0 3px 10px 0 rgba(0,0,0,.54);
+
 }
+.navbar-default .navbar-nav>li>a       {color: white;}
+.navbar-default .navbar-nav>li>a:hover {color: #C9C7CB;}
 .navbar-inverse .navbar-nav>li>a       {color: white;}
 .navbar-inverse .navbar-nav>li>a:hover {color: #C9C7CB;}
 .navbar-brand > img {
     width: 230px;
-}
-.navbar-btn {
-    margin-top: 8px!important; /* for navbar */
-    margin-bottom: 8px!important;
 }
 /* Nav Tabs. Default size is for xs screens */ 
 .nav-tabs {
@@ -111,10 +109,6 @@ body {
     border-bottom-color: #FFFFFF;
     border-radius:       0;
 }
-/* $HERO */
-.hero {
-    padding-top: 4rem; /* makes up for fixed nav */
-}
 /* $FOOTER */
 footer {
     border-top: 1px solid rgba(0,0,0,.12);
@@ -133,10 +127,9 @@ h6 {
 }
 /* Used only for the hero */
 h1 {
-    font-size:      4rem;
+    font-size:      3rem;
     color:          #FFFFFF;
     margin:         0;
-    text-shadow:    1px 3px 0 rgba(0,0,0,.12);
 }
 /* Used for section headers */
 h2 {
@@ -167,7 +160,7 @@ p.lg {
 }
 p {
     font-size:   1rem;
-    font-weight: 400;
+    font-weight: 300;
 }
 /* Used for more prominent body text */
 p.lg {
@@ -214,8 +207,7 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
     text-decoration: none;
     font-weight:     400;
     border-radius:   0;
-    padding:         .5rem 1rem!important; /* for navbar */
-    margin:          0 0 2rem 0;
+    padding:         .5rem 1rem;
     letter-spacing:  0.08rem;
     line-height:     1.45;
     cursor:          pointer;
@@ -239,7 +231,7 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
 .btn-primary:focus {
     text-decoration:  none;
     background-color: #5000BE;
-    color:            transparent;
+    color:            #FFFFFF;
     border: 1px solid #FFFFFF;
 }
 
@@ -305,7 +297,7 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
     border: 1px solid #5CB85C;
 }
 .btn-success:hover {
-    color:            #5CB85C!important; /* for the navbar */
+    color:            #5CB85C;
     background-color: transparent;
     border: 1px solid #5CB85C;
 }
@@ -318,13 +310,13 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
 
 /* White with green */
 .btn-success-inverse {
-    color:            #5CB85C!important; /* for the navbar */
+    color:            #5CB85C;
     background-color: transparent;
     border: 1px solid #5CB85C;
 }
 .btn-success-inverse:hover {
-    color:            #FFFFFF!important;
-    background-color: #5CB85C!important;
+    color:            #FFFFFF;
+    background-color: #5CB85C;
     border: 1px solid #5CB85C;
 }
 .btn-success-inverse:focus {
@@ -347,6 +339,27 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
 }
 .social-icon:hover {opacity: .7;}
 
+/* $FORMS */
+.card {
+  padding: 1.5rem;
+  background-color: rgba(255,255,255,.8);
+  border-radius: 0;
+}
+/* Chrome doesn't honor 'select' border radius */
+.form-control {
+  border-radius: 0;
+  border: 1px solid rgba(0,0,0,.12);
+  box-shadow: none;
+}
+.card .form-control {
+  min-height: 38px;
+  border: 1px solid #FFFFFF;
+}
+.form-control:focus {
+  border-color: #5000BE;
+  box-shadow: none;
+}
+
 /* $MEDIA QUERIES */
 /* Extra small devices (phones, less than 768px) */
 /* This should be the default AKA no styles here */
@@ -358,6 +371,7 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
     .nav-tabs           {font-size: 1.25rem;}
     .nav-tabs>li>a      {padding:   .5rem 1rem;}
     .navbar-brand > img {width:     250px;}
+    h1 {font-size: 4em;}
 }
 
 /* Medium devices (desktops, 992px and up) */

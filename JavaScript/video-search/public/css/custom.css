@@ -5,13 +5,7 @@
 }
 h1 {font-size: 3rem;} /* To fit cleanly on smaller screens */
 /* FORM */
-.card {
-  padding: 1.5rem;
-  padding-bottom: 2rem;
-  background-color: rgba(255,255,255,.7);
-  border-radius: 0;
-  box-shadow: 2px 3px 10px 0 rgba(0,0,0,.54);
-}
+
 
 /* For input bar with btn */
 form {
@@ -27,12 +21,43 @@ form .btn {margin-bottom: 0;}
 
 .form-control {
     max-width: 100%;
-    border-radius: 0;
-    height: 2.5rem;
 }
-.search-form input {width: 100%; margin-bottom: .5rem;}
 /* Search results */
-#search-results {list-style-type: none; padding: 0; margin: 0;}
+#search-results {
+	list-style-type: none;
+	padding: 0; margin: 0;
+}
+#search-results > li {
+	padding-bottom: 4rem;
+	margin-bottom: 4rem;
+	border-bottom: 1px solid rgba(0,0,0,.12);
+}
+#search-results > li:last-of-type {
+	padding-bottom: 0;
+	margin-bottom: 0;
+	border-bottom: none;
+}
+.video-details {
+	list-style: none;
+	padding: 0;
+}
+.video-details p   {
+	margin-bottom: 0;
+}
+.video-details .sub {
+	font-size: .75rem;
+}
+.video-details .lg {
+	font-weight: 400;
+}
+.video-details li  {
+	padding-bottom: .5rem;
+	margin-bottom: .5rem;
+	border-bottom: 1px solid rgba(0,0,0,.12);}
+.video-details li:last-of-type {margin-bottom: 0; border-bottom: none;}
+ /* For smaller screens */
+.search-form input {width: 100%; margin-bottom: .5rem;}
+
 /* Ensure video fits to its container */
 .video-container {
 	position: relative;

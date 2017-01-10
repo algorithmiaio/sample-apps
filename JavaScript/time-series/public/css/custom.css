@@ -1,1 +1,14 @@
 /*Put Custom Styles Here*/
+
+/* Eventually remove this */
+iframe {
+	width: 100%;
+	height: 700px;
+	border: none;
+}
+
+.hero {
+    background-image: url(../images/timeseries.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}

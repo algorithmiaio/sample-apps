@@ -6,14 +6,8 @@
     background-size: cover;
 }
 
-.card {
-  padding: 1.5rem;
-  background-color: rgba(255,255,255,.7);
-  border-radius: 0;
-  box-shadow: 2px 3px 10px 0 rgba(0,0,0,.54);
-}
-
-.form-control {
+.card .form-control {
+  margin-bottom: 1rem;
   width: 95%;
 }
 .text-danger {display: block; margin-top: .5rem;}

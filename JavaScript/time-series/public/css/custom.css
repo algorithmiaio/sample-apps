@@ -12,3 +12,8 @@ iframe {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.viz-main {
+  width: 100%;
+  height: 360px;
+}

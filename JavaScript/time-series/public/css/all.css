@@ -70,8 +70,10 @@ body {
     align-items:    center;
     
     border-bottom: none;
-    box-shadow: 0 3px 10px 0 rgba(0,0,0,.54);
+
 }
+.navbar-default .navbar-nav>li>a       {color: white;}
+.navbar-default .navbar-nav>li>a:hover {color: #C9C7CB;}
 .navbar-inverse .navbar-nav>li>a       {color: white;}
 .navbar-inverse .navbar-nav>li>a:hover {color: #C9C7CB;}
 .navbar-brand > img {
@@ -137,7 +139,6 @@ h1 {
     font-size:      3rem;
     color:          #FFFFFF;
     margin:         0;
-    text-shadow:    1px 3px 0 rgba(0,0,0,.12);
 }
 /* Used for section headers */
 h2 {
@@ -168,7 +169,7 @@ p.lg {
 }
 p {
     font-size:   1rem;
-    font-weight: 400;
+    font-weight: 300;
 }
 /* Used for more prominent body text */
 p.lg {
@@ -346,6 +347,18 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
     margin-right: .5rem;
 }
 .social-icon:hover {opacity: .7;}
+
+/* $FORMS */
+/* Chrome doesn't honor select border radius */
+.form-control {
+  border-radius: 0;
+  border: 1px solid rgba(0,0,0,.12);
+  box-shadow: none;
+}
+.form-control:focus {
+  border-color: #5000BE;
+  box-shadow: none;
+}
 
 /* $MEDIA QUERIES */
 /* Extra small devices (phones, less than 768px) */

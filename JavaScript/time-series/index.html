@@ -52,7 +52,7 @@
 
 </head>
 <body>
-	<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+	<nav class="navbar navbar-default navbar-static-top navbar-public navbar-dark" role="navigation">
 		<div class="container no-padding">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -67,14 +67,11 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
-					<li><a href="https://algorithmia.com/algorithms"><span>Algorithms</span></a></li>
+					<li><a href="https://algorithmia.com/algorithms">Algorithms</a></li>
 					<li><a href="https://algorithmia.com/use-cases">Use Cases</a></li>
-					<li><a href="https://algorithmia.com/pricing"><span>Pricing</span></a></li>
-					<li><a href="http://blog.algorithmia.com/"><span>Blog</span></a></li>
-					<li>
-						<a class="btn btn-success-inverse navbar-btn hidden-sm hidden-xs" href="https://algorithmia.com/signup">
-							Sign up
-						</a>
+					<li><a href="https://algorithmia.com/pricing">Pricing</a></li>
+					<li><a href="http://blog.algorithmia.com/">Blog</a></li>
+					<li><a class="hidden-sm hidden-xs" href="https://algorithmia.com/signup">Sign up</a>
 					</li>
 
 				</ul>
@@ -92,12 +89,115 @@
 			</div>
 		</div>
 	</section>
+	<div class="border-bottom">
+	<section class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="whitespace-sm">Algorithmia Time Series Analysis</h2>
+			    <p>This tool analyzes time series data. It uses Socrata Open Government data on building permits to analyze development trends in various cities.</p>
+			</div>
+	    </div>
+	    <div class="row">
+			<div class="col-md-12">
+			  	<div ng-controller="TimeSeriesControl" id="tsControl" ng-init="analyze()">
+				    <div class="viz-main">
+				      <timeseries-chart data="tsData" options="tsOptions" headers="headers" />
+				    </div>
+				    <div>
+				      <!-- <button class="btn btn-primary" ng-click="analyze()">Perform Data Analysis</button> -->
+				      <span class="aspinner algo-spinner demo-spinner"></span>
+				      <i class="fa fa-warning text-danger" ng-if="errorMessage" ng-cloak></i>
+				      <span class="text-danger" ng-bind="errorMessage"></span>
+			    	</div>
+				    <div class="row row-md">
+					    <div class="col-md-6">
+					      <h3>Data Source</h3>
+					      <select class="form-control" ng-model="dataSource" ng-change="analyze()">
+					        <option value="Los Angeles">Los Angeles, CA</option>
+					        <option value="Boston">Boston, MA</option>
+					        <option value="Santa Rosa">Santa Rosa, CA</option>
+					        <option value="Fort Worth">Fort Worth, TX</option>
+					        <option value="New York City">New York City, NY</option>
+					        <option value="Edmonton">Edmonton, Canada</option>
+					      </select>
+					    </div>
+					</div>
+					
+				    <div class="row row-md">
+					    <div class="col-md-6">
+					      <h3>Analysis</h3>
+					      <select class="form-control" ng-model="dataAnalysis" ng-change="analyze()">
+					        <option value="/timeseries/Forecast">Forecast</option>
+					        <option value="/timeseries/OutlierDetection">Outlier Detection</option>
+					        <option value="/timeseries/AutoCorrelate">Auto Correlate</option>
+					      </select>
+					    </div>
+					</div>
+				
+					<div class="row row-sm">
+					    <div class="col-md-3">
+					      <p class="whitespace-sm">Filter 1</p>
+					      <select class="form-control" ng-model="dataFilter1" ng-change="analyze()">
+					        <option value="/util/Echo">None</option>
+					        <option value="/timeseries/LinearDetrend">Linear Detrend</option>
+					        <option value="/timeseries/RemoveSeasonality">Remove Seasonality</option>
+					        <option value="/timeseries/SimpleMovingAverage">Simple Moving Average</option>
+					      </select>
+					    </div>
+		
+					    <div class="col-md-3">
+					      <p class="whitespace-sm">Filter 2</p>
+					      <select class="form-control" ng-model="dataFilter2" ng-change="analyze()">
+					        <option value="/util/Echo">None</option>
+					        <option value="/timeseries/LinearDetrend">Linear Detrend</option>
+					        <option value="/timeseries/RemoveSeasonality">Remove Seasonality</option>
+					        <option value="/timeseries/SimpleMovingAverage">Simple Moving Average</option>
+					      </select>
+					    </div>
+					</div>
 
-<div class="container">
-	<iframe src="https://algorithmia.com/demo/timeseries2">
-	  <p>Your browser does not support iframes.</p>
-	</iframe>
-</div>
+			    </div>
+			</div>
+		</div>
+	</section>
+	</div>
+
+	<section class="container">
+		<div class="row row-md">
+			<div class="col-md-12">
+				<h2 class="whitespace-none">How it works</h2>
+				<h4>Tracking Economic Development with Open Data and Predictive Algorithms</h4>
+			</div>
+		</div>
+		<div class="row row-md">
+			<div class="col-md-8">
+				<h3>Tools used</h3>
+				<ul>
+					<li><a href="">Socrata Open Data Query</a> – pulls the permit data from Socrata</li>
+					<li><a href="">Simple Moving Average</a> – uses local average to smooth data</li>
+					<li><a href="">Linear Detrend</a> – removes increasing or decreasing trends in time series</li>
+					<li><a href="">Autocorrelate</a> – used to analyze the seasonality of a time series</li>
+					<li><a href="">Remove Seasonality</a> – removes known seasonal effects from a time series</li>
+					<li><a href="">Outlier Detection</a> – flags unusual data points</li>
+					<li><a href="">Forecast</a> – predict a given time series into the future</li>
+				</ul>
+			</div>
+		</div>
+		<div class="row row-md">
+			<div class="col-md-8">
+				<h3>Source Data</h3>
+				<p>We use an algorithm to directly access Socrata’s API that can be found here.</p>
+				<p>Once we’ve retrieved the data, we aggregate it by total number of permits issued per month, and plot this data. To make the graph clearer, it sometimes helps to smooth or denoise the data. There are a number of ways to do this, with moving averages being the most popular. The most intuitive is the Simple Moving Average, which replaces each point by the average of itself and some number of the preceding points (default is 3).</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				<h3>Takeaway</h3>
+				<p>The takeaway from this example is not the individual pieces – most of these techniques are available a number of places. The secret here is that it is simple, composable, and fully automated. Once one person writes a data connector in Algorithmia (which is likely to happen for interesting public data, like that provided by Socrata), you don’t have to burn precious time writing and working kinks out of your own. On the other hand, if something existing gets done better, the compositional nature of Algorithmia will allow you to swap out pieces of a pipeline seamlessly. When someone comes up with a better outlier detector, then upgrading a pipeline like the one above can be literally just a few keystrokes away.</p>
+			</div>
+		</div>
+	</section>
+
 	<!-- JOIN -->
 	<section class="grey-background">
 		<div class="container">

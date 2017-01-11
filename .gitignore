@@ -2,3 +2,4 @@
 */.DS_Store
 aws-keys.json
 node_modules
+.idea/

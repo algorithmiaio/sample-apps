@@ -71,9 +71,7 @@
 					<li><a href="https://algorithmia.com/use-cases">Use Cases</a></li>
 					<li><a href="https://algorithmia.com/pricing">Pricing</a></li>
 					<li><a href="http://blog.algorithmia.com/">Blog</a></li>
-					<li><a class="hidden-sm hidden-xs" href="https://algorithmia.com/signup">Sign up</a>
-					</li>
-
+					<li><a class="hidden-sm hidden-xs" href="https://algorithmia.com/signup">Sign up</a></li>
 				</ul>
 			</div>
 		</div>
@@ -89,7 +87,7 @@
 			</div>
 		</div>
 	</section>
-	<div class="border-bottom">
+
 	<section class="container">
 		<div class="row">
 			<div class="col-md-12">
@@ -101,7 +99,9 @@
 			<div class="col-md-12">
 			  	<div ng-controller="TimeSeriesControl" id="tsControl" ng-init="analyze()">
 				    <div class="viz-main">
-				      <timeseries-chart data="tsData" options="tsOptions" headers="headers" />
+				    	<!-- PLACEHOLDER IMG -->
+				    	<img src="public/images/timeseries_placeholder.png" class="img-placeholder">
+				    	<timeseries-chart data="tsData" options="tsOptions" headers="headers" />
 				    </div>
 				    <div>
 				      <!-- <button class="btn btn-primary" ng-click="analyze()">Perform Data Analysis</button> -->
@@ -109,7 +109,7 @@
 				      <i class="fa fa-warning text-danger" ng-if="errorMessage" ng-cloak></i>
 				      <span class="text-danger" ng-bind="errorMessage"></span>
 			    	</div>
-				    <div class="row row-md">
+				    <div class="row row-sm">
 					    <div class="col-md-6">
 					      <h3>Data Source</h3>
 					      <select class="form-control" ng-model="dataSource" ng-change="analyze()">
@@ -123,7 +123,7 @@
 					    </div>
 					</div>
 					
-				    <div class="row row-md">
+				    <div class="row row-sm">
 					    <div class="col-md-6">
 					      <h3>Analysis</h3>
 					      <select class="form-control" ng-model="dataAnalysis" ng-change="analyze()">
@@ -134,9 +134,9 @@
 					    </div>
 					</div>
 				
-					<div class="row row-sm">
+					<div class="row whitespace-none filters">
 					    <div class="col-md-3">
-					      <p class="whitespace-sm">Filter 1</p>
+					      <p class="whitespace-none">Filter 1</p>
 					      <select class="form-control" ng-model="dataFilter1" ng-change="analyze()">
 					        <option value="/util/Echo">None</option>
 					        <option value="/timeseries/LinearDetrend">Linear Detrend</option>
@@ -146,7 +146,7 @@
 					    </div>
 		
 					    <div class="col-md-3">
-					      <p class="whitespace-sm">Filter 2</p>
+					      <p class="whitespace-none">Filter 2</p>
 					      <select class="form-control" ng-model="dataFilter2" ng-change="analyze()">
 					        <option value="/util/Echo">None</option>
 					        <option value="/timeseries/LinearDetrend">Linear Detrend</option>
@@ -160,8 +160,8 @@
 			</div>
 		</div>
 	</section>
-	</div>
 
+	<div class="grey-background">
 	<section class="container">
 		<div class="row row-md">
 			<div class="col-md-12">
@@ -197,18 +197,47 @@
 			</div>
 		</div>
 	</section>
+	</div>
+
+  <!-- BUILT FOR DEVS -->
+  <div class="border-bottom">
+  <section class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <h2 class="whitespace-sm">Built For Developers</h2>
+        <h4 class="secondary whitespace-md">A simple, scalable API for machine intelligence</h4>
+          <p class="item-title">SAMPLE INPUT</p>
+          <pre class="whitespace-md"><code class="python">import Algorithmia
+input = {"images": ["_IMAGE_URL_"], "savePaths": ["_OUTPUT_URL_"], "filterName": "space_pizza"}
+client = Algorithmia.client('_API_KEY_')
+algo = client.algo('deeplearning/DeepFilter/0.5.3')
+
+print algo.pipe(input)
+  </code></pre>
+            <p class="item-title">SAMPLE OUTPUT</p>
+            <pre><code class="json">{
+  "savePaths": [
+    "_OUTPUT_URL_"
+  ]
+}</code></pre>
+        <a href="https://algorithmia.com/algorithms/deeplearning/DeepFilter" class="btn btn-primary-inverse">
+          LEARN MORE
+        </a>
+      </div>
+    </div>
+  </section>
+  </div>
+
 
 	<!-- JOIN -->
-	<section class="grey-background">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h2>Join the thousands of developers already building intelligent apps</h2>
-					<h4 class="whitespace-md">Get 10,000 additional credits when you sign up using the code "color"</h4>
-					<a href="https://algorithmia.com/signup?invite=color" class="btn btn-success">
-						SIGN UP FOR FREE
-					</a>
-				</div>
+	<section class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h2>Join the thousands of developers already building intelligent apps</h2>
+				<h4 class="whitespace-md">Get 10,000 additional credits when you sign up using the code "color"</h4>
+				<a href="https://algorithmia.com/signup?invite=color" class="btn btn-success">
+					SIGN UP FOR FREE
+				</a>
 			</div>
 		</div>
 	</section>
@@ -236,6 +265,9 @@
 	<!-- JS -->
 	<script src="public/js/jquery.min.js"></script>
 	<script src="public/js/bootstrap.min.js"></script>
+	<script src="public/js/algorithmia-0.2.0.js"></script>
+	<script src="public/js/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
 
 </body>
 </html>

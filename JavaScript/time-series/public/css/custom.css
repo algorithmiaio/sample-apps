@@ -1,12 +1,5 @@
 /*Put Custom Styles Here*/
-
-/* Eventually remove this */
-iframe {
-	width: 100%;
-	height: 700px;
-	border: none;
-}
-
+h1 {font-size: 2.5rem;}
 .hero {
     background-image: url(../images/timeseries.jpeg);
     background-repeat: no-repeat;
@@ -16,4 +9,12 @@ iframe {
 .viz-main {
   width: 100%;
   height: 360px;
+}
+
+.filters .form-control {margin-bottom: 1rem;}
+.img-placeholder {height: 100%;}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    h1 {font-size: 4em;}
 }

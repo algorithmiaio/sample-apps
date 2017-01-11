@@ -79,11 +79,6 @@ body {
 .navbar-brand > img {
     width: 230px;
 }
-.navbar-inverse .navbar-nav>li>a {}
-.navbar-btn {
-    margin-top:    8px!important; /* for navbar */
-    margin-bottom: 8px!important;
-}
 /* Nav Tabs. Default size is for xs screens */ 
 .nav-tabs {
     border-bottom: 1px solid #5000BE;
@@ -113,10 +108,6 @@ body {
     border:              1px solid #5000BE;
     border-bottom-color: #FFFFFF;
     border-radius:       0;
-}
-/* $HERO */
-.hero {
-    padding-top: 4rem; /* makes up for fixed nav */
 }
 /* $FOOTER */
 footer {
@@ -176,6 +167,11 @@ p.lg {
     font-size:   1.25rem;
     font-weight: 300;
 }
+.item-title  {
+  color: rgba(0,0,0,.54);
+  margin-bottom: 0;
+  text-transform: uppercase;
+}
 
 img       {max-width: 100%;}
 .img-fill {width: 100%;}
@@ -216,7 +212,7 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
     text-decoration: none;
     font-weight:     400;
     border-radius:   0;
-    padding:         .5rem 1rem!important; /* for navbar */
+    padding:         .5rem 1rem;
     letter-spacing:  0.08rem;
     line-height:     1.45;
     cursor:          pointer;
@@ -306,7 +302,7 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
     border: 1px solid #5CB85C;
 }
 .btn-success:hover {
-    color:            #5CB85C!important; /* for the navbar */
+    color:            #5CB85C;
     background-color: transparent;
     border: 1px solid #5CB85C;
 }
@@ -319,13 +315,13 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
 
 /* White with green */
 .btn-success-inverse {
-    color:            #5CB85C!important; /* for the navbar */
+    color:            #5CB85C;
     background-color: transparent;
     border: 1px solid #5CB85C;
 }
 .btn-success-inverse:hover {
-    color:            #FFFFFF!important;
-    background-color: #5CB85C!important;
+    color:            #FFFFFF;
+    background-color: #5CB85C;
     border: 1px solid #5CB85C;
 }
 .btn-success-inverse:focus {
@@ -349,15 +345,34 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
 .social-icon:hover {opacity: .7;}
 
 /* $FORMS */
-/* Chrome doesn't honor select border radius */
+.card {
+  padding: 1.5rem;
+  background-color: rgba(255,255,255,.8);
+  border-radius: 0;
+}
+/* Chrome doesn't honor 'select' border radius */
 .form-control {
   border-radius: 0;
   border: 1px solid rgba(0,0,0,.12);
   box-shadow: none;
 }
+.card .form-control {
+  min-height: 38px;
+  border: 1px solid #FFFFFF;
+}
 .form-control:focus {
   border-color: #5000BE;
   box-shadow: none;
+}
+
+/* $CODE */
+pre {
+    padding: 0;
+    margin: 0; /* overrides default */
+    margin-bottom: 1rem;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
 }
 
 /* $MEDIA QUERIES */

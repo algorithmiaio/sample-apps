@@ -168,8 +168,8 @@ p.lg {
     font-weight: 300;
 }
 .item-title  {
-  color: rgba(0,0,0,.54);
-  margin-bottom: 0;
+  color: rgba(0,0,0,.54)!important;  /* overrides things like p.lg */
+  margin-bottom: 0!important;
   text-transform: uppercase;
 }
 
@@ -383,7 +383,7 @@ pre {
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     /* Bump up tab size for larger screens */
-    .nav-tabs           {font-size: 1.25rem;}
+    .nav-tabs           {font-size: 1rem;}
     .nav-tabs>li>a      {padding:   .5rem 1rem;}
     .navbar-brand > img {width:     250px;}
     h1 {font-size: 4em;}

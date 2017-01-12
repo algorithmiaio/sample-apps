@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-<title>RSS Dashboard - Algorithmia</title>
+<title>Site Mapper - Algorithmia</title>
 
 <!-- CSS -->
 <link rel="shortcut icon" href="public/images/favicon-bw.png" type="image/png">
@@ -46,61 +46,143 @@
     </div>
   </nav>
 
-<section class="hero purple-grad-background">
-  <div class="container">
+  <section class="hero purple-grad-background">
+    <div class="container">
 
-    <div class="row row-sm">
-      <div class="col-md-12 col-lg-8">
-        <h1>RSS Dashboard</h1>
-        <h4 class="secondary-light whitespace-md">This tool takes in a URL to an RSS feed, and offers automatically generated tag suggestions, text summary, and sentiment analysis.</h4>
+      <div class="row row-sm">
+        <div class="col-md-12 col-lg-8">
+          <h1>Site Mapper</h1>
+          <h4 class="secondary-light whitespace-md">Ever wondered what your domain/website looks like to the robots crawling it ?</h4>
+        </div>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col-md-6">
-        <div class="card">
-        <!-- Inputs -->
-          <div class="form-group">
-            <label class="block">Select an example RSS feed:</label>
-            <select id="urlDD" class="form-control" onchange="updateUrl()">
-              <option disabled>Select an example RSS feed</option>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+          <!-- Inputs -->
 
-              <!-- Replace these with links to your favorite RSS feeds -->
-              <option value="https://news.ycombinator.com/rss">HackerNews</option>
-              <option value="http://feeds.feedburner.com/codinghorror">Coding Horror</option>
-              <option value="https://www.reddit.com/r/programming/.rss">r/programming</option>
-              <option value="http://www.alistapart.com/feed/rss.xml">A List Apart</option>
-              <option value="http://www.nytimes.com/services/xml/rss/nyt/Technology.xml">NYT Technology</option>
-              <option value="http://blog.algorithmia.com/rss">Algorithmia Blog</option>
-            </select>
-          </div>
-             
-          <label class="block">Or input your own:</label>
-          <div class="form-group">
-            <input class="form-control" id="inputStrings">
-          </div>
 
-          <div class="form-group">
-            <button class="btn btn-primary whitespace-none" onclick="analyze()">Analyze RSS</button>
-            <span class="aspinner hidden" id="algo-spinner"></span>
-            <span id="status-label"></span>
+            <form ng-submit="scrape(siteUrl)">
+              <div class="row whitespace-sm">
+                <div class="col-md-9">
+                  <label>Website URL to scrape</label>
+                  <input type="text" class="form-control url" ng-model="siteUrl">
+                </div>
+                <div class="col-md-3">
+                  <label title="Sets the maximum number of pages to crawl">Depth</label>
+                  <input type="number" min="0" max="120" class="form-control depth" ng-model="depthLimit">
+                </div>
+              </div>
+              <div class="row whitespace-none">
+                <div class="col-md-12">
+                  <input type="submit" class="btn btn-primary" value="Map Site">
+                  <span class="aspinner algo-spinner demo-spinner"></span>
+                  <span ng-bind="scrapeStatus"></span>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="container">    
-  <div class="row">
-    <div class="col-md-12">
-      <h2 class="border-bottom">Results</h2>
-      <h4 class="hidden">Analyze an RSS feed to get results.</h4>
-      <div id="output">
-        <!-- OUTPUT INSERTED HERE -->
+  <!-- Outputs -->
+  <section class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <p class="lg item-title">SITEMAP VIZUALIZATION</p>
+        <div class="viz-container">
+          <img src="public/images/site-map-placeholder.png" class="placeholder">
+          <img src="public/images/sitemap-scale.png" class="scale" title="Color Scale" ng-show="pagerank" ng-animate="'fade'" ng-cloak>
+<!--           <svg class="viz">
+            <g class="viewport">
+              <g class="bottom"></g>
+              <g class="middle"></g>
+              <g class="top"></g>
+            </g>
+          </svg> -->
+        </div>
+      </div>
+      <div class="col-md-5">
+        <p class="lg item-title">PAGE RANK</p>
+        <div class="pagerank-panel">
+    <!-- <table>
+            <tr ng-repeat="pair in pagerankSorted" ng-click="loadLink(pair.url)" ng-cloak>
+              <td ng-bind="round(pair.rank)"></td>
+              <td><a ng-bind="pair.url"></a></td>
+            </tr>
+          </table> -->
+          <div class="row whitespace-sm">
+            <div class="col-md-3">
+              <p ng-bind="round(pair.rank)"></p>
+            </div>
+            <div class="col-md-9">
+              <p><a ng-bind="pair.url"></a></p>
+            </div>
+          </div>
+        </div>   
       </div>
     </div>
-  </div>
+
+<!--     <div>
+      <graph data="siteMap"></graph>
+    </div> -->
+<!--     <div class="row">
+      <div class="col-md-7">
+        <div class="link-details-panel" ng-if="link.url" ng-cloak>
+          <label>Link Summary</label>
+          <a ng-href="{{link.url}}" ng-bind="link.url"></a>
+          <div ng-show="summarizing">
+            <span class="aspinner demo-spinner"></span>
+            Summarizing...
+          </div>
+          <div ng-bind="link.summary" class="small"></div>
+        </div>
+      </div> 
+      <div class="col-md-5">
+        <div class="link-details-panel" ng-if="link.url" ng-cloak>
+          <label>Link Tags</label>
+          <div ng-show="tagging">
+            <span class="aspinner demo-spinner"></span>
+            Tagging...
+          </div>
+          <div class="tag-pills" ng-repeat="tag in link.tags">
+            <a ng-bind="tag"></a>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!-- Print debug input / output from the algorithms -->
+    <!-- Nav tabs -->
+    <div class="row row-sm">
+      <div class="col-md-12">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#demo-code" data-toggle="tab">Demo Code</a></li>
+          <li><a href="#sitemap" data-toggle="tab">SiteMap</a></li>
+          <li><a href="#pagerank-in" data-toggle="tab">PageRank Input</a></li>
+          <li><a href="#pagerank-out" data-toggle="tab">PageRank Output</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="row row-sm">
+      <div class="col-md-12">
+        <!-- Tab panes -->
+        <div class="tab-content debug-container">
+          <div class="tab-pane debug active" id="demo-code">
+            <pre><code>Algorithmia.client(apiKey).algo("/web/SiteMap").pipe(siteUrl).then(function(graph) {
+    // Render graph here...
+    Algorithmia.client(apiKey).algo("/thatguy2048/PageRank").pipe(graph.result).then(function(ranking) {
+        // Colorize graph here...
+    });
+});</code></pre>
+          </div>
+          <div class="tab-pane debug" id="sitemap"><pre ng-bind="siteMap | json">...</pre></div>
+          <div class="tab-pane debug" id="pagerank-in">...</div>
+          <div class="tab-pane debug" id="pagerank-out">...</div>
+        </div>
+      </div>
+    </div>
 </section>
 
 <!-- EXPLANATION -->

@@ -1,48 +1,58 @@
 @import url("spinner.css");
-
+.viz-container {
+  position: relative;
+}
+.placeholder {
+  border: 1px solid rgba(0,0,0,.54);
+}
+.scale {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 .hero {    
-    background-image: url(../images/newspaper.jpeg);
+    background-image: url(../images/site-map.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
 }
-.card .form-control {
-  margin-bottom: 1rem;
-  width: 95%;
+
+/* Imported style */
+svg {
+    background-color: #fff;
+    border: 1px solid black;
+}
+svg circle {
+  cursor: pointer;
+}
+.viz-container {
+  margin-top:        0px;
+  margin-bottom:     0px;
+}
+.pagerank-panel label,
+.link-details-panel label {
+
+}
+.pagerank-panel {
+  height: 500px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: 1px solid rgba(0,0,0,.54);
+}
+.pagerank-panel table {
+  width: 100%;
+}
+.pagerank-panel table td {
+  cursor: pointer;
+  padding-right: 5px;
+}
+.link-details-panel {
+  height: 240px;
+  overflow-y: auto;
+  margin-top: 10px;
 }
 
-.text-danger {display: block; margin-top: .5rem;}
+.inline-form-control {width: 333px}
 
-#output section {
-  padding-bottom: 2rem;
-  margin-bottom: 2rem;
-  border-bottom: 1px solid rgba(0,0,0,.12);
-}
+.svg.viz {height: 700px; border: 1px solid #888; }
 
-#output section:last-of-type {
-  padding-bottom: 0;
-  margin-bottom: 0;
-  border-bottom: none;
-}
-.sentiment p:last-of-type {margin-bottom: 0;}
-.item-title  {
-  color: rgba(0,0,0,.54);
-  margin-bottom: 0;
-  text-transform: uppercase;
-}
-.result,
-.tags       {margin-bottom: 1rem;}
-.label  {
-  border-radius: 0;
-}
-.label-info {
-  background-color: #5000BE;
-}
-.tag-label {margin-bottom: 0;}
-span.label {
-  font-size: .75rem;
-  line-height: 2;
-}
-
-.form-group {
-  margin-bottom: 6px;
-}
+.link-details-panel {height: 300px}

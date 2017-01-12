@@ -60,8 +60,6 @@
         <div class="col-md-6">
           <div class="card">
           <!-- Inputs -->
-
-
             <form ng-submit="scrape(siteUrl)">
               <div class="row whitespace-none">
                 <div class="col-xs-12 col-sm-9 whitespace-sm">
@@ -90,10 +88,10 @@
   <!-- Outputs -->
   <section class="container">
     <div class="row whitespace-none">
-      <div class="col-sm-8 whitespace-md">
+      <div class="col-sm-7 whitespace-md">
         <p class="lg item-title">SITEMAP VIZUALIZATION</p>
         <div class="info-panel viz-panel">
-          <img src="public/images/site-map-placeholder.png" class="">
+          <img src="public/images/site-map-placeholder.png" class="placeholder">
           <img src="public/images/pagerank_scale.svg" class="scale" title="Color Scale" ng-show="pagerank" ng-animate="'fade'" ng-cloak>
 <!--           <svg class="viz">
             <g class="viewport">
@@ -104,7 +102,7 @@
           </svg> -->
         </div>
       </div>
-      <div class="col-sm-4 whitespace-md">
+      <div class="col-sm-5 whitespace-md">
         <p class="lg item-title">PAGE RANK</p>
         <div class="info-panel pagerank-panel">
     <!-- <table>
@@ -114,11 +112,23 @@
             </tr>
           </table> -->
           <div class="row whitespace-sm">
-            <div class="col-md-3">
+            <div class="col-xs-2">
               <p ng-bind="round(pair.rank)"></p>
+              <p class="pagerank-rank">1.00</p>
+              <p class="pagerank-rank">.89</p>
+              <p class="pagerank-rank">.79</p>
+              <p class="pagerank-rank">.69</p>
+              <p class="pagerank-rank">.59</p>
+              <p class="pagerank-rank">.49</p>
             </div>
-            <div class="col-md-9">
-              <p><a ng-bind="pair.url"></a></p>
+            <div class="col-xs-10 pagerank-links">
+              <p class="pagerank-url"><a ng-bind="pair.url"></a></p>
+              <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
+              <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
+              <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
+              <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
+              <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
+              <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
             </div>
           </div>
         </div>   

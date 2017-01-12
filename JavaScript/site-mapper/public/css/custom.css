@@ -1,5 +1,11 @@
 @import url("spinner.css");
 
+
+img.placeholder {
+  width: auto;
+  height: 100%;
+}
+
 .hero {    
     background-image: url(../images/site-map.jpg);
     background-repeat: no-repeat;
@@ -23,11 +29,10 @@ svg circle {
   border: 1px solid rgba(0,0,0,.54);
 }
 
-.viz-panel,
-.pagerank-panel {
-  height: 500px;
-}
 .viz-panel {
+    text-align: center;
+
+  height: 500px;
   position: relative;
 }
 .scale {
@@ -36,12 +41,28 @@ svg circle {
   left: 0;
 }
 .pagerank-panel {
+  height: 500px;
   overflow-y: auto;
   overflow-x: hidden;
 }
-
+.pagerank-links {padding-left: 0;}
+.pagerank-rank,
+.pagerank-url {font-size: .75rem;}
+.pagerank-rank {padding-left: .5rem;}
 .link-details-panel {
   height: 300px;
   overflow-y: auto;
 }
-svg.viz {height: 700px; border: 1px solid rgba(0,0,0,.54);}
+
+svg.viz {
+  height: 700px;
+  border: 1px solid rgba(0,0,0,.54);
+}
+.tag-pills>a {
+  padding: 0 .6rem 0;
+  border-radius: 0;
+  color: #FFFFFF;
+  background-color: #5000BE;
+  display: inline-block;
+  margin: 2px;
+}

@@ -50,7 +50,8 @@ module.exports = function(grunt) {
       'process-html-template': {
         options: {
           data: {
-            'title': 'My blog post',
+            header: grunt.file.read('JavaScript/header.html'),
+            footer: grunt.file.read('JavaScript/footer.html'),
           }
         },
         files: [

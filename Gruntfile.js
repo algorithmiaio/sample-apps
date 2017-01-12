@@ -17,6 +17,7 @@ module.exports = function(grunt) {
     { slug: 'deep-style', dist: 'JavaScript/deep-filter/'},
     { slug: 'web-page-inspector', dist: 'JavaScript/web-page-inspector'},
     { slug: 'video-search', dist: 'JavaScript/video-search'},
+    { slug: 'rss-dashboard', dist: 'JavaScript/rss-dashboard'},
   ];
 
 
@@ -50,11 +51,12 @@ module.exports = function(grunt) {
       'process-html-template': {
         options: {
           data: {
-            header: grunt.file.read('JavaScript/header.html'),
+            header_begin: grunt.file.read('JavaScript/header_begin.html'),
+            header_end: grunt.file.read('JavaScript/header_end.html'),
             footer: grunt.file.read('JavaScript/footer.html'),
           }
         },
-        files: [
+        files: [  //TBD: parse only HTML files, pre-copy the rest **/*.*
           {
             expand: true,
             cwd: 'JavaScript/',

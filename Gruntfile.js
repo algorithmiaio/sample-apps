@@ -46,6 +46,18 @@ module.exports = function(grunt) {
   grunt.initConfig({
     aws: grunt.file.readJSON('aws-keys.json'),
     aws_s3: awsS3Config,
+    copy: {
+      main: {
+        files:  [
+          {
+            expand: true,
+            cwd: 'JavaScript/',
+            src: ['**/*'],
+            dest: 'build/',
+          },
+        ],
+      }
+    },
     template: {
       options: {},
       'process-html-template': {
@@ -56,7 +68,7 @@ module.exports = function(grunt) {
             footer: grunt.file.read('JavaScript/footer.html'),
           }
         },
-        files: [  //TBD: parse only HTML files, pre-copy the rest **/*.*
+        files: [
           {
             expand: true,
             cwd: 'JavaScript/',
@@ -68,8 +80,8 @@ module.exports = function(grunt) {
     },
     watch: {
       scripts: {
-        files: ['JavaScript/**/*.js','JavaScript/**/*.css','JavaScript/**/*.html'],
-        tasks: ['template'],
+        files: ['JavaScript/**/*.html'],
+        tasks: ['copy','template'],
         options: {
           spawn: false
         },
@@ -78,11 +90,13 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-aws-s3');
-  grunt.loadNpmTasks('grunt-template');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-template');
 
   demos.forEach(function(demo) {
     grunt.registerTask('publish:' + demo.slug, "Publish the " + demo.slug + " demo", ['aws_s3:' + demo.slug]);
+    grunt.registerTask('build', "Build all demos", ['copy','template']);
   });
 
 };

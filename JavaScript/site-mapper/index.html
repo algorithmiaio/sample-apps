@@ -89,11 +89,11 @@
 
   <!-- Outputs -->
   <section class="container">
-    <div class="row row-md">
+    <div class="row whitespace-none">
       <div class="col-sm-8 whitespace-md">
         <p class="lg item-title">SITEMAP VIZUALIZATION</p>
-        <div class="viz-container">
-          <img src="public/images/site-map-placeholder.png" class="placeholder">
+        <div class="info-panel viz-panel">
+          <img src="public/images/site-map-placeholder.png" class="">
           <img src="public/images/pagerank_scale.svg" class="scale" title="Color Scale" ng-show="pagerank" ng-animate="'fade'" ng-cloak>
 <!--           <svg class="viz">
             <g class="viewport">
@@ -104,9 +104,9 @@
           </svg> -->
         </div>
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-4 whitespace-md">
         <p class="lg item-title">PAGE RANK</p>
-        <div class="pagerank-panel">
+        <div class="info-panel pagerank-panel">
     <!-- <table>
             <tr ng-repeat="pair in pagerankSorted" ng-click="loadLink(pair.url)" ng-cloak>
               <td ng-bind="round(pair.rank)"></td>
@@ -128,10 +128,10 @@
 <!--     <div>
       <graph data="siteMap"></graph>
     </div> -->
-<!--     <div class="row">
-      <div class="col-md-7">
-        <div class="link-details-panel" ng-if="link.url" ng-cloak>
-          <label>Link Summary</label>
+    <div class="row whitespace-md">
+      <div class="col-sm-7 whitespace-md">
+        <p class="lg item-title">Link Summary</p>
+        <div class="info-panel link-details-panel" ng-if="link.url" ng-cloak>
           <a ng-href="{{link.url}}" ng-bind="link.url"></a>
           <div ng-show="summarizing">
             <span class="aspinner demo-spinner"></span>
@@ -140,9 +140,9 @@
           <div ng-bind="link.summary" class="small"></div>
         </div>
       </div> 
-      <div class="col-md-5">
-        <div class="link-details-panel" ng-if="link.url" ng-cloak>
-          <label>Link Tags</label>
+      <div class="col-sm-5 whitespace-md">
+        <p class="lg item-title">LINK TAGS</p>
+        <div class="info-panel link-details-panel" ng-if="link.url" ng-cloak>
           <div ng-show="tagging">
             <span class="aspinner demo-spinner"></span>
             Tagging...
@@ -152,7 +152,7 @@
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
     <!-- Print debug input / output from the algorithms -->
     <!-- Nav tabs -->
     <div class="row row-sm">

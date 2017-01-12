@@ -1,58 +1,47 @@
 @import url("spinner.css");
-.viz-container {
-  position: relative;
-}
-.placeholder {
-  border: 1px solid rgba(0,0,0,.54);
-}
-.scale {
-  position: absolute;
-  bottom: 1px;
-  left: 1px;
-}
+
 .hero {    
     background-image: url(../images/site-map.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-/* Imported style */
+/* PANELS */
 svg {
     background-color: #fff;
     border: 1px solid black;
 }
+svg.viz {
+  height: 700px;
+  border: 1px solid rgba(0,0,0,.54);
+}
 svg circle {
   cursor: pointer;
 }
-.viz-container {
-  margin-top:        0px;
-  margin-bottom:     0px;
-}
-.pagerank-panel label,
-.link-details-panel label {
-
-}
-.pagerank-panel {
-  height: 500px;
-  overflow-y: auto;
-  overflow-x: hidden;
+/* Apply first to panels */
+.info-panel {
   border: 1px solid rgba(0,0,0,.54);
 }
-.pagerank-panel table {
-  width: 100%;
+
+.viz-panel,
+.pagerank-panel {
+  height: 500px;
 }
-.pagerank-panel table td {
-  cursor: pointer;
-  padding-right: 5px;
+.viz-panel {
+  position: relative;
 }
-.link-details-panel {
-  height: 240px;
+.scale {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.pagerank-panel {
   overflow-y: auto;
-  margin-top: 10px;
+  overflow-x: hidden;
 }
 
-.inline-form-control {width: 333px}
-
-.svg.viz {height: 700px; border: 1px solid #888; }
-
-.link-details-panel {height: 300px}
+.link-details-panel {
+  height: 300px;
+  overflow-y: auto;
+}
+svg.viz {height: 700px; border: 1px solid rgba(0,0,0,.54);}

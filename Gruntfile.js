@@ -44,9 +44,39 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     aws: grunt.file.readJSON('aws-keys.json'),
-    aws_s3: awsS3Config
+    aws_s3: awsS3Config,
+    template: {
+      options: {},
+      'process-html-template': {
+        options: {
+          data: {
+            'title': 'My blog post',
+          }
+        },
+        files: [
+          {
+            expand: true,
+            cwd: 'JavaScript/',
+            src: ['**/*.js','**/*.css','**/*.html'],
+            dest: 'build/',
+          },
+        ],
+      }
+    },
+    watch: {
+      scripts: {
+        files: ['JavaScript/**/*.js','JavaScript/**/*.css','JavaScript/**/*.html'],
+        tasks: ['template'],
+        options: {
+          spawn: false
+        },
+      },
+    },
   });
+
   grunt.loadNpmTasks('grunt-aws-s3');
+  grunt.loadNpmTasks('grunt-template');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   demos.forEach(function(demo) {
     grunt.registerTask('publish:' + demo.slug, "Publish the " + demo.slug + " demo", ['aws_s3:' + demo.slug]);

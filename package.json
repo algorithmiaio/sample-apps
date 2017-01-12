@@ -1,6 +1,8 @@
 {
   "name": "sample-apps",
   "devDependencies": {
-    "grunt-aws-s3": "^0.14.5"
+    "grunt-aws-s3": "^0.14.5",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-template": "^1.0.0"
   }
 }

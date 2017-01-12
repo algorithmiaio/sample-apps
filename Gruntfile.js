@@ -17,7 +17,7 @@ module.exports = function(grunt) {
     { slug: 'deep-style', dist: 'JavaScript/deep-filter/'},
     { slug: 'web-page-inspector', dist: 'JavaScript/web-page-inspector'},
     { slug: 'video-search', dist: 'JavaScript/video-search'},
-    { slug: 'rss-dashboard', dist: 'JavaScript/rss-dashboard'},
+    { slug: 'rss-dashboard', dist: 'JavaScript/RSS_dashboard'},
   ];
 
 
@@ -31,6 +31,8 @@ module.exports = function(grunt) {
         differential: true
       }
   };
+  var copyConfig = {};
+  var templateConfig = {};
 
   demos.forEach(function(demo) {
     awsS3Config[demo.slug] = {
@@ -41,43 +43,38 @@ module.exports = function(grunt) {
         dest: demo.slug
       }]
     };
+    copyConfig[demo.slug] = {
+      files:  [{
+        expand: true,
+        cwd: demo.dist,
+        src: ['**/*'],
+        dest: 'build/'+demo.slug
+      }]
+    };
+    templateConfig[demo.slug] = {
+      options: {
+        data: {
+          header_begin: grunt.file.read('JavaScript/header_begin.html'),
+          header_end: grunt.file.read('JavaScript/header_end.html'),
+          footer: grunt.file.read('JavaScript/footer.html'),
+        }
+      },
+      files: [
+        {
+          expand: true,
+          cwd: demo.dist,
+          src: ['**/*.js','**/*.css','**/*.html'],
+          dest: 'build/'+demo.slug,
+        },
+      ]
+    };
   });
 
   grunt.initConfig({
     aws: grunt.file.readJSON('aws-keys.json'),
     aws_s3: awsS3Config,
-    copy: {
-      main: {
-        files:  [
-          {
-            expand: true,
-            cwd: 'JavaScript/',
-            src: ['**/*'],
-            dest: 'build/',
-          },
-        ],
-      }
-    },
-    template: {
-      options: {},
-      'process-html-template': {
-        options: {
-          data: {
-            header_begin: grunt.file.read('JavaScript/header_begin.html'),
-            header_end: grunt.file.read('JavaScript/header_end.html'),
-            footer: grunt.file.read('JavaScript/footer.html'),
-          }
-        },
-        files: [
-          {
-            expand: true,
-            cwd: 'JavaScript/',
-            src: ['**/*.js','**/*.css','**/*.html'],
-            dest: 'build/',
-          },
-        ],
-      }
-    },
+    copy: copyConfig,
+    template: templateConfig,
     watch: {
       scripts: {
         files: ['JavaScript/**/*.html'],
@@ -96,7 +93,7 @@ module.exports = function(grunt) {
 
   demos.forEach(function(demo) {
     grunt.registerTask('publish:' + demo.slug, "Publish the " + demo.slug + " demo", ['aws_s3:' + demo.slug]);
-    grunt.registerTask('build', "Build all demos", ['copy','template']);
+    grunt.registerTask('build:' + demo.slug, "Build all demos", ['copy:' + demo.slug, 'template:' + demo.slug]);
   });
 
 };

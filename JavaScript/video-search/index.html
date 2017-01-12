@@ -83,7 +83,7 @@
 					<h1>Search Unstructured Video</h1>
 					<h4 class="secondary-light whitespace-md">Use Computer Vision and Deep Learning to search untagged video</h4>
 				</div>
-				<div class="col-sm-12 col-md-8">
+				<div class="col-sm-12 col-md-6">
 					<div class="card">
 						<div id="status-label"></div>
 						<h3 class="dark">Search our video database for an object</h3>
@@ -228,47 +228,47 @@
 	</section>
 	</div>
 
-	<!-- BUILT FOR DEVS -->
-	<section class="container">
-		<div class="row">
-			<div class="col-md-9">
-				<h2 class="has-subcontent">Built For Developers</h2>
-				<h4 class="secondary">A simple, scalable API for machine intelligence</h4>
-					<h4 class="has-subcontent">Sample Input</h4>
-					<pre><code class="python">import Algorithmia
+  <!-- BUILT FOR DEVS -->
+  <section class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <h2 class="whitespace-sm">Built For Developers</h2>
+        <h4 class="whitespace-md">A simple, scalable API for machine intelligence</h4>
+          <p class="item-title">SAMPLE INPUT</p>
+          <pre class="whitespace-md"><code class="python">import Algorithmia
 input = {"images": ["_IMAGE_URL_"], "savePaths": ["_OUTPUT_URL_"], "filterName": "space_pizza"}
 client = Algorithmia.client('_API_KEY_')
 algo = client.algo('deeplearning/DeepFilter/0.5.3')
 
 print algo.pipe(input)
-	</code></pre>
-						<h4 class="has-subcontent">Sample Output</h4>
-						<pre><code class="json">{
+  </code></pre>
+            <p class="item-title">SAMPLE OUTPUT</p>
+            <pre><code class="json">{
   "savePaths": [
     "_OUTPUT_URL_"
   ]
 }</code></pre>
-				<a href="https://algorithmia.com/algorithms/deeplearning/DeepFilter" class="btn btn-primary-inverse">
-					LEARN MORE
-				</a>
-			</div>
-		</div>
-	</section>
+        <a href="https://algorithmia.com/algorithms/deeplearning/DeepFilter" class="btn btn-primary-inverse">
+          LEARN MORE
+        </a>
+      </div>
+    </div>
+  </section>
 
-	<!-- JOIN -->
-	<section class="grey-background">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h2>Join the thousands of developers already building intelligent apps</h2>
-					<h4 class="whitespace-md">Get 10,000 additional credits when you sign up using the code "color"</h4>
-					<a href="https://algorithmia.com/signup?invite=color" class="btn btn-success">
-						SIGN UP FOR FREE
-					</a>
-				</div>
-			</div>
-		</div>
-	</section>
+  <!-- JOIN -->
+  <section class="grey-background">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Join the thousands of developers already building intelligent apps</h3>
+          <p class="lg">Get 10,000 additional credits when you sign up using the code "color"</p>
+          <a href="https://algorithmia.com/signup?invite=color" class="btn btn-success">
+            SIGN UP FOR FREE
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
 	<footer>
 		<div class="container md-padding">

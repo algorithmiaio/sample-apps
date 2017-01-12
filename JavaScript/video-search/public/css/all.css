@@ -167,6 +167,11 @@ p.lg {
     font-size:   1.25rem;
     font-weight: 300;
 }
+.item-title  {
+  color: rgba(0,0,0,.54);
+  margin-bottom: 0;
+  text-transform: uppercase;
+}
 
 img       {max-width: 100%;}
 .img-fill {width: 100%;}
@@ -358,6 +363,16 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
 .form-control:focus {
   border-color: #5000BE;
   box-shadow: none;
+}
+
+/* $CODE */
+pre {
+    padding: 0;
+    margin: 0; /* overrides default */
+    margin-bottom: 1rem;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
 }
 
 /* $MEDIA QUERIES */

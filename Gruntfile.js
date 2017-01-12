@@ -64,13 +64,13 @@ module.exports = function(grunt) {
         {
           expand: true,
           cwd: demo.dist,
-          src: ['**/*.js','**/*.css','**/*.html'],
+          src: ['**/*.js','**/*.css','**/*.htm*'],
           dest: 'build/'+demo.slug,
         },
       ]
     };
     watchConfig[demo.slug] = {
-      files: [demo.dist+'/**/*.html'],
+      files: [demo.dist+'/**/*.htm*', demo.dist+'/**/*.css'],
       tasks: ['copy:' + demo.slug, 'template:' + demo.slug],
       options: {
         spawn: false

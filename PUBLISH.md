@@ -1,11 +1,29 @@
-## Publishing demos
+## Setup
 
-Most of the demos get published via Grunt tasks. You'll need to install the Grunt CLI and the AWS grunt plugin: 
+Most of the demos get built and published via Grunt tasks. You'll need to install the Grunt CLI and the AWS grunt plugin:
 
 ```bash
 npm install -g grunt-cli
 npm install
 ```
+
+## Building demos
+
+While editing the demos, you'll probably want to see your changes in their templated context.
+
+You can manually build an individual demo:
+
+```bash
+grunt build:colorize-photos
+```
+
+Or you can have Grunt continuously *watch* for changes to HTML or CSS files, and rebuild as needed:
+
+```bash
+grunt watch
+```
+
+## Publishing demos
 
 You'll need to create `aws-keys.json` in the repo root:
 

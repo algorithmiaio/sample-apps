@@ -7,11 +7,11 @@
 }
 .scale {
   position: absolute;
-  top: 0;
-  left: 0;
+  bottom: 1px;
+  left: 1px;
 }
 .hero {    
-    background-image: url(../images/site-map.jpeg);
+    background-image: url(../images/site-map.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }

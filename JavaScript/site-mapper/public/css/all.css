@@ -86,10 +86,12 @@ body {
     border-radius: 0;
     font-weight: 300;
 }
+/* Ensures tabs fit on one line for small screens. Cant remove border bottom :( */
 .nav-tabs > li {
-    float:      none;
-    display:    inline-block;
+    float: none;
+    display: table-cell;
 }
+
 /* Not active. Grey with no border. */
 .nav-tabs>li>a       {color: rgba(0,0,0,.54); padding: .25rem;}
 .nav-tabs>li>a:hover {
@@ -383,9 +385,19 @@ pre {
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     /* Bump up tab size for larger screens */
-    .nav-tabs           {font-size: 1rem;}
-    .nav-tabs>li>a      {padding:   .5rem 1rem;}
-    .navbar-brand > img {width:     250px;}
+    .nav-tabs {
+        font-size: 1rem;
+    }
+    .nav-tabs > li {
+        float: left;
+        display:    inline-block;
+    }
+    .nav-tabs>li>a {
+        padding:   .5rem 1rem;
+    }
+    .navbar-brand > img {
+        width: 250px;
+    }
     h1 {font-size: 4em;}
 }
 

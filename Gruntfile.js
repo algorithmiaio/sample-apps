@@ -33,6 +33,7 @@ module.exports = function(grunt) {
   };
   var copyConfig = {};
   var templateConfig = {};
+  var watchConfig = {};
 
   demos.forEach(function(demo) {
     awsS3Config[demo.slug] = {
@@ -68,6 +69,13 @@ module.exports = function(grunt) {
         },
       ]
     };
+    watchConfig[demo.slug] = {
+      files: [demo.dist+'/**/*.html'],
+      tasks: ['copy:' + demo.slug, 'template:' + demo.slug],
+      options: {
+        spawn: false
+      },
+    };
   });
 
   grunt.initConfig({
@@ -75,15 +83,7 @@ module.exports = function(grunt) {
     aws_s3: awsS3Config,
     copy: copyConfig,
     template: templateConfig,
-    watch: {
-      scripts: {
-        files: ['JavaScript/**/*.html'],
-        tasks: ['copy','template'],
-        options: {
-          spawn: false
-        },
-      },
-    },
+    watch: watchConfig
   });
 
   grunt.loadNpmTasks('grunt-aws-s3');

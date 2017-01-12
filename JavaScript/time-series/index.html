@@ -98,17 +98,22 @@
 	    <div class="row">
 			<div class="col-md-12">
 			  	<div ng-controller="TimeSeriesControl" id="tsControl" ng-init="analyze()">
-				    <div class="viz-main">
-				    	<!-- PLACEHOLDER IMG -->
-				    	<img src="public/images/timeseries_placeholder.png" class="img-placeholder">
-				    	<timeseries-chart data="tsData" options="tsOptions" headers="headers" />
-				    </div>
-				    <div>
-				      <!-- <button class="btn btn-primary" ng-click="analyze()">Perform Data Analysis</button> -->
-				      <span class="aspinner algo-spinner demo-spinner"></span>
-				      <i class="fa fa-warning text-danger" ng-if="errorMessage" ng-cloak></i>
-				      <span class="text-danger" ng-bind="errorMessage"></span>
-			    	</div>
+			  		<div class="row row-sm">
+						<div class="col-md-12">
+						    <div class="viz-main">
+						    	<!-- PLACEHOLDER IMG -->
+						    	<img src="public/images/timeseries_placeholder.png" class="img-placeholder">
+						    	<timeseries-chart data="tsData" options="tsOptions" headers="headers" />
+						    </div>
+						    <div>
+						      <!-- <button class="btn btn-primary" ng-click="analyze()">Perform Data Analysis</button> -->
+						      <span class="aspinner algo-spinner demo-spinner"></span>
+						      <i class="fa fa-warning text-danger" ng-if="errorMessage" ng-cloak></i>
+						      <span class="text-danger" ng-bind="errorMessage"></span>
+					    	</div>
+					    </div>
+					</div>
+
 				    <div class="row row-sm">
 					    <div class="col-md-6">
 					      <h3>Data Source</h3>
@@ -200,7 +205,6 @@
 	</div>
 
   <!-- BUILT FOR DEVS -->
-  <div class="border-bottom">
   <section class="container">
     <div class="row">
       <div class="col-md-9">
@@ -226,21 +230,21 @@ print algo.pipe(input)
       </div>
     </div>
   </section>
-  </div>
 
-
-	<!-- JOIN -->
-	<section class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<h2>Join the thousands of developers already building intelligent apps</h2>
-				<h4 class="whitespace-md">Get 10,000 additional credits when you sign up using the code "color"</h4>
-				<a href="https://algorithmia.com/signup?invite=color" class="btn btn-success">
-					SIGN UP FOR FREE
-				</a>
-			</div>
-		</div>
-	</section>
+  <!-- JOIN -->
+  <section class="grey-background">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Join the thousands of developers already building intelligent apps</h3>
+          <p class="lg">Get 10,000 additional credits when you sign up using the code "color"</p>
+          <a href="https://algorithmia.com/signup?invite=color" class="btn btn-success">
+            SIGN UP FOR FREE
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
 	<footer>
 		<div class="container md-padding">

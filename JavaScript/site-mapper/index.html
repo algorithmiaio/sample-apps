@@ -140,8 +140,9 @@
     </div> -->
     <div class="row whitespace-md">
       <div class="col-sm-7 whitespace-md">
-        <p class="lg item-title">Link Summary</p>
-        <div class="info-panel link-details-panel" ng-if="link.url" ng-cloak>
+        <p class="item-title">URL + PAGERANK</p>
+        <p class="item-title">GENERATED SUMMARY</p>
+        <div ng-if="link.url" ng-cloak>
           <a ng-href="{{link.url}}" ng-bind="link.url"></a>
           <div ng-show="summarizing">
             <span class="aspinner demo-spinner"></span>
@@ -149,10 +150,9 @@
           </div>
           <div ng-bind="link.summary" class="small"></div>
         </div>
-      </div> 
-      <div class="col-sm-5 whitespace-md">
-        <p class="lg item-title">LINK TAGS</p>
-        <div class="info-panel link-details-panel" ng-if="link.url" ng-cloak>
+  
+        <p class="item-title">GENERATED TAGS</p>
+        <div ng-if="link.url" ng-cloak>
           <div ng-show="tagging">
             <span class="aspinner demo-spinner"></span>
             Tagging...

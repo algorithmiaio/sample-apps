@@ -12,10 +12,10 @@ function updateUrl() {
 function analyze() {
 
   var output = document.getElementById("output");
-  var statusLabel = document.getElementById("status-label")
+  var statusLabel = document.getElementById("status-label");
 
   statusLabel.innerHTML = "";
-  startTask();
+  document.getElementById("algo-spinner").classList.remove("hidden");
 
   // Get the URL of the feed
   var inputUrl = document.getElementById("inputStrings").value;
@@ -26,7 +26,7 @@ function analyze() {
 
   // Query RSS scraper algorithm
     Algorithmia.query("/tags/ScrapeRSS", Algorithmia.api_key, inputUrl, function(error, items) {
-      finishTask();
+      document.getElementById("algo-spinner").classList.add("hidden");
       // Print debug output
       if(error) {
         statusLabel.innerHTML = '<span class="text-danger">Failed to load RSS feed (' + error + ')</span>';
@@ -38,7 +38,6 @@ function analyze() {
       
       // Iterate over each item returned from ScrapeRSS
       for(var i in items) {
-        startTask();
 
         // Create closure to capture item
         (function() {
@@ -54,11 +53,11 @@ function analyze() {
           itemHTML += '<p class="item-title">ARTICLE TITLE</p>';
           itemHTML += '<h4 class="result"><a href="' + itemUrl + '">' + item.title + '</a></h4>';
           itemHTML += '<p class="item-title">GENERATED SUMMARY</p>';
-          itemHTML += '<p class="summary"></p>';
+          itemHTML += '<p class="summary"><span class="aspinner"></span></p>';
           itemHTML += '<p class="item-title">GENERATED TAGS</p>';
-          itemHTML += '<div class="tags"></div>';
+          itemHTML += '<div class="tags"><span class="aspinner"></span></div>';
           itemHTML += '<p class="item-title">SENTIMENT ANALYSIS</p>';
-          itemHTML += '<div class="sentiment"></div>';
+          itemHTML += '<div class="sentiment"><span class="aspinner"></span></div>';
           itemHTML += '</div>';
           row.innerHTML += itemHTML;
 
@@ -68,7 +67,6 @@ function analyze() {
 
           // Use a utility algorithm to fetch page text
           Algorithmia.query("/util/Html2Text", Algorithmia.api_key, itemUrl, function(error, itemText) {
-            finishTask();
 
             if(error) {
               statusLabel.innerHTML = '<span class="text-danger">Error fetching ' + itemUrl + '</span>';
@@ -86,11 +84,9 @@ function analyze() {
   }
 
   function summarize(itemText, summaryElement) {
-    startTask();
 
     // Query summarizer analysis
     Algorithmia.query("/nlp/Summarizer", Algorithmia.api_key, itemText, function(error, summaryText) {
-      finishTask();
 
       if(error) {
         statusLabel.innerHTML = '<span class="text-danger">' + error + '</span>';
@@ -102,7 +98,6 @@ function analyze() {
   }
 
   function autotag(itemText, tagsElement) {
-    startTask();
 
     var topics = [];
     var topicLabels = [];
@@ -115,7 +110,6 @@ function analyze() {
 
     // Query autotag analysis
     Algorithmia.query("/nlp/AutoTag", Algorithmia.api_key, itemText, function(error, topics) {
-      finishTask();
 
       if(error) {
         statusLabel.innerHTML = '<span class="text-danger">' + error + '</span>';
@@ -132,7 +126,6 @@ function analyze() {
 
 
 function sentiment(itemText, sentimentElement) {
-  startTask();
 
   var smileys = [
     '<i class="fa fa-frown-o"></i>',
@@ -144,7 +137,6 @@ function sentiment(itemText, sentimentElement) {
 
   // Query sentiment analysis
   Algorithmia.query("/nlp/SentimentAnalysis", Algorithmia.api_key, {document:itemText}, function(error, result) {
-    finishTask();
 
     if(error) {
       statusLabel.innerHTML = '<span class="text-danger">' + error + '</span>';
@@ -164,16 +156,5 @@ function sentiment(itemText, sentimentElement) {
     sentimentElement.innerHTML = '<p>'+(Math.round(sentimentScore*100))/100+' ('+sentimentStrength+sentimentType+')</p>';
 
   });
-}
 
-var numTasks = 0;
-function startTask() {
-  numTasks++;
-  document.getElementById("algo-spinner").classList.remove("hidden");
-}
-function finishTask() {
-  numTasks--;
-  if(numTasks <= 0) {
-    document.getElementById("algo-spinner").classList.add("hidden");
-  }
 }

@@ -34,18 +34,20 @@
 </footer>
 
 <!-- JS -->
-<script>
-  updateUrl();
-  analyze();
-</script>
 <script src="public/js/jquery.min.js"></script>
 <script src="public/js/bootstrap.min.js"></script>
-<script src="public/js/algorithmia-0.2.0.js"></script>
-<script src="public/js/TweenMax.min.js"></script>
 <script src="public/js/dots.js"></script>
 <script src="public/js/highlight.pack.js"></script>
+
+<!-- This is the Algorithmia JavaScript client. See: https://algorithmia.com/docs/clients/javascript/ -->
+<script src="public/js/algorithmia.js"></script>
+<!-- Sample App code -->
 <script src="public/js/main.js"></script>
-<!-- <script src="https://www.youtube.com/iframe_api"></script> -->
-<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+  hljs.initHighlightingOnLoad();
+  updateUrl();
+</script>
+
 </body>
 </html>

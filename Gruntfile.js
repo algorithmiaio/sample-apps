@@ -70,7 +70,7 @@ module.exports = function(grunt) {
       ]
     };
     watchConfig[demo.slug] = {
-      files: [demo.dist+'/**/*.htm*', demo.dist+'/**/*.css'],
+      files: [demo.dist+'/**/*.htm*', demo.dist+'/**/*.css', demo.dist+'/**/*.js'],
       tasks: ['copy:' + demo.slug, 'template:' + demo.slug],
       options: {
         spawn: false

@@ -18,7 +18,7 @@ You can manually build an individual demo:
 grunt build:colorize-photos
 ```
 
-Or you can have Grunt continuously *watch* for changes to HTML or CSS files, and rebuild as needed:
+Or you can have Grunt continuously *watch* for changes to HTML/CSS/JS files, and rebuild as needed:
 
 ```bash
 grunt watch

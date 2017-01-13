@@ -76,6 +76,20 @@ form .btn {margin-bottom: 0;}
 	height: 100%;
 }
 
+/* EXPLAINATION */
+.explaination-steps {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.explaination-steps .step {
+	font-size: 1.25rem;
+	font-weight: 700;
+}
+.explaination-steps li {
+	margin-bottom: 1rem;
+}
+
 /* $MEDIA QUERIES */
 /* Extra small devices (phones, less than 768px) */
 /* This should be the default AKA no styles here */

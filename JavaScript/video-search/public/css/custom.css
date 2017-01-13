@@ -28,8 +28,8 @@ form .btn {margin-bottom: 0;}
 	padding: 0; margin: 0;
 }
 #search-results > li {
-	padding-bottom: 4rem;
-	margin-bottom: 4rem;
+	padding-bottom: 2rem;
+	margin-bottom: 3rem;
 	border-bottom: 1px solid rgba(0,0,0,.12);
 }
 #search-results > li:last-of-type {
@@ -41,7 +41,8 @@ form .btn {margin-bottom: 0;}
 	list-style: none;
 	padding: 0;
 }
-.video-details p   {
+.video-details p,
+.video-details h4 {
 	margin-bottom: 0;
 }
 .video-details .sub {
@@ -62,6 +63,7 @@ form .btn {margin-bottom: 0;}
 .video-container {
 	position: relative;
 	padding-bottom: 56.25%; /* 16:9 aspect ratio */
+	margin-bottom: 1rem;
 	padding-top: 30px;
 	height: 0;
 	overflow: hidden;

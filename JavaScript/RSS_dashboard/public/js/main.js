@@ -143,7 +143,7 @@ function sentiment(itemText, sentimentElement) {
   ];
 
   // Query sentiment analysis
-  Algorithmia.query("/nlp/SentimentAnalysis", Algorithmia.api_key, itemText, function(error, sentimentScore) {
+  Algorithmia.query("/nlp/SentimentAnalysis", Algorithmia.api_key, {document:itemText}, function(error, result) {
     finishTask();
 
     if(error) {
@@ -151,7 +151,18 @@ function sentiment(itemText, sentimentElement) {
       return;
     }
 
-    sentimentElement.innerHTML = '<p>10% Positive, 1% Negative, 89% Neutral</p>';
+    var sentimentScore = result[0].sentiment;
+
+    var sentimentType = 'neutral';
+    if (sentimentScore>=0.2) {
+      sentimentType = 'positive'
+    } else if (sentimentScore<=-0.2) {
+      sentimentType = 'negative'
+    }
+    var sentimentStrength = Math.abs(sentimentScore)>=0.4?'very ':'';
+
+    sentimentElement.innerHTML = '<p>'+(Math.round(sentimentScore*100))/100+' ('+sentimentStrength+sentimentType+')</p>';
+
   });
 }
 

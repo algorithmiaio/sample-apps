@@ -1,6 +1,11 @@
 window.Algorithmia = window.Algorithmia || {};
 Algorithmia.api_key = "simeyUbLXQ/R8Qga/3ZCRGcr2oR1";
 
+var httpRegex = new RegExp("^(http|https)://", "i");
+
+/**
+ * copy URL of RSS feed from dropdown into input text
+ */
 function updateUrl() {
   var dropDown = document.getElementById("urlDD");
   document.getElementById("inputStrings").value = dropDown.options[dropDown.selectedIndex].value;
@@ -19,6 +24,15 @@ function displayError(error, errorMessage) {
   return !!error;
 }
 
+/**
+ * ensure that a URL begins with http(s)://
+ * @param url
+ * @returns {string}
+ */
+function prefixHttp(url) {
+  return httpRegex.test(url)?url:'http://'+inputUrl;
+}
+
 function analyze() {
 
   var statusLabel = document.getElementById("status-label");
@@ -28,7 +42,7 @@ function analyze() {
   document.getElementById("algo-spinner").classList.remove("hidden");
 
   // Get the URL of the feed
-  var inputUrl = document.getElementById("inputStrings").value;
+  var inputUrl = prefixHttp(document.getElementById("inputStrings").value);
 
   // Clear table to prep for new data
   output.innerHTML = "";
@@ -38,7 +52,8 @@ function analyze() {
   Algorithmia.query("/tags/ScrapeRSS", Algorithmia.api_key, inputUrl, function(error, items) {
     document.getElementById("algo-spinner").classList.add("hidden");
     // Print debug output
-    if(displayError(error, 'Failed to load RSS feed ('+error+')')) {return;}
+    if(displayError(error, 'Failed to load RSS feed; please check that it is a valid URL')) {return;}
+    document.getElementById("results").classList.remove("hidden");
 
     // Trim items
     items.length = Math.min(items.length,6);
@@ -74,7 +89,7 @@ function analyze() {
 
         // Use a utility algorithm to fetch page text
         Algorithmia.query("/util/Html2Text", Algorithmia.api_key, itemUrl, function(error, itemText) {
-          if(displayError(error, 'Error fetching ' + itemUrl)) {return;}
+          if(displayError(error, 'Error fetching ' + itemUrl +': '+error)) {return;}
           // Run NLP algos on the links
           summarize(itemText, summaryElement);
           autotag(itemText, tagsElement);
@@ -116,14 +131,6 @@ function autotag(itemText, tagsElement) {
 }
 
 function sentiment(itemText, sentimentElement) {
-
-  var smileys = [
-    '<i class="fa fa-frown-o"></i>',
-    '<i class="fa fa-frown-o"></i>',
-    '<i class="fa fa-meh-o"></i>',
-    '<i class="fa fa-smile-o"></i>',
-    '<i class="fa fa-smile-o"></i>'
-  ];
 
   // Query sentiment analysis
   Algorithmia.query("/nlp/SentimentAnalysis", Algorithmia.api_key, {document:itemText}, function(error, result) {

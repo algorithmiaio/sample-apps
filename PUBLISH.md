@@ -4,6 +4,7 @@ Most of the demos get built and published via Grunt tasks. You'll need to instal
 
 ```bash
 npm install -g grunt-cli
+npm install grunt
 npm install
 ```
 
@@ -21,6 +22,13 @@ Or you can have Grunt continuously *watch* for changes to HTML or CSS files, and
 
 ```bash
 grunt watch
+```
+
+
+Note: if you do not plan on publishing, you must create a dummy `aws-keys.json` in the repo root to build:
+
+```json
+{}
 ```
 
 ## Publishing demos

@@ -53,9 +53,13 @@ svg circle {
     background-color: rgba(80,0,190,.5);
     -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
-.pagerank-links {padding-left: 0;}
+.pagerank-links {
+  padding-left: 0;
+}
 
-.pagerank-rank {padding-left: .5rem;}
+.pagerank-rank {
+  padding-left: .5rem;
+}
 .link-details-panel {
   height: 300px;
   overflow-y: auto;

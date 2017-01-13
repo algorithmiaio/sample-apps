@@ -62,11 +62,11 @@
           <!-- Inputs -->
             <form ng-submit="scrape(siteUrl)">
               <div class="row whitespace-none">
-                <div class="col-xs-12 col-sm-9 whitespace-sm">
+                <div class="col-xs-12 col-sm-10 whitespace-sm">
                   <label>Website URL to scrape</label>
                   <input type="text" class="form-control url" ng-model="siteUrl">
                 </div>
-                <div class="col-xs-5 col-sm-3 whitespace-sm">
+                <div class="col-xs-4 col-sm-2 whitespace-sm">
                   <label title="Sets the maximum number of pages to crawl">Depth</label>
                   <input type="number" min="0" max="120" class="form-control depth" ng-model="depthLimit">
                 </div>
@@ -91,9 +91,10 @@
       <div class="col-sm-7 whitespace-md">
         <p class="lg item-title">SITEMAP VIZUALIZATION</p>
         <div class="viz-panel">
-          <img src="public/images/site-map-placeholder.png" class="placeholder">
-          <img src="public/images/pagerank_scale.svg" class="scale" title="Color Scale" ng-show="pagerank" ng-animate="'fade'" ng-cloak>
-<!--           <svg class="viz">
+          <img src="public/images/placeholder02.png" class="placeholder">
+          <!-- Viz from: http://www.redotheweb.com/CodeFlower/ -->
+          <!-- <img src="public/images/pagerank_scale.svg" class="scale" title="Color Scale" ng-show="pagerank" ng-animate="'fade'" ng-cloak>-->
+          <!--  <svg class="viz">
             <g class="viewport">
               <g class="bottom"></g>
               <g class="middle"></g>
@@ -124,6 +125,7 @@
   
         <p class="item-title">GENERATED TAGS</p>
         <div class="tags">
+          <!-- PLACEHOLDER -->
           <span class="label label-purple">whatsapp</span>
           <span class="label label-purple">security</span>
           <span class="label label-purple">messages</span>
@@ -163,6 +165,7 @@
           <div class="row whitespace-sm">
             <div class="col-xs-2">
               <!-- <p ng-bind="round(pair.rank)"></p> -->
+              <!-- PLACEHOLDER -->
               <p>1.00</p>
               <p>.89</p>
               <p>.79</p>
@@ -178,6 +181,7 @@
             </div>
             <div class="col-xs-10 pagerank-links">
               <!-- <p class="pagerank-url"><a ng-bind="pair.url"></a></p> -->
+              <!-- PLACEHOLDER -->
               <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
               <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
               <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>

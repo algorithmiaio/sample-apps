@@ -39,11 +39,11 @@ svg circle {
 .pagerank-panel {
   border: 1px solid rgba(0,0,0,.12);
   padding: .5rem;
-  max-height: 300px;
+  max-height: 200px;
   overflow-y: scroll;
   overflow-x: hidden;
 }
-
+.pagerank-panel p {margin-bottom: .5rem;}
 .pagerank-panel::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 7px;
@@ -56,12 +56,11 @@ svg circle {
 .pagerank-links {
   padding-left: 0;
 }
-
 .pagerank-rank {
   padding-left: .5rem;
 }
 .link-details-panel {
-  height: 300px;
+  height: 200px;
   overflow-y: auto;
 }
 /* Label */

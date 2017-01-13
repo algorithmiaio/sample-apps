@@ -92,34 +92,32 @@
   <div class="row row-md">
     <div class="col-md-12">
       <h2 class="whitespace-none">How it works</h2>
-      <h4>Using computer vision to search unstructured video</h4>
+      <h4>Extracting summaries, tags, and sentiment from an RSS feed</h4>
     </div>
   </div>
   <div class="row row-md">
     <div class="col-md-8">
       <h3>Tools used</h3>
       <ul>
-        <li><a href="">Socrata Open Data Query</a> – pulls the permit data from Socrata</li>
-        <li><a href="">Simple Moving Average</a> – uses local average to smooth data</li>
-        <li><a href="">Linear Detrend</a> – removes increasing or decreasing trends in time series</li>
-        <li><a href="">Autocorrelate</a> – used to analyze the seasonality of a time series</li>
-        <li><a href="">Remove Seasonality</a> – removes known seasonal effects from a time series</li>
-        <li><a href="">Outlier Detection</a> – flags unusual data points</li>
-        <li><a href="">Forecast</a> – predict a given time series into the future</li>
+        <li><a href="https://algorithmia.com/algorithms/tags/ScrapeRSS">ScrapeRSS</a> – scrapes the RSS feed, extracting each entry's title and url</li>
+        <li><a href="https://algorithmia.com/algorithms/util/Html2Text">Html2Text</a> – scrapes HTML from the entry's url and converts its main content to plain text</li>
+        <li><a href="https://algorithmia.com/algorithms/nlp/Summarizer">Summarizer</a> – creates a summary by extracting topic sentences based on frequency of key terms</li>
+        <li><a href="https://algorithmia.com/algorithms/nlp/AutoTag">AutoTag</a> – uses a variant of <a href="https://algorithmia.com/algorithms/nlp/LDA">nlp/LDA</a> to extract keywords.</li>
+        <li><a href="https://algorithmia.com/algorithms/nlp/SentimentAnalysis">SentimentAnalysis</a> – assigns a sentiment rating from -1 (very negative) to to 1 very positive.
+</li>
       </ul>
     </div>
   </div>
   <div class="row row-md">
     <div class="col-md-8">
       <h3>Source Data</h3>
-      <p>We use an algorithm to directly access Socrata’s API that can be found here.</p>
-      <p>Once we’ve retrieved the data, we aggregate it by total number of permits issued per month, and plot this data. To make the graph clearer, it sometimes helps to smooth or denoise the data. There are a number of ways to do this, with moving averages being the most popular. The most intuitive is the Simple Moving Average, which replaces each point by the average of itself and some number of the preceding points (default is 3).</p>
+      <p>We examine the provided RSS feed, extract the title and content URL, then and convert the content into plain text (while removing tags which do not contribute to its meaning).  Then we extract topic tags from the converted content, analyze it for positive or negative sentiment, and generate a meaningful summary.</p>
     </div>
   </div>
   <div class="row">
     <div class="col-md-8">
       <h3>Takeaway</h3>
-      <p>The takeaway from this example is not the individual pieces – most of these techniques are available a number of places. The secret here is that it is simple, composable, and fully automated. Once one person writes a data connector in Algorithmia (which is likely to happen for interesting public data, like that provided by Socrata), you don’t have to burn precious time writing and working kinks out of your own. On the other hand, if something existing gets done better, the compositional nature of Algorithmia will allow you to swap out pieces of a pipeline seamlessly. When someone comes up with a better outlier detector, then upgrading a pipeline like the one above can be literally just a few keystrokes away.</p>
+      <p>By wiring up a series of very simple API calls, a developer can easily and quickly scrape content from a variety of sources and perform automatic summarization, tagging, and even complex sentiment analysis... all without writing a single line of text-processing code or performing any sever-management tasks.  This makes it possible to build web dashboards, in-app content analysis, or backend pipelines in mere hours.</p>
     </div>
   </div>
 </section>
@@ -132,20 +130,28 @@
       <h2 class="whitespace-sm">Built For Developers</h2>
       <h4 class="secondary whitespace-md">A simple, scalable API for machine intelligence</h4>
         <p class="item-title">SAMPLE INPUT</p>
-        <pre class="whitespace-md"><code class="python">import Algorithmia
-input = {"images": ["_IMAGE_URL_"], "savePaths": ["_OUTPUT_URL_"], "filterName": "space_pizza"}
-client = Algorithmia.client('_API_KEY_')
-algo = client.algo('deeplearning/DeepFilter/0.5.3')
-
-print algo.pipe(input)
+        <pre class="whitespace-md"><code hlcode="js" class="ng-scope hljs js javascript"><span class="hljs-keyword"><span class="hljs-keyword">var</span></span> input = <span class="hljs-string"><span class="hljs-string">"https://news.ycombinator.com/rss"</span></span>;
+Algorithmia.client(<span class="hljs-string"><span class="hljs-string">"YOUR_API_KEY"</span></span>)
+           .algo(<span class="hljs-string"><span class="hljs-string">"algo://tags/ScrapeRSS/0.1.6"</span></span>)
+           .pipe(input)
+           .then(<span class="hljs-function"><span class="hljs-keyword"><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span class="hljs-function">(</span><span class="hljs-params"><span class="hljs-function"><span class="hljs-params">output</span></span></span><span class="hljs-function">) </span></span>{
+             <span class="hljs-built_in"><span class="hljs-built_in">console</span></span>.log(output);
+           });
 </code></pre>
           <p class="item-title">SAMPLE OUTPUT</p>
-          <pre><code class="json">{
-"savePaths": [
-  "_OUTPUT_URL_"
-]
-}</code></pre>
-      <a href="https://algorithmia.com/algorithms/deeplearning/DeepFilter" class="btn btn-primary-inverse">
+          <pre><code class="hljs json">[
+  {
+    <span class="hljs-attr"><span class="hljs-attr">"title"</span></span>: <span class="hljs-string"><span class="hljs-string">"Waitin' (on Leiningen)"</span></span>,
+    <span class="hljs-attr"><span class="hljs-attr">"url"</span></span>: <span class="hljs-string"><span class="hljs-string">"http://swannodette.github.io/2014/12/22/waitin/"</span></span>,
+    <span class="hljs-attr"><span class="hljs-attr">"description"</span></span>: <span class="hljs-string"><span class="hljs-string">"&lt;a href=\"https://news.ycombinator.com/item?id=8790001\"&gt;Comments&lt;/a&gt;"</span></span>
+  },
+  {
+    <span class="hljs-attr"><span class="hljs-attr">"title"</span></span>: <span class="hljs-string"><span class="hljs-string">"Daala progress update"</span></span>,
+    <span class="hljs-attr"><span class="hljs-attr">"url"</span></span>: <span class="hljs-string"><span class="hljs-string">"https://people.xiph.org/~xiphmont/demo/daala/update1.shtml"</span></span>,
+    <span class="hljs-attr"><span class="hljs-attr">"description"</span></span>: <span class="hljs-string"><span class="hljs-string">"&lt;a href=\"https://news.ycombinator.com/item?id=8790468\"&gt;Comments&lt;/a&gt;"</span></span>
+  }
+]</code></pre>
+      <a href="https://algorithmia.com/algorithms/tags/ScrapeRSS" class="btn btn-primary-inverse">
         LEARN MORE
       </a>
     </div>

@@ -168,8 +168,8 @@ p.lg {
     font-weight: 300;
 }
 .item-title  {
-  color: rgba(0,0,0,.54);
-  margin-bottom: 0;
+  color: rgba(0,0,0,.54)!important;  /* overrides things like p.lg */
+  margin-bottom: 0!important;
   text-transform: uppercase;
 }
 

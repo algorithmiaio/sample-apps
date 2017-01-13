@@ -20,7 +20,6 @@ module.exports = function(grunt) {
     { slug: 'rss-dashboard', dist: 'JavaScript/RSS_dashboard'},
   ];
 
-
   var awsS3Config = {
       options: {
         accessKeyId: '<%= aws.key %>',
@@ -33,7 +32,12 @@ module.exports = function(grunt) {
   };
   var copyConfig = {};
   var templateConfig = {};
-  var watchConfig = {};
+  var watchConfig = {
+    templates: {
+      files: ['JavaScript/*.html','Gruntfile.js'],
+      options: { reload: true }
+    }
+  };
 
   demos.forEach(function(demo) {
     awsS3Config[demo.slug] = {

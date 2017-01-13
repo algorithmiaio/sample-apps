@@ -19,19 +19,15 @@ svg {
 }
 svg.viz {
   height: 700px;
-  border: 1px solid rgba(0,0,0,.54);
+  border: 1px solid rgba(0,0,0,.12);
 }
 svg circle {
   cursor: pointer;
 }
-/* Apply first to panels */
-.info-panel {
-  border: 1px solid rgba(0,0,0,.54);
-}
 
 .viz-panel {
-    text-align: center;
-
+  text-align: center;
+  border: 1px solid rgba(0,0,0,.12);
   height: 500px;
   position: relative;
 }
@@ -41,8 +37,21 @@ svg circle {
   left: 0;
 }
 .pagerank-panel {
-  overflow-y: auto;
+  border: 1px solid rgba(0,0,0,.12);
+  padding: .5rem;
+  max-height: 300px;
+  overflow-y: scroll;
   overflow-x: hidden;
+}
+
+.pagerank-panel::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+.pagerank-panel::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(80,0,190,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
 .pagerank-links {padding-left: 0;}
 
@@ -51,7 +60,18 @@ svg circle {
   height: 300px;
   overflow-y: auto;
 }
-
+/* Label */
+.label {
+  border-radius: 0;
+}
+.label-purple {
+  color: #FFFFFF;
+  background-color: #5000BE;
+}
+span.label {
+  font-size: .75rem;
+  line-height: 2;
+}
 svg.viz {
   height: 700px;
   border: 1px solid rgba(0,0,0,.54);

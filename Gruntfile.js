@@ -39,7 +39,7 @@ module.exports = function(grunt) {
     awsS3Config[demo.slug] = {
       files: [{
         expand: true,
-        cwd: demo.dist,
+        cwd: 'build/'+demo.slug,
         src: ['**'],
         dest: demo.slug
       }]
@@ -92,7 +92,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-template');
 
   demos.forEach(function(demo) {
-    grunt.registerTask('publish:' + demo.slug, "Publish the " + demo.slug + " demo", ['aws_s3:' + demo.slug]);
+    grunt.registerTask('publish:' + demo.slug, "Publish the " + demo.slug + " demo", ['copy:' + demo.slug, 'template:' + demo.slug, 'aws_s3:' + demo.slug]);
     grunt.registerTask('build:' + demo.slug, "Build all demos", ['copy:' + demo.slug, 'template:' + demo.slug]);
   });
 

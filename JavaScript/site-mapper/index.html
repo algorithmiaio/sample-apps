@@ -103,8 +103,44 @@
         </div>
       </div>
       <div class="col-sm-5 whitespace-md">
-        <p class="lg item-title">PAGE RANK</p>
-        <div class="info-panel pagerank-panel">
+        <p class="lg item-title">PAGE DATA</p>
+        <p class="item-title">URL</p>
+        <p><a href="">https://algorithmia.com/demo/sitemap</a></p>
+        <p class="item-title">PAGERANK</p>
+        <p>.89</p>
+        <p class="item-title">GENERATED SUMMARY</p>
+        <p>This demo uses domain mapping techniques and the Page Rank algorithm...By analyzing municipal building permit data and applying multiple time series algorithms, we created a live analysis of selected cities economic development and trajectory</p>
+        <div ng-if="link.url" ng-cloak>
+          <a ng-href="{{link.url}}" ng-bind="link.url"></a>
+          <!-- <div ng-show="summarizing">
+            <span class="aspinner demo-spinner"></span>
+            Summarizing...
+          </div> -->
+          <div ng-bind="link.summary" class="small"></div>
+        </div>
+  
+        <p class="item-title">GENERATED TAGS</p>
+        <div ng-if="link.url" ng-cloak>
+          <!-- <div ng-show="tagging">
+            <span class="aspinner demo-spinner"></span>
+            Tagging...
+          </div> -->
+          <div class="tag-pills" ng-repeat="tag in link.tags">
+            <a ng-bind="tag"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+      
+    </div>
+
+<!--     <div>
+      <graph data="siteMap"></graph>
+    </div> -->
+    <div class="row whitespace-md">
+      <div class="col-md-12 whitespace-md">
+        <p class="lg item-title">PAGERANK</p>
+        <div class="pagerank-panel">
     <!-- <table>
             <tr ng-repeat="pair in pagerankSorted" ng-click="loadLink(pair.url)" ng-cloak>
               <td ng-bind="round(pair.rank)"></td>
@@ -112,7 +148,7 @@
             </tr>
           </table> -->
           <div class="row whitespace-sm">
-            <div class="col-xs-2">
+            <div class="col-xs-1">
               <p ng-bind="round(pair.rank)"></p>
               <p class="pagerank-rank">1.00</p>
               <p class="pagerank-rank">.89</p>
@@ -133,70 +169,6 @@
           </div>
         </div>   
       </div>
-    </div>
-
-<!--     <div>
-      <graph data="siteMap"></graph>
-    </div> -->
-    <div class="row whitespace-md">
-      <div class="col-sm-7 whitespace-md">
-        <p class="item-title">URL + PAGERANK</p>
-        <p class="item-title">GENERATED SUMMARY</p>
-        <div ng-if="link.url" ng-cloak>
-          <a ng-href="{{link.url}}" ng-bind="link.url"></a>
-          <div ng-show="summarizing">
-            <span class="aspinner demo-spinner"></span>
-            Summarizing...
-          </div>
-          <div ng-bind="link.summary" class="small"></div>
-        </div>
-  
-        <p class="item-title">GENERATED TAGS</p>
-        <div ng-if="link.url" ng-cloak>
-          <div ng-show="tagging">
-            <span class="aspinner demo-spinner"></span>
-            Tagging...
-          </div>
-          <div class="tag-pills" ng-repeat="tag in link.tags">
-            <a ng-bind="tag"></a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Print debug input / output from the algorithms -->
-    <!-- Nav tabs -->
-    <div class="row row-sm">
-      <div class="col-md-12">
-        <ul class="nav nav-tabs">
-          <li class="active"><a href="#demo-code" data-toggle="tab">Demo Code</a></li>
-          <li><a href="#sitemap" data-toggle="tab">SiteMap</a></li>
-          <li><a href="#pagerank-in" data-toggle="tab">PageRank Input</a></li>
-          <li><a href="#pagerank-out" data-toggle="tab">PageRank Output</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <!-- Tab panes -->
-        <div class="tab-content debug-container">
-          <div class="tab-pane debug active" id="demo-code">
-            <pre><code>Algorithmia.client(apiKey).algo("/web/SiteMap").pipe(siteUrl).then(function(graph) {
-    // Render graph here...
-    Algorithmia.client(apiKey).algo("/thatguy2048/PageRank").pipe(graph.result).then(function(ranking) {
-        // Colorize graph here...
-    });
-});</code></pre>
-          </div>
-          <div class="tab-pane debug" id="sitemap"><pre ng-bind="siteMap | json">...</pre></div>
-          <div class="tab-pane debug" id="pagerank-in">...</div>
-          <div class="tab-pane debug" id="pagerank-out">...</div>
-        </div>
-        <a href="https://algorithmia.com/algorithms/deeplearning/DeepFilter" class="btn btn-primary-inverse">
-          LEARN MORE
-        </a>
-      </div>
-    </div>
-
 </section>
 
 <!-- EXPLANATION -->
@@ -237,6 +209,41 @@
     </div>
   </section>
   </div>
+
+<!-- Print debug input / output from the algorithms -->
+    <!-- Nav tabs -->
+<!--     <div class="row row-sm">
+      <div class="col-md-12">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#demo-code" data-toggle="tab">Demo Code</a></li>
+          <li><a href="#sitemap" data-toggle="tab">SiteMap</a></li>
+          <li><a href="#pagerank-in" data-toggle="tab">PageRank Input</a></li>
+          <li><a href="#pagerank-out" data-toggle="tab">PageRank Output</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12"> -->
+        <!-- Tab panes -->
+<!--         <div class="tab-content debug-container">
+          <div class="tab-pane debug active" id="demo-code">
+            <pre><code>Algorithmia.client(apiKey).algo("/web/SiteMap").pipe(siteUrl).then(function(graph) {
+    // Render graph here...
+    Algorithmia.client(apiKey).algo("/thatguy2048/PageRank").pipe(graph.result).then(function(ranking) {
+        // Colorize graph here...
+    });
+});</code></pre>
+          </div>
+          <div class="tab-pane debug" id="sitemap"><pre ng-bind="siteMap | json">...</pre></div>
+          <div class="tab-pane debug" id="pagerank-in">...</div>
+          <div class="tab-pane debug" id="pagerank-out">...</div>
+        </div>
+        <a href="https://algorithmia.com/algorithms/deeplearning/DeepFilter" class="btn btn-primary-inverse">
+          LEARN MORE
+        </a>
+      </div>
+    </div> -->
+
 
   <!-- JOIN -->
   <section class="container">

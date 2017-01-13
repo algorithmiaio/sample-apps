@@ -41,13 +41,11 @@ svg circle {
   left: 0;
 }
 .pagerank-panel {
-  height: 500px;
   overflow-y: auto;
   overflow-x: hidden;
 }
 .pagerank-links {padding-left: 0;}
-.pagerank-rank,
-.pagerank-url {font-size: .75rem;}
+
 .pagerank-rank {padding-left: .5rem;}
 .link-details-panel {
   height: 300px;

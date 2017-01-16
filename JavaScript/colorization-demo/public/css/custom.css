@@ -1,15 +1,22 @@
+@import 'dots.css';
+
+.hero {
+    background-image: url(../images/colorize-black-and-white-photos-hero.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+
+.form-group {margin-bottom: 1.5rem;}
+ /* For smaller screens */
+.form-group input {width: 100%; margin-bottom: .5rem;}
+
 /*Put Custom Styles Here*/
 
 @media (max-width: 767px){
 	.visible-xs-block {
 		padding-bottom: 10px;
 	    display: block !important;
-	}
-	.form-control{
-		max-width: 100%;
-	}
-	.mb {
-		margin-top:5px;
 	}
 }
 
@@ -18,26 +25,35 @@
   position: relative;
 }
 
-.sample-images {
-	max-width:100%;
-	border:1px white solid;
+.sample-image {
+	padding-right: 0;
 }
 
-pre {
-	padding: 0px;
-	margin: 13px;
-	border: 0px;
+/* $MEDIA QUERIES */
+/* Extra small devices (phones, less than 768px) */
+/* This should be the default AKA no styles here */
+/*@media (min-width: @screen-xs-min) {}*/
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    form {
+        /* vertical center */
+    	display:        flex;
+    	align-items:    center;
+	}
+	.form-group input {margin-bottom: 0;}
 }
 
-#social {
-	margin-top: 20px;
-	text-align: center;
-}
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {}
 
-.sample-images {
-	cursor: pointer;
-}
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}
 
+
+
+
+/* What is dz-message? */
 .dz-message {
 	border: 1px dashed white;
 	text-align: center;

@@ -27,7 +27,12 @@
 
 .sample-image {
 	padding-right: 0;
+	margin-bottom: .5rem;
 }
+.sample-image img {border: 1px solid transparent}
+.sample-image:hover img {border: 1px solid #5000BE;}
+
+.feature {margin-bottom: 2rem;}
 
 /* $MEDIA QUERIES */
 /* Extra small devices (phones, less than 768px) */
@@ -42,10 +47,15 @@
     	align-items:    center;
 	}
 	.form-group input {margin-bottom: 0;}
+	.sample-image {
+		margin-bottom: 0;
+	}
 }
 
 /* Medium devices (desktops, 992px and up) */
-@media (min-width: 992px) {}
+@media (min-width: 992px) {
+	.feature {margin-bottom: 0;}
+}
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {}

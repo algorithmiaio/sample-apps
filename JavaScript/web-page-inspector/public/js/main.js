@@ -81,16 +81,16 @@ function addMeta(data){
     posi = posi+"%";
     neutra = neutra+"%";
     negi = negi+"%";
-    document.getElementById("positive").innerHTML = "<div class=\"progress-bar progress-bar-success\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+posi+"\">"+posi+" Positive</div>";
-    document.getElementById("neutral").innerHTML = "<div class=\"progress-bar progress-bar-warning\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+neutra+"\">"+neutra+" Neutral</div>";
-    document.getElementById("negative").innerHTML = "<div class=\"progress-bar progress-bar-danger\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+negi+"\">"+negi+" Negative</div>";
+    document.getElementById("positive").innerHTML = "<span>"+posi+" Positive</span>";
+    document.getElementById("neutral").innerHTML = "<span>"+neutra+" Neutral</span>";
+    document.getElementById("negative").innerHTML = "<span>"+negi+" Negative</span>";
   }
 
 // Add Tags
   var tags = document.getElementById("tags")
   for (var i in data.tags) {
     var newSpan = document.createElement('span');
-    newSpan.className = "label label-default";
+    newSpan.className = "label label-primary";
     newSpan.innerHTML = i;
 
     var space = document.createTextNode(" ");
@@ -200,11 +200,11 @@ function addMeta(data){
     // Check is images are valid
     if (data.images[i].match(/\.(jpeg|jpg|gif|png|svg)$/) != null) {
       var div = document.createElement('div');
-      div.className = "col-md-3";
+      div.className = "col-sm-4";
 
       var img = document.createElement('img');
       img.setAttribute('src', data.images[i]);
-      img.className = "center-block thumbnail img-responsive";
+      img.className = "img-responsive";
 
       imgs.appendChild(div);
       div.appendChild(img);

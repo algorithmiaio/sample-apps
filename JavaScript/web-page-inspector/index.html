@@ -34,14 +34,12 @@
 
 	<!-- CSS -->
 	<link rel="shortcut icon" href="public/images/favicon-bw.png" type="image/png">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700|Raleway:300,400,700" rel="stylesheet">
 	<link href="public/css/bootstrap.min.css" rel="stylesheet">
 	<link href="public/css/all.css" rel="stylesheet">
 	<link href="public/css/custom.css" rel="stylesheet">
 	<link href="public/css/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet">
 	<link href="public/css/styles/monokai.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Lato:400,300" rel="stylesheet" type="text/css">
-	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
-
 
 <!--   Google Analytics -->
 <script>
@@ -55,282 +53,267 @@ ga('send', 'pageview');
 </script>
 </head>
 <body>
-	<div class="outer-container">
-		<div class="navbar navbar-default navbar-static-top navbar-public navbar-dark" role="navigation">
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="">
-						<img src="public/images/logo-white.png" alt="Algorithmia">
-					</a>
-				</div>
-				<div class="navbar-collapse collapse">
-					<ul class="nav navbar-nav pull-right">
-						<li><a href="https://algorithmia.com/algorithms"><span>Algorithms</span></a></li>
-						<li><a href="https://algorithmia.com/use-cases">Use Cases</a></li>
-						<li><a href="https://algorithmia.com/pricing"><span>Pricing</span></a></li>
-						<li><a href="http://blog.algorithmia.com/"><span>Blog</span></a></li>
-						<li>
-							<a class="nav-link nav-username hidden-sm hidden-xs" href="https://algorithmia.com/signup?invite=analyzeurl">
-								Sign up
-							</a>
-						</li>
-					</ul>
-				</div>
+	<nav class="navbar navbar-default navbar-static-top navbar-public navbar-dark" role="navigation">
+		<div class="container no-padding">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="">
+					<img src="public/images/algoWhite.svg" alt="Algorithmia">
+				</a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav pull-right">
+					<li><a href="https://algorithmia.com/algorithms">Algorithms</a></li>
+					<li><a href="https://algorithmia.com/use-cases">Use Cases</a></li>
+					<li><a href="https://algorithmia.com/pricing">Pricing</a></li>
+					<li><a href="http://blog.algorithmia.com/">Blog</a></li>
+					<li><a class="hidden-sm hidden-xs" href="https://algorithmia.com/signup">Sign up</a></li>
+				</ul>
 			</div>
 		</div>
+	</nav>
 
-
-		<div class="content-container">
-			<div class="container" id="content">
-				<div class="row hero-background">
-					<div class="container hero">
-						<div id="pitch" class="col-md-7">
-							<h1>Web Page Inspector</h1>
-							<h2 class="lead">An API to instantly retrieve clean, structured data from any URL</h2>
-							<div id="status-label"></div>
-							<div class="form-group well">
-								<form onsubmit="callAlgorithm(); return false;">
-									<p>Paste the URL to an article to analyze it</p>
-									<input type="text" class="form-control" id="url" placeholder="http://thenewstack.io/algorithmia-new-algorithm-economy/">
-									<button class="btn btn-primary" type="button" onclick="callAlgorithm()">
-										<span class="fa fa-magic" aria-hidden="true"></span>
-										Analyze URL
-									</button>
-								</form>
-
-								<p>
-									<small>
-										Or, try these sample articles:
-									</small>
-								</p>
-
-								<div class="row">
-									<div class="col-md-2 col-xs-6">
-										<a onclick="analyzeDefault('http://thenewstack.io/algorithmia-new-algorithm-economy/')"><img src="public/images/newstack.png" class="sample-images"></a>
-									</div>
-									<div class="col-md-2 col-xs-6">
-										<a onclick="analyzeDefault('https://medium.com/emergent-future/machine-learning-trends-and-the-future-of-artificial-intelligence-2016-15c15cd6c129#.7vvstzebt')"><img src="public/images/machines.jpg" class="sample-images"></a>
-									</div>
-									<div class="clearfix visible-xs-block"></div>
-									<div class="col-md-2 col-xs-6">
-										<a onclick="analyzeDefault('http://blog.algorithmia.com/predictive-algorithms-track-real-time-health-trends/')"><img src="public/images/predictive.jpg" class="sample-images"></a>
-									</div>
-									<div class="col-md-2 col-xs-6">
-										<a onclick="analyzeDefault('http://www.wired.com/2014/08/algorithmia/')"><img src="public/images/wired.jpg" class="sample-images"></a>
-									</div>
-									<div class="clearfix visible-xs-block"></div>
-								</div>
+	<section class="purple-grad-background hero">
+		<div class="container" id="content">
+			<div class="row">
+				<div class="col-md-7">
+					<h1>Web Page Inspector</h1>
+					<h4 class="light whitespace-md">An API to instantly retrieve clean, structured data from any URL</h4>
+				</div>
+				<div class="col-sm-12 col-md-7">
+					<div class="card">
+						<h3 class="whitespace">Analyze a URL</h3>
+						<p class="whitespace-none">Paste the URL to an article to analyze it</p>
+						<form class="form-group" onsubmit="callAlgorithm(); return false;">
+							<input type="text" class="form-control" id="url" placeholder="http://thenewstack.io/algorithmia-new-algorithm-economy/">
+							<button class="btn btn-primary" type="button" onclick="callAlgorithm()">
+								<span class="fa fa-magic" aria-hidden="true"></span>
+								Analyze URL
+							</button>
+						</form>
+						<div id="status-label"></div>
+						<h4 class="dark whitespace-sm">Or, try these sample articles:</h4>
+						<div class="row whitespace-none sample-images">
+							<div class="col-xs-3 col-sm-2 sample-image">
+								<a onclick="analyzeDefault('http://thenewstack.io/algorithmia-new-algorithm-economy/')"><img src="public/images/newstack.png"></a>
+							</div>
+							<div class="col-xs-3 col-sm-2 sample-image">
+								<a onclick="analyzeDefault('https://medium.com/emergent-future/machine-learning-trends-and-the-future-of-artificial-intelligence-2016-15c15cd6c129#.7vvstzebt')"><img src="public/images/machines.jpg"></a>
+							</div>
+							<div class="col-xs-3 col-sm-2 sample-image">
+								<a onclick="analyzeDefault('http://blog.algorithmia.com/predictive-algorithms-track-real-time-health-trends/')"><img src="public/images/predictive.jpg"></a>
+							</div>
+							<div class="col-xs-3 col-sm-2 sample-image">
+								<a onclick="analyzeDefault('http://www.wired.com/2014/08/algorithmia/')"><img src="public/images/wired.jpg"></a>
 							</div>
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
+	</section>
 
-				<div class="row main-content">
-					<div class="container">
-						<div id="overlay" class="hidden">
-							<div class="dots-container">
-								<div class="dot dot1"></div>
-								<div class="dot dot2"></div>
-								<div class="dot dot3"></div>
-								<div class="dot dot4"></div>
-							</div>
-						</div>
+	<div class="container hidden">
+		<div id="overlay">
+			<div class="dots-container">
+				<div class="dot dot1"></div>
+				<div class="dot dot2"></div>
+				<div class="dot dot3"></div>
+				<div class="dot dot4"></div>
+			</div>
+		</div>
+	</div>
 
-						<!-- RESULTS PAGE -->
-						<div class="hidden" id="results">
-						<a name="resultspage"></a>
-							<div class="row">
-								<div class="col-md-10">
-									<h4>URL Successfully Analyzed <br><small>Here's the structured data we found</small></h4>
-									<p>
-										<strong>How it works:</strong> Web Page Inspector attempts to extract the title, full text, both a short and long summary, permalink, social share count, tags, sentiment, and more from a valid URL. In this demo we provie both a UI of the metadata, as well as the raw JSON response.
-									</p>
-									<p> It's built using <a href="https://algorithmia.com/algorithms/outofstep/MegaAnalyzeURL">Mega Analyze URL</a>, a microservice wrapper composed of several other microservices: <a href="https://algorithmia.com/algorithms/web/AnalyzeURL">Analyze URL</a>, <a href="https://algorithmia.com/algorithms/nlp/Summarizer">Summarizer</a>, <a href="https://algorithmia.com/algorithms/nlp/SocialSentimentAnalysis">Social Sentiment Analysis</a>, <a href="https://algorithmia.com/algorithms/web/ShareCounts">Count Social Shares</a>, Get Links, <a href="https://algorithmia.com/algorithms/diego/Getimagelinks">Get Image Links</a>, and <a href="https://algorithmia.com/algorithms/tags/AutoTagURL">Auto-Tag URL</a>.
-									</p>
-									<p>
-										<!-- Learn more about <a href="#">building composable microservices</a> using Algorithmia. -->
-									</p>
-								</div>
-								<div class="col-md-12 top-buffer">
-									<!-- Nav tabs -->
-									<ul class="nav nav-tabs" role="tablist">
-										<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Metadata</a></li>
-										<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Raw JSON Response</a></li>
-									</ul>
-									<div class="col-md-12">
-										<!-- Tab panes -->
-										<div class="tab-content">
-											<div role="tabpanel" class="tab-pane active" id="home">
-												<div class="col-md-10">
-													<h4>Extracted Metadata</h4>
-													<p>
-														Here's the structured data we were able to parse for the URL:
-													</p>
+	<!-- RESULTS PAGE -->
+	<section class="container">
+		<div class="row row-sm" id="results">
+			<div class="col-md-8">
+				<h2 class="whitespace-none">URL Successfully Analyzed</h2>
+				<h4 class="whitespace-md">Here's the structured data we found</h4>
+			</div>
+		</div>
 
-													<dl class="dl-horizontal">
-														<dt>Title</dt>
-														<dd><h4 id="title"></h4></dd>
-														<dt>Thumbnail</dt>
-														<dd><img src id="thumb" class="img-thumbnail img-responsive"></dd>
-														<dt>Permalink</dt>
-														<dd><a href id="userurl"></a></dd>
-														<dt>Social Shares</dt>
-														<dd><div id="socialshares"></div></dd>
-														<dt>Sentiment Analysis</dt>
-														<dd>
-															<div class="progress">
-																<div id="positive"></div>
-																<div id="negative"></div>
-																<div id="neutral"></div>
-															</div>
-	<!-- 														  <div class="progress-bar progress-bar-success" style="width: 35%">
-															  </div>
-															  <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 20%">
-															    <span class="sr-only">20% Complete (warning)</span>
-															  </div>
-															  <div class="progress-bar progress-bar-danger" style="width: 10%">
-															    <span class="sr-only">10% Complete (danger)</span>
-															  </div>
-															</div>
- -->
+		<div class="row row-md">
+			<div class="col-md-12">
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Metadata</a></li>
+					<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Raw JSON Response</a></li>
+				</ul>
+			</div>
+		</div>
 
-														</dd>
-														<dt>Tags</dt>
-														<dd><div id="tags"></div></dd>
-														<dt>Short Summary</dt>
-														<dd><p id="shortsummary"></p></dd>
-														<dt>Long Summary</dt>
-														<dd><p id="longsummary"></p></dd>
-														<dt>Full Text</dt>
-														<dd><p id="fulltext"></p></dd>
-														<dt>Images</dt>
-														<dd><div class="row" id="images"></div></dd>
-														<dt>Timestamp</dt>
-														<dd><div id="timestamp"></div></dd>
-														<dt>Status Code</dt>
-														<dd><div id="statuscode"></div></dd>
-														<dt>Links</dt>
-														<dd><ul class="list-unstyled" id="links"></ul></dd>
-													</dl>
-												</div>
-											</div>
-											<div role="tabpanel" class="tab-pane" id="profile">
-												<div class="col-md-10">
-													<h4>JSON Object</h4>
-														<p>This is the JSON response for the URL:</p>
-												</div>
-												<div class="col-md-10 col-md-offset-1">
-													<pre><code class="json" id="code"></code></pre>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-12"><hr></div>
-							</div>
-						</div>
-						<!-- Marketing blurb -->
-						<div class="row" id="marketing">
-							<div class="col-md-8 col-md-offset-2">
-								<center>
-									<h4>Built For Developers <br><small>A simple, scalable, machine intelligence API for creating smarter products.</small></h4>
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane active" id="home">
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="whitespace-none">Extracted Metadata</h3>
+						<p class="lg whitespace-md">Here's the structured data we were able to parse for the URL:</p>
+						<p class="item-title">Title</p>
+						<h4 id="title"></h4>
+						<p class="item-title">Thumbnail</p>
+						<img src id="thumb" class="img-responsive">
+						<p class="item-title">Permalink</p>
+						<p><a href id="userurl"></a></p>
+						<p class="item-title">Social Shares</p>
+						<div id="socialshares"></div>
+						<p class="item-title">Sentiment Analysis</p>
+						<p>
+							<span id="positive"></span>,
+							<span id="negative"></span>,
+							<span id="neutral"></span>
+						</p>
+						<p class="item-title">Tags</p>
+						<div id="tags"></div>
+						<p class="item-title">Short Summary</p>
+						<p id="shortsummary"></p>
+						<p class="item-title">Long Summary</p>
+						<p id="longsummary"></p>
+						<p class="item-title">Full Text</p>
+						<p id="fulltext"></p>
+						<p class="item-title">Images</p>
+						<div class="row row-sm" id="images"></div>
+						<p class="item-title">Timestamp</p>
+						<p id="timestamp"></p>
+						<p class="item-title">Status Code</p>
+						<p id="statuscode"></p>
+						<p class="item-title">Links</p>
+						<ul class="list-unstyled" id="links"></ul>
+					</div>
+				</div>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="profile">
+				<div class="row">
+					<div class="col-md-12">
+						<h3>JSON Object</h3>
+						<p>This is the JSON response for the URL:</p>
+						<pre><code class="json" id="code"></code></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
-								</center>
 
-								<pre><code class="python">import Algorithmia
+
+
+<!-- EXPLANATION SECTION -->
+	<div class="grey-background">
+	<section class="container">
+		<div class="row row-md">
+			<div class="col-md-12">
+				<h2 class="whitespace-none">How it works</h2>
+				<h4>Web Page Inspector</h4>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				<p>Web Page Inspector attempts to extract the title, full text, both a short and long summary, permalink, social share count, tags, sentiment, and more from a valid URL. In this demo we provie both a UI of the metadata, as well as the raw JSON response.</p>
+				<p>It's built using <a href="https://algorithmia.com/algorithms/outofstep/MegaAnalyzeURL">Mega Analyze URL</a>, a microservice wrapper composed of several other microservices: <a href="https://algorithmia.com/algorithms/web/AnalyzeURL">Analyze URL</a>, <a href="https://algorithmia.com/algorithms/nlp/Summarizer">Summarizer</a>, <a href="https://algorithmia.com/algorithms/nlp/SocialSentimentAnalysis">Social Sentiment Analysis</a>, <a href="https://algorithmia.com/algorithms/web/ShareCounts">Count Social Shares</a>, Get Links, <a href="https://algorithmia.com/algorithms/diego/Getimagelinks">Get Image Links</a>, and <a href="https://algorithmia.com/algorithms/tags/AutoTagURL">Auto-Tag URL</a>.</p>
+			</div>
+		</div>
+	</section>
+	</div>
+
+
+<!-- BUILT FOR DEVS -->
+  <section class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <h2 class="whitespace-sm">Built For Developers</h2>
+        <h4 class="whitespace-md">A simple, scalable API for machine intelligence</h4>
+          <p class="item-title">SAMPLE INPUT</p>
+          <pre class="whitespace-md"><code class="python">import Algorithmia
 
 input = "http://thenewstack.io/algorithmia-new-algorithm-economy/"
 client = Algorithmia.client('API KEY')
 algo = client.algo('outofstep/MegaAnalyzeURL/0.1.1')
 
 print algo.pipe(input)</code></pre>
+        <a href="https://algorithmia.com/algorithms/outofstep/MegaAnalyzeURL" class="btn btn-primary-inverse">
+          LEARN MORE
+        </a>
+      </div>
+    </div>
+  </section>
 
-							</div>
-								<div class="col-md-12">
-									<hr>
-									<center>
-										<p class="lead"><small>
-											<b>Join 25,000+ developers using Algorithmia to build intelligent apps</b>
-											<br>
-											Sign up using the code <a href="https://algorithmia.com/signup?invite=analyzeurl">"analyzeurl"</a> and receive 10,000 additional credits.</small>
-										</p>
-										<p>
-											<a href="https://algorithmia.com/signup?invite=analyzeurl" target="_new" class="btn btn-success btn-lg">Sign Up For Free</a>
-										</p>
-									</center>
-									<hr>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-8 col-md-offset-2">
-									<dl>
-										<dt>Algorithms as a Microservice</dt>
-										<dd>Leverage an ever-growing library of more than 2,200 algorithmic microservices via an intuitive API with clients for Python, JavaScript, Java, Scala, Ruby, or Rust. We provide the tools and manage the cloud infrastructure needed to run it at scale. <a href="http://developers.algorithmia.com/application-development/guides/" target="_blank">Learn more</a>
-										</dd>
-									</dl>
-									<dl>
-										<dt>Web Services for Business Logic</dt>
-										<dd>Instantly deploy your backend code as an API for public or private consumption. Every algorithm runs as it's own microservice, making each composable, interoperable, and secure. No servers, NoOps.
-										</dd>
-									</dl>
-									<dl>
-										<dt>Host Your Trained Models</dt>
-										<dd>Have a trained machine learning or deep learning model? Turn it into a serverless microservices in minutes. We'll show you how. <a href="http://developers.algorithmia.com/algorithm-development/model-guides/" target="_blank">Learn more</a></dd>
-									</dl>
-									<dl>
-										<dt>Try For Free</dt>
-										<dd>Get started for free, and scale with ease. Algorithmia's free tier provides 5,000 free credits per month for apps of any scale. When you're ready to grow, pay only for what you use, making it easy and cost effective to go from prototype to production. <a href="https://algorithmia.com/signup?invite=analyzeurl" target="_blank">Sign Up</a></dd>
-									</dl>
-									<p>
-										Let us know what you think <a href="https://twitter.com/algorithmia" target="_blank">@Algorithmia</a> or by <a href="https://algorithmia.com/contact" target="_blank">email</a>.
-									</p>
-								</div>
-							</div>
-						</div>
+  	<!-- JOIN -->
+	<div class="grey-background">
+	<section class="container">
+	  <div class="row">
+	    <div class="col-md-12">
+	      <h3>Join the thousands of developers already building intelligent apps</h3>
+	      <p class="lg">Get 10,000 additional credits when you sign up using the code "analyzeurl"</p>
+	      <a href="https://algorithmia.com/signup?invite=analyzeurl" class="btn btn-success">
+	        SIGN UP FOR FREE
+	      </a>
+	    </div>
+	  </div>
+	</section>
+	</div>
+
+	<!-- FEATURES -->
+	<section class="container">
+		<div class="row" id="feature-row">
+			<div class="col-sm-6 col-md-4 feature">
+				<h4>Algorithms as a Microservice</h4>
+				<p>Leverage an ever-growing library of more than 2,200 algorithmic microservices via an intuitive API. We provide the tools and manage the cloud infrastructure needed to run it at scale.</p>
+				<a href="http://developers.algorithmia.com/application-development/guides/">LEARN MORE</a>
+			</div>
+			<div class="col-sm-6 col-md-4 feature">
+				<h4>Web Services for Business Logic</h4>
+				<p>Instantly deploy your backend code as an API for public or private consumption. Every algorithm runs as it's own microservice, making each composable, interoperable, and secure. </p>
+				<a href="http://blog.algorithmia.com/algorithms-as-microservices/">LEARN MORE</a>
+			</div>
+			<div class="col-sm-6 col-md-4 feature">
+				<h4>Hosted Trained Models</h4>
+				<p>Have a trained machine learning or deep learning model? Turn it into a serverless microservices in minutes. We'll show you how to get started for free, and scale with ease. </p>
+				<a href="http://developers.algorithmia.com/algorithm-development/model-guides/">LEARN MORE</a>
+			</div>
+		</div>
+	</section>
+
+	<footer>
+		<div class="container md-padding">
+			<div class="row row-sm">
+				<div class="col-md-12">
+					<div class="pull-left">
+						&copy; Algorithmia 2017
 					</div>
+					<ul class="list-inline pull-right">
+						<li><a href="https://algorithmia.com/about">About</a></li>
+						<li><a href="https://algorithmia.com/terms">Terms</a></li>
+						<li><a href="https://algorithmia.com/privacy">Privacy</a></li>
+						<li><a href="http://blog.algorithmia.com" target="_blank">Blog</a></li>
+						<li><a href="https://angel.co/algorithmia/jobs/" target="_blank">Jobs</a></li>
+						<li><a href="https://algorithmia.com/contact">Contact</a></li>
+					</ul>
 				</div>
 			</div>
 		</div>
-	</div>
-		<footer>
-			<div class="container">
-				<div class="pull-left">
-					&copy; Algorithmia 2016
-				</div>
-				<ul class="list-inline pull-right">
-					<li><a href="https://algorithmia.com/about">About</a></li>
-					<li><a href="https://algorithmia.com/terms">Terms</a></li>
-					<li><a href="https://algorithmia.com/privacy">Privacy</a></li>
-					<li><a href="http://blog.algorithmia.com" target="_blank">Blog</a></li>
-					<li><a href="https://angel.co/algorithmia/jobs/" target="_blank">Jobs</a></li>
-					<li><a href="https://algorithmia.com/contact">Contact</a></li>
-				</ul>
-			</div>
-		</footer>
+	</footer>
 
-		<!-- JS -->
-		<script src="public/js/jquery.min.js"></script>
-		<script src="public/js/bootstrap.min.js"></script>
-		<script src="public/js/TweenMax.min.js"></script>
-		<script src="public/js/algorithmia-0.2.0.js"></script>
-		<script src="public/js/dots.js"></script>
-		<script src="public/js/highlight.pack.js"></script>
-		<script src="public/js/main.js"></script>
-		<script>hljs.initHighlightingOnLoad();</script>
-		<script>
-		window.intercomSettings = {
-			app_id: "c9fj6354"
-		};
-		</script>
-		<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/c9fj6354';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+	<!-- JS -->
+	<script src="public/js/jquery.min.js"></script>
+	<script src="public/js/bootstrap.min.js"></script>
+	<script src="public/js/TweenMax.min.js"></script>
+	<script src="public/js/algorithmia-0.2.0.js"></script>
+	<script src="public/js/dots.js"></script>
+	<script src="public/js/highlight.pack.js"></script>
+	<script src="public/js/main.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<script>
+	window.intercomSettings = {
+		app_id: "c9fj6354"
+	};
+	</script>
+	<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/c9fj6354';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
 
 	</body>
 	</html>

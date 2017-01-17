@@ -25,8 +25,7 @@
 	padding-right: 0;
 	margin-bottom: .5rem;
 }
-.sample-image img {border: 1px solid transparent}
-.sample-image:hover img {border: 1px solid #5000BE;}
+.sample-image:hover img {opacity: .7;}
 
 .feature {margin-bottom: 2rem;}
 

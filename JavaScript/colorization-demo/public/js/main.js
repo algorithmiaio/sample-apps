@@ -4,7 +4,7 @@
 // paris https://images.unsplash.com/33/YOfYx7zhTvYBGYs6g83s_IMG_8643.jpg
 
 window.Algorithmia = window.Algorithmia || {};
-Algorithmia.api_key = "simlWDRXPhYo0iAhB053QL1kQLY1";
+Algorithmia.api_key = "simYU7sWtoiMToSYQC9uVqdAURb1";
 var numTasks = 0;
 
 function callAlgorithm() {
@@ -38,7 +38,7 @@ document.getElementById('compareLink').addEventListener('click', function() {
 
 function colorify(img) {
   Algorithmia.client(Algorithmia.api_key)
-    .algo("algo://algorithmiahq/ColorizationDemo/1.1.15")
+    .algo("algo://algorithmiahq/ColorizationDemo/1.1.16")
     .pipe(img)
     .then(function(output) {
       if(output.error) {

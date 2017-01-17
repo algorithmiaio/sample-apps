@@ -41,11 +41,11 @@
 
     <div class="row">
       <div class="col-md-6">
-        <div class="card">
+        <form class="card" onsubmit="processFeed(); return false;">
         <!-- Inputs -->
           <div class="form-group">
             <label class="block">Select an example RSS feed:</label>
-            <select id="urlDD" class="form-control" onchange="updateUrl()">
+            <select id="rssSelector" class="form-control" onchange="updateRssUrl()">
               <option disabled>Select an example RSS feed</option>
 
               <!-- Replace these with links to your favorite RSS feeds -->
@@ -60,26 +60,26 @@
              
           <label class="block">Or input your own:</label>
           <div class="form-group">
-            <input class="form-control" id="inputStrings">
+            <input class="form-control" id="rssUrl">
           </div>
 
           <div class="form-group">
             <button class="btn btn-primary whitespace-none" onclick="processFeed()">Analyze RSS</button>
-            <span class="aspinner hidden" id="algo-spinner"></span>
+            <span class="aspinner hidden" id="fetch-spinner"></span>
             <span id="status-label"></span>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
 </section>
 
-<section class="container hidden" id="results">
+<section class="container hidden" id="resultsWrapper">
   <div class="row">
     <div class="col-md-12">
       <h2 class="border-bottom">Results</h2>
       <h4 class="hidden">Analyze an RSS feed to get results.</h4>
-      <div id="output">
+      <div id="results">
         <!-- OUTPUT INSERTED HERE -->
       </div>
     </div>

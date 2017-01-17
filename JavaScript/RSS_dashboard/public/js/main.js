@@ -7,6 +7,7 @@ var httpRegex = new RegExp('^(http|https)://', 'i');
  * once DOM is ready, update vars amd set initial URL
  */
 $(document).ready(function() {
+  setInviteCode('rss');
   updateRssUrl();
 });
 

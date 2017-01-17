@@ -1,0 +1,89 @@
+@import url("spinner.css");
+
+
+img.placeholder {
+  width: auto;
+  height: 100%;
+}
+
+.hero {    
+    background-image: url(../images/site-map.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* PANELS */
+svg {
+    background-color: #fff;
+    border: 1px solid black;
+}
+svg.viz {
+  height: 700px;
+  border: 1px solid rgba(0,0,0,.12);
+}
+svg circle {
+  cursor: pointer;
+}
+
+.viz-panel {
+  text-align: center;
+  border: 1px solid rgba(0,0,0,.12);
+  height: 500px;
+  position: relative;
+}
+.scale {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.pagerank-panel {
+  border: 1px solid rgba(0,0,0,.12);
+  padding: .5rem;
+  max-height: 200px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.pagerank-panel p {margin-bottom: .5rem;}
+.pagerank-panel::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+.pagerank-panel::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(80,0,190,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+.pagerank-links {
+  padding-left: 0;
+}
+.pagerank-rank {
+  padding-left: .5rem;
+}
+.link-details-panel {
+  height: 200px;
+  overflow-y: auto;
+}
+/* Label */
+.label {
+  border-radius: 0;
+}
+.label-purple {
+  color: #FFFFFF;
+  background-color: #5000BE;
+}
+span.label {
+  font-size: .75rem;
+  line-height: 2;
+}
+svg.viz {
+  height: 700px;
+  border: 1px solid rgba(0,0,0,.54);
+}
+.tag-pills>a {
+  padding: 0 .6rem 0;
+  border-radius: 0;
+  color: #FFFFFF;
+  background-color: #5000BE;
+  display: inline-block;
+  margin: 2px;
+}

@@ -1,5 +1,5 @@
-window.Algorithmia = window.Algorithmia || {};
-Algorithmia.api_key = 'simeyUbLXQ/R8Qga/3ZCRGcr2oR1';
+// init the Algorithmia client with your API key from https://algorithmia.com/user#credentials
+var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
 
 var httpRegex = new RegExp('^(http|https)://', 'i');
 var statusLabel, output;
@@ -22,15 +22,17 @@ function updateUrl() {
 
 /**
  * Display error message to user; can also be used to test if error is present
- * @param error (optional) if error is not present, returns immediately (nothing will be displayed)
+ * @param response (optional) response to inspect for error; if error is not present, returns immediately (nothing will be displayed)
  * @param errorMessage (optional) message to display instead of the error itself
  * @returns {boolean} true if there was an error
  */
-function displayError(error, errorMessage) {
-  if(error) {
-    $('#status-label').html('<span class="text-danger">' + (errorMessage?errorMessage:error) + '</span>');
+function displayError(response, errorMessage) {
+  if(response && response.error) {
+    console.log(response.error);
+    $('#status-label').html('<span class="text-danger">' + (errorMessage?errorMessage:response.error) + '</span>');
+    return true;
   }
-  return !!error;
+  return false;
 }
 
 /**
@@ -61,27 +63,33 @@ function sentimentScoreToText(sentimentScore) {
  * scrape the RSS feed and analyze its entries
  */
 var processFeed = function() {
+  // clear out old results
   output.empty();
   statusLabel.empty();
   $('#algo-spinner').removeClass('hidden');
+  // query RSS scraper algorithm with selected feed URL
   var feedUrl = prefixHttp($('#inputStrings').val());
-  // Query RSS scraper algorithm
-  Algorithmia.query('/tags/ScrapeRSS', Algorithmia.api_key, feedUrl, function(error, items) {
+  algoClient.algo('/tags/ScrapeRSS').pipe(feedUrl).then(function(response) {
     $('#algo-spinner').addClass('hidden');
-    if (displayError(error, 'Failed to load RSS feed; please check that it is a valid URL')) {return;}
+    if (displayError(response, 'Failed to load RSS feed; please check that it is a valid URL')) {return;}
     $('#results').removeClass('hidden');
     // process no more than 6 RSS entries
-    items.slice(0,6).forEach(processFeedEntry);
+    response.result.slice(0,6).forEach(processFeedEntry);
   });
 
 };
 
-var processFeedEntry = function(entry) {
-  // Create table and elements into which we will stick the results of our algorithms
+/**
+ * insert a section into page showing an RSS feed entry's title, generated summary & tags, and sentiment analysis 
+ * @param url web address to which the entry points 
+ * @param title entry's title from RSS feed
+ */
+var processFeedEntry = function(url, title) {
+  // create section and elements into which we will stick the results of our algorithms
   var row = $('<section><div class="row whitespace-none rss-result">'
     + '<div class="col-md-12 col-lg-9">'
     + '<p class="item-title">ARTICLE TITLE</p>'
-    + '<h4 class="result"><a href="' + entry.url + '">' + entry.title + '</a></h4>'
+    + '<h4 class="result"><a href="' + url + '">' + title + '</a></h4>'
     + '<p class="item-title">GENERATED SUMMARY</p>'
     + '<p class="summary"><span class="aspinner"></span></p>'
     + '<p class="item-title">GENERATED TAGS</p>'
@@ -91,44 +99,59 @@ var processFeedEntry = function(entry) {
     + '</div></section>');
   output.append(row);
   // fetch text from the page to which this entry points, and extract summary, tags, and sentiment
-  Algorithmia.query('/util/Html2Text', Algorithmia.api_key, entry.url, function (error, text) {
-    if (displayError(error, 'Error fetching ' + entry.url + ': ' + error)) {
+  algoClient.algo('/util/Html2Text').pipe(url).then(function (response) {
+    if (displayError(response, 'Error fetching ' + url + ': ' + response.error)) {
       return;
     }
-    summarizeFeedEntry(text, row.find('.summary:first'));
-    autotagFeedEntry(text, row.find('.tags:first'));
-    sentimentAnalyzeFeedEntry(text, row.find('.sentiment:first'));
+    summarizeFeedEntry(response.result, row.find('.summary:first'));
+    autotagFeedEntry(response.result, row.find('.tags:first'));
+    sentimentAnalyzeFeedEntry(response.result, row.find('.sentiment:first'));
   });
 };
 
-function summarizeFeedEntry(itemText, summaryElement) {
-  // Query summarizer analysis
-  Algorithmia.query('/nlp/Summarizer', Algorithmia.api_key, itemText, function(error, summaryText) {
-    if(displayError(error)) {return;}
-    summaryElement.text(summaryText);
+/**
+ * get a summary of the entryText (via https://algorithmia.com/algorithms/nlp/Summarizer), insert into targetElement
+ * @param entryText full plaintext of the entry 
+ * @param targetElement jQuery DOM element into which results should be placed
+ */
+function summarizeFeedEntry(entryText, targetElement) {
+  // call Algorithmia API for summary of text
+  algoClient.algo('/nlp/Summarizer').pipe(entryText).then(function(response) {
+    if(displayError(response.error)) {return;}
+    targetElement.text(response.result);
   });
 }
 
-function autotagFeedEntry(itemText, tagsElement) {
+/**
+ * extract tags from entryText (via https://algorithmia.com/algorithms/nlp/AutoTag), insert into targetElement
+ * @param entryText full plaintext of the entry 
+ * @param targetElement jQuery DOM element into which results should be placed
+ */
+function autotagFeedEntry(entryText, targetElement) {
   var topicLabels = [];
-  itemText = typeof(itemText)=='string'? itemText.split('\n') : [];
-  // Query autotag analysis
-  Algorithmia.query('/nlp/AutoTag', Algorithmia.api_key, itemText, function(error, topics) {
-    if(!displayError(error)) {
-      for (var key in topics) {
+  entryText = typeof(entryText)=='string'? entryText.split('\n') : [];
+  // call Algorithmia API for autotag analysis
+  algoClient.algo('/nlp/AutoTag').pipe(entryText).then(function(response) {
+    if(!displayError(response.error)) {
+      for (var key in response.result) {
         topicLabels.push('<span class="label label-info">' + topics[key] + '</span> ');
       }
-      tagsElement.html(topicLabels.join(''));
+      targetElement.html(topicLabels.join(''));
     }
   });
 }
 
-function sentimentAnalyzeFeedEntry(itemText, sentimentElement) {
-  // Query sentiment analysis
-  Algorithmia.query('/nlp/SentimentAnalysis', Algorithmia.api_key, {document:itemText}, function(error, result) {
-    if(displayError(error)) {return;}
-    var sentimentScore = result[0].sentiment;
-    sentimentElement.html('<p>'+(Math.round(sentimentScore*100))/100+' ('+sentimentScoreToText(sentimentScore)+')</p>');
+/**
+ * analyze sentiment of entryText (via https://algorithmia.com/algorithms/nlp/SentimentAnalysis), insert into targetElement
+ * @param entryText full plaintext of the entry
+ * @param targetElement jQuery DOM element into which results should be placed
+ */
+function sentimentAnalyzeFeedEntry(entryText, targetElement) {
+  // call Algorithmia API for sentiment analysis
+  algoClient.algo('/nlp/SentimentAnalysis').pipe({document:entryText}).then(function(response) {
+    if(displayError(response)) {return;}
+    var sentimentScore = Math.round(response.result[0].sentiment*100)/100;
+    targetElement.html('<p>'+sentimentScore+' ('+sentimentScoreToText(sentimentScore)+')</p>');
   });
 
 }

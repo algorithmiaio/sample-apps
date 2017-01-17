@@ -29,8 +29,7 @@
 	padding-right: 0;
 	margin-bottom: .5rem;
 }
-.sample-image img {border: 1px solid transparent}
-.sample-image:hover img {border: 1px solid #5000BE;}
+.sample-image:hover img {opacity: .7;}
 
 .feature {margin-bottom: 2rem;}
 
@@ -59,33 +58,3 @@
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {}
-
-
-
-
-/* What is dz-message? */
-.dz-message {
-	border: 1px dashed white;
-	text-align: center;
-	cursor: pointer;
-	background-color: rgba(90, 90, 90, .8);
-	font-size: 13px;
-	max-width: 300px;
-}
-
-/* Custom, iPhone Retina */
-@media only screen and (min-width : 320px) {
-	.dz-message { height: 109px; line-height: 109px; padding-top: 0px }
-}
-@media only screen and (min-width : 360px) {
-	.dz-message { height: 129px; line-height: 129px; padding-top: 0px }
-}
-@media only screen and (min-width : 768px) {
-	.dz-message { height: 300px; line-height: 300px; padding-top: 0px;}
-}
-@media only screen and (min-width : 992px) {
-	.dz-message { height: 60px; line-height: normal; padding-top: 8px; }
-}
-@media only screen and (min-width : 1200px) {
-	.dz-message { height: 79px; line-height: normal; padding-top: 20px; }
-}

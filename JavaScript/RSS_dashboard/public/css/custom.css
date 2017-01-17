@@ -34,6 +34,10 @@
 .label  {
   border-radius: 0;
 }
+select {
+  -webkit-appearance:none;
+  -moz-appearance:none;
+}
 .label-info {
   background-color: #5000BE;
 }

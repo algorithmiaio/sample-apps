@@ -32,13 +32,11 @@
 
 	<!-- CSS -->
     <link rel="shortcut icon" href="public/images/favicon-bw.png" type="image/png">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700|Raleway:300,400,700" rel="stylesheet">
 	<link href="public/css/bootstrap.min.css" rel="stylesheet">
 	<link href="public/css/all.css" rel="stylesheet">
 	<link href="public/css/custom.css" rel="stylesheet">
-	<link href="public/css/styles/monokai.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Lato:400,300" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
-
+	<link href="public/css/monokai.css" rel="stylesheet">
 
 	<!--   Google Analytics -->
 	<script>
@@ -53,109 +51,286 @@
 
 </head>
 <body>
-	<div class="outer-container">
-		<div class="navbar navbar-default navbar-static-top navbar-public navbar-dark" role="navigation">
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="">
-						<img src="public/images/logo-white.png" alt="Algorithmia">
-					</a>
+	<nav class="navbar navbar-default navbar-static-top navbar-public navbar-dark" role="navigation">
+		<div class="container no-padding">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="">
+					<img src="public/images/algoWhite.svg" alt="Algorithmia">
+				</a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav pull-right">
+					<li><a href="https://algorithmia.com/algorithms">Algorithms</a></li>
+					<li><a href="https://algorithmia.com/use-cases">Use Cases</a></li>
+					<li><a href="https://algorithmia.com/pricing">Pricing</a></li>
+					<li><a href="http://blog.algorithmia.com/">Blog</a></li>
+					<li><a class="hidden-sm hidden-xs" href="https://algorithmia.com/signup">Sign up</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<section class="purple-grad-background hero">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1>Search Unstructured Video</h1>
+					<h4 class="secondary-light whitespace-md">Use Computer Vision and Deep Learning to search untagged video</h4>
 				</div>
-				<div class="navbar-collapse collapse">
-					<ul class="nav navbar-nav pull-right">
-						<li><a href="https://algorithmia.com/">Algorithm API marketplace</a></li>
+				<div class="col-sm-12 col-md-6">
+					<div class="card">
+						<div id="status-label"></div>
+						<h3 class="dark">Search our video database for an object</h3>
+						<p class="secondary whitespace-none">Examples: chair, couch, rabbit, elephant</p>
+						<form class="search-form">
+							<input type="text" class="form-control" id="search-query" placeholder="Search">
+							<a class="btn btn-primary">
+								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+								Search
+							</a>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div id="overlay" class="hidden">
+		<div class="dots-container">
+			<div class="dot dot1"></div>
+			<div class="dot dot2"></div>
+			<div class="dot dot3"></div>
+			<div class="dot dot4"></div>
+		</div>
+	</div>
+
+	<!-- RESULTS -->
+	<section class="container hidden" id="results">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="explanation">
+					<h2 class="border-bottom whitespace">Search results</h2>
+					<p class="whitespace-md"><b>basketball</b> was found in these videos using <a href="">algorithm</a>, <a href="">algorithm</a>, and <a href="">algorithm</a>.</p>
+					<h4 id="no-results" class="whitespace-lg hidden">Your object was not found in any videos</h4>
+					<ul id="search-results">
+
+						<li class="row video-result">
+							<div class="col-sm-6">
+								<div class="video-container">
+									<iframe width="560" height="315" src="https://www.youtube.com/embed/bU3yiZo4c-0" frameborder="0" allowfullscreen></iframe>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<ul class="video-details">
+									<li>
+										<p class="item-title">TERM</p>
+										<p class="lg">basketball</p>
+									</li>
+									<li>
+										<p class="item-title">VIDEO</p>
+										<p class="lg">Gonzaga destroys Arizona</p>
+									</li>
+									<li>
+										<p class="item-title">APPEARANCE</p>
+										<h4><a>1:02</a> - <a>2:03</a></h4>
+									</li>
+									<li>
+										<p class="item-title">CONFIDENCE</p>
+										<p class="lg">89.4%</p>
+									</li>
+								</ul>
+							</div>
+						</li>
+
+						<li class="row video-result">
+							<div class="col-sm-6">
+								<div class="video-container">
+									<iframe width="560" height="315" src="https://www.youtube.com/embed/-0vwOD8mb4s" frameborder="0" allowfullscreen></iframe>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<ul class="video-details">
+									<li>
+										<p class="item-title">TERM</p>
+										<p class="lg">basketball</p>
+									</li>
+									<li>
+										<p class="item-title">VIDEO</p>
+										<p class="lg">Villanova National Champions</p>
+									</li>
+									<li>
+										<p class="item-title">APPEARANCE</p>
+										<h4><a>2:02</a> - <a>2:49</a></h4>
+									</li>
+									<li>
+										<p class="item-title">CONFIDENCE</p>
+										<p class="lg">54.4%</p>
+									</li>
+								</ul>
+							</div>
+						</li>
 					</ul>
 				</div>
 			</div>
 		</div>
+	</section>
 
-		<div class="content-container">
-			<div class="container" id="content">
-				<div class="row hero-background">
-					<div class="container hero">
-						<div id="pitch" class="col-md-7">
-							<h1>Search Unstructured Video</h1>
-							<h2 class="lead">Use Deep Learning to search untagged video</h2>
-							<div id="status-label"></div>
-							<div class="form-group well">
-								<form id="search-form">
-									<input type="text" class="form-control" id="search-query" placeholder="Enter search term here...">
-									<button class="btn btn-primary mb" type="submit">
-										<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-										Search
-									</button>
-								</form>
-								<p style="margin-bottom: 0">Example tags: chair, couch, rabbit, elephant</p>
-							</div>
-						</div>
-						<div class="col-md-5">
-							<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/3Gb3faOzvBk" frameborder="0" allowfullscreen></iframe> -->
-							<div id="player"></div>
-						</div>
-					</div>
-				</div>
-
-				<div class="row main-content">
-					<div class="container">
-						<div id="overlay" class="hidden">
-							<div class="dots-container">
-								<div class="dot dot1"></div>
-								<div class="dot dot2"></div>
-								<div class="dot dot3"></div>
-								<div class="dot dot4"></div>
-							</div>
-						</div>
-
-						<!-- EXPLANATION PAGE -->
-						<div class="row" id="explainer">
-							<div class="col-md-12">
-								<div class="explanation">
-									<h4>
-										Use deep learning image tagging to search arbitrary video
-									</h4>
-									<img src="public/images/diagram3.png" style="max-width: 100%;">
-									<hr>
-									<p>
-										<b>Join the thousands of developers using Algorithmia to build intelligent apps</b>
-										<br>
-										Create a free Algorithmia account using the code "color" and get an additional 10,000 free credits when you <a href="https://algorithmia.com/signup?invite=color" target="_new">sign up</a>.
-									</p>
-								</div>
-							</div>
-						</div>
-
-						<!-- RESULTS PAGE -->
-						<div class="row hidden" id="results">
-							<div class="col-md-12">
-								<div class="explanation">
-									<center>
-										<h4>
-											Search Results
-										</h4>
-									</center>
-
-									<ol id="search-results">
-									</ol>
-
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
+	<!-- EXPLANATION -->
+	<div class="grey-background">
+	<section class="container">
+		<div class="row row-md">
+			<div class="col-md-12">
+				<h2 class="whitespace-none">How it works</h2>
+				<h4>Using computer vision to search unstructured video</h4>
 			</div>
 		</div>
+		<div class="row row-md">
+			<div class="col-md-8">
+				<h3>Tools used</h3>
+				<ul>
+					<li><a href="">Socrata Open Data Query</a> – pulls the permit data from Socrata</li>
+					<li><a href="">Simple Moving Average</a> – uses local average to smooth data</li>
+					<li><a href="">Linear Detrend</a> – removes increasing or decreasing trends in time series</li>
+					<li><a href="">Autocorrelate</a> – used to analyze the seasonality of a time series</li>
+					<li><a href="">Remove Seasonality</a> – removes known seasonal effects from a time series</li>
+					<li><a href="">Outlier Detection</a> – flags unusual data points</li>
+					<li><a href="">Forecast</a> – predict a given time series into the future</li>
+				</ul>
+			</div>
+		</div>
+		<div class="row row-md">
+			<div class="col-md-8">
+				<h3>Source Data</h3>
+				<p>We use an algorithm to directly access Socrata’s API that can be found here.</p>
+				<p>Once we’ve retrieved the data, we aggregate it by total number of permits issued per month, and plot this data. To make the graph clearer, it sometimes helps to smooth or denoise the data. There are a number of ways to do this, with moving averages being the most popular. The most intuitive is the Simple Moving Average, which replaces each point by the average of itself and some number of the preceding points (default is 3).</p>
+			</div>
+		</div>
+		<div class="row row-md">
+			<div class="col-md-12">
+				<h3>Processing steps</h3>
+				<ul class="explaination-steps">
+					<li class="row">
+						<div class="col-md-12">
+							<p class="lg item-title">1. Download video</p>
+						</div>
+						<div class="col-sm-4">
+							<img src="public/images/step01.png">
+						</div>
+						<div class="col-sm-8">
+							<p>Once we’ve retrieved the data, we aggregate it by total number of permits issued per month, and plot this data. To make the graph clearer, it sometimes helps to smooth or denoise the data. There are a number of ways to do this, with moving averages being the most popular. The most intuitive is the Simple Moving Average, which replaces each point by the average of itself and some number of the preceding points (default is 3).</p>
+						</div>
+					</li>
+					<li class="row">
+						<div class="col-md-12">
+							<p class="lg item-title">2. Split in frames</p>
+						</div>
+
+						<div class="col-sm-8">
+							<p>Once we’ve retrieved the data, we aggregate it by total number of permits issued per month, and plot this data. To make the graph clearer, it sometimes helps to smooth or denoise the data. There are a number of ways to do this, with moving averages being the most popular. The most intuitive is the Simple Moving Average, which replaces each point by the average of itself and some number of the preceding points (default is 3).</p>
+						</div>
+						<div class="col-sm-4">
+							<img src="public/images/step02.png">
+						</div>
+					</li>
+					<li class="row">
+						<div class="col-md-12">
+							<p class="lg item-title">3. Auto-generate frame tags</p>
+						</div>
+						<div class="col-sm-4">
+							<img src="public/images/step03.png">
+						</div>
+						<div class="col-sm-8">
+							<p>Once we’ve retrieved the data, we aggregate it by total number of permits issued per month, and plot this data. To make the graph clearer, it sometimes helps to smooth or denoise the data. There are a number of ways to do this, with moving averages being the most popular. The most intuitive is the Simple Moving Average, which replaces each point by the average of itself and some number of the preceding points (default is 3).</p>
+						</div>
+					</li>
+					<li class="row">
+						<div class="col-md-12">
+							<p class="lg item-title">4. Search tags</p>
+						</div>
+
+						<div class="col-sm-8">
+							<p>Once we’ve retrieved the data, we aggregate it by total number of permits issued per month, and plot this data. To make the graph clearer, it sometimes helps to smooth or denoise the data. There are a number of ways to do this, with moving averages being the most popular. The most intuitive is the Simple Moving Average, which replaces each point by the average of itself and some number of the preceding points (default is 3).</p>
+						</div>
+						<div class="col-sm-4">
+							<img src="public/images/step04.png">
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				<h3>Takeaway</h3>
+				<p>The takeaway from this example is not the individual pieces – most of these techniques are available a number of places. The secret here is that it is simple, composable, and fully automated. Once one person writes a data connector in Algorithmia (which is likely to happen for interesting public data, like that provided by Socrata), you don’t have to burn precious time writing and working kinks out of your own. On the other hand, if something existing gets done better, the compositional nature of Algorithmia will allow you to swap out pieces of a pipeline seamlessly. When someone comes up with a better outlier detector, then upgrading a pipeline like the one above can be literally just a few keystrokes away.</p>
+			</div>
+		</div>
+	</section>
 	</div>
+
+  <!-- BUILT FOR DEVS -->
+  <section class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <h2 class="whitespace-sm">Built For Developers</h2>
+        <h4 class="whitespace-md">A simple, scalable API for machine intelligence</h4>
+          <p class="item-title">SAMPLE INPUT</p>
+          <pre class="whitespace-md"><code class="python">import Algorithmia
+input = {"images": ["_IMAGE_URL_"], "savePaths": ["_OUTPUT_URL_"], "filterName": "space_pizza"}
+client = Algorithmia.client('_API_KEY_')
+algo = client.algo('deeplearning/DeepFilter/0.5.3')
+
+print algo.pipe(input)
+  </code></pre>
+            <p class="item-title">SAMPLE OUTPUT</p>
+            <pre><code class="json">{
+  "savePaths": [
+    "_OUTPUT_URL_"
+  ]
+}</code></pre>
+        <a href="https://algorithmia.com/algorithms/deeplearning/DeepFilter" class="btn btn-primary-inverse">
+          LEARN MORE
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOIN -->
+  <section class="grey-background">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Join the thousands of developers already building intelligent apps</h3>
+          <p class="lg">Get 10,000 additional credits when you sign up using the code "color"</p>
+          <a href="https://algorithmia.com/signup?invite=color" class="btn btn-success">
+            SIGN UP FOR FREE
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
 	<footer>
-		<div class="container">
-			<div class="pull-left">
-				&copy; Algorithmia 2016
+		<div class="container md-padding">
+			<div class="row row-sm">
+				<div class="col-md-12">
+					<div class="pull-left">
+						&copy; Algorithmia 2017
+					</div>
+					<ul class="list-inline pull-right">
+						<li><a href="https://algorithmia.com/about">About</a></li>
+						<li><a href="https://algorithmia.com/terms">Terms</a></li>
+						<li><a href="https://algorithmia.com/privacy">Privacy</a></li>
+						<li><a href="http://blog.algorithmia.com" target="_blank">Blog</a></li>
+						<li><a href="https://angel.co/algorithmia/jobs/" target="_blank">Jobs</a></li>
+						<li><a href="https://algorithmia.com/contact">Contact</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</footer>
@@ -168,7 +343,7 @@
 	<script src="public/js/dots.js"></script>
 	<script src="public/js/highlight.pack.js"></script>
 	<script src="public/js/main.js"></script>
-	<script src="https://www.youtube.com/iframe_api"></script>
+	<!-- <script src="https://www.youtube.com/iframe_api"></script> -->
 	<script>hljs.initHighlightingOnLoad();</script>
 
 </body>

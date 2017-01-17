@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="394px" height="38px" viewBox="0 0 394 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>search</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="264" height="38"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="264" height="38" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-1340.000000, -1365.000000)">
+            <g id="search" transform="translate(1340.000000, 1365.000000)">
+                <g id="tag-copy-4" transform="translate(264.000000, 0.000000)">
+                    <rect id="Rectangle-3" fill="#5000BE" x="0" y="0" width="130" height="38"></rect>
+                    <text id="SEARCH" font-family="OpenSans-Semibold, Open Sans" font-size="16" font-weight="500" letter-spacing="0.200000003" fill="#FFFFFF">
+                        <tspan x="42.05625" y="25">SEARCH</tspan>
+                    </text>
+                    <path d="M25.5,21 L24.71,21 L24.43,20.73 C25.41,19.59 26,18.11 26,16.5 C26,12.91 23.09,10 19.5,10 C15.91,10 13,12.91 13,16.5 C13,20.09 15.91,23 19.5,23 C21.11,23 22.59,22.41 23.73,21.43 L24,21.71 L24,22.5 L29,27.49 L30.49,26 L25.5,21 L25.5,21 Z M19.5,21 C17.01,21 15,18.99 15,16.5 C15,14.01 17.01,12 19.5,12 C21.99,12 24,14.01 24,16.5 C24,18.99 21.99,21 19.5,21 Z" id="Shape" fill="#FFFFFF"></path>
+                </g>
+                <g id="tag-copy-3">
+                    <use id="Rectangle-3" stroke-opacity="0.2" stroke="#000000" mask="url(#mask-2)" stroke-width="2" fill="#FFFFFF" xlink:href="#path-1"></use>
+                    <text id="Search" font-family="OpenSans, Open Sans" font-size="16" font-weight="normal" letter-spacing="0.200000003" fill-opacity="0.87" fill="#000000">
+                        <tspan x="10.4554455" y="25">Search</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

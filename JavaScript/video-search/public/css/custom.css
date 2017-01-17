@@ -1,42 +1,113 @@
 /*Put Custom Styles Here*/
+.hero {
+	background: url(../images/camera-banner.jpg);
+	background-size: cover;
+}
+h1 {font-size: 3rem;} /* To fit cleanly on smaller screens */
+/* FORM */
 
-@media (max-width: 767px){
-	.visible-xs-block {
-		padding-bottom: 10px;
-	    display: block !important;
+
+/* For input bar with btn */
+form {
+    font-size:      1rem;
+    min-height:         46px;
+}
+form:focus {
+    border: 1px solid #5000BE;
+    -webkit-box-shadow: none;
+    box-shadow:         none;
+}
+form .btn {margin-bottom: 0;}
+
+.form-control {
+    max-width: 100%;
+}
+/* Search results */
+#search-results {
+	list-style-type: none;
+	padding: 0; margin: 0;
+}
+#search-results > li {
+	padding-bottom: 2rem;
+	margin-bottom: 3rem;
+	border-bottom: 1px solid rgba(0,0,0,.12);
+}
+#search-results > li:last-of-type {
+	padding-bottom: 0;
+	margin-bottom: 0;
+	border-bottom: none;
+}
+.video-details {
+	list-style: none;
+	padding: 0;
+}
+.video-details p,
+.video-details h4 {
+	margin-bottom: 0;
+}
+.video-details .sub {
+	font-size: .75rem;
+}
+.video-details .lg {
+	font-weight: 400;
+}
+.video-details li  {
+	padding-bottom: .5rem;
+	margin-bottom: .5rem;
+	border-bottom: 1px solid rgba(0,0,0,.12);}
+.video-details li:last-of-type {margin-bottom: 0; border-bottom: none;}
+ /* For smaller screens */
+.search-form input {width: 100%; margin-bottom: .5rem;}
+
+/* Ensure video fits to its container */
+.video-container {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 aspect ratio */
+	margin-bottom: 1rem;
+	padding-top: 30px;
+	height: 0;
+	overflow: hidden;
+}
+.video-container iframe, .video-container object, .video-container embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/* EXPLAINATION */
+.explaination-steps {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.explaination-steps .step {
+	font-size: 1.25rem;
+	font-weight: 700;
+}
+
+/* $MEDIA QUERIES */
+/* Extra small devices (phones, less than 768px) */
+/* This should be the default AKA no styles here */
+/*@media (min-width: @screen-xs-min) {}*/
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    /* Bump up tab size for larger screens */
+    .nav-tabs           {font-size: 1.25rem;}
+    .nav-tabs>li>a      {padding:   .5rem 1rem;}
+    .navbar-brand > img {width:     250px;}
+    form {
+        /* vertical center */
+    	display:        flex;
+    	align-items:    center;
 	}
-	.form-control{
-		max-width: 100%;
-	}
-	.mb {
-		margin-top:5px;
-	}
+	.search-form input {margin-bottom: 0;}
 }
 
-pre {
-	padding: 0px;
-	margin: 13px;
-	border: 0px;
-}
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {h1 {font-size: 4rem;}}
 
-#social {
-	margin-top: 20px;
-	text-align: center;
-}
-
-/* Custom, iPhone Retina */
-@media only screen and (min-width : 320px) {
-	.dz-message { height: 109px; line-height: 109px; padding-top: 0px }
-}
-@media only screen and (min-width : 360px) {
-	.dz-message { height: 129px; line-height: 129px; padding-top: 0px }
-}
-@media only screen and (min-width : 768px) {
-	.dz-message { height: 300px; line-height: 300px; padding-top: 0px;}
-}
-@media only screen and (min-width : 992px) {
-	.dz-message { height: 60px; line-height: normal; padding-top: 8px; }
-}
-@media only screen and (min-width : 1200px) {
-	.dz-message { height: 79px; line-height: normal; padding-top: 20px; }
-}
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}

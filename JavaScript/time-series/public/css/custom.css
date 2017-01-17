@@ -1,0 +1,16 @@
+/*Put Custom Styles Here*/
+h1 {font-size: 2.5rem;}
+.hero {
+    background-image: url(../images/timeseries.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.filters .form-control {margin-bottom: 1rem;}
+.img-placeholder {width:100%;}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    h1 {font-size: 4em;}
+}

@@ -135,7 +135,7 @@ function autotagFeedEntry(entryText, targetElement) {
   algoClient.algo('/nlp/AutoTag').pipe(entryText).then(function(response) {
     if(!displayError(response.error)) {
       for (var key in response.result) {
-        topicLabels.push('<span class="label label-info">' + topics[key] + '</span> ');
+        topicLabels.push('<span class="label label-info">' + response.result[key] + '</span> ');
       }
       targetElement.html(topicLabels.join(''));
     }

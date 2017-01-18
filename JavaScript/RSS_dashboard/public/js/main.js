@@ -87,7 +87,7 @@ var processFeed = function() {
  */
 var processFeedEntry = function(entry) {
   // create section and elements into which we will stick the results of our algorithms
-  var row = $('<section><div class="row whitespace-none rss-result">'
+  var row = $('<section class="rss-result"><div class="row whitespace-none">'
     + '<div class="col-md-12 col-lg-9">'
     + '<p class="item-title">ARTICLE TITLE</p>'
     + '<h4 class="result"><a href="' + entry.url + '">' + entry.title + '</a></h4>'

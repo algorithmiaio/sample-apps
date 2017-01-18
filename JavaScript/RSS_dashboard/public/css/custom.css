@@ -12,17 +12,18 @@
 
 .text-danger {display: block; margin-top: .5rem;}
 
-#output section {
+#results .rss-result {
   padding-bottom: 2rem;
   margin-bottom: 2rem;
   border-bottom: 1px solid rgba(0,0,0,.12);
 }
 
-#output section:last-of-type {
+#results .rss-result:last-of-type {
   padding-bottom: 0;
   margin-bottom: 0;
   border-bottom: none;
 }
+
 .sentiment p:last-of-type {margin-bottom: 0;}
 .item-title  {
   color: rgba(0,0,0,.54);
@@ -30,10 +31,8 @@
   text-transform: uppercase;
 }
 .result,
-.tags       {margin-bottom: 1rem;}
-.label  {
-  border-radius: 0;
-}
+.tags   {margin-bottom: 1rem;}
+.label  {border-radius: 0;}
 select {
   -webkit-appearance:none;
   -moz-appearance:none;

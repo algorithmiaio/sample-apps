@@ -1,6 +1,14 @@
 // init the Algorithmia client with your API key from https://algorithmia.com/user#credentials
 var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
 
+var algorithms = {
+  autotag: '/nlp/AutoTag/1.0.0',
+  html2text: '/util/Html2Text/0.1.4',
+  scraperss: '/tags/ScrapeRSS/0.1.6',
+  sentiment: '/nlp/SentimentAnalysis/1.0.2',
+  summarizer: '/nlp/Summarizer/0.1.3'
+};
+
 var httpRegex = new RegExp('^(http|https)://', 'i');
 
 /**
@@ -67,7 +75,7 @@ var processFeed = function() {
   $('#fetch-spinner').removeClass('hidden');
   // query RSS scraper algorithm with selected feed URL
   var feedUrl = prefixHttp($('#rssUrl').val());
-  algoClient.algo('/tags/ScrapeRSS').pipe(feedUrl).then(function(response) {
+  algoClient.algo(algorithms.scraperss).pipe(feedUrl).then(function(response) {
     $('#fetch-spinner').addClass('hidden');
     if (displayError(response, 'Failed to load RSS feed; please check that it is a valid URL')) {return;}
     $('#resultsWrapper').removeClass('hidden');
@@ -100,7 +108,7 @@ var processFeedEntry = function(entry) {
     + '</div></section>');
   $('#results').append(row);
   // fetch text from the page to which this entry points, and extract summary, tags, and sentiment
-  algoClient.algo('/util/Html2Text').pipe(entry.url).then(function (response) {
+  algoClient.algo(algorithms.html2text).pipe(entry.url).then(function (response) {
     if (displayError(response, 'Error fetching ' + entry.url + ': ' + response.error)) {
       return;
     }
@@ -117,7 +125,7 @@ var processFeedEntry = function(entry) {
  */
 function summarizeFeedEntry(entryText, targetElement) {
   // call Algorithmia API for summary of text
-  algoClient.algo('/nlp/Summarizer').pipe(entryText).then(function(response) {
+  algoClient.algo(algorithms.summarizer).pipe(entryText).then(function(response) {
     if(displayError(response.error)) {return;}
     targetElement.text(response.result);
   });
@@ -132,7 +140,7 @@ function autotagFeedEntry(entryText, targetElement) {
   var topicLabels = [];
   entryText = typeof(entryText)=='string'? entryText.split('\n') : [];
   // call Algorithmia API for autotag analysis
-  algoClient.algo('/nlp/AutoTag').pipe(entryText).then(function(response) {
+  algoClient.algo(algorithms.autotag).pipe(entryText).then(function(response) {
     if(!displayError(response.error)) {
       for (var key in response.result) {
         topicLabels.push('<span class="label label-info">' + response.result[key] + '</span> ');
@@ -149,7 +157,7 @@ function autotagFeedEntry(entryText, targetElement) {
  */
 function sentimentAnalyzeFeedEntry(entryText, targetElement) {
   // call Algorithmia API for sentiment analysis
-  algoClient.algo('/nlp/SentimentAnalysis').pipe({document:entryText}).then(function(response) {
+  algoClient.algo(algorithms.sentiment).pipe({document:entryText}).then(function(response) {
     if(displayError(response)) {return;}
     var sentimentScore = Math.round(response.result[0].sentiment*100)/100;
     targetElement.html('<p>'+sentimentScore+' ('+sentimentScoreToText(sentimentScore)+')</p>');

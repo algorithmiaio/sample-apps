@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<%= header_begin %>
 
 <title>Site Mapper - Algorithmia</title>
 
@@ -15,311 +10,258 @@
 <link href="public/css/custom.css" rel="stylesheet">
 <link href="public/css/monokai.css" rel="stylesheet">
 
-<!-- This is the Algorithmia JavaScript client. See: https://algorithmia.com/docs/clients/javascript/ -->
-<script src="public/js/algorithmia.js"></script>
-<script src="public/js/main.js"></script>
-</head>
+<%= header_end %>
 
-<body>
-  <nav class="navbar navbar-default navbar-static-top navbar-public navbar-dark" role="navigation">
-    <div class="container no-padding">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="">
-          <img src="public/images/algoWhite.svg" alt="Algorithmia">
-        </a>
-      </div>
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav pull-right">
-          <li><a href="https://algorithmia.com/algorithms">Algorithms</a></li>
-          <li><a href="https://algorithmia.com/use-cases">Use Cases</a></li>
-          <li><a href="https://algorithmia.com/pricing">Pricing</a></li>
-          <li><a href="http://blog.algorithmia.com/">Blog</a></li>
-          <li><a class="hidden-sm hidden-xs" href="https://algorithmia.com/signup">Sign up</a></li>
-        </ul>
+<section class="hero purple-grad-background">
+  <div class="container">
+
+    <div class="row row-sm">
+      <div class="col-md-8">
+        <h1>Site Mapper</h1>
+        <h4 class="light whitespace-md">Ever wondered what your domain/website looks like to the robots crawling it ?</h4>
       </div>
     </div>
-  </nav>
 
-  <section class="hero purple-grad-background">
-    <div class="container">
-
-      <div class="row row-sm">
-        <div class="col-md-8">
-          <h1>Site Mapper</h1>
-          <h4 class="light whitespace-md">Ever wondered what your domain/website looks like to the robots crawling it ?</h4>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+        <!-- Inputs -->
+          <form ng-submit="scrape(siteUrl)">
+            <div class="row whitespace-none">
+              <div class="col-xs-12 col-sm-10 whitespace-sm">
+                <label>Website URL to scrape</label>
+                <input type="text" class="form-control url" ng-model="siteUrl">
+              </div>
+              <div class="col-xs-4 col-sm-2 whitespace-sm">
+                <label title="Sets the maximum number of pages to crawl">Depth</label>
+                <input type="number" min="0" max="120" class="form-control depth" ng-model="depthLimit">
+              </div>
+            </div>
+            <div class="row whitespace-none">
+              <div class="col-md-12">
+                <input type="submit" class="btn btn-primary" value="Map Site">
+                <span class="aspinner algo-spinner demo-spinner"></span>
+                <span ng-bind="scrapeStatus"></span>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
+    </div>
+  </div>
+</section>
 
-      <div class="row">
-        <div class="col-md-6">
-          <div class="card">
-          <!-- Inputs -->
-            <form ng-submit="scrape(siteUrl)">
-              <div class="row whitespace-none">
-                <div class="col-xs-12 col-sm-10 whitespace-sm">
-                  <label>Website URL to scrape</label>
-                  <input type="text" class="form-control url" ng-model="siteUrl">
-                </div>
-                <div class="col-xs-4 col-sm-2 whitespace-sm">
-                  <label title="Sets the maximum number of pages to crawl">Depth</label>
-                  <input type="number" min="0" max="120" class="form-control depth" ng-model="depthLimit">
-                </div>
+<!-- RESULTS -->
+<section id="results" class="container">
+  <div class="row row-md"> <!-- tab row -->
+    <div class="col-sm-7">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#viz" aria-controls="viz" role="tab" data-toggle="tab">Sitemap Vizualization</a></li>
+        <li role="presentation"><a href="#pagerank-list" aria-controls="pagerank-list" role="tab" data-toggle="tab">Pagerank</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row"> <!-- Containing row -->
+    <div class="col-sm-7">
+    <!-- Tab pane -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="viz">
+          <div class="row row-md">
+            <div class="col-md-12">
+              <div class="viz-panel">
+                <img src="public/images/placeholder02.png" class="placeholder">
+                <!-- Viz from: http://www.redotheweb.com/CodeFlower/ -->
+                <!-- <img src="public/images/pagerank_scale.svg" class="scale" title="Color Scale" ng-show="pagerank" ng-animate="'fade'" ng-cloak>-->
+                <!--  <svg class="viz">
+                  <g class="viewport">
+                    <g class="bottom"></g>
+                    <g class="middle"></g>
+                    <g class="top"></g>
+                  </g>
+                </svg> -->
               </div>
-              <div class="row whitespace-none">
-                <div class="col-md-12">
-                  <input type="submit" class="btn btn-primary" value="Map Site">
-                  <span class="aspinner algo-spinner demo-spinner"></span>
-                  <span ng-bind="scrapeStatus"></span>
-                </div>
-              </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Outputs -->
-  <section class="container">
-    <div class="row whitespace-none">
-      <div class="col-sm-7 whitespace-md">
-        <p class="lg item-title">SITEMAP VIZUALIZATION</p>
-        <div class="viz-panel">
-          <img src="public/images/placeholder02.png" class="placeholder">
-          <!-- Viz from: http://www.redotheweb.com/CodeFlower/ -->
-          <!-- <img src="public/images/pagerank_scale.svg" class="scale" title="Color Scale" ng-show="pagerank" ng-animate="'fade'" ng-cloak>-->
-          <!--  <svg class="viz">
-            <g class="viewport">
-              <g class="bottom"></g>
-              <g class="middle"></g>
-              <g class="top"></g>
-            </g>
-          </svg> -->
-        </div>
-      </div>
-      <div class="col-sm-5 whitespace-md">
-        <p class="lg item-title">PAGE DATA</p>
-        <p class="item-title">URL</p>
-        <!-- PLACEHOLDER -->
-        <p><a href="">https://algorithmia.com/demo/sitemap</a></p>
-        <p class="item-title">PAGERANK</p>
-        <!-- PLACEHOLDER -->
-        <p>.89</p>
-        <p class="item-title">GENERATED SUMMARY</p>
-        <!-- PLACEHOLDER -->
-        <p>This demo uses domain mapping techniques and the Page Rank algorithm...By analyzing municipal building permit data and applying multiple time series algorithms, we created a live analysis of selected cities economic development and trajectory</p>
-        <div ng-if="link.url" ng-cloak>
-          <a ng-href="{{link.url}}" ng-bind="link.url"></a>
-          <!-- <div ng-show="summarizing">
-            <span class="aspinner demo-spinner"></span>
-            Summarizing...
-          </div> -->
-          <div ng-bind="link.summary" class="small"></div>
-        </div>
-  
-        <p class="item-title">GENERATED TAGS</p>
-        <div class="tags">
-          <!-- PLACEHOLDER -->
-          <span class="label label-purple">whatsapp</span>
-          <span class="label label-purple">security</span>
-          <span class="label label-purple">messages</span>
-          <span class="label label-purple">users</span>
-          <span class="label label-purple">backdoor</span>
-          <span class="label label-purple">facebook</span>
-          <span class="label label-purple">encryption</span>
-          <span class="label label-purple">government</span>
-        </div>
-        <div ng-if="link.url" ng-cloak>
-          <!-- <div ng-show="tagging">
-            <span class="aspinner demo-spinner"></span>
-            Tagging...
-          </div> -->
-          <div class="tag-pills" ng-repeat="tag in link.tags">
-            <a ng-bind="tag"></a>
+      <!-- Tab pane -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane" id="pagerank-list">
+          <div class="row row-md">
+            <div class="col-md-12">
+              <div class="pagerank-panel">
+          <!-- <table>
+                  <tr ng-repeat="pair in pagerankSorted" ng-click="loadLink(pair.url)" ng-cloak>
+                    <td ng-bind="round(pair.rank)"></td>
+                    <td><a ng-bind="pair.url"></a></td>
+                  </tr>
+                </table> -->
+                <div class="row whitespace-sm">
+                  <div class="col-xs-2">
+                    <!-- <p ng-bind="round(pair.rank)"></p> -->
+                    <!-- PLACEHOLDER -->
+                    <p>1.00</p>
+                    <p>.89</p>
+                    <p>.79</p>
+                    <p>.69</p>
+                    <p>.59</p>
+                    <p>.49</p>
+                    <p>.30</p>
+                    <p>.29</p>
+                    <p>.19</p>
+                    <p>.10</p>
+                    <p>.09</p>
+                    <p>.01</p>
+                  </div>
+                  <div class="col-xs-10 pagerank-links">
+                    <!-- <p class="pagerank-url"><a ng-bind="pair.url"></a></p> -->
+                    <!-- PLACEHOLDER -->
+                    <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
+                    <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
+                    <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
+                    <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
+                    <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
+                    <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
+                    <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
+                    <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
+                    <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
+                    <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
+                    <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
+                    <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
+                  </div>
+                </div>
+              </div>   
+            </div>
           </div>
         </div>
       </div>
-    </div>
-      
-    </div>
+    </div> <!-- End tabbed content col -->
 
-<!--     <div>
+    <div class="col-sm-5">
+      <p class="lg item-title">PAGE DATA</p>
+      <p class="item-title">URL</p>
+      <!-- PLACEHOLDER -->
+      <p><a href="">https://algorithmia.com/demo/sitemap</a></p>
+      <p class="item-title">PAGERANK</p>
+      <!-- PLACEHOLDER -->
+      <p>.89</p>
+      <p class="item-title">GENERATED SUMMARY</p>
+      <!-- PLACEHOLDER -->
+      <p>This demo uses domain mapping techniques and the Page Rank algorithm...By analyzing municipal building permit data and applying multiple time series algorithms, we created a live analysis of selected cities economic development and trajectory</p>
+      <div ng-if="link.url" ng-cloak>
+        <a ng-href="{{link.url}}" ng-bind="link.url"></a>
+        <!-- <div ng-show="summarizing">
+          <span class="aspinner demo-spinner"></span>
+          Summarizing...
+        </div> -->
+        <div ng-bind="link.summary" class="small"></div>
+      </div>
+      <p class="item-title">GENERATED TAGS</p>
+      <div class="tags">
+        <!-- PLACEHOLDER -->
+        <span class="label label-purple">whatsapp</span>
+        <span class="label label-purple">security</span>
+        <span class="label label-purple">messages</span>
+        <span class="label label-purple">users</span>
+        <span class="label label-purple">backdoor</span>
+        <span class="label label-purple">facebook</span>
+        <span class="label label-purple">encryption</span>
+        <span class="label label-purple">government</span>
+      </div>
+      <div ng-if="link.url" ng-cloak>
+        <!-- <div ng-show="tagging">
+          <span class="aspinner demo-spinner"></span>
+          Tagging...
+        </div> -->
+        <div class="tag-pills" ng-repeat="tag in link.tags">
+          <a ng-bind="tag"></a>
+        </div>
+      </div>
+    </div>
+  </div> <!-- End containing row -->
+<!--<div>
       <graph data="siteMap"></graph>
     </div> -->
-    <div class="row">
-      <div class="col-sm-7">
-        <p class="lg item-title">PAGERANK</p>
-        <div class="pagerank-panel">
-    <!-- <table>
-            <tr ng-repeat="pair in pagerankSorted" ng-click="loadLink(pair.url)" ng-cloak>
-              <td ng-bind="round(pair.rank)"></td>
-              <td><a ng-bind="pair.url"></a></td>
-            </tr>
-          </table> -->
-          <div class="row whitespace-sm">
-            <div class="col-xs-2">
-              <!-- <p ng-bind="round(pair.rank)"></p> -->
-              <!-- PLACEHOLDER -->
-              <p>1.00</p>
-              <p>.89</p>
-              <p>.79</p>
-              <p>.69</p>
-              <p>.59</p>
-              <p>.49</p>
-              <p>.30</p>
-              <p>.29</p>
-              <p>.19</p>
-              <p>.10</p>
-              <p>.09</p>
-              <p>.01</p>
-            </div>
-            <div class="col-xs-10 pagerank-links">
-              <!-- <p class="pagerank-url"><a ng-bind="pair.url"></a></p> -->
-              <!-- PLACEHOLDER -->
-              <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
-              <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
-              <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
-              <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
-              <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
-              <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
-              <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
-              <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
-              <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
-              <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
-              <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
-              <p class="pagerank-url"><a href="">https://algorithmia.com/demo/sitemap</a></p>
-            </div>
-          </div>
-        </div>   
-      </div>
 </section>
 
 <!-- EXPLANATION -->
-  <div class="grey-background">
-  <section class="container">
-    <div class="row row-md">
-      <div class="col-md-12">
-        <h2 class="whitespace-none">How it works</h2>
-        <h4>Using computer vision to search unstructured video</h4>
-      </div>
+<div class="grey-background border-bottom">
+<section class="container">
+  <div class="row row-md">
+    <div class="col-md-12">
+      <h2 class="whitespace-none">How it works</h2>
+      <h4>Using computer vision to search unstructured video</h4>
     </div>
-    <div class="row row-md">
-      <div class="col-md-8">
-        <h3>Tools used</h3>
-        <ul>
-          <li><a href="">Socrata Open Data Query</a> – pulls the permit data from Socrata</li>
-          <li><a href="">Simple Moving Average</a> – uses local average to smooth data</li>
-          <li><a href="">Linear Detrend</a> – removes increasing or decreasing trends in time series</li>
-          <li><a href="">Autocorrelate</a> – used to analyze the seasonality of a time series</li>
-          <li><a href="">Remove Seasonality</a> – removes known seasonal effects from a time series</li>
-          <li><a href="">Outlier Detection</a> – flags unusual data points</li>
-          <li><a href="">Forecast</a> – predict a given time series into the future</li>
-        </ul>
-      </div>
-    </div>
-    <div class="row row-md">
-      <div class="col-md-8">
-        <h3>Source Data</h3>
-        <p>We use an algorithm to directly access Socrata’s API that can be found here.</p>
-        <p>Once we’ve retrieved the data, we aggregate it by total number of permits issued per month, and plot this data. To make the graph clearer, it sometimes helps to smooth or denoise the data. There are a number of ways to do this, with moving averages being the most popular. The most intuitive is the Simple Moving Average, which replaces each point by the average of itself and some number of the preceding points (default is 3).</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-8">
-        <h3>Takeaway</h3>
-        <p>The takeaway from this example is not the individual pieces – most of these techniques are available a number of places. The secret here is that it is simple, composable, and fully automated. Once one person writes a data connector in Algorithmia (which is likely to happen for interesting public data, like that provided by Socrata), you don’t have to burn precious time writing and working kinks out of your own. On the other hand, if something existing gets done better, the compositional nature of Algorithmia will allow you to swap out pieces of a pipeline seamlessly. When someone comes up with a better outlier detector, then upgrading a pipeline like the one above can be literally just a few keystrokes away.</p>
-      </div>
-    </div>
-  </section>
   </div>
+  <div class="row row-md">
+    <div class="col-md-8">
+      <h3>Tools used</h3>
+      <ul>
+        <li><a href="">Socrata Open Data Query</a> – pulls the permit data from Socrata</li>
+        <li><a href="">Simple Moving Average</a> – uses local average to smooth data</li>
+        <li><a href="">Linear Detrend</a> – removes increasing or decreasing trends in time series</li>
+        <li><a href="">Autocorrelate</a> – used to analyze the seasonality of a time series</li>
+        <li><a href="">Remove Seasonality</a> – removes known seasonal effects from a time series</li>
+        <li><a href="">Outlier Detection</a> – flags unusual data points</li>
+        <li><a href="">Forecast</a> – predict a given time series into the future</li>
+      </ul>
+    </div>
+  </div>
+  <div class="row row-md">
+    <div class="col-md-8">
+      <h3>Source Data</h3>
+      <p>We use an algorithm to directly access Socrata’s API that can be found here.</p>
+      <p>Once we’ve retrieved the data, we aggregate it by total number of permits issued per month, and plot this data. To make the graph clearer, it sometimes helps to smooth or denoise the data. There are a number of ways to do this, with moving averages being the most popular. The most intuitive is the Simple Moving Average, which replaces each point by the average of itself and some number of the preceding points (default is 3).</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <h3>Takeaway</h3>
+      <p>The takeaway from this example is not the individual pieces – most of these techniques are available a number of places. The secret here is that it is simple, composable, and fully automated. Once one person writes a data connector in Algorithmia (which is likely to happen for interesting public data, like that provided by Socrata), you don’t have to burn precious time writing and working kinks out of your own. On the other hand, if something existing gets done better, the compositional nature of Algorithmia will allow you to swap out pieces of a pipeline seamlessly. When someone comes up with a better outlier detector, then upgrading a pipeline like the one above can be literally just a few keystrokes away.</p>
+    </div>
+  </div>
+</section>
+</div>
 
 <!-- Print debug input / output from the algorithms -->
-    <!-- Nav tabs -->
+  <!-- Nav tabs -->
 <!--     <div class="row row-sm">
-      <div class="col-md-12">
-        <ul class="nav nav-tabs">
-          <li class="active"><a href="#demo-code" data-toggle="tab">Demo Code</a></li>
-          <li><a href="#sitemap" data-toggle="tab">SiteMap</a></li>
-          <li><a href="#pagerank-in" data-toggle="tab">PageRank Input</a></li>
-          <li><a href="#pagerank-out" data-toggle="tab">PageRank Output</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12"> -->
-        <!-- Tab panes -->
-<!--         <div class="tab-content debug-container">
-          <div class="tab-pane debug active" id="demo-code">
-            <pre><code>Algorithmia.client(apiKey).algo("/web/SiteMap").pipe(siteUrl).then(function(graph) {
-    // Render graph here...
-    Algorithmia.client(apiKey).algo("/thatguy2048/PageRank").pipe(graph.result).then(function(ranking) {
-        // Colorize graph here...
-    });
-});</code></pre>
-          </div>
-          <div class="tab-pane debug" id="sitemap"><pre ng-bind="siteMap | json">...</pre></div>
-          <div class="tab-pane debug" id="pagerank-in">...</div>
-          <div class="tab-pane debug" id="pagerank-out">...</div>
-        </div>
-        <a href="https://algorithmia.com/algorithms/deeplearning/DeepFilter" class="btn btn-primary-inverse">
-          LEARN MORE
-        </a>
-      </div>
-    </div> -->
-
-
-  <!-- JOIN -->
-  <section class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <h3>Join the thousands of developers already building intelligent apps</h3>
-        <p class="lg">Get 10,000 additional credits when you sign up using the code "color"</p>
-        <a href="https://algorithmia.com/signup?invite=color" class="btn btn-success">
-          SIGN UP FOR FREE
-        </a>
-      </div>
-    </div>
-  </section>
-
-<footer>
-  <div class="container md-padding">
-    <div class="row row-sm">
-      <div class="col-md-12">
-        <div class="pull-left">
-          &copy; Algorithmia 2017
-        </div>
-        <ul class="list-inline pull-right">
-          <li><a href="https://algorithmia.com/about">About</a></li>
-          <li><a href="https://algorithmia.com/terms">Terms</a></li>
-          <li><a href="https://algorithmia.com/privacy">Privacy</a></li>
-          <li><a href="http://blog.algorithmia.com" target="_blank">Blog</a></li>
-          <li><a href="https://angel.co/algorithmia/jobs/" target="_blank">Jobs</a></li>
-          <li><a href="https://algorithmia.com/contact">Contact</a></li>
-        </ul>
-      </div>
+    <div class="col-md-12">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#demo-code" data-toggle="tab">Demo Code</a></li>
+        <li><a href="#sitemap" data-toggle="tab">SiteMap</a></li>
+        <li><a href="#pagerank-in" data-toggle="tab">PageRank Input</a></li>
+        <li><a href="#pagerank-out" data-toggle="tab">PageRank Output</a></li>
+      </ul>
     </div>
   </div>
-</footer>
+  <div class="row">
+    <div class="col-md-12"> -->
+      <!-- Tab panes -->
+<!--         <div class="tab-content debug-container">
+        <div class="tab-pane debug active" id="demo-code">
+          <pre><code>Algorithmia.client(apiKey).algo("/web/SiteMap").pipe(siteUrl).then(function(graph) {
+  // Render graph here...
+  Algorithmia.client(apiKey).algo("/thatguy2048/PageRank").pipe(graph.result).then(function(ranking) {
+      // Colorize graph here...
+  });
+});</code></pre>
+        </div>
+        <div class="tab-pane debug" id="sitemap"><pre ng-bind="siteMap | json">...</pre></div>
+        <div class="tab-pane debug" id="pagerank-in">...</div>
+        <div class="tab-pane debug" id="pagerank-out">...</div>
+      </div>
+      <a href="https://algorithmia.com/algorithms/deeplearning/DeepFilter" class="btn btn-primary-inverse">
+        LEARN MORE
+      </a>
+    </div>
+  </div> -->
 
 <!-- JS -->
 <script>
-  updateUrl();
-  analyze();
+updateUrl();
+analyze();
 </script>
-<script src="public/js/jquery.min.js"></script>
-<script src="public/js/bootstrap.min.js"></script>
-<script src="public/js/algorithmia-0.2.0.js"></script>
-<script src="public/js/TweenMax.min.js"></script>
-<script src="public/js/dots.js"></script>
-<script src="public/js/highlight.pack.js"></script>
-<script src="public/js/main.js"></script>
-<!-- <script src="https://www.youtube.com/iframe_api"></script> -->
-<script>hljs.initHighlightingOnLoad();</script>
-</body>
-</html>
+
+<%= footer %>

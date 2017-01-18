@@ -3,6 +3,13 @@
 // rock https://images.unsplash.com/reserve/yZfr4jmxQyuaE132MWZm_stagnes.jpg
 // paris https://images.unsplash.com/33/YOfYx7zhTvYBGYs6g83s_IMG_8643.jpg
 
+/**
+ * once DOM is ready, update vars amd set initial URL
+ */
+$(document).ready(function() {
+  setInviteCode('color');
+});
+
 window.Algorithmia = window.Algorithmia || {};
 Algorithmia.api_key = "sim4m8jnVOF3086ujBXdiYteIS01";
 var numTasks = 0;

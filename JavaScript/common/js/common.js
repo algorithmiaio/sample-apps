@@ -11,5 +11,6 @@ function setInviteCode(inviteCode) {
  * once DOM is ready, run inits common to all demos
  */
 $(document).ready(function() {
+  // code highlighting
   hljs.initHighlightingOnLoad();
 });

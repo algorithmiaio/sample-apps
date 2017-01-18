@@ -2,6 +2,13 @@ window.Algorithmia = window.Algorithmia || {};
 Algorithmia.api_key = "simnxB3dwTN8kds9p6SGMpGoOJC1"
 var numTasks = 0;
 
+/**
+ * once DOM is ready, update vars amd set initial URL
+ */
+$(document).ready(function() {
+  setInviteCode('analyzeurl');;
+});
+
 function callAlgorithm() {
   // begin taks
   startTask();

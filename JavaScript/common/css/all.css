@@ -1,10 +1,8 @@
 /* 
-*  SITEWIDE GENERAL STYLING
+*  GENERAL STYLING FOR DEMOS
 *  Default style is for xs screens. Necessary responsive adjustments are made in media queries
-*  Variables in variables.less
 */
 
-/* Wrap file in an .all tag (Temporary solution to avoid style conflicts) */
 html,
 body {
     font-size:   16px;
@@ -14,7 +12,7 @@ body {
     font-weight: 300;
 }
 
-/*STRUCTURE*/
+/***  STRUCTURE  ***/
 
 /*$CONTAINER*/
 /* Adds default padding to top of container. Balances whitespace from rows */
@@ -52,7 +50,7 @@ body {
 /* Center a single column row. Place after col-*-* class. */
 .col-centered {float: none; margin: 0 auto;}
 
-/* GENERAL ELEMENTS */
+/***  GENERAL ELEMENTS  ***/
 /* Background colors for sections. Place outside of container for full page width */
 .purple-background      {background-color: #5000BE;}
 .purple-grad-background {background: linear-gradient(#6730B0, #492CAB);}
@@ -66,12 +64,10 @@ body {
     min-height: 4rem;
     background-color: #444A55;
     margin-bottom: 0;
+    border-bottom: none;
     /* vertical center */
     display:        flex;
     align-items:    center;
-    
-    border-bottom: none;
-
 }
 .navbar-default .navbar-nav>li>a       {color: white;}
 .navbar-default .navbar-nav>li>a:hover {color: #C9C7CB;}
@@ -183,7 +179,7 @@ img       {max-width: 100%;}
 .light           {color: #FFFFFF;}
 .secondary-light {color: rgba(255,255,255,.7);}
 
-/* These names make more sense. Hopefully eliminate !important */
+/* Bottom spacing for elements to override default. Hopefully eliminate !important */
 .whitespace-none {margin-bottom: 0!important;}
 .whitespace-sm   {margin-bottom: .5rem!important;}
 .whitespace      {margin-bottom: 1rem!important;}
@@ -204,6 +200,9 @@ a.light        {color: #FFFFFF; text-decoration: underline;}
 /* Hover state */
 a:hover        {color: #5000BE; text-decoration: underline;}
 a.light:hover  {color: #FFFFFF; text-decoration: none;}
+/* Hover state */
+a:focus        {color: #5000BE; text-decoration: underline;}
+a.light:focus  {color: #FFFFFF; text-decoration: none;}
 
 /* $BUTTONS */
 .btn {
@@ -331,6 +330,17 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
     text-decoration:  none;
     border: 1px solid #FFFFFF;
 }
+.btn-flat {
+    color: #5000BE;
+    padding: 0;
+    border: none;
+}
+.btn-flat:hover,
+.btn-flat:focus {
+    color: #5000BE;
+    border: none;
+    text-decoration: underline;
+}
 
 /* Moves btn to right side. Place on parent */
 .btn-right {text-align: right;}
@@ -351,7 +361,7 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
   background-color: rgba(255,255,255,.8);
   border-radius: 0;
 }
-/* Chrome doesn't honor 'select' border radius */
+/* Chrome doesn't honor 'select' border radius. you can remove styling to fix it. */
 .form-control {
   border-radius: 0;
   border: 1px solid rgba(0,0,0,.12);
@@ -369,7 +379,7 @@ a.light:hover  {color: #FFFFFF; text-decoration: none;}
 /* $CODE */
 pre {
     padding: 0;
-    margin: 0; /* overrides default */
+    margin: 0; /* reset default values */
     margin-bottom: 1rem;
     background-color: transparent;
     border: none;
@@ -387,7 +397,7 @@ pre {
     .nav-tabs           {font-size: 1.25rem;}
     .nav-tabs>li>a      {padding:   .5rem 1rem;}
     .navbar-brand > img {width:     250px;}
-    h1 {font-size: 4em;}
+    h1 {font-size: 4em;} /* increase header size on larger screens */
 }
 
 /* Medium devices (desktops, 992px and up) */

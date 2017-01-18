@@ -6,7 +6,7 @@ var numTasks = 0;
  * once DOM is ready, update vars amd set initial URL
  */
 $(document).ready(function() {
-  setInviteCode('analyzeurl');;
+  setInviteCode('analyzeurl');
 });
 
 function callAlgorithm() {

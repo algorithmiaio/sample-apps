@@ -18,6 +18,7 @@ module.exports = function(grunt) {
     { slug: 'web-page-inspector', dist: 'JavaScript/web-page-inspector'},
     { slug: 'video-search', dist: 'JavaScript/video-search'},
     { slug: 'rss-dashboard', dist: 'JavaScript/RSS_dashboard'},
+    { slug: 'sitemap', dist: 'JavaScript/site-mapper'},
   ];
 
   var awsS3Config = {

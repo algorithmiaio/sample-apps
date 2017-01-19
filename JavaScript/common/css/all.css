@@ -164,6 +164,7 @@ p.lg {
     font-size:   1.25rem;
     font-weight: 300;
 }
+.secondary-text {font-size: .75rem;}
 .item-title  {
   color: rgba(0,0,0,.54)!important;  /* overrides things like p.lg */
   margin-bottom: 0!important;

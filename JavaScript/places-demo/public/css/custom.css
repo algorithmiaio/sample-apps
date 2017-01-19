@@ -6,14 +6,25 @@
 #twoface-demo canvas {
   max-width:100%;
 }
+.form-group input {margin-bottom: .5rem;}
 
+/* Label */
+.label {
+  border-radius: 0;
+}
 .label-success {
-	border-radius: 0;
-    background-color: #5000BE;
+  color: #FFFFFF;
+  background-color: #5000BE;
+}
+
+span.label {
+  font-size: .75rem;
 }
 
 #userImg {
+	padding-top: 8px;
 	width: 100%;
+	margin-bottom: .5rem;
 }
 
 #social {
@@ -45,7 +56,7 @@
 	}
 	.form-group input {margin-bottom: 0;}
 	.sample-image {
-		margin-bottom: 0;
+		margin-bottom: .5rem;
 	}
 }
 

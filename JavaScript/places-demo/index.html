@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+<%= header_begin %>
 
 	<title>Deep Learning to Classify Places, Locations, and Scenes in Images – Algorithmia</title>
 	<link rel="canonical" href="http://demos.algorithmia.com/classify-places/" />
@@ -32,67 +27,7 @@
 	<meta itemprop="name" content="Classify Places, Locations, and Scenes in Images">
 	<meta itemprop="description" content="Use deep learning algorithms to identify places in images with the Places365 Classifier microservice, trained on 1.8 million images to recognize 365 scenes">
 
-	<!-- CSS -->
-    <link rel="shortcut icon" href="public/images/favicon-bw.png" type="image/png">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700|Raleway:300,400,700" rel="stylesheet">
-	<link href="public/css/bootstrap.min.css" rel="stylesheet">
-	<link href="public/css/all.css" rel="stylesheet">
-	<link href="public/css/custom.css" rel="stylesheet">
-	<link href="public/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-	<link href="public/css/styles/monokai.css" rel="stylesheet">
-
-    <!-- Facebook Pixel Code -->
-	<script>
-	!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-	n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-	n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-	t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-	document,'script','https://connect.facebook.net/en_US/fbevents.js');
-
-	fbq('init', '238560436537425');
-	fbq('track', "PageView");</script>
-	<noscript><img height="1" width="1" style="display:none"
-	src="https://www.facebook.com/tr?id=238560436537425&ev=PageView&noscript=1"
-	/></noscript>
-	<!-- End Facebook Pixel Code -->
-
-	<!--   Google Analytics -->
-	<script>
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-	ga('create', 'UA-38617973-1', 'auto');
-	ga('send', 'pageview');
-	</script>
-</head>
-<body>
-	<nav class="navbar navbar-default navbar-static-top navbar-public navbar-dark" role="navigation">
-		<div class="container no-padding">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="">
-					<img src="public/images/algoWhite.svg" alt="Algorithmia">
-				</a>
-			</div>
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav pull-right">
-					<li><a href="https://algorithmia.com/algorithms">Algorithms</a></li>
-					<li><a href="https://algorithmia.com/use-cases">Use Cases</a></li>
-					<li><a href="https://algorithmia.com/pricing">Pricing</a></li>
-					<li><a href="http://blog.algorithmia.com/">Blog</a></li>
-					<li><a class="hidden-sm hidden-xs" href="https://algorithmia.com/signup">Sign up</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-
+<%= header_end %>
 
 	<section class="purple-grad-background hero">
 		<div class="container">
@@ -147,33 +82,33 @@
 	</div>
 
 	<!-- RESULTS PAGE -->
-	<section class="container hidden">
+	<section class="container">
 		<div class="explanation" id="results">
 			<div class="row">
-				<div class="col-md-6">
-					<h3>Your Image</h3>
-					<img src="" id="userImg">
+				<div class="col-sm-6">
+					<img src="public/images/dock_lg.jpg" id="userImg">
 				</div>
-				<div class="col-md-6">
-					<h3>Places Classified</h3>
-					<table class="table table-striped" id="table">
+				<div class="col-sm-6">
+					<table class="table" id="table">
 						<thead>
 							<tr>
-								<th class="item-title">Place Tags</th>
-								<th class="item-title">Probability</th>
+								<th><p class="item-title">Place Tags</p></th>
+								<th><p class="item-title">Probability</p></th>
 							</tr>
 						</thead>
-						<tbody id="tbody"></tbody>
+						<tbody id="tbody">
+							<tr>
+								<td>
+									<span class="label label-success">pier</span>
+								</td>
+								<td>
+									79.75%
+								</td>
+							</tr>
+							<tr><td><span class="label label-success">boardwalk</span></td><td>2.94%</td></tr><tr><td><span class="label label-success">lighthouse</span></td><td>2.17%</td></tr><tr><td><span class="label label-success">coast</span></td><td>1.54%</td></tr><tr><td><span class="label label-success">harbor</span></td><td>1.49%</td></tr><tr><td><span class="label label-success">ocean</span></td><td>1.47%</td></tr><tr><td><span class="label label-success">bridge</span></td><td>1.42%</td></tr>
+						</tbody>
 					</table>
 				</div>
-			</div>
-		</div>
-
-		<div class="row" id="social">
-			<div class="col-md-8 col-md-offset-2">
-				<a href="https://twitter.com/share" class="twitter-share-button" data-text="Classify Places, Locations, and Scenes in Images" data-via="algorithmia" data-hashtags="classifyit" data-show-count="false">Tweet</a>
-
-				<div class="fb-share-button" data-href="http://demos.algorithmia.com/classify-places/" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fdemos.algorithmia.com%2Fclassify-places%2F&amp;src=sdkpreparse">Share</a></div>
 			</div>
 		</div>
 	</section>
@@ -181,22 +116,18 @@
 	<!-- EXPLANATION PAGE -->
 	<div class="grey-background">
 	<section class="container">
-		<div class="row" id="explainer">
-			<div class="explanation">
-				<div class="row row-md">
-					<div class="col-md-12">
-						<h2 class="whitespace-none">How it works</h2>
-						<h4>Quickly Classify Places, Locations, and Scenes in Images</h4>
-					</div>
+		<div class="explanation">
+			<div class="row row-md">
+				<div class="col-md-12">
+					<h2 class="whitespace-none">How it works</h2>
+					<h4>Quickly Classify Places, Locations, and Scenes in Images</h4>
 				</div>
-				<div class="row whitespace-none">
-					<div class="col-md-8">
-						<p>Use state-of-the-art deep learning to identify places in images. Just paste in a URL above.</p>
-						<p>We're excited to introduce <a href="http://blog.algorithmia.com/2016/07/cloud-hosted-deep-learning-models/" target="_blank">cloud hosted deep learning models</a> on Algorithmia. The <a href="https://algorithmia.com/algorithms/deeplearning/Places365Classifier" target="_blank">Places365 Classifier microservice</a> is a computer vision algorithm trained on ~1.8 million images to recognize 365 scene categories.</p>
+				<div class="col-md-8">
+					<p>Use state-of-the-art deep learning to identify places in images. Just paste in a URL above.</p>
+					<p>We're excited to introduce <a href="http://blog.algorithmia.com/2016/07/cloud-hosted-deep-learning-models/" target="_blank">cloud hosted deep learning models</a> on Algorithmia. The <a href="https://algorithmia.com/algorithms/deeplearning/Places365Classifier" target="_blank">Places365 Classifier microservice</a> is a computer vision algorithm trained on ~1.8 million images to recognize 365 scene categories.</p>
 
-						<p>This microservice is an implementation of <a href="https://github.com/metalbubble/places365" target="_blank">Places: An Image Database for Deep Scene Understanding. B. Zhou, A. Khosla, A. Lapedriza, A. Torralba and A. Oliva Arxiv, 2016</a>. Learn more about their work <a href="http://places2.csail.mit.edu/" target="_blank">here</a><!--and <a href="#">how we built this demo</a>-->.</p>
-						<p>Let us know what you think <a href="https://twitter.com/algorithmia" target="_blank">@Algorithmia</a> or by <a href="https://algorithmia.com/contact" target="_blank">email</a>.</p>
-					</div>
+					<p>This microservice is an implementation of <a href="https://github.com/metalbubble/places365" target="_blank">Places: An Image Database for Deep Scene Understanding. B. Zhou, A. Khosla, A. Lapedriza, A. Torralba and A. Oliva Arxiv, 2016</a>. Learn more about their work <a href="http://places2.csail.mit.edu/" target="_blank">here</a><!--and <a href="#">how we built this demo</a>-->.</p>
+					<p>Let us know what you think <a href="https://twitter.com/algorithmia" target="_blank">@Algorithmia</a> or by <a href="https://algorithmia.com/contact" target="_blank">email</a>.</p>
 				</div>
 			</div>
 		</div>
@@ -236,95 +167,4 @@ print algo.pipe(input)
     </div>
   </section>
 
-	<!-- JOIN -->
-	<div class="grey-background">
-	<section class="container">
-	  <div class="row">
-	    <div class="col-md-12">
-	      <h3>Join the thousands of developers already building intelligent apps</h3>
-	      <p class="lg">Get 10,000 additional credits when you sign up using the code "places"</p>
-	      <a href="https://algorithmia.com/signup?invite=places" class="btn btn-success">
-	        SIGN UP FOR FREE
-	      </a>
-	    </div>
-	  </div>
-	</section>
-	</div>
-
-	<!-- FEATURES -->
-	<section class="container">
-		<div class="row" id="feature-row">
-			<div class="col-sm-6 col-md-4 feature">
-				<h4>Algorithms as a Microservice</h4>
-				<p>Leverage an ever-growing library of more than 2,200 algorithmic microservices via an intuitive API. We provide the tools and manage the cloud infrastructure needed to run it at scale.</p>
-				<a href="http://developers.algorithmia.com/application-development/guides/">LEARN MORE</a>
-			</div>
-			<div class="col-sm-6 col-md-4 feature">
-				<h4>Web Services for Business Logic</h4>
-				<p>Instantly deploy your backend code as an API for public or private consumption. Every algorithm runs as it's own microservice, making each composable, interoperable, and secure. </p>
-				<a href="http://blog.algorithmia.com/algorithms-as-microservices/">LEARN MORE</a>
-			</div>
-			<div class="col-sm-6 col-md-4 feature">
-				<h4>Hosted Trained Models</h4>
-				<p>Have a trained machine learning or deep learning model? Turn it into a serverless microservices in minutes. We'll show you how to get started for free, and scale with ease. </p>
-				<a href="http://developers.algorithmia.com/algorithm-development/model-guides/">LEARN MORE</a>
-			</div>
-		</div>
-	</section>
-
-	<footer>
-		<div class="container md-padding">
-			<div class="row row-sm">
-				<div class="col-md-12">
-					<div class="pull-left">
-						&copy; Algorithmia 2017
-					</div>
-					<ul class="list-inline pull-right">
-						<li><a href="https://algorithmia.com/about">About</a></li>
-						<li><a href="https://algorithmia.com/terms">Terms</a></li>
-						<li><a href="https://algorithmia.com/privacy">Privacy</a></li>
-						<li><a href="http://blog.algorithmia.com" target="_blank">Blog</a></li>
-						<li><a href="https://angel.co/algorithmia/jobs/" target="_blank">Jobs</a></li>
-						<li><a href="https://algorithmia.com/contact">Contact</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</footer>
-
-	<!-- JS -->
-	<script src="public/js/jquery.min.js"></script>
-	<script src="public/js/bootstrap.min.js"></script>
-	<script src="public/js/TweenMax.min.js"></script>
-	<script src="public/js/algorithmia-0.2.0.js"></script>
-	<script src="public/js/dots.js"></script>
-	<script src="public/js/highlight.pack.js"></script>
-	<script src="public/js/dropzone.js"></script>
-	<script src="public/js/main.js"></script>
-	<script>hljs.initHighlightingOnLoad();</script>
-	<script>
-	  window.intercomSettings = {
-	    app_id: "c9fj6354"
-	  };
-	</script>
-	<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/c9fj6354';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
-
-    <!-- Here be the social sharing scripts -->
-	<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-	<div id="fb-root"></div>
-	<script>(function(d, s, id) {
-	var js, fjs = d.getElementsByTagName(s)[0];
-	if (d.getElementById(id)) return;
-	js = d.createElement(s); js.id = id;
-	js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
-	fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));</script>
-	<style media="screen" type="text/css">
-	.fb_iframe_widget span {
-		vertical-align: baseline !important;
-	}
-	</style>
-
-
-</body>
-</html>
+<%= footer %>

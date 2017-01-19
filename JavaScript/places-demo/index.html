@@ -82,33 +82,33 @@
 	</div>
 
 	<!-- RESULTS PAGE -->
-	<section class="container hidden">
+	<section class="container">
 		<div class="explanation" id="results">
 			<div class="row">
-				<div class="col-md-6">
-					<h3>Your Image</h3>
-					<img src="" id="userImg">
+				<div class="col-sm-6">
+					<img src="public/images/dock_lg.jpg" id="userImg">
 				</div>
-				<div class="col-md-6">
-					<h3>Places Classified</h3>
-					<table class="table table-striped" id="table">
+				<div class="col-sm-6">
+					<table class="table" id="table">
 						<thead>
 							<tr>
-								<th class="item-title">Place Tags</th>
-								<th class="item-title">Probability</th>
+								<th><p class="item-title">Place Tags</p></th>
+								<th><p class="item-title">Probability</p></th>
 							</tr>
 						</thead>
-						<tbody id="tbody"></tbody>
+						<tbody id="tbody">
+							<tr>
+								<td>
+									<span class="label label-success">pier</span>
+								</td>
+								<td>
+									79.75%
+								</td>
+							</tr>
+							<tr><td><span class="label label-success">boardwalk</span></td><td>2.94%</td></tr><tr><td><span class="label label-success">lighthouse</span></td><td>2.17%</td></tr><tr><td><span class="label label-success">coast</span></td><td>1.54%</td></tr><tr><td><span class="label label-success">harbor</span></td><td>1.49%</td></tr><tr><td><span class="label label-success">ocean</span></td><td>1.47%</td></tr><tr><td><span class="label label-success">bridge</span></td><td>1.42%</td></tr>
+						</tbody>
 					</table>
 				</div>
-			</div>
-		</div>
-
-		<div class="row" id="social">
-			<div class="col-md-8 col-md-offset-2">
-				<a href="https://twitter.com/share" class="twitter-share-button" data-text="Classify Places, Locations, and Scenes in Images" data-via="algorithmia" data-hashtags="classifyit" data-show-count="false">Tweet</a>
-
-				<div class="fb-share-button" data-href="http://demos.algorithmia.com/classify-places/" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fdemos.algorithmia.com%2Fclassify-places%2F&amp;src=sdkpreparse">Share</a></div>
 			</div>
 		</div>
 	</section>
@@ -116,22 +116,18 @@
 	<!-- EXPLANATION PAGE -->
 	<div class="grey-background">
 	<section class="container">
-		<div class="row" id="explainer">
-			<div class="explanation">
-				<div class="row row-md">
-					<div class="col-md-12">
-						<h2 class="whitespace-none">How it works</h2>
-						<h4>Quickly Classify Places, Locations, and Scenes in Images</h4>
-					</div>
+		<div class="explanation">
+			<div class="row row-md">
+				<div class="col-md-12">
+					<h2 class="whitespace-none">How it works</h2>
+					<h4>Quickly Classify Places, Locations, and Scenes in Images</h4>
 				</div>
-				<div class="row whitespace-none">
-					<div class="col-md-8">
-						<p>Use state-of-the-art deep learning to identify places in images. Just paste in a URL above.</p>
-						<p>We're excited to introduce <a href="http://blog.algorithmia.com/2016/07/cloud-hosted-deep-learning-models/" target="_blank">cloud hosted deep learning models</a> on Algorithmia. The <a href="https://algorithmia.com/algorithms/deeplearning/Places365Classifier" target="_blank">Places365 Classifier microservice</a> is a computer vision algorithm trained on ~1.8 million images to recognize 365 scene categories.</p>
+				<div class="col-md-8">
+					<p>Use state-of-the-art deep learning to identify places in images. Just paste in a URL above.</p>
+					<p>We're excited to introduce <a href="http://blog.algorithmia.com/2016/07/cloud-hosted-deep-learning-models/" target="_blank">cloud hosted deep learning models</a> on Algorithmia. The <a href="https://algorithmia.com/algorithms/deeplearning/Places365Classifier" target="_blank">Places365 Classifier microservice</a> is a computer vision algorithm trained on ~1.8 million images to recognize 365 scene categories.</p>
 
-						<p>This microservice is an implementation of <a href="https://github.com/metalbubble/places365" target="_blank">Places: An Image Database for Deep Scene Understanding. B. Zhou, A. Khosla, A. Lapedriza, A. Torralba and A. Oliva Arxiv, 2016</a>. Learn more about their work <a href="http://places2.csail.mit.edu/" target="_blank">here</a><!--and <a href="#">how we built this demo</a>-->.</p>
-						<p>Let us know what you think <a href="https://twitter.com/algorithmia" target="_blank">@Algorithmia</a> or by <a href="https://algorithmia.com/contact" target="_blank">email</a>.</p>
-					</div>
+					<p>This microservice is an implementation of <a href="https://github.com/metalbubble/places365" target="_blank">Places: An Image Database for Deep Scene Understanding. B. Zhou, A. Khosla, A. Lapedriza, A. Torralba and A. Oliva Arxiv, 2016</a>. Learn more about their work <a href="http://places2.csail.mit.edu/" target="_blank">here</a><!--and <a href="#">how we built this demo</a>-->.</p>
+					<p>Let us know what you think <a href="https://twitter.com/algorithmia" target="_blank">@Algorithmia</a> or by <a href="https://algorithmia.com/contact" target="_blank">email</a>.</p>
 				</div>
 			</div>
 		</div>
@@ -170,5 +166,5 @@ print algo.pipe(input)
       </div>
     </div>
   </section>
-  
+
 <%= footer %>

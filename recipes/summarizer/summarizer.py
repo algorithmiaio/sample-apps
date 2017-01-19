@@ -3,7 +3,6 @@ import Algorithmia
 
 client = Algorithmia.client("your_api_key")
 
-
 def extract_text(url):
     """Retrieve text content from URL."""
     algo = client.algo("util/ExtractText/0.1.1")
@@ -50,3 +49,8 @@ def summarizer(input):
         print("Printed contents to dropbox file")
     except Exception as e:
         print(e)
+
+
+# Example Inputs
+summarizer("http://www.slideshare.net/doppenhe/algorithmia-at-hackernews-meetup-seattle")
+# summarizer("http://www.slideshare.net/MattKiser/algorithms-as-microservices")

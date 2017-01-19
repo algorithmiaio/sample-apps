@@ -6,11 +6,24 @@ h1 {font-size: 2.5rem;}
     background-size: cover;
 }
 
-
-.filters .form-control {margin-bottom: 1rem;}
+.variable-select {
+	margin-bottom: 1rem;
+}
+.variable-select h3,
+.variable-select h4 {
+	font-size: 1rem;
+}
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
 .img-placeholder {width:100%;}
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     h1 {font-size: 4em;}
+    .variable-select h3,
+	.variable-select h4 {
+		font-size: 1.5rem;
+	}
 }

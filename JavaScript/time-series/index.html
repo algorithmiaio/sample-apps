@@ -40,80 +40,70 @@
 	</section>
 
 	<section class="container">
-		<div class="row">
+		<div class="row row-md">
 			<div class="col-md-12">
 				<h2 class="whitespace-sm">Algorithmia Time Series Analysis</h2>
 			    <p>This tool analyzes time series data. It uses Socrata Open Government data on building permits to analyze development trends in various cities.</p>
 			</div>
 	    </div>
-	    <div class="row">
-			<div class="col-md-12">
-			  	<div ng-controller="TimeSeriesControl" id="tsControl" ng-init="analyze()">
-			  		<div class="row row-sm">
-						<div class="col-md-12">
-						    <div class="viz-main">
-						    	<!-- PLACEHOLDER IMG -->
-						    	<img src="public/images/timeseries_placeholder.png" class="img-placeholder">
-						    	<timeseries-chart data="tsData" options="tsOptions" headers="headers" />
-						    </div>
-						    <div>
-						      <!-- <button class="btn btn-primary" ng-click="analyze()">Perform Data Analysis</button> -->
-						      <span class="aspinner algo-spinner demo-spinner"></span>
-						      <i class="fa fa-warning text-danger" ng-if="errorMessage" ng-cloak></i>
-						      <span class="text-danger" ng-bind="errorMessage"></span>
-					    	</div>
-					    </div>
-					</div>
 
-				    <div class="row row-sm">
-					    <div class="col-md-6">
-					      <h3>Data Source</h3>
-					      <select class="form-control" ng-model="dataSource" ng-change="analyze()">
-					        <option value="Los Angeles">Los Angeles, CA</option>
-					        <option value="Boston">Boston, MA</option>
-					        <option value="Santa Rosa">Santa Rosa, CA</option>
-					        <option value="Fort Worth">Fort Worth, TX</option>
-					        <option value="New York City">New York City, NY</option>
-					        <option value="Edmonton">Edmonton, Canada</option>
-					      </select>
-					    </div>
-					</div>
-					
-				    <div class="row row-sm">
-					    <div class="col-md-6">
-					      <h3>Analysis</h3>
-					      <select class="form-control" ng-model="dataAnalysis" ng-change="analyze()">
-					        <option value="/timeseries/Forecast">Forecast</option>
-					        <option value="/timeseries/OutlierDetection">Outlier Detection</option>
-					        <option value="/timeseries/AutoCorrelate">Auto Correlate</option>
-					      </select>
-					    </div>
-					</div>
-				
-					<div class="row whitespace-none filters">
-					    <div class="col-md-3">
-					      <p class="whitespace-none">Filter 1</p>
-					      <select class="form-control" ng-model="dataFilter1" ng-change="analyze()">
-					        <option value="/util/Echo">None</option>
-					        <option value="/timeseries/LinearDetrend">Linear Detrend</option>
-					        <option value="/timeseries/RemoveSeasonality">Remove Seasonality</option>
-					        <option value="/timeseries/SimpleMovingAverage">Simple Moving Average</option>
-					      </select>
-					    </div>
+		<div ng-controller="TimeSeriesControl" id="tsControl" ng-init="analyze()">
+		    <div class="row row-sm">
+			    <div class="col-xs-6 col-sm-3 variable-select">
+			      <h3>Data Source</h3>
+			      <select class="form-control" ng-model="dataSource" ng-change="analyze()">
+			        <option value="Los Angeles">Los Angeles, CA</option>
+			        <option value="Boston">Boston, MA</option>
+			        <option value="Santa Rosa">Santa Rosa, CA</option>
+			        <option value="Fort Worth">Fort Worth, TX</option>
+			        <option value="New York City">New York City, NY</option>
+			        <option value="Edmonton">Edmonton, Canada</option>
+			      </select>
+			    </div>
+			    <div class="col-xs-6 col-sm-3 variable-select">
+			      <h3>Analysis</h3>
+			      <select class="form-control" ng-model="dataAnalysis" ng-change="analyze()">
+			        <option value="/timeseries/Forecast">Forecast</option>
+			        <option value="/timeseries/OutlierDetection">Outlier Detection</option>
+			        <option value="/timeseries/AutoCorrelate">Auto Correlate</option>
+			      </select>
+			    </div>
+		    	<div class="col-xs-6 col-sm-3 variable-select">
+				    <h4 class="whitespace-sm">Filter 1</h4>
+				    <select class="form-control" ng-model="dataFilter1" ng-change="analyze()">
+				    	<option value="/util/Echo">None</option>
+				        <option value="/timeseries/LinearDetrend">Linear Detrend</option>
+				        <option value="/timeseries/RemoveSeasonality">Remove Seasonality</option>
+				        <option value="/timeseries/SimpleMovingAverage">Simple Moving Average</option>
+				    </select>
+				</div>
 		
-					    <div class="col-md-3">
-					      <p class="whitespace-none">Filter 2</p>
-					      <select class="form-control" ng-model="dataFilter2" ng-change="analyze()">
-					        <option value="/util/Echo">None</option>
-					        <option value="/timeseries/LinearDetrend">Linear Detrend</option>
-					        <option value="/timeseries/RemoveSeasonality">Remove Seasonality</option>
-					        <option value="/timeseries/SimpleMovingAverage">Simple Moving Average</option>
-					      </select>
-					    </div>
-					</div>
-
+			    <div class="col-xs-6 col-sm-3 variable-select">
+			      <h4 class="whitespace-sm">Filter 2</h4>
+			      <select class="form-control" ng-model="dataFilter2" ng-change="analyze()">
+			        <option value="/util/Echo">None</option>
+			        <option value="/timeseries/LinearDetrend">Linear Detrend</option>
+			        <option value="/timeseries/RemoveSeasonality">Remove Seasonality</option>
+			        <option value="/timeseries/SimpleMovingAverage">Simple Moving Average</option>
+			      </select>
 			    </div>
 			</div>
+
+<!-- 		<div>
+		      <span class="aspinner algo-spinner demo-spinner"></span>
+		      <i class="fa fa-warning text-danger" ng-if="errorMessage" ng-cloak></i>
+		      <span class="text-danger" ng-bind="errorMessage"></span>
+	    	</div> -->
+
+	  		<div class="row row-sm">
+				<div class="col-md-12">
+				    <div class="viz-main">
+				    	<!-- PLACEHOLDER IMG -->
+				    	<img src="public/images/timeseries_placeholder.png" class="img-placeholder">
+				    	<timeseries-chart data="tsData" options="tsOptions" headers="headers" />
+				    </div>
+			    </div>
+	    	</div>
 		</div>
 	</section>
 

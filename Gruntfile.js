@@ -20,6 +20,7 @@ module.exports = function(grunt) {
     { slug: 'rss-dashboard', dist: 'JavaScript/RSS_dashboard'},
     { slug: 'sitemap', dist: 'JavaScript/site-mapper'},
     { slug: 'timeseries', dist: 'JavaScript/time-series'},
+    { slug: 'isitnude', dist: 'JavaScript/isitnude'},
   ];
 
   var awsS3Config = {

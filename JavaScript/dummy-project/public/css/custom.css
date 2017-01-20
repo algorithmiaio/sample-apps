@@ -1,6 +1,4 @@
-@import url("spinner.css");
-
-.hero {    
+.hero {
     background-image: url(../images/newspaper.jpeg);
     background-repeat: no-repeat;
     background-size: cover;

@@ -4,21 +4,14 @@
     background-image: url(../images/colorize-black-and-white-photos-hero.jpg);
     background-size: cover;
     background-repeat: no-repeat;
-
+    background-position: 0% 50%;
 }
 
 .form-group {margin-bottom: 1.5rem;}
  /* For smaller screens */
 .form-group input {width: 100%; margin-bottom: .5rem;}
 
-/*Put Custom Styles Here*/
-
-@media (max-width: 767px){
-	.visible-xs-block {
-		padding-bottom: 10px;
-	    display: block !important;
-	}
-}
+.explanation {text-align: center;}
 
 #twoface-demo canvas {
   max-width:100%;

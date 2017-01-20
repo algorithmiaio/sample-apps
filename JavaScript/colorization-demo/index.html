@@ -83,33 +83,25 @@
 	</div>
 
 	<!-- RESULTS SECTION -->
-	<section class="container hidden">
+	<section class="container">
 		<div class="row" id="results">
 			<div class="col-md-12">
 				<div class="explanation">
-					<center>
-						<h3>Photo Colorization Before and After</h3>
-						<figure>
-							<div id="twoface-demo"></div>
-							<figcaption class="whitespace">Drag the purple line to reveal the before and after</figcaption>
-						</figure>
-
-						<div class="hidden" id="downloadLinks">
-							<a id="compareLink" href="#" onclick="ga('send', 'event', 'comparison', 'download');" download="colorize-compare.png">Download Comparison</a>
-							|
-							<a id="resultLink" href="#" onclick="ga('send', 'event', 'colorized', 'download');" download="colorized.png">Download Colorized Image</a>
+					<h3>Photo Colorization Before and After</h3>
+					<figure>
+						<div id="twoface-demo">
+							<!-- <canvas id="twoface" width="800" height="533"></canvas> -->
+							<img src="public/images/placeholder.png">
 						</div>
-					</center>
+						<p>Drag the purple line to reveal the before and after</p>
+					</figure>
+
+					<div class="" id="downloadLinks">
+						<a id="compareLink" class="btn btn-flat" href="#" onclick="ga('send', 'event', 'comparison', 'download');" download="colorize-compare.png">Download Comparison</a>
+						|
+						<a id="resultLink" class="btn btn-flat" href="#" onclick="ga('send', 'event', 'colorized', 'download');" download="colorized.png">Download Colorized Image</a>
+					</div>
 				</div>
-			</div>
-		</div>
-
-		<div class="row invisible" id="social">
-			<div class="col-md-8 col-md-offset-2">
-
-				<a href="https://twitter.com/share" class="twitter-share-button" data-text="Colorize Black and White Photos" data-via="algorithmia" data-hashtags="colorizeit" data-show-count="false">Tweet</a>
-
-				<div class="fb-share-button" data-href="http://colorize-it.com" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fcolorize-it.com%2F&amp;src=sdkpreparse">Share</a></div>
 			</div>
 		</div>
 	</section>
@@ -135,8 +127,6 @@
 		</div>
 	</section>
 </div>
-	
-
 
 <!-- BUILT FOR DEVS -->
   <section class="container">
@@ -165,23 +155,6 @@ print algo.pipe(input)
 	<!-- JS -->
 	<script src="public/js/TweenMax.min.js"></script>
 	<script src="public/js/twoimages.js"></script>
-	<script src="public/js/dropzone.js"></script>
 
-
-    <!-- Here be the social sharing scripts -->
-	<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-	<div id="fb-root"></div>
-	<script>(function(d, s, id) {
-	var js, fjs = d.getElementsByTagName(s)[0];
-	if (d.getElementById(id)) return;
-	js = d.createElement(s); js.id = id;
-	js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
-	fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));</script>
-	<style media="screen" type="text/css">
-	.fb_iframe_widget span {
-		vertical-align: baseline !important;
-	}
-	</style>
 
 <%= footer %>

@@ -2,10 +2,10 @@
 var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
 
 var algorithms = {
-  autotag: '/nlp/AutoTag/1.0.0',
+  autotag: '/nlp/AutoTag/1.0.1',
   html2text: '/util/Html2Text/0.1.4',
   scraperss: '/tags/ScrapeRSS/0.1.6',
-  sentiment: '/nlp/SentimentAnalysis/1.0.2',
+  sentiment: '/nlp/SentimentAnalysis/1.0.3',
   summarizer: '/nlp/Summarizer/0.1.6'
 };
 

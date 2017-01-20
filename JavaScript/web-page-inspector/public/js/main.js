@@ -10,7 +10,7 @@ $(document).ready(function() {
 });
 
 function callAlgorithm() {
-  // begin taks
+  // begin tasks
   startTask();
   // Get the img URL
   var url = document.getElementById("url").value;
@@ -230,7 +230,7 @@ function analyzeDefault(url) {
 
 function startTask() {
   numTasks++;
-  document.getElementById("overlay").classList.remove("hidden");
+  $("#overlay").removeClass("hidden");
 
   // Remove anchor hash
   removeHash();

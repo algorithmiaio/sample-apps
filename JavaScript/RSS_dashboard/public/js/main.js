@@ -6,7 +6,7 @@ var algorithms = {
   html2text: '/util/Html2Text/0.1.4',
   scraperss: '/tags/ScrapeRSS/0.1.6',
   sentiment: '/nlp/SentimentAnalysis/1.0.2',
-  summarizer: '/nlp/Summarizer/0.1.3'
+  summarizer: '/nlp/Summarizer/0.1.6'
 };
 
 var httpRegex = new RegExp('^(http|https)://', 'i');

@@ -13,7 +13,7 @@ function callAlgorithm() {
   // begin tasks
   startTask();
   // Get the img URL
-  var url = document.getElementById("url").value;
+  var url = $("#url").val();
   // Remove any whitespace from url
   url = url.trim();
 
@@ -22,16 +22,9 @@ function callAlgorithm() {
 };
 
 function ValidURL(url) {
-  var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
-  '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|'+ // domain name
-  '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
-  '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'); // port and path
-  // '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
-  // '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
-  if(!pattern.test(url)) {
+  if(!isValidUrl(url)) {
     // Error Handling
-    var statusLabel = document.getElementById("status-label")
-    statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh Oh! Please enter a valid URL.</div>';
+    $("#status-label").html('<div class="alert alert-danger" role="alert">Please enter a valid URL.</div>');
     taskError();
   } else {
     console.log("URL is valid");
@@ -49,11 +42,10 @@ function getMeta(url){
       if (output.error) {
         console.log("There was an error", output.error.message);
         // Error Handling
-        var statusLabel = document.getElementById("status-label")
-        statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh Oh! Something went wrong: ' + output.error.message + ' </div>';
+        var statusLabel = $("#status-label");
+        statusLabel.html('<div class="alert alert-danger" role="alert">' + output.error.message + ' </div>');
         taskError();
       } else {
-        console.log("Adding Metadata");
         // Add results to page
         addMeta(output.result);
       }
@@ -62,24 +54,24 @@ function getMeta(url){
 
 function addMeta(data){
   console.log("Adding Metadata");
-  document.getElementById("code").textContent = JSON.stringify(data, null, 4);
-  hljs.highlightBlock(document.getElementById("code"));
-  document.getElementById("title").textContent = data.metadata.title;
-  document.getElementById("thumb").src = data.metadata.thumbnail;
-  document.getElementById("shortsummary").textContent = data.metadata.summary;
-  document.getElementById("longsummary").textContent = data.summary;
-  document.getElementById("fulltext").textContent = data.metadata.text;
-  document.getElementById("timestamp").textContent = data.metadata.date;
-  document.getElementById("statuscode").textContent = data.metadata.statusCode;
+  $("#code").text(JSON.stringify(data, null, 4));
+  hljs.highlightBlock($("#code")[0]);
+  $("#title").text(data.metadata.title);
+  $("#thumb").attr('src', data.metadata.thumbnail);
+  $("#shortsummary").text(data.metadata.summary);
+  $("#longsummary").text(data.summary);
+  $("#fulltext").text(data.metadata.text);
+  $("#timestamp").text(data.metadata.date);
+  $("#statuscode").text(data.metadata.statusCode);
 
-// Add URL
-  var url = document.getElementById("userurl")
-  url.setAttribute('href', data.metadata.url);
-  url.innerHTML = data.metadata.url;
+  // Add URL
+  var url = $("#userurl");
+  url.attr('href', data.metadata.url);
+  url.attr(data.metadata.url);
 
-// Add Sentiment Analysis
+  // Add Sentiment Analysis
   if (data.socialsentiment){
-    console.log(data.socialsentiment[0].compound);
+    // console.log(data.socialsentiment[0].compound);
     var posi = (data.socialsentiment[0].positive * 100).toFixed(2);
     var negi = (data.socialsentiment[0].negative * 100).toFixed(2);
     posi = parseInt(posi,10);
@@ -88,13 +80,13 @@ function addMeta(data){
     posi = posi+"%";
     neutra = neutra+"%";
     negi = negi+"%";
-    document.getElementById("positive").innerHTML = "<span>"+posi+" Positive</span>";
-    document.getElementById("neutral").innerHTML = "<span>"+neutra+" Neutral</span>";
-    document.getElementById("negative").innerHTML = "<span>"+negi+" Negative</span>";
+    $("#positive").html("<span>"+posi+" Positive</span>");
+    $("#neutral").html("<span>"+neutra+" Neutral</span>");
+    $("#negative").html("<span>"+negi+" Negative</span>");
   }
 
-// Add Tags
-  var tags = document.getElementById("tags")
+  // Add Tags
+  var tags = $("#tags");
   for (var i in data.tags) {
     var newSpan = document.createElement('span');
     newSpan.className = "label label-primary";
@@ -102,107 +94,47 @@ function addMeta(data){
 
     var space = document.createTextNode(" ");
 
-    tags.appendChild(newSpan);
-    tags.appendChild(space);
+    tags.append(newSpan);
+    tags.append(space);
   };
 
-// Add Links
-  var links = document.getElementById("links");
+  // Add Links
+  var links = $("#links");
   for (var i in data.links) {
     var listItem = document.createElement('li');
     var listLink = document.createElement('a');
     listLink.setAttribute('href', data.links[i]);
     listLink.innerHTML = data.links[i];
 
-    links.appendChild(listItem);
-    listItem.appendChild(listLink);
+    links.append(listItem);
+    listItem.append(listLink);
   };
 
-// Add social shares
-  var shares = document.getElementById("socialshares");
+  var createSocialSection = function(title, body) {
+    $('<span class="label label-default">'+title+'<span class="badge">'+body+'</span></span>')
+  };
+
+  // Add social shares
+  var shares = $("#socialshares");
   console.log(data.socialshares);
   if (data.socialshares.facebook_likes > 0) {
-    var span = document.createElement('span');
-    span.className = "label label-default";
-    span.textContent = "Facebook Likes: ";
-
-    var innerSpan = document.createElement('span');
-    innerSpan.className = "badge";
-    innerSpan.innerHTML = data.socialshares.facebook_likes;
-
-    var space = document.createTextNode(" ");
-
-    span.appendChild(innerSpan);
-    shares.appendChild(span);
-    shares.appendChild(space);
+    createSocialSection("Facebook Likes: ", data.socialshares.facebook_likes);
   }
-
   if (data.socialshares.facebook_shares > 0) {
-    var span = document.createElement('span');
-    span.className = "label label-default";
-    span.textContent = "Facebook Shares: ";
-
-    var innerSpan = document.createElement('span');
-    innerSpan.className = "badge";
-    innerSpan.innerHTML = data.socialshares.facebook_shares;
-
-    var space = document.createTextNode(" ");
-
-    span.appendChild(innerSpan);
-    shares.appendChild(span);
-    shares.appendChild(space);
+    createSocialSection("Facebook Shares: ", data.socialshares.facebook_shares);
   }
-
   if (data.socialshares.facebook_comments > 0) {
-    var span = document.createElement('span');
-    span.className = "label label-default";
-    span.textContent = "Facebook Comments: ";
-
-    var innerSpan = document.createElement('span');
-    innerSpan.className = "badge";
-    innerSpan.innerHTML = data.socialshares.facebook_comments;
-
-    var space = document.createTextNode(" ");
-
-    span.appendChild(innerSpan);
-    shares.appendChild(span);
-    shares.appendChild(space);
+    createSocialSection("Facebook Comments: ", data.socialshares.facebook_comments);
   }
-
   if (data.socialshares.linkedIn > 0) {
-    var span = document.createElement('span');
-    span.className = "label label-default";
-    span.textContent = "LinkedIn Shares: ";
-
-    var innerSpan = document.createElement('span');
-    innerSpan.className = "badge";
-    innerSpan.innerHTML = data.socialshares.linkedIn;
-
-    var space = document.createTextNode(" ");
-
-    span.appendChild(innerSpan);
-    shares.appendChild(span);
-    shares.appendChild(space);
+    createSocialSection("LinkedIn Shares: ", data.socialshares.linkedIn);
   }
-
   if (data.socialshares.pinterest > 0) {
-    var span = document.createElement('span');
-    span.className = "label label-default";
-    span.textContent = "Pinterest Shares: ";
-
-    var innerSpan = document.createElement('span');
-    innerSpan.className = "badge";
-    innerSpan.innerHTML = data.socialshares.pinterest;
-
-    var space = document.createTextNode(" ");
-
-    span.appendChild(innerSpan);
-    shares.appendChild(span);
-    shares.appendChild(space);
+    createSocialSection("Pinterest Shares: ", data.socialshares.pinterest);
   }
 
-// Add images
-  var imgs = document.getElementById("images");
+  // Add images
+  var imgs = $("#images");
   for (var i in data.images) {
     // Check is images are valid
     if (data.images[i].match(/\.(jpeg|jpg|gif|png|svg)$/) != null) {
@@ -213,8 +145,8 @@ function addMeta(data){
       img.setAttribute('src', data.images[i]);
       img.className = "img-responsive";
 
-      imgs.appendChild(div);
-      div.appendChild(img);
+      imgs.append(div);
+      div.append(img);
     }
   };
 
@@ -224,7 +156,7 @@ function addMeta(data){
 };
 
 function analyzeDefault(url) {
-	document.getElementById("url").value = url;
+	$("#url").val(url);
 	callAlgorithm();
 }
 
@@ -232,47 +164,44 @@ function startTask() {
   numTasks++;
   $("#overlay").removeClass("hidden");
 
-  // Remove anchor hash
-  removeHash();
-
   // Clear error messages
-  var statusLabel = document.getElementById("status-label")
-  statusLabel.innerHTML = "";
+  $("#status-label").empty();
 
   // Clear contents
-  document.getElementById("title").textContent = " ";
-  document.getElementById("thumb").src = " ";
-  document.getElementById("shortsummary").textContent = " ";
-  document.getElementById("longsummary").textContent = " ";
-  document.getElementById("fulltext").textContent = " ";
-  document.getElementById("timestamp").textContent = " ";
-  document.getElementById("statuscode").textContent = " ";
-  document.getElementById("images").innerHTML = " ";
-  document.getElementById("socialshares").innerHTML = " ";
-  document.getElementById("tags").innerHTML = " ";
-  document.getElementById("links").innerHTML = " ";
-  document.getElementById("userurl").innerHTML = " ";
-  document.getElementById("positive").innerHTML = " ";
-  document.getElementById("neutral").innerHTML = " ";
-  document.getElementById("negative").innerHTML = " ";
+  $("#title").empty();
+  $("#thumb").attr('src','');
+  $("#shortsummary").empty();
+  $("#longsummary").empty();
+  $("#fulltext").empty();
+  $("#timestamp").empty();
+  $("#statuscode").empty();
+  $("#images").empty();
+  $("#socialshares").empty();
+  $("#tags").empty();
+  $("#links").empty();
+  $("#userurl").empty();
+  $("#positive").empty();
+  $("#neutral").empty();
+  $("#negative").empty();
 };
-
-function removeHash () {
-    history.pushState("", document.title, window.location.pathname + window.location.search);
-}
 
 function finishTask() {
   numTasks--;
+  console.log(numTasks);
   if(numTasks <= 0) {
-    document.getElementById("overlay").classList.add("hidden");
-    document.getElementById("results").classList.remove("hidden");
-    // Scroll to results
-    location.hash = '#resultspage';
+    $("#overlay").addClass("hidden");
+    $("#fetch-spinner").addClass("hidden");
+    $("#results").removeClass("hidden");
+    // smooth scroll to results section
+    $('html, body').animate({
+      scrollTop: $("#resultspage").offset().top
+    }, 1000);
   }
 };
 
 function taskError() {
   numTasks = 0;
-  document.getElementById("overlay").classList.add("hidden");
-  document.getElementById("results").classList.add("hidden");
+  $("#overlay").addClass("hidden");
+  $("#fetch-spinner").addClass("hidden");
+  $("#results").addClass("hidden");
 };

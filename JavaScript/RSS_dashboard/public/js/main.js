@@ -9,8 +9,6 @@ var algorithms = {
   summarizer: '/nlp/Summarizer/0.1.6'
 };
 
-var httpRegex = new RegExp('^(http|https)://', 'i');
-
 /**
  * once DOM is ready, update vars amd set initial URL
  */
@@ -39,15 +37,6 @@ function displayError(response, errorMessage) {
     return true;
   }
   return false;
-}
-
-/**
- * ensure that a URL begins with http(s)://
- * @param url
- * @returns {string}
- */
-function prefixHttp(url) {
-  return httpRegex.test(url)?url:'http://'+url;
 }
 
 /**

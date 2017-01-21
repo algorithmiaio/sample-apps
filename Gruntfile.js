@@ -38,7 +38,7 @@ module.exports = function(grunt) {
   var templateConfig = {};
   var watchConfig = {
     templates: {
-      files: ['JavaScript/common/*.html','Gruntfile.js'],
+      files: ['JavaScript/common/**/*','Gruntfile.js'],
       options: { reload: true }
     }
   };

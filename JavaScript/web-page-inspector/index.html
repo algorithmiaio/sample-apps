@@ -38,18 +38,21 @@
 					<div class="card">
 						<h3 class="whitespace">Analyze a URL</h3>
 						<p class="whitespace-none">Paste the URL to an article to analyze it</p>
-						<form class="form-group" onsubmit="callAlgorithm(); return false;">
+						<form class="form-group dots-form" onsubmit="callAlgorithm(); return false;">
 							<input type="text" class="form-control" id="url" placeholder="http://thenewstack.io/algorithmia-new-algorithm-economy/">
-							<button id="analyze-button" class="btn btn-primary" type="button" onclick="callAlgorithm()">
-								<span class="fa fa-magic" aria-hidden="true"></span>
-								Analyze URL
+							<button id="analyze-button" class="btn btn-primary btn-dots" type="button" onclick="callAlgorithm()">
+								<span class="no-viz-off">
+									<span class="fa fa-magic" aria-hidden="true"></span>
+									Analyze URL
+								</span>
+								<div class="dots-container hidden">
+                                	<div class="dot dot1"></div>
+                                	<div class="dot dot2"></div>
+                                	<div class="dot dot3"></div>
+                                	<div class="dot dot4"></div>
+                            	</div>
 							</button>
-                            <div class="dots-container hidden">
-                                <div class="dot dot1"></div>
-                                <div class="dot dot2"></div>
-                                <div class="dot dot3"></div>
-                                <div class="dot dot4"></div>
-                            </div>
+                            
 						</form>
 						<div id="status-label"></div>
 						<h4 class="dark whitespace-sm">Or, try these sample articles:</h4>

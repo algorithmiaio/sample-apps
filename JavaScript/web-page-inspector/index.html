@@ -38,9 +38,9 @@
 					<div class="card">
 						<h3 class="whitespace">Analyze a URL</h3>
 						<p class="whitespace-none">Paste the URL to an article to analyze it</p>
-						<form class="form-group" onsubmit="callAlgorithm(); return false;">
+						<form class="form-group" onsubmit="analyzeUrl(); return false;">
 							<input type="text" class="form-control" id="url" placeholder="http://thenewstack.io/algorithmia-new-algorithm-economy/">
-							<button id="analyze-button" class="btn btn-primary" type="button" onclick="callAlgorithm()">
+							<button id="analyze-button" class="btn btn-primary" type="button" onclick="analyzeUrl()">
 								<span class="fa fa-magic" aria-hidden="true"></span>
 								Analyze URL
 							</button>
@@ -55,16 +55,16 @@
 						<h4 class="dark whitespace-sm">Or, try these sample articles:</h4>
 						<div class="row whitespace-none sample-images">
 							<div class="col-xs-3 col-sm-2 sample-image">
-								<a onclick="analyzeDefault('http://thenewstack.io/algorithmia-new-algorithm-economy/')"><img src="public/images/newstack.png"></a>
+								<a onclick="analyzeUrl('http://thenewstack.io/algorithmia-new-algorithm-economy/')"><img src="public/images/newstack.png"></a>
 							</div>
 							<div class="col-xs-3 col-sm-2 sample-image">
-								<a onclick="analyzeDefault('https://medium.com/emergent-future/machine-learning-trends-and-the-future-of-artificial-intelligence-2016-15c15cd6c129#.7vvstzebt')"><img src="public/images/machines.jpg"></a>
+								<a onclick="analyzeUrl('https://medium.com/emergent-future/machine-learning-trends-and-the-future-of-artificial-intelligence-2016-15c15cd6c129#.7vvstzebt')"><img src="public/images/machines.jpg"></a>
 							</div>
 							<div class="col-xs-3 col-sm-2 sample-image">
-								<a onclick="analyzeDefault('http://blog.algorithmia.com/predictive-algorithms-track-real-time-health-trends/')"><img src="public/images/predictive.jpg"></a>
+								<a onclick="analyzeUrl('http://blog.algorithmia.com/predictive-algorithms-track-real-time-health-trends/')"><img src="public/images/predictive.jpg"></a>
 							</div>
 							<div class="col-xs-3 col-sm-2 sample-image">
-								<a onclick="analyzeDefault('http://www.wired.com/2014/08/algorithmia/')"><img src="public/images/wired.jpg"></a>
+								<a onclick="analyzeUrl('http://www.wired.com/2014/08/algorithmia/')"><img src="public/images/wired.jpg"></a>
 							</div>
 						</div>
 					</div>

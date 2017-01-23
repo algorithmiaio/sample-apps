@@ -42,6 +42,9 @@
 .label-primary {
   background-color: #5000BE;
 }
+.label-default {
+  margin-right: 0.5em;
+}
 .tag-label {margin-bottom: 0;}
 span.label {
   font-size: .75rem;

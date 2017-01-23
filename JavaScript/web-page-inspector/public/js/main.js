@@ -135,9 +135,6 @@ var showResults = function(data){
 
   // reveal and smooth-scroll to results section
   endWait(true);
-  $('html, body').animate({
-    scrollTop: $("#resultspage").offset().top
-  }, 1000);
 
 };
 
@@ -156,8 +153,8 @@ var createSocialSection = function(title, body) {
  */
 var showWait = function() {
   $("#overlay").removeClass("hidden");
+  $("#analyze-button-text").addClass("no-viz");
   $(".dots-container").removeClass("hidden");
-  $("#analyze-button").addClass("hidden");
   $("#results").addClass("hidden");
   // Clear error messages
   $("#status-label").empty();
@@ -185,10 +182,13 @@ var showWait = function() {
  */
 var endWait = function(showResults) {
   $("#overlay").addClass("hidden");
+  $("#analyze-button-text").removeClass("no-viz");
   $(".dots-container").addClass("hidden");
-  $("#analyze-button").removeClass("hidden");
   if(showResults) {
     $("#results").removeClass("hidden");
+    $('html, body').animate({
+      scrollTop: $("#resultspage").offset().top
+    }, 1000);
   } else {
     $("#results").addClass("hidden");
   }

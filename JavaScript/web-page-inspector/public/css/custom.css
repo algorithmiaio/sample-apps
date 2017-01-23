@@ -50,27 +50,10 @@ span.label {
   font-size: .75rem;
   line-height: 2;
 }
-
-/* BTN DOTS */
-/* place on parent because dots are absolute positioned */
-.btn-dots {
-  position: relative;
-}
-/* No viz applied to btn text so that btn keeps original size */
-.no-viz {
-  visibility: hidden;
-}
-/* overwrite common properties to better position dots */
+/* Move dots down to be in middle of card */
 .dots-container {
-  top: 35%;
-  left: 20%;
-  transform: none;
+  top: 50%;
 }
-/* Change dot color because background is purple */
-.dot1 {background: #FFFFFF;}
-.dot2 {background: #773CC9;}
-.dot3 {background: #4500A4;}
-.dot4 {background: #35007E;}
 
 /* $MEDIA QUERIES */
 /* Extra small devices (phones, less than 768px) */

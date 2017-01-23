@@ -42,6 +42,9 @@
 .label-primary {
   background-color: #5000BE;
 }
+.label-default {
+  margin-right: 0.5em;
+}
 .tag-label {margin-bottom: 0;}
 span.label {
   font-size: .75rem;
@@ -67,7 +70,7 @@ span.label {
 .dot1 {background: #FFFFFF;}
 .dot2 {background: #773CC9;}
 .dot3 {background: #4500A4;}
-.dot4 {background: #35007E; }
+.dot4 {background: #35007E;}
 
 /* $MEDIA QUERIES */
 /* Extra small devices (phones, less than 768px) */

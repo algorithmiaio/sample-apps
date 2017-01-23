@@ -190,7 +190,7 @@ var startTask = function() {
 var finishTask = function() {
   numTasks--;
   if(numTasks <= 0) {
-    resetView();
+    resetView(true);
     // smooth scroll to results section
     $('html, body').animate({
       scrollTop: $("#resultspage").offset().top
@@ -198,11 +198,15 @@ var finishTask = function() {
   }
 };
 
-var resetView = function() {
+var resetView = function(showResults) {
   numTasks = 0;
   $("#overlay").addClass("hidden");
   $(".dots-container").addClass("hidden");
   $("#analyze-button").removeClass("hidden");
   $("#fetch-spinner").addClass("hidden");
-  $("#results").addClass("hidden");
+  if(showResults) {
+    $("#results").removeClass("hidden");
+  } else {
+    $("#results").addClass("hidden");
+  }
 };

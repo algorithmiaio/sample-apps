@@ -25,7 +25,7 @@ var ValidURL = function(url) {
   if(!isValidUrl(url)) {
     // Error Handling
     $("#status-label").html('<div class="alert alert-danger" role="alert">Please enter a valid URL.</div>');
-    taskError();
+    resetView();
   } else {
     console.log("URL is valid");
     // Call algorithm
@@ -44,7 +44,7 @@ var getMeta = function(url){
         // Error Handling
         var statusLabel = $("#status-label");
         statusLabel.html('<div class="alert alert-danger" role="alert">' + output.error.message + ' </div>');
-        taskError();
+        resetView();
       } else {
         // Add results to page
         addMeta(output.result);
@@ -163,6 +163,8 @@ var analyzeDefault = function(url) {
 var startTask = function() {
   numTasks++;
   $("#overlay").removeClass("hidden");
+  $(".dots-container").removeClass("hidden");
+  $("#analyze-button").addClass("hidden");
 
   // Clear error messages
   $("#status-label").empty();
@@ -187,11 +189,8 @@ var startTask = function() {
 
 var finishTask = function() {
   numTasks--;
-  console.log(numTasks);
   if(numTasks <= 0) {
-    $("#overlay").addClass("hidden");
-    $("#fetch-spinner").addClass("hidden");
-    $("#results").removeClass("hidden");
+    resetView();
     // smooth scroll to results section
     $('html, body').animate({
       scrollTop: $("#resultspage").offset().top
@@ -199,9 +198,11 @@ var finishTask = function() {
   }
 };
 
-var taskError = function() {
+var resetView = function() {
   numTasks = 0;
   $("#overlay").addClass("hidden");
+  $(".dots-container").addClass("hidden");
+  $("#analyze-button").removeClass("hidden");
   $("#fetch-spinner").addClass("hidden");
   $("#results").addClass("hidden");
 };

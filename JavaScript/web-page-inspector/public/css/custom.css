@@ -48,6 +48,14 @@ span.label {
   line-height: 2;
 }
 
+/* reposition dots container */
+.dots-container {
+	position: relative;
+	top: inherit;
+	left: inherit;
+	transform: none;
+}
+
 /* $MEDIA QUERIES */
 /* Extra small devices (phones, less than 768px) */
 /* This should be the default AKA no styles here */

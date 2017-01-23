@@ -63,7 +63,6 @@ var showResults = function(data){
 
   // Add Sentiment Analysis
   if (data.socialsentiment){
-    // console.log(data.socialsentiment[0].compound);
     var posi = (data.socialsentiment[0].positive * 100).toFixed(2);
     var negi = (data.socialsentiment[0].negative * 100).toFixed(2);
     posi = parseInt(posi,10);
@@ -101,7 +100,6 @@ var showResults = function(data){
 
   // Add social shares
   var shares = $("#socialshares");
-  console.log(data.socialshares);
   if (data.socialshares.facebook_likes > 0) {
     shares.append(createSocialSection("Facebook Likes: ", data.socialshares.facebook_likes));
   }
@@ -187,7 +185,7 @@ var endWait = function(showResults) {
   if(showResults) {
     $("#results").removeClass("hidden");
     $('html, body').animate({
-      scrollTop: $("#resultspage").offset().top
+      scrollTop: $("#results").offset().top
     }, 1000);
   } else {
     $("#results").addClass("hidden");

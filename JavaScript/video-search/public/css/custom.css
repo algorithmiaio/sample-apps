@@ -2,6 +2,7 @@
 .hero {
 	background: url(../images/camera-banner.jpg);
 	background-size: cover;
+	background-position: 0 50%;
 }
 h1 {font-size: 3rem;} /* To fit cleanly on smaller screens */
 /* FORM */
@@ -9,8 +10,8 @@ h1 {font-size: 3rem;} /* To fit cleanly on smaller screens */
 
 /* For input bar with btn */
 form {
-    font-size:      1rem;
-    min-height:         46px;
+    font-size:  1rem;
+    min-height: 46px;
 }
 form:focus {
     border: 1px solid #5000BE;
@@ -29,13 +30,13 @@ form .btn {margin-bottom: 0;}
 }
 #search-results > li {
 	padding-bottom: 2rem;
-	margin-bottom: 3rem;
-	border-bottom: 1px solid rgba(0,0,0,.12);
+	margin-bottom:  3rem;
+	border-bottom:  1px solid rgba(0,0,0,.12);
 }
 #search-results > li:last-of-type {
 	padding-bottom: 0;
-	margin-bottom: 0;
-	border-bottom: none;
+	margin-bottom:  0;
+	border-bottom:  none;
 }
 .video-details {
 	list-style: none;
@@ -53,8 +54,8 @@ form .btn {margin-bottom: 0;}
 }
 .video-details li  {
 	padding-bottom: .5rem;
-	margin-bottom: .5rem;
-	border-bottom: 1px solid rgba(0,0,0,.12);}
+	margin-bottom:  .5rem;
+	border-bottom:   1px solid rgba(0,0,0,.12);}
 .video-details li:last-of-type {margin-bottom: 0; border-bottom: none;}
  /* For smaller screens */
 .search-form input {width: 100%; margin-bottom: .5rem;}
@@ -86,6 +87,28 @@ form .btn {margin-bottom: 0;}
 	font-size: 1.25rem;
 	font-weight: 700;
 }
+
+/* BTN DOTS */
+/* place on btn because dots are absolute positioned */
+.btn-dots {
+  position: relative;
+  min-width: 155px; /* Any smaller and the dots collapse */
+}
+/* No viz applied to btn text so that btn keeps original size */
+.no-viz {
+  visibility: hidden;
+}
+/* overwrite common properties to better position dots */
+.dots-container {
+  top: 35%;
+  left: 20%;
+  transform: none;
+}
+/* Change dot color because background is purple */
+.dot1 {background: #FFFFFF;}
+.dot2 {background: #773CC9;}
+.dot3 {background: #4500A4;}
+.dot4 {background: #35007E;}
 
 /* $MEDIA QUERIES */
 /* Extra small devices (phones, less than 768px) */

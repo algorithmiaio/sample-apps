@@ -1,3 +1,5 @@
+/* Site-mapper */
+
 img.placeholder {
   width: auto;
   height: 100%;
@@ -81,3 +83,25 @@ svg.viz {
   display: inline-block;
   margin: 2px;
 }
+
+/* BTN DOTS */
+/* place on btn because dots are absolute positioned */
+.btn-dots {
+  position: relative;
+  min-width: 155px; /* Any smaller and the dots collapse */
+}
+/* No viz applied to btn text so that btn keeps original size */
+.no-viz {
+  visibility: hidden;
+}
+/* overwrite common properties to better position dots */
+.dots-container {
+  top: 35%;
+  left: 20%;
+  transform: none;
+}
+/* Change dot color because background is purple */
+.dot1 {background: #FFFFFF;}
+.dot2 {background: #773CC9;}
+.dot3 {background: #4500A4;}
+.dot4 {background: #35007E;}

@@ -9,7 +9,7 @@ $(document).ready(function() {
   setInviteCode('analyzeurl');
 });
 
-function callAlgorithm() {
+var callAlgorithm = function() {
   // begin tasks
   startTask();
   // Get the img URL
@@ -21,7 +21,7 @@ function callAlgorithm() {
   ValidURL(url);
 };
 
-function ValidURL(url) {
+var ValidURL = function(url) {
   if(!isValidUrl(url)) {
     // Error Handling
     $("#status-label").html('<div class="alert alert-danger" role="alert">Please enter a valid URL.</div>');
@@ -31,9 +31,9 @@ function ValidURL(url) {
     // Call algorithm
     getMeta(url);
   }
-}
+};
 
-function getMeta(url){
+var getMeta = function(url){
   console.log("calling algorithm")
   Algorithmia.client(Algorithmia.api_key)
    .algo("algo://outofstep/MegaAnalyzeURL/0.1.6")
@@ -52,7 +52,7 @@ function getMeta(url){
    });
 };
 
-function addMeta(data){
+var addMeta = function(data){
   console.log("Adding Metadata");
   $("#code").text(JSON.stringify(data, null, 4));
   hljs.highlightBlock($("#code")[0]);
@@ -155,12 +155,12 @@ function addMeta(data){
   finishTask();
 };
 
-function analyzeDefault(url) {
+var analyzeDefault = function(url) {
 	$("#url").val(url);
 	callAlgorithm();
-}
+};
 
-function startTask() {
+var startTask = function() {
   numTasks++;
   $("#overlay").removeClass("hidden");
 
@@ -185,7 +185,7 @@ function startTask() {
   $("#negative").empty();
 };
 
-function finishTask() {
+var finishTask = function() {
   numTasks--;
   console.log(numTasks);
   if(numTasks <= 0) {
@@ -199,7 +199,7 @@ function finishTask() {
   }
 };
 
-function taskError() {
+var taskError = function() {
   numTasks = 0;
   $("#overlay").addClass("hidden");
   $("#fetch-spinner").addClass("hidden");

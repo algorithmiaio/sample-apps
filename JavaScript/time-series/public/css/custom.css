@@ -4,6 +4,7 @@ h1 {font-size: 2.5rem;}
     background-image: url(../images/timeseries.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: 0 50%;
 }
 
 .variable-select {

@@ -1,6 +1,7 @@
 .hero {
     background-image: url(../images/deep-learning-place-classifier-hero.jpg);
     background-size: cover;
+    background-position: 0 50%;
 }
 
 #twoface-demo canvas {

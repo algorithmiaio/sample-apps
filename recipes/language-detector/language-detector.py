@@ -7,8 +7,8 @@ client = Algorithmia.client("your_api_key")
 
 def detect_language(text):
     """detect the language of a piece of text and return the ISO 639 language code"""
-    algo = client.algo('miguelher/LanguageDetector/0.1.0')
-    return algo.pipe(text).result['result']
+    algo = client.algo('nlp/LanguageIdentification/1.0.0')
+    return algo.pipe({'sentence':text}).result[0]['language']
 
 def extract_text(filename):
     """Extract and return the text from a document"""
@@ -27,5 +27,6 @@ docdir = '/some/file/path/'
 for filename in listdir(docdir):
   if re.match('.*\.txt|.*\.docx', filename):
     lang = detect_language(extract_text(path.join(docdir,filename)))
-    mkdir(path.join(docdir,lang))
+    if not path.exists(path.join(docdir,lang)):
+        mkdir(path.join(docdir,lang))
     rename(path.join(docdir,filename),path.join(docdir,lang,filename))

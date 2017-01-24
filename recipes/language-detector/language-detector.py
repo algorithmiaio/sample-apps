@@ -6,21 +6,21 @@ import re
 client = Algorithmia.client("your_api_key")
 
 def detect_language(text):
-    """Retrieve text content from URL."""
-    algo = client.algo("miguelher/LanguageDetector/0.1.0")
-    return algo.pipe(text).result
+    """detect the language of a piece of text and return the ISO 639 language code"""
+    algo = client.algo('miguelher/LanguageDetector/0.1.0')
+    return algo.pipe(text).result['result']
 
 def extract_text(filename):
     """Extract and return the text from a document"""
-    if filename.endswith('.doc'):
+    if filename.endswith('.docx'):
         document = docx.Document(filename)
-        text = '\n\n'.join([
-            paragraph.text.encode('utf-8') for paragraph in document.paragraphs
+        text = '\n'.join([
+            paragraph.text for paragraph in document.paragraphs
         ])
         return text
     else:
         with open(filename) as f:
-            return f.readlines()
+            return f.read()
 
 docdir = '/some/file/path/'
 

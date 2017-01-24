@@ -26,9 +26,14 @@ def extract_text(filename):
 
 docdir = '/some/file/path/'
 
+counts = {}
+
 for filename in listdir(docdir):
   if re.match('.*\.txt|.*\.docx', filename):
     lang = detect_language(extract_text(path.join(docdir,filename)))
     if not path.exists(path.join(docdir,lang)):
         mkdir(path.join(docdir,lang))
     rename(path.join(docdir,filename),path.join(docdir,lang,filename))
+    counts[lang] = counts[lang]+1 if lang in counts else 1
+
+print counts

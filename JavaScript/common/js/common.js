@@ -50,6 +50,8 @@ var requireHttp = function(elem) {
       elem.val('http://');
     } else if (doubleHttpRegex.test(val)) {
       elem.val(val.replace(doubleHttpRegex,'http$1:/'));
+    } else if (!prefixHttpRegex.test(val)) {
+      elem.val('http://'+val)
     }
   };
   elem.bind('paste', function (e) {

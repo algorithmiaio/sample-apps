@@ -7,6 +7,7 @@ var algorithmAutotag = 'outofstep/MegaAnalyzeURL/0.1.6';
  */
 $(document).ready(function() {
   setInviteCode('analyzeurl');
+  requireHttp($('#url'));
 });
 
 /**

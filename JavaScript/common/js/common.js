@@ -1,5 +1,7 @@
 var prefixHttpRegex = new RegExp('^(http|https)://', 'i');
 
+var doubleHttpRegex = new RegExp('^http:/+http(s)*:/');
+
 var validUrlRegex = new RegExp('^(https?:\\/\\/)?' + // protocol
   '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' + // domain name
   '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
@@ -36,3 +38,24 @@ function prefixHttp(url) {
 function isValidUrl(url) {
   return validUrlRegex.test(url);
 }
+
+/***
+ * add http:// prefix to an input element if empty, and clean up "http://http"
+ * @param elem jQuery element
+ */
+var requireHttp = function(elem) {
+  var requireHttpHandler = function(elem) {
+    var val = elem.val().trim();
+    if (val=='') {
+      elem.val('http://');
+    } else if (doubleHttpRegex.test(val)) {
+      elem.val(val.replace(doubleHttpRegex,'http$1:/'));
+    }
+  };
+  elem.bind('paste', function (e) {
+    setTimeout(function(){requireHttpHandler(elem)});
+  });
+  elem.bind('click keypress', function (e) {
+    requireHttpHandler(elem);
+  });
+};

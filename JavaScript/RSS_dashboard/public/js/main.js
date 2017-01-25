@@ -15,6 +15,7 @@ var algorithms = {
 $(document).ready(function() {
   setInviteCode('rss');
   updateRssUrl();
+  requireHttp($('#rssUrl'));
 });
 
 /**
@@ -63,7 +64,7 @@ var processFeed = function() {
   $('#status-label').empty();
   $('#fetch-spinner').removeClass('hidden');
   // query RSS scraper algorithm with selected feed URL
-  var feedUrl = prefixHttp($('#rssUrl').val());
+  var feedUrl = $('#rssUrl').val();
   algoClient.algo(algorithms.scraperss).pipe(feedUrl).then(function(response) {
     $('#fetch-spinner').addClass('hidden');
     if (displayError(response, 'Failed to load RSS feed; please check that it is a valid URL')) {return;}

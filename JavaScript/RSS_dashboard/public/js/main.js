@@ -63,10 +63,14 @@ var processFeed = function() {
   $('#results').empty();
   $('#status-label').empty();
   $('#fetch-spinner').removeClass('hidden');
+  $('#rssSelector').attr('disabled','disabled');
+  $('#rssUrl').attr('disabled','disabled');
   // query RSS scraper algorithm with selected feed URL
   var feedUrl = $('#rssUrl').val();
   algoClient.algo(algorithms.scraperss).pipe(feedUrl).then(function(response) {
     $('#fetch-spinner').addClass('hidden');
+    $('#rssSelector').removeAttr('disabled');
+    $('#rssUrl').removeAttr('disabled');
     if (displayError(response, 'Failed to load RSS feed; please check that it is a valid URL')) {return;}
     $('#resultsWrapper').removeClass('hidden');
     // smooth scroll to results section

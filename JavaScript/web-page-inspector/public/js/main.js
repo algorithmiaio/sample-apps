@@ -41,6 +41,10 @@ var analyzeUrl = function(url) {
   }
 };
 
+/**
+ * render results HTML
+ * @param data
+ */
 var showResults = function(data){
 
   // Add raw JSON response to results section

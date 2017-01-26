@@ -35,6 +35,11 @@ function prefixHttp(url) {
   return prefixHttpRegex.test(url)?url:'http://'+url;
 }
 
+/**
+ * does this look like a URL?
+ * @param url
+ * @returns {boolean}
+ */
 function isValidUrl(url) {
   return validUrlRegex.test(url);
 }
@@ -61,3 +66,16 @@ var requireHttp = function(elem) {
     requireHttpHandler(elem);
   });
 };
+
+/**
+ * left-pad a number
+ * @param n original number
+ * @param width total number of characters desired
+ * @param padchar (optional) character with which to pad, else '0'
+ * @returns {*}
+ */
+function padleft(n, width, padchar) {
+  padchar = padchar || '0';
+  n = n + '';
+  return n.length >= width ? n : new Array(width - n.length + 1).join(padchar) + n;
+}

@@ -1,190 +1,268 @@
-// ********** THIS WAS COPIED FROM THE VIDEO SEARCH DEMO ***********
+// init the Algorithmia client with your API key from https://algorithmia.com/user#credentials
+var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
+var algorithmBuildingPermits = 'ETL/GetBuildingPermitData/0.1.5';
 
-// clouds https://images.unsplash.com/16/unsplash_525a7e89953d1_1.JPG
-// hills https://images.unsplash.com/29/cloudy-hills.jpg
-// rock https://images.unsplash.com/reserve/yZfr4jmxQyuaE132MWZm_stagnes.jpg
-// paris https://images.unsplash.com/33/YOfYx7zhTvYBGYs6g83s_IMG_8643.jpg
+/**
+ * once DOM is ready, update vars
+ */
+$(document).ready(function() {
+  setInviteCode('timeseries');
+});
 
-window.Algorithmia = window.Algorithmia || {};
-Algorithmia.api_key = "sim4m8jnVOF3086ujBXdiYteIS01";
-var numTasks = 0;
 
-function callAlgorithm() {
-  var statusLabel = document.getElementById("status-label");
-  statusLabel.innerHTML = "";
+/**
+ * TBD: decide whether to stay on Angular1 or port to jQuery for simplicity
+ */
+(function() {
+  var app, cities, copy, defaultOptions, defaultSeries, transpose, updateViz;
 
-  // Get the search query URL
-  var query = document.getElementById("search-query").value.trim();
+  app = angular.module("algorithmia");
 
-  if(typeof(query) == "string" && query !== "") {
-    startTask();
-    search(query);
-  }
-
-};
-
-function search(query) {
-  console.log("Searching for tag", query);
-
-  // renderSearchResults([
-  //   {title: "Deadmau5 - Ghosts N Stuff", videoId: "3Gb3faOzvBk", firstFrame: 10, lastFrame: 100},
-  //   {title: "Sean Mackey - Discover", videoId: "Ts2I4ffd4p8", firstFrame: 20, lastFrame: 200}
-  // ]);
-  // finishTask();
-
-  var algoInput = {
-    "collections": ["data://demo/VideoSearchDemo"],
-    "keyword": query,
-    "minConfidence": 0.15
-  };
-  Algorithmia.client(Algorithmia.api_key)
-    .algo("algo://algorithmiahq/VideoClassificationDemo/0.5.9")
-    .pipe(algoInput)
-    .then(function(output) {
-      if(output.error) {
-        // Error Handling
-        var statusLabel = document.getElementById("status-label")
-        statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh Oh! Something went wrong: ' + output.error.message + ' </div>';
-        taskError();
-      } else {
-        console.log("got output", output.result);
-
-        // Render search results
-        try {
-          renderSearchResults(output.result);
-        } catch(e) {
-          console.log("error rendering", e);
-        }
-        finishTask();
+  defaultOptions = {
+    width: $("#tsControl").width(),
+    height: 360,
+    chartArea: {
+      width: "80%"
+    },
+    legend: {
+      alignment: "end",
+      position: 'top'
+    },
+    animation: {
+      duration: 500,
+      easing: 'inAndOut',
+      startup: true
+    },
+    vAxes: {
+      0: {
+        title: "Permits"
       }
-    });
-}
-
-function renderSearchResults(results) {
-  console.log("renderSearchResults", results);
-  var output = document.getElementById("search-results");
-  output.innerHTML = "";
-  for(var i = 0; i < results.length; i++) {
-    var doc = results[i];
-    console.log("renderSearchResults doc", doc);
-    var li = document.createElement("li");
-
-    var thumb = document.createElement("img");
-    thumb.src = "http://img.youtube.com/vi/" + doc.videoId + "/0.jpg"
-    thumb.classList.add("thumb")
-
-    var info = document.createElement("div");
-    info.classList.add("video-info");
-
-    // Main youtube link
-    var link = document.createElement("a");
-    link.innerText = doc.title;
-    link.onclick = jumpToVideo(doc, 0);
-    var linkDiv = document.createElement("div");
-    linkDiv.classList.add("video-title");
-    linkDiv.appendChild(link);
-    info.appendChild(linkDiv);
-
-    // Stats and metadata
-    var linkFirst = document.createElement("a");
-    linkFirst.innerText = formatTime(doc.startFrame);
-    linkFirst.onclick = jumpToVideo(doc, doc.startFrame);
-    var linkLast = document.createElement("a");
-    linkLast.innerText = formatTime(doc.stopFrame);
-    linkLast.onclick = jumpToVideo(doc, doc.stopFrame);
-
-    info.appendChild(document.createTextNode("Appearance: "));
-    info.appendChild(linkFirst);
-    info.appendChild(document.createTextNode(" - "));
-    info.appendChild(linkLast);
-    // info.appendChild(document.createTextNode(")"));
-
-    // Score
-    var scoreDiv = document.createElement("div");
-    scoreDiv.appendChild(document.createTextNode("Score: " + doc.avgConfidence.toFixed(3)));
-    info.appendChild(scoreDiv);
-
-    li.appendChild(thumb);
-    li.appendChild(info);
-    output.appendChild(li);
-  }
-}
-
-function formatTime(seconds) {
-  var mod60 = Math.floor(seconds % 60);
-  if (mod60 < 10) {
-    mod60 = "0" + mod60;
-  }
-  return Math.floor(seconds / 60) + ":" + mod60;
-}
-
-function jumpToVideo(doc, time) {
-  return function() {
-    console.log("Jumping to " + doc.title + " @ " + time);
-    player.loadVideoById(doc.videoId);
-    player.seekTo(time);
-    player.playVideo();
-  };
-}
-
-function startTask() {
-  numTasks++;
-  document.getElementById("overlay").classList.remove("hidden");
-}
-
-function finishTask() {
-  numTasks--;
-  if(numTasks <= 0) {
-    document.getElementById("overlay").classList.add("hidden");
-    document.getElementById("explainer").classList.add("hidden");
-    document.getElementById("results").classList.remove("hidden");
-  }
-}
-
-function taskError() {
-  numTasks = 0;
-  document.getElementById("overlay").classList.add("hidden");
-  document.getElementById("explainer").classList.add("display");
-  document.getElementById("explainer").classList.remove("hidden");
-  document.getElementById("results").classList.add("hidden");
-}
-
-document.getElementById("search-form").onsubmit = function(e) {
-  console.log("onsubmit");
-  e.preventDefault();
-  callAlgorithm();
-  return false;
-}
-
-
-window.player = null;
-
-// 3. This function creates an <iframe> (and YouTube player)
-//    after the API code downloads.
-function onYouTubeIframeAPIReady() {
-  console.log("YT ready");
-  player = new YT.Player('player', {
-    // height: '390',
-    // width: '640',
-    // videoId: '3Gb3faOzvBk',
-    events: {
-      'onReady': onPlayerReady,
-      'onStateChange': onPlayerStateChange
+    },
+    series: {
+      0: {
+        color: "#f66",
+        pointSize: 1
+      },
+      1: {
+        color: "#f90",
+        pointSize: 4
+      },
+      2: {
+        color: "#5000be",
+        pointSize: 4
+      }
     }
+  };
+
+  copy = function(src) {
+    return JSON.parse(JSON.stringify(src));
+  };
+
+  defaultSeries = [[], [], [], []];
+
+  cities = {
+    LasVegas: {
+      "url": "data://etl/socrata/Building_Permits_LasVegas.csv",
+      "colName": "PROJECT_ISSDTTM",
+      "dateFormat": "%d/%m/%Y %I:%M:%S %p",
+      "threshold": 10
+    },
+    SantaRosa: {
+      "url": "data://etl/socrata/Building_Permits__ALL_SantaRosa.csv",
+      "colName": "Issued Date",
+      "dateFormat": "%m/%d/%Y %I:%M:%S %p",
+      "threshold": 10
+    },
+    FortWorth: {
+      "url": "data://etl/socrata/Development_Permits_FtWorth.csv",
+      "colName": "Filing Date",
+      "dateFormat": "%m/%d/%Y",
+      "threshold": 10
+    },
+    NewYorkCity: {
+      "url": "data://etl/socrata/DOB_Permit_Issuance_NYC.csv",
+      "colName": "Issuance Date",
+      "dateFormat": "%m/%d/%Y %I:%M:%S %p",
+      "threshold": 12000
+    },
+    Boston: {
+      "url": "data://etl/socrata/Approved_Building_Permits_Boston.csv",
+      "colName": "ISSUED_DATE",
+      "dateFormat": "%m/%d/%Y %I:%M:%S %p",
+      "threshold": 10
+    },
+    LosAngeles: {
+      "url": "data://etl/socrata/Building_and_Safety_Permit_Information_LA.csv",
+      "colName": "Issue Date",
+      "dateFormat": "%m/%d/%Y",
+      "threshold": 10
+    },
+    Edmondton: {
+      "url": "data://etl/socrata/Edmonton.csv",
+      "colName": "Issue Date",
+      "dateFormat": "%m/%d/%Y",
+      "threshold": 10
+    }
+  };
+
+  app.controller("TimeSeriesControl", function($scope, $http) {
+    var algoClient;
+    $scope.headers = ['Time', 'Value'];
+    $scope.tsOptions = defaultOptions;
+    $scope.tsData = defaultSeries;
+    $scope.dataSource = "Edmonton";
+    $scope.dataFilter1 = "/util/Echo";
+    $scope.dataFilter2 = "/util/Echo";
+    $scope.dataAnalysis = "/timeseries/Forecast";
+    algoClient = Algorithmia.client(Algorithmia.demo.demo_api_key, "https://api.algorithmia.com/v1/web/algo");
+    $scope.analyze = function() {
+      if (!$scope.dataSource) {
+        return;
+      }
+      console.log("Fetching data...", $scope.dataSource);
+      algoClient.algo(algorithmBuildingPermits).pipe($scope.dataSource).then(function(result1) {
+        var timeseries, timestamps;
+        if (!result1.error) {
+          timestamps = result1.result[0].map(function(ts) {
+            return new Date(ts.replace(" ", "T"));
+          });
+          timeseries = result1.result[1];
+          updateViz(timestamps, timeseries, [], []);
+          console.log("Filtering1...", $scope.dataFilter1);
+          return algoClient.algo($scope.dataFilter1).pipe(timeseries).then(function(result2) {
+            var timeseriesFiltered1;
+            if (!result2.error) {
+              timeseriesFiltered1 = result2.result;
+              updateViz(timestamps, timeseries, timeseriesFiltered1, []);
+              console.log("Filtering2...", $scope.dataFilter2);
+              return algoClient.algo($scope.dataFilter2).pipe(timeseriesFiltered1).then(function(result3) {
+                var timeseriesFiltered2;
+                if (!result3.error) {
+                  timeseriesFiltered2 = result3.result;
+                  updateViz(timestamps, timeseries, timeseriesFiltered2, []);
+                  console.log("Analyzing...", $scope.dataAnalysis);
+                  return algoClient.algo($scope.dataAnalysis).pipe(timeseriesFiltered2).then(function(result4) {
+                    var dataSize, forecastSize, i, lastDate, timeseriesAnalysis, _i, _ref;
+                    if (!result4.error) {
+                      timeseriesAnalysis = result4.result;
+                      if ($scope.dataAnalysis === "/timeseries/Forecast") {
+                        dataSize = timestamps.length;
+                        forecastSize = timeseriesAnalysis.length;
+                        timeseriesAnalysis = [];
+                        lastDate = timestamps[timestamps.length - 1];
+                        for (i = _i = 0, _ref = dataSize + forecastSize - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
+                          if (i < dataSize) {
+                            timeseriesAnalysis[i] = null;
+                          } else {
+                            timeseriesAnalysis[i] = result4.result[i - dataSize];
+                            timestamps[i] = new Date(lastDate);
+                            timestamps[i].setMonth(lastDate.getMonth() + i - dataSize + 1);
+                          }
+                        }
+                      }
+                      $scope.$apply(function() {
+                        if ($scope.dataAnalysis === "/timeseries/AutoCorrelate") {
+                          $scope.tsOptions = copy(defaultOptions);
+                          $scope.tsOptions.series[2].targetAxisIndex = 1;
+                          return $scope.tsOptions.vAxes[1] = {
+                            textPosition: 'none'
+                          };
+                        } else {
+                          return $scope.tsOptions = defaultOptions;
+                        }
+                      });
+                      updateViz(timestamps, timeseries, timeseriesFiltered2, timeseriesAnalysis);
+                      return console.log("Analysis", timeseriesAnalysis);
+                    } else {
+                      console.error("Failed to analyze data", result4.error);
+                      return $scope.errorMessage = "Failed to analyze data";
+                    }
+                  });
+                } else {
+                  console.error("Failed to filter2 data", result3.error);
+                  return $scope.errorMessage = "Failed to filter2 data";
+                }
+              });
+            } else {
+              console.error("Failed to filter1 data", result2.error);
+              return $scope.errorMessage = "Failed to filter1 data";
+            }
+          });
+        } else {
+          console.error("Failed to load data", result1.error);
+          return $scope.errorMessage = "Failed to load data";
+        }
+      });
+    };
   });
-}
 
-// 4. The API will call this function when the video player is ready.
-function onPlayerReady(event) {
-  console.log("player ready");
-  // event.target.playVideo();
-}
+  app.directive("timeseriesChart", function() {
+    return {
+      restrict: 'E',
+      scope: {
+        headers: '=',
+        data: '=',
+        options: '='
+      },
+      link: function(lscope, element, attrs, controller) {
+        var chart, redraw;
+        chart = new google.visualization.ScatterChart(element[0]);
+        redraw = function(scope, element) {
+          var chartdata, headerWrapper, tsData;
+          if (scope.headers && scope.data && scope.data.length > 0) {
+            headerWrapper = [scope.headers];
+            tsData = (function() {
+              if (typeof scope.data === "string") {
+                try {
+                  return JSON.parse(scope.data);
+                } catch (_error) {
+                  return defaultSeries;
+                }
+              } else {
+                return scope.data;
+              }
+            })();
+            tsData = transpose(tsData);
+            chartdata = new google.visualization.DataTable();
+            chartdata.addColumn("date", "Date");
+            chartdata.addColumn("number", "Raw");
+            chartdata.addColumn("number", "Filtered");
+            chartdata.addColumn("number", "Analysis");
+            chartdata.addRows(tsData);
+            chart.draw(chartdata, scope.options);
+          }
+        };
+        lscope.$watch('data', (function(newValue) {
+          return redraw(lscope, element);
+        }), true);
+        lscope.$watch('headers', (function(newValue) {
+          return redraw(lscope, element);
+        }), true);
+        lscope.$watch('options', (function(newValue) {
+          return redraw(lscope, element);
+        }), true);
+      },
+      template: '<div></div>'
+    };
+  });
 
-// 5. The API calls this function when the player's state changes.
-//    The function indicates that when playing a video (state=1),
-//    the player should play for six seconds and then stop.
-function onPlayerStateChange(event) {
-  // if (event.data == YT.PlayerState.PLAYING &&) {
-  //   setTimeout(stopVideo, 6000);
-  // }
-}
+  transpose = function(arr) {
+    return Object.keys(arr[0]).map(function(col) {
+      return arr.map(function(row) {
+        return row[col];
+      });
+    });
+  };
+
+  updateViz = function(labels, raw, filtered, analysis) {
+    var data, tsScope;
+    if (typeof data === !"string") {
+      data = JSON.stringify(data);
+    }
+    tsScope = angular.element("#tsControl").scope();
+    tsScope.$apply(function() {
+      return tsScope.tsData = [labels, raw, filtered, analysis];
+    });
+  };
+
+}).call(this);

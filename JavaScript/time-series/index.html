@@ -47,11 +47,11 @@
 			</div>
 	    </div>
 
-		<div id="tsControl">
+		<div id="timeseries-controls">
 		    <div class="row row-sm">
 			    <div class="col-xs-6 col-sm-3 variable-select">
 			      <h3>Data Source</h3>
-			      <select class="form-control" id="dataSource" onchange="analyze()">
+			      <select class="form-control" id="dataSource" onchange="startAnalysis()">
 			        <option value="Los Angeles">Los Angeles, CA</option>
 			        <option value="Boston">Boston, MA</option>
 			        <option value="Santa Rosa">Santa Rosa, CA</option>
@@ -62,7 +62,7 @@
 			    </div>
 			    <div class="col-xs-6 col-sm-3 variable-select">
 			      <h3>Analysis</h3>
-			      <select class="form-control" id="dataAnalysis" onchange="analyze()">
+			      <select class="form-control" id="dataAnalysis" onchange="startAnalysis()">
 			        <option value="/timeseries/Forecast">Forecast</option>
 			        <option value="/timeseries/OutlierDetection">Outlier Detection</option>
 			        <option value="/timeseries/AutoCorrelate">Auto Correlate</option>
@@ -70,7 +70,7 @@
 			    </div>
 		    	<div class="col-xs-6 col-sm-3 variable-select">
 				    <h4 class="whitespace-sm">Filter 1</h4>
-				    <select class="form-control" id="dataFilter1" onchange="analyze()">
+				    <select class="form-control" id="dataFilter1" onchange="startAnalysis()">
 				    	<option value="/util/Echo">None</option>
 				        <option value="/timeseries/LinearDetrend">Linear Detrend</option>
 				        <option value="/timeseries/RemoveSeasonality">Remove Seasonality</option>
@@ -80,7 +80,7 @@
 		
 			    <div class="col-xs-6 col-sm-3 variable-select">
 			      <h4 class="whitespace-sm">Filter 2</h4>
-			      <select class="form-control" id="dataFilter2" onchange="analyze()">
+			      <select class="form-control" id="dataFilter2" onchange="startAnalysis()">
 			        <option value="/util/Echo">None</option>
 			        <option value="/timeseries/LinearDetrend">Linear Detrend</option>
 			        <option value="/timeseries/RemoveSeasonality">Remove Seasonality</option>
@@ -95,12 +95,7 @@
 
 	  		<div class="row row-sm">
 				<div class="col-md-12">
-				    <div class="viz-main">
-				    	<!-- PLACEHOLDER IMG -->
-				    	<!--<img src="public/images/timeseries_placeholder.png" class="img-placeholder">-->
-				    	<timeseries-chart data="tsData" options="tsOptions" headers="headers" />
-                        <div id="timeseries-chart"></div>
-				    </div>
+                    <div id="timeseries-chart"></div>
 			    </div>
 	    	</div>
 		</div>

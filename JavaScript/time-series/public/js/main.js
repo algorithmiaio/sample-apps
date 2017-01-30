@@ -10,11 +10,11 @@ var chart, chartOptions;
 $(document).ready(function() {
   setInviteCode('timeseries');
   chart = new google.visualization.ScatterChart($('#timeseries-chart')[0]);
-  analyze();
+  startAnalysis();
 });
 
 var defaultOptions = {
-  width: $("#tsControl").width(),
+  width: $("#timeseries-controls").width(),
   height: 360,
   chartArea: {
     width: "80%"
@@ -49,10 +49,9 @@ var defaultOptions = {
   }
 };
 
-var analyze = function() {
+var startAnalysis = function() {
   $('#errorMessage').empty();
   chartOptions = defaultOptions;
-  console.log("Fetching data...", $('#dataSource').val());
   algoClient.algo(algorithmBuildingPermits).pipe($('#dataSource').val()).then(function(result1) {
     var timeseries, timestamps;
     if (!result1.error) {
@@ -61,14 +60,12 @@ var analyze = function() {
       });
       timeseries = result1.result[1];
       updateViz(timestamps, timeseries, [], []);
-      console.log("Filtering1...", $('#dataFilter1').val());
       return algoClient.algo($('#dataFilter1').val()).pipe(timeseries).then(function(result2) {
         var timeseriesFiltered1;
         if (!result2.error) {
           timeseriesFiltered1 = result2.result;
           updateViz(timestamps, timeseries, timeseriesFiltered1, []);
-          console.log("Filtering2...", $('#dataFilter2').val());
-          return algoClient.algo($('#dataFilter1').val()).pipe(timeseriesFiltered1).then(function(result3) {
+          return algoClient.algo($('#dataFilter2').val()).pipe(timeseriesFiltered1).then(function(result3) {
             var timeseriesFiltered2;
             if (!result3.error) {
               timeseriesFiltered2 = result3.result;
@@ -102,27 +99,25 @@ var analyze = function() {
                   updateViz(timestamps, timeseries, timeseriesFiltered2, timeseriesAnalysis);
                   return console.log("Analysis", timeseriesAnalysis);
                 } else {
-                  console.error(result4.error);
-                  return showError("Failed to analyze data");
+                  return showError("Failed to analyze data", result4.error);
                 }
               });
             } else {
-              console.error(result3.error);
-              return showError("Failed to filter2 data");
+              return showError("Failed to filter data", result3.error);
             }
           });
         } else {
-          console.error(result2.error);
-          return showError("Failed to filter1 data");
+          return showError("Failed to filter data", result2.error);
         }
       });
     } else {
-      console.error(result1.error);
-      return showError("Failed to load data");
+      return showError("Failed to load data", result1.error);
     }
   });
 };
-function showError(errMsg) {
+
+function showError(errMsg, err) {
+  console.error(errMsg, err);
   $('#errorMessage').html('<i class="fa fa-warning text-danger"></i>' + errMsg);
 }
 

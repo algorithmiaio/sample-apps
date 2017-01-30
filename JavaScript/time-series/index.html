@@ -89,18 +89,17 @@
 			    </div>
 			</div>
 
-<!-- 		<div>
-		      <span class="aspinner algo-spinner demo-spinner"></span>
-		      <i class="fa fa-warning text-danger" ng-if="errorMessage" ng-cloak></i>
-		      <span class="text-danger" ng-bind="errorMessage"></span>
-	    	</div> -->
+ 		<div>
+		      <span class="text-danger" id="errorMessage"></span>
+        </div>
 
 	  		<div class="row row-sm">
 				<div class="col-md-12">
 				    <div class="viz-main">
 				    	<!-- PLACEHOLDER IMG -->
-				    	<img src="public/images/timeseries_placeholder.png" class="img-placeholder">
+				    	<!--<img src="public/images/timeseries_placeholder.png" class="img-placeholder">-->
 				    	<timeseries-chart data="tsData" options="tsOptions" headers="headers" />
+                        <div id="timeseries-chart"></div>
 				    </div>
 			    </div>
 	    	</div>

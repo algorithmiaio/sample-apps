@@ -2,21 +2,18 @@
 var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
 var algorithmBuildingPermits = 'ETL/GetBuildingPermitData/0.1.5';
 
+var chart, chartOptions;
+
 /**
  * once DOM is ready, update vars
  */
 $(document).ready(function() {
   setInviteCode('timeseries');
+  chart = new google.visualization.ScatterChart($('#timeseries-chart')[0]);
   analyze();
 });
 
-
-/**
- * TBD: decide whether to stay on Angular1 or port to jQuery for simplicity
- */
-var app, cities, copy, defaultOptions, defaultSeries, transpose, updateViz;
-
-defaultOptions = {
+var defaultOptions = {
   width: $("#tsControl").width(),
   height: 360,
   chartArea: {
@@ -52,66 +49,9 @@ defaultOptions = {
   }
 };
 
-copy = function(src) {
-  return JSON.parse(JSON.stringify(src));
-};
-
-defaultSeries = [[], [], [], []];
-
-cities = {
-  LasVegas: {
-    "url": "data://etl/socrata/Building_Permits_LasVegas.csv",
-    "colName": "PROJECT_ISSDTTM",
-    "dateFormat": "%d/%m/%Y %I:%M:%S %p",
-    "threshold": 10
-  },
-  SantaRosa: {
-    "url": "data://etl/socrata/Building_Permits__ALL_SantaRosa.csv",
-    "colName": "Issued Date",
-    "dateFormat": "%m/%d/%Y %I:%M:%S %p",
-    "threshold": 10
-  },
-  FortWorth: {
-    "url": "data://etl/socrata/Development_Permits_FtWorth.csv",
-    "colName": "Filing Date",
-    "dateFormat": "%m/%d/%Y",
-    "threshold": 10
-  },
-  NewYorkCity: {
-    "url": "data://etl/socrata/DOB_Permit_Issuance_NYC.csv",
-    "colName": "Issuance Date",
-    "dateFormat": "%m/%d/%Y %I:%M:%S %p",
-    "threshold": 12000
-  },
-  Boston: {
-    "url": "data://etl/socrata/Approved_Building_Permits_Boston.csv",
-    "colName": "ISSUED_DATE",
-    "dateFormat": "%m/%d/%Y %I:%M:%S %p",
-    "threshold": 10
-  },
-  LosAngeles: {
-    "url": "data://etl/socrata/Building_and_Safety_Permit_Information_LA.csv",
-    "colName": "Issue Date",
-    "dateFormat": "%m/%d/%Y",
-    "threshold": 10
-  },
-  Edmondton: {
-    "url": "data://etl/socrata/Edmonton.csv",
-    "colName": "Issue Date",
-    "dateFormat": "%m/%d/%Y",
-    "threshold": 10
-  }
-};
-
-var headers = ['Time', 'Value'];
-var tsOptions = defaultOptions;
-var tsData = defaultSeries;
-var dataSource = "Edmonton";
-var dataFilter1 = "/util/Echo";
-var dataFilter2 = "/util/Echo";
-var dataAnalysis = "/timeseries/Forecast";
 var analyze = function() {
   $('#errorMessage').empty();
+  chartOptions = defaultOptions;
   console.log("Fetching data...", $('#dataSource').val());
   algoClient.algo(algorithmBuildingPermits).pipe($('#dataSource').val()).then(function(result1) {
     var timeseries, timestamps;
@@ -133,7 +73,7 @@ var analyze = function() {
             if (!result3.error) {
               timeseriesFiltered2 = result3.result;
               updateViz(timestamps, timeseries, timeseriesFiltered2, []);
-              var dataAnalysisAlgo = $('#dataAnalysis');
+              var dataAnalysisAlgo = $('#dataAnalysis').val();
               console.log("Analyzing...", dataAnalysisAlgo);
               return algoClient.algo(dataAnalysisAlgo).pipe(timeseriesFiltered2).then(function(result4) {
                 var dataSize, forecastSize, i, lastDate, timeseriesAnalysis, _i, _ref;
@@ -155,90 +95,52 @@ var analyze = function() {
                     }
                   }
                   if (dataAnalysisAlgo === "/timeseries/AutoCorrelate") {
-                    tsOptions = copy(defaultOptions);
-                    tsOptions.series[2].targetAxisIndex = 1;
-                    tsOptions.vAxes[1] = {textPosition: 'none'};
-                  } else {
-                    tsOptions = defaultOptions;
+                    chartOptions = jQuery.extend(true, {}, defaultOptions);
+                    chartOptions.series[2].targetAxisIndex = 1;
+                    chartOptions.vAxes[1] = {textPosition: 'none'};
                   }
                   updateViz(timestamps, timeseries, timeseriesFiltered2, timeseriesAnalysis);
                   return console.log("Analysis", timeseriesAnalysis);
                 } else {
-                  console.error("Failed to analyze data", result4.error);
-                  return $('#errorMessage').val("Failed to analyze data");
+                  console.error(result4.error);
+                  return showError("Failed to analyze data");
                 }
               });
             } else {
-              console.error("Failed to filter2 data", result3.error);
-              return $('#errorMessage').val("Failed to filter2 data");
+              console.error(result3.error);
+              return showError("Failed to filter2 data");
             }
           });
         } else {
-          console.error("Failed to filter1 data", result2.error);
-          return $('#errorMessage').val("Failed to filter1 data");
+          console.error(result2.error);
+          return showError("Failed to filter1 data");
         }
       });
     } else {
-      console.error("Failed to load data", result1.error);
-      return $('#errorMessage').val("Failed to load data");
+      console.error(result1.error);
+      return showError("Failed to load data");
     }
   });
 };
+function showError(errMsg) {
+  $('#errorMessage').html('<i class="fa fa-warning text-danger"></i>' + errMsg);
+}
 
-var timeseriesChart = function(lscope, element, attrs, controller) {
-  var chart, redraw;
-  chart = new google.visualization.ScatterChart(element[0]);
-  redraw = function(scope, element) {
-    var chartdata, headerWrapper, tsData;
-    if (scope.headers && scope.data && scope.data.length > 0) {
-      headerWrapper = [scope.headers];
-      tsData = (function() {
-        if (typeof scope.data === "string") {
-          try {
-            return JSON.parse(scope.data);
-          } catch (_error) {
-            return defaultSeries;
-          }
-        } else {
-          return scope.data;
-        }
-      })();
-      tsData = transpose(tsData);
-      chartdata = new google.visualization.DataTable();
-      chartdata.addColumn("date", "Date");
-      chartdata.addColumn("number", "Raw");
-      chartdata.addColumn("number", "Filtered");
-      chartdata.addColumn("number", "Analysis");
-      chartdata.addRows(tsData);
-      chart.draw(chartdata, scope.options);
-    }
-  };
-  lscope.$watch('data', (function(newValue) {
-    return redraw(lscope, element);
-  }), true);
-  lscope.$watch('headers', (function(newValue) {
-    return redraw(lscope, element);
-  }), true);
-  lscope.$watch('options', (function(newValue) {
-    return redraw(lscope, element);
-  }), true);
-  };
+var updateViz = function(labels, raw, filtered, analysis) {
+  var chartdata = new google.visualization.DataTable();
+  console.log('OPTIONS: ',chartOptions.series[2].targetAxisIndex)
+  chartdata.addColumn("date", "Date");
+  chartdata.addColumn("number", "Raw");
+  chartdata.addColumn("number", "Filtered");
+  chartdata.addColumn("number", "Analysis");
+  chartdata.addRows(transpose([labels, raw, filtered, analysis]));
+  chart.draw(chartdata, chartOptions);
+};
 
-transpose = function(arr) {
+var transpose = function(arr) {
   return Object.keys(arr[0]).map(function(col) {
     return arr.map(function(row) {
       return row[col];
     });
-  });
-};
-
-updateViz = function(labels, raw, filtered, analysis) {
-  var data, tsScope;
-  if (typeof data === !"string") {
-    data = JSON.stringify(data);
-  }
-  tsScope = angular.element("#tsControl").scope();
-  tsScope.$apply(function() {
-    return tsScope.tsData = [labels, raw, filtered, analysis];
   });
 };

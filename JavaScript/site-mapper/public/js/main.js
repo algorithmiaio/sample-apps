@@ -1,17 +1,33 @@
+// init the Algorithmia client with your API key from https://algorithmia.com/user#credentials
+var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
 
+var algorithms = {
+  autotag: '/nlp/AutoTag/1.0.1',
+  url2text: '/util/Url2Text/0.1.4',
+  getlinks: '/web/GetLinks/0.1.5',
+  pagerank: '/thatguy2048/PageRank/0.1.0',
+  summarizer: '/SummarAI/Summarizer/0.1.3'
+};
 
 var colorScale = d3.scale.linear().domain([0, 0.4, 1]).range(["yellow", "red", "#5000be"]);
 
-var getLinks, getNodes, graphObj = null, graphObjectToMatrix, normalize, pagerank, sortMap, startViz, updateGraph, updateRanking;
+/**
+ * once DOM is ready, update vars amd set initial URL
+ */
+$(document).ready(function() {
+  setInviteCode('sitemapper');
+  $('[data-toggle="popover"]').popover();
+  // requireHttp($('#rssUrl'));
+});
 
-var count, doScrape, pending;
+var graphObj = null;
+var pending = [];
+var count = 0;
 
 $scope.siteUrl = "http://algorithmia.com/";
 $scope.depthLimit = 12;
 $scope.siteMap = {};
 $scope.scrapeStatus = "";
-pending = [];
-count = 0;
 $scope.link = {};
 
 setTimeout((function() {
@@ -29,7 +45,7 @@ $scope.scrape = function(url) {
   return doScrape();
 };
 
-doScrape = function() {
+var doScrape = function() {
   var url;
   $scope.scrapeStatus = "Scraping site...";
   if (pending.length === 0 || count >= $scope.depthLimit) {
@@ -68,11 +84,11 @@ $scope.loadLink = function(url) {
   $scope.tagging = true;
   $scope.link = {};
   $scope.link.url = url;
-  Algorithmia.query("/util/Url2Text", Algorithmia.demo.demo_api_key, url, function(err, result) {
+  algoClient.algo(algorithms.url2text).pipe(url).then(function(err, result) {
     if (err) {
       return;
     }
-    Algorithmia.query("/SummarAI/Summarizer", Algorithmia.demo.demo_api_key, result, function(err, result) {
+    algoClient.algo(algorithms.summarizer).pipe(result).then(function(err, result) {
       if (err) {
         return;
       }
@@ -81,7 +97,7 @@ $scope.loadLink = function(url) {
         return $scope.summarizing = false;
       });
     });
-    return Algorithmia.query("/nlp/AutoTag", Algorithmia.demo.demo_api_key, [result], function(err, result) {
+    return algoClient.algo(algorithms.autotag).pipe([result]).then(function(err, result) {
       if (err) {
         return;
       }
@@ -97,7 +113,7 @@ $scope.round = function(n) {
   return (Math.floor(n * 100) / 100).toFixed(2);
 };
 
-startViz = function($scope) {
+var startViz = function($scope) {
   var clickHandler, colors, height, radius, svg, width;
   svg = d3.select("svg.viz");
   width = $(".viz-container").width();
@@ -124,7 +140,7 @@ startViz = function($scope) {
   graphObj = new Algorithmia.viz.Graph(svg, width, height, colors, radius, clickHandler);
 };
 
-updateGraph = function(links) {
+var updateGraph = function(links) {
   var graph, svg;
   svg = d3.select("svg.viz");
   graph = {
@@ -134,7 +150,7 @@ updateGraph = function(links) {
   graphObj.update(graph, null);
 };
 
-updateRanking = function(ranking) {
+var updateRanking = function(ranking) {
   var weight;
   weight = function(d) {
     return ranking[d];
@@ -142,20 +158,20 @@ updateRanking = function(ranking) {
   graphObj.updateRanking(weight);
 };
 
-getLinks = function(url, cb) {
+var getLinks = function(url, cb) {
   var inputJson;
   inputJson = [url, true];
-  Algorithmia.query("/web/GetLinks", Algorithmia.demo.demo_api_key, inputJson, cb);
+  algoClient.algo(algorithms.getlinks).pipe(inputJson).then(cb);
 };
 
-pagerank = function(graph, cb) {
+var pagerank = function(graph, cb) {
   var graphMatrix, nodes;
   $("#demo-status").text("");
   $("#pagerank-out").text("");
   nodes = getNodes(graph);
   graphMatrix = graphObjectToMatrix(graph, nodes);
   $("#pagerank-in").html("<pre>" + JSON.stringify(graphMatrix, null, 2) + "</pre>");
-  Algorithmia.query("/thatguy2048/PageRank", Algorithmia.demo.demo_api_key, graphMatrix, function(error, result) {
+  algoClient.algo(algorithms.pagerank).pipe(graphMatrix).then(function(error, result) {
     var errorSpan, i, pre, rank, ranking, _i, _len;
     if (error) {
       errorSpan = $('<span class="text-danger">').text(error);
@@ -181,7 +197,7 @@ pagerank = function(graph, cb) {
   });
 };
 
-getNodes = function(graph) {
+var getNodes = function(graph) {
   var link, links, page, pageMap, _i, _len;
   pageMap = [];
   for (page in graph) {
@@ -199,7 +215,7 @@ getNodes = function(graph) {
   return pageMap;
 };
 
-graphObjectToMatrix = function(graph, nodes) {
+var graphObjectToMatrix = function(graph, nodes) {
   var links, page, transformedGraph;
   transformedGraph = nodes.map(function() {
     return [];
@@ -213,7 +229,7 @@ graphObjectToMatrix = function(graph, nodes) {
   return transformedGraph;
 };
 
-normalize = function(data) {
+var normalize = function(data) {
   var max, min;
   min = Math.min.apply(Math, data);
   max = Math.max.apply(Math, data);
@@ -222,7 +238,7 @@ normalize = function(data) {
   });
 };
 
-sortMap = function(input) {
+var sortMap = function(input) {
   var k, list, v;
   list = (function() {
     var _results;

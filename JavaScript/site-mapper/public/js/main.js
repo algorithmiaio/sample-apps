@@ -11,8 +11,6 @@ var algorithms = {
 
 var colorScale = d3.scale.linear().domain([0, 0.4, 1]).range(["yellow", "red", "#5000be"]);
 var graphObj = null;
-var pagerank = null;
-var pagerankSorted = [];
 var pending = [];
 var count = 0;
 var depthLimit = 3;
@@ -37,36 +35,38 @@ var scrape = function(url) {
   url = prefixHttp(url);
   depthLimit = $('#depthLimit').val();
   siteMap = {};
-  pagerank = null;
-  pagerankSorted = [];
   link = {};
   pending = [url];
   count = 0;
   startViz();
+  $('#scrape-status').text("Analyzing site...");
   doScrape();
 };
 
 var doScrape = function() {
-  var url;
-  $('#scrape-status').text("Scraping site...");
   if (pending.length === 0 || count >= depthLimit) {
-    $('#scrape-status').text("Running PageRank...");
     rankPage(siteMap, function(ranking) {
       $('#scrape-status').text("");
-      pagerank = ranking;
-      pagerankSorted = sortMap(ranking);
+      // $('#pagerank').text(ranking);
+      var pagerankSorted = sortMap(ranking);
+      var pagerankSortedHtml = '';
+      for (var i in pagerankSorted) {
+        pagerankSortedHtml += '<div class="col-xs-2"><p>'+round(pagerankSorted[i].rank)+'</p></div>';
+        pagerankSortedHtml += '<div class="col-xs-10 pagerank-links"><p class="pagerank-url"><a href="'+pagerankSorted[i].url+'">'+pagerankSorted[i].url+'</a></p></div>';
+      }
+      $('#pagerank-sorted').html(pagerankSortedHtml);
       updateRanking(ranking);
     });
     return;
   }
-  url = pending.shift();
+  var url = pending.shift();
   if (!siteMap[url]) {
     count++;
-    getLinks(url, function(error, links) {
-      if (!error) {
-        siteMap[url] = links;
+    getLinks(url, function(output) {
+      if (!output.error) {
+        siteMap[url] = output.result;
         updateGraph(siteMap);
-        pending = pending.concat(links);
+        pending = pending.concat(output.result);
       }
       doScrape();
     });
@@ -82,31 +82,32 @@ var loadLink = function(url) {
   link.url = url;
   $('#link-url').text(url);
   $('#link-url').href(url);
-  algoClient.algo(algorithms.url2text).pipe(url).then(function(err, result) {
-    if (err) {
-      return;
-    }
-    algoClient.algo(algorithms.summarizer).pipe(result).then(function(err, result) {
-      if (err) {
-        return;
-      }
-      link.summary = result.summarized_data;
-      $('#link-summary').text(result.summarized_data);
+  algoClient.algo(algorithms.url2text).pipe(url).then(function(output) {
+    if (output.error) {return showError(output.error);}
+    algoClient.algo(algorithms.summarizer).pipe(output.result).then(function(output) {
+      if (output.error) {return showError(output.error);}
+      link.summary = output.result.summarized_data;
+      $('#link-summary').text(output.result.summarized_data);
       summarizing = false;
     });
-    return algoClient.algo(algorithms.autotag).pipe([result]).then(function(err, result) {
-      if (err) {
-        return;
-      }
+    return algoClient.algo(algorithms.autotag).pipe([output.result]).then(function(output) {
+      if (output.error) {return showError(output.error);}
       tagging = false;
-      link.tags = result;
+      link.tags = output.result;
       var resultHtml = '';
-      for (tag in result) {
+      for (tag in output.result) {
         resultHtml += '<a>'+tag+'</a>'
       }
       $('link-tags').html(resultHtml);
     });
   });
+};
+
+var showError = function(error) {
+  console.error(error);
+  $('#scrape-status').html('<div class="text-danger">'+error.message.replace('java.net.UnknownHostException','Invalid URL')+'</div>');
+  // $("#pagerank-out").html(errorHtml);
+  // $("#demo-status").html(errorHtml);
 };
 
 var round = function(n) {
@@ -164,30 +165,24 @@ var getLinks = function(url, cb) {
 
 var rankPage = function(graph, cb) {
   var graphMatrix, nodes;
-  $("#demo-status").text("");
-  $("#pagerank-out").text("");
+  // $("#demo-status").text("");
+  // $("#pagerank-out").text("");
   nodes = getNodes(graph);
   graphMatrix = graphObjectToMatrix(graph, nodes);
-  $("#pagerank-in").html("<pre>" + JSON.stringify(graphMatrix, null, 2) + "</pre>");
-  algoClient.algo(algorithms.pagerank).pipe(graphMatrix).then(function(error, result) {
-    var errorSpan, i, pre, rank, ranking, _i, _len;
-    if (error) {
-      errorSpan = $('<span class="text-danger">').text(error);
-      $("#pagerank-out").html(errorSpan);
-      $("#demo-status").html(errorSpan);
+  // $("#pagerank-in").html("<pre>" + JSON.stringify(graphMatrix, null, 2) + "</pre>");
+  algoClient.algo(algorithms.pagerank).pipe(graphMatrix).then(function(output) {
+    if (output.error) {
+      showError(output.error);
       return;
     }
-    pre = $("<pre>").text(JSON.stringify(result, null, 2));
-    $("#pagerank-out").html(pre);
-    $("#demo-status").text("");
-    if (typeof result === "string") {
-      result = JSON.parse(result);
-    }
-    result = normalize(result);
-    ranking = {};
+    // var pre = $("<pre>").text(JSON.stringify(output, null, 2));
+    // $("#pagerank-out").html(pre);
+    // $("#demo-status").text("");
+    var result = normalize(output.result);
+    var ranking = {};
+    var i, _i, _len;
     for (i = _i = 0, _len = result.length; _i < _len; i = ++_i) {
-      rank = result[i];
-      ranking[nodes[i]] = rank;
+      ranking[nodes[i]] = result[i];
     }
     if (cb) {
       cb(ranking);

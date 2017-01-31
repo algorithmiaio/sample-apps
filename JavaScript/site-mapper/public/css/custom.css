@@ -15,6 +15,11 @@ img.placeholder {
     padding-left: 0;
 }
 
+.text-danger {
+    font-weight: bolder;
+    padding-top: 1em;
+}
+
 /* PANELS */
 svg {
     background-color: #fff;

@@ -2,7 +2,7 @@
 var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
 var algorithmBuildingPermits = 'ETL/GetBuildingPermitData/0.1.5';
 
-var chart, chartOptions;
+var chart, timeseries, timestamps, timeseriesFiltered, timeseriesAnalysis;
 
 /**
  * once DOM is ready, update vars
@@ -10,10 +10,18 @@ var chart, chartOptions;
 $(document).ready(function() {
   setInviteCode('timeseries');
   chart = new google.visualization.ScatterChart($('#timeseries-chart')[0]);
-  startAnalysis();
+  retrieveData();
 });
 
-var defaultOptions = {
+/**
+ * resize chart if window is resized
+ */
+$(window).resize(function() {
+  defaultChartOptions.width = $("#timeseries-controls").width();
+  updateChart();
+});
+
+var defaultChartOptions = {
   width: $("#timeseries-controls").width(),
   height: 360,
   chartArea: {
@@ -49,89 +57,136 @@ var defaultOptions = {
   }
 };
 
-var startAnalysis = function() {
+/**
+ * get new permits data from server
+ */
+var retrieveData = function() {
   $('#errorMessage').empty();
-  chartOptions = defaultOptions;
-  algoClient.algo(algorithmBuildingPermits).pipe($('#dataSource').val()).then(function(result1) {
-    var timeseries, timestamps;
-    if (!result1.error) {
-      timestamps = result1.result[0].map(function(ts) {
-        return new Date(ts.replace(" ", "T"));
-      });
-      timeseries = result1.result[1];
-      updateViz(timestamps, timeseries, [], []);
-      return algoClient.algo($('#dataFilter1').val()).pipe(timeseries).then(function(result2) {
-        var timeseriesFiltered1;
-        if (!result2.error) {
-          timeseriesFiltered1 = result2.result;
-          updateViz(timestamps, timeseries, timeseriesFiltered1, []);
-          return algoClient.algo($('#dataFilter2').val()).pipe(timeseriesFiltered1).then(function(result3) {
-            var timeseriesFiltered2;
-            if (!result3.error) {
-              timeseriesFiltered2 = result3.result;
-              updateViz(timestamps, timeseries, timeseriesFiltered2, []);
-              var dataAnalysisAlgo = $('#dataAnalysis').val();
-              console.log("Analyzing...", dataAnalysisAlgo);
-              return algoClient.algo(dataAnalysisAlgo).pipe(timeseriesFiltered2).then(function(result4) {
-                var dataSize, forecastSize, i, lastDate, timeseriesAnalysis, _i, _ref;
-                if (!result4.error) {
-                  timeseriesAnalysis = result4.result;
-                  if (dataAnalysisAlgo === "/timeseries/Forecast") {
-                    dataSize = timestamps.length;
-                    forecastSize = timeseriesAnalysis.length;
-                    timeseriesAnalysis = [];
-                    lastDate = timestamps[timestamps.length - 1];
-                    for (i = _i = 0, _ref = dataSize + forecastSize - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
-                      if (i < dataSize) {
-                        timeseriesAnalysis[i] = null;
-                      } else {
-                        timeseriesAnalysis[i] = result4.result[i - dataSize];
-                        timestamps[i] = new Date(lastDate);
-                        timestamps[i].setMonth(lastDate.getMonth() + i - dataSize + 1);
-                      }
-                    }
-                  }
-                  if (dataAnalysisAlgo === "/timeseries/AutoCorrelate") {
-                    chartOptions = jQuery.extend(true, {}, defaultOptions);
-                    chartOptions.series[2].targetAxisIndex = 1;
-                    chartOptions.vAxes[1] = {textPosition: 'none'};
-                  }
-                  updateViz(timestamps, timeseries, timeseriesFiltered2, timeseriesAnalysis);
-                  return console.log("Analysis", timeseriesAnalysis);
-                } else {
-                  return showError("Failed to analyze data", result4.error);
-                }
-              });
-            } else {
-              return showError("Failed to filter data", result3.error);
-            }
-          });
-        } else {
-          return showError("Failed to filter data", result2.error);
-        }
-      });
-    } else {
-      return showError("Failed to load data", result1.error);
-    }
+  algoClient.algo(algorithmBuildingPermits).pipe($('#dataSource').val()).then(handleDataRetrieval);
+};
+
+/**
+ * callback for permit data retrieval (triggers analysis)
+ * @param result
+ * @returns {*}
+ */
+var handleDataRetrieval = function(result) {
+  if (result.error) {return showError("Failed to load data", result.error);}
+  timestamps = result.result[0].map(function(ts) {
+    return new Date(ts.replace(" ", "T"));
   });
+  timeseries = result.result[1];
+  runAnalysis();
 };
 
-function showError(errMsg, err) {
-  console.error(errMsg, err);
-  $('#errorMessage').html('<i class="fa fa-warning text-danger"></i>' + errMsg);
-}
-
-var updateViz = function(labels, raw, filtered, analysis) {
-  var chartdata = new google.visualization.DataTable();
-  console.log('OPTIONS: ',chartOptions.series[2].targetAxisIndex)
-  chartdata.addColumn("date", "Date");
-  chartdata.addColumn("number", "Raw");
-  chartdata.addColumn("number", "Filtered");
-  chartdata.addColumn("number", "Analysis");
-  chartdata.addRows(transpose([labels, raw, filtered, analysis]));
-  chart.draw(chartdata, chartOptions);
+/**
+ * filter and analyze already-retrieved permit data; begin rendering chain
+ * @returns {*}
+ */
+var runAnalysis = function() {
+  timeseriesFiltered = [];
+  timeseriesAnalysis = [];
+  if($('#dataFilter1').val()) {
+    return algoClient.algo($('#dataFilter1').val()).pipe(timeseries).then(handleFilter1);
+  } else if($('#dataFilter2').val()) {
+    algoClient.algo($('#dataFilter2').val()).pipe(timeseries).then(handleFilter2);
+  } else {
+    algoClient.algo($('#dataAnalysis').val()).pipe(timeseries).then(handleAnalysis);
+  }
 };
 
+/**
+ * callback for filter1 data retrieval
+ * @param result
+ * @returns {*}
+ */
+var handleFilter1 = function(result) {
+  if (result.error) {return showError("Failed to filter data", result.error);}
+  timeseriesFiltered = result.result;
+  if($('#dataFilter2').val()) {
+    algoClient.algo($('#dataFilter2').val()).pipe(timeseriesFiltered).then(handleFilter2);
+  } else {
+    algoClient.algo($('#dataAnalysis').val()).pipe(timeseriesFiltered).then(handleAnalysis);
+  }
+};
+
+
+/**
+ * callback for filter1 data retrieval
+ * @param result
+ * @returns {*}
+ */
+var handleFilter2 = function(result) {
+  if (result.error) {return showError("Failed to filter data", result.error);}
+  timeseriesFiltered = result.result;
+  return algoClient.algo($('#dataAnalysis').val()).pipe(timeseriesFiltered).then(handleAnalysis);
+};
+
+
+/**
+ * callback for analysis data retrieval
+ * @param result
+ * @returns {*}
+ */
+var handleAnalysis = function(result) {
+  if (result.error) {return showError("Failed to analyze data", result.error);}
+  timeseriesAnalysis = result.result;
+  updateChart();
+};
+
+/**
+ * refresh the d3 chart with all new data
+ */
+var updateChart = function() {
+  var timeseriesAnalysisAdjusted = timeseriesAnalysis;
+  var timestampsAdjusted = timestamps;
+  var chartOptions = defaultChartOptions;
+  switch ($('#dataAnalysis').val()) {
+    case "/timeseries/Forecast":
+      var dataSize = timestamps.length;
+      var forecastSize = timeseriesAnalysis.length;
+      var lastDate = timestamps[timestamps.length - 1];
+      timeseriesAnalysisAdjusted = copy(timeseriesAnalysis);
+      timestampsAdjusted = copy(timestamps);
+      var i, _i, _ref;
+      for (i = _i = 0, _ref = dataSize + forecastSize - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
+        if (i < dataSize) {
+          timeseriesAnalysisAdjusted[i] = null;
+        } else {
+          timeseriesAnalysisAdjusted[i] = timeseriesAnalysis[i - dataSize];
+          timestampsAdjusted[i] = new Date(lastDate);
+          timestampsAdjusted[i].setMonth(lastDate.getMonth() + i - dataSize + 1);
+        }
+      }
+      break;
+    case "/timeseries/AutoCorrelate":
+      chartOptions = copy(defaultChartOptions);
+      chartOptions.series[2].targetAxisIndex = 1;
+      chartOptions.vAxes[1] = {textPosition: 'none'};
+      break;
+  }
+  var dataTable = new google.visualization.DataTable();
+  dataTable.addColumn("date", "Date");
+  dataTable.addColumn("number", "Raw");
+  dataTable.addColumn("number", "Filtered");
+  dataTable.addColumn("number", "Analysis");
+  dataTable.addRows(transpose([timestampsAdjusted, timeseries, timeseriesFiltered, timeseriesAnalysisAdjusted]));
+  chart.draw(dataTable, chartOptions);
+};
+
+/**
+ * deep-copy the data
+ * @param data
+ */
+var copy = function(data) {
+  return jQuery.extend(true, {}, data);
+};
+
+/**
+ * transpose an array
+ * @param arr
+ * @returns {Array}
+ */
 var transpose = function(arr) {
   return Object.keys(arr[0]).map(function(col) {
     return arr.map(function(row) {
@@ -139,3 +194,13 @@ var transpose = function(arr) {
     });
   });
 };
+
+/**
+ * display and log an error
+ * @param errMsg
+ * @param err
+ */
+function showError(errMsg, err) {
+  console.error(errMsg, err);
+  $('#errorMessage').html('<i class="fa fa-warning text-danger"></i>' + errMsg);
+}

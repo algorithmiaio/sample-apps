@@ -15,9 +15,7 @@ var pending = [];
 var count = 0;
 var depthLimit = 3;
 var siteMap = {};
-var link = {};
-
-var summarizing, tagging;
+var pageranks = {};
 
 /**
  * once DOM is ready, update vars amd set initial URL
@@ -35,9 +33,9 @@ var scrape = function(url) {
   url = prefixHttp(url);
   depthLimit = $('#depthLimit').val();
   siteMap = {};
-  link = {};
   pending = [url];
   count = 0;
+  $('#link-details').hide();
   startViz();
   $('#scrape-status').text("Analyzing site...");
   doScrape();
@@ -50,9 +48,11 @@ var doScrape = function() {
       // $('#pagerank').text(ranking);
       var pagerankSorted = sortMap(ranking);
       var pagerankSortedHtml = '';
+      // pagerank = ranking;
       for (var i in pagerankSorted) {
+        pageranks[pagerankSorted[i].url] = pagerankSorted[i].rank;
         pagerankSortedHtml += '<div class="col-xs-2"><p>'+round(pagerankSorted[i].rank)+'</p></div>';
-        pagerankSortedHtml += '<div class="col-xs-10 pagerank-links"><p class="pagerank-url"><a href="'+pagerankSorted[i].url+'">'+pagerankSorted[i].url+'</a></p></div>';
+        pagerankSortedHtml += '<div class="col-xs-10 pagerank-links"><p class="pagerank-url"><a onclick="loadLink(\''+pagerankSorted[i].url+'\')">'+pagerankSorted[i].url+'</a></p></div>';
       }
       $('#pagerank-sorted').html(pagerankSortedHtml);
       updateRanking(ranking);
@@ -60,7 +60,9 @@ var doScrape = function() {
     return;
   }
   var url = pending.shift();
-  if (!siteMap[url]) {
+  if (siteMap[url]) {
+    doScrape();
+  } else {
     count++;
     getLinks(url, function(output) {
       if (!output.error) {
@@ -70,35 +72,27 @@ var doScrape = function() {
       }
       doScrape();
     });
-  } else {
-    doScrape();
   }
 };
 
 var loadLink = function(url) {
-  summarizing = true;
-  tagging = true;
-  link = {};
-  link.url = url;
-  $('#link-url').text(url);
-  $('#link-url').href(url);
+  $('#link-url').text(url).attr('href',url);
+  $('#link-rank').text(round(pageranks[url]));
+  $('#link-summary, #link-tags').html('<span class="aspinner demo-spinner"></span>');
+  $('#link-details').show();
   algoClient.algo(algorithms.url2text).pipe(url).then(function(output) {
     if (output.error) {return showError(output.error);}
     algoClient.algo(algorithms.summarizer).pipe(output.result).then(function(output) {
       if (output.error) {return showError(output.error);}
-      link.summary = output.result.summarized_data;
       $('#link-summary').text(output.result.summarized_data);
-      summarizing = false;
     });
     return algoClient.algo(algorithms.autotag).pipe([output.result]).then(function(output) {
       if (output.error) {return showError(output.error);}
-      tagging = false;
-      link.tags = output.result;
       var resultHtml = '';
-      for (tag in output.result) {
-        resultHtml += '<a>'+tag+'</a>'
+      for (i in output.result) {
+        resultHtml += '<span class="label label-purple">'+output.result[i]+'</span> ';
       }
-      $('link-tags').html(resultHtml);
+      $('#link-tags').html(resultHtml);
     });
   });
 };

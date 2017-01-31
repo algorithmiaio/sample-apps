@@ -10,6 +10,16 @@ var algorithms = {
 };
 
 var colorScale = d3.scale.linear().domain([0, 0.4, 1]).range(["yellow", "red", "#5000be"]);
+var graphObj = null;
+var pagerank = null;
+var pagerankSorted = [];
+var pending = [];
+var count = 0;
+var depthLimit = 3;
+var siteMap = {};
+var link = {};
+
+var summarizing, tagging;
 
 /**
  * once DOM is ready, update vars amd set initial URL
@@ -17,59 +27,45 @@ var colorScale = d3.scale.linear().domain([0, 0.4, 1]).range(["yellow", "red", "
 $(document).ready(function() {
   setInviteCode('sitemapper');
   $('[data-toggle="popover"]').popover();
-  // requireHttp($('#rssUrl'));
+  $('#siteUrl').val("http://algorithmia.com/");
+  $('#depthLimit').val(depthLimit);
+  scrape();
 });
 
-var graphObj = null;
-var pending = [];
-var count = 0;
-
-$scope.siteUrl = "http://algorithmia.com/";
-$scope.depthLimit = 12;
-$scope.siteMap = {};
-$scope.scrapeStatus = "";
-$scope.link = {};
-
-setTimeout((function() {
-  return $scope.scrape($scope.siteUrl);
-}), 0);
-
-$scope.scrape = function(url) {
-  $scope.siteMap = {};
-  $scope.pagerank = null;
-  $scope.pagerankSorted = [];
-  $scope.link = {};
+var scrape = function(url) {
+  if(!url) {url = $('#siteUrl').val();}
+  url = prefixHttp(url);
+  depthLimit = $('#depthLimit').val();
+  siteMap = {};
+  pagerank = null;
+  pagerankSorted = [];
+  link = {};
   pending = [url];
   count = 0;
-  startViz($scope);
-  return doScrape();
+  startViz();
+  doScrape();
 };
 
 var doScrape = function() {
   var url;
-  $scope.scrapeStatus = "Scraping site...";
-  if (pending.length === 0 || count >= $scope.depthLimit) {
-    $scope.scrapeStatus = "Running PageRank...";
-    pagerank($scope.siteMap, function(ranking) {
-      $scope.$apply(function() {
-        $scope.scrapeStatus = "";
-        $scope.pagerank = ranking;
-        return $scope.pagerankSorted = sortMap(ranking);
-      });
+  $('#scrape-status').text("Scraping site...");
+  if (pending.length === 0 || count >= depthLimit) {
+    $('#scrape-status').text("Running PageRank...");
+    rankPage(siteMap, function(ranking) {
+      $('#scrape-status').text("");
+      pagerank = ranking;
+      pagerankSorted = sortMap(ranking);
       updateRanking(ranking);
     });
     return;
   }
   url = pending.shift();
-  if (!$scope.siteMap[url]) {
+  if (!siteMap[url]) {
     count++;
     getLinks(url, function(error, links) {
       if (!error) {
-        $scope.siteMap[url] = links;
-        $scope.$apply(function() {
-          return $scope.siteMap[url] = links;
-        });
-        updateGraph($scope.siteMap);
+        siteMap[url] = links;
+        updateGraph(siteMap);
         pending = pending.concat(links);
       }
       doScrape();
@@ -79,11 +75,13 @@ var doScrape = function() {
   }
 };
 
-$scope.loadLink = function(url) {
-  $scope.summarizing = true;
-  $scope.tagging = true;
-  $scope.link = {};
-  $scope.link.url = url;
+var loadLink = function(url) {
+  summarizing = true;
+  tagging = true;
+  link = {};
+  link.url = url;
+  $('#link-url').text(url);
+  $('#link-url').href(url);
   algoClient.algo(algorithms.url2text).pipe(url).then(function(err, result) {
     if (err) {
       return;
@@ -92,28 +90,30 @@ $scope.loadLink = function(url) {
       if (err) {
         return;
       }
-      return $scope.$apply(function() {
-        $scope.link.summary = result.summarized_data;
-        return $scope.summarizing = false;
-      });
+      link.summary = result.summarized_data;
+      $('#link-summary').text(result.summarized_data);
+      summarizing = false;
     });
     return algoClient.algo(algorithms.autotag).pipe([result]).then(function(err, result) {
       if (err) {
         return;
       }
-      return $scope.$apply(function() {
-        $scope.tagging = false;
-        return $scope.link.tags = result;
-      });
+      tagging = false;
+      link.tags = result;
+      var resultHtml = '';
+      for (tag in result) {
+        resultHtml += '<a>'+tag+'</a>'
+      }
+      $('link-tags').html(resultHtml);
     });
   });
 };
 
-$scope.round = function(n) {
+var round = function(n) {
   return (Math.floor(n * 100) / 100).toFixed(2);
 };
 
-var startViz = function($scope) {
+var startViz = function() {
   var clickHandler, colors, height, radius, svg, width;
   svg = d3.select("svg.viz");
   width = $(".viz-container").width();
@@ -133,9 +133,7 @@ var startViz = function($scope) {
     }
   };
   clickHandler = function(d) {
-    $scope.$apply(function() {
-      $scope.loadLink(d.name);
-    });
+      loadLink(d.name);
   };
   graphObj = new Algorithmia.viz.Graph(svg, width, height, colors, radius, clickHandler);
 };
@@ -164,7 +162,7 @@ var getLinks = function(url, cb) {
   algoClient.algo(algorithms.getlinks).pipe(inputJson).then(cb);
 };
 
-var pagerank = function(graph, cb) {
+var rankPage = function(graph, cb) {
   var graphMatrix, nodes;
   $("#demo-status").text("");
   $("#pagerank-out").text("");

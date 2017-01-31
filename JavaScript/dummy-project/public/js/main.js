@@ -34,15 +34,6 @@ function displayError(response, errorMessage) {
 }
 
 /**
- * ensure that a URL begins with http(s)://
- * @param url
- * @returns {string}
- */
-function prefixHttp(url) {
-  return httpRegex.test(url)?url:'http://'+url;
-}
-
-/**
  * convert a sentiment score [-1 to 1] to natural language [(very) negative / (very) positive / neutral] by quintile
  * @param sentimentScore
  * @returns {string}

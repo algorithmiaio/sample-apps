@@ -27,12 +27,16 @@ function setInviteCode(inviteCode) {
 }
 
 /**
- * ensure that a URL begins with http(s)://
+ * trim and ensure that a URL begins with http(s)://
  * @param url
  * @returns {string}
  */
 function prefixHttp(url) {
-  return prefixHttpRegex.test(url)?url:'http://'+url;
+  if(url) {
+    url = url.trim();
+    url = prefixHttpRegex.test(url)?url:'http://'+url;
+  }
+  return url;
 }
 
 /**

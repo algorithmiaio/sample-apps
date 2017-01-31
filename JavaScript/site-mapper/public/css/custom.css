@@ -11,6 +11,10 @@ img.placeholder {
     background-size: cover;
 }
 
+.depth-wrapper {
+    padding-left: 0;
+}
+
 /* PANELS */
 svg {
     background-color: #fff;

@@ -18,21 +18,20 @@
       <div class="col-md-6">
         <div class="card">
         <!-- Inputs -->
-          <form ng-submit="scrape(siteUrl)">
+          <form onsubmit="scrape(); return false;">
             <div class="row whitespace-none">
               <div class="col-xs-12 col-sm-10 whitespace-sm">
                 <label>Website URL to scrape</label>
-                <input type="text" class="form-control url" ng-model="siteUrl">
+                <input type="text" class="form-control url" id="siteUrl">
               </div>
-              <div class="col-xs-4 col-sm-2 whitespace-sm">
+              <div class="col-xs-4 col-sm-2 whitespace-sm depth-wrapper">
                 <label title="Sets the maximum number of pages to crawl">Depth</label>
-                <input type="number" min="0" max="120" class="form-control depth" ng-model="depthLimit">
+                <input type="number" min="0" max="120" class="form-control depth" id="depthLimit">
               </div>
             </div>
             <div class="row whitespace-none">
               <div class="col-md-12">
-                <form class="form-group" onsubmit="callAlgorithm(); return false;">
-                  <button class="btn btn-primary btn-dots" type="button" onclick="callAlgorithm()">
+                  <button class="btn btn-primary btn-dots" type="button" onclick="scrape()">
                     <span> <!-- Add class no-viz onClick -->
                       <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                       Map Site
@@ -44,8 +43,7 @@
                         <div class="dot dot4"></div>
                     </div>
                   </button>
-                </form>
-                <span ng-bind="scrapeStatus"></span>
+                <span id="scrape-status"></span>
               </div>
             </div>
           </form>
@@ -153,13 +151,13 @@
       <p class="item-title">GENERATED SUMMARY</p>
       <!-- PLACEHOLDER -->
       <p>This demo uses domain mapping techniques and the Page Rank algorithm...By analyzing municipal building permit data and applying multiple time series algorithms, we created a live analysis of selected cities economic development and trajectory</p>
-      <div ng-if="link.url" ng-cloak>
-        <a ng-href="{{link.url}}" ng-bind="link.url"></a>
+      <div>
+        <a id="link-url"></a>
         <!-- <div ng-show="summarizing">
           <span class="aspinner demo-spinner"></span>
           Summarizing...
         </div> -->
-        <div ng-bind="link.summary" class="small"></div>
+        <div id="link-summary" class="small"></div>
       </div>
       <p class="item-title">GENERATED TAGS</p>
       <div class="tags">
@@ -173,14 +171,12 @@
         <span class="label label-purple">encryption</span>
         <span class="label label-purple">government</span>
       </div>
-      <div ng-if="link.url" ng-cloak>
+      <div>
         <!-- <div ng-show="tagging">
           <span class="aspinner demo-spinner"></span>
           Tagging...
         </div> -->
-        <div class="tag-pills" ng-repeat="tag in link.tags">
-          <a ng-bind="tag"></a>
-        </div>
+        <div class="tag-pills" id="link-tags"></div>
       </div>
     </div>
   </div> <!-- End containing row -->
@@ -263,5 +259,8 @@
   </div> -->
 
 <!-- JS -->
+
+<script src="public/js/d3.min.js"></script>
+<script src="public/js/algorithmia.d3.js"></script>
 
 <%= footer %>

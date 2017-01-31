@@ -63,18 +63,18 @@
 			    <div class="col-xs-6 col-sm-3 variable-select">
 			      <h3>Analysis</h3>
 			      <select class="form-control" id="dataAnalysis" onchange="runAnalysis()">
-			        <option value="/timeseries/Forecast">Forecast</option>
-			        <option value="/timeseries/OutlierDetection">Outlier Detection</option>
-			        <option value="/timeseries/AutoCorrelate">Auto Correlate</option>
+			        <option value="/timeseries/Forecast/0.2.0">Forecast</option>
+			        <option value="/timeseries/OutlierDetection/0.1.0">Outlier Detection</option>
+			        <option value="/timeseries/AutoCorrelate/0.2.0">Auto Correlate</option>
 			      </select>
 			    </div>
 		    	<div class="col-xs-6 col-sm-3 variable-select">
 				    <h4 class="whitespace-sm">Filter 1</h4>
 				    <select class="form-control" id="dataFilter1" onchange="runAnalysis()">
 				    	<option value="">None</option>
-				        <option value="/timeseries/LinearDetrend">Linear Detrend</option>
-				        <option value="/timeseries/RemoveSeasonality">Remove Seasonality</option>
-				        <option value="/timeseries/SimpleMovingAverage">Simple Moving Average</option>
+				        <option value="/timeseries/LinearDetrend/0.1.1">Linear Detrend</option>
+				        <option value="/timeseries/RemoveSeasonality/0.1.1">Remove Seasonality</option>
+				        <option value="/timeseries/SimpleMovingAverage/0.2.0">Simple Moving Average</option>
 				    </select>
 				</div>
 		
@@ -82,9 +82,9 @@
 			      <h4 class="whitespace-sm">Filter 2</h4>
 			      <select class="form-control" id="dataFilter2" onchange="runAnalysis()">
 			        <option value="">None</option>
-			        <option value="/timeseries/LinearDetrend">Linear Detrend</option>
-			        <option value="/timeseries/RemoveSeasonality">Remove Seasonality</option>
-			        <option value="/timeseries/SimpleMovingAverage">Simple Moving Average</option>
+				        <option value="/timeseries/LinearDetrend/0.1.1">Linear Detrend</option>
+				        <option value="/timeseries/RemoveSeasonality/0.1.1">Remove Seasonality</option>
+				        <option value="/timeseries/SimpleMovingAverage/0.2.0">Simple Moving Average</option>
 			      </select>
 			    </div>
 			</div>
@@ -146,20 +146,17 @@
         <h2 class="whitespace-sm">Built For Developers</h2>
         <h4 class="secondary whitespace-md">A simple, scalable API for machine intelligence</h4>
           <p class="item-title">SAMPLE INPUT</p>
-          <pre class="whitespace-md"><code class="python">import Algorithmia
-input = {"images": ["_IMAGE_URL_"], "savePaths": ["_OUTPUT_URL_"], "filterName": "space_pizza"}
-client = Algorithmia.client('_API_KEY_')
-algo = client.algo('deeplearning/DeepFilter/0.5.3')
-
-print algo.pipe(input)
+          <pre class="whitespace-md"><code hlcode="js" class="ng-scope hljs js javascript"><span class="hljs-keyword"><span class="hljs-keyword">var</span></span> input = [[0,1,2,3,4,5,6,7,8,9,10],5,2];
+Algorithmia.client(<span class="hljs-string"><span class="hljs-string">"YOUR_API_KEY"</span></span>)
+           .algo(<span class="hljs-string"><span class="hljs-string">"algo://timeseries/Forecast/0.2.0"</span></span>)
+           .pipe(input)
+           .then(<span class="hljs-function"><span class="hljs-keyword"><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span class="hljs-function">(</span><span class="hljs-params"><span class="hljs-function"><span class="hljs-params">output</span></span></span><span class="hljs-function">) </span></span>{
+             <span class="hljs-built_in"><span class="hljs-built_in">console</span></span>.log(output);
+           });
   </code></pre>
             <p class="item-title">SAMPLE OUTPUT</p>
-            <pre><code class="json">{
-  "savePaths": [
-    "_OUTPUT_URL_"
-  ]
-}</code></pre>
-        <a href="https://algorithmia.com/algorithms/deeplearning/DeepFilter" class="btn btn-primary-inverse">
+            <pre><code class="hljs json">[11, 12, 13, 14, 15]</code></pre>
+        <a href="https://algorithmia.com/algorithms/tags/ScrapeRSS" class="btn btn-primary-inverse">
           LEARN MORE
         </a>
       </div>

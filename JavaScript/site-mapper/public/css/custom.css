@@ -36,10 +36,11 @@ svg circle {
   cursor: pointer;
 }
 
-.viz-panel {
+#viz-panel {
   text-align: center;
   border: 1px solid rgba(0,0,0,.12);
   height: 500px;
+  width: 100%;
   position: relative;
 }
 .scale {
@@ -47,17 +48,18 @@ svg circle {
   bottom: 0;
   left: 0;
 }
-.pagerank-panel {
+#pagerank-panel {
   height: 500px;
+  width: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
 }
-.pagerank-panel p {margin-bottom: .5rem;}
-.pagerank-panel::-webkit-scrollbar {
+#pagerank-panel p {margin-bottom: .5rem;}
+#pagerank-panel::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 7px;
 }
-.pagerank-panel::-webkit-scrollbar-thumb {
+#pagerank-panel::-webkit-scrollbar-thumb {
     border-radius: 4px;
     background-color: rgba(80,0,190,.5);
     -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);

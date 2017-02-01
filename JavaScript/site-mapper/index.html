@@ -59,7 +59,7 @@
     <div class="col-sm-7">
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#viz" aria-controls="viz" role="tab" data-toggle="tab">Sitemap Vizualization</a></li>
+        <li role="presentation" class="active"><a href="#viz" aria-controls="viz" role="tab" data-toggle="tab">Sitemap Visualization</a></li>
         <li role="presentation"><a href="#pagerank-list" aria-controls="pagerank-list" role="tab" data-toggle="tab">Pagerank</a></li>
       </ul>
     </div>
@@ -70,22 +70,13 @@
       <div role="tabpanel" class="tab-pane active" id="viz">
         <div class="row row-md">
           <div class="col-md-12">
-            <div class="viz-panel">
-              <img src="public/images/placeholder02.png" class="placeholder">
-
-              <!-- Viz from: http://www.redotheweb.com/CodeFlower/ -->
-              <!-- <img src="public/images/pagerank_scale.svg" class="scale" title="Color Scale" ng-show="pagerank" ng-animate="'fade'" ng-cloak>-->
-              <!--  <svg class="viz">
+              <svg id="viz-panel" class="viz">
                 <g class="viewport">
                   <g class="bottom"></g>
                   <g class="middle"></g>
                   <g class="top"></g>
                 </g>
-              </svg> -->
-
-            <!--<graph data="siteMap"></graph>-->
-
-            </div>
+              </svg>
           </div>
         </div>
       </div>
@@ -93,7 +84,7 @@
       <div role="tabpanel" class="tab-pane" id="pagerank-list">
         <div class="row row-md">
           <div class="col-md-12">
-            <div class="pagerank-panel">
+            <div id="pagerank-panel">
               <div class="row whitespace-sm" id="pagerank-sorted"></div>
             </div>
           </div>

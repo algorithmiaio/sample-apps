@@ -104,8 +104,8 @@ var round = function(n) {
 var startViz = function() {
   var clickHandler, colors, height, radius, svg, width;
   svg = d3.select("svg.viz");
-  width = $(".viz-container").width();
-  height = $(".viz-container").height();
+  width = $("#viz-panel").width();
+  height = $("#viz-panel").height();
   colors = function(d) {
     if (d.rank === -1) {
       return "blue";
@@ -114,7 +114,7 @@ var startViz = function() {
     }
   };
   radius = function(d) {
-    if (d.rank === -1) {
+    if (d.rank === -1 || d.rank === undefined) {
       return 6;
     } else {
       return 6 + d.rank * 6;

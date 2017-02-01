@@ -170,10 +170,8 @@ var rankPages = function() {
     var pagerankSortedHtml = '';
     for (var j in pagerankSorted) {
       pageranks[pagerankSorted[j].url] = pagerankSorted[j].rank;
-      if(pagerankSorted[j].rank>=.1) {
-        pagerankSortedHtml += '<div class="col-xs-2"><p>' + round(pagerankSorted[j].rank) + '</p></div>';
-        pagerankSortedHtml += '<div class="col-xs-10 pagerank-links"><p class="pagerank-url"><a onclick="loadLink(\'' + pagerankSorted[j].url + '\')">' + pagerankSorted[j].url + '</a></p></div>';
-      }
+      pagerankSortedHtml += '<div class="col-xs-2"><p>' + round(pagerankSorted[j].rank) + '</p></div>';
+      pagerankSortedHtml += '<div class="col-xs-10 pagerank-links"><p class="pagerank-url"><a onclick="loadLink(\'' + pagerankSorted[j].url + '\')">' + pagerankSorted[j].url + '</a></p></div>';
     }
     $('#pagerank-sorted').html(pagerankSortedHtml);
     updateRanking(ranking);

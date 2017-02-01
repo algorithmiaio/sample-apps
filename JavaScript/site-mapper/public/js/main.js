@@ -12,7 +12,7 @@ var algorithms = {
 var colorScale = d3.scale.linear().domain([0, 0.4, 1]).range(["yellow", "red", "#5000be"]);
 var graphObj = null;
 var pending = [];
-var depthLimit = 3;
+var depthLimit = 2;
 var maxWidth = 10;
 var siteMap = {};
 var pageranks = {};
@@ -52,7 +52,6 @@ var doScrape = function(depth, urls) {
     if (siteMap[url]) {
       doScrape(depth + 1, []);
     } else {
-console.log(url)
       siteMap[url] = [];
       getLinks(url, function (output) {
         if (output.error) {

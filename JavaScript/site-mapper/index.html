@@ -72,6 +72,7 @@
           <div class="col-md-12">
             <div class="viz-panel">
               <img src="public/images/placeholder02.png" class="placeholder">
+
               <!-- Viz from: http://www.redotheweb.com/CodeFlower/ -->
               <!-- <img src="public/images/pagerank_scale.svg" class="scale" title="Color Scale" ng-show="pagerank" ng-animate="'fade'" ng-cloak>-->
               <!--  <svg class="viz">
@@ -81,6 +82,9 @@
                   <g class="top"></g>
                 </g>
               </svg> -->
+
+            <!--<graph data="siteMap"></graph>-->
+
             </div>
           </div>
         </div>
@@ -90,12 +94,6 @@
         <div class="row row-md">
           <div class="col-md-12">
             <div class="pagerank-panel">
-        <!-- <table>
-                <tr ng-repeat="pair in pagerankSorted" ng-click="loadLink(pair.url)" ng-cloak>
-                  <td ng-bind="round(pair.rank)"></td>
-                  <td><a ng-bind="pair.url"></a></td>
-                </tr>
-              </table> -->
               <div class="row whitespace-sm" id="pagerank-sorted"></div>
             </div>
           </div>
@@ -115,15 +113,9 @@
       <div class="tags" id="link-tags">
         <span class="aspinner demo-spinner"></span>
       </div>
-        <!-- <div ng-show="tagging">
-          <span class="aspinner demo-spinner"></span>
-          Tagging...
-        </div> -->
     </div>
   </div> <!-- End containing row -->
-<!--<div>
-      <graph data="siteMap"></graph>
-    </div> -->
+
 </section>
 
 <!-- EXPLANATION -->
@@ -165,39 +157,30 @@
 </section>
 </div>
 
-<!-- Print debug input / output from the algorithms -->
-  <!-- Nav tabs -->
-<!--     <div class="row row-sm">
-    <div class="col-md-12">
-      <ul class="nav nav-tabs">
-        <li class="active"><a href="#demo-code" data-toggle="tab">Demo Code</a></li>
-        <li><a href="#sitemap" data-toggle="tab">SiteMap</a></li>
-        <li><a href="#pagerank-in" data-toggle="tab">PageRank Input</a></li>
-        <li><a href="#pagerank-out" data-toggle="tab">PageRank Output</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12"> -->
-      <!-- Tab panes -->
-<!--         <div class="tab-content debug-container">
-        <div class="tab-pane debug active" id="demo-code">
-          <pre><code>Algorithmia.client(apiKey).algo("/web/SiteMap").pipe(siteUrl).then(function(graph) {
-  // Render graph here...
-  Algorithmia.client(apiKey).algo("/thatguy2048/PageRank").pipe(graph.result).then(function(ranking) {
-      // Colorize graph here...
-  });
-});</code></pre>
-        </div>
-        <div class="tab-pane debug" id="sitemap"><pre ng-bind="siteMap | json">...</pre></div>
-        <div class="tab-pane debug" id="pagerank-in">...</div>
-        <div class="tab-pane debug" id="pagerank-out">...</div>
+  <!-- BUILT FOR DEVS -->
+  <section class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <h2 class="whitespace-sm">Built For Developers</h2>
+        <h4 class="whitespace-md">A simple, scalable API for machine intelligence</h4>
+          <p class="item-title">SAMPLE INPUT</p>
+          <pre class="whitespace-md"><code class="python hljs"><span class="hljs-keyword">import</span> Algorithmia
+client = Algorithmia.client(<span class="hljs-string">'API KEY'</span>)
+algo = client.algo(<span class="hljs-string">'web/GetLinks/0.1.5'</span>)
+<span class="hljs-keyword">print</span> algo.pipe(<span class="hljs-string">"https://algorithmia.com"</span>)</code>
+</pre>
+            <p class="item-title">SAMPLE OUTPUT</p>
+            <pre><code class="json hljs">[
+  "http://developers.algorithmia.com",
+  "https://algorithmia.com/terms",
+  ...
+]</code></pre>
+        <a href="https://algorithmia.com/algorithms/media/VideoMetadataExtraction" class="btn btn-primary-inverse">
+          LEARN MORE
+        </a>
       </div>
-      <a href="https://algorithmia.com/algorithms/deeplearning/DeepFilter" class="btn btn-primary-inverse">
-        LEARN MORE
-      </a>
     </div>
-  </div> -->
+  </section>
 
 <!-- JS -->
 

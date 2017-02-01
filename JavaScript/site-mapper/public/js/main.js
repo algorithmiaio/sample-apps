@@ -35,7 +35,7 @@ var scrape = function(url) {
   siteMap = {};
   $('#link-details').hide();
   startViz();
-  $('#scrape-status').text("Analyzing site...");
+  $('#scrape-status').html('&nbsp;<span class="aspinner demo-spinner"></span>Analyzing site...');
   $('#pagerank-sorted').html('&nbsp;&nbsp;&nbsp;&nbsp;<span class="aspinner demo-spinner"></span>');
   doScrape(0, [url]);
 };
@@ -51,7 +51,6 @@ var doScrape = function(depth, urls) {
     if (siteMap[url]) {
       doScrape(depth + 1, []);
     } else {
-console.log( url);
       siteMap[url] = [];
       getLinks(url, function (output) {
         if (output.error) {
@@ -95,8 +94,6 @@ var loadLink = function(url) {
 var showError = function(error) {
   console.error(error);
   $('#scrape-status').html('<div class="text-danger">'+error.message.replace('java.net.UnknownHostException','Invalid URL')+'</div>');
-  // $("#pagerank-out").html(errorHtml);
-  // $("#demo-status").html(errorHtml);
 };
 
 var round = function(n) {
@@ -153,10 +150,8 @@ var getLinks = function(url, cb) {
 };
 
 var rankPages = function() {
-console.log("Ranking", siteMap);
   var nodes = getNodes(siteMap);
   var graphMatrix = graphObjectToMatrix(siteMap, nodes);
-  // $("#pagerank-in").html("<pre>" + JSON.stringify(graphMatrix, null, 2) + "</pre>");
   algoClient.algo(algorithms.pagerank).pipe(graphMatrix).then(function(output) {
     if (output.error) {
       showError(output.error);
@@ -178,6 +173,7 @@ console.log("Ranking", siteMap);
     }
     $('#pagerank-sorted').html(pagerankSortedHtml);
     updateRanking(ranking);
+    loadLink(pagerankSorted[0].url)
   });
 };
 

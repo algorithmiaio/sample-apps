@@ -15,8 +15,11 @@ img.placeholder {
     padding-left: 0;
 }
 
-.text-danger {
+#scrape-status {
     font-weight: bolder;
+}
+
+.text-danger {
     padding-top: 1em;
 }
 

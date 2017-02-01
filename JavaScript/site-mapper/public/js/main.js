@@ -13,6 +13,7 @@ var colorScale = d3.scale.linear().domain([0, 0.4, 1]).range(["yellow", "red", "
 var graphObj = null;
 var pending = [];
 var depthLimit = 3;
+var maxWidth = 10;
 var siteMap = {};
 var pageranks = {};
 var cleanupTimer = null;
@@ -46,11 +47,12 @@ var doScrape = function(depth, urls) {
     cleanupTimer = setTimeout(rankPages, 1000);
     return;
   }
-  for (var i in urls) {
-    var url = urls[i].split(/[?#]/)[0];
+  for (var i in urls.slice(0, maxWidth)) {
+    var url = urls[i].split(/[?#;$!*,=]/)[0];
     if (siteMap[url]) {
       doScrape(depth + 1, []);
     } else {
+console.log(url)
       siteMap[url] = [];
       getLinks(url, function (output) {
         if (output.error) {
@@ -168,8 +170,10 @@ var rankPages = function() {
     var pagerankSortedHtml = '';
     for (var j in pagerankSorted) {
       pageranks[pagerankSorted[j].url] = pagerankSorted[j].rank;
-      pagerankSortedHtml += '<div class="col-xs-2"><p>'+round(pagerankSorted[j].rank)+'</p></div>';
-      pagerankSortedHtml += '<div class="col-xs-10 pagerank-links"><p class="pagerank-url"><a onclick="loadLink(\''+pagerankSorted[j].url+'\')">'+pagerankSorted[j].url+'</a></p></div>';
+      if(pagerankSorted[j].rank>=.1) {
+        pagerankSortedHtml += '<div class="col-xs-2"><p>' + round(pagerankSorted[j].rank) + '</p></div>';
+        pagerankSortedHtml += '<div class="col-xs-10 pagerank-links"><p class="pagerank-url"><a onclick="loadLink(\'' + pagerankSorted[j].url + '\')">' + pagerankSorted[j].url + '</a></p></div>';
+      }
     }
     $('#pagerank-sorted').html(pagerankSortedHtml);
     updateRanking(ranking);

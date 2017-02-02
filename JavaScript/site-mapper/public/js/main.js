@@ -6,7 +6,7 @@ var algorithms = {
   url2text: '/util/Url2Text/0.1.4',
   getlinks: '/web/GetLinks/0.1.5',
   pagerank: '/thatguy2048/PageRank/0.1.0',
-  summarizer: '/SummarAI/Summarizer/0.1.3'
+  summarizer: '/nlp/Summarizer/0.1.6'
 };
 
 var colorScale = d3.scale.linear().domain([0, 0.4, 1]).range(["yellow", "red", "#5000be"]);
@@ -115,7 +115,7 @@ var loadLink = function(url) {
     if (output.error) {return showError(output.error);}
     algoClient.algo(algorithms.summarizer).pipe(output.result).then(function(output) {
       if($('#link-url').text()==url) { //avoid race condition if called again on different url
-        $('#link-summary').text(output.error?"Error retrieving page":output.result.summarized_data);
+        $('#link-summary').text(output.error?"Error retrieving page":output.result);
       }
     });
     return algoClient.algo(algorithms.autotag).pipe([output.result]).then(function(output) {

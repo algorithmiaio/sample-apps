@@ -112,7 +112,7 @@ var loadLink = function(url, scrollToDetails) {
   }
   $('#link-rank').text(pageRanks[url] ? round(pageRanks[url]) : '');
   $('#link-details').show();
-  if(scrollToDetails) {
+  if(scrollToDetails && $(window).width()<768) {
     $('html, body').animate({
       scrollTop: $("#link-details").offset().top
     }, 1000);

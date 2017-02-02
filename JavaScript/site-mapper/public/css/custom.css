@@ -12,7 +12,7 @@ img.placeholder {
 }
 
 .depth-wrapper {
-    padding-left: 0;
+    padding-left: 15px;
 }
 
 #scrape-status {
@@ -22,7 +22,7 @@ img.placeholder {
 .text-danger {
     padding-top: 1em;
 }
-
+.nav-tabs {font-size: 16px;}
 /* PANELS */
 svg {
     background-color: #fff;
@@ -49,10 +49,10 @@ svg circle {
   left: 0;
 }
 #pagerank-panel {
-  height: 500px;
+  height: auto;
   width: 100%;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  overflow-y: visible;
+  word-wrap: break-word;
 }
 #pagerank-panel p {margin-bottom: .5rem;}
 #pagerank-panel::-webkit-scrollbar {
@@ -64,6 +64,7 @@ svg circle {
     background-color: rgba(80,0,190,.5);
     -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
+#link-url {word-wrap: break-word;}
 .pagerank-links {
   padding-left: 0;
 }
@@ -120,3 +121,31 @@ svg.viz {
 .dot2 {background: #773CC9;}
 .dot3 {background: #4500A4;}
 .dot4 {background: #35007E;}
+
+
+/* $MEDIA QUERIES */
+/* Extra small devices (phones, less than 768px) */
+/* This should be the default AKA no styles here */
+/*@media (min-width: @screen-xs-min) {}*/
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .depth-wrapper {
+    padding-left: 0;
+  }
+  .nav-tabs {
+    font-size: 1.25rem;
+  }
+  #pagerank-panel {
+    height: 500px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}

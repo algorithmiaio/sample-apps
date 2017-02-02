@@ -213,8 +213,8 @@ var rankPages = function() {
     var pagerankSortedHtml = '';
     for (var j in pagerankSorted) {
       pageRanks[pagerankSorted[j].url] = pagerankSorted[j].rank;
-      pagerankSortedHtml += '<div class="col-xs-2"><p>' + round(pagerankSorted[j].rank) + '</p></div>';
-      pagerankSortedHtml += '<div class="col-xs-10 pagerank-links"><p class="pagerank-url"><a onclick="loadLink(\'' + pagerankSorted[j].url + '\', true)">' + pagerankSorted[j].url + '</a></p></div>';
+      pagerankSortedHtml += '<div class="col-xs-3 col-sm-2"><p>' + round(pagerankSorted[j].rank) + '</p></div>';
+      pagerankSortedHtml += '<div class="col-xs-9 col-sm-10 pagerank-links"><p class="pagerank-url"><a onclick="loadLink(\'' + pagerankSorted[j].url + '\', true)">' + pagerankSorted[j].url + '</a></p></div>';
     }
     $('#pagerank-sorted').html(pagerankSortedHtml);
     updateGraph();

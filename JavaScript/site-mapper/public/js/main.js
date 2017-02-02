@@ -103,14 +103,20 @@ var hideLink = function() {
 /**
  * show the link-details and retrieve rank, summary, and tags
  * @param url
+ * @param scrollToDetails
  */
-var loadLink = function(url) {
+var loadLink = function(url, scrollToDetails) {
   if($('#link-url').text()!=url) { // don't flush content unless url has changed
     $('#link-url').text(url).attr('href', url);
     $('#link-summary, #link-tags').html('<span class="aspinner demo-spinner"></span>');
   }
   $('#link-rank').text(pageRanks[url] ? round(pageRanks[url]) : '');
   $('#link-details').show();
+  if(scrollToDetails) {
+    $('html, body').animate({
+      scrollTop: $("#link-details").offset().top
+    }, 1000);
+  }
   algoClient.algo(algorithms.url2text).pipe(url).then(function(output) {
     if (output.error) {return showError(output.error);}
     algoClient.algo(algorithms.summarizer).pipe(output.result).then(function(output) {
@@ -169,7 +175,7 @@ var startViz = function() {
     $("#viz-panel").height(),
     function(d) {return d.rank >= 0? colorScale(d.rank) : "blue";}, //color calculation
     function(d) {return d.rank >= 0? 6+d.rank*6 : 6}, //radius calculation
-    function(d) {loadLink(d.name);} //link handler
+    function(d) {loadLink(d.name, true);} //link handler
   );
 };
 
@@ -208,7 +214,7 @@ var rankPages = function() {
     for (var j in pagerankSorted) {
       pageRanks[pagerankSorted[j].url] = pagerankSorted[j].rank;
       pagerankSortedHtml += '<div class="col-xs-2"><p>' + round(pagerankSorted[j].rank) + '</p></div>';
-      pagerankSortedHtml += '<div class="col-xs-10 pagerank-links"><p class="pagerank-url"><a onclick="loadLink(\'' + pagerankSorted[j].url + '\')">' + pagerankSorted[j].url + '</a></p></div>';
+      pagerankSortedHtml += '<div class="col-xs-10 pagerank-links"><p class="pagerank-url"><a onclick="loadLink(\'' + pagerankSorted[j].url + '\', true)">' + pagerankSorted[j].url + '</a></p></div>';
     }
     $('#pagerank-sorted').html(pagerankSortedHtml);
     updateGraph();

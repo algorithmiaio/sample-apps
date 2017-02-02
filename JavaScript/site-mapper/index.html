@@ -18,7 +18,7 @@
       <div class="col-md-6">
         <div class="card">
         <!-- Inputs -->
-          <form onsubmit="scrape(); return false;">
+          <form onsubmit="startScrape(); return false;">
             <div class="row whitespace-none">
               <div class="col-xs-12 col-sm-10 whitespace-sm">
                 <label>Website URL to scrape</label>
@@ -26,12 +26,12 @@
               </div>
               <div class="col-xs-4 col-sm-2 whitespace-sm depth-wrapper">
                 <label title="Sets the maximum number of pages to crawl">Depth</label>
-                <input type="number" min="0" max="3" class="form-control depth" id="depthLimit">
+                <input type="number" min="1" max="5" class="form-control depth" id="depthLimit">
               </div>
             </div>
             <div class="row whitespace-none">
               <div class="col-md-12">
-                  <button class="btn btn-primary btn-dots" type="button" onclick="scrape()">
+                  <button class="btn btn-primary btn-dots" type="submit" onclick="startScrape()">
                     <span> <!-- Add class no-viz onClick -->
                       <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                       Map Site
@@ -54,7 +54,7 @@
 </section>
 
 <!-- RESULTS -->
-<section id="results" class="container">
+<section id="results" class="container" style="display: none">
   <div class="row row-md"> <!-- tab row -->
     <div class="col-sm-7">
       <!-- Nav tabs -->
@@ -95,7 +95,7 @@
     <div class="col-sm-5" id="link-details" style="display: none">
       <p class="lg item-title">PAGE DATA</p>
       <p class="item-title">URL</p>
-      <p><a id="link-url"></a></p>
+      <p><a id="link-url" target="_blank"></a></p>
       <p class="item-title">PAGERANK</p>
       <p id="link-rank"></p>
       <p class="item-title">GENERATED SUMMARY</p>

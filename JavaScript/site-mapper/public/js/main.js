@@ -12,10 +12,11 @@ var algorithms = {
 var colorScale = d3.scale.linear().domain([0, 0.4, 1]).range(["yellow", "red", "#5000be"]);
 var graphObj = null;
 var pending = [];
-var depthLimit = 2;
-var maxWidth = 10;
+var depthLimit = 3;
+var maxWidth = 20;
 var siteMap = {};
-var pageranks = {};
+var pageRanks = {};
+var pagesDisplayed = 0;
 var cleanupTimer = null;
 
 /**
@@ -23,187 +24,235 @@ var cleanupTimer = null;
  */
 $(document).ready(function() {
   setInviteCode('sitemapper');
-  $('[data-toggle="popover"]').popover();
   $('#siteUrl').val("http://algorithmia.com/");
-  $('#depthLimit').val(depthLimit);
-  scrape();
+  $('#depthLimit').val(depthLimit).change(function(){this.value=Math.max(1,Math.min(this.value,5));});
+  $('#siteUrl').change(function(){this.value=cleanUrl(this.value);});
 });
 
-var scrape = function(url) {
-  if(!url) {url = $('#siteUrl').val();}
-  url = prefixHttp(url);
+/**
+ * initiate site scrape
+ */
+var startScrape = function() {
+  var url = $('#siteUrl').val();
+  if(!url) {return;}
   depthLimit = $('#depthLimit').val();
   siteMap = {};
-  $('#link-details').hide();
-  startViz();
+  pageRanks = {};
+  pagesDisplayed = 0;
   $('#scrape-status').html('&nbsp;<span class="aspinner demo-spinner"></span>Analyzing site...');
   $('#pagerank-sorted').html('&nbsp;&nbsp;&nbsp;&nbsp;<span class="aspinner demo-spinner"></span>');
-  doScrape(0, [url]);
+  hideLink();
+  $('#results').show();
+  $('a[href="#viz"]').click();
+  startViz();
+  enqueueRankPages();
+  doScrape(1, [url]);
 };
 
+/**
+ * get up to maxWidth links for each url, and recurse until depthLimit
+ * @param depth
+ * @param urls
+ */
 var doScrape = function(depth, urls) {
-  if (depth > depthLimit) {
-    if(cleanupTimer) {clearTimeout(cleanupTimer);}
-    cleanupTimer = setTimeout(rankPages, 1000);
-    return;
-  }
-  for (var i in urls.slice(0, maxWidth)) {
-    var url = urls[i].split(/[?#;$!*,=]/)[0];
-    if (siteMap[url]) {
-      doScrape(depth + 1, []);
-    } else {
-      siteMap[url] = [];
-      getLinks(url, function (output) {
+  for (var i in urls) {
+    var url = urls[i];
+    if (!siteMap[url]) {
+      algoClient.algo(algorithms.getlinks).pipe([url, true]).then(function (output) {
         if (output.error) {
-          doScrape(depth + 1, []);
+          //fail silently while recursing
+          if(depth<=1) {showError(output.error);}
+          console.error(output)
         } else {
-          siteMap[url] = output.result;
-          updateGraph(siteMap);
-          doScrape(depth+1, output.result);
+          if (depth > depthLimit) {
+            enqueueRankPages();
+          } else if(!siteMap[url]) {
+            //recurse on maxWidth links, not including self
+            var newUrls = output.result;
+            for (var j in newUrls) {
+              newUrls[j] = cleanUrl(newUrls[j]);
+            }
+            newUrls = newUrls.filter(function(e) {return e != url;}).slice(0, maxWidth);
+            siteMap[url] = newUrls;
+            doScrape(depth+1, newUrls);
+            updateGraph();
+          }
         }
       });
     }
   }
 };
 
+/**
+ * run rankPages if it has not been run in the last 1000ms
+ */
+function enqueueRankPages() {
+  if (cleanupTimer) {clearTimeout(cleanupTimer);}
+  cleanupTimer = setTimeout(rankPages, 1000);
+}
+
+/**
+ * hide the link-details section
+ */
+var hideLink = function() {
+  $('#link-url').empty().removeAttr('href');
+  $('#link-summary, #link-tags, #link-rank').empty();
+  $('#link-details').hide();
+};
+
+/**
+ * show the link-details and retrieve rank, summary, and tags
+ * @param url
+ */
 var loadLink = function(url) {
-  $('#link-url').text(url).attr('href',url);
-  $('#link-rank').text(round(pageranks[url]));
-  $('#link-summary, #link-tags').html('<span class="aspinner demo-spinner"></span>');
+  if($('#link-url').text()!=url) { // don't flush content unless url has changed
+    $('#link-url').text(url).attr('href', url);
+    $('#link-summary, #link-tags').html('<span class="aspinner demo-spinner"></span>');
+  }
+  $('#link-rank').text(pageRanks[url] ? round(pageRanks[url]) : '');
   $('#link-details').show();
   algoClient.algo(algorithms.url2text).pipe(url).then(function(output) {
     if (output.error) {return showError(output.error);}
     algoClient.algo(algorithms.summarizer).pipe(output.result).then(function(output) {
-      if (output.error) {return showError(output.error);}
-      if($('#link-url').text()==url) { //avoid race cond
-        $('#link-summary').text(output.result.summarized_data);
+      if($('#link-url').text()==url) { //avoid race condition if called again on different url
+        $('#link-summary').text(output.error?"Error retrieving page":output.result.summarized_data);
       }
     });
     return algoClient.algo(algorithms.autotag).pipe([output.result]).then(function(output) {
-      if (output.error) {return showError(output.error);}
-      var resultHtml = '';
-      for (i in output.result) {
-        resultHtml += '<span class="label label-purple">'+output.result[i]+'</span> ';
-      }
-      if($('#link-url').text()==url) { //avoid race cond
+      if($('#link-url').text()==url) { //avoid race condition
+        var resultHtml = '';
+        if (output.error) {
+          resultHtml = "Error retrieving page";
+        } else for (i in output.result) {
+          resultHtml += '<span class="label label-purple">'+output.result[i]+'</span> ';
+        }
         $('#link-tags').html(resultHtml);
       }
     });
   });
 };
 
+/**
+ * ensure prefix, remove anchors and trailing /
+ * @param url
+ * @returns {string}
+ */
+var cleanUrl = function (url) {
+  return getUrlCore(prefixHttp(url));
+};
+
+/**
+ * display an error to the user
+ * @param error
+ */
 var showError = function(error) {
   console.error(error);
   $('#scrape-status').html('<div class="text-danger">'+error.message.replace('java.net.UnknownHostException','Invalid URL')+'</div>');
 };
 
+/**
+ * round to 2 decimal places
+ * @param n
+ * @returns {float}
+ */
 var round = function(n) {
   return (Math.floor(n * 100) / 100).toFixed(2);
 };
 
+/**
+ * initialize d3 graph
+ */
 var startViz = function() {
-  var clickHandler, colors, height, radius, svg, width;
-  svg = d3.select("svg.viz");
-  width = $("#viz-panel").width();
-  height = $("#viz-panel").height();
-  colors = function(d) {
-    if (d.rank === -1) {
-      return "blue";
-    } else {
-      return colorScale(d.rank);
+  graphObj = new Algorithmia.viz.Graph(
+    d3.select("svg.viz"),
+    $("#viz-panel").width(),
+    $("#viz-panel").height(),
+    function(d) {return d.rank >= 0? colorScale(d.rank) : "blue";}, //color calculation
+    function(d) {return d.rank >= 0? 6+d.rank*6 : 6}, //radius calculation
+    function(d) {loadLink(d.name);} //link handler
+  );
+};
+
+/**
+ * update d3 graph with current siteMap
+ */
+var updateGraph = function() {
+  graphObj.update(
+    { //graph
+      nodes: getNodes(),
+      links: siteMap
+    },
+    function(name) { //rank function
+      return pageRanks[name]?pageRanks[name]:0;
     }
-  };
-  radius = function(d) {
-    if (d.rank === -1 || d.rank === undefined) {
-      return 6;
-    } else {
-      return 6 + d.rank * 6;
-    }
-  };
-  clickHandler = function(d) {
-      loadLink(d.name);
-  };
-  graphObj = new Algorithmia.viz.Graph(svg, width, height, colors, radius, clickHandler);
+  );
 };
 
-var updateGraph = function(links) {
-  var graph, svg;
-  svg = d3.select("svg.viz");
-  graph = {
-    nodes: getNodes(links),
-    links: links
-  };
-  graphObj.update(graph, null);
-};
-
-var updateRanking = function(ranking) {
-  var weight;
-  weight = function(d) {
-    return ranking[d];
-  };
-  graphObj.updateRanking(weight);
-};
-
-var getLinks = function(url, cb) {
-  var inputJson;
-  inputJson = [url, true];
-  algoClient.algo(algorithms.getlinks).pipe(inputJson).then(cb);
-};
-
+/**
+ * calculate rank across all pages, update graph, list links, and show summary for first link
+ */
 var rankPages = function() {
-  var nodes = getNodes(siteMap);
+  var nodes = getNodes();
+  if(nodes.length==0) {return $('#results').hide();}
   var graphMatrix = graphObjectToMatrix(siteMap, nodes);
   algoClient.algo(algorithms.pagerank).pipe(graphMatrix).then(function(output) {
-    if (output.error) {
-      showError(output.error);
-      return;
-    }
+    if (output.error) {return showError(output.error);}
     var result = normalize(output.result);
     var ranking = {};
-    var i, _i, _len;
-    for (i = _i = 0, _len = result.length; _i < _len; i = ++_i) {
+    for (var i = 0; i < result.length; i++) {
       ranking[nodes[i]] = result[i];
     }
     $('#scrape-status').text("");
     var pagerankSorted = sortMap(ranking);
     var pagerankSortedHtml = '';
     for (var j in pagerankSorted) {
-      pageranks[pagerankSorted[j].url] = pagerankSorted[j].rank;
+      pageRanks[pagerankSorted[j].url] = pagerankSorted[j].rank;
       pagerankSortedHtml += '<div class="col-xs-2"><p>' + round(pagerankSorted[j].rank) + '</p></div>';
       pagerankSortedHtml += '<div class="col-xs-10 pagerank-links"><p class="pagerank-url"><a onclick="loadLink(\'' + pagerankSorted[j].url + '\')">' + pagerankSorted[j].url + '</a></p></div>';
     }
     $('#pagerank-sorted').html(pagerankSortedHtml);
-    updateRanking(ranking);
-    loadLink(pagerankSorted[0].url)
+    updateGraph();
+    graphObj.updateRanking(function(d) {
+      return ranking[d];
+    });
+    if(pagesDisplayed!=pagerankSorted.length) {
+      enqueueRankPages();
+    }
+    pagesDisplayed = pagerankSorted.length;
+    var currentUrl = $('#link-url').text();
+    loadLink(currentUrl?currentUrl:pagerankSorted[0].url);
   });
 };
 
-var getNodes = function(graph) {
-  var link, links, page, pageMap, _i, _len;
-  pageMap = [];
-  for (page in graph) {
-    links = graph[page];
+/**
+ * list all URLs from siteMap (keys and values)
+ * @returns {Array}
+ */
+var getNodes = function() {
+  var pageMap = [];
+  for (var page in siteMap) {
+    var links = siteMap[page];
     if (pageMap.indexOf(page) === -1) {
       pageMap.push(page);
     }
-    for (_i = 0, _len = links.length; _i < _len; _i++) {
-      link = links[_i];
-      if (pageMap.indexOf(link) === -1) {
-        pageMap.push(link);
+    for (var i = 0; i < links.length; i++) {
+      if (pageMap.indexOf(links[i]) === -1) {
+        pageMap.push(links[i]);
       }
     }
   }
   return pageMap;
 };
 
+/**
+ * get matrix of link relationships
+ * @param graph
+ * @param nodes
+ */
 var graphObjectToMatrix = function(graph, nodes) {
-  var links, page, transformedGraph;
-  transformedGraph = nodes.map(function() {
-    return [];
-  });
-  for (page in graph) {
-    links = graph[page];
-    transformedGraph[nodes.indexOf(page)] = links.map(function(link) {
+  var transformedGraph = nodes.map(function() {return [];});
+  for (var page in graph) {
+    transformedGraph[nodes.indexOf(page)] = graph[page].map(function(link) {
       return nodes.indexOf(link);
     });
   }

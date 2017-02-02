@@ -48,6 +48,15 @@ function isValidUrl(url) {
   return validUrlRegex.test(url);
 }
 
+/**
+ * get the portion of a URL before # and strip trailing /
+ * @param url
+ * @returns {*}
+ */
+function getUrlCore(url) {
+  return url.split('#')[0].replace(/\/$/, '');
+}
+
 /***
  * add http:// prefix to an input element if empty, and clean up "http://http"
  * @param elem jQuery element

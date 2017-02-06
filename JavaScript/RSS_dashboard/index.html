@@ -1,0 +1,159 @@
+<%= header_begin %>
+
+<title>RSS Dashboard - Algorithmia</title>
+
+<link rel="canonical" href="http://demos.algorithmia.com/rss-dashboard/">
+<meta name="description" content="Automatically create summaries, extract tags, and analyze the sentiment of RSS feeds with this microservice.">
+
+<!-- FB -->
+<meta property="og:title" content="Summarize, tag, & analyze RSS feeds">
+<meta property="og:url" content="http://demos.algorithmia.com/rss-dashboard/">
+<meta property="og:description" content="Automatically create summaries, extract tags, and analyze the sentiment of RSS feeds with this microservice">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:image" content="http://demos.algorithmia.com/rss-dashboard/public/images/fbshare.jpg">
+<meta property="og:site_name" content="Algorithmia">
+
+<!-- TWTR -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@algorithmia">
+<meta name="twitter:title" content="Summarize, tag, & analyze RSS feeds">
+<meta name="twitter:description" content="Automatically create summaries, extract tags, and analyze the sentiment of RSS feeds with this microservice">
+<meta name="twitter:image" content="http://demos.algorithmia.com/rss-dashboard/public/images/twshare.jpg">
+<meta name="twitter:creator" content="@matt_kiser">
+
+<!-- OTHER -->
+<meta itemprop="name" content="Summarize, tag, & analyze RSS feeds">
+<meta itemprop="description" content="Automatically create summaries, extract tags, and analyze the sentiment of RSS feeds with this microservice">
+
+<%= header_end %>
+
+<section class="hero purple-grad-background">
+  <div class="container">
+
+    <div class="row row-sm">
+      <div class="col-md-12 col-lg-8">
+        <h1>RSS Dashboard</h1>
+        <h4 class="secondary-light whitespace-md">This tool takes in a URL to an RSS feed, and offers automatically generated tag suggestions, text summary, and sentiment analysis.</h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <form class="card" onsubmit="processFeed(); return false;">
+        <!-- Inputs -->
+          <div class="form-group">
+            <label class="block">Select an example RSS feed:</label>
+            <select id="rssSelector" class="form-control" onchange="updateRssUrl()">
+              <option disabled>Select an example RSS feed</option>
+
+              <!-- Replace these with links to your favorite RSS feeds -->
+              <option value="https://news.ycombinator.com/rss">HackerNews</option>
+              <option value="http://feeds.feedburner.com/codinghorror">Coding Horror</option>
+              <!--<option value="https://www.reddit.com/r/programming/.rss">r/programming</option>-->
+              <option value="http://www.alistapart.com/feed/rss.xml">A List Apart</option>
+              <option value="http://www.nytimes.com/services/xml/rss/nyt/Technology.xml">NYT Technology</option>
+              <option value="http://blog.algorithmia.com/rss">Algorithmia Blog</option>
+            </select>
+          </div>
+             
+          <label class="block">Or input your own:</label>
+          <div class="form-group">
+            <input class="form-control" id="rssUrl">
+          </div>
+
+          <div class="form-group">
+            <button class="btn btn-primary whitespace-none" onclick="processFeed()">Analyze RSS</button>
+            <span class="aspinner hidden" id="fetch-spinner"></span>
+            <span id="status-label"></span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container hidden" id="resultsWrapper">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="border-bottom">Results</h2>
+      <div id="results">
+        <!-- OUTPUT INSERTED HERE -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPLANATION -->
+<div class="grey-background">
+<section class="container">
+  <div class="row row-md">
+    <div class="col-md-12">
+      <h2 class="whitespace-none">How it works</h2>
+      <h4>Extracting summaries, tags, and sentiment from an RSS feed</h4>
+    </div>
+  </div>
+  <div class="row row-md">
+    <div class="col-md-8">
+      <h3>Tools used</h3>
+      <ul>
+        <li><a href="https://algorithmia.com/algorithms/tags/ScrapeRSS">ScrapeRSS</a> – scrapes the RSS feed, extracting each entry's title and url</li>
+        <li><a href="https://algorithmia.com/algorithms/util/Html2Text">Html2Text</a> – scrapes HTML from the entry's url and converts its main content to plain text</li>
+        <li><a href="https://algorithmia.com/algorithms/nlp/Summarizer">Summarizer</a> – creates a summary by extracting topic sentences based on frequency of key terms</li>
+        <li><a href="https://algorithmia.com/algorithms/nlp/AutoTag">AutoTag</a> – uses a variant of <a href="https://algorithmia.com/algorithms/nlp/LDA">nlp/LDA</a> to extract keywords.</li>
+        <li><a href="https://algorithmia.com/algorithms/nlp/SentimentAnalysis">SentimentAnalysis</a> – assigns a sentiment rating from -1 (very negative) to to 1 very positive.
+</li>
+      </ul>
+    </div>
+  </div>
+  <div class="row row-md">
+    <div class="col-md-8">
+      <h3>Source Data</h3>
+      <p>We examine the provided RSS feed, extract the title and content URL, then and convert the content into plain text (while removing tags which do not contribute to its meaning).  Then we extract topic tags from the converted content, analyze it for positive or negative sentiment, and generate a meaningful summary.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <h3>Takeaway</h3>
+      <p>By wiring up a series of very simple API calls, a developer can easily and quickly scrape content from a variety of sources and perform automatic summarization, tagging, and even complex sentiment analysis... all without writing a single line of text-processing code or performing any sever-management tasks.  This makes it possible to build web dashboards, in-app content analysis, or backend pipelines in mere hours.</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- BUILT FOR DEVS -->
+<section class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <h2 class="whitespace-sm">Built For Developers</h2>
+      <h4 class="secondary whitespace-md">A simple, scalable API for machine intelligence</h4>
+        <p class="item-title">SAMPLE INPUT</p>
+        <pre class="whitespace-md"><code hlcode="js" class="ng-scope hljs js javascript"><span class="hljs-keyword"><span class="hljs-keyword">var</span></span> input = <span class="hljs-string"><span class="hljs-string">"https://news.ycombinator.com/rss"</span></span>;
+Algorithmia.client(<span class="hljs-string"><span class="hljs-string">"YOUR_API_KEY"</span></span>)
+           .algo(<span class="hljs-string"><span class="hljs-string">"algo://tags/ScrapeRSS/0.1.6"</span></span>)
+           .pipe(input)
+           .then(<span class="hljs-function"><span class="hljs-keyword"><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span class="hljs-function">(</span><span class="hljs-params"><span class="hljs-function"><span class="hljs-params">output</span></span></span><span class="hljs-function">) </span></span>{
+             <span class="hljs-built_in"><span class="hljs-built_in">console</span></span>.log(output);
+           });
+</code></pre>
+          <p class="item-title">SAMPLE OUTPUT</p>
+          <pre><code class="hljs json">[
+  {
+    <span class="hljs-attr"><span class="hljs-attr">"title"</span></span>: <span class="hljs-string"><span class="hljs-string">"Waitin' (on Leiningen)"</span></span>,
+    <span class="hljs-attr"><span class="hljs-attr">"url"</span></span>: <span class="hljs-string"><span class="hljs-string">"http://swannodette.github.io/2014/12/22/waitin/"</span></span>,
+    <span class="hljs-attr"><span class="hljs-attr">"description"</span></span>: <span class="hljs-string"><span class="hljs-string">"&lt;a href=\"https://news.ycombinator.com/item?id=8790001\"&gt;Comments&lt;/a&gt;"</span></span>
+  },
+  {
+    <span class="hljs-attr"><span class="hljs-attr">"title"</span></span>: <span class="hljs-string"><span class="hljs-string">"Daala progress update"</span></span>,
+    <span class="hljs-attr"><span class="hljs-attr">"url"</span></span>: <span class="hljs-string"><span class="hljs-string">"https://people.xiph.org/~xiphmont/demo/daala/update1.shtml"</span></span>,
+    <span class="hljs-attr"><span class="hljs-attr">"description"</span></span>: <span class="hljs-string"><span class="hljs-string">"&lt;a href=\"https://news.ycombinator.com/item?id=8790468\"&gt;Comments&lt;/a&gt;"</span></span>
+  }
+]</code></pre>
+      <a href="https://algorithmia.com/algorithms/tags/ScrapeRSS" class="btn btn-primary-inverse">
+        LEARN MORE
+      </a>
+    </div>
+  </div>
+</section>
+
+<%= footer %>

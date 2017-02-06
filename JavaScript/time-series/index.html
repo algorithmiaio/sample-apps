@@ -1,0 +1,176 @@
+	<%= header_begin %>
+
+	<title>Time Series – Algorithmia</title>
+	<link rel="canonical" href="http://demos.algorithmia.com/timeseries/" />
+	<meta name="description" content="Track economic development with open data and predictive algorithms">
+	<meta name="robots" content="index,follow">
+
+	<!-- FB -->
+	<meta property="og:title" content="Track Economic Development">
+	<meta property="og:url" content="http://demos.algorithmia.com/timeseries/">
+	<meta property="og:description" content="Track economic development with open data and predictive algorithms">
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="website" />
+	<meta property="og:image" content="http://demos.algorithmia.com/timeseries/public/images/fbshare.jpeg" />
+	<meta property="og:site_name" content="Algorithmia" />
+
+	<!-- TWTR -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@algorithmia" />
+	<meta name="twitter:title" content="Track Economic Development" />
+	<meta name="twitter:description" content="Track economic development with open data and predictive algorithms" />
+	<meta name="twitter:image" content="http://demos.algorithmia.com/timeseries/public/images/twshare.jpeg" />
+	<meta name="twitter:creator" content="@matt_kiser" />
+
+	<!-- OTHER -->
+	<meta itemprop="name" content="Track Economic Development">
+	<meta itemprop="description" content="Track economic development with open data and predictive algorithms">
+
+	<%= header_end %>
+
+	<section class="hero purple-grad-background">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-lg-8">
+					<h1>Track Economic Development</h1>
+					<h4 class="secondary-light whitespace-md">Track economic development with open data and predictive algorithms</h4>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="container">
+		<div class="row row-md">
+			<div class="col-md-12">
+				<h2 class="whitespace-sm">Algorithmia Time Series Analysis</h2>
+			    <p>This tool analyzes time series data. It uses Socrata Open Government data on building permits to analyze development trends in various cities.</p>
+			</div>
+	    </div>
+
+		<div id="timeseries-controls">
+		    <div class="row row-sm">
+			    <div class="col-xs-6 col-sm-3 variable-select">
+			      <h3>Data Source</h3>
+			      <select class="form-control" id="dataSource" onchange="retrieveData()">
+			        <option value="Los Angeles">Los Angeles, CA</option>
+			        <option value="Boston">Boston, MA</option>
+			        <option value="Santa Rosa">Santa Rosa, CA</option>
+			        <option value="Fort Worth">Fort Worth, TX</option>
+			        <option value="New York City">New York City, NY</option>
+			        <option value="Edmonton">Edmonton, Canada</option>
+			      </select>
+			    </div>
+			    <div class="col-xs-6 col-sm-3 variable-select">
+			      <h3>Analysis</h3>
+			      <select class="form-control" id="dataAnalysis" onchange="runAnalysis()">
+			        <option value="/timeseries/Forecast/0.2.0">Forecast</option>
+			        <option value="/timeseries/OutlierDetection/0.1.0">Outlier Detection</option>
+			        <option value="/timeseries/AutoCorrelate/0.2.0">Auto Correlate</option>
+			      </select>
+			    </div>
+		    	<div class="col-xs-6 col-sm-3 variable-select">
+				    <h4 class="whitespace-sm">Filter 1</h4>
+				    <select class="form-control" id="dataFilter1" onchange="runAnalysis()">
+				    	<option value="">None</option>
+				        <option value="/timeseries/LinearDetrend/0.1.1">Linear Detrend</option>
+				        <option value="/timeseries/RemoveSeasonality/0.1.1">Remove Seasonality</option>
+				        <option value="/timeseries/SimpleMovingAverage/0.2.0">Simple Moving Average</option>
+				    </select>
+				</div>
+		
+			    <div class="col-xs-6 col-sm-3 variable-select">
+			      <h4 class="whitespace-sm">Filter 2</h4>
+			      <select class="form-control" id="dataFilter2" onchange="runAnalysis()">
+			        <option value="">None</option>
+				        <option value="/timeseries/LinearDetrend/0.1.1">Linear Detrend</option>
+				        <option value="/timeseries/RemoveSeasonality/0.1.1">Remove Seasonality</option>
+				        <option value="/timeseries/SimpleMovingAverage/0.2.0">Simple Moving Average</option>
+			      </select>
+			    </div>
+			</div>
+
+ 		<div>
+		      <span class="text-danger" id="errorMessage"></span>
+        </div>
+
+	  		<div class="row row-sm">
+				<div class="col-md-12">
+                    <div id="timeseries-chart"></div>
+			    </div>
+	    	</div>
+		</div>
+	</section>
+
+	<div class="grey-background">
+	<section class="container">
+		<div class="row row-md">
+			<div class="col-md-12">
+				<h2 class="whitespace-none">How it works</h2>
+				<h4>Tracking Economic Development with Open Data and Predictive Algorithms</h4>
+			</div>
+		</div>
+		<div class="row row-md">
+			<div class="col-md-8">
+				<h3>Tools used</h3>
+				<ul>
+					<li><a href="https://algorithmia.com/algorithms/marksskram/SocrataOpenDataQuery">Socrata Open Data Query</a> – pulls the permit data from Socrata</li>
+					<li><a href="https://algorithmia.com/algorithms/timeseries/SimpleMovingAverage">Simple Moving Average</a> – uses local average to smooth data</li>
+					<li><a href="https://algorithmia.com/algorithms/timeseries/LinearDetrend">Linear Detrend</a> – removes increasing or decreasing trends in time series</li>
+					<li><a href="https://algorithmia.com/algorithms/timeseries/AutoCorrelate">Autocorrelate</a> – used to analyze the seasonality of a time series</li>
+					<li><a href="https://algorithmia.com/algorithms/timeseries/RemoveSeasonality">Remove Seasonality</a> – removes known seasonal effects from a time series</li>
+					<li><a href="https://algorithmia.com/algorithms/timeseries/OutlierDetection">Outlier Detection</a> – flags unusual data points</li>
+					<li><a href="https://algorithmia.com/algorithms/timeseries/Forecast">Forecast</a> – predict a given time series into the future</li>
+				</ul>
+			</div>
+		</div>
+		<div class="row row-md">
+			<div class="col-md-8">
+				<h3>Source Data</h3>
+				<p>We use an algorithm to directly access Socrata’s API that can be found here.</p>
+				<p>Once we’ve retrieved the data, we aggregate it by total number of permits issued per month, and plot this data. To make the graph clearer, it sometimes helps to smooth or denoise the data. There are a number of ways to do this, with moving averages being the most popular. The most intuitive is the Simple Moving Average, which replaces each point by the average of itself and some number of the preceding points (default is 3).</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				<h3>Takeaway</h3>
+				<p>The takeaway from this example is not the individual pieces – most of these techniques are available a number of places. The secret here is that it is simple, composable, and fully automated. Once one person writes a data connector in Algorithmia (which is likely to happen for interesting public data, like that provided by Socrata), you don’t have to burn precious time writing and working kinks out of your own. On the other hand, if something existing gets done better, the compositional nature of Algorithmia will allow you to swap out pieces of a pipeline seamlessly. When someone comes up with a better outlier detector, then upgrading a pipeline like the one above can be literally just a few keystrokes away.</p>
+			</div>
+		</div>
+	</section>
+	</div>
+
+  <!-- BUILT FOR DEVS -->
+  <section class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <h2 class="whitespace-sm">Built For Developers</h2>
+        <h4 class="secondary whitespace-md">A simple, scalable API for machine intelligence</h4>
+          <p class="item-title">SAMPLE INPUT</p>
+          <pre class="whitespace-md"><code hlcode="js" class="ng-scope hljs js javascript"><span class="hljs-keyword"><span class="hljs-keyword">var</span></span> input = [[0,1,2,3,4,5,6,7,8,9,10],5,2];
+Algorithmia.client(<span class="hljs-string"><span class="hljs-string">"YOUR_API_KEY"</span></span>)
+           .algo(<span class="hljs-string"><span class="hljs-string">"algo://timeseries/Forecast/0.2.0"</span></span>)
+           .pipe(input)
+           .then(<span class="hljs-function"><span class="hljs-keyword"><span class="hljs-function"><span class="hljs-keyword">function</span></span></span><span class="hljs-function">(</span><span class="hljs-params"><span class="hljs-function"><span class="hljs-params">output</span></span></span><span class="hljs-function">) </span></span>{
+             <span class="hljs-built_in"><span class="hljs-built_in">console</span></span>.log(output);
+           });
+  </code></pre>
+            <p class="item-title">SAMPLE OUTPUT</p>
+            <pre><code class="hljs json">[11, 12, 13, 14, 15]</code></pre>
+        <a href="https://algorithmia.com/algorithms/tags/ScrapeRSS" class="btn btn-primary-inverse">
+          LEARN MORE
+        </a>
+      </div>
+    </div>
+  </section>
+
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript">
+		google.load('visualization', '1.1', {
+			packages: ['corechart']
+			// packages: ['scatter']
+		});
+	</script>
+	<script src="public/js/d3.min.js"></script>
+	<script src="public/js/algorithmia.d3.js"></script>
+
+	<%= footer %>

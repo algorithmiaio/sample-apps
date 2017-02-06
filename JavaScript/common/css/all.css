@@ -1,0 +1,409 @@
+/* 
+*  GENERAL STYLING FOR DEMOS
+*  Default style is for xs screens. Necessary responsive adjustments are made in media queries
+*/
+
+html,
+body {
+    font-size:   16px;
+    font-size:   1em;
+    color:       rgba(0,0,0,.87);
+    font-family: 'Open Sans', Georgia, serif;
+    font-weight: 300;
+}
+
+/***  STRUCTURE  ***/
+
+/*$CONTAINER*/
+/* Adds default padding to top of container. Balances whitespace from rows */
+.container            {padding-top: 4rem;}
+.container.md-padding {padding-top: 2rem;}
+.container.sm-padding {padding-top: 1rem;}
+.container.no-padding {padding-top: 0;}
+
+/* $ROWS */
+/* Adds whitespace to rows */
+.row    {margin-bottom: 4rem;}
+/* Requires .row class */
+.row-md {margin-bottom: 2rem;}
+.row-sm {margin-bottom: 1rem;}
+/* Centers element(s) using flexbox. Place on parent. */
+.vert-center {
+   display:                 -webkit-flex;
+   display:                 flex;
+   -webkit-flex-direction:  row;
+   flex-direction:          row;
+   -webkit-align-items:     center;
+   align-items:             center;
+   -webkit-justify-content: center;
+   justify-content:         center;
+}
+/* Aligns an element to the bottom of the container. */
+.flex-bottom {
+   display: -webkit-flex;
+   display: flex;
+   -webkit-flex-direction: column;
+   flex-direction: column;
+   -webkit-align-items: flex-end;
+   align-items: flex-end;
+}
+/* Center a single column row. Place after col-*-* class. */
+.col-centered {float: none; margin: 0 auto;}
+
+/***  GENERAL ELEMENTS  ***/
+/* Background colors for sections. Place outside of container for full page width */
+.purple-background      {background-color: #5000BE;}
+.purple-grad-background {background: linear-gradient(#6730B0, #492CAB);}
+.grey-background        {background-color: #F1F1F1;}
+/* Breaks up two ligth sections. Place outside of container for full page width. On container for container width. */
+.border-bottom          {border-bottom: 1px solid rgba(0,0,0,.12);}
+
+/* $NAVIGATION */
+/* navbar on top */
+.navbar {
+    min-height: 4rem;
+    background-color: #444A55;
+    margin-bottom: 0;
+    border-bottom: none;
+    /* vertical center */
+    display:        flex;
+    align-items:    center;
+}
+.navbar-default .navbar-nav>li>a       {color: white;}
+.navbar-default .navbar-nav>li>a:hover {color: #C9C7CB;}
+.navbar-inverse .navbar-nav>li>a       {color: white;}
+.navbar-inverse .navbar-nav>li>a:hover {color: #C9C7CB;}
+.navbar-brand > img {
+    width: 230px;
+}
+/* Nav Tabs. Default size is for xs screens */ 
+.nav-tabs {
+    border-bottom: 1px solid #5000BE;
+    font-size: .75rem;
+    border-radius: 0;
+    font-weight: 300;
+}
+.nav-tabs > li {
+    float:      none;
+    display:    inline-block;
+}
+/* Not active. Grey with no border. */
+.nav-tabs>li>a       {color: rgba(0,0,0,.54); padding: .25rem;}
+.nav-tabs>li>a:hover {
+    color:            #5000BE;
+    background-color: transparent;
+    border: 1px solid transparent;
+    cursor:           pointer;
+}
+/* Active. Purple with border. */
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:focus,
+.nav-tabs>li.active>a:hover {
+    background-color:    #FFFFFF;
+    color:               #5000BE;
+    font-weight:         300;
+    border:              1px solid #5000BE;
+    border-bottom-color: #FFFFFF;
+    border-radius:       0;
+}
+/* $FOOTER */
+footer {
+    border-top: 1px solid rgba(0,0,0,.12);
+}
+
+/* $HEADERS*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family:    'Raleway', Helvetica, sans-serif;
+    padding:        0;
+    letter-spacing: 0.04rem;
+}
+/* Used only for the hero */
+h1 {
+    font-size:      3rem;
+    color:          #FFFFFF;
+    margin:         0;
+}
+/* Used for section headers */
+h2 {
+    margin:    0 0 2rem 0;
+    color:     rgba(0,0,0,.87);
+    font-size: 3rem;
+}
+h3,
+h4 {
+    font-size:   1.5rem;
+    color:  rgba(0,0,0,.87);
+    margin: 0 0 .5rem 0;
+}
+h3 {font-weight: 700;}
+h1,
+h2,
+h4 {font-weight: 300;}
+h4 {color: rgba(0,0,0,.54);}
+
+/* $BODY */
+p,
+p.lg {
+    font-family:    'Open Sans', Georgia, serif;
+    color:          rgba(0,0,0,.87);
+    letter-spacing: 0.02rem;
+    line-height:    1.45;
+    margin:         0 0 1rem 0;
+}
+p {
+    font-size:   1rem;
+    font-weight: 300;
+}
+/* Used for more prominent body text */
+p.lg {
+    font-size:   1.25rem;
+    font-weight: 300;
+}
+.secondary-text {font-size: .75rem;}
+.item-title  {
+  color: rgba(0,0,0,.54)!important;  /* overrides things like p.lg */
+  margin-bottom: 0!important;
+  text-transform: uppercase;
+}
+
+img       {max-width: 100%;}
+.img-fill {width: 100%;}
+
+/* Colors for text. (Default is dark) */
+.dark            {color: rgba(0,0,0,.87);}
+.secondary       {color: rgba(0,0,0,.54);}
+.light           {color: #FFFFFF;}
+.secondary-light {color: rgba(255,255,255,.7);}
+
+/* Bottom spacing for elements to override default. Hopefully eliminate !important */
+.whitespace-none {margin-bottom: 0!important;}
+.whitespace-sm   {margin-bottom: .5rem!important;}
+.whitespace      {margin-bottom: 1rem!important;}
+.whitespace-md   {margin-bottom: 2rem!important;}
+.whitespace-lg   {margin-bottom: 4rem!important;}
+
+/* $LINKS */
+/* Purple with underline hover (Default link style) */
+a {
+    color:           #5000BE;
+    text-decoration: none;
+    cursor:          pointer;
+    font-family:     'Open Sans', Georgia, serif;
+    letter-spacing:  0.02rem;
+}
+/* For links on a dark background */
+a.light        {color: #FFFFFF; text-decoration: underline;}
+/* Hover state */
+a:hover        {color: #5000BE; text-decoration: underline;}
+a.light:hover  {color: #FFFFFF; text-decoration: none;}
+/* Hover state */
+a:focus        {color: #5000BE; text-decoration: underline;}
+a.light:focus  {color: #FFFFFF; text-decoration: none;}
+
+/* $BUTTONS */
+.btn {
+    display:         inline-block;
+    font-family:     'Open Sans', Georgia, serif;
+    text-transform:  uppercase;
+    text-decoration: none;
+    font-weight:     400;
+    border-radius:   0;
+    padding:         .5rem 1rem;
+    letter-spacing:  0.08rem;
+    line-height:     1.45;
+    cursor:          pointer;
+}
+.btn:hover {
+    transition: ease-in-out .3s;
+    text-decoration: none;  
+}
+/* Purple with white */
+.btn-primary {
+    color:            #FFFFFF;
+    background-color: #5000BE;
+    border: 1px solid #5000BE;
+}
+.btn-primary:hover {
+    color:            #5000BE;
+    background-color: transparent;
+    text-decoration:  none;
+    border: 1px solid #5000BE;
+}
+.btn-primary:focus {
+    text-decoration:  none;
+    background-color: #5000BE;
+    color:            #FFFFFF;
+    border: 1px solid #FFFFFF;
+}
+
+/* White with purple */
+.btn-primary-inverse {
+    color:            #5000BE;
+    background-color: #FFFFFF;
+    border: 1px solid #5000BE;
+}
+.btn-primary-inverse:hover {
+    color:            #FFFFFF;
+    background-color: #5000BE;
+    border: 1px solid #FFFFFF;
+}
+.btn-primary-inverse:focus {
+    color:            #5000BE;
+    background-color: #FFFFFF;
+    text-decoration:  none;
+    border: 1px solid #5000BE;
+}
+
+/* Blue with white */
+.btn-info {
+    color:            #FFFFFF;
+    background-color: #0055BE;
+    border: 1px solid #FFFFFF;
+}
+.btn-info:hover {
+    color:            #0055BE;
+    background-color: #FFFFFF;
+    text-decoration:  none;
+    border: 1px solid #0055BE;
+}
+.btn-info:focus {
+    color:            #FFFFFF;
+    background-color: #0055BE;
+    text-decoration:  none;
+    border: 1px solid #FFFFFF;
+}
+
+/* White with blue */
+.btn-info-inverse {
+    color:            #0055BE;
+    background-color: #FFFFFF;
+    border: 1px solid #0055BE;
+}
+.btn-info-inverse:hover {
+    color:            #FFFFFF;
+    background-color: #0055BE;
+    border: 1px solid #FFFFFF;
+}
+.btn-info-inverse:focus {
+    color:            #0055BE;
+    background-color: #FFFFFF;
+    text-decoration:  none;
+    border: 1px solid #0055BE;
+}
+
+/* Green with white */
+.btn-success {
+    color:            #FFFFFF;
+    background-color: #5CB85C;
+    border: 1px solid #5CB85C;
+}
+.btn-success:hover {
+    color:            #5CB85C;
+    background-color: transparent;
+    border: 1px solid #5CB85C;
+}
+.btn-success:focus {
+    color:            #FFFFFF;
+    background-color: transparent;
+    text-decoration:  none;
+    border: 1px solid #5CB85C;
+}
+
+/* White with green */
+.btn-success-inverse {
+    color:            #5CB85C;
+    background-color: transparent;
+    border: 1px solid #5CB85C;
+}
+.btn-success-inverse:hover {
+    color:            #FFFFFF;
+    background-color: #5CB85C;
+    border: 1px solid #5CB85C;
+}
+.btn-success-inverse:focus {
+    color:            #5CB85C;
+    background-color: #FFFFFF;
+    text-decoration:  none;
+    border: 1px solid #FFFFFF;
+}
+.btn-flat {
+    color: #5000BE;
+    padding: 0;
+    border: none;
+}
+.btn-flat:hover,
+.btn-flat:focus {
+    color: #5000BE;
+    border: none;
+    text-decoration: underline;
+}
+
+/* Moves btn to right side. Place on parent */
+.btn-right {text-align: right;}
+
+/* $ICONS */
+.icons       {display: block;}
+.social-icon {
+    width:        1.5rem;
+    max-height:   1.5rem;
+    display:      inline-block;
+    margin-right: .5rem;
+}
+.social-icon:hover {opacity: .7;}
+
+/* $FORMS */
+.card {
+  position: relative; /* For overlaid dots */
+  padding: 1.5rem;
+  background-color: rgba(255,255,255,.8);
+  border-radius: 0;
+}
+/* Chrome doesn't honor 'select' border radius. you can remove styling to fix it. */
+.form-control {
+  border-radius: 0;
+  border: 1px solid rgba(0,0,0,.12);
+  box-shadow: none;
+}
+.card .form-control {
+  min-height: 38px;
+  border: 1px solid #FFFFFF;
+}
+.form-control:focus {
+  border-color: #5000BE;
+  box-shadow: none;
+}
+
+/* $CODE */
+pre {
+    padding: 0;
+    margin: 0; /* reset default values */
+    margin-bottom: 1rem;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+}
+
+/* $MEDIA QUERIES */
+/* Extra small devices (phones, less than 768px) */
+/* This should be the default AKA no styles here */
+/*@media (min-width: @screen-xs-min) {}*/
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    /* Bump up tab size for larger screens */
+    .nav-tabs           {font-size: 1.25rem;}
+    .nav-tabs>li>a      {padding:   .5rem 1rem;}
+    .navbar-brand > img {width:     250px;}
+    h1 {font-size: 4em;} /* increase header size on larger screens */
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}

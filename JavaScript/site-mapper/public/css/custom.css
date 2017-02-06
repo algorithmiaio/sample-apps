@@ -1,0 +1,151 @@
+/* Site-mapper */
+
+img.placeholder {
+  width: auto;
+  height: 100%;
+}
+
+.hero {    
+    background-image: url(../images/site-map.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.depth-wrapper {
+    padding-left: 15px;
+}
+
+#scrape-status {
+    font-weight: bolder;
+}
+
+.text-danger {
+    padding-top: 1em;
+}
+.nav-tabs {font-size: 16px;}
+/* PANELS */
+svg {
+    background-color: #fff;
+    border: 1px solid black;
+}
+svg.viz {
+  height: 700px;
+  border: 1px solid rgba(0,0,0,.12);
+}
+svg circle {
+  cursor: pointer;
+}
+
+#viz-panel {
+  text-align: center;
+  border: 1px solid rgba(0,0,0,.12);
+  height: 500px;
+  width: 100%;
+  position: relative;
+}
+.scale {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+#pagerank-panel {
+  height: auto;
+  width: 100%;
+  overflow-y: visible;
+  word-wrap: break-word;
+}
+#pagerank-panel p {margin-bottom: .5rem;}
+#pagerank-panel::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+#pagerank-panel::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(80,0,190,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+#link-url {word-wrap: break-word;}
+.pagerank-links {
+  padding-left: 0;
+}
+.pagerank-rank {
+  padding-left: .5rem;
+}
+.link-details-panel {
+  height: 200px;
+  overflow-y: auto;
+}
+/* Label */
+.label {
+  border-radius: 0;
+}
+.label-purple {
+  color: #FFFFFF;
+  background-color: #5000BE;
+}
+span.label {
+  font-size: .75rem;
+  line-height: 2;
+}
+svg.viz {
+  height: 700px;
+  border: 1px solid rgba(0,0,0,.54);
+}
+.tag-pills>a {
+  padding: 0 .6rem 0;
+  border-radius: 0;
+  color: #FFFFFF;
+  background-color: #5000BE;
+  display: inline-block;
+  margin: 2px;
+}
+
+/* BTN DOTS */
+/* place on btn because dots are absolute positioned */
+.btn-dots {
+  position: relative;
+  min-width: 155px; /* Any smaller and the dots collapse */
+}
+/* No viz applied to btn text so that btn keeps original size */
+.no-viz {
+  visibility: hidden;
+}
+/* overwrite common properties to better position dots */
+.dots-container {
+  top: 35%;
+  left: 20%;
+  transform: none;
+}
+/* Change dot color because background is purple */
+.dot1 {background: #FFFFFF;}
+.dot2 {background: #773CC9;}
+.dot3 {background: #4500A4;}
+.dot4 {background: #35007E;}
+
+
+/* $MEDIA QUERIES */
+/* Extra small devices (phones, less than 768px) */
+/* This should be the default AKA no styles here */
+/*@media (min-width: @screen-xs-min) {}*/
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .depth-wrapper {
+    padding-left: 0;
+  }
+  .nav-tabs {
+    font-size: 1.25rem;
+  }
+  #pagerank-panel {
+    height: 500px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}

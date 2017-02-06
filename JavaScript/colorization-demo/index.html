@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<%= header_begin %>
+
 	<title>Colorize Black and White Photos – Algorithmia</title>
 	<link rel="canonical" href="http://demos.algorithmia.com/colorize-photos/" />
 	<meta name="description" content="Automatically colorize black and white photos, pictures, and images using the Colorful Image Colorization microservice.">
@@ -30,193 +26,116 @@
 	<meta itemprop="name" content="Colorize Black and White Photos">
 	<meta itemprop="description" content="Automatically colorize black and white photos, pictures, and images using the Colorful Image Colorization microservice">
 
-	<!-- CSS -->
-    <link rel="shortcut icon" href="public/images/favicon-bw.png" type="image/png">
-	<link href="public/css/bootstrap.min.css" rel="stylesheet">
-	<link href="public/css/all.css" rel="stylesheet">
-	<link href="public/css/custom.css" rel="stylesheet">
-	<link href="public/css/styles/monokai.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Lato:400,300" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+	<%= header_end %>
 
-
-	<!--   Google Analytics -->
-	<script>
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-	ga('create', 'UA-38617973-1', 'auto');
-	ga('send', 'pageview');
-	</script>
-
-</head>
-<body>
-	<div class="outer-container">
-		<div class="navbar navbar-default navbar-static-top navbar-public navbar-dark" role="navigation">
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="">
-						<img src="public/images/logo-white.png" alt="Algorithmia">
-					</a>
+	<section class="purple-grad-background hero">
+		<div class="container" id="content">
+			<div class="row">
+				<div class="col-md-7">
+					<h1>Colorize Photos</h1>
+					<h4 class="light whitespace-md">Use Deep Learning to Automatically Colorize Black and White Photos</h4>
 				</div>
-				<div class="navbar-collapse collapse">
-					<ul class="nav navbar-nav pull-right">
-						<li><a href="https://algorithmia.com/algorithms"><span>Algorithms</span></a></li>
-						<li><a href="https://algorithmia.com/use-cases">Use Cases</a></li>
-						<li><a href="https://algorithmia.com/pricing"><span>Pricing</span></a></li>
-						<li><a href="http://blog.algorithmia.com/"><span>Blog</span></a></li>
-						<li>
-							<a class="nav-link nav-username hidden-sm hidden-xs" href="https://algorithmia.com/signup?invite=color">
-								Sign up
+				<div class="col-sm-12 col-md-7">
+					<div class="card">
+						<h3 class="whitespace">Colorize a photo</h3>
+						<p class="whitespace-none">Paste the URL to an image or <br class="hidden-sm hidden-md hidden-lg hidden-xl" ><a href=""><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> UPLOAD</a></p>
+						<form class="form-group" onsubmit="callAlgorithm(); return false;">
+							<input type="text" class="form-control" id="imgUrl" placeholder="image URL">
+							<a class="btn btn-primary" type="button" onclick="callAlgorithm()">
+								<span class="glyphicon glyphicon-adjust" aria-hidden="true"></span>
+								Colorize It
 							</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-
-		<div class="content-container">
-			<div class="container" id="content">
-				<div class="row hero-background">
-					<div class="container hero">
-						<div id="pitch" class="col-md-7">
-							<h1>Colorize Photos</h1>
-							<h2 class="lead">Use Deep Learning to Automatically Colorize Black and White Photos</h2>
-							<div id="status-label"></div>
-							<div class="form-group well">
-								<p>Paste the URL to an image to colorize it</p>
-								<form onsubmit="callAlgorithm(); return false;">
-									<input type="text" class="form-control" id="imgUrl" placeholder="http://www.algorithmia.com/images/logo-white.png">
-									<button class="btn btn-primary mb" type="button" onclick="callAlgorithm()">
-										<span class="glyphicon glyphicon-adjust" aria-hidden="true"></span>
-										Colorize It
-									</button>
-								</form>
-								<p>
-									<small>
-										Or, try these sample images:
-									</small>
-								</p>
-								<div class="row">
-									<div class="col-md-2 col-xs-6">
-										<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/e/ef/Ocean_beach_at_low_tide_against_the_sun.jpg')"><img src="public/images/water.png" class="sample-images"></a>
-									</div>
-									<div class="col-md-2 col-xs-6">
-										<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/c/ce/MaynardYingst_SprintCar.jpg')"><img src="public/images/car.png" class="sample-images"></a>
-									</div>
-									<div class="clearfix visible-xs-block"></div>
-									<div class="col-md-2 col-xs-6">
-										<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/7/7d/Yosemite_(14359652100).jpg')"><img src="public/images/yosemite.png" class="sample-images"></a>
-									</div>
-									<div class="col-md-2 col-xs-6">
-										<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/e/e5/Fire-breather_CIELAB_L*.jpg')"><img src="public/images/fire.png" class="sample-images"></a>
-									</div>
-									<div class="clearfix visible-xs-block"></div>
-									<div class="col-md-2 col-xs-6">
-										<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/4/4d/Beef_Portrait_(5210343960).jpg')"><img src="public/images/cows.png" class="sample-images"></a>
-									</div>
-									<div class="col-md-2 col-xs-6">
-										<form class="primary-text dropzone" id="file-dropzone" action="javascript:;">
-											<div class="dz-message" data-dz-message>Upload photo</div>
-										</form>
-									</div>
-								</div>
+						</form>
+						<div id="status-label"></div>
+						<h4 class="dark whitespace-sm">Or, try these sample images:</h4>
+						<div class="row whitespace-none sample-images">
+							<div class="col-xs-4 col-sm-2 sample-image">
+								<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/e/ef/Ocean_beach_at_low_tide_against_the_sun.jpg')"><img src="public/images/water.png"></a>
+							</div>
+							<div class="col-xs-4 col-sm-2 sample-image">
+								<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/c/ce/MaynardYingst_SprintCar.jpg')"><img src="public/images/car.png" class="sample-image"></a>
+							</div>
+							<div class="col-xs-4 col-sm-2 sample-image">
+								<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/7/7d/Yosemite_(14359652100).jpg')"><img src="public/images/yosemite.png" class="sample-image"></a>
+							</div>
+							<div class="col-xs-4 col-sm-2 sample-image">
+								<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/e/e5/Fire-breather_CIELAB_L*.jpg')"><img src="public/images/fire.png" class="sample-image"></a>
+							</div>
+							<div class="col-xs-4 col-sm-2 sample-image">
+								<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/4/4d/Beef_Portrait_(5210343960).jpg')"><img src="public/images/cows.png" class="sample-image"></a>
 							</div>
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
+	</section>
 
-				<div class="row main-content">
-					<div class="container">
-						<div id="overlay" class="hidden">
-							<div class="dots-container">
-								<div class="dot dot1"></div>
-								<div class="dot dot2"></div>
-								<div class="dot dot3"></div>
-								<div class="dot dot4"></div>
-							</div>
+	<div class="container hidden">
+		<div id="overlay">
+			<div class="dots-container">
+				<div class="dot dot1"></div>
+				<div class="dot dot2"></div>
+				<div class="dot dot3"></div>
+				<div class="dot dot4"></div>
+			</div>
+		</div>
+	</div>
+
+	<!-- RESULTS SECTION -->
+	<section class="container">
+		<div class="row" id="results">
+			<div class="col-md-12">
+				<div class="explanation">
+					<h3>Photo Colorization Before and After</h3>
+					<figure>
+						<div id="twoface-demo">
+							<!-- <canvas id="twoface" width="800" height="533"></canvas> -->
+							<img src="public/images/placeholder.png">
 						</div>
+						<p>Drag the purple line to reveal the before and after</p>
+					</figure>
 
-						<!-- EXPLANATION PAGE -->
-						<div class="row" id="explainer">
-							<div class="col-md-6">
-								<div class="explanation">
-									<h4>
-										Easily Add Color to Your Black and White Photos
-									</h4>
-									<p>
-										Bring new life to old photos by automatically colorizing them using the Algorithmia API. It's as easy as pasting in a URL above.
-									</p>
-									<p>
-										We're excited to introduce <a href="http://blog.algorithmia.com/2016/07/cloud-hosted-deep-learning-models/" target="_blank">cloud hosted deep learning models</a> on Algorithmia. The <a href="https://algorithmia.com/algorithms/deeplearning/ColorfulImageColorization" target="_blank">Colorful Image Colorization microservice</a> is a computer vision algorithm trained on a million images from the Imagenet dataset.
-									</p>
-									<!-- NEED BLOG POST URL -->
-									<p>
-										This microservice is an implementation of the <a href="http://richzhang.github.io/colorization/" target="_blank">Colorful Image Colorization algorithm created by Richard Zhang, Phillip Isola, and Alexei A. Efros</a>.<!-- and <a href="#">how we built this demo</a>-->.
-									</p>
-									<p>
-										Let us know what you think <a href="https://twitter.com/algorithmia" target="_blank">@Algorithmia</a> or by <a href="https://algorithmia.com/contact" target="_blank">email</a>.
-									</p>
-									<hr>
-									<p>
-										<b>Join the thousands of developers using Algorithmia to build intelligent apps</b>
-										<br>
-										Create a free Algorithmia account using the code "color" and get an additional 10,000 free credits when you <a href="https://algorithmia.com/signup?invite=color" target="_new">sign up</a>.
-									</p>
-								</div>
-							</div>
-						</div>
+					<div class="" id="downloadLinks">
+						<a id="compareLink" class="btn btn-flat" href="#" onclick="ga('send', 'event', 'comparison', 'download');" download="colorize-compare.png">Download Comparison</a>
+						|
+						<a id="resultLink" class="btn btn-flat" href="#" onclick="ga('send', 'event', 'colorized', 'download');" download="colorized.png">Download Colorized Image</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
+	<!-- EXPLANATION SECTION -->
+	<div class="grey-background">
+	<section class="container">
+		<div class="row row-md">
+			<div class="col-md-12">
+				<h2 class="whitespace-none">How it works</h2>
+				<h4>Using computer vision to search unstructured video</h4>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				<p class="lg">Easily Add Color to Your Black and White Photos</p>
+				<p>Bring new life to old photos by automatically colorizing them using the Algorithmia API. It's as easy as pasting in a URL above.</p>
+				<p>We're excited to introduce <a href="http://blog.algorithmia.com/2016/07/cloud-hosted-deep-learning-models/" target="_blank">cloud hosted deep learning models</a> on Algorithmia. The <a href="https://algorithmia.com/algorithms/deeplearning/ColorfulImageColorization" target="_blank">Colorful Image Colorization microservice</a> is a computer vision algorithm trained on a million images from the Imagenet dataset.</p>
+				<!-- NEED BLOG POST URL -->
+				<p>This microservice is an implementation of the <a href="http://richzhang.github.io/colorization/" target="_blank">Colorful Image Colorization algorithm created by Richard Zhang, Phillip Isola, and Alexei A. Efros</a>.<!-- and <a href="#">how we built this demo</a>-->.</p>
+				<p>Let us know what you think <a href="https://twitter.com/algorithmia" target="_blank">@Algorithmia</a> or by <a href="https://algorithmia.com/contact" target="_blank">email</a>.</p>
+			</div>
+		</div>
+	</section>
+	</div>
 
-
-						<!-- RESULTS PAGE -->
-						<div class="row hidden" id="results">
-							<div class="col-md-12">
-								<div class="explanation">
-									<center>
-										<h4>
-											Photo Colorization Before and After<br>
-											<!-- <small id="urlAddress"></small> -->
-										</h4>
-										<figure>
-											<div id="twoface-demo"></div>
-											<figcaption>Drag the purple line to reveal the before and after</figcaption>
-										</figure>
-
-										<div class="hidden" id="downloadLinks" style="margin-top:15px">
-											<a id="compareLink" href="#" onclick="ga('send', 'event', 'comparison', 'download');" download="colorize-compare.png">Download Comparison</a>
-											|
-											<a id="resultLink" href="#" onclick="ga('send', 'event', 'colorized', 'download');" download="colorized.png">Download Colorized Image</a>
-										</div>
-									</center>
-								</div>
-							</div>
-						</div>
-
-						<div class="row invisible" id="social">
-							<div class="col-md-8 col-md-offset-2">
-
-								<a href="https://twitter.com/share" class="twitter-share-button" data-text="Colorize Black and White Photos" data-via="algorithmia" data-hashtags="colorizeit" data-show-count="false">Tweet</a>
-
-								<div class="fb-share-button" data-href="http://colorize-it.com" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fcolorize-it.com%2F&amp;src=sdkpreparse">Share</a></div>
-							</div>
-						</div>
-
-						<div class="row hidden" id="marketing">
-							<div class="col-md-8 col-md-offset-2">
-								<hr>
-								<center>
-									<h4>Built For Developers <br><small>A simple, scalable API for creating smarter products.</small></h4>
-								</center>
-								<pre><code class="python">import Algorithmia
+<!-- BUILT FOR DEVS -->
+  <section class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <h2 class="whitespace-sm">Built For Developers</h2>
+        <h4 class="whitespace-md">A simple, scalable API for machine intelligence</h4>
+          <p class="item-title">SAMPLE INPUT</p>
+          <pre class="whitespace-md"><code class="python">import Algorithmia
 
 input = {"image": "_IMAGE_URL_"}
 client = Algorithmia.client('_API_KEY_')
@@ -224,110 +143,18 @@ algo = client.algo('deeplearning/ColorfulImageColorization/1.0.1')
 
 print algo.pipe(input)
 </code></pre>
-							</div>
-							<div class="col-md-8 col-md-offset-2">
-								<pre><code class="json">{"output": "data://.algo/temp/image.png"}</code></pre>
-							</div>
-
-							<div class="col-md-8 col-md-offset-2">
-								<hr>
-									<center>
-									<p class="lead"><small>
-										<b>Join the thousands of developers using Algorithmia to build intelligent apps</b>
-										<br>
-										Get 10,000 additional credits when you <a href="https://algorithmia.com/signup?invite=color">sign up</a> using the code "color" </small>
-									</p>
-									<p><a href="https://algorithmia.com/signup?invite=color" target="_new" class="btn btn-success btn-lg">Sign Up For Free</a></p>
-								</center>
-								<hr>
-							</div>
-							<div class="col-md-8 col-md-offset-2">
-								<dl>
-								  <dt>Scalable API</dt>
-								  <dd>With an intuitive API, you have access to more than 2,200 algorithmic microservices. Build in your preferred language using Python, JavaScript, Java, Scala, Ruby, or Rust. <a href="http://developers.algorithmia.com/application-development/guides/" target="_blank">Learn more</a>
-								  </dd>
-								</dl>
-								<dl>
-								  <dt>Managed Platform</dt>
-								  <dd>Focus on building your app. We provide the tools and manage the cloud infrastructure needed to run it at scale. <a href="http://blog.algorithmia.com/2016/07/cloud-hosted-deep-learning-models/" target="_blank">Learn more</a></dd>
-								</dl>
-								<dl>
-								  <dt>Host Your Trained Models</dt>
-								  <dd>Have a trained machine learning or deep learning model? Turn it into a serverless microservices in minutes. We'll show you how. <a href="http://developers.algorithmia.com/algorithm-development/model-guides/" target="_blank">Learn more</a></dd>
-								</dl>
-								<dl>
-								  <dt>Try For Free</dt>
-								  <dd>Get started for free, and scale with ease. Algorithmia's free tier provides 5,000 free credits per month for apps of any scale. When you're ready to grow, pay only for what you use, making it easy and cost effective to go from prototype to production. <a href="https://algorithmia.com/signup?invite=color" target="_blank">Sign Up</a></dd>
-								</dl>
-								<hr>
-								<p>
-									Add the <a href="https://algorithmia.com/algorithms/deeplearning/ColorfulImageColorization" target="_blank">Colorful Image Colorization microservice</a> to your app today.
-								</p>
-								<p>
-									Now, researchers and developers can train their deep learning models locally, and <a href="http://blog.algorithmia.com/2016/07/cloud-hosted-deep-learning-models/" target="_blank">deploy them to Algorithmia’s scalable, cloud infrastructure</a>, where they become smart API endpoints for others developers to use.
-								</p>
-								<p>
-									This means application developers can now obtain real-time predictions from deep learning models, and build production-ready apps using state-of-the-art machine intelligence in five-lines of code or less.
-								</p>
-								<p>
-									Algorithms like this image colorizer join our collection of more than 2,200 algorithmic microservices.
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<footer>
-		<div class="container">
-			<div class="pull-left">
-				&copy; Algorithmia 2016
-			</div>
-			<ul class="list-inline pull-right">
-				<li><a href="https://algorithmia.com/about">About</a></li>
-				<li><a href="https://algorithmia.com/terms">Terms</a></li>
-				<li><a href="https://algorithmia.com/privacy">Privacy</a></li>
-				<li><a href="http://blog.algorithmia.com" target="_blank">Blog</a></li>
-				<li><a href="https://angel.co/algorithmia/jobs/" target="_blank">Jobs</a></li>
-				<li><a href="https://algorithmia.com/contact">Contact</a></li>
-			</ul>
-		</div>
-	</footer>
+            <p class="item-title">SAMPLE OUTPUT</p>
+            <pre><code class="json">{"output": "data://.algo/temp/image.png"}</code></pre>
+        <a href="https://algorithmia.com/algorithms/deeplearning/ColorfulImageColorization" class="btn btn-primary-inverse">
+          LEARN MORE
+        </a>
+      </div>
+    </div>
+  </section>
 
 	<!-- JS -->
-	<script src="public/js/jquery.min.js"></script>
-	<script src="public/js/bootstrap.min.js"></script>
 	<script src="public/js/TweenMax.min.js"></script>
-	<script src="public/js/algorithmia-0.2.0.js"></script>
 	<script src="public/js/twoimages.js"></script>
-	<script src="public/js/dots.js"></script>
-	<script src="public/js/highlight.pack.js"></script>
-	<script src="public/js/dropzone.js"></script>
-	<script src="public/js/main.js"></script>
-	<script>hljs.initHighlightingOnLoad();</script>
-	<script>
-	  window.intercomSettings = {
-	    app_id: "c9fj6354"
-	  };
-	</script>
-	<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/c9fj6354';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
 
-    <!-- Here be the social sharing scripts -->
-	<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-	<div id="fb-root"></div>
-	<script>(function(d, s, id) {
-	var js, fjs = d.getElementsByTagName(s)[0];
-	if (d.getElementById(id)) return;
-	js = d.createElement(s); js.id = id;
-	js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
-	fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));</script>
-	<style media="screen" type="text/css">
-	.fb_iframe_widget span {
-		vertical-align: baseline !important;
-	}
-	</style>
 
-</body>
-</html>
+<%= footer %>

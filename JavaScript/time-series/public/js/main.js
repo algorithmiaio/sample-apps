@@ -18,7 +18,7 @@ $(document).ready(function() {
  */
 $(window).resize(function() {
   defaultChartOptions.width = $("#timeseries-controls").width();
-  updateChart();
+  if(timeseriesAnalysis.length) {updateChart();}
 });
 
 var defaultChartOptions = {

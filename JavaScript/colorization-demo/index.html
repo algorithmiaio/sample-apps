@@ -11,7 +11,7 @@
 	<meta property="og:description" content="Automatically colorize black and white photos, pictures, and images using the Colorful Image Colorization microservice">
 	<meta property="og:locale" content="en_US" />
 	<meta property="og:type" content="website" />
-	<meta property="og:image" content="http://demos.algorithmia.com/colorize-photos/public/images/hero-fb.png" />
+	<meta property="og:image" content="http://demos.algorithmia.com/colorize-photos/public/images/fbshare.png" />
 	<meta property="og:site_name" content="Algorithmia" />
 
 	<!-- TWTR -->
@@ -19,7 +19,7 @@
 	<meta name="twitter:site" content="@algorithmia" />
 	<meta name="twitter:title" content="Colorize Black and White Photos" />
 	<meta name="twitter:description" content="Automatically colorize black and white photos, pictures, and images using the Colorful Image Colorization microservice" />
-	<meta name="twitter:image" content="http://demos.algorithmia.com/colorize-photos/public/images/hero-twttr.png" />
+	<meta name="twitter:image" content="http://demos.algorithmia.com/colorize-photos/public/images/twshare.png" />
 	<meta name="twitter:creator" content="@matt_kiser" />
 
 	<!-- OTHER -->
@@ -38,7 +38,7 @@
 				<div class="col-sm-12 col-md-7">
 					<div class="card">
 						<h3 class="whitespace">Colorize a photo</h3>
-						<p class="whitespace-none">Paste the URL to an image or <br class="hidden-sm hidden-md hidden-lg hidden-xl" ><a href=""><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> UPLOAD</a></p>
+						<p class="whitespace-none">Paste the URL to an image or <br class="hidden-sm hidden-md hidden-lg hidden-xl" ><a href="javascript:;" id="file-dropzone" ><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> UPLOAD</a></p>
 						<form class="form-group" onsubmit="callAlgorithm(); return false;">
 							<input type="text" class="form-control" id="imgUrl" placeholder="image URL">
 							<a class="btn btn-primary" type="button" onclick="callAlgorithm()">
@@ -50,48 +50,44 @@
 						<h4 class="dark whitespace-sm">Or, try these sample images:</h4>
 						<div class="row whitespace-none sample-images">
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/e/ef/Ocean_beach_at_low_tide_against_the_sun.jpg')"><img src="public/images/water.png"></a>
+								<a onclick="callAlgorithm('https://upload.wikimedia.org/wikipedia/commons/e/ef/Ocean_beach_at_low_tide_against_the_sun.jpg')"><img src="public/images/water.png"></a>
 							</div>
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/c/ce/MaynardYingst_SprintCar.jpg')"><img src="public/images/car.png" class="sample-image"></a>
+								<a onclick="callAlgorithm('https://upload.wikimedia.org/wikipedia/commons/c/ce/MaynardYingst_SprintCar.jpg')"><img src="public/images/car.png" class="sample-image"></a>
 							</div>
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/7/7d/Yosemite_(14359652100).jpg')"><img src="public/images/yosemite.png" class="sample-image"></a>
+								<a onclick="callAlgorithm('https://upload.wikimedia.org/wikipedia/commons/7/7d/Yosemite_(14359652100).jpg')"><img src="public/images/yosemite.png" class="sample-image"></a>
 							</div>
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/e/e5/Fire-breather_CIELAB_L*.jpg')"><img src="public/images/fire.png" class="sample-image"></a>
+								<a onclick="callAlgorithm('https://upload.wikimedia.org/wikipedia/commons/e/e5/Fire-breather_CIELAB_L*.jpg')"><img src="public/images/fire.png" class="sample-image"></a>
 							</div>
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="analyzeDefault('https://upload.wikimedia.org/wikipedia/commons/4/4d/Beef_Portrait_(5210343960).jpg')"><img src="public/images/cows.png" class="sample-image"></a>
+								<a onclick="callAlgorithm('https://upload.wikimedia.org/wikipedia/commons/4/4d/Beef_Portrait_(5210343960).jpg')"><img src="public/images/cows.png" class="sample-image"></a>
 							</div>
 						</div>
+						<div id="overlay" class="container hidden">
+							<div class="dots-container">
+                            	<div class="dot dot1"></div>
+                            	<div class="dot dot2"></div>
+                            	<div class="dot dot3"></div>
+                            	<div class="dot dot4"></div>
+                        	</div>
+                        </div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<div class="container hidden">
-		<div id="overlay">
-			<div class="dots-container">
-				<div class="dot dot1"></div>
-				<div class="dot dot2"></div>
-				<div class="dot dot3"></div>
-				<div class="dot dot4"></div>
-			</div>
-		</div>
-	</div>
-
 	<!-- RESULTS SECTION -->
-	<section class="container">
-		<div class="row" id="results">
+	<section class="container hidden" id="results">
+		<div class="row">
 			<div class="col-md-12">
 				<div class="explanation">
 					<h3>Photo Colorization Before and After</h3>
 					<figure>
-						<div id="twoface-demo">
-							<!-- <canvas id="twoface" width="800" height="533"></canvas> -->
-							<img src="public/images/placeholder.png">
+						<div id="twoface-wrapper">
+							<canvas id="twoface" width="800" height="624"></canvas>
 						</div>
 						<p>Drag the purple line to reveal the before and after</p>
 					</figure>
@@ -112,12 +108,11 @@
 		<div class="row row-md">
 			<div class="col-md-12">
 				<h2 class="whitespace-none">How it works</h2>
-				<h4>Using computer vision to search unstructured video</h4>
+				<h4>Easily Add Color to Your Black and White Photos</h4>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-8">
-				<p class="lg">Easily Add Color to Your Black and White Photos</p>
 				<p>Bring new life to old photos by automatically colorizing them using the Algorithmia API. It's as easy as pasting in a URL above.</p>
 				<p>We're excited to introduce <a href="http://blog.algorithmia.com/2016/07/cloud-hosted-deep-learning-models/" target="_blank">cloud hosted deep learning models</a> on Algorithmia. The <a href="https://algorithmia.com/algorithms/deeplearning/ColorfulImageColorization" target="_blank">Colorful Image Colorization microservice</a> is a computer vision algorithm trained on a million images from the Imagenet dataset.</p>
 				<!-- NEED BLOG POST URL -->
@@ -128,23 +123,23 @@
 	</section>
 	</div>
 
-<!-- BUILT FOR DEVS -->
+  <!-- BUILT FOR DEVS -->
   <section class="container">
     <div class="row">
       <div class="col-md-9">
         <h2 class="whitespace-sm">Built For Developers</h2>
         <h4 class="whitespace-md">A simple, scalable API for machine intelligence</h4>
           <p class="item-title">SAMPLE INPUT</p>
-          <pre class="whitespace-md"><code class="python">import Algorithmia
+          <pre><code class="python hljs"><span class="hljs-keyword">import</span> Algorithmia
 
-input = {"image": "_IMAGE_URL_"}
-client = Algorithmia.client('_API_KEY_')
-algo = client.algo('deeplearning/ColorfulImageColorization/1.0.1')
+input = {<span class="hljs-string">"image"</span>: <span class="hljs-string">"_IMAGE_URL_"</span>}
+client = Algorithmia.client(<span class="hljs-string">'_API_KEY_'</span>)
+algo = client.algo(<span class="hljs-string">'deeplearning/ColorfulImageColorization/1.0.1'</span>)
 
-print algo.pipe(input)
+<span class="hljs-keyword">print</span> algo.pipe(input)
 </code></pre>
             <p class="item-title">SAMPLE OUTPUT</p>
-            <pre><code class="json">{"output": "data://.algo/temp/image.png"}</code></pre>
+            <pre><code class="json hljs">{<span class="hljs-attr">"output"</span>: <span class="hljs-string">"data://.algo/temp/image.png"</span>}</code></pre>
         <a href="https://algorithmia.com/algorithms/deeplearning/ColorfulImageColorization" class="btn btn-primary-inverse">
           LEARN MORE
         </a>
@@ -152,9 +147,10 @@ print algo.pipe(input)
     </div>
   </section>
 
-	<!-- JS -->
-	<script src="public/js/TweenMax.min.js"></script>
-	<script src="public/js/twoimages.js"></script>
+  <!-- JS -->
+  <script src="public/js/TweenMax.min.js"></script>
+  <script src="public/js/twoimages.js"></script>
+  <script src="public/js/dropzone.js"></script>
 
 
 <%= footer %>

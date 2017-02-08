@@ -3,7 +3,7 @@ var algoClient = Algorithmia.client('simnxB3dwTN8kds9p6SGMpGoOJC1');
 var algorithmAutotag = 'outofstep/MegaAnalyzeURL/0.1.6';
 
 /**
- * once DOM is ready, update vars amd set initial URL
+ * once DOM is ready, update vars and add handlers
  */
 $(document).ready(function() {
   setInviteCode('analyzeurl');

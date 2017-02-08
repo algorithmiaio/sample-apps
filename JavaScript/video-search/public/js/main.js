@@ -4,7 +4,7 @@ var algorithmVideoClassification = "algorithmiahq/VideoClassificationDemo/0.5.9"
 window.player = null;
 
 /**
- * once DOM is ready, update vars amd set initial URL
+ * once DOM is ready, update vars
  */
 $(document).ready(function() {
   setInviteCode('videosearch');

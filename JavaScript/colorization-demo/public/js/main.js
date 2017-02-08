@@ -6,7 +6,7 @@ var algorithms = {
 };
 
 /**
- * once DOM is ready, update vars amd set initial URL
+ * once DOM is ready, update vars and add handlers
  */
 $(document).ready(function() {
   setInviteCode('color');

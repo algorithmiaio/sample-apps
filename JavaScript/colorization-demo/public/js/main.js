@@ -27,8 +27,6 @@ var callAlgorithm = function(img) {
   } else {
     img=$('#imgUrl').val();
   }
-  // Get the img URL
-  var img = $('#imgUrl').val().trim();
   if(img == "" || img=="http://") {
     return hideWait('Please select an image, click the upload link, or enter a URL');
   }

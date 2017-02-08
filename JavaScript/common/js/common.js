@@ -63,7 +63,7 @@ function getUrlCore(url) {
  */
 var requireHttp = function(elem) {
   var requireHttpHandler = function(elem) {
-    var val = elem.val().trim();
+    var val = elem.val().replace(/\s/g,''); //even trim inner whitespace
     if (val=='') {
       elem.val('http://');
     } else if (doubleHttpRegex.test(val)) {

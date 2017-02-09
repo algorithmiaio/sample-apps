@@ -39,10 +39,10 @@
         <div class="col-sm-12 col-md-7">
           <div class="card">
             <h3 class="whitespace">Test a photo</h3>
-            <p class="whitespace-none">Paste the URL to an image or <br class="hidden-sm hidden-md hidden-lg hidden-xl" ><a href=""><span class="glyphicon glyphicon-upload" aria-hidden="true"></span>UPLOAD</a></p>
-            <form class="form-group" onsubmit="callAlgorithm(); return false;">
+            <p class="whitespace-none">Paste the URL to an image or <br class="hidden-sm hidden-md hidden-lg hidden-xl" ><a href="javascript:;" id="file-dropzone" ><span class="glyphicon glyphicon-upload" aria-hidden="true"></span>UPLOAD</a></p>
+            <form class="form-group" onsubmit="analyzeImage(); return false;">
               <input type="text" class="form-control" id="imgUrl" placeholder="image URL">
-              <a class="btn btn-primary" type="button" onclick="callAlgorithm()">
+              <a class="btn btn-primary" type="button" onclick="analyzeImage()">
                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                 isitnude?
               </a>
@@ -52,20 +52,28 @@
             <h4 class="dark whitespace-sm">Or, try these sample images:</h4>
             <div class="row whitespace-none sample-images">
               <div class="col-xs-4 col-sm-2">
-                <a onclick=""><img src="public/images/thumb01.png" alt="woman"></a>
+                <a onclick="analyzeImage('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/sunglasses-love-woman-flowers.jpg')"><img src="public/images/thumb01.png" alt="woman"></a>
               </div>
               <div class="col-xs-4 col-sm-2 sample-image">
-                <a onclick=""><img src="public/images/thumb02.png" alt="Obama Swimsuit"></a>
+                <a onclick="analyzeImage('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/obama.jpg')"><img src="public/images/thumb02.png" alt="Obama Swimsuit"></a>
               </div>
               <div class="col-xs-4 col-sm-2 sample-image">
-                <a onclick=""><img src="public/images/thumb03.png" alt="Putin Riding a Bear"></a>
+                <a onclick="analyzeImage('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/putin.jpg')"><img src="public/images/thumb03.png" alt="Putin Riding a Bear"></a>
               </div>
               <div class="col-xs-4 col-sm-2 sample-image">
-                <a onclick=""><img src="public/images/thumb04.jpg" alt="Family Guy Peter"></a>
+                <a onclick="analyzeImage('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/family-guy.jpg')"><img src="public/images/thumb04.jpg" alt="Family Guy Peter"></a>
               </div>
               <div class="col-xs-4 col-sm-2 sample-image">
-                <a onclick=""><img src="public/images/thumb05.png"></a>
+                <a onclick="analyzeImage('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/cosimo-medici-orpheus.jpg')"><img src="public/images/thumb05.png" alt="Cosimo Medici as Orpheus"></a>
               </div>
+            </div>
+            <div id="overlay" class="container hidden">
+                <div class="dots-container">
+                    <div class="dot dot1"></div>
+                    <div class="dot dot2"></div>
+                    <div class="dot dot3"></div>
+                    <div class="dot dot4"></div>
+                </div>
             </div>
           </div>
         </div>
@@ -75,11 +83,11 @@
 
 <section class="container hidden" id="results">
   <div class="row">
-      <div class="col-md-12 result-img">
+      <div class="col-md-12 result-wrapper">
         <h4>RATING:</h4>
-        <h3 class="rating g">G - Not nude</h3>
-        <img src="http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/obama.jpg" alt="Obama Swimsuit">
-        <p class="lg">You can probably post this</p>
+        <h3 id="result-rating" class="rating"></h3>
+        <img id="result-img" src="" alt="analyzed image">
+        <p id="result-msg" class="lg"></p>
         <p class="whitespace-none">We apologize if we didn't get it right, we are improving every day.</p>
         <p class="secondary-text">Please note that we cannot detect black and white images.</p>
       </div>
@@ -147,4 +155,9 @@ print algo.pipe(input)
     </div>
   </section>
 
-<%= footer %>
+  <!-- JS -->
+  <script src="public/js/TweenMax.min.js"></script>
+  <script src="public/js/dots.js"></script>
+  <script src="public/js/dropzone.js"></script>
+
+  <%= footer %>

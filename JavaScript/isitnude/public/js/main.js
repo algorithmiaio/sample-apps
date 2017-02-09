@@ -2,7 +2,7 @@
 var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
 
 var algorithms = {
-  classifier: 'deeplearning/Places365Classifier/0.1.9'
+  nudity: 'sfw/NudityDetection/1.1.4' //'sfw/nuditydetectioni2v/0.2.5'
 };
 
 /**
@@ -18,7 +18,7 @@ $(document).ready(function() {
  * call API on URL, get up to 7 results, and display them
  * @param url
  */
-var getPlaces = function(url) {
+var analyzeImage = function(url) {
   if(url) {
     $('#imgUrl').val(url.indexOf('http')==0?url:''); //only display http URLs
   } else {
@@ -28,16 +28,12 @@ var getPlaces = function(url) {
     return hideWait('Please select an image, click the upload link, or enter a URL');
   }
   showWait();
-  var input = {
-    "image": url,
-    "numResults": 7
-  };
-  $('#userImg').attr('src',url);
-  algoClient.algo(algorithms.classifier).pipe(input).then(function (output) {
+  $('#result-img').attr('src',url);
+  algoClient.algo(algorithms.nudity).pipe(url).then(function (output) {
     if (output.error) {
       endWait(output.error.message);
     } else {
-      showPredictions(output.result.predictions);
+      showResults(output.result);
       endWait();
     }
   });
@@ -47,14 +43,14 @@ var getPlaces = function(url) {
  * render tags and probabilities into
  * @param result [{"class":string,"prob":number}]
  */
-var showPredictions = function(result){
-  var html = '';
-  for (var i = 0; i < result.length; i++) {
-    var prob = (result[i].prob * 100).toFixed(2);
-    var tag = result[i].class.replace('_',' ');
-    html += '<tr><td><span class="label label-success">'+ tag+'</span></td><td>'+prob+'%</td></tr>';
+var showResults = function(result){
+  if(result.nude=='true') {
+    $('#result-rating').html("R - Nude <nobr>(we're "+(result.confidence*100)+"% sure)</nobr>").addClass('r');
+    $('#result-message').html('You might want to be careful where you post this!');
+  } else {
+    $('#result-rating').html("G - Not Nude <nobr>(we're "+(result.confidence*100)+"% sure)</nobr>").addClass('g');
+    $('#result-message').html('You can probably post this.');
   }
-  $('#results-tbody').html(html);
   hideWait();
 };
 
@@ -64,8 +60,9 @@ var showPredictions = function(result){
 var showWait = function() {
   $('#overlay').removeClass('hidden');
   $('#status-label').empty();
-  $("#results-tbody").empty();
-  $('#userImg').removeAttr('src');
+  $('#result-rating').html('<span class="aspinner"></span>').removeClass('g').removeClass('r');
+  $('#result-message').empty();
+  $('#result-img').removeAttr('src');
 };
 
 
@@ -108,7 +105,7 @@ var initDropzone = function() {
     showWait();
     var reader = new FileReader();
     reader.addEventListener("load", function () {
-      getPlaces(reader.result);
+      analyzeImage(reader.result);
       dropzone.removeFile(file);
     }, false);
     reader.readAsDataURL(file);

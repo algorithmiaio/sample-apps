@@ -2,7 +2,7 @@
 var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
 
 var algorithms = {
-  nudity: 'sfw/NudityDetection/1.1.4' //'sfw/nuditydetectioni2v/0.2.5'
+  nudity: 'sfw/NudityDetection/1.1.4'
 };
 
 /**
@@ -29,7 +29,9 @@ var analyzeImage = function(url) {
   }
   showWait();
   $('#result-img').attr('src',url);
+console.log(url);
   algoClient.algo(algorithms.nudity).pipe(url).then(function (output) {
+console.log(output);
     if (output.error) {
       endWait(output.error.message);
     } else {

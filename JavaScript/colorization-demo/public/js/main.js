@@ -2,7 +2,7 @@
 var algoClient = Algorithmia.client('simYU7sWtoiMToSYQC9uVqdAURb1');
 
 var algorithms = {
-  colorize: 'algorithmiahq/ColorizationDemo/1.1.18'
+  colorize: 'algorithmiahq/ColorizationDemo/1.1.19'
 };
 
 /**
@@ -42,7 +42,7 @@ var callAlgorithm = function(img) {
 var colorize = function(img) {
   algoClient.algo(algorithms.colorize).pipe(img).then(function(output) {
       if(output.error) {
-        hideWait(output.error.message);
+        hideWait(output.error.message||"Unable to colorize image");
       } else {
         // Decode base64 imgs
         var imgOriginal = "data:image/png;base64," + output.result[0];

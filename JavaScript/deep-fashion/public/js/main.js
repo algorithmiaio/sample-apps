@@ -80,6 +80,8 @@ var hideWait = function(errorMessage) {
     $('#results').addClass('hidden');
   } else {
     $('#results').removeClass('hidden');
+    $('#feedback').removeClass('hidden');
+    $('#feedback-msg').addClass('hidden');
     $('html, body').animate({
       scrollTop: $("#results").offset().top
     }, 1000);
@@ -121,7 +123,21 @@ var initDropzone = function() {
 
 var clickYes = function() {
   console.log("User clicked yes");
+  // Hide accuracy check
+  $("#feedback").addClass("hidden");
 };
 var clickNo = function() {
   console.log("User clicked no");
+  var input = {
+    "image": $('#imgUrl').val(),
+    "targetDirectory": "data://.my/Reclassify/"
+  };
+  algoClient.algo("util/SmartImageDownloader/0.2.4").pipe(input).then(function(result) {
+    if(result.error) {
+      console.error("Failed to mark image for re-classification");
+    } else {
+      $("#feedback").addClass("hidden");
+      $("#feedback-msg").removeClass("hidden");
+    }
+  });
 };

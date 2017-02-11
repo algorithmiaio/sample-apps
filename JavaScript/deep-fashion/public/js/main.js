@@ -65,6 +65,8 @@ var showWait = function() {
   $('#overlay').removeClass('hidden');
   $('#status-label').empty();
   $("#results-tbody").empty();
+  $('#feedback').addClass('hidden');
+  $('#feedback-msg').addClass('hidden');
   $('#userImg').removeAttr('src');
 };
 

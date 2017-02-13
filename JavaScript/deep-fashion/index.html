@@ -37,9 +37,9 @@
 					<div class="card">
 						<h3 class="whitespace">Classify an image</h3>
 						<p class="whitespace-none">Paste the URL to an image or <br class="hidden-sm hidden-md hidden-lg hidden-xl" ><a href="javascript:;" id="file-dropzone" ><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> UPLOAD</a></p>
-						<form class="form-group" onsubmit="getPlaces(); return false;">
+						<form class="form-group" onsubmit="getTags(); return false;">
 							<input type="text" class="form-control" id="imgUrl" placeholder="http://">
-							<a class="btn btn-primary" type="button" onclick="getPlaces()">
+							<a class="btn btn-primary" type="button" onclick="getTags()">
 								<span class="fa fa-magic" aria-hidden="true"></span>
 								Classify It
 							</a>
@@ -48,19 +48,19 @@
 						<h4 class="dark whitespace-sm">Or, try these sample images:</h4>
 						<div class="row whitespace-none sample-images">
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="getPlaces('https://s3.amazonaws.com/algorithmia-assets/deep-fashion/fashion1.jpg')"><img src="public/images/fashion1_sm.jpg"></a>
+								<a onclick="getTags('https://s3.amazonaws.com/algorithmia-assets/deep-fashion/fashion1.jpg')"><img src="public/images/fashion1_sm.jpg"></a>
 							</div>
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="getPlaces('https://s3.amazonaws.com/algorithmia-assets/deep-fashion/fashion2.jpg')"><img src="public/images/fashion2_sm.jpg"></a>
+								<a onclick="getTags('https://s3.amazonaws.com/algorithmia-assets/deep-fashion/fashion2.jpg')"><img src="public/images/fashion2_sm.jpg"></a>
 							</div> 
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="getPlaces('https://s3.amazonaws.com/algorithmia-assets/deep-fashion/fashion3.jpg')"><img src="public/images/fashion3_sm.jpg"></a>
+								<a onclick="getTags('https://s3.amazonaws.com/algorithmia-assets/deep-fashion/fashion3.jpg')"><img src="public/images/fashion3_sm.jpg"></a>
 							</div>
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="getPlaces('https://s3.amazonaws.com/algorithmia-assets/deep-fashion/fashion4.jpg')"><img src="public/images/fashion4_sm.jpg"></a>
+								<a onclick="getTags('https://s3.amazonaws.com/algorithmia-assets/deep-fashion/fashion4.jpg')"><img src="public/images/fashion4_sm.jpg"></a>
 							</div>
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="getPlaces('https://s3.amazonaws.com/algorithmia-assets/deep-fashion/fashion5.jpg')"><img src="public/images/fashion5_sm.jpg"></a>
+								<a onclick="getTags('https://s3.amazonaws.com/algorithmia-assets/deep-fashion/fashion5.jpg')"><img src="public/images/fashion5_sm.jpg"></a>
 							</div>
 						</div>
 						<div id="overlay" class="container hidden">

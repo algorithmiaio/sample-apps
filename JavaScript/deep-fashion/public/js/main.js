@@ -1,8 +1,8 @@
 // init the Algorithmia client with your API key from https://algorithmia.com/user#credentials
-var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
+var algoClient = Algorithmia.client('simL9bcF01/FR0v6Dq5JTYqoQmq1', 'http://api.test.algorithmia.com/v1/web/algo');
 
 var algorithms = {
-  classifier: 'deeplearning/Places365Classifier/0.1.9'
+  classifier: 'zeryx/FasterRCNN/0.1.2'
 };
 
 /**
@@ -18,7 +18,7 @@ $(document).ready(function() {
  * call API on URL, get up to 7 results, and display them
  * @param url
  */
-var getPlaces = function(url) {
+var getTags = function(url) {
   if(url) {
     if(url.indexOf('http')==0) {$('#imgUrl').val(url);} //only display http URLs
   } else {
@@ -28,16 +28,13 @@ var getPlaces = function(url) {
     return hideWait('Please select an image, click the upload link, or enter a URL');
   }
   showWait();
-  var input = {
-    "image": url,
-    "numResults": 7
-  };
+  var input = url;
   $('#userImg').attr('src',url);
   algoClient.algo(algorithms.classifier).pipe(input).then(function (output) {
     if (output.error) {
       endWait(output.error.message);
     } else {
-      showPredictions(output.result.predictions);
+      showPredictions(output.result.tags);
       endWait();
     }
   });
@@ -50,7 +47,7 @@ var getPlaces = function(url) {
 var showPredictions = function(result){
   var html = '';
   for (var i = 0; i < result.length; i++) {
-    var prob = (result[i].prob * 100).toFixed(2);
+    var prob = (result[i].confidence * 100).toFixed(2);
     var tag = result[i].class.replace('_',' ');
     html += '<tr><td><span class="label label-success">'+ tag+'</span></td><td>'+prob+'%</td></tr>';
   }
@@ -112,7 +109,7 @@ var initDropzone = function() {
     showWait();
     var reader = new FileReader();
     reader.addEventListener("load", function () {
-      getPlaces(reader.result);
+      gettags(reader.result);
       dropzone.removeFile(file);
     }, false);
     reader.readAsDataURL(file);

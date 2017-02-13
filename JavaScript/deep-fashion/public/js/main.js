@@ -3,7 +3,8 @@ var algoClient1 = Algorithmia.client('simL9bcF01/FR0v6Dq5JTYqoQmq1', 'http://api
 var algoClient2 = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
 
 var algorithms = {
-  classifier: 'zeryx/FasterRCNN/0.1.2'
+  classifier: 'zeryx/FasterRCNN/0.1.4',
+  imagedownload: 'util/SmartImageDownloader/0.2.4'
 };
 
 /**
@@ -140,7 +141,7 @@ var clickNo = function() {
     "image": $('#imgUrl').val(),
     "targetDirectory": "data://.my/Reclassify/"
   };
-  algoClient2.algo("util/SmartImageDownloader/0.2.4").pipe(input).then(function(result) {
+  algoClient2.algo(algorithms.imagedownload).pipe(input).then(function(result) {
     if(result.error) {
       console.error("Failed to mark image for re-classification");
     } else {

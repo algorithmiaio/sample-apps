@@ -117,13 +117,12 @@
 				<div class="row row-md">
 					<div class="col-md-12">
 						<h2 class="whitespace-none">How it works</h2>
-						<h4>Quickly Classify Places, Locations, and Scenes in Images</h4>
+						<h4>Quickly Classify Clothing and Fashion Items in Images</h4>
 					</div>
 					<div class="col-md-8">
-						<p>Use state-of-the-art deep learning to identify places in images. Just paste in a URL above.</p>
+						<p>Use state-of-the-art deep learning to identify clothing and fashion items in images. Just paste in a URL above.</p>
 						<p>We're excited to introduce <a href="http://blog.algorithmia.com/2016/07/cloud-hosted-deep-learning-models/" target="_blank">cloud hosted deep learning models</a> on Algorithmia. The <a href="https://algorithmia.com/algorithms/deeplearning/Places365Classifier" target="_blank">Places365 Classifier microservice</a> is a computer vision algorithm trained on ~1.8 million images to recognize 365 scene categories.</p>
 
-						<p>This microservice is an implementation of <a href="https://github.com/metalbubble/places365" target="_blank">Places: An Image Database for Deep Scene Understanding. B. Zhou, A. Khosla, A. Lapedriza, A. Torralba and A. Oliva Arxiv, 2016</a>. Learn more about their work <a href="http://places2.csail.mit.edu/" target="_blank">here</a><!--and <a href="#">how we built this demo</a>-->.</p>
 						<p>Let us know what you think <a href="https://twitter.com/algorithmia" target="_blank">@Algorithmia</a> or by <a href="https://algorithmia.com/contact" target="_blank">email</a>.</p>
 					</div>
 				</div>
@@ -142,18 +141,16 @@
 
 input = {<span class="hljs-string">"image"</span>: <span class="hljs-string">"_IMAGE_URL_"</span>}
 client = Algorithmia.client(<span class="hljs-string">'_API_KEY_'</span>)
-algo = client.algo(<span class="hljs-string">'deeplearning/Places365Classifier/0.1.8'</span>)
+algo = client.algo(<span class="hljs-string">'deeplearning/DeepFashion/0.1.0'</span>)
 
 <span class="hljs-keyword">print</span> algo.pipe(input)
 </code></pre>
             <p class="item-title">SAMPLE OUTPUT</p>
             <pre><code class="json hljs">{
-  <span class="hljs-attr">"predictions"</span>: [
-    {<span class="hljs-attr">"class"</span>: <span class="hljs-string">"tower"</span>, <span class="hljs-attr">"prob"</span>: <span class="hljs-number">0.6098036170005801</span>},
-    {<span class="hljs-attr">"class"</span>: <span class="hljs-string">"skyscraper"</span>, <span class="hljs-attr">"prob"</span>: <span class="hljs-number">0.14249812066555023</span>},
-    {<span class="hljs-attr">"class"</span>: <span class="hljs-string">"office_building"</span>, <span class="hljs-attr">"prob"</span>: <span class="hljs-number">0.04916094988584519</span>},
-    {<span class="hljs-attr">"class"</span>: <span class="hljs-string">"downtown"</span>, <span class="hljs-attr">"prob"</span>: <span class="hljs-number">0.02924365177750587</span>},
-    {<span class="hljs-attr">"class"</span>: <span class="hljs-string">"church/outdoor"</span>, <span class="hljs-attr">"prob"</span>: <span class="hljs-number">0.028504755347967155</span>}
+  <span class="hljs-attr">"tags"</span>: [
+    {<span class="hljs-attr">"class"</span>: <span class="hljs-string">"tank_top"</span>, <span class="hljs-attr">"confidence"</span>: <span class="hljs-number">0.9996302127838137</span>},
+    {<span class="hljs-attr">"class"</span>: <span class="hljs-string">"skirt"</span>, <span class="hljs-attr">"confidence"</span>: <span class="hljs-number">0.9999059438705444</span>},
+    {<span class="hljs-attr">"class"</span>: <span class="hljs-string">"heels_pumps_or_wedges"</span>, <span class="hljs-attr">"confidence"</span>: <span class="hljs-number">0.9692339897155761</span>}
   ]
 }</code></pre>
         <a href="https://algorithmia.com/algorithms/deeplearning/Places365Classifier" class="btn btn-primary-inverse">

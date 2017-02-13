@@ -51,7 +51,7 @@ var showPredictions = function(result){
   var html = '';
   for (var i = 0; i < result.length; i++) {
     var prob = (result[i].prob * 100).toFixed(2);
-    var tag = result[i].class.replace('_',' ');
+    var tag = result[i].class.replace(/_/g,' ');
     html += '<tr><td><span class="label label-success">'+ tag+'</span></td><td>'+prob+'%</td></tr>';
   }
   $('#results-tbody').html(html);

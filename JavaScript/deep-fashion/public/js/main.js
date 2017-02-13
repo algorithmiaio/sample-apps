@@ -1,5 +1,6 @@
 // init the Algorithmia client with your API key from https://algorithmia.com/user#credentials
-var algoClient = Algorithmia.client('simL9bcF01/FR0v6Dq5JTYqoQmq1', 'http://api.test.algorithmia.com/v1/web/algo');
+var algoClient1 = Algorithmia.client('simL9bcF01/FR0v6Dq5JTYqoQmq1', 'http://api.test.algorithmia.com/v1/web/algo');
+var algoClient2 = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
 
 var algorithms = {
   classifier: 'zeryx/FasterRCNN/0.1.2'
@@ -30,7 +31,7 @@ var getTags = function(url) {
   showWait();
   var input = url;
   $('#userImg').attr('src',url);
-  algoClient.algo(algorithms.classifier).pipe(input).then(function (output) {
+  algoClient1.algo(algorithms.classifier).pipe(input).then(function (output) {
     if (output.error) {
       endWait(output.error.message);
     } else {
@@ -45,10 +46,18 @@ var getTags = function(url) {
  * @param result [{"class":string,"prob":number}]
  */
 var showPredictions = function(result){
+  var tags = result.sort(function(a,b) {
+    if(a.confidence < b.confidence)
+      return 1;
+    else if(a.confidence > b.confidence)
+      return -1;
+    else
+      return 0;
+  });
   var html = '';
-  for (var i = 0; i < result.length; i++) {
-    var prob = (result[i].confidence * 100).toFixed(2);
-    var tag = result[i].class.replace('_',' ');
+  for (var i = 0; i < tags.length; i++) {
+    var prob = (tags[i].confidence * 100).toFixed(2);
+    var tag = tags[i].class.replace(/_/g,' ');
     html += '<tr><td><span class="label label-success">'+ tag+'</span></td><td>'+prob+'%</td></tr>';
   }
   $('#results-tbody').html(html);
@@ -131,7 +140,7 @@ var clickNo = function() {
     "image": $('#imgUrl').val(),
     "targetDirectory": "data://.my/Reclassify/"
   };
-  algoClient.algo("util/SmartImageDownloader/0.2.4").pipe(input).then(function(result) {
+  algoClient2.algo("util/SmartImageDownloader/0.2.4").pipe(input).then(function(result) {
     if(result.error) {
       console.error("Failed to mark image for re-classification");
     } else {

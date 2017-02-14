@@ -13,7 +13,7 @@ pip install algorithmia
 pip install python-docx
 ```
 
-Detailed instructions can be found in the [blog post](http://blog.algorithmia.com/).
+Detailed instructions can be found in the [blog post](http://blog.algorithmia.com/build-your-own-language-detection-microservice/).
 
 ## How To Run the Script
 

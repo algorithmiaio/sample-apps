@@ -6,7 +6,7 @@
 <meta name="description" content="Automatically create summaries, extract tags, and analyze the sentiment of RSS feeds with this microservice.">
 
 <!-- FB -->
-<meta property="og:title" content="Summarize, tag, & analyze RSS feeds">
+<meta property="og:title" content="Summarize, Tag, and Analyze RSS Feeds">
 <meta property="og:url" content="http://demos.algorithmia.com/rss-dashboard/">
 <meta property="og:description" content="Automatically create summaries, extract tags, and analyze the sentiment of RSS feeds with this microservice">
 <meta property="og:locale" content="en_US">
@@ -17,13 +17,13 @@
 <!-- TWTR -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@algorithmia">
-<meta name="twitter:title" content="Summarize, tag, & analyze RSS feeds">
+<meta name="twitter:title" content="Summarize, Tag, and Analyze RSS Feeds">
 <meta name="twitter:description" content="Automatically create summaries, extract tags, and analyze the sentiment of RSS feeds with this microservice">
 <meta name="twitter:image" content="http://demos.algorithmia.com/rss-dashboard/public/images/twshare.jpg">
 <meta name="twitter:creator" content="@matt_kiser">
 
 <!-- OTHER -->
-<meta itemprop="name" content="Summarize, tag, & analyze RSS feeds">
+<meta itemprop="name" content="Summarize, Tag, and Analyze RSS Feeds">
 <meta itemprop="description" content="Automatically create summaries, extract tags, and analyze the sentiment of RSS feeds with this microservice">
 
 <%= header_end %>
@@ -34,7 +34,7 @@
     <div class="row row-sm">
       <div class="col-md-12 col-lg-8">
         <h1>RSS Dashboard</h1>
-        <h4 class="secondary-light whitespace-md">This tool takes in a URL to an RSS feed, and offers automatically generated tag suggestions, text summary, and sentiment analysis.</h4>
+        <h4 class="secondary-light whitespace-md">Extract summaries, tags, and sentiment from an RSS feed</h4>
       </div>
     </div>
 
@@ -48,9 +48,8 @@
               <option disabled>Select an example RSS feed</option>
 
               <!-- Replace these with links to your favorite RSS feeds -->
-              <option value="https://news.ycombinator.com/rss">HackerNews</option>
+              <option value="https://news.ycombinator.com/rss">Hacker News</option>
               <option value="http://feeds.feedburner.com/codinghorror">Coding Horror</option>
-              <!--<option value="https://www.reddit.com/r/programming/.rss">r/programming</option>-->
               <option value="http://www.alistapart.com/feed/rss.xml">A List Apart</option>
               <option value="http://www.nytimes.com/services/xml/rss/nyt/Technology.xml">NYT Technology</option>
               <option value="http://blog.algorithmia.com/rss">Algorithmia Blog</option>
@@ -90,18 +89,18 @@
   <div class="row row-md">
     <div class="col-md-12">
       <h2 class="whitespace-none">How it works</h2>
-      <h4>Extracting summaries, tags, and sentiment from an RSS feed</h4>
+      <h4>This tool takes a URL for an RSS feed, and automatically generates tags, text summaries, and sentiment analysis.</h4>
     </div>
   </div>
   <div class="row row-md">
     <div class="col-md-8">
-      <h3>Tools used</h3>
+      <h3>Tools Used</h3>
       <ul>
-        <li><a href="https://algorithmia.com/algorithms/tags/ScrapeRSS">ScrapeRSS</a> – scrapes the RSS feed, extracting each entry's title and url</li>
-        <li><a href="https://algorithmia.com/algorithms/util/Html2Text">Html2Text</a> – scrapes HTML from the entry's url and converts its main content to plain text</li>
+        <li><a href="https://algorithmia.com/algorithms/tags/ScrapeRSS">Scrape RSS</a> – parses an RSS feed, extracting each entry's title and url</li>
+        <li><a href="https://algorithmia.com/algorithms/util/Html2Text">HTML2Text</a> – converts the main content of an HTML page to plain text</li>
         <li><a href="https://algorithmia.com/algorithms/nlp/Summarizer">Summarizer</a> – creates a summary by extracting topic sentences based on frequency of key terms</li>
         <li><a href="https://algorithmia.com/algorithms/nlp/AutoTag">AutoTag</a> – uses a variant of <a href="https://algorithmia.com/algorithms/nlp/LDA">nlp/LDA</a> to extract keywords.</li>
-        <li><a href="https://algorithmia.com/algorithms/nlp/SentimentAnalysis">SentimentAnalysis</a> – assigns a sentiment rating from -1 (very negative) to to 1 very positive.
+        <li><a href="https://algorithmia.com/algorithms/nlp/SentimentAnalysis">Sentiment Analysis</a> – assigns a sentiment rating from -1 (very negative) to to 1 (very positive).
 </li>
       </ul>
     </div>
@@ -109,13 +108,13 @@
   <div class="row row-md">
     <div class="col-md-8">
       <h3>Source Data</h3>
-      <p>We examine the provided RSS feed, extract the title and content URL, then and convert the content into plain text (while removing tags which do not contribute to its meaning).  Then we extract topic tags from the converted content, analyze it for positive or negative sentiment, and generate a meaningful summary.</p>
+      <p>We start by examining the RSS feed, extracting the title and content URL. We then convert the content into plain text and remove the HTML tags. Finally, we extract topic tags, analyze it for sentiment, and generate a meaningful summary.</p>
     </div>
   </div>
   <div class="row">
     <div class="col-md-8">
       <h3>Takeaway</h3>
-      <p>By wiring up a series of very simple API calls, a developer can easily and quickly scrape content from a variety of sources and perform automatic summarization, tagging, and even complex sentiment analysis... all without writing a single line of text-processing code or performing any sever-management tasks.  This makes it possible to build web dashboards, in-app content analysis, or backend pipelines in mere hours.</p>
+      <p>By wiring up a series of very simple API calls, a developer can quickly scrape content from a variety of sources and perform automatic summarization, tagging, and sentiment analysis – all without writing a single line of text-processing code or performing any sever-management tasks. This makes it possible to build web dashboards, in-app content analysis, or backend pipelines in mere hours.</p>
     </div>
   </div>
 </section>

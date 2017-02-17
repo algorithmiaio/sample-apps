@@ -157,17 +157,33 @@
 	<div class="grey-background">
 	<section class="container">
 		<div class="row row-md">
-			<div class="col-md-12">
+			<div class="col-md-8">
 				<h2 class="whitespace-none">How it works</h2>
-				<h4>Web Page Inspector</h4>
+				<h4>Web Page Inspector extracts structured data from web sites.</h4>
+				<p>Web Page Inspector attempts to extract the title, full text, both a short and long summary, permalink, social share count, tags, sentiment, and more from a valid URL. In this demo we provie both a UI of the metadata, as well as the raw JSON response.</p>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-8">
-				<p>Web Page Inspector attempts to extract the title, full text, both a short and long summary, permalink, social share count, tags, sentiment, and more from a valid URL. In this demo we provie both a UI of the metadata, as well as the raw JSON response.</p>
-				<p>It's built using <a href="https://algorithmia.com/algorithms/outofstep/MegaAnalyzeURL">Mega Analyze URL</a>, a microservice wrapper composed of several other microservices: <a href="https://algorithmia.com/algorithms/web/AnalyzeURL">Analyze URL</a>, <a href="https://algorithmia.com/algorithms/nlp/Summarizer">Summarizer</a>, <a href="https://algorithmia.com/algorithms/nlp/SocialSentimentAnalysis">Social Sentiment Analysis</a>, <a href="https://algorithmia.com/algorithms/web/ShareCounts">Count Social Shares</a>, Get Links, <a href="https://algorithmia.com/algorithms/diego/Getimagelinks">Get Image Links</a>, and <a href="https://algorithmia.com/algorithms/tags/AutoTagURL">Auto-Tag URL</a>.</p>
+				 <h3>Tools Used</h3>
+				<p>At the heart of this demo is a microservice called <a href="https://algorithmia.com/algorithms/outofstep/MegaAnalyzeURL">Mega Analyze URL</a>, which is a wrapper for capturing the metadata, summary, social sentiment analysis, tags, count of social shares, images, and links for a URL. Check out the <a href="https://algorithmia.com/algorithms/outofstep/MegaAnalyzeURL/edit">source code here</a>.</p> 
+				<p>The underlying algorithms are:</p>
+			      <ul>
+			        <li><a href="https://algorithmia.com/algorithms/web/AnalyzeURL">Analyze URL</a> – takes a URL and returns several pieces of structured data</li>
+			        <li><a href="https://algorithmia.com/algorithms/nlp/Summarizer">Summarizer</a> - creates a summary of the most important points of the original document</li>
+			        <li><a href="https://algorithmia.com/algorithms/nlp/SocialSentimentAnalysis">Social Sentiment Analysis</a> - assigns sentiment ratings of "positive", "negative" and "neutral"</li>	<li><a href="https://algorithmia.com/algorithms/web/ShareCounts">Count Social Shares</a> - returns the number of times that URL has been shared on various social media sites</li> 
+			        <li><a href="https://algorithmia.com/algorithms/web/GetLinks">Get Links</a> - scrapes the page for all the links and returns them as URL strings</li>     
+			        <li><a href="https://algorithmia.com/algorithms/diego/Getimagelinks">Get Image Links</a>- return a list of all the image URLs</li>
+			        <li><a href="https://algorithmia.com/algorithms/tags/AutoTagURL">Auto-Tag URL</a> - produces candidate tags using LDA</li>
+			        </ul>
 			</div>
 		</div>
+		 <div class="row">
+		    <div class="col-md-8">
+		      <h3>Takeaway</h3>
+		      <p>By creating a microservice that wraps other algorithms, a developer can quickly generate useful structured data in a single API call without ever having to write their own web scraper or manage servers. This makes it possible to automatically extract clean text and metadata from any URL.</p>
+		    </div>
+		  </div>
 	</section>
 	</div>
 

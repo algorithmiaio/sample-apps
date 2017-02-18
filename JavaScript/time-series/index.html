@@ -33,7 +33,7 @@
 			<div class="row">
 				<div class="col-md-12 col-lg-8">
 					<h1>Track Economic Development</h1>
-					<h4 class="secondary-light whitespace-md">Track economic development with open data and predictive algorithms</h4>
+					<h4 class="secondary-light whitespace-md">Analyze open data using predictive time series analysis</h4>
 				</div>
 			</div>
 		</div>
@@ -41,9 +41,9 @@
 
 	<section class="container">
 		<div class="row row-md">
-			<div class="col-md-12">
-				<h2 class="whitespace-sm">Algorithmia Time Series Analysis</h2>
-			    <p>This tool analyzes time series data. It uses Socrata Open Government data on building permits to analyze development trends in various cities.</p>
+			<div class="col-md-8">
+				<h2 class="whitespace-sm">Time Series Analysis</h2>
+			    <p>This tool analyzes time series data using <a href="https://socrata.com/" target="_blank">Socrata Open Government</a> data on building permits to identify development trends in various cities.</p>
 			</div>
 	    </div>
 
@@ -104,14 +104,14 @@
 	<div class="grey-background">
 	<section class="container">
 		<div class="row row-md">
-			<div class="col-md-12">
-				<h2 class="whitespace-none">How it works</h2>
-				<h4>Tracking Economic Development with Open Data and Predictive Algorithms</h4>
+			<div class="col-md-8">
+				<h2 class="whitespace-none">How It Works</h2>
+				<h4>The world runs on data. Often times the effort to acquire fresh data, analyze it, and deploy live analysis can be a challenge.</h4>
 			</div>
 		</div>
 		<div class="row row-md">
 			<div class="col-md-8">
-				<h3>Tools used</h3>
+				<h3>Tools Used</h3>
 				<ul>
 					<li><a href="https://algorithmia.com/algorithms/marksskram/SocrataOpenDataQuery">Socrata Open Data Query</a> – pulls the permit data from Socrata</li>
 					<li><a href="https://algorithmia.com/algorithms/timeseries/SimpleMovingAverage">Simple Moving Average</a> – uses local average to smooth data</li>
@@ -126,14 +126,14 @@
 		<div class="row row-md">
 			<div class="col-md-8">
 				<h3>Source Data</h3>
-				<p>We use an algorithm to directly access Socrata’s API that can be found here.</p>
-				<p>Once we’ve retrieved the data, we aggregate it by total number of permits issued per month, and plot this data. To make the graph clearer, it sometimes helps to smooth or denoise the data. There are a number of ways to do this, with moving averages being the most popular. The most intuitive is the Simple Moving Average, which replaces each point by the average of itself and some number of the preceding points (default is 3).</p>
+				<p>We use an <a href="https://algorithmia.com/algorithms/marksskram/SocrataOpenDataQuery">algorithm to  access Socrata’s API</a>.</p>
+				<p>Once we’ve retrieved the data, we aggregate it by total number of permits issued per month, and plot it. To make the graph clearer, it sometimes helps to smooth or denoise the data. There are a number of ways to do this, with moving averages being the most popular. The most intuitive is the <a href="https://algorithmia.com/algorithms/TimeSeries/SimpleMovingAverage">Simple Moving Average</a> algorithm, which replaces each point by the average of itself and some number of the preceding points (default is 3).</p>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-8">
 				<h3>Takeaway</h3>
-				<p>The takeaway from this example is not the individual pieces – most of these techniques are available a number of places. The secret here is that it is simple, composable, and fully automated. Once one person writes a data connector in Algorithmia (which is likely to happen for interesting public data, like that provided by Socrata), you don’t have to burn precious time writing and working kinks out of your own. On the other hand, if something existing gets done better, the compositional nature of Algorithmia will allow you to swap out pieces of a pipeline seamlessly. When someone comes up with a better outlier detector, then upgrading a pipeline like the one above can be literally just a few keystrokes away.</p>
+				<p>While these techniques are available in a number of places, the secret here is that Algorithmia provides a simple, composable, and fully automated API. Once your data is connected to Algorithmia, (like the data provided by Socrata), you don’t have to waste precious time writing and working kinks out of your own. On the other hand, if something existing gets done better, the compositional nature of Algorithmia will allow you to swap out pieces of a pipeline seamlessly. When someone comes up with a better outlier detector, then upgrading a pipeline like the one above can be literally just a few keystrokes away.</p>
 			</div>
 		</div>
 	</section>

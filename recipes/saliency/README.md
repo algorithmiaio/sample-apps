@@ -29,7 +29,7 @@ and add in your API key.
 
 After putting in your own API key to the line above run it in your console environment:
 
-```python saliency_recipe.py```
+```python saliency__algorithm_recipe.py```
 
 ## Built With
 * [Algorithmia](https://algorithmia.com/)

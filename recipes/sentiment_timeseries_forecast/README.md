@@ -20,12 +20,12 @@ library(stats)
 
 You’ll also need a free Algorithmia account, which includes 5,000 free credits a month – more than enough to get started with crawling, extracting, and analyzing web data.
 
-Sign up [here](https://algorithmia.com/), and then grab your API key from your user profile under Credentials.
+Sign up [here](https://algorithmia.com/), and then grab your [API key](algorithmia.com/user#credentials).
 
 Find this line in the script: 
 
 ```
-client <- getAlgorithmiaClient("your_api_key")
+client <- getAlgorithmiaClient("YOUR_API_KEY")
 ```
 and add in your API key.
 

@@ -3,6 +3,7 @@ import docx
 from os import listdir, mkdir, path, rename
 import re
 
+# get your API key at algorithmia.com/user#credentials
 client = Algorithmia.client('your_api_key')
 
 def detect_language(text):

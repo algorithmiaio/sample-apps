@@ -4,7 +4,7 @@ import Algorithmia
 #Set your Algorithmia API Key
 apiKey = 'YOUR API KEY GOES HERE'
 
-#Initialize Algorithmia Python client
+# get your API key at algorithmia.com/user#credentials
 client = Algorithmia.client(apiKey)
 
 #Pick Algorithm to use

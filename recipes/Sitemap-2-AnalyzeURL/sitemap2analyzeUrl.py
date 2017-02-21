@@ -6,7 +6,7 @@ import json
 input = ["http://algorithmia.com",1]
 
 # Replace YOUR API KEY with you free Algorithmia key
-# https://algorithmia.com/signup
+# http://algorithmia.com/user#credentials
 client = Algorithmia.client('YOUR API KEY')
 
 # Here we call the Site Map algorithm

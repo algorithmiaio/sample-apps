@@ -2,6 +2,8 @@ import re
 from collections import defaultdict, Counter
 
 import Algorithmia
+
+# get your API key at algorithmia.com/user#credentials
 client = Algorithmia.client("your_algorithmia_api_key")
 
 def pull_tweets():

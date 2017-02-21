@@ -1,4 +1,4 @@
-# Build a Sentiment Analysis Pipeline for Web Scraping
+# Build a Sentiment Timeseries Forecasting Pipeline
 
 Time series forecasting algorithms are a common method for predicting future values based on historical data using sequential data, such as snowfall per hour, customer sign-ups per day, or quarterly sales data.
 

@@ -18,7 +18,16 @@ You’ll also need a free Algorithmia account, which includes 5,000 free credits
 
 Sign up [here](https://algorithmia.com/), and then grab your API key from your user profile under Credentials.
 
+Find this line in the script: 
+
+```
+client = Algorithmia.client("your_api_key")
+```
+and add in your API key.
+
 ## How to Find the Sentiment Analysis of your URL
+
+After putting in your own API key to the line above run it in your console environment:
 
 ```python sentiment_analysis.py```
 

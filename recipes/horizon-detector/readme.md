@@ -4,7 +4,7 @@ The [Horizon Detection microservice](https://algorithmia.com/algorithms/ukyvisio
 
 This Python script allows you to specify an input image, passes it through the horizon-detection service, and straightens out the image (while optionally cropping and resampling it).
 
-For the full blog post related to this recipe, see [blog.algorithmia.com](http://blog.algorithmia.com/).
+For the full blog post related to this recipe, see [Introduction to Horizon Line Estimation](http://blog.algorithmia.com/introduction-to-horizon-line-estimation/).
 
 ## Getting Started
 

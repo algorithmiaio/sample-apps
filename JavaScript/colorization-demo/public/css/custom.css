@@ -11,11 +11,6 @@
 
 .explanation {text-align: center;}
 
-/* Move dots down to be over input field */
-.dots-container {
-  top: 36%;
-}
-
 #twoface-demo canvas {
   max-width:100%;
   position: relative;

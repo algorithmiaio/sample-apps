@@ -4,6 +4,8 @@ The [Language Identification microservice](https://algorithmia.com/algorithms/nl
 
 This simple Python script will examine all the .txt and .docx files in a directory, identify the language of each file, and move them into subdirectories according to their ISO 639 language code ('en', 'fr', etc).
 
+For the full blog post related to this recipe, see [Build Your Own Language Detection Microservice](http://blog.algorithmia.com/build-your-own-language-detection-microservice/).
+
 ## Getting Started
 
 Create a free [Algorithmia account](https://algorithmia.com/signup), and install the Algorithmia Python client and the python-docx package:

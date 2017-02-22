@@ -2,7 +2,7 @@
 var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
 
 var algorithms = {
-  nudity: 'sfw/NudityDetection/1.1.4'
+  nudity: 'sfw/NudityDetectioni2v/0.2.5'
 };
 
 /**

@@ -4,7 +4,9 @@ install.packages("stats")
 library(algorithmia)
 library(stats)
 
+# get your API key at algorithmia.com/user#credentials
 client <- getAlgorithmiaClient("your_api_key")
+
 # This is input for the Sentiment Time Series algorithm
 sent_freq <- function(){
   sent_input <- list(input_file="data://username/data_collection_name/time_comments.csv",

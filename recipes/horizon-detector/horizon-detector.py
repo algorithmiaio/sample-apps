@@ -23,7 +23,7 @@ def rotate_image(infile, outfile, degrees, crop):
     """Rotate an image by a number of degrees, crop if desired, and save to outfile"""
     Image.open(infile).rotate(degrees, expand=not crop, resample=Image.BILINEAR).save(outfile)
 
-
+# get your API key at algorithmia.com/user#credentials
 client = Algorithmia.client('your_api_key')
 infile = "/some/filename.jpg"
 outfile = "/some/outputfile.jpg"

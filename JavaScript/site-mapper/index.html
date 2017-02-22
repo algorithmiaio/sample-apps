@@ -1,13 +1,13 @@
 <%= header_begin %>
 
-    <title>Site Mapper - Algorithmia</title>
+  <title>Site Mapper - Algorithmia</title>
 	<link rel="canonical" href="http://demos.algorithmia.com/sitemap/" />
-	<meta name="description" content="Crawl a website, rank its pages, and extract content with Algorithmia's microservices.">
+	<meta name="description" content="Crawl a website, rank the pages, and extract content with Algorithmia's microservices.">
 
 	<!-- FB -->
 	<meta property="og:title" content="Search Unstructured Video">
 	<meta property="og:url" content="http://demos.algorithmia.com/sitemap/">
-	<meta property="og:description" content="Crawl a website, rank its pages, and extract content with Algorithmia's microservices">
+	<meta property="og:description" content="Crawl a website, rank the pages, and extract content with Algorithmia's microservices">
 	<meta property="og:locale" content="en_US" />
 	<meta property="og:type" content="website" />
 	<meta property="og:image" content="http://demos.algorithmia.com/sitemap/public/images/fbshare.jpg" />
@@ -17,13 +17,13 @@
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@algorithmia" />
 	<meta name="twitter:title" content="Crawl a Website and Rank Pages" />
-	<meta name="twitter:description" content="Crawl a website, rank its pages, and extract content with Algorithmia's microservices" />
+	<meta name="twitter:description" content="Crawl a website, rank the pages, and extract content with Algorithmia's microservices" />
 	<meta name="twitter:image" content="http://demos.algorithmia.com/sitemap/public/images/twshare.jpg" />
 	<meta name="twitter:creator" content="@matt_kiser" />
 
 	<!-- OTHER -->
 	<meta itemprop="name" content="Crawl a Website and Rank Pages">
-	<meta itemprop="description" content="Crawl a website, rank its pages, and extract content with Algorithmia's microservices">
+	<meta itemprop="description" content="Crawl a website, rank the pages, and extract content with Algorithmia's microservices">
 <%= header_end %>
 
 <section class="hero purple-grad-background">
@@ -32,7 +32,7 @@
     <div class="row row-sm">
       <div class="col-md-8">
         <h1>Site Mapper</h1>
-        <h4 class="light whitespace-md">Ever wondered what your domain/website looks like to the robots crawling it ?</h4>
+        <h4 class="light whitespace-md">Look at Your Website the Way Google Does</h4>
       </div>
     </div>
 
@@ -43,7 +43,7 @@
           <form onsubmit="startScrape(); return false;">
             <div class="row whitespace-none">
               <div class="col-xs-12 col-sm-10 whitespace-sm">
-                <label>Website URL to scrape</label>
+                <label>Website to scrape</label>
                 <input type="text" class="form-control url" id="siteUrl">
               </div>
               <div class="col-xs-4 col-sm-2 whitespace-sm depth-wrapper">
@@ -137,32 +137,32 @@
   <div class="row row-md">
     <div class="col-md-12">
       <h2 class="whitespace-none">How it works</h2>
-      <h4>Crawl a website, rank its pages, and extract content</h4>
+      <h4>Crawl a website, rank the pages, and extract content</h4>
     </div>
   </div>
   <div class="row row-md">
     <div class="col-md-8">
       <h3>Tools used</h3>
       <ul>
-        <li><a href="https://algorithmia.com/algorithms/web/GetLinks">Get Links</a> – examines a webpage, returning links to other pages</li>
-        <li><a href="https://algorithmia.com/algorithms/thatguy2048/PageRank">Page Rank</a> – a simple implementation of the PageRank algorithm</li>
-        <li><a href="https://algorithmia.com/algorithms/util/Url2Text">Url2Text</a> – extracts the main content from a webpage</li>
+        <li><a href="https://algorithmia.com/algorithms/web/GetLinks">Get Links</a> – examines a webpage and returns links to other pages</li>
+        <li><a href="https://algorithmia.com/algorithms/thatguy2048/PageRank">Page Rank</a> – a simple implementation of the <a href="https://en.wikipedia.org/wiki/PageRank" target="_blank">PageRank algorithm</a></li>
+        <li><a href="https://algorithmia.com/algorithms/util/Url2Text">URL2Text</a> – extracts the main content from a webpage</li>
         <li><a href="https://algorithmia.com/algorithms/nlp/Summarizer">Summarizer</a> – creates a summary by extracting key topic sentences</li>
-        <li><a href="https://algorithmia.com/algorithms/nlp/AutoTag">Auto Tag</a> – generates keywords via Latent Dirichlet Allocation</li>
-        <li><a href="https://d3js.org/" target="_blank">D3</a> - a powerful JavaScript library for generating graphs and other visualizations</li>
+        <li><a href="https://algorithmia.com/algorithms/nlp/AutoTag">Auto-Tag</a> – generates keywords via Latent Dirichlet Allocation</li>
+        <li><a href="https://d3js.org/" target="_blank">D3</a> - a JavaScript library for generating graphs and visualizations</li>
       </ul>
     </div>
   </div>
   <div class="row row-md">
     <div class="col-md-8">
       <h3>Source Data</h3>
-      <p>We examine the provided URL, traversing the links found in that page and in successive pages, up to a certain depth.  We then generate a visual map and a ranked list based on the links between those pages, and provide a summary and tag list for each page.</p>
+      <p>We examine the provided URL, traversing the links found in that page and the pages linked to – up to a certain depth. We then generate a visual map and ranked list based on the links between those pages. For each page, we also provide a summary and list of tags.</p>
     </div>
   </div>
   <div class="row">
     <div class="col-md-8">
       <h3>Takeaway</h3>
-      <p>Algorithmia's easy-to-use microservices make it possible to quickly traverse and examine a large number of pages, without the need to set up any infrastructure.  By combining these services with readily available visualization tools, a developer can rapidly assemble a site crawler without ever leaving the browser environment. </p>
+      <p>Algorithmia's easy-to-use microservices make it possible to quickly traverse and examine a large number of pages without the need to set up any infrastructure. By combining these services with readily available visualization tools, a developer can rapidly assemble a site crawler without ever leaving the browser environment. </p>
     </div>
   </div>
 </section>

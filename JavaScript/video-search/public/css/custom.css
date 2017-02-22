@@ -88,27 +88,27 @@ form .btn {margin-bottom: 0;}
 	font-weight: 700;
 }
 
-/* BTN DOTS */
+/* BTN DOTS (Saving all this for future use) */
 /* place on btn because dots are absolute positioned */
-.btn-dots {
+/*.btn-dots {
   position: relative;
-  min-width: 155px; /* Any smaller and the dots collapse */
-}
+  min-width: 155px; Any smaller and the dots collapse
+}*/
 /* No viz applied to btn text so that btn keeps original size */
-.no-viz {
+/*.no-viz {
   visibility: hidden;
-}
+}*/
 /* overwrite common properties to better position dots */
-.dots-container {
+/*.dots-container {
   top: 35%;
   left: 20%;
   transform: none;
-}
+}*/
 /* Change dot color because background is purple */
-.dot1 {background: #FFFFFF;}
+/*.dot1 {background: #FFFFFF;}
 .dot2 {background: #773CC9;}
 .dot3 {background: #4500A4;}
-.dot4 {background: #35007E;}
+.dot4 {background: #35007E;}*/
 
 /* $MEDIA QUERIES */
 /* Extra small devices (phones, less than 768px) */

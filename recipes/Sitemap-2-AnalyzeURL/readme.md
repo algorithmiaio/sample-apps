@@ -6,6 +6,8 @@ Analyze URL works as a simple API endpoint that’s always on and available.
 
 This is a simple Python script that will crawl a domain, scrape the metadata contents, and put it in a useful JSON format.
 
+For the full blog post related to this recipe, see [Web Scraping with Python: How To Crawl, Scrape, and Analyze URLs](http://blog.algorithmia.com/web-scraping-crawling-python/)
+
 ## Getting Started
 
 Create a free [Algorithmia account](https://algorithmia.com/signup), and install the Algorithmia Python client:

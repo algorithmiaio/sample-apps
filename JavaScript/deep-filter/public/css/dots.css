@@ -8,11 +8,18 @@
   background-color: rgba(0,0,0,0.7); 
 }
 
-.dots-container {
-    position: absolute;
-    top: 50%;;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
+.dots-container,
+.dots-text-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+.dots-text-container {
+  top: 45%;
+}
+.dots-text {
+  color: #fff;
 }
 .dot {
     display: block;

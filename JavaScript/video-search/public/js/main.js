@@ -112,6 +112,7 @@ var jumpToVideo = function(videoId, time) {
  * show dots, hide button, disable links; pre-clear results
  */
 var showWait = function() {
+  $('#overlay').removeClass('hidden');
   $("#analyze-button-text").addClass("no-viz");
   $('#search-query').attr('disabled','disabled');
   $('.search-link').click(function (e) {e.preventDefault();});
@@ -123,6 +124,7 @@ var showWait = function() {
  * @param showResults should the results section be revealed?
  */
 var endWait = function(showResults) {
+  $('#overlay').addClass('hidden');
   $("#analyze-button-text").removeClass("no-viz");
   $('#search-query').removeAttr('disabled');
   $('.search-link').unbind('click');

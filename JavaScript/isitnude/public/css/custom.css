@@ -11,11 +11,6 @@
   width: 100%;
 }
 
-/* Move dots down to be over input field */
-.dots-container {
-  top: 35%;
-}
-
 /* results */
 .rating {}
 .rating.g {color: green;}

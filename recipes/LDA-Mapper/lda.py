@@ -1,6 +1,6 @@
 import Algorithmia
 
-client = Algorithmia.client('sim4TVSxcIiUod91joxShOZIcMR1')
+client = Algorithmia.client(YOUR_API_KEY)
 
 docslist = [
     "Machine Learning is Fun Part 5: Language Translation with Deep Learning and the Magic of Sequences",

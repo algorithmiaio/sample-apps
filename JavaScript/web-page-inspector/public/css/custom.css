@@ -50,10 +50,6 @@ span.label {
   font-size: .75rem;
   line-height: 2;
 }
-/* Move dots down to be in middle of card */
-.dots-container {
-  top: 50%;
-}
 
 /* $MEDIA QUERIES */
 /* Extra small devices (phones, less than 768px) */

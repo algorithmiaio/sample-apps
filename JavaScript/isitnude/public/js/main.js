@@ -31,7 +31,6 @@ var analyzeImage = function(url) {
   $('#result-img').attr('src',url);
 console.log(url);
   algoClient.algo(algorithms.nudity).pipe(url).then(function (output) {
-console.log(output);
     if (output.error) {
       endWait(output.error.message);
     } else {
@@ -46,11 +45,11 @@ console.log(output);
  * @param result [{"class":string,"prob":number}]
  */
 var showResults = function(result){
-  if(result.nude=='true') {
-    $('#result-rating').html("R - Nude <nobr>(we're "+(result.confidence*100)+"% sure)</nobr>").addClass('r');
+  if(result.nude) {
+    $('#result-rating').html("R - Nude <nobr>(we're "+Math.round(result.confidence*100)+"% sure)</nobr>").addClass('r');
     $('#result-message').html('You might want to be careful where you post this!');
   } else {
-    $('#result-rating').html("G - Not Nude <nobr>(we're "+(result.confidence*100)+"% sure)</nobr>").addClass('g');
+    $('#result-rating').html("G - Not Nude <nobr>(we're "+Math.round(result.confidence*100)+"% sure)</nobr>").addClass('g');
     $('#result-message').html('You can probably post this.');
   }
   hideWait();

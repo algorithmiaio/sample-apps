@@ -3,29 +3,28 @@
 <title>#isitnude - nudity detector - Algorithmia</title>
 <link rel="canonical" href="http://demos.algorithmia.com/isitnude/">
 <meta name="description" content="Choose an image and our bot will tell you #isitnude"/>
+<meta name="robots" content="index,follow">
 
 <!-- FB -->
-<meta property="og:title" content="Summarize, tag, & analyze RSS feeds">
-<meta property="og:url" content="http://demos.algorithmia.com/rss-dashboard/">
-<meta property="og:description" content="Automatically create summaries, extract tags, and analyze the sentiment of RSS feeds with this microservice">
+<meta property="og:title" content="#isitnude - nudity detector">
+<meta property="og:url" content="http://demos.algorithmia.com/isitnude/">
+<meta property="og:description" content="Choose an image and our bot will tell you #isitnude">
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="website">
-<meta property="og:image" content="http://demos.algorithmia.com/rss-dashboard/public/images/newspaper.jpeg">
+<meta property="og:image" content="http://demos.algorithmia.com/isitnude/public/images/fbshare.jpeg">
 <meta property="og:site_name" content="Algorithmia">
 
 <!-- TWTR -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@algorithmia">
-<meta name="twitter:title" content="Summarize, tag, & analyze RSS feeds">
-<meta name="twitter:description" content="Automatically create summaries, extract tags, and analyze the sentiment of RSS feeds with this microservice">
-<meta name="twitter:image" content="http://demos.algorithmia.com/rss-dashboard/public/images/newspaper.jpeg">
+<meta name="twitter:title" content="#isitnude - nudity detector">
+<meta name="twitter:description" content="Choose an image and our bot will tell you #isitnude">
+<meta name="twitter:image" content="http://demos.algorithmia.com/isitnude/public/images/twshare.jpeg">
 <meta name="twitter:creator" content="@matt_kiser">
 
 <!-- OTHER -->
-<meta property="og:title" content="#isitnude - nudity detector" />
-<meta property="og:url" content="https://www.isitnude.com" />
-<meta property="og:image" content="http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/main_thumb_2.png" />
-<meta property="og:description" content="Choose an image and our bot will tell you #isitnude"/>
+<meta itemprop="name" content="#isitnude - nudity detector">
+<meta itemprop="description" content="Choose an image and our bot will tell you #isitnude">
 
 <%= header_end %>
 
@@ -39,10 +38,10 @@
         <div class="col-sm-12 col-md-7">
           <div class="card">
             <h3 class="whitespace">Test a photo</h3>
-            <p class="whitespace-none">Paste the URL to an image or <br class="hidden-sm hidden-md hidden-lg hidden-xl" ><a href=""><span class="glyphicon glyphicon-upload" aria-hidden="true"></span>UPLOAD</a></p>
-            <form class="form-group" onsubmit="callAlgorithm(); return false;">
+            <p class="whitespace-none">Paste the URL to an image or <br class="hidden-sm hidden-md hidden-lg hidden-xl" ><a href="javascript:;" id="file-dropzone" ><span class="glyphicon glyphicon-upload" aria-hidden="true"></span>UPLOAD</a></p>
+            <form class="form-group" onsubmit="analyzeImage(); return false;">
               <input type="text" class="form-control" id="imgUrl" placeholder="image URL">
-              <a class="btn btn-primary" type="button" onclick="callAlgorithm()">
+              <a class="btn btn-primary" type="button" onclick="analyzeImage()">
                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                 isitnude?
               </a>
@@ -52,20 +51,28 @@
             <h4 class="dark whitespace-sm">Or, try these sample images:</h4>
             <div class="row whitespace-none sample-images">
               <div class="col-xs-4 col-sm-2">
-                <a onclick=""><img src="public/images/thumb01.png" alt="woman"></a>
+                <a onclick="analyzeImage('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/sunglasses-love-woman-flowers.jpg')"><img src="public/images/thumb01.png" alt="woman"></a>
               </div>
               <div class="col-xs-4 col-sm-2 sample-image">
-                <a onclick=""><img src="public/images/thumb02.png" alt="Obama Swimsuit"></a>
+                <a onclick="analyzeImage('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/obama.jpg')"><img src="public/images/thumb02.png" alt="Obama Swimsuit"></a>
               </div>
               <div class="col-xs-4 col-sm-2 sample-image">
-                <a onclick=""><img src="public/images/thumb03.png" alt="Putin Riding a Bear"></a>
+                <a onclick="analyzeImage('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/putin.jpg')"><img src="public/images/thumb03.png" alt="Putin Riding a Bear"></a>
               </div>
               <div class="col-xs-4 col-sm-2 sample-image">
-                <a onclick=""><img src="public/images/thumb04.jpg" alt="Family Guy Peter"></a>
+                <a onclick="analyzeImage('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/family-guy.jpg')"><img src="public/images/thumb04.jpg" alt="Family Guy Peter"></a>
               </div>
               <div class="col-xs-4 col-sm-2 sample-image">
-                <a onclick=""><img src="public/images/thumb05.png"></a>
+                <a onclick="analyzeImage('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/cosimo-medici-orpheus.jpg')"><img src="public/images/thumb05.png" alt="Cosimo Medici as Orpheus"></a>
               </div>
+            </div>
+            <div id="overlay" class="container hidden">
+                <div class="dots-container">
+                    <div class="dot dot1"></div>
+                    <div class="dot dot2"></div>
+                    <div class="dot dot3"></div>
+                    <div class="dot dot4"></div>
+                </div>
             </div>
           </div>
         </div>
@@ -75,11 +82,11 @@
 
 <section class="container hidden" id="results">
   <div class="row">
-      <div class="col-md-12 result-img">
+      <div class="col-md-12 result-wrapper">
         <h4>RATING:</h4>
-        <h3 class="rating g">G - Not nude</h3>
-        <img src="http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/obama.jpg" alt="Obama Swimsuit">
-        <p class="lg">You can probably post this</p>
+        <h3 id="result-rating" class="rating"></h3>
+        <img id="result-img" src="" alt="analyzed image">
+        <p id="result-msg" class="lg"></p>
         <p class="whitespace-none">We apologize if we didn't get it right, we are improving every day.</p>
         <p class="secondary-text">Please note that we cannot detect black and white images.</p>
       </div>
@@ -93,31 +100,27 @@
   <div class="row row-md">
     <div class="col-md-12">
       <h2 class="whitespace-none">How it works</h2>
-      <h4>Extracting summaries, tags, and sentiment from an RSS feed</h4>
+      <h4>Using artificial intelligence to detect nudity</h4>
     </div>
   </div>
   <div class="row row-md">
     <div class="col-md-8">
       <h3>Tools used</h3>
       <ul>
-        <li><a href="https://algorithmia.com/algorithms/tags/ScrapeRSS">ScrapeRSS</a> – scrapes the RSS feed, extracting each entry's title and url</li>
-        <li><a href="https://algorithmia.com/algorithms/util/Html2Text">Html2Text</a> – scrapes HTML from the entry's url and converts its main content to plain text</li>
-        <li><a href="https://algorithmia.com/algorithms/nlp/Summarizer">Summarizer</a> – creates a summary by extracting topic sentences based on frequency of key terms</li>
-        <li><a href="https://algorithmia.com/algorithms/nlp/AutoTag">AutoTag</a> – uses a variant of <a href="https://algorithmia.com/algorithms/nlp/LDA">nlp/LDA</a> to extract keywords.</li>
-        <li><a href="https://algorithmia.com/algorithms/nlp/SentimentAnalysis">SentimentAnalysis</a> – assigns a sentiment rating from -1 (very negative) to to 1 very positive.</li>
+        <li><a href="https://algorithmia.com/algorithms/sfw/NudityDetection">NudityDetection</a> – detects nudity in pictures</li>
       </ul>
     </div>
   </div>
   <div class="row row-md">
     <div class="col-md-8">
-      <h3>Source Data</h3>
-      <p>We examine the provided RSS feed, extract the title and content URL, then and convert the content into plain text (while removing tags which do not contribute to its meaning).  Then we extract topic tags from the converted content, analyze it for positive or negative sentiment, and generate a meaningful summary.</p>
+      <h3>Method</h3>
+      <p>Our algorithm is based on <a href="https://sites.google.com/a/dcs.upd.edu.ph/csp-proceedings/Home/pcsc-2005/AI4.pdf?attredirects=0" target="_blank">existing solutions</a> which detect skin patches and their relative position and size, but also reduces false positives by detecting other features in the image (such as <a href="https://algorithmia.com/algorithms/opencv/FaceDetection" target="_blank">faces</a>) and removing them from consideration, or using them to count the number of people in each image and adjust for skin tone.</p>
     </div>
   </div>
   <div class="row">
     <div class="col-md-8">
       <h3>Takeaway</h3>
-      <p>By wiring up a series of very simple API calls, a developer can easily and quickly scrape content from a variety of sources and perform automatic summarization, tagging, and even complex sentiment analysis... all without writing a single line of text-processing code or performing any sever-management tasks.  This makes it possible to build web dashboards, in-app content analysis, or backend pipelines in mere hours.</p>
+      <p>With just a single call to our API, a developer can easily add nudity-detection, within a given level of confidence, to their application or data processing pipeline.  This allows for easy flagging of inappropriate images, without the need to build or integrate any complex image-processing libraries or machine-learning architecture.</p>
     </div>
   </div>
 </section>
@@ -132,14 +135,17 @@
           <p class="item-title">SAMPLE INPUT</p>
           <pre class="whitespace-md"><code class="python">import Algorithmia
 
-input = {"image": "_IMAGE_URL_"}
+input = "_IMAGE_URL_"
 client = Algorithmia.client('_API_KEY_')
-algo = client.algo('deeplearning/ColorfulImageColorization/1.0.1')
+algo = client.algo('sfw/NudityDetection/1.1.4')
 
 print algo.pipe(input)
 </code></pre>
             <p class="item-title">SAMPLE OUTPUT</p>
-            <pre><code class="json">{"output": "data://.algo/temp/image.png"}</code></pre>
+            <pre><code class="json">{
+    "nude": "true",
+    "confidence": 0.93
+}</code></pre>
         <a href="https://algorithmia.com/algorithms/deeplearning/ColorfulImageColorization" class="btn btn-primary-inverse">
           LEARN MORE
         </a>
@@ -147,4 +153,9 @@ print algo.pipe(input)
     </div>
   </section>
 
-<%= footer %>
+  <!-- JS -->
+  <script src="public/js/TweenMax.min.js"></script>
+  <script src="public/js/dots.js"></script>
+  <script src="public/js/dropzone.js"></script>
+
+  <%= footer %>

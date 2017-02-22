@@ -1,0 +1,167 @@
+<%= header_begin %>
+
+	<title>Deep Learning to Classify Clothing and Fashion Items in Images – Algorithmia</title>
+	<link rel="canonical" href="http://demos.algorithmia.com/deep-fashion/" />
+	<meta name="description" content="Use deep learning algorithms to identify clothing and accessories in images with the Fashion Classifier microservice">
+	<meta name="robots" content="index,follow">
+
+	<!-- FB -->
+	<meta property="og:title" content="Classify Clothing and Fashion Items in Images">
+	<meta property="og:url" content="http://demos.algorithmia.com/deep-fashion/">
+	<meta property="og:description" content="Use deep learning algorithms to identify clothing and accessories in images with the Fashion Classifier microservice">
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="website" />
+	<meta property="og:image" content="http://demos.algorithmia.com/deep-fashion/public/images/fbshare.jpg" />
+	<meta property="og:site_name" content="Algorithmia" />
+
+	<!-- TWTR -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@algorithmia" />
+	<meta name="twitter:title" content="Classify Clothing and Fashion Items in Images" />
+	<meta name="twitter:description" content="Use deep learning algorithms to identify clothing and accessories in images with the Fashion Classifier microservice" />
+	<meta name="twitter:image" content="http://demos.algorithmia.com/deep-fashion/public/images/twshare.jpg" />
+	<meta name="twitter:creator" content="@matt_kiser" />
+
+	<!-- OTHER -->
+	<meta itemprop="name" content="Classify Places, Locations, and Scenes in Images">
+	<meta itemprop="description" content="Use deep learning algorithms to identify places in images with the Places365 Classifier microservice, trained on 1.8 million images to recognize 365 scenes">
+
+	<%= header_end %>
+
+	<section class="purple-grad-background hero">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8">
+					<h1>Fashion Recognition</h1>
+					<h4 class="light whitespace-md">Use Deep Learning to Identify and Classify Fashion Items</h4>
+					<div class="card">
+						<h3 class="whitespace">Classify an image</h3>
+						<p class="whitespace-none">Paste the URL to an image or <br class="hidden-sm hidden-md hidden-lg hidden-xl" ><a href="javascript:;" id="file-dropzone" ><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> UPLOAD</a></p>
+						<form class="form-group" onsubmit="getTags(); return false;">
+							<input type="text" class="form-control" id="imgUrl" placeholder="http://">
+							<a class="btn btn-primary" type="button" onclick="getTags()">
+								<span class="fa fa-magic" aria-hidden="true"></span>
+								Classify It
+							</a>
+						</form>
+						<div id="status-label"></div>
+						<h4 class="dark whitespace-sm">Or, try these sample images:</h4>
+						<div class="row whitespace-none sample-images">
+							<div class="col-xs-4 col-sm-2 sample-image">
+								<a onclick="getTags('https://s3.amazonaws.com/algorithmia-assets/deep-fashion/fashion1.jpg')"><img src="public/images/fashion1_sm.jpg"></a>
+							</div>
+							<div class="col-xs-4 col-sm-2 sample-image">
+								<a onclick="getTags('https://s3.amazonaws.com/algorithmia-assets/deep-fashion/fashion2.jpg')"><img src="public/images/fashion2_sm.jpg"></a>
+							</div> 
+							<div class="col-xs-4 col-sm-2 sample-image">
+								<a onclick="getTags('https://s3.amazonaws.com/algorithmia-assets/deep-fashion/fashion3.jpg')"><img src="public/images/fashion3_sm.jpg"></a>
+							</div>
+							<div class="col-xs-4 col-sm-2 sample-image">
+								<a onclick="getTags('https://s3.amazonaws.com/algorithmia-assets/deep-fashion/fashion4.jpg')"><img src="public/images/fashion4_sm.jpg"></a>
+							</div>
+							<div class="col-xs-4 col-sm-2 sample-image">
+								<a onclick="getTags('https://s3.amazonaws.com/algorithmia-assets/deep-fashion/fashion5.jpg')"><img src="public/images/fashion5_sm.jpg"></a>
+							</div>
+						</div>
+						<div id="overlay" class="container hidden">
+							<div class="dots-container">
+								<div class="dot dot1"></div>
+								<div class="dot dot2"></div>
+								<div class="dot dot3"></div>
+								<div class="dot dot4"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- RESULTS PAGE -->
+	<section class="container hidden" id="results">
+		<div class="explanation">
+			<div class="row">
+				<div class="col-sm-6">
+					<img id="userImg">
+				</div>
+				<div class="col-sm-6">
+					<table class="table" id="table">
+						<thead>
+							<tr>
+								<th><p class="item-title">Fashion Tags</p></th>
+								<th><p class="item-title">Probability</p></th>
+							</tr>
+						</thead>
+						<tbody id="results-tbody">
+						</tbody>
+					</table>
+				</div>
+
+				<!-- FEEDBACK PAGE -->
+				<div class="center" id="feedback">
+					<div>Are the tags accurate?</div>
+					<button class="btn btn-default" onclick="clickYes()">Yes</button>
+					<button class="btn btn-default" onclick="clickNo()">No</button>
+				</div>
+				<div class="center hidden" id="feedback-msg">
+					&#10004; Thanks for your feedback. This image will be reclassified.
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- EXPLANATION PAGE -->
+	<div class="grey-background">
+		<section class="container">
+			<div class="explanation">
+				<div class="row row-md">
+					<div class="col-md-12">
+						<h2 class="whitespace-none">How it works</h2>
+						<h4>Quickly Classify Clothing and Fashion Items in Images</h4>
+					</div>
+					<div class="col-md-8">
+						<p>Use state-of-the-art deep learning to identify clothing and fashion items in images. Just paste in a URL above.</p>
+
+						<p>Let us know what you think <a href="https://twitter.com/algorithmia" target="_blank">@Algorithmia</a> or by <a href="https://algorithmia.com/contact" target="_blank">email</a>.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+  <!-- BUILT FOR DEVS -->
+  <section class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <h2 class="whitespace-sm">Built For Developers</h2>
+        <h4 class="whitespace-md">A simple, scalable API for machine intelligence</h4>
+          <p class="item-title">SAMPLE INPUT</p>
+          <pre><code class="python hljs"><span class="hljs-keyword">import</span> Algorithmia
+
+input = {<span class="hljs-string">"image"</span>: <span class="hljs-string">"_IMAGE_URL_"</span>}
+client = Algorithmia.client(<span class="hljs-string">'_API_KEY_'</span>)
+algo = client.algo(<span class="hljs-string">'deeplearning/DeepFashion/0.1.0'</span>)
+
+<span class="hljs-keyword">print</span> algo.pipe(input)
+</code></pre>
+            <p class="item-title">SAMPLE OUTPUT</p>
+            <pre><code class="json hljs">{
+  <span class="hljs-attr">"tags"</span>: [
+    {<span class="hljs-attr">"class"</span>: <span class="hljs-string">"tank_top"</span>, <span class="hljs-attr">"confidence"</span>: <span class="hljs-number">0.9996302127838137</span>},
+    {<span class="hljs-attr">"class"</span>: <span class="hljs-string">"skirt"</span>, <span class="hljs-attr">"confidence"</span>: <span class="hljs-number">0.9999059438705444</span>},
+    {<span class="hljs-attr">"class"</span>: <span class="hljs-string">"heels_pumps_or_wedges"</span>, <span class="hljs-attr">"confidence"</span>: <span class="hljs-number">0.9692339897155761</span>}
+  ]
+}</code></pre>
+        <a href="https://algorithmia.com/algorithms/deeplearning/Places365Classifier" class="btn btn-primary-inverse">
+          LEARN MORE
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- JS -->
+  <script src="public/js/TweenMax.min.js"></script>
+  <script src="public/js/dots.js"></script>
+  <script src="public/js/dropzone.js"></script>
+
+  <%= footer %>

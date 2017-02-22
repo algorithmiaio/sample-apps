@@ -9,6 +9,11 @@ h1 {font-size: 2.5rem;}
 
 #timeseries-chart {
 	height: 400px;
+	text-align: center;
+}
+
+#fetch-spinner {
+	margin-top: 5em;
 }
 
 .variable-select {

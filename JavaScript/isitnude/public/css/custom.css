@@ -11,10 +11,16 @@
   width: 100%;
 }
 
+/* Move dots down to be over input field */
+.dots-container {
+  top: 35%;
+}
+
 /* results */
 .rating {}
 .rating.g {color: green;}
-.result-img {text-align: center;}
+.rating.r {color: darkred;}
+.result-wrapper {text-align: center;}
 /* $MEDIA QUERIES */
 /* Extra small devices (phones, less than 768px) */
 /* This should be the default AKA no styles here */

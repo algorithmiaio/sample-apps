@@ -5,14 +5,13 @@
 	<meta name="description" content="Use deep learning algorithms to identify places in images with the Places365 Classifier microservice, trained on 1.8 million images to recognize 365 scenes">
 	<meta name="robots" content="index,follow">
 
-
 	<!-- FB -->
 	<meta property="og:title" content="Classify Places, Locations, and Scenes in Images">
 	<meta property="og:url" content="http://demos.algorithmia.com/classify-places/">
 	<meta property="og:description" content="Use deep learning algorithms to identify places in images with the Places365 Classifier microservice, trained on 1.8 million images to recognize 365 scenes">
 	<meta property="og:locale" content="en_US" />
 	<meta property="og:type" content="website" />
-	<meta property="og:image" content="http://demos.algorithmia.com/classify-places/public/images/hero-fb.png" />
+	<meta property="og:image" content="http://demos.algorithmia.com/classify-places/public/images/fbshare.png" />
 	<meta property="og:site_name" content="Algorithmia" />
 
 	<!-- TWTR -->
@@ -20,14 +19,14 @@
 	<meta name="twitter:site" content="@algorithmia" />
 	<meta name="twitter:title" content="Classify Places, Locations, and Scenes in Images" />
 	<meta name="twitter:description" content="Use deep learning algorithms to identify places in images with the Places365 Classifier microservice, trained on 1.8 million images to recognize 365 scenes" />
-	<meta name="twitter:image" content="http://demos.algorithmia.com/classify-places/public/images/hero-twttr.png" />
+	<meta name="twitter:image" content="http://demos.algorithmia.com/classify-places/public/images/twshare.png" />
 	<meta name="twitter:creator" content="@matt_kiser" />
 
 	<!-- OTHER -->
 	<meta itemprop="name" content="Classify Places, Locations, and Scenes in Images">
 	<meta itemprop="description" content="Use deep learning algorithms to identify places in images with the Places365 Classifier microservice, trained on 1.8 million images to recognize 365 scenes">
 
-<%= header_end %>
+	<%= header_end %>
 
 	<section class="purple-grad-background hero">
 		<div class="container">
@@ -37,10 +36,10 @@
 					<h4 class="light whitespace-md">Use Deep Learning to Identify and Classify Places</h4>
 					<div class="card">
 						<h3 class="whitespace">Classify a place</h3>
-						<p class="whitespace-none">Paste the URL to an image or <br class="hidden-sm hidden-md hidden-lg hidden-xl" ><a href=""><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> UPLOAD</a></p>
-						<form class="form-group" onsubmit="callAlgorithm(); return false;">
-							<input type="text" class="form-control" id="imgUrl" placeholder="http://www.algorithmia.com/images/logo-white.png">
-							<a class="btn btn-primary" type="button" onclick="callAlgorithm()">
+						<p class="whitespace-none">Paste the URL to an image or <br class="hidden-sm hidden-md hidden-lg hidden-xl" ><a href="javascript:;" id="file-dropzone" ><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> UPLOAD</a></p>
+						<form class="form-group" onsubmit="getPlaces(); return false;">
+							<input type="text" class="form-control" id="imgUrl" placeholder="http://">
+							<a class="btn btn-primary" type="button" onclick="getPlaces()">
 								<span class="fa fa-magic" aria-hidden="true"></span>
 								Classify It
 							</a>
@@ -49,19 +48,27 @@
 						<h4 class="dark whitespace-sm">Or, try these sample images:</h4>
 						<div class="row whitespace-none sample-images">
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="analyzeDefault('data://demo/places/alley_lg.jpg')"><img src="public/images/alley_sm.jpg"></a>
+								<a onclick="getPlaces('https://s3.amazonaws.com/algorithmia-assets/classifyplaces_static_content/alley_lg.jpg')"><img src="public/images/alley_sm.jpg"></a>
 							</div>
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="analyzeDefault('data://demo/places/dock_lg.jpg')"><img src="public/images/dock_sm.jpg"></a>
+								<a onclick="getPlaces('https://s3.amazonaws.com/algorithmia-assets/classifyplaces_static_content/dock_lg.jpg')"><img src="public/images/dock_sm.jpg"></a>
 							</div> 
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="analyzeDefault('data://demo/places/canyon_lg.jpg')"><img src="public/images/canyon_sm.jpg"></a>
+								<a onclick="getPlaces('https://s3.amazonaws.com/algorithmia-assets/classifyplaces_static_content/canyon_lg.jpg')"><img src="public/images/canyon_sm.jpg"></a>
 							</div>
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="analyzeDefault('data://demo/places/skyscraper_lg.jpg')"><img src="public/images/skyscraper_sm.jpg"></a>
+								<a onclick="getPlaces('https://s3.amazonaws.com/algorithmia-assets/classifyplaces_static_content/skyscraper_lg.jpg')"><img src="public/images/skyscraper_sm.jpg"></a>
 							</div>
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="analyzeDefault('data://demo/places/airplane_lg.jpg')"><img src="public/images/airplane_sm.jpg"></a>
+								<a onclick="getPlaces('https://s3.amazonaws.com/algorithmia-assets/classifyplaces_static_content/airplane_lg.jpg')"><img src="public/images/airplane_sm.jpg"></a>
+							</div>
+						</div>
+						<div id="overlay" class="container hidden">
+							<div class="dots-container">
+								<div class="dot dot1"></div>
+								<div class="dot dot2"></div>
+								<div class="dot dot3"></div>
+								<div class="dot dot4"></div>
 							</div>
 						</div>
 					</div>
@@ -70,23 +77,12 @@
 		</div>
 	</section>
 
-	<div class="container hidden">
-		<div id="overlay">
-			<div class="dots-container">
-				<div class="dot dot1"></div>
-				<div class="dot dot2"></div>
-				<div class="dot dot3"></div>
-				<div class="dot dot4"></div>
-			</div>
-		</div>
-	</div>
-
 	<!-- RESULTS PAGE -->
-	<section class="container">
-		<div class="explanation" id="results">
+	<section class="container hidden" id="results">
+		<div class="explanation">
 			<div class="row">
 				<div class="col-sm-6">
-					<img src="public/images/dock_lg.jpg" id="userImg">
+					<img id="userImg">
 				</div>
 				<div class="col-sm-6">
 					<table class="table" id="table">
@@ -96,16 +92,7 @@
 								<th><p class="item-title">Probability</p></th>
 							</tr>
 						</thead>
-						<tbody id="tbody">
-							<tr>
-								<td>
-									<span class="label label-success">pier</span>
-								</td>
-								<td>
-									79.75%
-								</td>
-							</tr>
-							<tr><td><span class="label label-success">boardwalk</span></td><td>2.94%</td></tr><tr><td><span class="label label-success">lighthouse</span></td><td>2.17%</td></tr><tr><td><span class="label label-success">coast</span></td><td>1.54%</td></tr><tr><td><span class="label label-success">harbor</span></td><td>1.49%</td></tr><tr><td><span class="label label-success">ocean</span></td><td>1.47%</td></tr><tr><td><span class="label label-success">bridge</span></td><td>1.42%</td></tr>
+						<tbody id="results-tbody">
 						</tbody>
 					</table>
 				</div>
@@ -115,49 +102,48 @@
 
 	<!-- EXPLANATION PAGE -->
 	<div class="grey-background">
-	<section class="container">
-		<div class="explanation">
-			<div class="row row-md">
-				<div class="col-md-12">
-					<h2 class="whitespace-none">How it works</h2>
-					<h4>Quickly Classify Places, Locations, and Scenes in Images</h4>
-				</div>
-				<div class="col-md-8">
-					<p>Use state-of-the-art deep learning to identify places in images. Just paste in a URL above.</p>
-					<p>We're excited to introduce <a href="http://blog.algorithmia.com/2016/07/cloud-hosted-deep-learning-models/" target="_blank">cloud hosted deep learning models</a> on Algorithmia. The <a href="https://algorithmia.com/algorithms/deeplearning/Places365Classifier" target="_blank">Places365 Classifier microservice</a> is a computer vision algorithm trained on ~1.8 million images to recognize 365 scene categories.</p>
+		<section class="container">
+			<div class="explanation">
+				<div class="row row-md">
+					<div class="col-md-12">
+						<h2 class="whitespace-none">How it works</h2>
+						<h4>Quickly Classify Places, Locations, and Scenes in Images</h4>
+					</div>
+					<div class="col-md-8">
+						<p>Use state-of-the-art deep learning to identify places in images. Just paste in a URL above.</p>
+						<p>We're excited to introduce <a href="http://blog.algorithmia.com/2016/07/cloud-hosted-deep-learning-models/" target="_blank">cloud hosted deep learning models</a> on Algorithmia. The <a href="https://algorithmia.com/algorithms/deeplearning/Places365Classifier" target="_blank">Places365 Classifier microservice</a> is a computer vision algorithm trained on ~1.8 million images to recognize 365 scene categories.</p>
 
-					<p>This microservice is an implementation of <a href="https://github.com/metalbubble/places365" target="_blank">Places: An Image Database for Deep Scene Understanding. B. Zhou, A. Khosla, A. Lapedriza, A. Torralba and A. Oliva Arxiv, 2016</a>. Learn more about their work <a href="http://places2.csail.mit.edu/" target="_blank">here</a><!--and <a href="#">how we built this demo</a>-->.</p>
-					<p>Let us know what you think <a href="https://twitter.com/algorithmia" target="_blank">@Algorithmia</a> or by <a href="https://algorithmia.com/contact" target="_blank">email</a>.</p>
+						<p>This microservice is an implementation of <a href="https://github.com/metalbubble/places365" target="_blank">Places: An Image Database for Deep Scene Understanding. B. Zhou, A. Khosla, A. Lapedriza, A. Torralba and A. Oliva Arxiv, 2016</a>. Learn more about their work <a href="http://places2.csail.mit.edu/" target="_blank">here</a><!--and <a href="#">how we built this demo</a>-->.</p>
+						<p>Let us know what you think <a href="https://twitter.com/algorithmia" target="_blank">@Algorithmia</a> or by <a href="https://algorithmia.com/contact" target="_blank">email</a>.</p>
+					</div>
 				</div>
 			</div>
-		</div>
-	</section>
+		</section>
 	</div>
 
-
-	<!-- BUILT FOR DEVS -->
+  <!-- BUILT FOR DEVS -->
   <section class="container">
     <div class="row">
       <div class="col-md-9">
         <h2 class="whitespace-sm">Built For Developers</h2>
         <h4 class="whitespace-md">A simple, scalable API for machine intelligence</h4>
           <p class="item-title">SAMPLE INPUT</p>
-          <pre><code class="python">import Algorithmia
+          <pre><code class="python hljs"><span class="hljs-keyword">import</span> Algorithmia
 
-input = {"image": "_IMAGE_URL_"}
-client = Algorithmia.client('_API_KEY_')
-algo = client.algo('deeplearning/Places365Classifier/0.1.8')
+input = {<span class="hljs-string">"image"</span>: <span class="hljs-string">"_IMAGE_URL_"</span>}
+client = Algorithmia.client(<span class="hljs-string">'_API_KEY_'</span>)
+algo = client.algo(<span class="hljs-string">'deeplearning/Places365Classifier/0.1.8'</span>)
 
-print algo.pipe(input)
+<span class="hljs-keyword">print</span> algo.pipe(input)
 </code></pre>
             <p class="item-title">SAMPLE OUTPUT</p>
-            <pre><code class="json">{
-  "predictions": [
-    {"class": "tower", "prob": 0.6098036170005801},
-    {"class": "skyscraper", "prob": 0.14249812066555023},
-    {"class": "office_building", "prob": 0.04916094988584519},
-    {"class": "downtown", "prob": 0.02924365177750587},
-    {"class": "church/outdoor", "prob": 0.028504755347967155}
+            <pre><code class="json hljs">{
+  <span class="hljs-attr">"predictions"</span>: [
+    {<span class="hljs-attr">"class"</span>: <span class="hljs-string">"tower"</span>, <span class="hljs-attr">"prob"</span>: <span class="hljs-number">0.6098036170005801</span>},
+    {<span class="hljs-attr">"class"</span>: <span class="hljs-string">"skyscraper"</span>, <span class="hljs-attr">"prob"</span>: <span class="hljs-number">0.14249812066555023</span>},
+    {<span class="hljs-attr">"class"</span>: <span class="hljs-string">"office_building"</span>, <span class="hljs-attr">"prob"</span>: <span class="hljs-number">0.04916094988584519</span>},
+    {<span class="hljs-attr">"class"</span>: <span class="hljs-string">"downtown"</span>, <span class="hljs-attr">"prob"</span>: <span class="hljs-number">0.02924365177750587</span>},
+    {<span class="hljs-attr">"class"</span>: <span class="hljs-string">"church/outdoor"</span>, <span class="hljs-attr">"prob"</span>: <span class="hljs-number">0.028504755347967155</span>}
   ]
 }</code></pre>
         <a href="https://algorithmia.com/algorithms/deeplearning/Places365Classifier" class="btn btn-primary-inverse">
@@ -167,4 +153,9 @@ print algo.pipe(input)
     </div>
   </section>
 
-<%= footer %>
+  <!-- JS -->
+  <script src="public/js/TweenMax.min.js"></script>
+  <script src="public/js/dots.js"></script>
+  <script src="public/js/dropzone.js"></script>
+
+  <%= footer %>

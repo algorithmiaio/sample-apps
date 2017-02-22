@@ -1,140 +1,116 @@
-// clouds https://images.unsplash.com/16/unsplash_525a7e89953d1_1.JPG
-// hills https://images.unsplash.com/29/cloudy-hills.jpg
-// rock https://images.unsplash.com/reserve/yZfr4jmxQyuaE132MWZm_stagnes.jpg
-// paris https://images.unsplash.com/33/YOfYx7zhTvYBGYs6g83s_IMG_8643.jpg
+// init the Algorithmia client with your API key from https://algorithmia.com/user#credentials
+var algoClient = Algorithmia.client('simYU7sWtoiMToSYQC9uVqdAURb1');
 
-/**
- * once DOM is ready, update vars amd set initial URL
- */
-$(document).ready(function() {
-  setInviteCode('color');;
-});
-
-window.Algorithmia = window.Algorithmia || {};
-Algorithmia.api_key = "simYU7sWtoiMToSYQC9uVqdAURb1";
-var numTasks = 0;
-
-function callAlgorithm() {
-  var statusLabel = document.getElementById("status-label");
-  statusLabel.innerHTML = "";
-
-  // Get the img URL
-  var img = document.getElementById("imgUrl").value;
-
-  // Remove any whitespaces around the url
-  img = img.trim();
-
-  if(typeof(img) == "string" && img !== "") {
-    startTask();
-
-    // Call Image Colorization
-    colorify(img);
-  }
-
+var algorithms = {
+  colorize: 'algorithmiahq/ColorizationDemo/1.1.19'
 };
 
-function downloadCanvas(link, canvasId, filename) {
-    link.href = document.getElementById(canvasId).toDataURL();
-    link.download = filename;
-}
+/**
+ * once DOM is ready, update vars and add handlers
+ */
+$(document).ready(function() {
+  setInviteCode('color');
+  initDropzone();
+  requireHttp($('#imgUrl'));
+  $('#compareLink').click(function() {
+      $('#compareLink').attr('href', $('#twoface')[0].toDataURL());
+  });
+});
 
-document.getElementById('compareLink').addEventListener('click', function() {
-    downloadCanvas(this, 'twoface', 'rendered-comparison.png');
-}, false);
+/**
+ * clear status, colorize image if specified, or check #imgUrl if not
+ * @param img
+ */
+var callAlgorithm = function(img) {
+  if (img) {
+    $('#imgUrl').val(img);
+  } else {
+    img=$('#imgUrl').val();
+  }
+  if(img == "" || img=="http://") {
+    return hideWait('Please select an image, click the upload link, or enter a URL');
+  }
+  $('#status-label').empty();
+  showWait();
+  colorize(img);
+};
 
-
-function colorify(img) {
-  Algorithmia.client(Algorithmia.api_key)
-    .algo("algo://algorithmiahq/ColorizationDemo/1.1.16")
-    .pipe(img)
-    .then(function(output) {
+/**
+ * call API to colorize image
+ * @param img
+ */
+var colorize = function(img) {
+  algoClient.algo(algorithms.colorize).pipe(img).then(function(output) {
       if(output.error) {
-        // Error Handling
-        var statusLabel = document.getElementById("status-label")
-        statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh Oh! Something went wrong: ' + output.error.message + ' </div>';
-        taskError();
+        hideWait(output.error.message||"Unable to colorize image");
       } else {
-        console.log("got output", output.result);
-
         // Decode base64 imgs
         var imgOriginal = "data:image/png;base64," + output.result[0];
         var imgColorized = "data:image/png;base64," + output.result[1];
-
         // Show the download link if API also returned the URL
         if(output.result.length > 2) {
-            document.getElementById("downloadLinks").classList.remove("hidden");
-            document.getElementById("resultLink").href = output.result[2];
+            $('#resultLink').attr('href',output.result[2]);
         } else {
-            document.getElementById("downloadLinks").classList.add("hidden");
-            document.getElementById("resultLink").href = '#';
+            $('#resultLink').attr('href','#');
         }
-
-        getMeta(imgOriginal, imgColorized);
+        createTwoface(imgOriginal, imgColorized);
       }
     });
-}
+};
 
-function getMeta(original,colorized){
-
-  // Get height and width of original image
+/**
+ * show TwoFace demo of original vs colorized file
+ * @param original
+ * @param colorized
+ */
+var createTwoface = function(original,colorized) {
   var img = new Image();
-
-  img.onload = function(){
-    width = this.width;
-    height = this.height;
-
-    var twoface = TwoFace('twoface-demo', width, height);
+  img.onload = function() {
+    // use height and width of original image
+    var twoface = TwoFace('twoface-wrapper', this.width, this.height);
+    // set left and right images
     twoface.add(original);
     twoface.add(colorized);
-
-      // Finish Task
-      finishTask();
-
-    };
-
+    hideWait();
+  };
   img.src = colorized;
-}
+};
 
-function analyzeDefault(img) {
-	document.getElementById("imgUrl").value = img;
-	callAlgorithm();
-}
+/**
+ * shpw overlay, clear demo
+ */
+var showWait = function() {
+  $("#overlay").removeClass("hidden");
+  $(".dots-container").removeClass("hidden");
+  $('#twoface-wrapper').empty();
+};
 
-function startTask() {
-  numTasks++;
-  document.getElementById("overlay").classList.remove("hidden");
-  var clear = document.getElementById("twoface-demo");
-  clear.innerHTML = '';
-}
-
-function finishTask() {
-  numTasks--;
-  if(numTasks <= 0) {
-    document.getElementById("overlay").classList.add("hidden");
-    document.getElementById("explainer").classList.add("hidden");
-    document.getElementById("results").classList.remove("hidden");
-    document.getElementById("social").classList.remove("invisible");
-    document.getElementById("marketing").classList.remove("hidden");
+/**
+ * close overlay and either reveal results or display errorMessage 
+ * @param errorMessage
+ */
+var hideWait = function(errorMessage) {
+  $("#overlay").addClass("hidden");
+  $(".dots-container").addClass("hidden");
+  if(errorMessage) {
+    $('#status-label').html('<div class="alert alert-danger" role="alert">' + errorMessage+ '</div>');
+    $('#results').addClass('hidden');
+  } else {
+    $('#results').removeClass('hidden');
+    $('html, body').animate({
+      scrollTop: $("#results").offset().top
+    }, 1000);
   }
-}
+};
 
-function taskError() {
-  numTasks = 0;
-  document.getElementById("overlay").classList.add("hidden");
-  document.getElementById("explainer").classList.add("display");
-  document.getElementById("explainer").classList.remove("hidden");
-  document.getElementById("results").classList.add("hidden");
-  document.getElementById("social").classList.add("invisible");
-  document.getElementById("marketing").classList.add("hidden");
-}
-
-
-function initDropzone() {
+/**
+ * initialize Dropzone component
+ */
+var initDropzone  = function() {
   window.Dropzone.autoDiscover = false;
   var dropzone = new Dropzone("#file-dropzone", {
-    options: {
-      sending: function() {}
-    },
+    url: 'javascript:;',
+    options: {sending: function() {}},
     acceptedFiles: "image/*",
     previewTemplate: "<div></div>",
     maxFilesize: 10,
@@ -145,27 +121,18 @@ function initDropzone() {
   dropzone.__proto__.cancelUpload = function() {};
   dropzone.__proto__.uploadFile = function() {};
   dropzone.__proto__.uploadFiles = function() {};
-
   dropzone.on("processing", function(file) {
-    var statusLabel = document.getElementById("status-label")
-    statusLabel.innerHTML = "";
-    startTask();
-
+    $('#status-label').empty();
+    showWait();
     var reader = new FileReader();
     reader.addEventListener("load", function () {
-      console.log("Calling algorithm with uploaded image.");
-      colorify(reader.result);
+      colorize(reader.result);
       dropzone.removeFile(file);
     }, false);
     reader.readAsDataURL(file);
-    console.log("Reading uploaded image...");
   });
-
   dropzone.on("error", function(file, err) {
     dropzone.removeFile(file);
-    var statusLabel = document.getElementById("status-label")
-    statusLabel.innerHTML = '<div class="alert alert-danger" role="alert">Uh oh! ' + err + ' </div>';
-    taskError();
+    hideWait(err);
   });
-}
-initDropzone();
+};

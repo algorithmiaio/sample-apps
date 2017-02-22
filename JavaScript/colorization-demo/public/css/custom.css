@@ -1,5 +1,3 @@
-@import 'dots.css';
-
 .hero {
     background-image: url(../images/colorize-black-and-white-photos-hero.jpg);
     background-size: cover;
@@ -12,6 +10,11 @@
 .form-group input {width: 100%; margin-bottom: .5rem;}
 
 .explanation {text-align: center;}
+
+/* Move dots down to be over input field */
+.dots-container {
+  top: 36%;
+}
 
 #twoface-demo canvas {
   max-width:100%;

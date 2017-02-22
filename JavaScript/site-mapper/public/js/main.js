@@ -20,7 +20,7 @@ var pagesDisplayed = 0;
 var cleanupTimer = null;
 
 /**
- * once DOM is ready, update vars amd set initial URL
+ * once DOM is ready, update vars, set initial URL, and add handlers
  */
 $(document).ready(function() {
   setInviteCode('sitemapper');

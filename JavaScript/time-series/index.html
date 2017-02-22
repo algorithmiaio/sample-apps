@@ -95,7 +95,7 @@
 
 	  		<div class="row row-sm">
 				<div class="col-md-12">
-                    <div id="timeseries-chart"></div>
+                    <div id="timeseries-chart"><span class="aspinner" id="fetch-spinner"></span></div>
 			    </div>
 	    	</div>
 		</div>
@@ -170,6 +170,8 @@ Algorithmia.client(<span class="hljs-string"><span class="hljs-string">"YOUR_API
 			// packages: ['scatter']
 		});
 	</script>
+
+    <!-- JS -->
 	<script src="public/js/d3.min.js"></script>
 	<script src="public/js/algorithmia.d3.js"></script>
 

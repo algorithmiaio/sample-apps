@@ -9,13 +9,8 @@ var validUrlRegex = new RegExp('^(https?:\\/\\/)?' + // protocol
   // '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
   // '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
 
-/**
- * once DOM is ready, run inits common to all demos
- */
-$(document).ready(function() {
-  // code highlighting
-  hljs.initHighlightingOnLoad();
-});
+// code-highlighting onload handler
+hljs.initHighlightingOnLoad();
 
 /**
  * set invite code to be used for signup link and description thereof
@@ -63,7 +58,7 @@ function getUrlCore(url) {
  */
 var requireHttp = function(elem) {
   var requireHttpHandler = function(elem) {
-    var val = elem.val().trim();
+    var val = elem.val().replace(/\s/g,''); //even trim inner whitespace
     if (val=='') {
       elem.val('http://');
     } else if (doubleHttpRegex.test(val)) {

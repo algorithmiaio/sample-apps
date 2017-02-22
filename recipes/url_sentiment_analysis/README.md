@@ -1,4 +1,4 @@
-## Build a Sentiment Analysis Pipeline for Web Scraping
+# Build a Sentiment Analysis Pipeline for Web Scraping
 
 While sometimes text content is easily retrieved through a database query, other times it’s not so simple to extract. For instance, it’s notoriously difficult to retrieve text content from websites, especially when you don’t want to extract everything from a URL —  just the text content of specific pages.
 

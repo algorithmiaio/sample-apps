@@ -9,7 +9,7 @@ var algorithms = {
  * once DOM is ready, update vars and add handlers
  */
 $(document).ready(function() {
-  setInviteCode('places');
+  setInviteCode('isitnude');
   requireHttp($('#imgUrl'));
   initDropzone();
 });

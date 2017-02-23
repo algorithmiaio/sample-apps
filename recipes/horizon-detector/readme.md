@@ -15,7 +15,7 @@ pip install algorithmia
 pip install Pillow
 ```
 
-Detailed instructions can be found in the [blog post](http://blog.algorithmia.com/).
+Detailed instructions can be found in [How to Rotate Images in Python Using a Horizon Detection Algorithm](http://blog.algorithmia.com/how-to-rotate-images-in-python-using-a-horizon-detection-algorithm/).
 
 ## How To Run the Script
 

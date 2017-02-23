@@ -4,7 +4,7 @@ The [Horizon Detection microservice](https://algorithmia.com/algorithms/ukyvisio
 
 This Python script allows you to specify an input image, passes it through the horizon-detection service, and straightens out the image (while optionally cropping and resampling it).
 
-For the full blog post related to this recipe, see [Introduction to Horizon Line Estimation](http://blog.algorithmia.com/introduction-to-horizon-line-estimation/).
+For the full blog post related to this recipe, see [How to Rotate Images in Python Using a Horizon Detection Algorithm](http://blog.algorithmia.com/how-to-rotate-images-in-python-using-a-horizon-detection-algorithm/).
 
 ## Getting Started
 
@@ -15,7 +15,7 @@ pip install algorithmia
 pip install Pillow
 ```
 
-Detailed instructions can be found in [How to Rotate Images in Python Using a Horizon Detection Algorithm](http://blog.algorithmia.com/how-to-rotate-images-in-python-using-a-horizon-detection-algorithm/).
+Detailed instructions can be found in the [blog post](http://blog.algorithmia.com/how-to-rotate-images-in-python-using-a-horizon-detection-algorithm/).
 
 ## How To Run the Script
 

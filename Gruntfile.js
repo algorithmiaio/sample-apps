@@ -22,6 +22,7 @@ module.exports = function(grunt) {
     { slug: 'sitemap', dist: 'JavaScript/site-mapper'},
     { slug: 'timeseries', dist: 'JavaScript/time-series'},
     { slug: 'isitnude', dist: 'JavaScript/isitnude'},
+    { slug: 'video-toolbox', dist: 'JavaScript/video-toolbox'},
   ];
 
   var awsS3Config = {

@@ -29,13 +29,12 @@ var analyzeImage = function(url) {
   }
   showWait();
   $('#result-img').attr('src',url);
-console.log(url);
   algoClient.algo(algorithms.nudity).pipe(url).then(function (output) {
     if (output.error) {
-      endWait(output.error.message);
+      hideWait(output.error.message);
     } else {
       showResults(output.result);
-      endWait();
+      hideWait();
     }
   });
 };
@@ -113,6 +112,6 @@ var initDropzone = function() {
   });
   dropzone.on("error", function(file, err) {
     dropzone.removeFile(file);
-    endWait(err);
+    hideWait(err);
   });
 };

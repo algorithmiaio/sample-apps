@@ -1,0 +1,173 @@
+<%= header_begin %>
+
+<title>Video transformations and data extraction - Algorithmia</title>
+<link rel="canonical" href="http://demos.algorithmia.com/video-transform/">
+<meta name="description" content="Choose an image and our bot will tell you #isitnude"/>
+<meta name="robots" content="index,follow">
+
+<!-- FB -->
+<meta property="og:title" content="Video transformations and data extraction">
+<meta property="og:url" content="http://demos.algorithmia.com/isitnude/">
+<meta property="og:description" content="Stylize videos, detect objects, extract metadata, and determine if they're NSFW">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:image" content="http://demos.algorithmia.com/isitnude/public/images/fbshare.jpeg">
+<meta property="og:site_name" content="Algorithmia">
+
+<!-- TWTR -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@algorithmia">
+<meta name="twitter:title" content="Video transformations and data extraction">
+<meta name="twitter:description" content="Stylize videos, detect objects, extract metadata, and determine if they're NSFW">
+<meta name="twitter:image" content="http://demos.algorithmia.com/isitnude/public/images/twshare.jpeg">
+<meta name="twitter:creator" content="@matt_kiser">
+
+<!-- OTHER -->
+<meta itemprop="name" content="Video transformations and data extraction">
+<meta itemprop="description" content="Stylize videos, detect objects, extract metadata, and determine if they're NSFW">
+
+<%= header_end %>
+
+<section class="purple-grad-background hero">
+    <div class="container" id="content">
+      <div class="row">
+        <div class="col-md-7">
+          <h1>Video Toolbox</h1>
+          <h4 class="light whitespace-md">Video transformations and data extraction</h4>
+        </div>
+        <div class="col-sm-12 col-md-7">
+          <div class="card">
+            <h3 class="whitespace">2. What would you like to do?</h3>
+            <form>
+              <div><input type="radio" name="selectedAlgorithm" value="deepstyle" />Deep Style</div>
+              <div><input type="radio" name="selectedAlgorithm" value="metadata" />Extract Metadata Style</div>
+              <div><input type="radio" name="selectedAlgorithm" value="nsfw" />NSFW Detector</div>
+            </form>
+            <h3 class="dark whitespace-sm">2. Select a video:</h3>
+            <div class="row whitespace-none sample-images">
+              <div class="col-xs-4 col-sm-2">
+                <a onclick="selectVideo('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/sunglasses-love-woman-flowers.jpg')"><img src="public/images/thumb01.png" alt="woman"></a>
+              </div>
+              <div class="col-xs-4 col-sm-2 sample-image">
+                <a onclick="selectVideo('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/obama.jpg')"><img src="public/images/thumb02.png" alt="Obama Swimsuit"></a>
+              </div>
+              <div class="col-xs-4 col-sm-2 sample-image">
+                <a onclick="selectVideo('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/putin.jpg')"><img src="public/images/thumb03.png" alt="Putin Riding a Bear"></a>
+              </div>
+              <div class="col-xs-4 col-sm-2 sample-image">
+                <a onclick="selectVideo('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/family-guy.jpg')"><img src="public/images/thumb04.jpg" alt="Family Guy Peter"></a>
+              </div>
+              <div class="col-xs-4 col-sm-2 sample-image">
+                <a onclick="selectVideo('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/cosimo-medici-orpheus.jpg')"><img src="public/images/thumb05.png" alt="Cosimo Medici as Orpheus"></a>
+              </div>
+            </div>
+            <form class="form-group" onsubmit="analyze(); return false">
+              <button class="btn btn-primary">
+                  <span id="analyze-button-text">
+                      <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                      boom shakalaka
+                  </span>
+              </button>
+            </form>
+            <div id="status-label"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="overlay" class="container hidden">
+    <div class="dots-text-container">
+      <h3 class="dots-text">Boom...</h3>
+    </div>
+    <div class="dots-container">
+        <div class="dot dot1"></div>
+        <div class="dot dot2"></div>
+        <div class="dot dot3"></div>
+        <div class="dot dot4"></div>
+    </div>
+  </div>
+<section class="container hidden results" id="results-deepstyle">
+  <div class="row">
+    <h4 class="result-title">Deep Style results go here</h4>
+    <img class="result-img" src="" alt="analyzed image">
+  </div>
+</section>
+<section class="container hidden results" id="results-metadata">
+  <div class="row">
+    <h4 class="result-title">Metadata results go here</h4>
+    <img class="result-img" src="" alt="analyzed image">
+  </div>
+</section>
+<section class="container hidden results" id="results-nsfw">
+  <div class="row">
+    <h4 class="result-title">NSFW results go here</h4>
+    <img class="result-img" src="" alt="analyzed image">
+  </div>
+</section>
+
+<!-- EXPLANATION -->
+<div class="grey-background">
+<section class="container">
+  <div class="row row-md">
+    <div class="col-md-12">
+      <h2 class="whitespace-none">How it works</h2>
+      <h4>Using artificial intelligence to detect nudity</h4>
+    </div>
+  </div>
+  <div class="row row-md">
+    <div class="col-md-8">
+      <h3>Tools used</h3>
+      <ul>
+        <li><a href="https://algorithmia.com/algorithms/sfw/NudityDetectioni2v">NudityDetectioni2v</a> – detects nudity in pictures</li>
+      </ul>
+    </div>
+  </div>
+  <div class="row row-md">
+    <div class="col-md-8">
+      <h3>Method</h3>
+      <p>Our algorithm is based on <a href="https://sites.google.com/a/dcs.upd.edu.ph/csp-proceedings/Home/pcsc-2005/AI4.pdf?attredirects=0" target="_blank">existing solutions</a> which detect skin patches and their relative position and size, but also reduces false positives by detecting other features in the image (such as <a href="https://algorithmia.com/algorithms/opencv/FaceDetection" target="_blank">faces</a>) and removing them from consideration, or using them to count the number of people in each image and adjust for skin tone.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <h3>Takeaway</h3>
+      <p>With just a single call to our API, a developer can easily add nudity-detection, within a given level of confidence, to their application or data processing pipeline.  This allows for easy flagging of inappropriate images, without the need to build or integrate any complex image-processing libraries or machine-learning architecture.</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- BUILT FOR DEVS -->
+  <section class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <h2 class="whitespace-sm">Built For Developers</h2>
+        <h4 class="whitespace-md">A simple, scalable API for machine intelligence</h4>
+          <p class="item-title">SAMPLE INPUT</p>
+          <pre class="whitespace-md"><code class="python">import Algorithmia
+
+input = "_IMAGE_URL_"
+client = Algorithmia.client('_API_KEY_')
+algo = client.algo('sfw/NudityDetectioni2v/0.2.5')
+
+print algo.pipe(input)
+</code></pre>
+            <p class="item-title">SAMPLE OUTPUT</p>
+            <pre><code class="json">{
+    "nude": true,
+    "confidence": 0.93
+}</code></pre>
+        <a href="https://algorithmia.com/algorithms/deeplearning/ColorfulImageColorization" class="btn btn-primary-inverse">
+          LEARN MORE
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- JS -->
+  <script src="public/js/TweenMax.min.js"></script>
+  <script src="public/js/dots.js"></script>
+  <script src="public/js/dropzone.js"></script>
+
+  <%= footer %>

@@ -1,0 +1,43 @@
+.hero {    
+    background-image: url(../images/isitnude.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0% 70%;
+}
+.form-group {margin-bottom: 0;}
+/* For smaller screens */
+.form-group input {
+  margin-bottom: .5rem;
+  width: 100%;
+}
+
+/* results */
+.rating {}
+.rating.g {color: green;}
+.rating.r {color: darkred;}
+.result-wrapper {text-align: center;}
+/* $MEDIA QUERIES */
+/* Extra small devices (phones, less than 768px) */
+/* This should be the default AKA no styles here */
+/*@media (min-width: @screen-xs-min) {}*/
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  form {
+    /* vertical center */
+    display:        flex;
+    align-items:    center;
+  }
+  .form-group input {margin-bottom: 0;}
+  .sample-image {
+    margin-bottom: 0;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .feature {margin-bottom: 0;}
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}

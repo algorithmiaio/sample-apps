@@ -1,8 +1,8 @@
-.hero {    
-    background-image: url(../images/hero.jpeg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 0% 70%;
+.hero {
+  background-image: url(../images/video-toolbox.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0% 70%;
 }
 .form-group {margin-bottom: 0;}
 /* For smaller screens */
@@ -11,13 +11,26 @@
   width: 100%;
 }
 
-.radio-btns .radio-btn {
+.radio-btns .btn-radio {
   margin-right: 16px;
 }
-.radio-btns .radio-btn:last-of-type {
+.radio-btns .btn-radio:last-of-type {
   margin-right: 0;
 }
-.radio-btn:focus {
+.btn-radio {
+  font-size: 12px;
+  padding:         6px 6px;
+  color:            #0055BE;
+  background-color: #FFFFFF;
+  border: 1px solid #0055BE;
+  margin-bottom: 8px;
+}
+.btn-radio:hover {
+  color:            #FFFFFF;
+  background-color: #0055BE;
+  border: 1px solid #FFFFFF;
+}
+.btn-radio:focus {
   color:            #FFFFFF;
   background-color: #0055BE;
   border: 1px solid #FFFFFF;

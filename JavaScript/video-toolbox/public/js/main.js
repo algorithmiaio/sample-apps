@@ -3,7 +3,7 @@ var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
 
 var algorithms = {
   videoTransform: {
-    algorithm: 'media/VideoTransform/0.2.21',
+    algorithm: 'demo/VideoTransformDemo/0.1.0', // media/VideoTransform/0.2.21
     result_field: 'output_file'
   },
   metadata: null,
@@ -13,12 +13,14 @@ var algorithms = {
 var algorithmsUserSelectable = {
   deepstyle: {
     algorithm: "deeplearning/DeepFilter/0.6.0",
-    output_file: "data://.algo/temp/deepstyle.mp4",
     advanced_input: {
       "images": "$BATCH_INPUT",
       "savePaths": "$BATCH_OUTPUT",
       "filterName": "smooth_ride"
     }
+  },
+  saliency: {
+    algorithm: "deeplearning/SalNet/0.2.0"
   }
 };
 
@@ -27,45 +29,53 @@ var algorithmTemplates = {
       "input_file":null,
       "output_file":null,
       "algorithm":null,
-      "fps": 1
+      "fps": 30
     }
 };
 
 var selectedVideo;
+var selectedAlgo;
 
 /**
  * once DOM is ready, update vars and add handlers
  */
 $(document).ready(function() {
-  setInviteCode('isitnude');
-  $('input[name="selectedAlgorithm"]:first').click();
-  $('.sample-images a:first').click();
+  setInviteCode('videotransform');
+  // $('input[name="selectedAlgorithm"]:first').click();
+  // $('.sample-images a:first').click();
 });
 
-var selectVideo = function(uri) {
-  selectedVideo = uri;
+var selectVideo = function(name) {
+  selectedVideo = name;
 };
 
 /**
- * call API on URL, get up to 7 results, and display them
+ * call API on URL and display results
  */
 var analyze = function() {
-  var url = selectedVideo;
-  var algorithm = $('input[name="selectedAlgorithm"]:checked').val();
-  if(url == "" || url=="http://") {
-    return hideWait(algorithm, 'Please select an image, click the upload link, or enter a URL');
-  }
-  var data = jQuery.extend(algorithmTemplates.videoTransform, algorithmsUserSelectable[algorithm]);
-  data.input_file = url;
-  showWait(algorithm);
+  if(!(selectedVideo&&selectedAlgo)) {return hideWait(null, "Please select a video and a modifier");}
+  var data = jQuery.extend(algorithmTemplates.videoTransform, algorithmsUserSelectable[selectedAlgo]);
+  data.input_file = 's3+demo://video-transform/'+selectedVideo+'.mp4';
+  data.output_file = 's3+demo://video-transform/'+selectedVideo+'_'+selectedAlgo+'.mp4';
+  showWait(selectedAlgo);
   algoClient.algo(algorithms.videoTransform.algorithm).pipe(data).then(function(output) {
     if (output.error) {
-      hideWait(algorithm, output.error.message);
+      hideWait(selectedAlgo, output.error.message);
     } else {
-      showResults(algorithm, output.result);
-      hideWait(algorithm);
+      hideWait(selectedAlgo);
+      output.result[algorithms.videoTransform.result_field] = getHttpUrl(output.result[algorithms.videoTransform.result_field]);
+      showResults(selectedAlgo, output.result);
     }
   });
+};
+
+/**
+ * get the http URL which is mapped to our s3 bucket
+ * @param s3file s3 data URI of file
+ * @returns {string} http URL of file
+ */
+var getHttpUrl = function(s3file) {
+  return s3file.replace('s3+demo://','https://s3.amazonaws.com/algorithmia-demos/');
 };
 
 /**
@@ -74,9 +84,9 @@ var analyze = function() {
  */
 var showResults = function(algorithm, result){
   $('#results-'+algorithm+' .result-title').text(algorithm);
-console.log(result)
-console.log(algorithms.videoTransform.result_field)
-console.log(result[algorithms.videoTransform.result_field])
+// console.log(result)
+// console.log(algorithms.videoTransform.result_field)
+// console.log(result[algorithms.videoTransform.result_field])
   $('#results-'+algorithm+' .result-img').attr('src', result[algorithms.videoTransform.result_field]);
   hideWait(algorithm);
 };
@@ -106,7 +116,7 @@ var hideWait = function(algorithm, errorMessage) {
     $('.results').addClass('hidden');
     $('#results-'+algorithm).removeClass('hidden');
     $('html, body').animate({
-      scrollTop: $(".results-"+algorithm).offset().top
+      scrollTop: $("#results-"+algorithm).offset().top
     }, 1000);
   }
 };

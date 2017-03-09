@@ -37,30 +37,22 @@
         </div>
         <div class="col-sm-12 col-md-7">
           <div class="card">
-            <h3>1. Select a video:</h3>
-            <div class="row whitespace-md sample-images">
+            <h3 class="dark whitespace-sm">2. Select a video:</h3>
+            <div class="row whitespace-none sample-images">
               <div class="col-xs-4 col-sm-2">
-                <a onclick="selectVideo('data://media/videos/2016-10-31_11-28-11.mp4')"><img src="public/images/thumb01.png" alt="woman"></a>
+                <a onclick="selectVideo('kenny')"><img src="public/images/thumb01.png" alt="woman"></a>
               </div>
               <div class="col-xs-4 col-sm-2 sample-image">
-                <a onclick="selectVideo('data://media/videos/2016-10-31_11-28-11.mp4')"><img src="public/images/thumb02.png" alt="Obama Swimsuit"></a>
-              </div>
-              <div class="col-xs-4 col-sm-2 sample-image">
-                <a onclick="selectVideo('data://media/videos/2016-10-31_11-28-11.mp4')"><img src="public/images/thumb03.png" alt="Putin Riding a Bear"></a>
-              </div>
-              <div class="col-xs-4 col-sm-2 sample-image">
-                <a onclick="selectVideo('data://media/videos/2016-10-31_11-28-11.mp4')"><img src="public/images/thumb04.jpg" alt="Family Guy Peter"></a>
-              </div>
-              <div class="col-xs-4 col-sm-2 sample-image">
-                <a onclick="selectVideo('data://media/videos/2016-10-31_11-28-11.mp4')"><img src="public/images/thumb05.png" alt="Cosimo Medici as Orpheus"></a>
+                <a onclick="selectVideo('waving')"><img src="public/images/thumb02.png" alt="Obama Swimsuit"></a>
               </div>
             </div>
-            <h3>2. Select a modifyer:</h3>
-            <form class="whitespace-lg radio-btns">
-              <input type="button" name="selectedAlgorithm" value="Deep Style" class="btn btn-info-inverse radio-btn">
-              <input type="button" name="selectedAlgorithm" value="Extracy Metadata Style" class="btn btn-info-inverse radio-btn">
-              <input type="button" name="selectedAlgorithm" value="NSFW Detector" class="btn btn-info-inverse radio-btn">
-            </form>
+            <h3>2. Select a modifier:</h3>
+            <div class="whitespace-lg radio-btns">
+              <button name="selectedAlgorithm" class="btn btn-info-inverse radio-btn" onclick="selectedAlgo='deepstyle'">Deep Style</button>
+              <button name="selectedAlgorithm" class="btn btn-info-inverse radio-btn" onclick="selectedAlgo='saliency'">Saliency</button>
+              <button name="selectedAlgorithm" class="btn btn-info-inverse radio-btn" onclick="selectedAlgo='metadata'">Extract Metadata Style</button>
+              <button name="selectedAlgorithm" class="btn btn-info-inverse radio-btn" onclick="selectedAlgo='nsfw'">NSFW Detector</button>
+            </div>
             <form class="form-group" onsubmit="analyze(); return false">
               <button class="btn btn-primary">
                   <span id="analyze-button-text">
@@ -90,7 +82,13 @@
 <section class="container hidden results" id="results-deepstyle">
   <div class="row">
     <h4 class="result-title">Deep Style results go here</h4>
-    <img class="result-img" src="" alt="analyzed image">
+    <video controls><source class="result-img" type="video/mp4"></video>
+  </div>
+</section>
+<section class="container hidden results" id="results-saliency">
+  <div class="row">
+    <h4 class="result-title">Saliency results go here</h4>
+    <video controls><source class="result-img" type="video/mp4"></video>
   </div>
 </section>
 <section class="container hidden results" id="results-metadata">

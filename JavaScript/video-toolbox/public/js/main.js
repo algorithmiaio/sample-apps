@@ -2,7 +2,33 @@
 var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
 
 var algorithms = {
-  nudity: 'sfw/NudityDetectioni2v/0.2.6'
+  videoTransform: {
+    algorithm: 'media/VideoTransform/0.2.21',
+    result_field: 'output_file'
+  },
+  metadata: null,
+  nsfw: null
+};
+
+var algorithmsUserSelectable = {
+  deepstyle: {
+    algorithm: "deeplearning/DeepFilter/0.6.0",
+    output_file: "data://.algo/temp/deepstyle.mp4",
+    advanced_input: {
+      "images": "$BATCH_INPUT",
+      "savePaths": "$BATCH_OUTPUT",
+      "filterName": "smooth_ride"
+    }
+  }
+};
+
+var algorithmTemplates = {
+  videoTransform: {
+      "input_file":null,
+      "output_file":null,
+      "algorithm":null,
+      "fps": 1
+    }
 };
 
 var selectedVideo;
@@ -29,8 +55,10 @@ var analyze = function() {
   if(url == "" || url=="http://") {
     return hideWait(algorithm, 'Please select an image, click the upload link, or enter a URL');
   }
+  var data = jQuery.extend(algorithmTemplates.videoTransform, algorithmsUserSelectable[algorithm]);
+  data.input_file = url;
   showWait(algorithm);
-  algoClient.algo(algorithms.nudity).pipe(url).then(function(output) {
+  algoClient.algo(algorithms.videoTransform.algorithm).pipe(data).then(function(output) {
     if (output.error) {
       hideWait(algorithm, output.error.message);
     } else {
@@ -46,7 +74,10 @@ var analyze = function() {
  */
 var showResults = function(algorithm, result){
   $('#results-'+algorithm+' .result-title').text(algorithm);
-  $('#results-'+algorithm+' .result-img').attr('src', selectedVideo);
+console.log(result)
+console.log(algorithms.videoTransform.result_field)
+console.log(result[algorithms.videoTransform.result_field])
+  $('#results-'+algorithm+' .result-img').attr('src', result[algorithms.videoTransform.result_field]);
   hideWait(algorithm);
 };
 

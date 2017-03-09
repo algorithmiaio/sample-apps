@@ -21,6 +21,9 @@ var algorithmsUserSelectable = {
   },
   saliency: {
     algorithm: "deeplearning/SalNet/0.2.0"
+  },
+  colorization: {
+    algorithm: "deeplearning/ColorfulImageColorization/1.1.5"
   }
 };
 
@@ -62,7 +65,7 @@ var analyze = function() {
     if (output.error) {
       hideWait(selectedAlgo, output.error.message);
     } else {
-      hideWait(selectedAlgo);
+      $('#results-'+selectedAlgo+' .result-input').attr('src', getHttpUrl(data.input_file));
       output.result[algorithms.videoTransform.result_field] = getHttpUrl(output.result[algorithms.videoTransform.result_field]);
       showResults(selectedAlgo, output.result);
     }
@@ -78,6 +81,10 @@ var getHttpUrl = function(s3file) {
   return s3file.replace('s3+demo://','https://s3.amazonaws.com/algorithmia-demos/');
 };
 
+var playVideos = function() {
+  $('video').each(function(i,e){if(e.play)e.play();});
+};
+
 /**
  * render tags and probabilities into
  * @param result [{"class":string,"prob":number}]
@@ -87,7 +94,8 @@ var showResults = function(algorithm, result){
 // console.log(result)
 // console.log(algorithms.videoTransform.result_field)
 // console.log(result[algorithms.videoTransform.result_field])
-  $('#results-'+algorithm+' .result-img').attr('src', result[algorithms.videoTransform.result_field]);
+  $('#results-'+algorithm+' .result-output').attr('src', result[algorithms.videoTransform.result_field]);
+  $('#results-'+algorithm+' .result-link').attr('href', result[algorithms.videoTransform.result_field]);
   hideWait(algorithm);
 };
 
@@ -99,7 +107,9 @@ var showWait = function(algorithm) {
   $('#overlay').removeClass('hidden');
   $('#status-label').empty();
   $('#results-'+algorithm+' .result-title').empty();
-  $('#results-'+algorithm+' .result-img').removeAttr('src');
+  $('#results-'+algorithm+' .result-input').removeAttr('src');
+  $('#results-'+algorithm+' .result-output').removeAttr('src');
+  $('#results-'+algorithm+' .result-link').removeAttr('href');
 };
 
 

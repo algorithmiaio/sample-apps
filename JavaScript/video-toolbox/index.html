@@ -37,14 +37,8 @@
         </div>
         <div class="col-sm-12 col-md-7">
           <div class="card">
-            <h3 class="whitespace">2. What would you like to do?</h3>
-            <form>
-              <div><input type="radio" name="selectedAlgorithm" value="deepstyle" />Deep Style</div>
-              <div><input type="radio" name="selectedAlgorithm" value="metadata" />Extract Metadata Style</div>
-              <div><input type="radio" name="selectedAlgorithm" value="nsfw" />NSFW Detector</div>
-            </form>
-            <h3 class="dark whitespace-sm">2. Select a video:</h3>
-            <div class="row whitespace-none sample-images">
+            <h3>1. Select a video:</h3>
+            <div class="row whitespace-md sample-images">
               <div class="col-xs-4 col-sm-2">
                 <a onclick="selectVideo('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/sunglasses-love-woman-flowers.jpg')"><img src="public/images/thumb01.png" alt="woman"></a>
               </div>
@@ -61,6 +55,12 @@
                 <a onclick="selectVideo('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/cosimo-medici-orpheus.jpg')"><img src="public/images/thumb05.png" alt="Cosimo Medici as Orpheus"></a>
               </div>
             </div>
+            <h3>2. Select a modifyer:</h3>
+            <form class="whitespace-md radio-btns">
+              <input type="button" name="selectedAlgorithm" value="Deep Style" class="btn btn-info-inverse radio-btn">
+              <input type="button" name="selectedAlgorithm" value="Extracy Metadata Style" class="btn btn-info-inverse radio-btn">
+              <input type="button" name="selectedAlgorithm" value="NSFW Detector" class="btn btn-info-inverse radio-btn">
+            </form>
             <form class="form-group" onsubmit="analyze(); return false">
               <button class="btn btn-primary">
                   <span id="analyze-button-text">

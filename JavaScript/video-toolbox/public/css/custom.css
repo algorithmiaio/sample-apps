@@ -11,6 +11,18 @@
   width: 100%;
 }
 
+.radio-btns .radio-btn {
+  margin-right: 16px;
+}
+.radio-btns .radio-btn:last-of-type {
+  margin-right: 0;
+}
+.radio-btn:focus {
+  color:            #FFFFFF;
+  background-color: #0055BE;
+  border: 1px solid #FFFFFF;
+}
+
 /* results */
 .rating {}
 .rating.g {color: green;}

@@ -132,27 +132,30 @@
   <div class="row row-md">
     <div class="col-md-12">
       <h2 class="whitespace-none">How it works</h2>
-      <h4>Using artificial intelligence to detect nudity</h4>
+      <h4>Applying machine learning algorithms to entire videos</h4>
     </div>
   </div>
   <div class="row row-md">
     <div class="col-md-8">
       <h3>Tools used</h3>
       <ul>
-        <li><a href="https://algorithmia.com/algorithms/sfw/NudityDetectioni2v">NudityDetectioni2v</a> – detects nudity in pictures</li>
+        <li><a href="https://algorithmia.com/algorithms/media/VideoTransform">VideoTransform</a> – transform a video with image algorithms</li>
+        <li><a href="https://algorithmia.com/algorithms/media/DeepFilter">DeepFilter</a> – create interesting photo filters with deep learning</li>
+        <li><a href="https://algorithmia.com/algorithms/deeplearning/SalNet">SalNet</a> – detect salient items (objects, people, etc) within an image</li>
+        <li><a href="https://algorithmia.com/algorithms/deeplearning/ColorfulImageColorization">ColorfulImageColorization</a> – uses deep learning to artificially color images</li>
       </ul>
     </div>
   </div>
   <div class="row row-md">
     <div class="col-md-8">
       <h3>Method</h3>
-      <p>Our algorithm is based on <a href="https://sites.google.com/a/dcs.upd.edu.ph/csp-proceedings/Home/pcsc-2005/AI4.pdf?attredirects=0" target="_blank">existing solutions</a> which detect skin patches and their relative position and size, but also reduces false positives by detecting other features in the image (such as <a href="https://algorithmia.com/algorithms/opencv/FaceDetection" target="_blank">faces</a>) and removing them from consideration, or using them to count the number of people in each image and adjust for skin tone.</p>
+      <p>This algorithm uses an image processing algorithm to alter each frame of a video, then recombines it back into a freshly transformed video file.</p>
     </div>
   </div>
   <div class="row">
     <div class="col-md-8">
       <h3>Takeaway</h3>
-      <p>With just a single call to our API, a developer can easily add nudity-detection, within a given level of confidence, to their application or data processing pipeline.  This allows for easy flagging of inappropriate images, without the need to build or integrate any complex image-processing libraries or machine-learning architecture.</p>
+      <p>You can now use many of our powerful image filters on entire videos. We take care of the complex machine-learning processes as well as the splitting and recombination of the video files, all within a powerful cloud-based parallel pipeline, touched off by just a single API call.</p>
     </div>
   </div>
 </section>
@@ -167,16 +170,18 @@
           <p class="item-title">SAMPLE INPUT</p>
           <pre class="whitespace-md"><code class="python">import Algorithmia
 
-input = "_IMAGE_URL_"
 client = Algorithmia.client('_API_KEY_')
-algo = client.algo('sfw/NudityDetectioni2v/0.2.5')
-
+algo = client.algo('media/VideoTransform/0.2.21')
+input = {
+   "input_file":"data://media/videos/beach.mp4",
+   "output_file":"data://.algo/temp/beach_filtered.mp4",
+   "algorithm":"algo://deeplearning/DeepFilter"
+}
 print algo.pipe(input)
 </code></pre>
             <p class="item-title">SAMPLE OUTPUT</p>
             <pre><code class="json">{
-    "nude": true,
-    "confidence": 0.93
+    "output_file":"data://.algo/temp/beach_filtered.mp4"
 }</code></pre>
         <a href="https://algorithmia.com/algorithms/deeplearning/ColorfulImageColorization" class="btn btn-primary-inverse">
           LEARN MORE

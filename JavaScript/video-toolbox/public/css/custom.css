@@ -11,6 +11,12 @@
   width: 100%;
 }
 
+.video-thumb:hover,
+.video-thumb:focus,
+.video-thumb.active {
+  outline: 3px solid #5000BE;
+}
+
 .radio-btns .btn-radio {
   margin-right: 16px;
 }
@@ -25,12 +31,9 @@
   border: 1px solid #0055BE;
   margin-bottom: 8px;
 }
-.btn-radio:hover {
-  color:            #FFFFFF;
-  background-color: #0055BE;
-  border: 1px solid #FFFFFF;
-}
-.btn-radio:focus {
+.btn-radio:hover,
+.btn-radio:focus,
+.btn-radio.active {
   color:            #FFFFFF;
   background-color: #0055BE;
   border: 1px solid #FFFFFF;

@@ -43,7 +43,7 @@ var selectedAlgo;
  * once DOM is ready, update vars and add handlers
  */
 $(document).ready(function() {
-  setInviteCode('videotransform');
+  setInviteCode('videotoolbox');
   // $('input[name="selectedAlgorithm"]:first').click();
   // $('.sample-images a:first').click();
 });

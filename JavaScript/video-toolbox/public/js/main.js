@@ -90,10 +90,6 @@ var playVideos = function() {
  * @param result [{"class":string,"prob":number}]
  */
 var showResults = function(algorithm, result){
-  $('#results-'+algorithm+' .result-title').text(algorithm);
-// console.log(result)
-// console.log(algorithms.videoTransform.result_field)
-// console.log(result[algorithms.videoTransform.result_field])
   $('#results-'+algorithm+' .result-output').attr('src', result[algorithms.videoTransform.result_field]);
   $('#results-'+algorithm+' .result-link').attr('href', result[algorithms.videoTransform.result_field]);
   hideWait(algorithm);
@@ -106,7 +102,6 @@ var showWait = function(algorithm) {
   $('.dots-text').text(algorithm);
   $('#overlay').removeClass('hidden');
   $('#status-label').empty();
-  $('#results-'+algorithm+' .result-title').empty();
   $('#results-'+algorithm+' .result-input').removeAttr('src');
   $('#results-'+algorithm+' .result-output').removeAttr('src');
   $('#results-'+algorithm+' .result-link').removeAttr('href');

@@ -44,12 +44,18 @@ var selectedAlgo;
  */
 $(document).ready(function() {
   setInviteCode('videotoolbox');
-  // $('input[name="selectedAlgorithm"]:first').click();
-  // $('.sample-images a:first').click();
 });
 
 var selectVideo = function(name) {
+  $('.video-thumb').removeClass('active');
+  $('#video-thumb-'+name).addClass('active');
   selectedVideo = name;
+};
+
+var selectAlgo = function(name) {
+  $('button').removeClass('active');
+  $('#button-'+name).addClass('active');
+  selectedAlgo = name;
 };
 
 /**
@@ -81,8 +87,11 @@ var getHttpUrl = function(s3file) {
   return s3file.replace('s3+demo://','https://s3.amazonaws.com/algorithmia-demos/');
 };
 
+/**
+ * start playback of all videos
+ */
 var playVideos = function() {
-  $('video').each(function(i,e){if(e.play)e.play();});
+  $('video').each(function(i,e){try{e.play()}catch(e){}});
 };
 
 /**

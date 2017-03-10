@@ -40,25 +40,25 @@
             <h3>1. CHOOSE A VIDEO</h3>
             <div class="row whitespace-md sample-videos">
               <div class="col-xs-4 col-sm-2">
-                <a onclick="selectVideo('beach')"><img src="public/images/beach.png" alt="beach" class="video-thumb"></a>
+                <a onclick="selectVideo('beach')"><img src="public/images/beach.png" alt="beach" id="video-thumb-beach" class="video-thumb"></a>
               </div>
               <div class="col-xs-4 col-sm-2 sample-image">
-                <a onclick="selectVideo('office')"><img src="public/images/office.png" alt="office" class="video-thumb"></a>
+                <a onclick="selectVideo('office')"><img src="public/images/office.png" alt="office" id="video-thumb-office" class="video-thumb"></a>
               </div>
               <div class="col-xs-4 col-sm-2 sample-image">
-                <a onclick="selectVideo('dog')"><img src="public/images/dog.png" alt="dog" class="video-thumb"></a>
+                <a onclick="selectVideo('dog')"><img src="public/images/dog.png" alt="dog" id="video-thumb-dog" class="video-thumb"></a>
               </div>
               <div class="col-xs-4 col-sm-2 sample-image">
-                <a onclick="selectVideo('keyboard')"><img src="public/images/keyboard.png" alt="keyboard" class="video-thumb"></a>
+                <a onclick="selectVideo('keyboard')"><img src="public/images/keyboard.png" alt="keyboard" id="video-thumb-keyboard" class="video-thumb"></a>
               </div>
             </div>
             <h3>2. CHOOSE A MODIFIER</h3>
             <div class="whitespace-md radio-btns">
-              <button name="selectedAlgorithm" class="btn btn-radio" onclick="selectedAlgo='deepstyle'">Deep Style</button>
-              <button name="selectedAlgorithm" class="btn btn-radio" onclick="selectedAlgo='saliency'">Saliency</button>
-              <button name="selectedAlgorithm" class="btn btn-radio" onclick="selectedAlgo='colorization'">Colorization</button>
-              <!--<button name="selectedAlgorithm" class="btn btn-radio" onclick="selectedAlgo='metadata'">Extract Metadata Style</button>-->
-              <!--<button name="selectedAlgorithm" class="btn btn-radio" onclick="selectedAlgo='nsfw'">NSFW Detector</button>-->
+              <button name="selectedAlgorithm" class="btn btn-radio" id="button-deepstyle" onclick="selectAlgo('deepstyle')">Deep Style</button>
+              <button name="selectedAlgorithm" class="btn btn-radio" id="button-saliency" onclick="selectAlgo('saliency')">Saliency</button>
+              <button name="selectedAlgorithm" class="btn btn-radio" id="button-colorization" onclick="selectAlgo('colorization')">Colorization</button>
+              <!--<button name="selectedAlgorithm" class="btn btn-radio" id="button-metadata" onclick="selectAlgo('metadata'">Extract Metadata Style</button>-->
+              <!--<button name="selectedAlgorithm" class="btn btn-radio" id="button-nsfw" onclick="selectAlgo('nsfw'">NSFW Detector</button>-->
             </div>
             <form class="form-group" onsubmit="analyze(); return false">
               <button class="btn btn-primary">

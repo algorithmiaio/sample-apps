@@ -10,7 +10,7 @@
   margin-bottom: .5rem;
   width: 100%;
 }
-
+.video-thumb {margin-bottom: 16px;}
 .video-thumb:hover,
 .video-thumb:focus,
 .video-thumb.active {

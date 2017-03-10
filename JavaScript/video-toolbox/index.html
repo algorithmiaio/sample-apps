@@ -56,8 +56,9 @@
             <div class="whitespace-md radio-btns">
               <button name="selectedAlgorithm" class="btn btn-radio" onclick="selectedAlgo='deepstyle'">Deep Style</button>
               <button name="selectedAlgorithm" class="btn btn-radio" onclick="selectedAlgo='saliency'">Saliency</button>
-              <button name="selectedAlgorithm" class="btn btn-radio" onclick="selectedAlgo='metadata'">Extract Metadata Style</button>
-              <button name="selectedAlgorithm" class="btn btn-radio" onclick="selectedAlgo='nsfw'">NSFW Detector</button>
+              <button name="selectedAlgorithm" class="btn btn-radio" onclick="selectedAlgo='colorization'">Colorization</button>
+              <!--<button name="selectedAlgorithm" class="btn btn-radio" onclick="selectedAlgo='metadata'">Extract Metadata Style</button>-->
+              <!--<button name="selectedAlgorithm" class="btn btn-radio" onclick="selectedAlgo='nsfw'">NSFW Detector</button>-->
             </div>
             <form class="form-group" onsubmit="analyze(); return false">
               <button class="btn btn-primary">
@@ -95,6 +96,15 @@
   </div>
 </section>
 <section class="container hidden results" id="results-saliency">
+  <div class="row">
+    <h4 class="result-title">Saliency results go here</h4>
+    <video class="result-input col-sm-6" controls></video>
+    <video class="result-output col-sm-6" onloadeddata="playVideos()" controls>
+      Your video is ready to <a class="result-link">download</a>.
+    </video>
+  </div>
+</section>
+<section class="container hidden results" id="results-colorization">
   <div class="row">
     <h4 class="result-title">Saliency results go here</h4>
     <video class="result-input col-sm-6" controls></video>

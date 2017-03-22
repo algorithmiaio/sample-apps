@@ -15,7 +15,8 @@ def detect_nudity(source_uri):
 def upload_file(local_file):
     """Copy local_file to Algorithmia temporary datastore"""
     video_dir = 'data://.my/videos/'
-    client.dir(video_dir).create()
+    if not client.dir(video_dir).exists():
+        client.dir(video_dir).create()
     video_file = video_dir+str(uuid4())
     client.file(video_file).putFile(local_file)
     return video_file

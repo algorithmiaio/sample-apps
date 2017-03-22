@@ -18,7 +18,6 @@ Next, install the `moviepy` library, which will allow you to edit videos via Pyt
 
 ```
 pip install moviepy
-python -c "import imageio; imageio.plugins.ffmpeg.download()"
 ```
 
 You might also need to hook up `ffmpeg`; simply the following Python script:

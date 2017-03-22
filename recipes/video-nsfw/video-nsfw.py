@@ -1,10 +1,10 @@
 import Algorithmia
 import math
-from datetime import datetime
 from moviepy.editor import *
+from uuid import uuid4
 
 
-def extract_metadata(source_uri):
+def detect_nudity(source_uri):
     """Determine what time-ranges of a video contain nudity"""
     algo = client.algo('sfw/VideoNudityDetection/0.1.0')
     algo.set_options(timeout=15*60)
@@ -16,7 +16,7 @@ def upload_file(local_file):
     """Copy local_file to Algorithmia temporary datastore"""
     video_dir = 'data://.my/videos/'
     client.dir(video_dir).create()
-    video_file = video_dir+str(datetime.now().microsecond)
+    video_file = video_dir+str(uuid4())
     client.file(video_file).putFile(local_file)
     return video_file
 
@@ -26,7 +26,7 @@ def remove_nsfw(source_file, target_file, threshold=0.5, codec='libx264'):
     print "uploading %s" % source_file
     data_uri = upload_file(source_file)
     print "examining %s" % data_uri
-    nsfw_segments = extract_metadata(data_uri)
+    nsfw_segments = detect_nudity(data_uri)
     print "cleaning %s (threshold=%s)" % (source_file, threshold)
     clip = VideoFileClip(source_file)
     shift = 0

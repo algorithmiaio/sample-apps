@@ -27,7 +27,7 @@ and add in your API key.
 
 After putting in your own API key to the line above run it in your console environment:
 
-```python lda_mapper.py```
+```python lda.py```
 
 ## Built With
 * [Algorithmia](https://algorithmia.com/)

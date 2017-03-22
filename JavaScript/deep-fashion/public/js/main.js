@@ -1,10 +1,9 @@
 // init the Algorithmia client with your API key from https://algorithmia.com/user#credentials
-var algoClient1 = Algorithmia.client('simL9bcF01/FR0v6Dq5JTYqoQmq1', 'http://api.test.algorithmia.com/v1/web/algo');
-var algoClient2 = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
+var algoClient1 = Algorithmia.client('simDcapLUQmHq9hv3P6ILOEKuNv1');
 
 var algorithms = {
-  classifier: 'zeryx/FasterRCNN/0.1.4',
-  imagedownload: 'util/SmartImageDownloader/0.2.4'
+  classifier: 'algorithmiahq/DeepFashion/0.1.1',
+  imagedownload: 'util/SmartImageDownloader/0.2.5'
 };
 
 /**

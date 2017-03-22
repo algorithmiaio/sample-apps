@@ -2,6 +2,8 @@
 
 Finding topics in unstructured text data is a common use case that is easily solved using [LDA](https://algorithmia.com/algorithms/nlp/LDA), a topic modeling algorithm hosted on Algorithmia.
 
+This recipe covers how to use LDA for topic extraction on text documents and then classify new documents to those topics.
+
 For the full blog post related to this recipe, see [Use LDA to Classify Text Documents](http://blog.algorithmia.com/lda-algorithm-classify-text-documents/).
 
 ## Getting Started

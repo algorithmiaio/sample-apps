@@ -35,7 +35,7 @@ var getTags = function(url) {
     if (output.error) {
       endWait(output.error.message);
     } else {
-      showPredictions(output.result.tags);
+      showPredictions(output.result.articles);
       endWait();
     }
   });
@@ -57,7 +57,7 @@ var showPredictions = function(result){
   var html = '';
   for (var i = 0; i < tags.length; i++) {
     var prob = (tags[i].confidence * 100).toFixed(2);
-    var tag = tags[i].class.replace(/_/g,' ');
+    var tag = tags[i].article_name.replace(/_/g,' ');
     html += '<tr><td><span class="label label-success">'+ tag+'</span></td><td>'+prob+'%</td></tr>';
   }
   $('#results-tbody').html(html);

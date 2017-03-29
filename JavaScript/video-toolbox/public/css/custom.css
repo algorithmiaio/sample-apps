@@ -10,11 +10,19 @@
   margin-bottom: .5rem;
   width: 100%;
 }
-.video-thumb {margin-bottom: 16px;}
+
+video {
+  max-width: 100vw;
+}
+
+.video-thumb {
+  margin-bottom: 16px;
+  border: 3px solid transparent;
+}
 .video-thumb:hover,
 .video-thumb:focus,
 .video-thumb.active {
-  outline: 3px solid #5000BE;
+  border: 3px solid #5000BE;
 }
 
 .radio-btns .btn-radio {

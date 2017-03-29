@@ -43,7 +43,21 @@ var selectedAlgo;
  * once DOM is ready, update vars and add handlers
  */
 $(document).ready(function() {
-  setInviteCode('videotoolbox');
+  setInviteCode('videotoolbox1');
+  //reload videos if initial load fails
+  $('video').each(function(i, video) {
+    video.addEventListener('error', function (e) {
+      var curr_src = $(video).attr('src');
+      console.log(('Reloading '+curr_src));
+      if(curr_src) {
+        var curr_src_arr = curr_src.split("?");
+        var new_src = curr_src_arr[0] + "?t=" + new Date().getMilliseconds();
+        $(video).attr('src', new_src);
+        $(video).find('source').attr('src', new_src);
+        video.load();
+      }
+    }, false);
+  });
 });
 
 var selectVideo = function(name) {
@@ -71,7 +85,8 @@ var analyze = function() {
     if (output.error) {
       hideWait(selectedAlgo, output.error.message);
     } else {
-      $('#results-'+selectedAlgo+' .result-input').attr('src', getHttpUrl(data.input_file));
+      var inputFileUrl = getHttpUrl(data.input_file);
+      $('#results-'+selectedAlgo+' .result-input').attr({'src': inputFileUrl, 'poster': inputFileUrl+'.png'});
       output.result[algorithms.videoTransform.result_field] = getHttpUrl(output.result[algorithms.videoTransform.result_field]);
       showResults(selectedAlgo, output.result);
     }
@@ -99,8 +114,9 @@ var playVideos = function() {
  * @param result [{"class":string,"prob":number}]
  */
 var showResults = function(algorithm, result){
-  $('#results-'+algorithm+' .result-output').attr('src', result[algorithms.videoTransform.result_field]);
-  $('#results-'+algorithm+' .result-link').attr('href', result[algorithms.videoTransform.result_field]);
+  var outputFileUrl = result[algorithms.videoTransform.result_field];
+  $('#results-'+algorithm+' .result-output').attr({'src': outputFileUrl, 'poster': outputFileUrl+'.png'});
+  $('#results-'+algorithm+' .result-link').attr('href', outputFileUrl);
   hideWait(algorithm);
 };
 

@@ -43,7 +43,7 @@ var selectedAlgo;
  * once DOM is ready, update vars and add handlers
  */
 $(document).ready(function() {
-  setInviteCode('videotoolbox1');
+  setInviteCode('videotoolbox');
   //reload videos if initial load fails
   $('video').each(function(i, video) {
     video.addEventListener('error', function (e) {

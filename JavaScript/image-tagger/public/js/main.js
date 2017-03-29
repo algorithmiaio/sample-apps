@@ -48,8 +48,7 @@ var getInfo = function(url) {
  */
 var showResults = function(result){
   $('#results-tbody').html(
-    // tags2html(result.copyright, 0.1, 'copyright: ')
-    + tags2html(result.rating, 0.2, 'rating: ')
+    tags2html(result.rating, 0.2, 'rating: ')
     + tags2html(result.character, 0.1, 'character: ')
     + tags2html(result.general, 0.23)
   );

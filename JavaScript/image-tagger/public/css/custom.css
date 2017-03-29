@@ -1,0 +1,65 @@
+.hero {
+    background-image: url(../images/deep-learning-place-classifier-hero.jpg);
+    background-size: cover;
+    background-position: 0 50%;
+}
+
+.form-group input {margin-bottom: .5rem;}
+
+/* Label */
+.label {
+  border-radius: 0;
+}
+.label-success {
+  color: #FFFFFF;
+  background-color: #5000BE;
+}
+
+span.label {
+  font-size: .75rem;
+}
+
+#userImg {
+	padding-top: 8px;
+	width: 100%;
+	margin-bottom: .5rem;
+}
+
+#social {
+	margin-top: 20px;
+	text-align: center;
+}
+
+.sample-image {
+	padding-right: 0;
+	margin-bottom: .5rem;
+}
+.sample-image:hover img {opacity: .7;}
+
+.feature {margin-bottom: 2rem;}
+
+/* $MEDIA QUERIES */
+/* Extra small devices (phones, less than 768px) */
+/* This should be the default AKA no styles here */
+/*@media (min-width: @screen-xs-min) {}*/
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    form {
+        /* vertical center */
+    	display:        flex;
+    	align-items:    center;
+	}
+	.form-group input {margin-bottom: 0;}
+	.sample-image {
+		margin-bottom: .5rem;
+	}
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+	.feature {margin-bottom: 0;}
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}

@@ -2,7 +2,7 @@
 var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
 
 var algorithms = {
-  classifier: 'deeplearning/Places365Classifier/0.1.9'
+  tagger: 'deeplearning/Places365Classifier/0.1.9'
 };
 
 /**
@@ -33,7 +33,7 @@ var getPlaces = function(url) {
     "numResults": 7
   };
   $('#userImg').attr('src',url);
-  algoClient.algo(algorithms.classifier).pipe(input).then(function (output) {
+  algoClient.algo(algorithms.tagger).pipe(input).then(function (output) {
     if (output.error) {
       endWait(output.error.message);
     } else {

@@ -4,6 +4,7 @@ Most of the demos get built and published via Grunt tasks. You'll need to instal
 
 ```bash
 npm install -g grunt-cli
+npm update
 npm install grunt
 npm install
 ```

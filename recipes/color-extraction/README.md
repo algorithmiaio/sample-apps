@@ -6,9 +6,7 @@ While there are plenty of online color scheme generators, none can generate rand
 
 This recipe will show you how to extract image links from a url that has multiple images on it, get the color schemes from those image urls and generate a new custom color scheme made of five random hexadecimal colors. Then you can plug them into Adobe Color Wheel or another online color scheme creator and visualize your new color scheme.
 
-For the full blog post related to this recipe, see [Create a Custom Color Scheme From Your Favorite Website](http://blog.algorithmia.com/
-create-a-custom-color-scheme-from-your-favorite-website
-).
+For the full blog post related to this recipe, see [Create a Custom Color Scheme From Your Favorite Website](http://blog.algorithmia.com/create-a-custom-color-scheme-from-your-favorite-website).
 
 ## Getting Started
 

@@ -136,16 +136,18 @@ var clickYes = function() {
 };
 var clickNo = function() {
   console.log("User clicked no");
-  var input = {
-    "image": $('#imgUrl').val(),
-    "targetDirectory": "data://.my/Reclassify/"
-  };
-  algoClient2.algo(algorithms.imagedownload).pipe(input).then(function(result) {
-    if(result.error) {
-      console.error("Failed to mark image for re-classification");
-    } else {
-      $("#feedback").addClass("hidden");
-      $("#feedback-msg").removeClass("hidden");
-    }
-  });
+  // var input = {
+  //   "image": $('#imgUrl').val(),
+  //   "targetDirectory": "data://.my/Reclassify/"
+  // };
+  // algoClient2.algo(algorithms.imagedownload).pipe(input).then(function(result) {
+  //   if(result.error) {
+  //     console.error("Failed to mark image for re-classification");
+  //   } else {
+  //     $("#feedback").addClass("hidden");
+  //     $("#feedback-msg").removeClass("hidden");
+  //   }
+  // });
+  // Hide accuracy check
+  $("#feedback").addClass("hidden");
 };

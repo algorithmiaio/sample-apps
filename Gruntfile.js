@@ -46,6 +46,11 @@ module.exports = function(grunt) {
     }
   };
 
+  var dateString = new Date().getTime();
+  var getTemplate = function(template) {
+    return grunt.file.read(template).split('[[VERSION]]').join(dateString);
+  };
+
   demos.forEach(function(demo) {
     awsS3Config[demo.slug] = {
       files: [{
@@ -75,9 +80,9 @@ module.exports = function(grunt) {
     templateConfig[demo.slug] = {
       options: {
         data: {
-          header_begin: grunt.file.read('JavaScript/common/header_begin.html'),
-          header_end: grunt.file.read('JavaScript/common/header_end.html'),
-          footer: grunt.file.read('JavaScript/common/footer.html')
+          header_begin: getTemplate('JavaScript/common/header_begin.html'),
+          header_end: getTemplate('JavaScript/common/header_end.html'),
+          footer: getTemplate('JavaScript/common/footer.html')
         }
       },
       files: [

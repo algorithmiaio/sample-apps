@@ -227,8 +227,9 @@ a:hover, a:focus{
 
   .dots-container {
     position: absolute;
-    top: 30%;;
+    top: 30%;
     left: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
   }
   .dot {

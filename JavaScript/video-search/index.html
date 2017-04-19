@@ -97,21 +97,15 @@
 			<div class="col-md-8">
 				<h3>Tools used</h3>
 				<ul>
-					<li><a href="">Socrata Open Data Query</a> – pulls the permit data from Socrata</li>
-					<li><a href="">Simple Moving Average</a> – uses local average to smooth data</li>
-					<li><a href="">Linear Detrend</a> – removes increasing or decreasing trends in time series</li>
-					<li><a href="">Autocorrelate</a> – used to analyze the seasonality of a time series</li>
-					<li><a href="">Remove Seasonality</a> – removes known seasonal effects from a time series</li>
-					<li><a href="">Outlier Detection</a> – flags unusual data points</li>
-					<li><a href="">Forecast</a> – predict a given time series into the future</li>
+					<li><a href="https://algorithmia.com/algorithms/media/VideoMetadataExtraction">Video Metadata Extraction</a> – extract metadata from each frame of a video</li>
+					<li><a href="https://algorithmia.com/algorithms/deeplearning/InceptionNet">InceptionNet</a> – automatically tag images</li>
 				</ul>
 			</div>
 		</div>
 		<div class="row row-md">
 			<div class="col-md-8">
 				<h3>Source Data</h3>
-				<p>We use an algorithm to directly access Socrata’s API that can be found here.</p>
-				<p>Once we’ve retrieved the data, we aggregate it by total number of permits issued per month, and plot this data. To make the graph clearer, it sometimes helps to smooth or denoise the data. There are a number of ways to do this, with moving averages being the most popular. The most intuitive is the Simple Moving Average, which replaces each point by the average of itself and some number of the preceding points (default is 3).</p>
+				<p>This demo uses videos pulled directly from YouTube, but can easily be modified to handle any video source by either downloading them directly from a remote source, or by using the <a href="https://algorithmia.com/developers/data/">Data API</a> to connect to Dropbox or Amazon S3.</p>
 			</div>
 		</div>
 		<div class="row row-md">
@@ -122,11 +116,11 @@
 						<div class="col-md-12">
 							<p class="lg item-title">1. Download video</p>
 						</div>
-						<div class="col-sm-4">
-							<img src="public/images/step01.png">
+						<div class="col-sm-3">
+							<img class="" src="public/images/step01.png">
 						</div>
-						<div class="col-sm-8">
-							<p>Once we’ve retrieved the data, we aggregate it by total number of permits issued per month, and plot this data. To make the graph clearer, it sometimes helps to smooth or denoise the data. There are a number of ways to do this, with moving averages being the most popular. The most intuitive is the Simple Moving Average, which replaces each point by the average of itself and some number of the preceding points (default is 3).</p>
+						<div class="col-sm-9">
+							<p>The video file is downloaded from youtube, Dropbox, S3, or another source, and its file format is examined before proceeding.</p>
 						</div>
 					</li>
 					<li class="row">
@@ -134,10 +128,10 @@
 							<p class="lg item-title">2. Split in frames</p>
 						</div>
 
-						<div class="col-sm-8">
-							<p>Once we’ve retrieved the data, we aggregate it by total number of permits issued per month, and plot this data. To make the graph clearer, it sometimes helps to smooth or denoise the data. There are a number of ways to do this, with moving averages being the most popular. The most intuitive is the Simple Moving Average, which replaces each point by the average of itself and some number of the preceding points (default is 3).</p>
+						<div class="col-sm-9">
+							<p>The <a href="https://algorithmia.com/algorithms/media/VideoMetadataExtraction">Video Metadata Extraction</a> algorithm splits the video into frames, then processes them in batches.</p>
 						</div>
-						<div class="col-sm-4">
+						<div class="col-sm-3">
 							<img src="public/images/step02.png">
 						</div>
 					</li>
@@ -145,11 +139,11 @@
 						<div class="col-md-12">
 							<p class="lg item-title">3. Auto-generate frame tags</p>
 						</div>
-						<div class="col-sm-4">
+						<div class="col-sm-3">
 							<img src="public/images/step03.png">
 						</div>
-						<div class="col-sm-8">
-							<p>Once we’ve retrieved the data, we aggregate it by total number of permits issued per month, and plot this data. To make the graph clearer, it sometimes helps to smooth or denoise the data. There are a number of ways to do this, with moving averages being the most popular. The most intuitive is the Simple Moving Average, which replaces each point by the average of itself and some number of the preceding points (default is 3).</p>
+						<div class="col-sm-9">
+							<p>Tags and annotations describing each frame are generated Using <a href="https://algorithmia.com/algorithms/deeplearning/InceptionNet">InceptionNet</a> and other image classification/extraction algorithms.</p>
 						</div>
 					</li>
 					<li class="row">
@@ -157,10 +151,10 @@
 							<p class="lg item-title">4. Search tags</p>
 						</div>
 
-						<div class="col-sm-8">
-							<p>Once we’ve retrieved the data, we aggregate it by total number of permits issued per month, and plot this data. To make the graph clearer, it sometimes helps to smooth or denoise the data. There are a number of ways to do this, with moving averages being the most popular. The most intuitive is the Simple Moving Average, which replaces each point by the average of itself and some number of the preceding points (default is 3).</p>
+						<div class="col-sm-9">
+							<p>After the video is processed, timestamps are assigned to each extracted tag, allowing users to search across one or many videos for specific tags.</p>
 						</div>
-						<div class="col-sm-4">
+						<div class="col-sm-3">
 							<img src="public/images/step04.png">
 						</div>
 					</li>
@@ -170,7 +164,7 @@
 		<div class="row">
 			<div class="col-md-8">
 				<h3>Takeaway</h3>
-				<p>The takeaway from this example is not the individual pieces – most of these techniques are available a number of places. The secret here is that it is simple, composable, and fully automated. Once one person writes a data connector in Algorithmia (which is likely to happen for interesting public data, like that provided by Socrata), you don’t have to burn precious time writing and working kinks out of your own. On the other hand, if something existing gets done better, the compositional nature of Algorithmia will allow you to swap out pieces of a pipeline seamlessly. When someone comes up with a better outlier detector, then upgrading a pipeline like the one above can be literally just a few keystrokes away.</p>
+				<p>With just a few dozen lines of code and a couple spare hours, it's possible to build an entire video processing and tagging pipeline on top of Algorithmia's tools. Add in a few other relevant algorithms such as <a href="https://algorithmia.com/algorithms/spotify/Annoy">Approximate Nearest Neighbors Clustering</a>, <a href="https://algorithmia.com/algorithms/zskurultay/ImageSimilarity">Image Similarity</a>, or <a href="https://algorithmia.com/algorithms/deeplearning/DeepFilter">Deep Filter</a>, and you can quickly build a video recommender engine, copy detector, or filter.</p>
 			</div>
 		</div>
 	</section>

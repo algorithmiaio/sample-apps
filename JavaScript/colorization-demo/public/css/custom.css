@@ -5,6 +5,10 @@
     background-position: 0% 50%;
 }
 
+#twoface-wrapper canvas {
+	max-width: 80vw;
+}
+
 .form-group {margin-bottom: 1.5rem;}
  /* For smaller screens */
 .form-group input {width: 100%; margin-bottom: .5rem;}

@@ -1,5 +1,5 @@
 // init the Algorithmia client with your API key from https://algorithmia.com/user#credentials
-var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
+var algoClient = Algorithmia.client('simF94HqZ6cqThe/IbPe/I9ImMu1');
 
 var algorithms = {
   autotag: '/nlp/AutoTag/1.0.1',
@@ -18,6 +18,7 @@ var siteMap = {};
 var pageRanks = {};
 var pagesDisplayed = 0;
 var cleanupTimer = null;
+var existsError = false;
 
 /**
  * once DOM is ready, update vars, set initial URL, and add handlers
@@ -42,9 +43,9 @@ var startScrape = function() {
   $('#scrape-status').html('&nbsp;<span class="aspinner demo-spinner"></span>Analyzing site...');
   $('#pagerank-sorted').html('&nbsp;&nbsp;&nbsp;&nbsp;<span class="aspinner demo-spinner"></span>');
   hideLink();
-  $('#results').show();
   $('a[href="#viz"]').click();
   startViz();
+  existsError = false;
   enqueueRankPages();
   doScrape(1, [url]);
 };
@@ -57,16 +58,17 @@ var startScrape = function() {
 var doScrape = function(depth, urls) {
   for (var i in urls) {
     var url = urls[i];
-    if (!siteMap[url]) {
+    if (siteMap[url]==null) {
+      siteMap[url] = [];
       algoClient.algo(algorithms.getlinks).pipe([url, true]).then(function (output) {
+        console.log(depth,url);
         if (output.error) {
           //fail silently while recursing
           if(depth<=1) {showError(output.error);}
           console.error(output)
         } else {
-          if (depth > depthLimit) {
             enqueueRankPages();
-          } else if(!siteMap[url]) {
+            if (depth <= depthLimit && siteMap[url]!=null && siteMap[url].length==0) {
             //recurse on maxWidth links, not including self
             var newUrls = output.result;
             for (var j in newUrls) {
@@ -74,13 +76,22 @@ var doScrape = function(depth, urls) {
             }
             newUrls = newUrls.filter(function(e) {return e != url;}).slice(0, maxWidth);
             siteMap[url] = newUrls;
-            doScrape(depth+1, newUrls);
+            doScrape(depth+1, setSubtract(newUrls, Object.keys(siteMap)));
             updateGraph();
           }
         }
       });
     }
   }
+};
+
+/**
+ * set subtraction
+ * @param source
+ * @param remove
+ */
+var setSubtract = function(source, remove){
+  return source.filter(function(el){return remove.indexOf(el)<0;})
 };
 
 /**
@@ -153,7 +164,8 @@ var cleanUrl = function (url) {
  */
 var showError = function(error) {
   console.error(error);
-  $('#scrape-status').html('<div class="text-danger">'+error.message.replace('java.net.UnknownHostException','Invalid URL')+'</div>');
+  existsError = true;
+  $('#scrape-status').html('<div class="text-danger">Unable to load page: '+error.message.replace('java.net.UnknownHostException','Invalid URL')+'</div>');
 };
 
 /**
@@ -169,6 +181,7 @@ var round = function(n) {
  * initialize d3 graph
  */
 var startViz = function() {
+  $('#results').show(0);
   graphObj = new Algorithmia.viz.Graph(
     d3.select("svg.viz"),
     $("#viz-panel").width(),
@@ -177,6 +190,7 @@ var startViz = function() {
     function(d) {return d.rank >= 0? 6+d.rank*6 : 6}, //radius calculation
     function(d) {loadLink(d.name, true);} //link handler
   );
+  $('#results').hide(0);
 };
 
 /**
@@ -199,16 +213,19 @@ var updateGraph = function() {
  */
 var rankPages = function() {
   var nodes = getNodes();
-  if(nodes.length==0) {return $('#results').hide();}
+  if(nodes.length==0) {return;}
   var graphMatrix = graphObjectToMatrix(siteMap, nodes);
   algoClient.algo(algorithms.pagerank).pipe(graphMatrix).then(function(output) {
     if (output.error) {return showError(output.error);}
+    $('#results').show(0);
     var result = normalize(output.result);
     var ranking = {};
     for (var i = 0; i < result.length; i++) {
       ranking[nodes[i]] = result[i];
     }
-    $('#scrape-status').text("");
+    if(nodes.length>1 || !existsError) {
+      $('#scrape-status').text('');
+    }
     var pagerankSorted = sortMap(ranking);
     var pagerankSortedHtml = '';
     for (var j in pagerankSorted) {

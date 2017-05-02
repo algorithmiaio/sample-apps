@@ -18,18 +18,20 @@ def get_image(url):
     else:
         raise Exception("Please pass in a valid url")
 
-
+        
 def color_extractor(url):
     """Extract top 15 colors from images."""
     urls = get_image(url)
     algo = client.algo("vagrant/ColorSchemeExtraction/0.2.0")
-    try:
-        response = [algo.pipe({"url": path}).result for path in urls]
-        print(response)
-        return response
-    except Algorithmia.algo_response.AlgoException as e:
-        print("Exception ")
-        print(e)
+    response = []
+    for path in urls:
+        try:
+            response.append(algo.pipe({"url": path}).result)
+        except Algorithmia.algo_response.AlgoException as e:
+            print("Exception ")
+            print(e)
+    print(response)
+    return response
 
 
 def shuffle_colors(url):

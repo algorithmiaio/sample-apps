@@ -37,13 +37,17 @@ def color_extractor(url):
 def shuffle_colors(url):
     """Create unique color paletted from images passed in."""
     data = color_extractor(url)
+    print(data)
     a_list = []
     for c in data:
         for hex in c["colors"]:
             a_list.append(hex["hex"])
 
-    new_color_scheme = random.sample(set(a_list), 5)
-    print(new_color_scheme)
+    if len(a_list) == 0:
+        print("No valid images found (transparent or JavaScript-generated images)")
+    else:
+        new_color_scheme = random.sample(set(a_list), 5)
+        print(new_color_scheme)
 
 shuffle_colors(
     "http://shop.nordstrom.com/c/designer-collections?origin=topnav&cm_sp=Top%20Navigation-_-Designer%20Collections")

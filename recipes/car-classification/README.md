@@ -25,7 +25,7 @@ and add in your API key.
 
 After putting in your own API key to the line above run it in your console environment:
 
-```python car-classifier.py```
+```python car_classifier.py```
 
 ## Built With
 * [Algorithmia](https://algorithmia.com/)

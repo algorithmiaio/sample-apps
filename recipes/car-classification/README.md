@@ -2,8 +2,7 @@ Video processing pipelines are difficult to set up even if you have access to GP
 
 This recipe uses the [Video Metadata Extraction algorithm](https://algorithmia.com/algorithms/media/VideoMetadataExtraction) and the [Car Make and Model Recognition algorithm](https://algorithmia.com/algorithms/LgoBE/CarMakeandModelRecognition) to find useful information from traffic videos.
 
-For the full blog post related to this recipe, see [Video Processing of Traffic Videos](http://blog.algorithmia.com/
-video-processing-car-classification)
+For the full blog post related to this recipe, see [Video Processing of Traffic Videos](http://blog.algorithmia.com/video-processing-car-classification)
 
 ## Getting Started
 

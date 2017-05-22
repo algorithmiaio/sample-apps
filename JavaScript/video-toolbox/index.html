@@ -29,61 +29,62 @@
 <%= header_end %>
 
 <section class="purple-grad-background hero">
-    <div class="container" id="content">
-      <div class="row">
-        <div class="col-md-7">
-          <h1>Video Toolbox</h1>
-          <h4 class="light whitespace-md">Video transformations, powered my Machine Learning</h4>
-        </div>
-        <div class="col-sm-12 col-md-7">
-          <div class="card">
-            <h3>1. CHOOSE A VIDEO</h3>
-            <div class="row whitespace sample-videos">
-              <div class="col-xs-6 col-sm-3">
-                <a onclick="selectVideo('beach')"><img src="public/images/beach.png" alt="beach" id="video-thumb-beach" class="video-thumb"></a>
-              </div>
-              <div class="col-xs-6 col-sm-3 sample-image">
-                <a onclick="selectVideo('office')"><img src="public/images/office.png" alt="office" id="video-thumb-office" class="video-thumb"></a>
-              </div>
-              <div class="col-xs-6 col-sm-3 sample-image">
-                <a onclick="selectVideo('dog')"><img src="public/images/dog.png" alt="dog" id="video-thumb-dog" class="video-thumb"></a>
-              </div>
-              <div class="col-xs-6 col-sm-3 sample-image">
-                <a onclick="selectVideo('keyboard')"><img src="public/images/keyboard.png" alt="keyboard" id="video-thumb-keyboard" class="video-thumb"></a>
-              </div>
+  <div class="container" id="content">
+    <div class="row">
+      <div class="col-md-7">
+        <h1>Video Toolbox</h1>
+        <h4 class="light whitespace-md">Video transformations, powered my Machine Learning</h4>
+      </div>
+      <div class="col-sm-12 col-md-7">
+        <div class="card">
+          <h3>1. CHOOSE A VIDEO</h3>
+          <div class="row whitespace sample-videos">
+            <div class="col-xs-6 col-sm-3">
+              <a onclick="selectVideo('beach')"><img src="public/images/beach.png" alt="beach" id="video-thumb-beach" class="video-thumb"></a>
             </div>
-            <h3>2. CHOOSE A MODIFIER</h3>
-            <div class="whitespace-md radio-btns">
-              <button name="selectedAlgorithm" class="btn btn-radio" id="button-deepstyle" onclick="selectAlgo('deepstyle')">Deep Style</button>
-              <button name="selectedAlgorithm" class="btn btn-radio" id="button-saliency" onclick="selectAlgo('saliency')">Saliency</button>
-              <button name="selectedAlgorithm" class="btn btn-radio" id="button-colorization" onclick="selectAlgo('colorization')">Colorization</button>
+            <div class="col-xs-6 col-sm-3 sample-image">
+              <a onclick="selectVideo('office')"><img src="public/images/office.png" alt="office" id="video-thumb-office" class="video-thumb"></a>
             </div>
-            <form class="form-group" onsubmit="analyze(); return false">
-              <button class="btn btn-primary">
-                  <span id="analyze-button-text">
-                      <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-                      Transform Video
-                  </span>
-              </button>
-            </form>
-            <div id="status-label"></div>
+            <div class="col-xs-6 col-sm-3 sample-image">
+              <a onclick="selectVideo('dog')"><img src="public/images/dog.png" alt="dog" id="video-thumb-dog" class="video-thumb"></a>
+            </div>
+            <div class="col-xs-6 col-sm-3 sample-image">
+              <a onclick="selectVideo('keyboard')"><img src="public/images/keyboard.png" alt="keyboard" id="video-thumb-keyboard" class="video-thumb"></a>
+            </div>
           </div>
+          <h3>2. CHOOSE A MODIFIER</h3>
+          <div class="whitespace-md radio-btns">
+            <button name="selectedAlgorithm" class="btn btn-radio" id="button-deepstyle" onclick="selectAlgo('deepstyle')">Deep Style</button>
+            <button name="selectedAlgorithm" class="btn btn-radio" id="button-saliency" onclick="selectAlgo('saliency')">Saliency</button>
+            <button name="selectedAlgorithm" class="btn btn-radio" id="button-colorization" onclick="selectAlgo('colorization')">Colorization</button>
+          </div>
+          <form class="form-group" onsubmit="analyze(); return false">
+            <button class="btn btn-primary">
+                <span id="analyze-button-text">
+                    <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                    Transform Video
+                </span>
+            </button>
+          </form>
+          <div id="status-label"></div>
         </div>
       </div>
     </div>
-  </section>
-
-  <div id="overlay" class="container hidden">
-    <div class="dots-text-container">
-      <h3 class="dots-text">Boom...</h3>
-    </div>
-    <div class="dots-container">
-        <div class="dot dot1"></div>
-        <div class="dot dot2"></div>
-        <div class="dot dot3"></div>
-        <div class="dot dot4"></div>
-    </div>
   </div>
+</section>
+
+<div id="overlay" class="container hidden">
+  <div class="dots-text-container">
+    <h3 class="dots-text">Boom...</h3>
+  </div>
+  <div class="dots-container">
+      <div class="dot dot1"></div>
+      <div class="dot dot2"></div>
+      <div class="dot dot3"></div>
+      <div class="dot dot4"></div>
+  </div>
+</div>
+
 <section class="container hidden results" id="results-deepstyle">
   <div class="row">
     <h4 class="result-title col-sm-12">Deep Style</h4>

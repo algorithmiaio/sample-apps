@@ -2,37 +2,27 @@
 var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
 
 var algorithms = {
-  videoTransform: {
-    algorithm: 'demo/VideoTransformDemo/0.1.0', // media/VideoTransform/0.2.21
+  videoMetadata: {
+    algorithm: 'media/VideoMetadataExtraction/0.4.3',
     result_field: 'output_file'
   },
-  metadata: null,
-  nsfw: null
 };
 
 var algorithmsUserSelectable = {
-  deepstyle: {
-    algorithm: "deeplearning/DeepFilter/0.6.0",
-    advanced_input: {
-      "images": "$BATCH_INPUT",
-      "savePaths": "$BATCH_OUTPUT",
-      "filterName": "smooth_ride"
-    }
+  nudity: {
+    algorithm: "sfw/nuditydetectioni2v/0.2.12"
   },
-  saliency: {
-    algorithm: "deeplearning/SalNet/0.2.0"
-  },
-  colorization: {
-    algorithm: "deeplearning/ColorfulImageColorization/1.1.5"
+  tagger: {
+    algorithm: "deeplearning/IllustrationTagger/0.2.4"
   }
 };
 
 var algorithmTemplates = {
-  videoTransform: {
+  videoMetadata: {
       "input_file":null,
       "output_file":null,
       "algorithm":null,
-      "fps": 30
+      "fps": 5
     }
 };
 
@@ -77,17 +67,16 @@ var selectAlgo = function(name) {
  */
 var analyze = function() {
   if(!(selectedVideo&&selectedAlgo)) {return hideWait(null, "Please select a video and a modifier");}
-  var data = jQuery.extend(algorithmTemplates.videoTransform, algorithmsUserSelectable[selectedAlgo]);
-  data.input_file = 's3+demo://video-transform/'+selectedVideo+'.mp4';
-  data.output_file = 's3+demo://video-transform/'+selectedVideo+'_'+selectedAlgo+'.mp4';
+  var data = jQuery.extend(algorithmTemplates.videoMetadata, algorithmsUserSelectable[selectedAlgo]);
+  data.input_file = 'http://s3.amazonaws.com/algorithmia-demos/video-transform/'+selectedVideo+'.mp4';
+  data.output_file = 'data://.algo/temp/'+selectedVideo+'_'+selectedAlgo+'.json';
   showWait(selectedAlgo);
-  algoClient.algo(algorithms.videoTransform.algorithm).pipe(data).then(function(output) {
+  algoClient.algo(algorithms.videoMetadata.algorithm).pipe(data).then(function(output) {
     if (output.error) {
       hideWait(selectedAlgo, output.error.message);
     } else {
       var inputFileUrl = getHttpUrl(data.input_file);
       $('#results-'+selectedAlgo+' .result-input').attr({'src': inputFileUrl, 'poster': inputFileUrl+'.png'});
-      output.result[algorithms.videoTransform.result_field] = getHttpUrl(output.result[algorithms.videoTransform.result_field]);
       showResults(selectedAlgo, output.result);
     }
   });
@@ -114,9 +103,8 @@ var playVideos = function() {
  * @param result [{"class":string,"prob":number}]
  */
 var showResults = function(algorithm, result){
-  var outputFileUrl = result[algorithms.videoTransform.result_field];
-  $('#results-'+algorithm+' .result-output').attr({'src': outputFileUrl, 'poster': outputFileUrl+'.png'});
-  $('#results-'+algorithm+' .result-link').attr('href', outputFileUrl);
+  var outputFileUrl = result[algorithms.videoMetadata.result_field];
+  $('#results-'+algorithm+' .result-output').innerText(outputFileUrl);
   hideWait(algorithm);
 };
 

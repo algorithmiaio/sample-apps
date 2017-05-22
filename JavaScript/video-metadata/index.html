@@ -29,100 +29,56 @@
 <%= header_end %>
 
 <section class="purple-grad-background hero">
-    <div class="container" id="content">
-      <div class="row">
-        <div class="col-md-7">
-          <h1>Video Metadata</h1>
-          <h4 class="light whitespace-md">Use machine learning to extract information from videos</h4>
-        </div>
-        <div class="col-sm-12 col-md-7">
-          <div class="card">
-            <h3>1. CHOOSE A VIDEO</h3>
-            <div class="row whitespace sample-videos">
-              <div class="col-xs-6 col-sm-3">
-                <a onclick="selectVideo('beach')"><img src="public/images/beach.png" alt="beach" id="video-thumb-beach" class="video-thumb"></a>
-              </div>
-              <div class="col-xs-6 col-sm-3 sample-image">
-                <a onclick="selectVideo('office')"><img src="public/images/office.png" alt="office" id="video-thumb-office" class="video-thumb"></a>
-              </div>
-              <div class="col-xs-6 col-sm-3 sample-image">
-                <a onclick="selectVideo('dog')"><img src="public/images/dog.png" alt="dog" id="video-thumb-dog" class="video-thumb"></a>
-              </div>
-              <div class="col-xs-6 col-sm-3 sample-image">
-                <a onclick="selectVideo('keyboard')"><img src="public/images/keyboard.png" alt="keyboard" id="video-thumb-keyboard" class="video-thumb"></a>
-              </div>
+  <div class="container" id="content">
+    <div class="row">
+      <div class="col-md-7">
+        <h1>Video Metadata</h1>
+        <h4 class="light whitespace-md">Use machine learning to extract information from videos</h4>
+      </div>
+      <div class="col-sm-12 col-md-7">
+        <div class="card">
+          <h3>1. CHOOSE A VIDEO</h3>
+          <div class="row whitespace sample-videos">
+            <div class="col-xs-6 col-sm-3">
+              <a onclick="selectVideo('massage')"><img src="public/images/massage.png" alt="massage" id="video-thumb-massage" class="video-thumb"></a>
             </div>
-            <h3>2. CHOOSE A MODIFIER</h3>
-            <div class="whitespace-md radio-btns">
-              <button name="selectedAlgorithm" class="btn btn-radio" id="button-deepstyle" onclick="selectAlgo('deepstyle')">Deep Style</button>
-              <button name="selectedAlgorithm" class="btn btn-radio" id="button-saliency" onclick="selectAlgo('saliency')">Saliency</button>
-              <button name="selectedAlgorithm" class="btn btn-radio" id="button-colorization" onclick="selectAlgo('colorization')">Colorization</button>
-              <!--<button name="selectedAlgorithm" class="btn btn-radio" id="button-metadata" onclick="selectAlgo('metadata'">Extract Metadata Style</button>-->
-              <!--<button name="selectedAlgorithm" class="btn btn-radio" id="button-nsfw" onclick="selectAlgo('nsfw'">NSFW Detector</button>-->
-            </div>
-            <form class="form-group" onsubmit="analyze(); return false">
-              <button class="btn btn-primary">
-                  <span id="analyze-button-text">
-                      <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-                      Transform Video
-                  </span>
-              </button>
-            </form>
-            <div id="status-label"></div>
           </div>
+          <h3>2. CHOOSE A MODIFIER</h3>
+          <div class="whitespace-md radio-btns">
+            <button name="selectedAlgorithm" class="btn btn-radio" id="button-nudity" onclick="selectAlgo('nudity')">Detect Nudity</button>
+          </div>
+          <form class="form-group" onsubmit="analyze(); return false">
+            <button class="btn btn-primary">
+                <span id="analyze-button-text">
+                    <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                    Extract Metadata
+                </span>
+            </button>
+          </form>
+          <div id="status-label"></div>
         </div>
       </div>
     </div>
-  </section>
-
-  <div id="overlay" class="container hidden">
-    <div class="dots-text-container">
-      <h3 class="dots-text">Boom...</h3>
-    </div>
-    <div class="dots-container">
-        <div class="dot dot1"></div>
-        <div class="dot dot2"></div>
-        <div class="dot dot3"></div>
-        <div class="dot dot4"></div>
-    </div>
   </div>
-<section class="container hidden results" id="results-deepstyle">
+</section>
+
+<div id="overlay" class="container hidden">
+  <div class="dots-text-container">
+    <h3 class="dots-text">Boom...</h3>
+  </div>
+  <div class="dots-container">
+      <div class="dot dot1"></div>
+      <div class="dot dot2"></div>
+      <div class="dot dot3"></div>
+      <div class="dot dot4"></div>
+  </div>
+</div>
+
+<section class="container hidden results" id="results-nudity">
   <div class="row">
     <h4 class="result-title col-sm-12">Deep Style</h4>
     <video class="result-input col-sm-6" controls></video>
-    <video class="result-output col-sm-6" onloadeddata="playVideos()" controls>
-      Your video is ready to <a class="result-link">download</a>.
-    </video>
-  </div>
-</section>
-<section class="container hidden results" id="results-saliency">
-  <div class="row">
-    <h4 class="result-title col-sm-12">Saliency</h4>
-    <video class="result-input col-sm-6" controls></video>
-    <video class="result-output col-sm-6" onloadeddata="playVideos()" controls>
-      Your video is ready to <a class="result-link">download</a>.
-    </video>
-  </div>
-</section>
-<section class="container hidden results" id="results-colorization">
-  <div class="row">
-    <h4 class="result-title col-sm-12">Colorization</h4>
-    <video class="result-input col-sm-6" controls></video>
-    <video class="result-output col-sm-6" onloadeddata="playVideos()" controls>
-      Your video is ready to <a class="result-link">download</a>.
-    </video>
-  </div>
-</section>
-<section class="container hidden results" id="results-metadata">
-  <div class="row">
-    <h4 class="result-title">Metadata results go here</h4>
-    <img class="result-output" src="" alt="analyzed image">
-  </div>
-</section>
-<section class="container hidden results" id="results-nsfw">
-  <div class="row">
-    <h4 class="result-title">NSFW results go here</h4>
-    <img class="result-output" src="" alt="analyzed image">
+    <div class="result-output col-sm-6"></div>
   </div>
 </section>
 
@@ -179,15 +135,15 @@ client = Algorithmia.client('_API_KEY_')
 algo = client.algo('media/VideoMetadataExtraction/0.4.3')
 input = {
    "input_file":"data://media/videos/bus.mp4",
-   "output_file":"data://.algo/temp/bus_tagged.json",
-   "algorithm":"algo://deeplearning/IllustrationTagger",
+   "output_file":"data://media/videos/bus_tags.json",
+   "algorithm":"algo://deeplearning/IllustrationTagger/0.2.4",
    "fps": 5
 }
 print algo.pipe(input)
 </code></pre>
             <p class="item-title">SAMPLE OUTPUT</p>
             <pre><code class="json">{
-    "output_file":"data://.algo/temp/bus_tagged.json"
+    "output_file":"data://.algo/temp/bus_tags.json"
 }</code></pre>
         <a href="https://algorithmia.com/algorithms/media/VideoMetadataExtraction" class="btn btn-primary-inverse">
           LEARN MORE

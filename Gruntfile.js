@@ -24,6 +24,7 @@ module.exports = function(grunt) {
     { slug: 'timeseries', dist: 'JavaScript/time-series'},
     { slug: 'isitnude', dist: 'JavaScript/isitnude'},
     { slug: 'video-toolbox', dist: 'JavaScript/video-toolbox'},
+    { slug: 'video-metadata', dist: 'JavaScript/video-metadata'},
   ];
 
   var awsS3Config = {

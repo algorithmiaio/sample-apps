@@ -1,0 +1,79 @@
+.hero {
+  background-image: url(../images/video-toolbox.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0% 70%;
+}
+.form-group {margin-bottom: 0;}
+/* For smaller screens */
+.form-group input {
+  margin-bottom: .5rem;
+  width: 100%;
+}
+
+video {
+  max-width: 100vw;
+}
+
+.video-thumb {
+  margin-bottom: 16px;
+  border: 3px solid transparent;
+}
+.video-thumb:hover,
+.video-thumb:focus,
+.video-thumb.active {
+  border: 3px solid #5000BE;
+}
+
+.radio-btns .btn-radio {
+  margin-right: 16px;
+}
+.radio-btns .btn-radio:last-of-type {
+  margin-right: 0;
+}
+.btn-radio {
+  font-size: 12px;
+  padding:         6px 6px;
+  color:            #0055BE;
+  background-color: #FFFFFF;
+  border: 1px solid #0055BE;
+  margin-bottom: 8px;
+}
+.btn-radio:hover,
+.btn-radio:focus,
+.btn-radio.active {
+  color:            #FFFFFF;
+  background-color: #0055BE;
+  border: 1px solid #FFFFFF;
+}
+
+/* results */
+.rating {}
+.rating.g {color: green;}
+.rating.r {color: darkred;}
+.result-wrapper {text-align: center;}
+/* $MEDIA QUERIES */
+/* Extra small devices (phones, less than 768px) */
+/* This should be the default AKA no styles here */
+/*@media (min-width: @screen-xs-min) {}*/
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  form {
+    /* vertical center */
+    display:        flex;
+    align-items:    center;
+  }
+  .form-group input {margin-bottom: 0;}
+  .sample-image {
+    margin-bottom: 0;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .feature {margin-bottom: 0;}
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}

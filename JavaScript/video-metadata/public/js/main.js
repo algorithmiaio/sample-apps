@@ -5,7 +5,9 @@ var algorithms = {
   videoTransform: {
     algorithm: 'demo/VideoTransformDemo/0.1.0', // media/VideoTransform/0.2.21
     result_field: 'output_file'
-  }
+  },
+  metadata: null,
+  nsfw: null
 };
 
 var algorithmsUserSelectable = {
@@ -41,7 +43,7 @@ var selectedAlgo;
  * once DOM is ready, update vars and add handlers
  */
 $(document).ready(function() {
-  setInviteCode('videotoolbox');
+  setInviteCode('videometadata');
   //reload videos if initial load fails
   $('video').each(function(i, video) {
     video.addEventListener('error', function (e) {

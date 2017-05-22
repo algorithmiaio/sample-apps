@@ -1,14 +1,14 @@
 <%= header_begin %>
 
-<title>Video transformations - Algorithmia</title>
+<title>Video metadata extraction - Algorithmia</title>
 <link rel="canonical" href="http://demos.algorithmia.com/video-transform/">
-<meta name="description" content="Video transformations, powered my Machine Learning"/>
+<meta name="description" content="Video transformations and data extraction"/>
 <meta name="robots" content="index,follow">
 
 <!-- FB -->
-<meta property="og:title" content="Video transformations, powered my Machine Learning">
+<meta property="og:title" content="Video transformations and data extraction">
 <meta property="og:url" content="http://demos.algorithmia.com/video-toolbox/">
-<meta property="og:description" content="Use machine learning to stylize, colorize, and extract information from your videos">
+<meta property="og:description" content="Use machine learning to extract information from your videos">
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="website">
 <meta property="og:image" content="http://demos.algorithmia.com/video-toolbox/public/images/fbshare.jpeg">
@@ -17,14 +17,14 @@
 <!-- TWTR -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@algorithmia">
-<meta name="twitter:title" content="Video transformations, powered my Machine Learning">
-<meta name="twitter:description" content="Use machine learning to stylize, colorize, and extract information from your videos">
+<meta name="twitter:title" content="Video transformations and data extraction">
+<meta name="twitter:description" content="Use machine learning to extract information from your videos">
 <meta name="twitter:image" content="http://demos.algorithmia.com/video-toolbox/public/images/twshare.jpeg">
 <meta name="twitter:creator" content="@matt_kiser">
 
 <!-- OTHER -->
-<meta itemprop="name" content="Video transformations, powered my Machine Learning">
-<meta itemprop="description" content="Use machine learning to stylize, colorize, and extract information from your videos">
+<meta itemprop="name" content="Video transformations and data extraction">
+<meta itemprop="description" content="Use machine learning to extract information from your videos">
 
 <%= header_end %>
 
@@ -32,8 +32,8 @@
     <div class="container" id="content">
       <div class="row">
         <div class="col-md-7">
-          <h1>Video Toolbox</h1>
-          <h4 class="light whitespace-md">Video transformations, powered my Machine Learning</h4>
+          <h1>Video Metadata</h1>
+          <h4 class="light whitespace-md">Use machine learning to extract information from videos</h4>
         </div>
         <div class="col-sm-12 col-md-7">
           <div class="card">
@@ -57,6 +57,8 @@
               <button name="selectedAlgorithm" class="btn btn-radio" id="button-deepstyle" onclick="selectAlgo('deepstyle')">Deep Style</button>
               <button name="selectedAlgorithm" class="btn btn-radio" id="button-saliency" onclick="selectAlgo('saliency')">Saliency</button>
               <button name="selectedAlgorithm" class="btn btn-radio" id="button-colorization" onclick="selectAlgo('colorization')">Colorization</button>
+              <!--<button name="selectedAlgorithm" class="btn btn-radio" id="button-metadata" onclick="selectAlgo('metadata'">Extract Metadata Style</button>-->
+              <!--<button name="selectedAlgorithm" class="btn btn-radio" id="button-nsfw" onclick="selectAlgo('nsfw'">NSFW Detector</button>-->
             </div>
             <form class="form-group" onsubmit="analyze(); return false">
               <button class="btn btn-primary">
@@ -111,6 +113,18 @@
     </video>
   </div>
 </section>
+<section class="container hidden results" id="results-metadata">
+  <div class="row">
+    <h4 class="result-title">Metadata results go here</h4>
+    <img class="result-output" src="" alt="analyzed image">
+  </div>
+</section>
+<section class="container hidden results" id="results-nsfw">
+  <div class="row">
+    <h4 class="result-title">NSFW results go here</h4>
+    <img class="result-output" src="" alt="analyzed image">
+  </div>
+</section>
 
 <!-- EXPLANATION -->
 <div class="grey-background">
@@ -118,36 +132,35 @@
   <div class="row row-md">
     <div class="col-md-12">
       <h2 class="whitespace-none">How it works</h2>
-      <h4>Applying machine learning algorithms to transform entire videos</h4>
+      <h4>Applying machine learning algorithms to extract information from videos</h4>
     </div>
   </div>
   <div class="row row-md">
     <div class="col-md-8">
       <h3>Tools used</h3>
       <ul>
-        <li><a href="https://algorithmia.com/algorithms/media/VideoTransform">VideoTransform</a> – transform a video with image algorithms</li>
-        <li><a href="https://algorithmia.com/algorithms/media/DeepFilter">DeepFilter</a> – create interesting photo filters with deep learning</li>
-        <li><a href="https://algorithmia.com/algorithms/deeplearning/SalNet">SalNet</a> – detect salient items (objects, people, etc) within an image</li>
-        <li><a href="https://algorithmia.com/algorithms/deeplearning/ColorfulImageColorization">ColorfulImageColorization</a> – uses deep learning to artificially color images</li>
+        <li><a href="https://algorithmia.com/algorithms/media/VideoMetadataExtraction">VideoMetadataExtraction</a> – extract information from a video via image processing algorithms</li>
+        <li><a href="https://algorithmia.com/algorithms/deeplearning/IllustrationTagger">IllustrationTagger</a> – extract features from images and generate tags</li>
+        <li><a href="https://algorithmia.com/algorithms/sfw/NudityDetectioni2v">NudityDetectioni2v</a> – detect nudity in images</li>
       </ul>
     </div>
   </div>
   <div class="row row-md">
     <div class="col-md-8">
       <h3>Method</h3>
-      <p>This algorithm uses an image processing algorithm to alter each frame of a video, then recombines it back into a freshly transformed video file.</p>
+      <p>This algorithm extracts individual frames of the video, runs them through the specified image-processing algorithm, and combines the metadata results into a single JSON file with timepoints.</p>
     </div>
   </div>
   <div class="row row-md">
     <div class="col-md-8">
       <h3>Takeaway</h3>
-      <p>You can now use many of our powerful image filters on entire videos. We take care of the complex machine-learning processes as well as the splitting and recombination of the video files, all within a powerful cloud-based parallel pipeline, touched off by just a single API call.</p>
+      <p>You can now use our data-extraction algorithms on entire videos, not merely still images.  We take care of the complex machine-learning processes as well as splitting the video files, recombining the JSON output, and adding timepoints... all within a powerful cloud-based parallel pipeline, initiated by a single API call.</p>
     </div>
   </div>
   <div class="row">
     <div class="col-md-8">
       <h3>See also</h3>
-      <p>If you're interested in extracting metadata from videos &mdash; for example, tagging objects or detecting nudity &mdash; try out the demo for VideoTransform's sister algorithm <a href="../video-metadata">VideoMetadataExtraction</a></p>
+      <p>If you're interested in transforming videos &mdash; for example, stylizing or automatically colorizing movies &mdash; try out the demo for VideoMetadataExtraction's sister algorithm <a href="../video-toolbox">VideoTransform</a></p>
     </div>
   </div>
 </section>
@@ -163,19 +176,20 @@
           <pre class="whitespace-md"><code class="python">import Algorithmia
 
 client = Algorithmia.client('_API_KEY_')
-algo = client.algo('media/VideoTransform/0.2.21')
+algo = client.algo('media/VideoMetadataExtraction/0.4.3')
 input = {
-   "input_file":"data://media/videos/beach.mp4",
-   "output_file":"data://.algo/temp/beach_filtered.mp4",
-   "algorithm":"algo://deeplearning/DeepFilter"
+   "input_file":"data://media/videos/bus.mp4",
+   "output_file":"data://.algo/temp/bus_tagged.json",
+   "algorithm":"algo://deeplearning/IllustrationTagger",
+   "fps": 5
 }
 print algo.pipe(input)
 </code></pre>
             <p class="item-title">SAMPLE OUTPUT</p>
             <pre><code class="json">{
-    "output_file":"data://.algo/temp/beach_filtered.mp4"
+    "output_file":"data://.algo/temp/bus_tagged.json"
 }</code></pre>
-        <a href="https://algorithmia.com/algorithms/media/VideoTransform" class="btn btn-primary-inverse">
+        <a href="https://algorithmia.com/algorithms/media/VideoMetadataExtraction" class="btn btn-primary-inverse">
           LEARN MORE
         </a>
       </div>

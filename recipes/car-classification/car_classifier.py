@@ -2,7 +2,7 @@ import Algorithmia
 client = Algorithmia.client("YOUR_API_KEY")
 
 def get_make_model():
-    video_file = "data://quality/testing/BusStation-6094.mp4"
+    video_file = "data://your_user_name/your_data_collection/BusStation-6094.mp4"
     algo = client.algo("media/VideoMetadataExtraction/0.4.2")
     input = {
         "input_file": video_file,

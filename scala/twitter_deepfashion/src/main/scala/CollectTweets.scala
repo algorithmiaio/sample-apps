@@ -12,30 +12,20 @@ import play.api.libs.json.Json
 import twitter4j.Status
 
 
-
 case class Article(article_name: String)
 case class Result(articles: List[Article])
-
-object Article {
-  implicit val articleReads = Json.reads[Article]
-}
-
-object Result {
-  implicit val resultReads = Json.reads[Result]
-}
 
 
 /**
   * Collect at least the specified number of tweets into json text files.
   */
 object CollectTweets {
+  private implicit val articleReads = Json.reads[Article]
+  private implicit val resultReads = Json.reads[Result]
 
   def main(args: Array[String]) {
-    val consumerKey = ""
-    val consumerSecret = ""
-    val accessToken = ""
-    val accessTokenSecret = ""
-    val ALGORITHMIA_API_KEY = ""
+    // Load auth from json file
+    val auth = Auth.load
 
     println("Initializing Streaming Spark Context...")
 
@@ -50,10 +40,10 @@ object CollectTweets {
     val sc = new SparkContext(conf)
     val ssc = new StreamingContext(sc, Seconds(1))
 
-    System.setProperty("twitter4j.oauth.consumerKey", consumerKey)
-    System.setProperty("twitter4j.oauth.consumerSecret", consumerSecret)
-    System.setProperty("twitter4j.oauth.accessToken", accessToken)
-    System.setProperty("twitter4j.oauth.accessTokenSecret", accessTokenSecret)
+    System.setProperty("twitter4j.oauth.consumerKey", auth.consumerKey)
+    System.setProperty("twitter4j.oauth.consumerSecret", auth.consumerSecret)
+    System.setProperty("twitter4j.oauth.accessToken", auth.accessToken)
+    System.setProperty("twitter4j.oauth.accessTokenSecret", auth.accessTokenSecret)
 
     // In order to ensure there are enough HTTP connections to the API server set NUM_CONNECTIONS appropriately
     // for the amount of parallelism the spark task is doing.  This is primarily for local testing as in a cluster
@@ -63,8 +53,7 @@ object CollectTweets {
     // Was comment in Patricks Scala demo code to put in a NUM_CONNECTIONS argument Algorithmia.client(ALGORITHMIA_API_KEY, NUM_CONNECTIONS
     
 
-    val client = Algorithmia.client(ALGORITHMIA_API_KEY)
-
+    val client = Algorithmia.client(auth.algorithmiaApiKey)
 
     try {
 
@@ -80,7 +69,6 @@ object CollectTweets {
 
 
       val responses: DStream[Result] = urls.mapPartitions(partition => {
-        val client = Algorithmia.client(ALGORITHMIA_API_KEY)
         val algo = client.algo("algo://algorithmiahq/DeepFashion/0.1.1")
         partition.map(algo.pipe(_).as[Result])
       })
@@ -127,5 +115,3 @@ object CollectTweets {
     ssc.awaitTermination()
   }
 }
-
-

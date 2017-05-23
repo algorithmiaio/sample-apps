@@ -11,6 +11,7 @@ var algorithms = {
 var algorithmsUserSelectable = {
   deepstyle: {
     algorithm: "deeplearning/DeepFilter/0.6.0",
+    displaytext: "Deep Filter",
     advanced_input: {
       "images": "$BATCH_INPUT",
       "savePaths": "$BATCH_OUTPUT",
@@ -18,10 +19,12 @@ var algorithmsUserSelectable = {
     }
   },
   saliency: {
-    algorithm: "deeplearning/SalNet/0.2.0"
+    algorithm: "deeplearning/SalNet/0.2.0",
+    displaytext: "Saliency Detection"
   },
   colorization: {
-    algorithm: "deeplearning/ColorfulImageColorization/1.1.5"
+    algorithm: "deeplearning/ColorfulImageColorization/1.1.5",
+    displaytext: "Colorize Video"
   }
 };
 
@@ -78,7 +81,7 @@ var analyze = function() {
   var data = jQuery.extend(algorithmTemplates.videoTransform, algorithmsUserSelectable[selectedAlgo]);
   data.input_file = 's3+demo://video-transform/'+selectedVideo+'.mp4';
   data.output_file = 's3+demo://video-transform/'+selectedVideo+'_'+selectedAlgo+'.mp4';
-  showWait(selectedAlgo);
+  showWait(algorithmsUserSelectable[selectedAlgo].displaytext);
   algoClient.algo(algorithms.videoTransform.algorithm).pipe(data).then(function(output) {
     if (output.error) {
       hideWait(selectedAlgo, output.error.message);
@@ -88,7 +91,7 @@ var analyze = function() {
       output.result[algorithms.videoTransform.result_field] = getHttpUrl(output.result[algorithms.videoTransform.result_field]);
       showResults(selectedAlgo, output.result);
     }
-  });
+  },function(error) {hideWait(selectedAlgo, error);});
 };
 
 /**
@@ -109,6 +112,7 @@ var playVideos = function() {
 
 /**
  * render tags and probabilities into
+ * @param algorithm display name of the algo which was run
  * @param result [{"class":string,"prob":number}]
  */
 var showResults = function(algorithm, result){
@@ -133,6 +137,7 @@ var showWait = function(algorithm) {
 
 /**
  * close overlay and either reveal results or display errorMessage
+ * @param algorithm display name of the algo which was run
  * @param errorMessage
  */
 var hideWait = function(algorithm, errorMessage) {

@@ -101,11 +101,11 @@ object CollectTweets {
             val article_names = articles.map(article => article.article_name) // Turn that into Rdd[String] of just the article names
             val df = article_names.toDF("article")
             df.show()
+         
+            df.createOrReplaceTempView("articles")
 
             val imageCountsDataFrame = sparky.sql("select article, count(*) as total from articles group by article")
             imageCountsDataFrame.show()
-
-            df.createOrReplaceTempView("articles")
 
         } catch {
           case ex: Exception => {

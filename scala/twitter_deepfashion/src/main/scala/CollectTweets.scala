@@ -3,6 +3,7 @@
   */
 
 import com.algorithmia._
+import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.streaming.dstream.DStream
 import org.apache.spark.streaming.twitter._
@@ -39,6 +40,7 @@ object CollectTweets {
     val conf = new SparkConf().setAppName("CollectTweets").setMaster(SPARK_HOSTNAME)
     val sc = new SparkContext(conf)
     val ssc = new StreamingContext(sc, Seconds(1))
+    ssc.checkpoint("/tmp/spark-test")
 
     System.setProperty("twitter4j.oauth.consumerKey", auth.consumerKey)
     System.setProperty("twitter4j.oauth.consumerSecret", auth.consumerSecret)
@@ -73,7 +75,9 @@ object CollectTweets {
           println(s"Processing tweet url: $url")
 //          algo.pipe(url).as[Result]
           val json = algo.pipe(url).asJsonString
-          Json.fromJson[Result](Json.parse(json)).get
+          val result = Json.fromJson[Result](Json.parse(json)).get
+          println(s"Got tags for url $url $result")
+          result
         }
       }
 
@@ -82,36 +86,50 @@ object CollectTweets {
 
       val sparky = SparkSession.builder.config(sc.getConf).getOrCreate()
 
-      val rdds = responses.foreachRDD { rdd =>
-        println(s"Aggregating fashion tags: $rdd")
-
-        import sparky.implicits._
-
-        try {
-
-            val articles = rdd.flatMap(_.articles) // Turn RDD[Result] -> Rdd[Articles]
-            val article_names = articles.map(_.article_name) // Turn that into Rdd[String] of just the article names
-            val df = article_names.toDF("article")
-            if(df.count() > 0) {
-              df.show()
-            }
-
-            df.createOrReplaceTempView("articles")
-
-            val imageCountsDataFrame = sparky.sql("select article, count(*) as total from articles group by article")
-            if(imageCountsDataFrame.count() > 0) {
-              imageCountsDataFrame.show()
-            }
-
-        } catch {
-          case e: Exception => {
-            println("DF EXCEPTION", e)
-          }
+      val countsByUrl: DStream[(String, Int)] = responses
+        .flatMap(result => result.articles)
+        .map(art => (art.article_name, 1))
+        .reduceByKey(_ + _)
+        .updateStateByKey { (newCounts, x) =>
+          val sum = newCounts.sum
+          x.orElse(Some(0)).map(_ + sum)
         }
 
+      countsByUrl.foreachRDD { (rdd: RDD[(String, Int)]) =>
+        val tagCounts = rdd.collect().toList
+        if(tagCounts.nonEmpty) {
+          println("Got tag counts: " + tagCounts)
+        }
       }
 
-      rdds.
+//          println(s"Aggregating fashion tags: $rdd")
+//
+//          import sparky.implicits._
+//
+//          try {
+//
+//            val articles = rdd.flatMap(_.articles) // Turn RDD[Result] -> Rdd[Articles]
+//            val article_names = articles.map(art => (art.article_name, 1)) // Turn that into Rdd[String] of just the article names
+//            val df = article_names.toDF("article")
+//            if (df.count() > 0) {
+//              df.show()
+//            }
+//
+//            df.createOrReplaceTempView("articles")
+//
+//            val imageCountsDataFrame = sparky.sql("select article, count(*) as total from articles group by article")
+//            if (imageCountsDataFrame.count() > 0) {
+//              imageCountsDataFrame.show()
+//            }
+//
+//          } catch {
+//            case e: Exception => {
+//              println("DF EXCEPTION", e)
+//            }
+//          }
+//        }
+//
+//      }
 
     } catch {
       case ex: Exception => {

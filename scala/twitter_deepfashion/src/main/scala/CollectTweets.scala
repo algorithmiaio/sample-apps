@@ -49,11 +49,9 @@ object CollectTweets {
     // for the amount of parallelism the spark task is doing.  This is primarily for local testing as in a cluster
     // mode you can just increase the number of partitions and they will run on separate hosts
 
-    // ^ Kenny in Scala Client throws an error too many arguments - might be why I'm getting timeout errors?
+    // Kenny in Scala Client throws an error too many arguments - might be why I'm getting timeout errors?
     // Was comment in Patricks Scala demo code to put in a NUM_CONNECTIONS argument Algorithmia.client(ALGORITHMIA_API_KEY, NUM_CONNECTIONS
-    
-
-    val client = Algorithmia.client(auth.algorithmiaApiKey)
+    // val client = Algorithmia.client(auth.algorithmiaApiKey)
 
     try {
 
@@ -69,6 +67,7 @@ object CollectTweets {
 
 
       val responses: DStream[Result] = urls.mapPartitions(partition => {
+        val client = Algorithmia.client(auth.algorithmiaApiKey)
         val algo = client.algo("algo://algorithmiahq/DeepFashion/0.1.1")
         partition.map(algo.pipe(_).as[Result])
       })

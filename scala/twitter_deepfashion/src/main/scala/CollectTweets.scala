@@ -54,55 +54,64 @@ object CollectTweets {
     // val client = Algorithmia.client(auth.algorithmiaApiKey)
 
     try {
+      println("Getting tweets")
 
       val filters = Seq("streetstyle")
       val tweets: DStream[Status] = TwitterUtils.createStream(ssc, None, filters)
 
-      val urls: DStream[String] = tweets.flatMap {
-        tweet =>  {
-          System.out.println(s"WE FOUND A TWEET!********************** ${tweet}")
-          tweet.getMediaEntities.map(_.getMediaURL)
+      val urls: DStream[String] = tweets.flatMap { tweet =>
+        println(s"Found tweet: $tweet")
+        tweet.getMediaEntities.map(_.getMediaURL)
+      }
+
+      val responses: DStream[Result] = urls.mapPartitions { partition =>
+        println("Processing tweets")
+        // Necessary to create client per-partition, since it may be distributed across cluster
+        val client = Algorithmia.client(auth.algorithmiaApiKey)
+        val algo = client.algo("algo://algorithmiahq/DeepFashion/0.1.1")
+        partition.map { url =>
+          println(s"Processing tweet url: $url")
+//          algo.pipe(url).as[Result]
+          val json = algo.pipe(url).asJsonString
+          Json.fromJson[Result](Json.parse(json)).get
         }
       }
 
+      // urls.print()
+      // responses.print()
 
-      val responses: DStream[Result] = urls.mapPartitions(partition => {
-        val client = Algorithmia.client(auth.algorithmiaApiKey)
-        val algo = client.algo("algo://algorithmiahq/DeepFashion/0.1.1")
-        partition.map(algo.pipe(_).as[Result])
-      })
+      val sparky = SparkSession.builder.config(sc.getConf).getOrCreate()
 
-      urls.print()
-      responses.print()
+      val rdds = responses.foreachRDD { rdd =>
+        println(s"Aggregating fashion tags: $rdd")
 
-
-      responses.foreachRDD { rdd =>
-
-        val sparky = SparkSession.builder.config(rdd.sparkContext.getConf).getOrCreate()
         import sparky.implicits._
-
 
         try {
 
-            val articles = rdd.flatMap(result => result.articles) // Turn RDD[Result] -> Rdd[Articles]
-            val article_names = articles.map(article => article.article_name) // Turn that into Rdd[String] of just the article names
+            val articles = rdd.flatMap(_.articles) // Turn RDD[Result] -> Rdd[Articles]
+            val article_names = articles.map(_.article_name) // Turn that into Rdd[String] of just the article names
             val df = article_names.toDF("article")
-            df.show()
-         
+            if(df.count() > 0) {
+              df.show()
+            }
+
             df.createOrReplaceTempView("articles")
 
             val imageCountsDataFrame = sparky.sql("select article, count(*) as total from articles group by article")
-            imageCountsDataFrame.show()
+            if(imageCountsDataFrame.count() > 0) {
+              imageCountsDataFrame.show()
+            }
 
         } catch {
-          case ex: Exception => {
-            println("DF EXCEPTION")
-//            System.exit(0)
+          case e: Exception => {
+            println("DF EXCEPTION", e)
           }
         }
 
       }
 
+      rdds.
 
     } catch {
       case ex: Exception => {

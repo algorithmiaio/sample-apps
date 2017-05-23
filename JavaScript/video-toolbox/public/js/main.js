@@ -88,8 +88,7 @@ var analyze = function() {
     } else {
       var inputFileUrl = getHttpUrl(data.input_file);
       $('#results-'+selectedAlgo+' .result-input').attr({'src': inputFileUrl, 'poster': inputFileUrl+'.png'});
-      output.result[algorithms.videoTransform.result_field] = getHttpUrl(output.result[algorithms.videoTransform.result_field]);
-      showResults(selectedAlgo, output.result);
+      showResults(selectedAlgo, getHttpUrl(output.result[algorithms.videoTransform.result_field]));
     }
   },function(error) {hideWait(selectedAlgo, error);});
 };
@@ -111,12 +110,11 @@ var playVideos = function() {
 };
 
 /**
- * render tags and probabilities into
+ * reveal resultant video
  * @param algorithm display name of the algo which was run
- * @param result [{"class":string,"prob":number}]
+ * @param outputFileUrl web address of output video
  */
-var showResults = function(algorithm, result){
-  var outputFileUrl = result[algorithms.videoTransform.result_field];
+var showResults = function(algorithm, outputFileUrl){
   $('#results-'+algorithm+' .result-output').attr({'src': outputFileUrl, 'poster': outputFileUrl+'.png'});
   $('#results-'+algorithm+' .result-link').attr('href', outputFileUrl);
   hideWait(algorithm);

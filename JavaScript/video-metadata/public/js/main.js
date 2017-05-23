@@ -3,17 +3,19 @@ var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
 
 var algorithms = {
   videoMetadata: {
-    algorithm: 'media/VideoMetadataExtraction/0.4.3',
+    algorithm: 'demo/VideoMetadataExtractionDemo',
     result_field: 'output_file'
-  },
+  }
 };
 
 var algorithmsUserSelectable = {
   nudity: {
-    algorithm: "sfw/nuditydetectioni2v/0.2.12"
+    algorithm: "sfw/nuditydetectioni2v/0.2.12",
+    displaytext: "Detect Nudity"
   },
   tagger: {
-    algorithm: "deeplearning/IllustrationTagger/0.2.4"
+    algorithm: "deeplearning/IllustrationTagger/0.2.4",
+    displaytext: "Tag Video"
   }
 };
 
@@ -28,12 +30,17 @@ var algorithmTemplates = {
 
 var selectedVideo;
 var selectedAlgo;
+var resultsInterval;
 
 /**
  * once DOM is ready, update vars and add handlers
  */
 $(document).ready(function() {
   setInviteCode('videometadata');
+  //resize results whenever window is resized
+  $(window).resize(function() {
+    resizeResultAreas();
+  });
   //reload videos if initial load fails
   $('video').each(function(i, video) {
     video.addEventListener('error', function (e) {
@@ -66,10 +73,10 @@ var selectAlgo = function(name) {
  * call API on URL and display results
  */
 var analyze = function() {
-  if(!(selectedVideo&&selectedAlgo)) {return hideWait(null, "Please select a video and a modifier");}
+  if(!(selectedVideo&&selectedAlgo)) {return hideWait(null, "Please select a video and an algorithm");}
   var data = jQuery.extend(algorithmTemplates.videoMetadata, algorithmsUserSelectable[selectedAlgo]);
-  data.input_file = 'http://s3.amazonaws.com/algorithmia-demos/video-transform/'+selectedVideo+'.mp4';
-  data.output_file = 'data://.algo/temp/'+selectedVideo+'_'+selectedAlgo+'.json';
+  data.input_file = 'http://s3.amazonaws.com/algorithmia-demos/video-metadata/'+selectedVideo+'.mp4';
+  data.output_file = 'data://.algo/media/VideoMetadataExtraction/perm/'+selectedVideo+'_'+selectedAlgo+'.json';
   showWait(selectedAlgo);
   algoClient.algo(algorithms.videoMetadata.algorithm).pipe(data).then(function(output) {
     if (output.error) {
@@ -79,7 +86,7 @@ var analyze = function() {
       $('#results-'+selectedAlgo+' .result-input').attr({'src': inputFileUrl, 'poster': inputFileUrl+'.png'});
       showResults(selectedAlgo, output.result);
     }
-  });
+  },function(error) {hideWait(selectedAlgo, error);});
 };
 
 /**
@@ -92,27 +99,64 @@ var getHttpUrl = function(s3file) {
 };
 
 /**
- * start playback of all videos
+ * start playback of a video
+ * @param selector
  */
-var playVideos = function() {
-  $('video').each(function(i,e){try{e.play()}catch(e){}});
+var playVideo = function(selector) {
+  $(selector).each(function(i,e){try{e.play()}catch(e){}});
 };
 
 /**
- * render tags and probabilities into
- * @param result [{"class":string,"prob":number}]
+ * resize .result-output elements to be same height as videos
  */
-var showResults = function(algorithm, result){
-  var outputFileUrl = result[algorithms.videoMetadata.result_field];
-  $('#results-'+algorithm+' .result-output').innerText(outputFileUrl);
-  hideWait(algorithm);
+function resizeResultAreas() {
+  Object.keys(algorithmsUserSelectable).forEach(function (algo) {
+    $('#results-'+algo+' .result-output').height($('#results-'+algo+' video').height() - 5);
+  });
+}
+
+/**
+ * reveal resultant JSON metadata
+ * @param selectedAlgo display name of the algo which was run
+ * @param json JSON metadata results
+ */
+var showResults = function(selectedAlgo, json){
+  if(resultsInterval) {
+    window.clearInterval(resultsInterval);
+    resultsInterval = null;
+  }
+  var resultArea = $('#results-'+selectedAlgo+' .result-output');
+  var resultAreaCheckbox = $('#results-'+selectedAlgo+' .fullresults');
+  var videoArea = $('#results-'+selectedAlgo+' video');
+  frames = JSON.parse(json)['frame_data'];
+  for (var i=0; i<frames.length; i++) {delete frames[i].data.url;}
+  resultArea.val('Loading...');
+  var refreshResults = function() {
+    if(resultAreaCheckbox.is(':checked')) {
+      framesShown = frames;
+    } else {
+      var time = videoArea[0].currentTime;
+      framesShown = [];
+      for (var i=0; i<frames.length; i++) {
+        if(frames[i]['timestamp']<=time) {
+          framesShown=frames[i]; //frames.slice(0,i);
+        }
+      }
+    }
+    resultArea.val(JSON.stringify(framesShown, undefined, 2));
+    // resultArea.animate({scrollTop:resultArea[0].scrollHeight - resultArea.height()},500);
+  };
+  resultsInterval = window.setInterval(refreshResults, 1000);
+  hideWait(selectedAlgo);
+  resizeResultAreas();
+  playVideo('#results-'+selectedAlgo+' video');
 };
 
 /**
  * show overlay, clear results
  */
 var showWait = function(algorithm) {
-  $('.dots-text').text(algorithm);
+  $('.dots-text').text(algorithmsUserSelectable[algorithm].displaytext);
   $('#overlay').removeClass('hidden');
   $('#status-label').empty();
   $('#results-'+algorithm+' .result-input').removeAttr('src');
@@ -123,6 +167,7 @@ var showWait = function(algorithm) {
 
 /**
  * close overlay and either reveal results or display errorMessage
+ * @param algorithm display name of the algo which was run
  * @param errorMessage
  */
 var hideWait = function(algorithm, errorMessage) {

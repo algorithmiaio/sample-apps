@@ -43,7 +43,7 @@
               <a onclick="selectVideo('massage')"><img src="public/images/massage.png" alt="massage" id="video-thumb-massage" class="video-thumb"></a>
             </div>
           </div>
-          <h3>2. CHOOSE A MODIFIER</h3>
+          <h3>2. CHOOSE AN ALGORITHM</h3>
           <div class="whitespace-md radio-btns">
             <button name="selectedAlgorithm" class="btn btn-radio" id="button-nudity" onclick="selectAlgo('nudity')">Detect Nudity</button>
           </div>
@@ -76,9 +76,12 @@
 
 <section class="container hidden results" id="results-nudity">
   <div class="row">
-    <h4 class="result-title col-sm-12">Deep Style</h4>
-    <video class="result-input col-sm-6" controls></video>
-    <div class="result-output col-sm-6"></div>
+    <h4 class="result-title col-sm-12">Nudity Detection</h4>
+    <div class="result-wrapper">
+      <video class="result-input col-sm-6" controls></video>
+      <textarea class="result-output col-sm-6"></textarea>
+      <div class="result-toggle"><input type="checkbox" class="fullresults"> show full JSON</div>
+    </div>
   </div>
 </section>
 
@@ -132,7 +135,7 @@
           <pre class="whitespace-md"><code class="python">import Algorithmia
 
 client = Algorithmia.client('_API_KEY_')
-algo = client.algo('media/VideoMetadataExtraction/0.4.3')
+algo = client.algo('media/VideoMetadataExtraction/0.5.0')
 input = {
    "input_file":"data://media/videos/bus.mp4",
    "output_file":"data://media/videos/bus_tags.json",

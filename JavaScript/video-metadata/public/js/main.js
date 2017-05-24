@@ -21,6 +21,10 @@ var algorithmsUserSelectable = {
     algorithm: "algorithmiahq/DeepFashion/0.1.1",
     displaytext: "Tag Video"
   },
+  places: {
+    algorithm: "deeplearning/Places365Classifier/0.1.9",
+    displaytext: "Places Classifier"
+  },
   realestate: {
     algorithm: "deeplearning/RealEstateClassifier/0.2.3",
     displaytext: "Real Estate Classifier"

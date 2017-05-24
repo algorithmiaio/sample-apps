@@ -46,6 +46,10 @@
           <h3>2. CHOOSE AN ALGORITHM</h3>
           <div class="whitespace-md radio-btns">
             <button name="selectedAlgorithm" class="btn btn-radio" id="button-nudity" onclick="selectAlgo('nudity')">Detect Nudity</button>
+            <button name="selectedAlgorithm" class="btn btn-radio" id="button-tagger" onclick="selectAlgo('tagger')">Tagger</button>
+            <button name="selectedAlgorithm" class="btn btn-radio" id="button-deepfashion" onclick="selectAlgo('deepfashion')">Deep Fashion</button>
+            <button name="selectedAlgorithm" class="btn btn-radio" id="button-realestate" onclick="selectAlgo('realestate')">Real Estate</button>
+            <button name="selectedAlgorithm" class="btn btn-radio" id="button-emotion" onclick="selectAlgo('emotion')">Emotion</button>
           </div>
           <form class="form-group" onsubmit="analyze(); return false">
             <button class="btn btn-primary">
@@ -74,13 +78,13 @@
   </div>
 </div>
 
-<section class="container hidden results" id="results-nudity">
+<section class="container hidden results" id="results-algo">
   <div class="row">
-    <h4 class="result-title col-sm-12">Nudity Detection</h4>
+    <h4 class="result-title col-sm-12"></h4>
     <div class="result-wrapper">
       <video class="result-input col-sm-6" controls></video>
       <textarea class="result-output col-sm-6"></textarea>
-      <div class="result-toggle"><input type="checkbox" class="fullresults"> show full JSON</div>
+      <div class="result-timestamp"></div> <div class="result-toggle"><input type="checkbox" class="fullresults"> show full JSON</div>
     </div>
   </div>
 </section>

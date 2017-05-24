@@ -52,8 +52,11 @@ video {
 .rating.g {color: green;}
 .rating.r {color: darkred;}
 .result-wrapper {text-align: center;}
-.result-toggle {
-  float: right;
+.result-timestamp {float: left;}
+.result-toggle {float: right;}
+.result-output {
+  -webkit-overflow-scrolling: touch;
+  overflow-y: scroll;
 }
 
 /* $MEDIA QUERIES */
@@ -65,9 +68,8 @@ video {
 @media (max-width: 767px) {
   .result-input {padding-right: 5vw;}
   .result-output {width: 93vw;}
-  .result-toggle {
-    margin-right: 4vw;
-  }
+  .result-timestamp {margin-left: 4vw;}
+  .result-toggle {margin-right: 4vw;}
 }
 @media (min-width: 768px) {
   form {

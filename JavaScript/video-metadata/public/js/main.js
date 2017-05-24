@@ -3,7 +3,7 @@ var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
 
 var algorithms = {
   videoMetadata: {
-    algorithm: 'demo/VideoMetadataExtractionDemo',
+    algorithm: 'demo/VideoMetadataExtractionDemo', //'media/VideoMetadataExtraction'
     result_field: 'output_file'
   }
 };
@@ -14,9 +14,21 @@ var algorithmsUserSelectable = {
     displaytext: "Detect Nudity"
   },
   tagger: {
-    algorithm: "deeplearning/IllustrationTagger/0.2.4",
+    algorithm: "deeplearning/InceptionNet/1.0.3",
     displaytext: "Tag Video"
-  }
+  },
+  deepfashion: {
+    algorithm: "algorithmiahq/DeepFashion/0.1.1",
+    displaytext: "Tag Video"
+  },
+  realestate: {
+    algorithm: "deeplearning/RealEstateClassifier/0.2.3",
+    displaytext: "Real Estate Classifier"
+  },
+  emotion: {
+    algorithm: "deeplearning/EmotionRecognitionCNNMBP/0.1.3",
+    displaytext: "Emotion Recognition"
+  },
 };
 
 var algorithmTemplates = {
@@ -24,7 +36,8 @@ var algorithmTemplates = {
       "input_file":null,
       "output_file":null,
       "algorithm":null,
-      "fps": 5
+      "advanced_input":"$SINGLE_INPUT",
+      "fps": 10
     }
 };
 
@@ -80,13 +93,17 @@ var analyze = function() {
   showWait(selectedAlgo);
   algoClient.algo(algorithms.videoMetadata.algorithm).pipe(data).then(function(output) {
     if (output.error) {
+      console.log(output);
       hideWait(selectedAlgo, output.error.message);
     } else {
       var inputFileUrl = getHttpUrl(data.input_file);
-      $('#results-'+selectedAlgo+' .result-input').attr({'src': inputFileUrl, 'poster': inputFileUrl+'.png'});
+      $('#results-algo .result-input').attr({'src': inputFileUrl, 'poster': inputFileUrl+'.png'});
       showResults(selectedAlgo, output.result);
     }
-  },function(error) {hideWait(selectedAlgo, error);});
+  },function(error) {
+    console.log(error);
+    hideWait(selectedAlgo, error);
+  });
 };
 
 /**
@@ -111,7 +128,7 @@ var playVideo = function(selector) {
  */
 function resizeResultAreas() {
   Object.keys(algorithmsUserSelectable).forEach(function (algo) {
-    $('#results-'+algo+' .result-output').height($('#results-'+algo+' video').height() - 5);
+    $('#results-algo .result-output').css('min-height',($('#results-algo video').height() - 5));
   });
 }
 
@@ -125,31 +142,41 @@ var showResults = function(selectedAlgo, json){
     window.clearInterval(resultsInterval);
     resultsInterval = null;
   }
-  var resultArea = $('#results-'+selectedAlgo+' .result-output');
-  var resultAreaCheckbox = $('#results-'+selectedAlgo+' .fullresults');
-  var videoArea = $('#results-'+selectedAlgo+' video');
+  $('#results-algo .result-title').text(algorithmsUserSelectable[selectedAlgo].displaytext);
+  var resultArea = $('#results-algo .result-output');
+  var resultAreaTimestamp = $('#results-algo .result-timestamp');
+  var resultAreaCheckbox = $('#results-algo .fullresults');
+  var videoArea = $('#results-algo video');
   frames = JSON.parse(json)['frame_data'];
-  for (var i=0; i<frames.length; i++) {delete frames[i].data.url;}
+  for (var i=0; i<frames.length; i++) {
+    delete frames[i].data.url;
+    delete frames[i].data.output;
+  }
   resultArea.val('Loading...');
   var refreshResults = function() {
+    var framesShown = [];
     if(resultAreaCheckbox.is(':checked')) {
       framesShown = frames;
+      resultAreaTimestamp.text('');
     } else {
       var time = videoArea[0].currentTime;
-      framesShown = [];
+      resultAreaTimestamp.text("Timestamp: "+time.toFixed(2));
       for (var i=0; i<frames.length; i++) {
         if(frames[i]['timestamp']<=time) {
-          framesShown=frames[i]; //frames.slice(0,i);
+          framesShown = frames[i]['data']; //frames.slice(0,i);
         }
       }
     }
     resultArea.val(JSON.stringify(framesShown, undefined, 2));
     // resultArea.animate({scrollTop:resultArea[0].scrollHeight - resultArea.height()},500);
   };
-  resultsInterval = window.setInterval(refreshResults, 1000);
+  resultsInterval = window.setInterval(refreshResults, 300);
   hideWait(selectedAlgo);
   resizeResultAreas();
-  playVideo('#results-'+selectedAlgo+' video');
+  window.setTimeout(function() {
+    playVideo('#results-algo video');
+    resizeResultAreas();
+  },500);
 };
 
 /**
@@ -159,9 +186,9 @@ var showWait = function(algorithm) {
   $('.dots-text').text(algorithmsUserSelectable[algorithm].displaytext);
   $('#overlay').removeClass('hidden');
   $('#status-label').empty();
-  $('#results-'+algorithm+' .result-input').removeAttr('src');
-  $('#results-'+algorithm+' .result-output').removeAttr('src');
-  $('#results-'+algorithm+' .result-link').removeAttr('href');
+  $('#results-algo .result-input').removeAttr('src');
+  $('#results-algo .result-output').removeAttr('src');
+  $('#results-algo .result-link').removeAttr('href');
 };
 
 
@@ -177,9 +204,9 @@ var hideWait = function(algorithm, errorMessage) {
     $('.results').addClass('hidden');
   } else {
     $('.results').addClass('hidden');
-    $('#results-'+algorithm).removeClass('hidden');
+    $('#results-algo').removeClass('hidden');
     $('html, body').animate({
-      scrollTop: $("#results-"+algorithm).offset().top
+      scrollTop: $('#results-algo').offset().top
     }, 1000);
   }
 };

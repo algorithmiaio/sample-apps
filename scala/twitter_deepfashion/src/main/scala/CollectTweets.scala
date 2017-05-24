@@ -1,16 +1,9 @@
-/**
-  * Created by stephaniekim on 5/4/17.
-  */
-
 import com.algorithmia._
-import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.streaming.dstream.DStream
 import org.apache.spark.streaming.twitter._
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.apache.spark.{SparkConf, SparkContext}
 import play.api.libs.json.Json
-import twitter4j.Status
 
 
 case class Article(article_name: String)
@@ -53,17 +46,13 @@ object CollectTweets {
         // Necessary to create client per-partition, since it may be distributed across cluster
         val client = Algorithmia.client(auth.algorithmiaApiKey)
         val algo = client.algo("algo://algorithmiahq/DeepFashion/0.1.1")
-        partition.map { url =>
-          algo.pipe(url).as[Result]
-        }
+        // Send urls to Algorithmia for tagging:
+        partition.map(url => algo.pipe(url).as[Result])
       }
-      // Get tag articles
-      .flatMap(result => result.articles)
-      .map(art => (art.article_name, 1))
-      .reduceByKey(_ + _)
-      .updateStateByKey { (newCounts, x) =>
-        x.orElse(Some(0)).map(_ + newCounts.sum)
-      }
+      .flatMap(result => result.articles) // Get articles from tweets
+      .map(art => (art.article_name, 1))  // Create coutning pairs
+      .reduceByKey(_ + _)                 // Sum within partitions
+      .updateStateByKey(sumState)         // Could use mapWithState
       .foreachRDD { rdd =>
         val tagCounts = rdd
           .collect()
@@ -77,4 +66,9 @@ object CollectTweets {
     ssc.start()
     ssc.awaitTermination()
   }
+
+  private def sumState: (Seq[Int],Option[Int]) => Option[Int] = {
+    case (newCounts, sumSoFar) => sumSoFar.orElse(Some(0)).map(_ + newCounts.sum)
+  }
+
 }

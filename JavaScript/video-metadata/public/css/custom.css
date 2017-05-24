@@ -25,6 +25,10 @@ video {
   border: 3px solid #5000BE;
 }
 
+.sample-image:nth-child(2n+1) {
+  clear: left;
+}
+
 .radio-btns .btn-radio {
   margin-right: 16px;
 }
@@ -79,7 +83,13 @@ video {
   }
   .form-group input {margin-bottom: 0;}
   .sample-image {
-    margin-bottom: 0;
+    /*margin-bottom: 0;*/
+  }
+  .sample-image:nth-child(n) {
+    clear: none;
+  }
+  .sample-image:nth-child(4n+1) {
+    clear: left;
   }
 }
 

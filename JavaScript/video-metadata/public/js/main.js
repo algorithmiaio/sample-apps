@@ -3,7 +3,7 @@ var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
 
 var algorithms = {
   videoMetadata: {
-    algorithm: 'demo/VideoMetadataExtractionDemo', //'media/VideoMetadataExtraction'
+    algorithm: 'demo/VideoMetadataExtractionDemo',
     result_field: 'output_file'
   }
 };
@@ -16,6 +16,10 @@ var algorithmsUserSelectable = {
   tagger: {
     algorithm: "deeplearning/InceptionNet/1.0.3",
     displaytext: "Tag Video"
+  },
+  cars: {
+    algorithm: "LgoBE/CarMakeandModelRecognition/0.3.4",
+    displaytext: "Identify Cars"
   },
   deepfashion: {
     algorithm: "algorithmiahq/DeepFashion/0.1.1",
@@ -33,6 +37,11 @@ var algorithmsUserSelectable = {
     algorithm: "deeplearning/EmotionRecognitionCNNMBP/0.1.3",
     displaytext: "Emotion Recognition"
   },
+  faces: {
+    algorithm: "dlib/faceDetection",
+    displaytext: "Detect Faces",
+    advanced_input:{"images": [{"url": "$SINGLE_INPUT"}]}
+  }
 };
 
 var algorithmTemplates = {
@@ -95,6 +104,7 @@ var analyze = function() {
   data.input_file = 'http://s3.amazonaws.com/algorithmia-demos/video-metadata/'+selectedVideo+'.mp4';
   data.output_file = 'data://.algo/media/VideoMetadataExtraction/perm/'+selectedVideo+'_'+selectedAlgo+'.json';
   showWait(selectedAlgo);
+  console.log(JSON.stringify(data));
   algoClient.algo(algorithms.videoMetadata.algorithm).pipe(data).then(function(output) {
     if (output.error) {
       console.log(output);

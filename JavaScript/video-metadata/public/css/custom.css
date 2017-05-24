@@ -1,8 +1,8 @@
 .hero {
-  background-image: url(../images/video-toolbox.jpeg);
+  background-image: url(../images/bg-hero.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: 0% 70%;
+  background-position: 0% 30%;
 }
 .form-group {margin-bottom: 0;}
 /* For smaller screens */

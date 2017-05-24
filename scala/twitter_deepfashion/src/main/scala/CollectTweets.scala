@@ -35,7 +35,7 @@ object CollectTweets {
     System.setProperty("twitter4j.oauth.accessToken", auth.accessToken)
     System.setProperty("twitter4j.oauth.accessTokenSecret", auth.accessTokenSecret)
 
-    val tweetFilters = Seq("streetstyle")
+    val tweetFilters = Seq("fashionblogger", "OOTD")
     TwitterUtils.createStream(ssc, None, tweetFilters)
       .flatMap(_.getMediaEntities)        // Get tweet media entities
       .map(_.getMediaURL)                 // Get image urls

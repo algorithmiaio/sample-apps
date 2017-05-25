@@ -35,22 +35,20 @@ object CollectTweets {
     System.setProperty("twitter4j.oauth.accessToken", auth.accessToken)
     System.setProperty("twitter4j.oauth.accessTokenSecret", auth.accessTokenSecret)
 
-    val filters = Seq("streetstyle")
-    TwitterUtils.createStream(ssc, None, filters)
-      .flatMap { tweet =>
-        println(s"Found tweet: $tweet")
-        tweet.getMediaEntities.map(_.getMediaURL)
-      }
-      // Map tweet images to tags using Algorithmia
+    val tweetFilters = Seq("fashionblogger", "OOTD")
+    TwitterUtils.createStream(ssc, None, tweetFilters)
+      .flatMap(_.getMediaEntities)        // Get tweet media entities
+      .map(_.getMediaURL)                 // Get image urls
+      // Parallelize tweets into partitions, and get image tags using Algorithmia
       .mapPartitions { partition =>
-        // Necessary to create client per-partition, since it may be distributed across cluster
+        // Create client per-partition, since it may be distributed across cluster
         val client = Algorithmia.client(auth.algorithmiaApiKey)
         val algo = client.algo("algo://algorithmiahq/DeepFashion/0.1.1")
         // Send urls to Algorithmia for tagging:
         partition.map(url => algo.pipe(url).as[Result])
       }
       .flatMap(result => result.articles) // Get articles from tweets
-      .map(art => (art.article_name, 1))  // Create coutning pairs
+      .map(art => (art.article_name, 1))  // Create counting pairs
       .reduceByKey(_ + _)                 // Sum within partitions
       .updateStateByKey(sumState)         // Could use mapWithState
       .foreachRDD { rdd =>
@@ -59,7 +57,7 @@ object CollectTweets {
           .toList
           .sortBy(-_._2)
         if(tagCounts.nonEmpty) {
-          println("Got tag counts: " + tagCounts)
+          println("Got tag counts: " + tagCounts.mkString(","))
         }
       }
 
@@ -67,6 +65,7 @@ object CollectTweets {
     ssc.awaitTermination()
   }
 
+  // This accumulates totals from lists of ints, for updateStateByKey
   private def sumState: (Seq[Int],Option[Int]) => Option[Int] = {
     case (newCounts, sumSoFar) => sumSoFar.orElse(Some(0)).map(_ + newCounts.sum)
   }

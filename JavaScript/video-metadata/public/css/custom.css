@@ -50,6 +50,9 @@ video {
   background-color: #0055BE;
   border: 1px solid #FFFFFF;
 }
+.btn-suppressed {
+  opacity: 0.5;
+}
 
 /* results */
 .rating {}
@@ -61,6 +64,7 @@ video {
 .result-output {
   -webkit-overflow-scrolling: touch;
   overflow-y: scroll;
+  font-size: 0.75rem;
 }
 
 /* $MEDIA QUERIES */

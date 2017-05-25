@@ -54,6 +54,17 @@ var algorithmTemplates = {
     }
 };
 
+var algoSuggestions = {
+  "massage": ["nudity","tagger"],
+  "india1643": ["tagger","deepfashion","places","emotion"],
+  "city730": ["tagger","cars","places"],
+  "dance4428": ["tagger","deepfashion","places"],
+  "slapping64": ["places","emotion"],
+  "woman87": ["tagger","deepfashion","places","emotion"],
+  "crowd6582": ["tagger","deepfashion","places","emotion"],
+  "busstation6094": ["tagger","cars","deepfashion","places"],
+};
+
 var selectedVideo;
 var selectedAlgo;
 var resultsInterval;
@@ -86,6 +97,10 @@ $(document).ready(function() {
 var selectVideo = function(name) {
   $('.video-thumb').removeClass('active');
   $('#video-thumb-'+name).addClass('active');
+  $('button[name=selectedAlgorithm]').addClass('btn-suppressed');
+  algoSuggestions[name].forEach(function(algo) {
+    $('#button-'+algo).removeClass('btn-suppressed');
+  });
   selectedVideo = name;
 };
 
@@ -104,7 +119,6 @@ var analyze = function() {
   data.input_file = 'http://s3.amazonaws.com/algorithmia-demos/video-metadata/'+selectedVideo+'.mp4';
   data.output_file = 'data://.algo/media/VideoMetadataExtraction/perm/'+selectedVideo+'_'+selectedAlgo+'.json';
   showWait(selectedAlgo);
-  console.log(JSON.stringify(data));
   algoClient.algo(algorithms.videoMetadata.algorithm).pipe(data).then(function(output) {
     if (output.error) {
       console.log(output);

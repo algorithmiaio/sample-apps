@@ -38,9 +38,8 @@ var algorithmsUserSelectable = {
     displaytext: "Emotion Recognition"
   },
   faces: {
-    algorithm: "dlib/faceDetection",
-    displaytext: "Detect Faces",
-    advanced_input:{"images": [{"url": "$SINGLE_INPUT"}]}
+    algorithm: "dlib/faceDetection/0.2.0",
+    displaytext: "Detect Faces"
   }
 };
 
@@ -56,13 +55,13 @@ var algorithmTemplates = {
 
 var algoSuggestions = {
   "massage": ["nudity","tagger"],
-  "india1643": ["tagger","deepfashion","places","emotion"],
+  "india1643": ["tagger","deepfashion","places","emotion","faces"],
   "city730": ["tagger","cars","places"],
-  "dance4428": ["tagger","deepfashion","places"],
-  "slapping64": ["places","emotion"],
-  "woman87": ["tagger","deepfashion","places","emotion"],
-  "crowd6582": ["tagger","deepfashion","places","emotion"],
-  "busstation6094": ["tagger","cars","deepfashion","places"],
+  "dance4428": ["tagger","deepfashion","places","faces"],
+  "slapping64": ["places","emotion","faces"],
+  "woman87": ["tagger","deepfashion","places","emotion","faces"],
+  "crowd6582": ["tagger","deepfashion","places","emotion","faces"],
+  "busstation6094": ["tagger","cars","deepfashion","places","faces"]
 };
 
 var selectedVideo;

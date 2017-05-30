@@ -57,11 +57,11 @@ var algoSuggestions = {
   "massage": ["nudity","tagger"],
   "india1643": ["tagger","deepfashion","places","emotion","faces"],
   "city730": ["tagger","cars","places"],
-  "dance4428": ["tagger","deepfashion","places","faces"],
+  "dance4428": ["tagger","deepfashion","places"],
   "slapping64": ["places","emotion","faces"],
   "woman87": ["tagger","deepfashion","places","emotion","faces"],
   "crowd6582": ["tagger","deepfashion","places","emotion","faces"],
-  "busstation6094": ["tagger","cars","deepfashion","places","faces"]
+  "busstation6094": ["tagger","cars","deepfashion","places"]
 };
 
 var selectedVideo;

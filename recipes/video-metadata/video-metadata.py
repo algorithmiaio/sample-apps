@@ -6,7 +6,7 @@ def extract_metadata(source_uri, target_uri):
     """Extract metadata from the video"""
     algo = client.algo('media/VideoMetadataExtraction/0.1.5')
     data = {
-        'algorithm':'deeplearning/IllustrationTagger/0.2.3',
+        'algorithm':'deeplearning/IllustrationTagger/0.2.5',
         'input_file':source_uri,
         'output_file':target_uri,
     }

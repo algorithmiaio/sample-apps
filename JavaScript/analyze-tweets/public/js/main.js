@@ -2,19 +2,11 @@ var FRDemo =
 {
 	init: function()
 	{
-		var keywords = [
-			"algorithmia",
-			"microsoft",
-			"amazon",
-			"google",
-			"facebook",
-			"reddit"
-		];
+		// set background for test images
+		// FRDemo.prepareTestImages();
 
-		// Get random keyword
-		var kw = keywords[Math.floor(Math.random() * keywords.length)];
-
-		$("#form input").val(kw);
+		// listen to test image clicks
+		// $("#photos .img").on("click", FRDemo.testImageClicked);
 
 		// listen to analyze button
 		$("#demo a").on("click", FRDemo.analyzeTweets);
@@ -27,7 +19,7 @@ var FRDemo =
 	},
 
 	analyzeTweets: function() {
-		FRDemo.showLoading("analyze");
+		FRDemo.showLoading("Analyzing...");
 
 		// get keyword form input box
 		var keyword = $("#form input").val();
@@ -44,7 +36,7 @@ var FRDemo =
 			}
 		}
 
-		FRDemo.client.algo("nlp/AnalyzeTweets").pipe(input).then(function(output) {
+		FRDemo.client.algo("nlp/AnalyzeTweets/0.1.3").pipe(input).then(function(output) {
 			if (output.error) {
 				FRDemo.hideLoading();
 				swal("There was an error, please try again later.");
@@ -52,20 +44,16 @@ var FRDemo =
 			} else {
 
 				FRDemo.hideLoading();
+				d3.select("div#demo").transition().style("height", "1540");
 
 				console.log(output.result)
-				if (output.result.allTweets.length > 1) {
-					d3.select("div#demo").transition().style("height", "1540");
-					// prepare and load data
-					var data = FRDemo.prepareData(output.result);
-					// draw visualizations
-					FRDemo.drawPieChart(data["pieData"]);
-					FRDemo.drawHistogram(data["histogramData"]);
-					FRDemo.showTweets([data.allTweets, data.posTweets, data.negTweets]);
-					FRDemo.showTopics([data.posTopics, data.negTopics]);
-				} else {
-					swal("Please try again in 15 mins", " Unfortunately twitter limits the # of API calls we can make in every 15 min window.", "error");
-				}
+				// prepare and load data
+				var data = FRDemo.prepareData(output.result);
+				// draw visualizations
+				FRDemo.drawPieChart(data["pieData"]);
+				FRDemo.drawHistogram(data["histogramData"]);
+				FRDemo.showTweets([data.allTweets, data.posTweets, data.negTweets]);
+				FRDemo.showTopics([data.posTopics, data.negTopics]);
 			}
 		});
 	},
@@ -238,16 +226,13 @@ var FRDemo =
 						.classed("tab-pane", true)
 						.attr("id", "negativeTopics");
 
-		// $(".positiveTopics").remove();
-		// $(".negativeTopics").remove();
-
 		var table1 = pane1.append("table")
 				.classed("table positiveTopics", true);
 
 		var table2 = pane2.append("table")
 				.classed("table negativeTopics", true);
 
-		console.log(topics);
+		console.log(topics)
 
 		var dTable1 = $(".positiveTopics").DataTable({
 			data: topics[0],
@@ -340,10 +325,6 @@ var FRDemo =
 						.classed("tab-pane", true)
 						.attr("id", "allTweets");
 
-		// $(".tablePosTweets").remove();
-		// $(".tableNegTweets").remove();
-		// $(".tableAllTweets").remove();
-
 		var table1 = pane1.append("table")
 											.classed("table tablePosTweets", true);
 
@@ -413,7 +394,7 @@ var FRDemo =
 				{title: "Overall Sentiment"},
 				{title: "Positive Sentiment"},
 				{title: "Neutral Sentiment"},
-				{title: "Negative Sentiment"}
+				{title: "Negative Sentiment"},
 			],
 			"aoColumnDefs": [ {
         aTargets: [ '_all' ],
@@ -560,39 +541,10 @@ var FRDemo =
 	},
 
 	showLoading: function(message) {
-		var analyzeMessages = [
-			"Initializing app...",
-			"Searching for tweets on twitter...",
-			"Retrieving all relevant tweets...",
-			"Organizing tweets into groups...",
-			"Understanding sentiments of tweets...",
-			"Extracting topics from groups of tweets...",
-			"Rendering results into a pleasurable format...",
-			"Analysis is still compiling...",
-			"Modifying source code to become sentient...",
-			"Get into an infinite loop looking at cat pics..",
-			"Reboot...",
-			"Ignore cat pics until further notice...",
-			"Almost done..."
-		]
-		if (message == "analyze") {
-			d3.select("div#demo").transition().style("height", "180");
-			$("div#analysis-section").html("");
-			$("#loading").show();
-
-			var i = 1;
-			d3.select("#loading em").text(analyzeMessages[0]);
-			function myLoop () {
-			   setTimeout(function () {
-					 	d3.select("#loading em").text(analyzeMessages[i]);
-			      i++;
-			      if (i < 12) {
-			         myLoop();
-			      }
-			   }, 4000)
-			};
-			myLoop();
-		}
+		d3.select("div#demo").transition().style("height", "180");
+		$("div#analysis-section").html("");
+		$("#loading").find("em").html(message);
+		$("#loading").show();
 	},
 
 	hideLoading: function() {
@@ -601,6 +553,3 @@ var FRDemo =
 };
 
 $(FRDemo.init);
-
-// Initiate analysis right after page has loaded
-$(document).ready(FRDemo.analyzeTweets)

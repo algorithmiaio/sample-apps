@@ -1,0 +1,195 @@
+body
+{
+  font-family: 'Helvetica';
+  color: #444;
+}
+
+a {
+  cursor: pointer; cursor: hand;
+}
+
+div.tableData {
+    white-space:nowrap;
+    max-width:100em;
+    overflow:hidden;
+
+}
+
+::selection { background: #9b59b6; color: #ffffff; }
+a { color: #3498db; text-decoration: none; }
+
+.arc text {
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
+
+.arc path {
+  stroke: #fff;
+}
+
+.bar rect {
+  fill: #6b486b;
+  shape-rendering: crispEdges;
+}
+
+.bar text {
+  fill: #fff;
+  font: 10px sans-serif;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+#container
+{
+  width: 740px;
+  margin: 50px auto 100px auto;
+}
+
+#container h1, h2, h3
+{
+  font-family: 'Varela Round', sans-serif;
+  line-height: 180%;
+}
+
+#container > h1
+{
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#container h2
+{
+  font-size: 16px;
+  color: #AAA;
+}
+
+#container > h3
+{
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: -20px;
+}
+
+#container > p
+{
+  margin: 20px 0px 20px 0px;
+  line-height: 180%;
+}
+
+#container li {
+	display: list-item;
+	list-style-type: disc;
+	margin: 30px;
+	line-height: 20%;
+}
+
+#demo
+{
+  height: 180;
+  border-radius: 5px;
+  background-color: #F5F5F5;
+  border: solid 1px #9b59b6;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#demo h1 {
+  background-color: #9b59b6;
+  color: #FFF;
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 10px;
+  position: relative;
+  top: -20px;
+}
+
+#demo p
+{
+  padding: 10px;
+  text-align: center;
+  color: #888;
+}
+
+#form
+{
+  text-align: center;
+  margin-top: 5px;
+}
+
+#form input
+{
+  display: inline-block;
+  padding: 10px;
+  font-size: 14px;
+  width: 400px;
+  border-radius: 5px;
+  border: solid 1px #CCC;
+  height: 40px;
+}
+
+#form input:focus
+{
+  outline: 0;
+}
+
+#form a
+{
+  display: inline-block;
+  background-color: #3498db;
+  color: #FFF;
+  padding: 0px 10px 0px 10px;
+  height: 40px;
+  line-height: 40px;
+  margin-left: 10px;
+  border-radius: 5px;
+}
+
+#analysis-section
+{
+  padding: 20px;
+}
+
+#analysis-section .svg
+{
+  display: inline-block;
+  border-radius: 40px;
+  background-color: #CCC;
+  margin: 14px;
+  background-size: 80px auto;
+  cursor: pointer;
+}
+
+pre
+{
+  border-radius: 5px;
+  background-color: #F1F1F1;
+  border: solid 1px #CCC;
+  padding: 20px;
+}
+
+#loading
+{
+  position: absolute;
+  width: 738px;
+  top: 97px;
+  height: 142px;
+  border-radius: 0px 0px 5px 5px;
+  margin-top: -10px;
+  background-color: rgba(0,0,0,0.5);
+  text-align: center;
+  z-index: 1000;
+  padding-top: 50;
+  color: #FFF;
+  font-family: 'Varela Round', sans-serif;
+}
+
+#loading i
+{
+  margin-top: 10px;
+  font-size: 40px;
+  color: #FFF;
+}

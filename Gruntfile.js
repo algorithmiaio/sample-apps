@@ -12,6 +12,7 @@ module.exports = function(grunt) {
   //    slug: generates a publish-<slug> task that publishes to demos.algorithmia.com/<slug>
   //    dist: the directory containing a static files to publish (index.html should be in this directory)
   var demos = [
+    { slug: 'analyze-tweets', dist: 'JavaScript/analyze-tweets'},
     { slug: 'image-tagger', dist: 'JavaScript/image-tagger' },
     { slug: 'colorize-photos', dist: 'JavaScript/colorization-demo' },
     { slug: 'classify-places', dist: 'JavaScript/places-demo'},

@@ -2,7 +2,7 @@
 var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
 
 var algorithms = {
-  tagger: 'deeplearning/IllustrationTagger/0.2.3'
+  tagger: 'deeplearning/IllustrationTagger/0.2.5'
 };
 
 /**
@@ -35,11 +35,14 @@ var getInfo = function(url) {
   $('#userImg').attr('src',url);
   algoClient.algo(algorithms.tagger).pipe(input).then(function (output) {
     if (output.error) {
-      endWait(output.error.message);
+      hideWait(output.error.message);
     } else {
       showResults(output.result);
-      endWait();
+      hideWait();
     }
+  }, function(err) {
+    console.log(err);
+    hideWait(err);
   });
 };
 /**
@@ -133,6 +136,6 @@ var initDropzone = function() {
   });
   dropzone.on("error", function(file, err) {
     dropzone.removeFile(file);
-    endWait(err);
+    hideWait(err);
   });
 };

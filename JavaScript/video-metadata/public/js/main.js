@@ -3,7 +3,7 @@ var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
 
 var algorithms = {
   videoMetadata: {
-    algorithm: 'demo/VideoMetadataExtractionDemo/0.1.7',
+    algorithm: 'demo/VideoMetadataExtractionDemo/0.1.9',
     result_field: 'output_file'
   }
 };

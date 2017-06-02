@@ -2,7 +2,7 @@
 
 ## Applying machine learning algorithms to extract information from videos
 
-This is a demo of Algorithmia's [VideoMetadataExtraction](https://algorithmia.com/algorithms/media/VideoMetadataExtraction) and associated algorithms.  It uses machine learning algorithms such as [NudityDetection](https://algorithmia.com/algorithms/sfw/NudityDetectioni2v), [CarMakeandModelRecognition](https://algorithmia.com/algorithms/LgoBE/CarMakeandModelRecognition), and [EmotionRecognition](hhttps://algorithmia.com/algorithms/deeplearning/EmotionRecognitionCNNMBP) to examine the content of frame of a video. 
+This is a demo of Algorithmia's [VideoMetadataExtraction](https://algorithmia.com/algorithms/media/VideoMetadataExtraction) and associated algorithms.  It uses machine learning algorithms such as [NudityDetection](https://algorithmia.com/algorithms/sfw/NudityDetectioni2v), [CarMakeandModelRecognition](https://algorithmia.com/algorithms/LgoBE/CarMakeandModelRecognition), and [EmotionRecognition](https://algorithmia.com/algorithms/deeplearning/EmotionRecognitionCNNMBP) to examine the content of frame of a video. 
 
 ## See this demo in action
 

@@ -1,12 +1,12 @@
-# Scene Recognition
+# Is it Nude?
 
-## Use Deep Learning to Identify and Classify Places
+## Using artificial intelligence to detect nudity
 
-This is a demo of the [Places365Classifier](https://algorithmia.com/algorithms/deeplearning/Places365Classifier) running on Algorithmia, which uses state-of-the-art deep learning to identify places in images.  Simply paste in a URL or upload a file to quickly classify places, locations, and scenes in images.
+This is a demo of the [NudityDetectioni2v](https://algorithmia.com/algorithms/sfw/NudityDetectioni2v) microservice running on Algorithmia, which uses state-of-the-art deep learning to identify places in images.  Simply provide an image, and it will detect whether nudity is present.
 
 ## See this demo in action
 
-This demo can be viewed at http://demos.algorithmia.com/classify-places
+This demo can be viewed at http://demos.algorithmia.com/isitnude
 
 ## Run it yourself
 

@@ -1,12 +1,12 @@
-# Scene Recognition
+# Image Tagging
 
-## Use Deep Learning to Identify and Classify Places
+## Use Deep Learning to Identify Features in an Image
 
-This is a demo of the [Places365Classifier](https://algorithmia.com/algorithms/deeplearning/Places365Classifier) running on Algorithmia, which uses state-of-the-art deep learning to identify places in images.  Simply paste in a URL or upload a file to quickly classify places, locations, and scenes in images.
+This is a demo of the [IllustrationTagger](https://algorithmia.com/algorithms/deeplearning/IllustrationTagger) running on Algorithmia, which uses state-of-the-art deep learning to identify places in images.  Simply provide an image, and state-of-the-art deep learning will identify features which are present.
 
 ## See this demo in action
 
-This demo can be viewed at http://demos.algorithmia.com/classify-places
+This demo can be viewed at http://demos.algorithmia.com/image-tagger
 
 ## Run it yourself
 

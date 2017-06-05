@@ -2,7 +2,7 @@
 
 ## Applying machine learning algorithms to transform entire videos
 
-This is a demo of Algorithmia's [VideoTransform](https://algorithmia.com/algorithms/media/VideoTransform) and associated algorithms.  It uses an image processing algorithm such as [DeepFilter](https://algorithmia.com/algorithms/deeplearning/DeepFilter), [SalNet](https://algorithmia.com/algorithms/deeplearning/SalNet), or [ColorfulImageColorization](https://algorithmia.com/algorithms/deeplearning/ColorfulImageColorization) to alter each frame of a video, then recombines it back into a freshly transformed video file. 
+This is a demo of Algorithmia's [VideoTransform](https://algorithmia.com/algorithms/media/VideoTransform) and associated microservices.  It uses an image processing algorithm such as [DeepFilter](https://algorithmia.com/algorithms/deeplearning/DeepFilter), [SalNet](https://algorithmia.com/algorithms/deeplearning/SalNet), or [ColorfulImageColorization](https://algorithmia.com/algorithms/deeplearning/ColorfulImageColorization) to alter each frame of a video, then recombines it back into a freshly transformed video file.
 
 ## See this demo in action
 

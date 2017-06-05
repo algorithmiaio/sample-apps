@@ -1,12 +1,12 @@
-# Scene Recognition
+# Fashion Recognition
 
-## Use Deep Learning to Identify and Classify Places
+## Use Deep Learning to Identify and Classify Fashion Items
 
-This is a demo of the [Places365Classifier](https://algorithmia.com/algorithms/deeplearning/Places365Classifier) running on Algorithmia, which uses state-of-the-art deep learning to identify places in images.  Simply paste in a URL or upload a file to quickly classify places, locations, and scenes in images.
+This is a demo of the [DeepFashion](https://algorithmia.com/algorithms/deeplearning/DeepFashion) microservice running on Algorithmia, which uses state-of-the-art deep learning to identify places in images.  Simply provide an image, and deep learning will identify clothing and fashion items therein.
 
 ## See this demo in action
 
-This demo can be viewed at http://demos.algorithmia.com/classify-places
+This demo can be viewed at http://demos.algorithmia.com/deep-fashion
 
 ## Run it yourself
 

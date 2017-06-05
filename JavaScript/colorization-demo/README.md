@@ -1,12 +1,13 @@
-# Scene Recognition
+# Colorize Photos
 
-## Use Deep Learning to Identify and Classify Places
+## Use Deep Learning to Automatically Colorize Black and White Photos
 
-This is a demo of the [Places365Classifier](https://algorithmia.com/algorithms/deeplearning/Places365Classifier) running on Algorithmia, which uses state-of-the-art deep learning to identify places in images.  Simply paste in a URL or upload a file to quickly classify places, locations, and scenes in images.
+This is a demo of Algorithmia's [ColorfulImageColorization](https://algorithmia.com/algorithms/deeplearning/ColorfulImageColorization)
+microservice.  Upload or provide an image URL, and color will be automatically added to black-and-white photos.
 
 ## See this demo in action
 
-This demo can be viewed at http://demos.algorithmia.com/classify-places
+This demo can be viewed at http://demos.algorithmia.com/colorize-photos
 
 ## Run it yourself
 

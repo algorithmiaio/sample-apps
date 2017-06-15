@@ -4,7 +4,7 @@ Extracting metadata from videos is often needed for video editing, YouTube adver
 
 Earlier this week we wrote a [blog post](http://blog.algorithmia.com/automatic-scene-detection/) about an algorithm that does this for you called [Scene Detection] (https://algorithmia.com/algorithms/media/SceneDetection). 
 
-For the full blog post related to this recipe, see [Scene Detection in Videos: Extracting Metadata from Movie Scenes](http://blog.algorithmia.com/scene-detection-in-videos-extracting-metadata-from-movie-scene).
+For the full blog post related to this recipe, see [Video Editing: extracting metadata from movie scenes](http://blog.algorithmia.com/scene-detection-in-videos-extracting-metadata-from-movie-scene).
 
 ## Getting Started
 

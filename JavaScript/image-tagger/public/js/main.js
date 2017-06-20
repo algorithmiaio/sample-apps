@@ -2,7 +2,8 @@
 var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
 
 var algorithms = {
-  tagger: 'deeplearning/IllustrationTagger/0.2.5'
+  tagger: 'deeplearning/IllustrationTagger/0.2.5',
+  inception: 'deeplearning/InceptionNet/1.0.3'
 };
 
 /**
@@ -37,25 +38,30 @@ var getInfo = function(url) {
     if (output.error) {
       hideWait(output.error.message);
     } else {
-      showResults(output.result);
+      $('#results-tbody').html(
+        tags2html(output.result.rating, 0.2, 'rating: ')
+        + tags2html(output.result.character, 0.1, 'character: ')
+        + tags2html(output.result.general, 0.23)
+      );
       hideWait();
     }
   }, function(err) {
     console.log(err);
     hideWait(err);
   });
-};
-/**
- * render tags and probabilities into
- * @param tags [{"class":string,"prob":number}]
- */
-var showResults = function(result){
-  $('#results-tbody').html(
-    tags2html(result.rating, 0.2, 'rating: ')
-    + tags2html(result.character, 0.1, 'character: ')
-    + tags2html(result.general, 0.23)
-  );
-  hideWait();
+  algoClient.algo(algorithms.inception).pipe(url).then(function (output) {
+    if (output.error) {
+      hideWait(output.error.message);
+    } else {
+      $('#results-tbody2').html(
+        tags2htmlFlat(output.result.tags, 0.05)
+      );
+      hideWait();
+    }
+  }, function(err) {
+    console.log(err);
+    hideWait(err);
+  });
 };
 
 /**
@@ -80,12 +86,32 @@ function tags2html(tags, threshold, prefix) {
 }
 
 /**
+ * generate HTML to display provided tags
+ * @param tags {"class":String,"confidence":Float}
+ * @param threshold 0-1 probability above which tag should be shown
+ * @param prefix (optional) string to prepend to each tag
+ * @returns {string}
+ */
+function tags2htmlFlat(tags, threshold, prefix) {
+  var html = '';
+  for (var i = 0; i < tags.length; i++) {
+    var labels = (prefix || '') + tags[i]["class"].replace(/_/g, ' ');
+    var prob = tags[i]["confidence"];
+    if(prob>threshold) {
+      html += '<tr><td><span class="label label-success">' + labels + '</span></td><td>' + (prob * 100).toFixed(2) + '%</td></tr>';
+    }
+  }
+  return html;
+}
+
+/**
  * show overlay, clear results
  */
 var showWait = function() {
   $('#overlay').removeClass('hidden');
   $('#status-label').empty();
   $("#results-tbody").empty();
+  $("#results-tbody2").empty();
   $('#userImg').removeAttr('src');
 };
 

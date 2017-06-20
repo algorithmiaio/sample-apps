@@ -2,13 +2,13 @@
 
 	<title>Deep Learning to Identify Features and Automatically Tag in an Image – Algorithmia</title>
 	<link rel="canonical" href="http://demos.algorithmia.com/image-tagger/" />
-	<meta name="description" content="Use deep learning algorithms to identify features and assign tags with the Illustration Tagger microservice">
+	<meta name="description" content="Use deep learning algorithms to identify features and assign tags with Illustration Tagging microservices">
 	<meta name="robots" content="index,follow">
 
 	<!-- FB -->
 	<meta property="og:title" content="Identify Features and Automatically Tag Images">
 	<meta property="og:url" content="http://demos.algorithmia.com/iamge-tagger/">
-	<meta property="og:description" content="Use deep learning algorithms to identify features and assign tags with the Illustration Tagger microservice">
+	<meta property="og:description" content="Use deep learning algorithms to identify features and assign tags with Illustration Tagging microservices">
 	<meta property="og:locale" content="en_US" />
 	<meta property="og:type" content="website" />
 	<meta property="og:image" content="http://demos.algorithmia.com/classify-places/public/images/fbshare.png" />
@@ -18,13 +18,13 @@
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@algorithmia" />
 	<meta name="twitter:title" content="Identify Features and Automatically Tag Images" />
-	<meta name="twitter:description" content="Use deep learning algorithms to identify features and assign tags with the Illustration Tagger microservice" />
+	<meta name="twitter:description" content="Use deep learning algorithms to identify features and assign tags with Illustration Tagging microservices" />
 	<meta name="twitter:image" content="http://demos.algorithmia.com/classify-places/public/images/twshare.png" />
 	<meta name="twitter:creator" content="@algorithmia" />
 
 	<!-- OTHER -->
 	<meta itemprop="name" content="Identify Features and Automatically Tag Images">
-	<meta itemprop="description" content="Use deep learning algorithms to identify features and assign tags with the Illustration Tagger microservice">
+	<meta itemprop="description" content="Use deep learning algorithms to identify features and assign tags with Illustration Tagging microservices">
 
 	<%= header_end %>
 
@@ -92,11 +92,21 @@
 					<table class="table" id="table">
 						<thead>
 							<tr>
-								<th><p class="item-title">Tags</p></th>
+								<th><p class="item-title">IllustrationTagger</p></th>
 								<th><p class="item-title">Probability</p></th>
 							</tr>
 						</thead>
 						<tbody id="results-tbody">
+						</tbody>
+					</table>
+					<table class="table" id="table2">
+						<thead>
+							<tr>
+								<th><p class="item-title">InceptionNet</p></th>
+								<th><p class="item-title">Probability</p></th>
+							</tr>
+						</thead>
+						<tbody id="results-tbody2">
 						</tbody>
 					</table>
 				</div>
@@ -115,8 +125,9 @@
 					</div>
 					<div class="col-md-8">
 						<p>Use state-of-the-art deep learning to identify features in images. Just paste in a URL above.</p>
-						<p>The <a href="https://algorithmia.com/algorithms/deeplearning/IllustrationTagger" target="_blank">Illustration Tagger microservice</a>, one of many <a href="http://blog.algorithmia.com/2016/07/cloud-hosted-deep-learning-models/" target="_blank">cloud hosted CNN deep-learning models</a> hosted on Algorithmia, can recognize hundreds of different features in images.</p>
-						<p>This microservice is an implementation of <a href="http://illustration2vec.net/papers/illustration2vec-main.pdf" target="_blank">Saito, Masaki and Matsui, Yusuke. (2015). Illustration2Vec: A Semantic Vector Representation of Illustrations. SIGGRAPH Asia Technical Briefs. 2015</a>. Learn more about their work <a href="http://illustration2vec.net/" target="_blank">here</a>.</p>
+						<p>The <a href="https://algorithmia.com/algorithms/deeplearning/IllustrationTagger" target="_blank">IllustrationTagger</a> and <a href="https://algorithmia.com/algorithms/deeplearning/InceptionNet" target="_blank">InceptionNet</a> microservices are just two of the many <a href="http://blog.algorithmia.com/2016/07/cloud-hosted-deep-learning-models/" target="_blank">cloud-scaled CNN deep-learning models</a> hosted on Algorithmia which can recognize hundreds of different features in images.</p>
+                        <p>IllustrationTagger is a version of <a href="http://illustration2vec.net/papers/illustration2vec-main.pdf" target="_blank">Saito, Masaki and Matsui, Yusuke. (2015). Illustration2Vec: A Semantic Vector Representation of Illustrations. SIGGRAPH Asia Technical Briefs. 2015</a>. Learn more about their work <a href="http://illustration2vec.net/" target="_blank">here</a>.</p>
+						<p>InceptionNet is a direct implementation of <a href="https://algorithmia.com/algorithms/deeplearning/InceptionNet" target="_blank">Google's InceptionNet</a>, which was trained on the <a href="http://image-net.org/challenges/LSVRC/2015/" target="_blank">ImageNet 2015 dataset</a>. It is implemented using Google's <a href="https://www.tensorflow.org/" target="_blank">Tensorflow</a> python bindings.</p>
 						<p>Let us know what you think <a href="https://twitter.com/algorithmia" target="_blank">@Algorithmia</a> or by <a href="https://algorithmia.com/contact" target="_blank">email</a>.</p>
 					</div>
 				</div>
@@ -130,7 +141,7 @@
       <div class="col-md-9">
         <h2 class="whitespace-sm">Built For Developers</h2>
         <h4 class="whitespace-md">A simple, scalable API for machine intelligence</h4>
-          <p class="item-title">SAMPLE INPUT</p>
+          <p class="item-title">SAMPLE INPUT: IllustrationTagger</p>
           <pre><code class="python hljs"><span class="hljs-keyword">import</span> Algorithmia
 
 input = {<span class="hljs-string">"image"</span>: <span class="hljs-string">"_IMAGE_URL_"</span>}
@@ -139,7 +150,7 @@ algo = client.algo(<span class="hljs-string">'deeplearning/IllustrationTagger/0.
 
 <span class="hljs-keyword">print</span> algo.pipe(input)
 </code></pre>
-            <p class="item-title">SAMPLE OUTPUT</p>
+            <p class="item-title">SAMPLE OUTPUT: IllustrationTagger</p>
             <pre><code class="json hljs">{
   <span class="hljs-attr">"rating"</span>: [
     {<span class="hljs-attr">"safe"</span>: <span class="hljs-number">0.9924461245536804</span>}
@@ -150,7 +161,33 @@ algo = client.algo(<span class="hljs-string">'deeplearning/IllustrationTagger/0.
     {<span class="hljs-attr">"black hair"</span>: <span class="hljs-number">0.42818406224250793</span>}
   ]
 }</code></pre>
-        <a href="https://algorithmia.com/algorithms/deeplearning/IllustrationTagger" class="btn btn-primary-inverse">
+          <p class="item-title">SAMPLE INPUT: InceptionNet</p>
+          <pre><code class="python hljs"><span class="hljs-keyword">import</span> Algorithmia
+
+input = <span class="hljs-string">"_IMAGE_URL_"</span>
+client = Algorithmia.client(<span class="hljs-string">'_API_KEY_'</span>)
+algo = client.algo(<span class="hljs-string">'deeplearning/InceptionNet/1.0.3'</span>)
+
+<span class="hljs-keyword">print</span> algo.pipe(input)
+</code></pre>
+            <p class="item-title">SAMPLE OUTPUT: InceptionNet</p>
+            <pre><code class="json hljs">{
+  <span class="hljs-attr">"tags"</span>: [
+    {
+      <span class="hljs-attr">"class"</span>: <span class="hljs-string">"convertible"</span>,
+      <span class="hljs-attr">"confidence"</span>: <span class="hljs-number">0.3217212557792664</span>
+    },
+    {
+      <span class="hljs-attr">"class"</span>: <span class="hljs-string">"sports car, sport car"</span>,
+      <span class="hljs-attr">"confidence"</span>: <span class="hljs-number">0.18678018450737005</span>
+    },
+    {
+      <span class="hljs-attr">"class"</span>: <span class="hljs-string">"racer, race car, racing car"</span>,
+      <span class="hljs-attr">"confidence"</span>: <span class="hljs-number">0.09395135194063188</span>
+    }
+  ]
+}</code></pre>
+        <a href="https://algorithmia.com/algorithms/deeplearning/InceptionNet" class="btn btn-primary-inverse">
           LEARN MORE
         </a>
       </div>

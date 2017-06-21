@@ -89,25 +89,23 @@
 					<img id="userImg">
 				</div>
 				<div class="col-sm-6">
-					<table class="table" id="table">
+					<table class="table">
 						<thead>
 							<tr>
 								<th><p class="item-title">IllustrationTagger</p></th>
-								<th><p class="item-title">Probability</p></th>
+								<th width="80"><p class="item-title">Probability</p></th>
 							</tr>
 						</thead>
-						<tbody id="results-tbody">
-						</tbody>
+						<tbody id="results1"></tbody>
 					</table>
-					<table class="table" id="table2">
+					<table class="table">
 						<thead>
 							<tr>
 								<th><p class="item-title">InceptionNet</p></th>
-								<th><p class="item-title">Probability</p></th>
+								<th width="80"><p class="item-title">Probability</p></th>
 							</tr>
 						</thead>
-						<tbody id="results-tbody2">
-						</tbody>
+						<tbody id="results2"></tbody>
 					</table>
 				</div>
 			</div>
@@ -141,49 +139,40 @@
       <div class="col-md-9">
         <h2 class="whitespace-sm">Built For Developers</h2>
         <h4 class="whitespace-md">A simple, scalable API for machine intelligence</h4>
-          <p class="item-title">SAMPLE INPUT: IllustrationTagger</p>
+          <p class="item-title">SAMPLE INPUTr</p>
           <pre><code class="python hljs"><span class="hljs-keyword">import</span> Algorithmia
 
-input = {<span class="hljs-string">"image"</span>: <span class="hljs-string">"_IMAGE_URL_"</span>}
-client = Algorithmia.client(<span class="hljs-string">'_API_KEY_'</span>)
-algo = client.algo(<span class="hljs-string">'deeplearning/IllustrationTagger/0.2.5'</span>)
+image = "_IMAGE_URL_"
+client = Algorithmia.client(<span class="hljs-string">"_API_KEY_"</span>)
 
-<span class="hljs-keyword">print</span> algo.pipe(input)
+tagger1 = client.algo(<span class="hljs-string">"deeplearning/IllustrationTagger/0.2.5"</span>)
+tagger2 = client.algo(<span class="hljs-string">"deeplearning/InceptionNet/1.0.3"</span>)
+
+<span class="hljs-keyword">print</span> <span class="hljs-string">"IllustrationTagger:"</span>, tagger1.pipe({<span class="hljs-string">"image"</span>: image})
+<span class="hljs-keyword">print</span> <span class="hljs-string">"InceptionNet:"</span>, tagger2.pipe(image)
 </code></pre>
-            <p class="item-title">SAMPLE OUTPUT: IllustrationTagger</p>
-            <pre><code class="json hljs">{
+            <p class="item-title">SAMPLE OUTPUT</p>
+<pre><code class="json hljs"><span class="hljs-string">IllustrationTagger:</span>
+{
   <span class="hljs-attr">"rating"</span>: [
-    {<span class="hljs-attr">"safe"</span>: <span class="hljs-number">0.9924461245536804</span>}
+    {<span class="hljs-attr">"safe"</span>: <span class="hljs-number">0.9961</span>}
   ],
   <span class="hljs-attr">"general"</span>: [
-    {<span class="hljs-attr">"1boy"</span>: <span class="hljs-number">0.9158311486244202</span>},
-    {<span class="hljs-attr">"male"</span>: <span class="hljs-number">0.6592674255371094</span>},
-    {<span class="hljs-attr">"black hair"</span>: <span class="hljs-number">0.42818406224250793</span>}
+    {<span class="hljs-attr">"no humans"</span>: <span class="hljs-number">0.7062</span>},
+    {<span class="hljs-attr">"monochrome"</span>: <span class="hljs-number">0.6084</span>}
   ]
-}</code></pre>
-          <p class="item-title">SAMPLE INPUT: InceptionNet</p>
-          <pre><code class="python hljs"><span class="hljs-keyword">import</span> Algorithmia
+}
 
-input = <span class="hljs-string">"_IMAGE_URL_"</span>
-client = Algorithmia.client(<span class="hljs-string">'_API_KEY_'</span>)
-algo = client.algo(<span class="hljs-string">'deeplearning/InceptionNet/1.0.3'</span>)
-
-<span class="hljs-keyword">print</span> algo.pipe(input)
-</code></pre>
-            <p class="item-title">SAMPLE OUTPUT: InceptionNet</p>
-            <pre><code class="json hljs">{
+<span class="hljs-string">InceptionNet:</span>
+{
   <span class="hljs-attr">"tags"</span>: [
     {
-      <span class="hljs-attr">"class"</span>: <span class="hljs-string">"convertible"</span>,
-      <span class="hljs-attr">"confidence"</span>: <span class="hljs-number">0.3217212557792664</span>
+      <span class="hljs-attr">"class"</span>: <span class="hljs-string">"cliff, drop, drop-off"</span>,
+      <span class="hljs-attr">"confidence"</span>: <span class="hljs-number">0.4765</span>
     },
     {
-      <span class="hljs-attr">"class"</span>: <span class="hljs-string">"sports car, sport car"</span>,
-      <span class="hljs-attr">"confidence"</span>: <span class="hljs-number">0.18678018450737005</span>
-    },
-    {
-      <span class="hljs-attr">"class"</span>: <span class="hljs-string">"racer, race car, racing car"</span>,
-      <span class="hljs-attr">"confidence"</span>: <span class="hljs-number">0.09395135194063188</span>
+      <span class="hljs-attr">"class"</span>: <span class="hljs-string">"alp"</span>,
+      <span class="hljs-attr">"confidence"</span>: <span class="hljs-number">0.1755</span>
     }
   ]
 }</code></pre>

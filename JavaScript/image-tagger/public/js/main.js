@@ -38,7 +38,7 @@ var getInfo = function(url) {
     if (output.error) {
       hideWait(output.error.message);
     } else {
-      $('#results-tbody').html(
+      $('#results1').html(
         tags2html(output.result.rating, 0.2, 'rating: ')
         + tags2html(output.result.character, 0.1, 'character: ')
         + tags2html(output.result.general, 0.23)
@@ -53,8 +53,8 @@ var getInfo = function(url) {
     if (output.error) {
       hideWait(output.error.message);
     } else {
-      $('#results-tbody2').html(
-        tags2htmlFlat(output.result.tags, 0.05)
+      $('#results2').html(
+        tags2html(flattenPairs(output.result.tags,"class","confidence"), 0.05)
       );
       hideWait();
     }
@@ -77,8 +77,8 @@ function tags2html(tags, threshold, prefix) {
     Object.keys(tags[i]).forEach(function (key) {
       var prob = tags[i][key];
       if(prob>threshold) {
-        var tag = (prefix || '') + key.replace(/_/g, ' ');
-        html += '<tr><td><span class="label label-success">' + tag + '</span></td><td>' + (prob * 100).toFixed(2) + '%</td></tr>';
+        var tag = (prefix||'') + key.replace(/_/g,' ');
+        html += '<tr><td><span class="label label-success">'+tag+'</span></td><td>'+(prob*100).toFixed(2)+'%</td></tr>';
       }
     });
   }
@@ -86,22 +86,19 @@ function tags2html(tags, threshold, prefix) {
 }
 
 /**
- * generate HTML to display provided tags
- * @param tags {"class":String,"confidence":Float}
- * @param threshold 0-1 probability above which tag should be shown
- * @param prefix (optional) string to prepend to each tag
- * @returns {string}
+ * convert array of {keystr: x, valstr: y} to {x: y}
+ * @param arr
+ * @param keystr
+ * @param valstr
+ * @returns {Array}
  */
-function tags2htmlFlat(tags, threshold, prefix) {
-  var html = '';
-  for (var i = 0; i < tags.length; i++) {
-    var labels = (prefix || '') + tags[i]["class"].replace(/_/g, ' ');
-    var prob = tags[i]["confidence"];
-    if(prob>threshold) {
-      html += '<tr><td><span class="label label-success">' + labels + '</span></td><td>' + (prob * 100).toFixed(2) + '%</td></tr>';
-    }
+function flattenPairs(arr, keystr, valstr) {
+  var flattened = [];
+  for(var i=0; i<arr.length; arr++) {
+    flattened[i] = {};
+    flattened[i][arr[i][keystr]] = arr[i][valstr];
   }
-  return html;
+  return flattened;
 }
 
 /**
@@ -110,8 +107,8 @@ function tags2htmlFlat(tags, threshold, prefix) {
 var showWait = function() {
   $('#overlay').removeClass('hidden');
   $('#status-label').empty();
-  $("#results-tbody").empty();
-  $("#results-tbody2").empty();
+  $("#results1").html('<span class="aspinner"></span>');
+  $("#results2").html('<span class="aspinner"></span>');
   $('#userImg').removeAttr('src');
 };
 
@@ -125,6 +122,7 @@ var hideWait = function(errorMessage) {
   if(errorMessage) {
     $('#status-label').html('<div class="alert alert-danger" role="alert">' + errorMessage+ '</div>');
     $('#results').addClass('hidden');
+    $('.aspinner').remove();
   } else {
     $('#results').removeClass('hidden');
     $('html, body').animate({

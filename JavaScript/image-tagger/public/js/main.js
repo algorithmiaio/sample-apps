@@ -1,9 +1,9 @@
 // init the Algorithmia client with your API key from https://algorithmia.com/user#credentials
-var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
+var algoClient = Algorithmia.client('simVBQOndaup7KqkgEgkN/kz/3C1');
 
 var algorithms = {
-  tagger: 'deeplearning/IllustrationTagger/0.2.5',
-  inception: 'deeplearning/InceptionNet/1.0.3'
+  tagger: 'demo/IllustrationTaggerDemo/0.1.0', //'deeplearning/IllustrationTagger/0.2.5'
+  inception: 'demo/InceptionNetDemo/0.1.0' //'deeplearning/InceptionNet/1.0.3'
 };
 
 /**

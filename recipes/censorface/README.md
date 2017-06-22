@@ -1,4 +1,4 @@
-# Create and Censor Non-Nude Video Clips
+# Create and Censor Non-Nude Subclips from Video
 
 Video editing is a complicated process and when you need a family-friendly censored video pipeline, we are here to help. In past blog articles we've covered [Nudity Detection](https://blog.algorithmia.com/improving-nudity-detection-nsfw-image-recognition/), [Video Metadata Extraction](https://blog.algorithmia.com/introduction-video-metadata/), and [Video Transform](https://blog.algorithmia.com/introduction-to-video-transform/) which are all a part of this recipe so go ahead and check them out!
 

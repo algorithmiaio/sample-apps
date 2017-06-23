@@ -6,11 +6,19 @@
   background-position: 0% 30%;
 }
 .image-credit {
-  font-size: 8px;
+  font-size: 9px;
   position: absolute;
   bottom: 5px;
   right: 5px;
   color: #FFF;
+}
+.image-credit a {
+  color: #FFF;
+  text-decoration: underline;
+}
+.image-credit a:hover {
+  color: #FFF;
+  text-decoration: none;
 }
 .form-group {margin-bottom: 0;}
 /* For smaller screens */

@@ -4,7 +4,7 @@ The [Video Nudity Detection microservice](https://algorithmia.com/algorithms/sfw
 
 We can make use of this service, along with video-editing libraries, to strip out NSFW content from videos.
 
-For the full blog post related to this recipe, see http://blog.algorithmia.com [TBA].
+For the full blog post related to this recipe, see https://blog.algorithmia.com/video-nudity-detection-microservice/.
 
 ## Getting Started
 
@@ -27,7 +27,7 @@ import imageio
 imageio.plugins.ffmpeg.download()
 ```
 
-Detailed instructions can be found in the [blog post](http://blog.algorithmia.com/) [TBA].
+Detailed instructions can be found in the [blog post](https://blog.algorithmia.com/video-nudity-detection-microservice/).
 
 ## How To Run the Script
 

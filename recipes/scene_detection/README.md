@@ -23,7 +23,7 @@ client = Algorithmia.client("YOUR_API_KEY")
 ```
 and add in your API key.
 
-## How to Classify Documents with LDA
+## How to Find the Scenes in Videos
 
 After putting in your own API key to the line above run it in your console environment:
 

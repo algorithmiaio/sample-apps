@@ -25,7 +25,7 @@ client = Algorithmia.client("YOUR_API_KEY")
 ```
 and add in your API key.
 
-## How to Find the Sentiment Analysis of your URL
+## How to Extract Colors from Images
 
 After putting in your own API key to the line above run it in your console environment:
 

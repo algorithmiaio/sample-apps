@@ -1,12 +1,14 @@
 <html>
 <head>
+    <title>Content Aware Resize</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://algorithmia.com/v1/clients/js/algorithmia-0.2.0.js" type="text/javascript"></script>
     <script src="content-aware-resize.js" type="text/javascript"></script>
 </head>
-<body>
+<body class="container">
     <h3>Image:</h3>
     <input type="text" size="80" id="img_url" value="https://upload.wikimedia.org/wikipedia/commons/f/f7/Hickory_Golfer.jpg" />
-    <h3>General social image sizes:</h3>
+    <h3>Automatically resize:</h3>
     <input type="submit" value="Thumbnail 150x150" onclick="resize(150,150,'thumb')" /> <a download="thumb.png" id="thumb"></a><br/>
     <input type="submit" value="Banner 1200x300" onclick="resize(1200,300,'banner')" /> <a download="banner.png" id="banner"></a><br/>
     <input type="submit" value="Twitter 1024x512" onclick="resize(1024,512,'tw')" /> <a download="tw.png" id="tw"></a><br/>

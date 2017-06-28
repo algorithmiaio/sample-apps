@@ -12,9 +12,7 @@ For the full blog post related to this recipe, see http://blog.algorithmia.com.
 
 2. Edit content-aware-resize.js and replace `your_api_key` with your [Algorithmia API Key](http://developers.algorithmia.com/basics/customizing-api-keys/)
 
-3. (optional) Edit content-aware-resize.htm and replace `Hickory_Golfer.jpg` with an image of your own choosing
-
-4. Open content-aware-resize.htm in a web browser
+3. Open content-aware-resize.htm in a web browser
 
 ## Notes
 

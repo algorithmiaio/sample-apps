@@ -1,18 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Content Aware Resize Demo</title>
     <script src="https://algorithmia.com/v1/clients/js/algorithmia-0.2.0.js" type="text/javascript"></script>
     <script src="content-aware-resize.js" type="text/javascript"></script>
 </head>
 <body>
-    <form onclick="reloadHero(); return false;">
-        Image: <input type="text" size="50" id="hero_url" value="https://upload.wikimedia.org/wikipedia/commons/f/f7/Hickory_Golfer.jpg"><br />
-        Height: <input type="number" size="3" id="hero_height" value="300" /><br />
-        Width: <input type="number" size="3" id="hero_width" value="150" /><br />
-        <input type="submit" value="resize">
-    </form>
-    <img id="hero_img">
+    <h3>Image:</h3>
+    <input type="text" size="80" id="img_url" value="https://upload.wikimedia.org/wikipedia/commons/f/f7/Hickory_Golfer.jpg" />
+    <h3>General social image sizes:</h3>
+    <input type="submit" value="Thumbnail" onclick="resize(150,150,'thumb')" /> <a download="thumb.png" id="thumb"></a><br/>
+    <input type="submit" value="Twitter" onclick="resize(1024,512,'tw')" /> <a download="tw.png" id="tw"></a><br/>
+    <input type="submit" value="Facebook" onclick="resize(1200,628,'fb')" /> <a download="fb.png" id="fb"></a>
+    <h3>Manually resize image:</h3>
+    Width: <input type="number" style="width:4em" id="width" value="150" /><br />
+    Height: <input type="number" style="width:4em" id="height" value="300" /><br /><br />
+    <button onclick="resizeManual()">manual resize</button> <a download="manual.png" id="manual"></a>
 </body>
 </html>

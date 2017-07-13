@@ -1,4 +1,4 @@
-# Train a Face Recognition Model with Ten Images
+# Train a Face Recognition Model to Recognize Celebrities
 
 Earlier this week we introduced [Face Recognition](https://algorithmia.com/algorithms/cv/FaceRecognition), a trainable model that is hosted on Algorithmia. This model enables you to train images of people that you want the model to recognize and then you can pass in unseen images to the model to get a prediction score.
 

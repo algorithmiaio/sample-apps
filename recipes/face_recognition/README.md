@@ -1,10 +1,11 @@
+# Train a Face Recognition Model with Ten Images
+
 Earlier this week we introduced [Face Recognition](https://algorithmia.com/algorithms/cv/FaceRecognition), a trainable model that is hosted on Algorithmia. This model enables you to train images of people that you want the model to recognize and then you can pass in unseen images to the model to get a prediction score.
 
 The great thing about this algorithm is that you don't have to have a huge dataset to get a high accuracy on the prediction scores of unseen images. The Face Recognition algorithm trains your data quickly using at least ten images of each person that you wish to train on.
 
 Learn how to use the Face Recognition model so you can see which celebrity you look most like. 
 
-# Train a Face Recognition Model with Ten Images
 
 For the full blog post related to this recipe, see []().
 

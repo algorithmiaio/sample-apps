@@ -7,7 +7,8 @@ The great thing about this algorithm is that you don't have to have a huge datas
 Learn how to use the Face Recognition model so you can see which celebrity you look most like. 
 
 
-For the full blog post related to this recipe, see []().
+For the full blog post related to this recipe, see [Train a Face Recognition Model to Recognize Celebrities](blog.algorithmia.com/
+train-a-face-recognition-model-to-recognize-celebrities).
 
 ## Getting Started
 

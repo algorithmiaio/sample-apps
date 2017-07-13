@@ -34,4 +34,7 @@ After putting in your own API key to the line above run it in your console envir
 
 ## Built With
 * [Algorithmia](https://algorithmia.com/)
+* [Algorithmia Hosted Data](https://algorithmia.com/developers/data/hosted/)
+* [Face Recognition](https://algorithmia.com/algorithms/cv/FaceRecognition)
+
 

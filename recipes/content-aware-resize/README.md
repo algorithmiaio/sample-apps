@@ -4,7 +4,7 @@ The [Content Aware Resize microservice](https://algorithmia.com/algorithms/media
 
 We can use this tool to automatically create images of different sizes, such as those required for hero/banner images or social media posts, without accidentally cropping out faces and other important image features.
 
-For the full blog post related to this recipe, see http://blog.algorithmia.com.
+For the full blog post related to this recipe, see https://blog.algorithmia.com/smart-autogeneration-of-thumbnails-banners-and-socials
 
 ## Getting Started
 

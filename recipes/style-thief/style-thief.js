@@ -3,8 +3,10 @@ var geid = function(id) {return document.getElementById(id);}
 
 var run = function() {
   var input = {
-     "image": geid("img_url").value
-    //TBD
+    "source": geid("source").value,
+    "style": geid("style").value,
+    "output": geid("output").value
+
   };
   algo.pipe(input).then(function(response) {
     //TBD

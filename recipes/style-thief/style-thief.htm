@@ -6,8 +6,13 @@
     <script src="style-thief.js" type="text/javascript"></script>
 </head>
 <body class="container">
-    <h3>Image:</h3>
-    <input type="text" size="80" id="img_url" value="https://upload.wikimedia.org/wikipedia/commons/f/f7/Hickory_Golfer.jpg" />
-    <button onclick="run()">manual resize</button>
+    <h3>Image to restyle:</h3>
+    <input type="text" size="80" id="source" value="https://upload.wikimedia.org/wikipedia/commons/f/f7/Hickory_Golfer.jpg" />
+    <h3>Image from which to strip style:</h3>
+    <input type="text" size="80" id="style" value="data://bkyan/StyleThief/default_style.jpg" />
+    <h3>Output file:</h3>
+    <input type="text" size="80" id="output" value="Styled_Hickory_Golfer.jpg" />
+    <br />
+    <button onclick="run()">restyle</button>
 </body>
 </html>

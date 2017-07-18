@@ -1,19 +1,32 @@
 <html>
-<head>
-    <title>Style Thief</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" type="text/javascript"></script>
-    <script src="https://algorithmia.com/v1/clients/js/algorithmia-0.2.0.js" type="text/javascript"></script>
-    <script src="style-thief.js" type="text/javascript"></script>
-</head>
-<body class="container">
-    <h3>Image to restyle:</h3>
-    <input type="text" size="80" id="source" value="https://upload.wikimedia.org/wikipedia/commons/f/f7/Hickory_Golfer.jpg" />
-    <h3>Image from which to strip style:</h3>
-    <input type="text" size="80" id="style" value="data://bkyan/StyleThief/default_style.jpg" />
-    <h3>Output file:</h3>
-    <input type="text" size="80" id="output" value="Styled_Hickory_Golfer.jpg" />
-    <hr />
-    <button id="run" onclick="run()">restyle</button>
-</body>
+    <head>
+        <title>Style Thief</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" >
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" type="text/javascript"></script>
+        <script src="https://algorithmia.com/v1/clients/js/algorithmia-0.2.0.js" type="text/javascript"></script>
+        <script src="style-thief.js" type="text/javascript"></script>
+    </head>
+    <body class="col-11 mx-auto">
+        <h1>Style Thief Demo</h1>
+        <hr />
+        <div class="row">
+            <div class="col-3">Image to restyle:</div>
+            <input class="col-9" type="text" id="source" value="https://www.commerce.gov/sites/commerce.gov/files/styles/scalecrop_200x200/public/media/images/2015/sperling.jpg" />
+        </div>
+        <div class="row">
+            <div class="col-3">Style sample:</div>
+            <input type="text" class="col-9" id="style" value="data://bkyan/StyleThief/default_style.jpg" />
+        </div>
+        <div class="row">
+            <div class="col-3">Output file:</div>
+            <input type="text" class="col-9" id="output" value="styled_output.jpg" />
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <button id="run" onclick="run()">restyle</button>
+                <img id="loading" style="display:none;" src="loading.gif">
+            </div>
+            <div class="col-6" id="message"></div>
+        </div>
+    </body>
 </html>

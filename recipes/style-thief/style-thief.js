@@ -1,4 +1,4 @@
-var algo = Algorithmia.client("simABLGaZp3ZsXrLF9BhSGSnDGZ1").algo("algo://bkyan/StyleThief/0.2.13");
+var algo = Algorithmia.client("your_api_key").algo("algo://bkyan/StyleThief/0.2.13");
 
 var run = function() {
   var input = {
@@ -17,7 +17,7 @@ var run = function() {
     if(response.error) {
       $("#message").text(response.error.message);
     } else {
-      $("#message").text(response.result.replaceAll('\n',' '))
+      $("#message").text(response.result.replace('\n',' '))
     }
   });
 };

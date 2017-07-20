@@ -27,7 +27,7 @@ For the full blog post related to this recipe, see http://blog.algorithmia.com
 1. Go to https://algorithmia.com/data and click "Add Data Source", then pick "Amazon S3"
 2. Enter any label you like
 3. Paste in the AWS "Access Key ID" and "Secret Access Key" from the "**Get your Secret Access Keys**" step
-4. In Path Restriction, paste the name of the bucket from the "**Set up an Amazon S3 Bucket**" step, followed by "/*" (like "bucketname/*")
+4. In Path Restriction, paste the name of the bucket from the "**Set up an Amazon S3 Bucket**" step, followed by `/*` (like "bucketname/*")
 5. Check "allow writing" (**important!**)
 6. **Copy** the URI from the bottom of the dialog, except for the "*" (something like "s3+labelname://bucketname/") and click "Connect Amazon S3" to save
 7. Click the "Manage Amazon S3" button under your new connector and UNcheck "make this the default"; save it again
@@ -36,7 +36,8 @@ For the full blog post related to this recipe, see http://blog.algorithmia.com
 
 ## Edit and Run the Demo
 
-1. Edit style-thief.js and replace `your_api_key` with your [Algorithmia API Key](http://developers.algorithmia.com/basics/customizing-api-keys/)
+1. Edit style-thief.js and replace `YOUR API_KEY` with your [Algorithmia API Key](http://developers.algorithmia.com/basics/customizing-api-keys/)
+2. also replace `YOUR_DATA_CONNECTOR` with the URI of the connector you created (such as "s3+labelname://bucketname/")
 2. Open style-thief.htm in a web browser
 
 ## Notes

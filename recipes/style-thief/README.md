@@ -21,7 +21,7 @@ For the full blog post related to this recipe, see http://blog.algorithmia.com
 3. **ONLY** check "Programmatic Access"; click "Next"
 4. Click "Attach existing policies directly" and search for "s3"
 5. Select "AmazonS3FullAccess"; click "Next", then "Create User
-6. Copy "Access Key ID" and "Secret Access Key" (**do this _now_ since they won't be shown again)**
+6. Copy "Access Key ID" and "Secret Access Key" (**do this _now_ since they won't be shown again)**; you can also click "Download .csv File" to save a copy
 
 ## Create a Data Connector from Algorithmia to S3
 1. Go to https://algorithmia.com/data and click "Add Data Source", then pick "Amazon S3"

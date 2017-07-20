@@ -27,9 +27,9 @@ For the full blog post related to this recipe, see http://blog.algorithmia.com
 1. Go to https://algorithmia.com/data and click "Add Data Source", then pick "Amazon S3"
 2. Enter any label you like
 3. Paste in the AWS "Access Key ID" and "Secret Access Key" from the "**Get your Secret Access Keys**" step
-4. In Path Restriction, paste the name of the bucket from the "**Set up an Amazon S3 Bucket**" step
+4. In Path Restriction, paste the name of the bucket from the "**Set up an Amazon S3 Bucket**" step, followed by "/*" (like "bucketname/*")
 5. Check "allow writing" (**important!**)
-6. **Copy** the URI from the bottom of the dialog (something like "s3+labelname://bucketname") and click "Connect Amazon S3" to save
+6. **Copy** the URI from the bottom of the dialog, except for the "*" (something like "s3+labelname://bucketname/") and click "Connect Amazon S3" to save
 7. Click the "Manage Amazon S3" button under your new connector and UNcheck "make this the default"; save it again
 8. To test your connector, head over to https://algorithmia.com/algorithms/util/Cat, scroll down to the "Type Your Input" box and paste your connector (E.G. "s3+labelname://bucketname/"); if clicking Run gives an error, it isn't hooked up properly
 

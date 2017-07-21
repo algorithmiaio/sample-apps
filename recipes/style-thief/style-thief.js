@@ -1,5 +1,5 @@
 var client = Algorithmia.client("your_api_key");
-var algo_stylethief = client.algo("algo://bkyan/StyleThief/0.2.13?timeout=600");
+var algo_stylethief = client.algo("algo://bkyan/StyleThief/0.2.13?timeout=3000");
 var algo_cat64 = client.algo("algo://util/CatBase64/0.1.1");
 
 var run = function() {
@@ -8,7 +8,7 @@ var run = function() {
     "source": $("#source").val(),
     "style": $("#style").val(),
     "output": filename,
-    "iterations": 800,
+    "iterations": 100,
     "log_channel": "style-thief-demo"
   };
   var outputURI = "data://.algo/bkyan/StyleThief/temp/"+filename;

@@ -10,7 +10,7 @@ For the full blog post related to this recipe, see http://blog.algorithmia.com
 
 2. Edit style-thief.js and replace `your_api_key` with your [Algorithmia API Key](http://developers.algorithmia.com/basics/customizing-api-keys/)
 
-3. Open content-aware-resize.htm in a web browser
+3. Open style-thief.htm in a web browser
 
 ## Notes
 

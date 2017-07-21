@@ -12,7 +12,7 @@ var run = function() {
     "log_channel": "style-thief-demo"
   };
   var outputURI = "data://.algo/bkyan/StyleThief/temp/"+filename;
-  $("#message").empty();
+  $("#message").text("This will take 5-50 minutes, so please be patient!");
   $('#output').attr('src','');
   $("#run").hide();
   $("#loading").show();
@@ -22,10 +22,8 @@ var run = function() {
     if(response.error) {
       $("#message").text(response.error.message);
     } else {
-      console.log(response.result.replace('\n',' '));
-      console.log(outputURI);
       algo_cat64.pipe(outputURI).then(function(response2) {
-        console.log(response2.result);
+        $("#message").empty();
         $('#output').attr('src','data:image/jpeg;base64,'+response2.result);
       });
     }

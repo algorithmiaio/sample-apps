@@ -1,4 +1,4 @@
-var client = Algorithmia.client("simc6QvB6kIC5nHmoA3hrsVerJ91"); //");
+var client = Algorithmia.client("your_api_key");
 var algo_stylethief = client.algo("algo://bkyan/StyleThief/0.2.13?timeout=3000");
 var algo_cat64 = client.algo("algo://util/CatBase64/0.1.1");
 

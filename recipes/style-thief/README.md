@@ -10,10 +10,12 @@ For the full blog post related to this recipe, see http://blog.algorithmia.com
 
 ## Set up an Amazon S3 Bucket to Host your Results
 
-1. Go to https://console.aws.amazon.com/s3 and click "Create bucket"
-2. Give it any name & location you prefer; **write down the name of the bucket**, then click "Next"
+1. Go to https://s3.console.aws.amazon.com/s3/home?region=us-east-1 and click "Create bucket"
+2. Give it any name you prefer, and **write down the name of the bucket**; make sure the Region is set to *US East (N. Virginia); click "Next"
 3. You don't need to add versioning, logging, or tags, so click "Next" again
-4. In the permissions, select "grant public read access to this bucket", and save
+4. In the permissions, select "grant public read access to this bucket"; click Next and Next again to save your bucket.
+5. Once the popover has closed, click on your newly-created bucket and then click the "Properties Tab"
+6. Click "Static Website Hosting", "Use this Bucket to Host a Website", type "index.html" into the indec field, and Save.
 
 ## Get your Secret Access Keys from Amazon
 1. Go to https://console.aws.amazon.com/iam/home, click "Users", then "Add User"
@@ -37,8 +39,8 @@ For the full blog post related to this recipe, see http://blog.algorithmia.com
 ## Edit and Run the Demo
 
 1. Edit style-thief.js and replace `YOUR API_KEY` with your [Algorithmia API Key](http://developers.algorithmia.com/basics/customizing-api-keys/)
-2. also replace `YOUR_DATA_CONNECTOR` with the URI of the connector you created (such as "s3+labelname://bucketname/")
-2. Open style-thief.htm in a web browser
+2. Replace `YOUR_DATA_CONNECTOR/` with the URI of the connector you created (such as "s3+labelname://bucketname/")
+3. Open style-thief.htm in a web browser
 
 ## Notes
 

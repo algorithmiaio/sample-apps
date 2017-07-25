@@ -3,7 +3,7 @@ var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
 
 var algorithms = {
   videoMetadata: 'demo/VideoMetadataExtractionDemo/0.1.9',
-  VideoTagSequencer: 'media/VideoTagSequencer/0.1.3'
+  VideoTagSequencer: 'media/VideoTagSequencer/0.1.5'
 };
 
 var algorithmsUserSelectable = {
@@ -48,7 +48,44 @@ var algorithmTemplates = {
       "algorithm":null,
       "advanced_input":"$SINGLE_INPUT",
       "fps": 10
+    },
+  videoTagSequencer: {
+    nudity: {
+      tag_key: "nude",
+      confidence_key: "confidence",
+      traversal_path: "$ROOT",
+      minimum_confidence: 0.65,
+      minimum_sequence_length: 8
+    },
+    tagger: {
+      tag_key: "class",
+      confidence_key: "confidence",
+      traversal_path:{tags: "$ROOT"},
+      minimum_confidence: 0.1,
+      minimum_sequence_length: 5
+    },
+    cars: {
+      tag_key: ["body_style", "make", "model", "model_year"],
+      confidence_key: "confidence",
+      traversal_path: "$ROOT",
+      minimum_confidence: 0.3,
+      minimum_sequence_length: 1
+    },
+    deepfashion: {
+        tag_key: "article_name",
+        confidence_key: "confidence",
+        traversal_path: {articles: "$ROOT"},
+        minimum_confidence: 0.25,
+        minimum_sequence_length: 5
+    },
+    places: {
+      tag_key: "class",
+      confidence_key: "prob",
+      traversal_path: {predictions: "$ROOT"},
+      minimum_confidence: 0.25,
+      minimum_sequence_length: 5
     }
+  }
 };
 
 var algoSuggestions = {
@@ -123,23 +160,7 @@ var analyze = function() {
     } else {
       var inputFileUrl = getHttpUrl(data.input_file);
       $('#results-algo .result-input').attr({'src': inputFileUrl, 'poster': inputFileUrl+'.png'});
-      showResults(selectedAlgo, output.result);
-      console.log(data.output_file)
-      sequenceInput = {
-        source: data.output_file,
-        tag_key: "nude",
-        confidence_key: "confidence",
-        traversal_path: "$ROOT",
-        minimum_confidence: 0.65,
-        minimum_sequence_length: 8
-      };
-      algoClient.algo(algorithms.VideoTagSequencer).pipe(sequenceInput).then(function(output2) {
-        if (output2.error) {
-          console.log(output2);
-        } else {
-          console.log(output2.result);
-        }
-      });
+      showResults(selectedAlgo, output.result, data.output_file);
     }
   },function(error) {
     console.log(error);
@@ -177,8 +198,10 @@ function resizeResultAreas() {
  * reveal resultant JSON metadata
  * @param selectedAlgo display name of the algo which was run
  * @param json JSON metadata results
+ * @param outputFile data URI of metadata file
  */
-var showResults = function(selectedAlgo, json){
+var showResults = function(selectedAlgo, json, outputFile){
+  showSequenceResults(selectedAlgo,outputFile);
   if(resultsInterval) {
     window.clearInterval(resultsInterval);
     resultsInterval = null;
@@ -219,6 +242,57 @@ var showResults = function(selectedAlgo, json){
     resizeResultAreas();
   },500);
 };
+
+/**
+ * reveal resultant Sequence (if available)
+ * @param selectedAlgo display name of the algo which was run
+ * @param outputFile data URI of metadata file
+ */
+var showSequenceResults = function(selectedAlgo,outputFile) {
+  $('#results-sequence .result-output').html('<b>Building Timeline...</b>');
+  if(algorithmTemplates.videoTagSequencer[selectedAlgo]) {
+    $('#results-sequence').removeClass('hidden');
+    var sequenceInput=algorithmTemplates.videoTagSequencer[selectedAlgo];
+    sequenceInput.source=outputFile;
+    algoClient.algo(algorithms.VideoTagSequencer).pipe(sequenceInput).then(function(output2) {
+      var sequenceHtml = null;
+      if(output2.error) {
+        sequenceHtml = output2.error;
+      } else  if (output2.result.length) {
+        var sequenceList = '<table class="table">';
+        for (i in output2.result) {
+          sequenceList += '<tr><td>';
+          var s = output2.result[i];
+          for (j in s.tag) {
+            sequenceList += j+': '+s.tag[j]+'</br>';
+          }
+          sequenceList += '</td><td>';
+          for (j in s.sequences) {
+            sequenceList += round2d(s.sequences[j].start_time)+'s - '+round2d(s.sequences[j].stop_time)+'s<br/>';
+          }
+          sequenceList += '</td></tr>';
+        }
+        sequenceHtml = sequenceList+'</table>';
+      } else {
+        sequenceHtml = '<i>(no results above '+algorithmTemplates.videoTagSequencer[selectedAlgo].minimum_confidence+' confidence for at least '+algorithmTemplates.videoTagSequencer[selectedAlgo].minimum_sequence_length+' frames)</i>';
+      }
+      $('#results-sequence .result-output').html(sequenceHtml);
+      $('#results-sequence').removeClass('hidden');
+    });
+  } else {
+    $('#results-sequence').addClass('hidden');
+  }
+};
+
+/**
+ * two-digit rounding
+ * @param n
+ * @return {number}
+ */
+var round2d = function(n) {
+  return Math.round(n*100)/100.0;
+};
+
 
 /**
  * show overlay, clear results

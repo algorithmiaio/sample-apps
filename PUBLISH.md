@@ -1,6 +1,6 @@
 ## Setup
 
-Most of the demos get built and published via Grunt tasks. You'll need to install the Grunt CLI and the AWS grunt plugin:
+Most of the demos get built and published via Grunt tasks. You'll need to install the Grunt CLI:
 
 ```bash
 npm install -g grunt-cli

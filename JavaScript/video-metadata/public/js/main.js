@@ -2,10 +2,8 @@
 var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
 
 var algorithms = {
-  videoMetadata: {
-    algorithm: 'demo/VideoMetadataExtractionDemo/0.1.9',
-    result_field: 'output_file'
-  }
+  videoMetadata: 'demo/VideoMetadataExtractionDemo/0.1.9',
+  VideoTagSequencer: 'media/VideoTagSequencer/0.1.3'
 };
 
 var algorithmsUserSelectable = {
@@ -118,7 +116,7 @@ var analyze = function() {
   data.input_file = 'http://s3.amazonaws.com/algorithmia-demos/video-metadata/'+selectedVideo+'.mp4';
   data.output_file = 'data://.algo/media/VideoMetadataExtraction/perm/'+selectedVideo+'_'+selectedAlgo+'.json';
   showWait(selectedAlgo);
-  algoClient.algo(algorithms.videoMetadata.algorithm).pipe(data).then(function(output) {
+  algoClient.algo(algorithms.videoMetadata).pipe(data).then(function(output) {
     if (output.error) {
       console.log(output);
       hideWait(selectedAlgo, output.error.message);
@@ -126,6 +124,22 @@ var analyze = function() {
       var inputFileUrl = getHttpUrl(data.input_file);
       $('#results-algo .result-input').attr({'src': inputFileUrl, 'poster': inputFileUrl+'.png'});
       showResults(selectedAlgo, output.result);
+      console.log(data.output_file)
+      sequenceInput = {
+        source: data.output_file,
+        tag_key: "nude",
+        confidence_key: "confidence",
+        traversal_path: "$ROOT",
+        minimum_confidence: 0.65,
+        minimum_sequence_length: 8
+      };
+      algoClient.algo(algorithms.VideoTagSequencer).pipe(sequenceInput).then(function(output2) {
+        if (output2.error) {
+          console.log(output2);
+        } else {
+          console.log(output2.result);
+        }
+      });
     }
   },function(error) {
     console.log(error);

@@ -259,18 +259,21 @@ var showSequenceResults = function(selectedAlgo,outputFile) {
       if(output2.error) {
         sequenceHtml = output2.error;
       } else  if (output2.result.length) {
-        var sequenceList = '<table class="table">';
+        var sequenceList = '<table class="table table-hover">';
         for (i in output2.result) {
           sequenceList += '<tr><td>';
           var s = output2.result[i];
           for (j in s.tag) {
             sequenceList += j+': '+s.tag[j]+'</br>';
           }
-          sequenceList += '</td><td>';
+          sequenceList += '</td><td><nobr>';
           for (j in s.sequences) {
-            sequenceList += round2d(s.sequences[j].start_time)+'s - '+round2d(s.sequences[j].stop_time)+'s<br/>';
+            var start=round2d(s.sequences[j].start_time);
+            var end=round2d(s.sequences[j].stop_time);
+            sequenceList += '<a onclick="jumpToVideo('+start+')">'+start+'</a> - ';
+            sequenceList += '<a onclick="jumpToVideo('+end+')">'+end+'</a>s<br/>';
           }
-          sequenceList += '</td></tr>';
+          sequenceList += '</nobr></td></tr>';
         }
         sequenceHtml = sequenceList+'</table>';
       } else {
@@ -293,6 +296,13 @@ var round2d = function(n) {
   return Math.round(n*100)/100.0;
 };
 
+/**
+ * jump the video to a specified timepoint
+ * @param time
+ */
+var jumpToVideo = function(time) {
+  $('#results-algo .result-input')[0].currentTime=time;
+};
 
 /**
  * show overlay, clear results

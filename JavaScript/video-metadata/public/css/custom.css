@@ -82,13 +82,13 @@ video {
   overflow-y: scroll;
   font-size: 0.75rem;
 }
-#results-sequence .result-output, #results-timeline .result-output {
+#results-sequence .result-output {
   overflow-y: auto;
 }
 #results-sequence, #results-sequence {
   padding-top: 0;
 }
-.tl-storyslider {
+.tl-storyslider, .tl-timeaxis, .tl-menubar {
   display: none;
 }
 

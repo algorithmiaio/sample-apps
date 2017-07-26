@@ -251,7 +251,7 @@ var showResults = function(selectedAlgo, json, outputFile){
 var showSequenceResults = function(selectedAlgo,outputFile) {
   $('#results-sequence .result-output').html('<b>Building Timeline...</b>');
   if(algorithmTemplates.videoTagSequencer[selectedAlgo]) {
-    $('#results-sequence, #results-timeline').removeClass('hidden');
+    $('#results-sequence').removeClass('hidden');
     var sequenceInput=algorithmTemplates.videoTagSequencer[selectedAlgo];
     sequenceInput.source=outputFile;
     algoClient.algo(algorithms.VideoTagSequencer).pipe(sequenceInput).then(function(output2) {
@@ -263,13 +263,12 @@ var showSequenceResults = function(selectedAlgo,outputFile) {
         showTimeline(output2.result);
       } else {
         sequenceHtml = '<i>(no results above '+algorithmTemplates.videoTagSequencer[selectedAlgo].minimum_confidence+' confidence for at least '+algorithmTemplates.videoTagSequencer[selectedAlgo].minimum_sequence_length+' frames)</i>';
-        $('#timeline-embed').html(sequenceHtml);
       }
       $('#results-sequence .result-output').html(sequenceHtml);
-      $('#results-sequence, #results-timeline').removeClass('hidden');
+      $('#results-sequence').removeClass('hidden');
     });
   } else {
-    $('#results-sequence, #results-timeline').addClass('hidden');
+    $('#results-sequence').addClass('hidden');
   }
 };
 
@@ -314,40 +313,43 @@ var showTimeline = function(sequencerResults) {
       for (var k in s.sequences) {
         var event = {
           text:{
-            headline: '<a onclick="jumpToVideo(' + s.sequences[k].start_time + ')">' + j + ': ' + s.tag[j] +'</a>'
+            text: '<a onclick="jumpToVideo(' + s.sequences[k].start_time + ')">' + s.tag[j] +'</a>'
           }
         };
         var startHMS = secondsToHMS(s.sequences[k].start_time);
         event.start_date = {
           year: nowYear,
           month: nowMonth,
-          day: nowDay,
-          hour: startHMS.hour,
-          minute: startHMS.minute,
-          second: startHMS.second,
-          display_date: startHMS.hour+':'+startHMS.minute+':'+startHMS.second
+          day: Math.floor(s.sequences[k].start_time/2)
+          // day: nowDay,
+          // hour: startHMS.hour,
+          // minute: startHMS.minute,
+          // second: startHMS.second,
+          // display_date: startHMS.hour+':'+startHMS.minute+':'+startHMS.second
         };
         var endHMS = secondsToHMS(s.sequences[k].stop_time);
         event.end_date = {
           year: nowYear,
           month: nowMonth,
-          day: nowDay,
-          hour: endHMS.hour,
-          minute: endHMS.minute,
-          second: endHMS.second,
-          display_date: endHMS.hour+':'+endHMS.minute+':'+endHMS.second
+          day: Math.floor(s.sequences[k].stop_time/2)
+          // day: nowDay,
+          // hour: endHMS.hour,
+          // minute: endHMS.minute,
+          // second: endHMS.second,
+          // display_date: endHMS.hour+':'+endHMS.minute+':'+endHMS.second
         };
       }
       events.push(event);
     }
   }
-  window.timeline = new TL.Timeline('timeline-embed', {"events": events}, {hash_bookmark: false});
-  window.setTimeout(function(){window.timeline.updateDisplay();},500);
-  window.setTimeout(function(){window.timeline.updateDisplay},1000);
-  window.setTimeout(function(){window.timeline.updateDisplay();},2000);
-  window.addEventListener('resize', function () {
+  window.timeline = new TL.Timeline('timeline-embed', {"events": events}, {start_at_end: true, hash_bookmark: false, zoom_sequence: [0.8]});
+  var fixTimelineDisplay = function() {
+    window.timeline.setZoom(0);
     window.timeline.updateDisplay();
-  });
+  };
+  window.setTimeout(fixTimelineDisplay,500);
+  window.setTimeout(fixTimelineDisplay,1000);
+  window.addEventListener('resize', fixTimelineDisplay);
 };
 
 /**

@@ -289,12 +289,8 @@ var showSequenceResults = function(selectedAlgo,outputFile) {
 };
 
 var showTimeline = function(jsonFile) {
-  // var embed = document.getElementById('timeline-embed');
-  // embed.style.height = getComputedStyle(document.body).height;
   window.timeline = new TL.Timeline('timeline-embed',jsonFile,{ hash_bookmark: false});
   window.addEventListener('resize', function() {
-    // var embed = document.getElementById('timeline-embed');
-    // embed.style.height = getComputedStyle(document.body).height;
     timeline.updateDisplay();
   })
 };

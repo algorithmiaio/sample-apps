@@ -26,6 +26,10 @@
 <meta itemprop="name" content="Video transformations and data extraction">
 <meta itemprop="description" content="Use machine learning to extract information from your videos">
 
+<!-- CSS -->
+<link rel="stylesheet" href="public/css/font.knightlab.css">
+<link title="timeline-styles" rel="stylesheet" href="public/css/timeline.css">
+
 <%= header_end %>
 
 <section class="purple-grad-background hero">
@@ -134,6 +138,15 @@
   </div>
 </section>
 
+<section class="container hidden results" id="results-timeline">
+  <div class="row">
+    <h4 class="result-title col-sm-12">Timeline</h4>
+    <div class="result-output col-sm-12 col-md-6" id="timeline-embed">
+      <div id="timeline"></div>
+    </div>
+  </div>
+</section>
+
 <!-- EXPLANATION -->
 <div class="grey-background">
 <section class="container">
@@ -214,5 +227,6 @@ print algo.pipe(input)
   <script src="public/js/TweenMax.min.js"></script>
   <script src="public/js/dots.js"></script>
   <script src="public/js/dropzone.js"></script>
+  <script src="public/js/timeline-min.js"></script>
 
   <%= footer %>

@@ -251,7 +251,7 @@ var showResults = function(selectedAlgo, json, outputFile){
 var showSequenceResults = function(selectedAlgo,outputFile) {
   $('#results-sequence .result-output').html('<b>Building Timeline...</b>');
   if(algorithmTemplates.videoTagSequencer[selectedAlgo]) {
-    $('#results-sequence').removeClass('hidden');
+    $('#results-sequence, #results-timeline').removeClass('hidden');
     var sequenceInput=algorithmTemplates.videoTagSequencer[selectedAlgo];
     sequenceInput.source=outputFile;
     algoClient.algo(algorithms.VideoTagSequencer).pipe(sequenceInput).then(function(output2) {
@@ -276,15 +276,27 @@ var showSequenceResults = function(selectedAlgo,outputFile) {
           sequenceList += '</nobr></td></tr>';
         }
         sequenceHtml = sequenceList+'</table>';
+        showTimeline('https://raw.githubusercontent.com/NUKnightLab/TimelineJS3/master/website/templates/examples/houston/timeline3.json');
       } else {
         sequenceHtml = '<i>(no results above '+algorithmTemplates.videoTagSequencer[selectedAlgo].minimum_confidence+' confidence for at least '+algorithmTemplates.videoTagSequencer[selectedAlgo].minimum_sequence_length+' frames)</i>';
       }
       $('#results-sequence .result-output').html(sequenceHtml);
-      $('#results-sequence').removeClass('hidden');
+      $('#results-sequence, #results-timeline').removeClass('hidden');
     });
   } else {
-    $('#results-sequence').addClass('hidden');
+    $('#results-sequence, #results-timeline').addClass('hidden');
   }
+};
+
+var showTimeline = function(jsonFile) {
+  // var embed = document.getElementById('timeline-embed');
+  // embed.style.height = getComputedStyle(document.body).height;
+  window.timeline = new TL.Timeline('timeline-embed',jsonFile,{ hash_bookmark: false});
+  window.addEventListener('resize', function() {
+    // var embed = document.getElementById('timeline-embed');
+    // embed.style.height = getComputedStyle(document.body).height;
+    timeline.updateDisplay();
+  })
 };
 
 /**

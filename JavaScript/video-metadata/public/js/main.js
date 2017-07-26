@@ -69,7 +69,7 @@ var algorithmTemplates = {
       confidence_key: "confidence",
       traversal_path: "$ROOT",
       minimum_confidence: 0.3,
-      minimum_sequence_length: 1
+      minimum_sequence_length: 2
     },
     deepfashion: {
         tag_key: "article_name",
@@ -171,7 +171,7 @@ var analyze = function() {
 /**
  * get the http URL which is mapped to our s3 bucket
  * @param s3file s3 data URI of file
- * @returns {string} http URL of file
+ * @return {string} http URL of file
  */
 var getHttpUrl = function(s3file) {
   return s3file.replace('s3+demo://','https://s3.amazonaws.com/algorithmia-demos/');
@@ -259,26 +259,11 @@ var showSequenceResults = function(selectedAlgo,outputFile) {
       if(output2.error) {
         sequenceHtml = output2.error;
       } else  if (output2.result.length) {
-        var sequenceList = '<table class="table table-hover">';
-        for (i in output2.result) {
-          sequenceList += '<tr><td>';
-          var s = output2.result[i];
-          for (j in s.tag) {
-            sequenceList += j+': '+s.tag[j]+'</br>';
-          }
-          sequenceList += '</td><td><nobr>';
-          for (j in s.sequences) {
-            var start=round2d(s.sequences[j].start_time);
-            var end=round2d(s.sequences[j].stop_time);
-            sequenceList += '<a onclick="jumpToVideo('+start+')">'+start+'</a> - ';
-            sequenceList += '<a onclick="jumpToVideo('+end+')">'+end+'</a>s<br/>';
-          }
-          sequenceList += '</nobr></td></tr>';
-        }
-        sequenceHtml = sequenceList+'</table>';
-        showTimeline('https://raw.githubusercontent.com/NUKnightLab/TimelineJS3/master/website/templates/examples/houston/timeline3.json');
+        sequenceHtml = generateSequenceHtml(output2.result);
+        showTimeline(output2.result);
       } else {
         sequenceHtml = '<i>(no results above '+algorithmTemplates.videoTagSequencer[selectedAlgo].minimum_confidence+' confidence for at least '+algorithmTemplates.videoTagSequencer[selectedAlgo].minimum_sequence_length+' frames)</i>';
+        $('#timeline-embed').html(sequenceHtml);
       }
       $('#results-sequence .result-output').html(sequenceHtml);
       $('#results-sequence, #results-timeline').removeClass('hidden');
@@ -288,11 +273,81 @@ var showSequenceResults = function(selectedAlgo,outputFile) {
   }
 };
 
-var showTimeline = function(jsonFile) {
-  window.timeline = new TL.Timeline('timeline-embed',jsonFile,{ hash_bookmark: false});
-  window.addEventListener('resize', function() {
-    timeline.updateDisplay();
-  })
+/**
+ * build html view of VideoTagSequencer results
+ * @param sequencerResults
+ * @return {string}
+ */
+function generateSequenceHtml(sequencerResults) {
+  var html = '<table class="table table-hover">';
+  for (var i in sequencerResults) {
+    html += '<tr><td>';
+    var s = sequencerResults[i];
+    for (var j in s.tag) {
+      html += j + ': ' + s.tag[j] + '</br>';
+    }
+    html += '</td><td><nobr>';
+    for (var k in s.sequences) {
+      var start = round2d(s.sequences[k].start_time);
+      var end = round2d(s.sequences[k].stop_time);
+      html += '<a onclick="jumpToVideo(' + start + ')">' + start + '</a> - ';
+      html += '<a onclick="jumpToVideo(' + end + ')">' + end + '</a>s<br/>';
+    }
+    html += '</nobr></td></tr>';
+  }
+  return html + '</table>';
+}
+
+/**
+ * render timeline.js for VideoTagSequencer results
+ * @param sequencerResults
+ */
+var showTimeline = function(sequencerResults) {
+  var now = new Date();
+  var nowYear = now.getFullYear();
+  var nowMonth = now.getMonth()+1;
+  var nowDay = now.getDate();
+  var events = [];
+  for (var i in sequencerResults) {
+    var s = sequencerResults[i];
+    for (var j in s.tag) {
+      for (var k in s.sequences) {
+        var event = {
+          text:{
+            headline: '<a onclick="jumpToVideo(' + s.sequences[k].start_time + ')">' + j + ': ' + s.tag[j] +'</a>'
+          }
+        };
+        var startHMS = secondsToHMS(s.sequences[k].start_time);
+        event.start_date = {
+          year: nowYear,
+          month: nowMonth,
+          day: nowDay,
+          hour: startHMS.hour,
+          minute: startHMS.minute,
+          second: startHMS.second,
+          display_date: startHMS.hour+':'+startHMS.minute+':'+startHMS.second
+        };
+        var endHMS = secondsToHMS(s.sequences[k].stop_time);
+        event.end_date = {
+          year: nowYear,
+          month: nowMonth,
+          day: nowDay,
+          hour: endHMS.hour,
+          minute: endHMS.minute,
+          second: endHMS.second,
+          display_date: endHMS.hour+':'+endHMS.minute+':'+endHMS.second
+        };
+      }
+      events.push(event);
+    }
+  }
+  window.timeline = new TL.Timeline('timeline-embed', {"events": events}, {hash_bookmark: false});
+  window.setTimeout(function(){window.timeline.updateDisplay();},500);
+  window.setTimeout(function(){window.timeline.updateDisplay},1000);
+  window.setTimeout(function(){window.timeline.updateDisplay();},2000);
+  window.addEventListener('resize', function () {
+    window.timeline.updateDisplay();
+  });
 };
 
 /**
@@ -302,6 +357,21 @@ var showTimeline = function(jsonFile) {
  */
 var round2d = function(n) {
   return Math.round(n*100)/100.0;
+};
+
+/**
+ * convert a number of seconds into hour, minute, second dict
+ * @param seconds
+ * @return {{hour: number, minute: number, second: number}}
+ */
+var secondsToHMS = function(seconds) {
+  var divisor_minutes = seconds % 3600;
+  var divisor_seconds = divisor_minutes % 60;
+  return {
+    hour: Math.floor(seconds / 3600),
+    minute: Math.floor(divisor_minutes / 60),
+    second: Math.ceil(divisor_seconds)
+  }
 };
 
 /**

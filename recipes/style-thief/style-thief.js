@@ -1,6 +1,6 @@
-var client = Algorithmia.client("your_api_key");
+var client = Algorithmia.client("simGy+HVEcjGrf7pR56vSXZ6SiU1");
 var algo_stylethief = client.algo("algo://bkyan/StyleThief/0.2.13?timeout=3000");
-var algo_cat64 = client.algo("algo://util/CatBase64/0.1.1");
+var algo_cat64 = client.algo("algo://util/Data2Base64/0.1.0");
 
 var run = function() {
   var filename = new Date().getTime()+".jpg";

@@ -250,7 +250,7 @@ var showResults = function(selectedAlgo, json, outputFile){
  * @param outputFile data URI of metadata file
  */
 var showSequenceResults = function(selectedAlgo,outputFile) {
-  $('#results-sequence .result-output').html('<b>Building Timeline...</b>');
+  $('#timeline-html').html('<b>Building Timeline...</b>');
   if(algorithmTemplates.videoTagSequencer[selectedAlgo]) {
     $('#results-sequence').removeClass('hidden');
     var sequenceInput=algorithmTemplates.videoTagSequencer[selectedAlgo];
@@ -265,7 +265,7 @@ var showSequenceResults = function(selectedAlgo,outputFile) {
       } else {
         sequenceHtml = '<i>(no results above '+algorithmTemplates.videoTagSequencer[selectedAlgo].minimum_confidence+' confidence for at least '+algorithmTemplates.videoTagSequencer[selectedAlgo].minimum_sequence_length+' frames)</i>';
       }
-      $('#results-sequence .result-output').html(sequenceHtml);
+      $('#timeline-html').html(sequenceHtml);
       $('#results-sequence').removeClass('hidden');
     });
   } else {

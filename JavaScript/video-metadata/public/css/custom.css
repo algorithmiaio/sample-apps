@@ -69,6 +69,9 @@ video {
 .btn-suppressed {
   opacity: 0.5;
 }
+#analyze-button-text {
+  font-size: 0.65rem;
+}
 
 /* results */
 .rating {}

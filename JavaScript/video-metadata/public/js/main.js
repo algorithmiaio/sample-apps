@@ -319,6 +319,7 @@ var showTimeline = function(sequencerResults) {
         event.end_date = {
           year: Math.floor(s.sequences[k].stop_time)
         };
+        event.unique_id = "start-"+s.sequences[k].start_time;
         events.push(event);
       }
     }
@@ -340,7 +341,16 @@ var showTimeline = function(sequencerResults) {
       $('.tl-timeaxis span:contains("'+txt+'")').empty();
     });
   };
+  var addTimelineHooks = function() {
+    $('.tl-timemarker').each(
+      function(i,e) {
+        var t = parseFloat(e.id.substr(6));
+        $(e).click(function(){jumpToVideo(t);});
+      }
+    );
+  };
   window.setTimeout(fixTimelineDisplay,500);
+  window.setTimeout(addTimelineHooks,500);
   window.setTimeout(fixTimelineDisplay,1000);
   window.addEventListener('resize', fixTimelineDisplay);
 };

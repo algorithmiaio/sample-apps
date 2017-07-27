@@ -303,10 +303,6 @@ function generateSequenceHtml(sequencerResults) {
  * @param sequencerResults
  */
 var showTimeline = function(sequencerResults) {
-  var now = new Date();
-  var nowYear = now.getFullYear();
-  var nowMonth = now.getMonth()+1;
-  var nowDay = now.getDate();
   var events = [];
   for (var i in sequencerResults) {
     var s = sequencerResults[i];
@@ -317,33 +313,26 @@ var showTimeline = function(sequencerResults) {
             text: '<a onclick="jumpToVideo(' + s.sequences[k].start_time + ')">' + s.tag[j] +'</a>'
           }
         };
-        var startHMS = secondsToHMS(s.sequences[k].start_time);
         event.start_date = {
-          year: nowYear,
-          month: nowMonth,
-          day: Math.floor(s.sequences[k].start_time/2)
-          // day: nowDay,
-          // hour: startHMS.hour,
-          // minute: startHMS.minute,
-          // second: startHMS.second,
-          // display_date: startHMS.hour+':'+startHMS.minute+':'+startHMS.second
+          year: Math.floor(s.sequences[k].start_time)
         };
-        var endHMS = secondsToHMS(s.sequences[k].stop_time);
         event.end_date = {
-          year: nowYear,
-          month: nowMonth,
-          day: Math.floor(s.sequences[k].stop_time/2)
-          // day: nowDay,
-          // hour: endHMS.hour,
-          // minute: endHMS.minute,
-          // second: endHMS.second,
-          // display_date: endHMS.hour+':'+endHMS.minute+':'+endHMS.second
+          year: Math.floor(s.sequences[k].stop_time)
         };
+        events.push(event);
       }
-      events.push(event);
     }
   }
-  window.timeline = new TL.Timeline('timeline-embed', {"events": events}, {start_at_end: true, hash_bookmark: false, zoom_sequence: [0.5]});
+  window.timeline = new TL.Timeline(
+    'timeline-embed',
+    {events: events},
+    {
+      scale: 'cosmological',
+      start_at_end: true,
+      hash_bookmark: false,
+      zoom_sequence: [0.5]
+    }
+  );
   var fixTimelineDisplay = function() {
     window.timeline.setZoom(0);
     window.timeline.updateDisplay();
@@ -360,21 +349,6 @@ var showTimeline = function(sequencerResults) {
  */
 var round2d = function(n) {
   return Math.round(n*100)/100.0;
-};
-
-/**
- * convert a number of seconds into hour, minute, second dict
- * @param seconds
- * @return {{hour: number, minute: number, second: number}}
- */
-var secondsToHMS = function(seconds) {
-  var divisor_minutes = seconds % 3600;
-  var divisor_seconds = divisor_minutes % 60;
-  return {
-    hour: Math.floor(seconds / 3600),
-    minute: Math.floor(divisor_minutes / 60),
-    second: Math.ceil(divisor_seconds)
-  }
 };
 
 /**

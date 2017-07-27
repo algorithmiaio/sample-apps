@@ -88,7 +88,7 @@ video {
 #results-sequence, #results-sequence {
   padding-top: 0;
 }
-.tl-storyslider, .tl-timeaxis, .tl-menubar {
+.tl-storyslider, .tl-menubar {
   display: none;
 }
 

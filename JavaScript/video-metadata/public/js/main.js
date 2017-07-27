@@ -336,6 +336,9 @@ var showTimeline = function(sequencerResults) {
   var fixTimelineDisplay = function() {
     window.timeline.setZoom(0);
     window.timeline.updateDisplay();
+    ['BCE','Jan.','Feb.','March','April','May','June','July','Aug.','Sept.','Oct.','Nov.','Dec'].forEach(function(txt) {
+      $('.tl-timeaxis span:contains("'+txt+'")').empty();
+    });
   };
   window.setTimeout(fixTimelineDisplay,500);
   window.setTimeout(fixTimelineDisplay,1000);

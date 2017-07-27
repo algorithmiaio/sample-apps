@@ -3,7 +3,7 @@ var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
 
 var algorithms = {
   videoMetadata: 'demo/VideoMetadataExtractionDemo/0.1.9',
-  VideoTagSequencer: 'media/VideoTagSequencer/0.1.6'
+  VideoTagSequencer: 'media/VideoTagSequencer/0.1.8'
 };
 
 var algorithmsUserSelectable = {
@@ -141,6 +141,7 @@ var selectVideo = function(name) {
 var selectAlgo = function(name) {
   $('button').removeClass('active');
   $('#button-'+name).addClass('active');
+  $('#analyze-button-text').text(algorithmTemplates.videoTagSequencer[name]?'Extract Metadata & Build Timeline':'Extract Metadata');
   selectedAlgo = name;
 };
 
@@ -342,7 +343,7 @@ var showTimeline = function(sequencerResults) {
       events.push(event);
     }
   }
-  window.timeline = new TL.Timeline('timeline-embed', {"events": events}, {start_at_end: true, hash_bookmark: false, zoom_sequence: [0.8]});
+  window.timeline = new TL.Timeline('timeline-embed', {"events": events}, {start_at_end: true, hash_bookmark: false, zoom_sequence: [0.5]});
   var fixTimelineDisplay = function() {
     window.timeline.setZoom(0);
     window.timeline.updateDisplay();

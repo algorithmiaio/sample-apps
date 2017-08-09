@@ -21,7 +21,7 @@ for search_phrase in search_phrases:
 	for idlist in search.find_all('idlist'):
 		for article_id in idlist.find_all('id'):
 			article_ids.append(article_id.text)
-	print 'Found {} articles for {}'.format(len(article_ids),search_phrase)
+	print('Found {} articles for {}'.format(len(article_ids),search_phrase))
 	#extract abstracts from articles
 	for article_id in article_ids:
 		article_xml = requests.get(article_url+article_id).content.decode('utf-8')
@@ -31,7 +31,7 @@ for search_phrase in search_phrases:
 			abstract.append(a.text)
 		abstract = ' '.join(abstract)
 		if(len(abstract)==0):
-			print 'WARNING: no abstract for article {}'.format(article_id)
+			print('WARNING: no abstract for article {}'.format(article_id))
 		else:
 			training_data.append({'text':abstract.replace('"',''), 'label':search_phrase})
 	#train on this search_phrase
@@ -41,7 +41,7 @@ for search_phrase in search_phrases:
 	   'mode':'train'
 	}
 	client.algo('nlp/DocumentClassifier/0.3.0').set_options(timeout=3000).pipe(training_input)
-	print 'Trained {}'.format(search_phrase)
+	print('Trained {}'.format(search_phrase))
 
 #test a prediction
 testing_input = {
@@ -49,4 +49,4 @@ testing_input = {
    'namespace':'data://.my/'+namespace,
    'mode':'predict'
 }
-print client.algo('nlp/DocumentClassifier/0.3.0').pipe(testing_input)
+print(client.algo('nlp/DocumentClassifier/0.3.0').pipe(testing_input))

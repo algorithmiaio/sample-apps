@@ -2,7 +2,7 @@
 
 The [Video Metadata Extraction microservice](https://algorithmia.com/algorithms/media/VideoMetadataExtraction) from Algorithmia is a straightforward API which takes in a video (by URL) and returns metadata, such as a list of object tags, for each frame of the video.
 
-For the full blog post related to this recipe, see http://blog.algorithmia.com [TBA].
+For the full blog post related to this recipe, see https://blog.algorithmia.com/video-editing-extracting-metadata-from-movie-scenes/
 
 ## Getting Started
 
@@ -12,7 +12,7 @@ Create a free [Algorithmia account](https://algorithmia.com/signup), and install
 pip install algorithmia
 ```
 
-Detailed instructions can be found in the [blog post](http://blog.algorithmia.com/) [TBA].
+Detailed instructions can be found in the [blog post](https://blog.algorithmia.com/video-editing-extracting-metadata-from-movie-scenes/).
 
 ## How To Run the Script
 

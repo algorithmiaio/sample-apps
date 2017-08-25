@@ -26,9 +26,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Find views
-        algoUrl = (EditText) findViewById(R.id.algo_url);
-        algoInput = (EditText) findViewById(R.id.algo_input);
-        algoOutput = (TextView) findViewById(R.id.algo_output);
+        algoUrl = findViewById(R.id.algo_url);
+        algoInput = findViewById(R.id.algo_input);
+        algoOutput = findViewById(R.id.algo_output);
     }
 
     public void onClickRun(View v) {

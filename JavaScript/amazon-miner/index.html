@@ -1,0 +1,72 @@
+<html>
+  <head>
+	<title>Amazon Miner - Algorithmia</title>
+	<link rel="stylesheet" href="public/css/reset.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Varela+Round">
+	<link rel="stylesheet" href="public/css/main.css">
+	</head>
+  <body>
+
+	<div id="container">
+
+	  <div id="demo">
+		<div id="loading">
+			<h3>working...</h3>
+			<h4>this will likely take some time: scraping, splitting, scoring.</h4>
+			<i class="fa fa-spinner fa-spin"></i>
+		</div>
+
+		<div id="defaults">
+			<a data-name="cameras">Cameras</a>
+			<a data-name="toasters">Toasters</a>
+			<a data-name="shoes">Shoes</a>
+			<a data-name="toilerpaper">Toiletpapers</a>
+			<a data-name="customize">Customize</a>
+			<div style="clear:both;"></div>
+		</div>
+
+		<div class="section">
+			<h2><span>Step #1:</span> Define a source</h2>
+			<h3>List the products that you want to examine (name, Amazon URL) separated by new line.</h3>
+			<textarea id="products"></textarea>
+		</div>
+
+		<div class="section">
+			<h2><span>Step #2:</span> Specify features</h2>
+			<h3>List of features to be extracted, separated by comma.</h3>
+			<input id="features" type="text" />
+		</div>
+
+		<div class="section">
+			<h2><span>Step #3:</span> Compare products</h2>
+			<h3>Explore relevant customer feedback and compare sentiment</h3>
+		</div>
+
+		<a id="submit">Start Analysis</a>
+		<div id="legend-container">
+			<div id="legend"></div>
+			<div id="view-mode"><span>Chart</span> | <span>Text</span></div>
+		</div>
+		<div id="chart"></div>
+	</div>
+
+	<script id="comment-template" type="text/template">
+		<div class="comment">
+			<span style="background-color: {{color}}" class="score">{{score}}</span>
+			<span class="body">{{body}}</span>
+		</div>
+	</script>
+
+	<script type="text/javascript" src="public/js/jquery.min.js"></script>
+	<script type="text/javascript" src="public/js/algorithmia.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.1.1/mustache.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+	<script type="text/javascript" src="public/js/radarchart.js"></script>
+	<script type="text/javascript" src="public/js/configurator.js"></script>
+	<script type="text/javascript" src="public/js/chartmaker.js"></script>
+	<script type="text/javascript" src="public/js/main.js"></script>
+
+  </body>
+</html>

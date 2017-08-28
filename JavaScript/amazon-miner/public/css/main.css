@@ -1,0 +1,300 @@
+body
+{
+	font-family: 'Helvetica', sans-serif;
+	color: #444;
+}
+
+::selection { background: #9b59b6; color: #ffffff; }
+a { color: #3498db; text-decoration: none; }
+
+#container
+{
+	width: 600px;
+	margin: 50px auto 100px auto;
+}
+
+#demo
+{
+	position: relative;
+	overflow: hidden;
+	height: 880px;
+	border-radius: 5px;
+	background-color: #F5F5F5;
+	border: solid 1px #9b59b6;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#demo h1
+{
+	background-color: #9b59b6;
+	color: #FFF;
+	text-align: center;
+	font-size: 20px;
+	font-family: 'Varela Round', sans-serif;
+	line-height: 180%;
+}
+
+#demo p
+{
+	padding: 10px;
+	text-align: center;
+	color: #888;
+}
+
+input:focus
+{
+	outline: 0;
+}
+
+/*** Defaults ***/
+#defaults
+{
+
+}
+
+#defaults a
+{
+	display: block;
+	float: left;
+	box-sizing: border-box;
+	width: 20%;
+	height: 50px;
+	line-height: 50px;
+	background-color: #9b59b6;
+	text-align: center;
+	color: #FFF;
+	opacity: 0.8;
+	cursor: pointer;
+	font-family: 'Varela Round', sans-serif;
+}
+
+#defaults a.active,
+#defaults a:hover
+{
+	opacity: 1;
+}
+
+/*** Sections ***/
+.section
+{
+	padding: 20px 10px 20px 10px;
+	border-bottom: dotted 1px #9b59b6;
+}
+
+.section:last-child
+{
+	border-bottom-width: 0px;
+}
+
+.section h2
+{
+	font-family: 'HelveticaNeue', sans-serif;
+	font-weight: normal;
+	font-size: 16px;
+	color: #666;
+	line-height: 150%;
+}
+
+.section h2 span
+{
+	font-family: 'HelveticaNeue', sans-serif;
+	font-weight: bold;
+}
+
+.section h3
+{
+	font-family: 'HelveticaNeue-Light', sans-serif;
+	font-weight: 100;
+	font-size: 14px;
+	color: #888;
+	line-height: 150%;
+}
+
+.section textarea,
+.section input[type='text']
+{
+	border-radius: 5px;
+	width: 100%;
+	padding: 5px;
+	margin-top: 10px;
+	font-size: 12px;
+	font-family: 'HelveticaNeue-Light', sans-serif;
+	font-weight: 100;
+	border-width: 0px;
+}
+
+.section textarea
+{
+	height: 80px;
+}
+
+/*** Chart ***/
+#chart
+{
+	width: 590px;
+	height: 390px;
+	overflow: scroll;
+	margin-top: 10px;
+}
+
+/*** Text View ***/
+#chart h2
+{
+	font-family: 'HelveticaNeue-Light', sans-serif;
+	font-weight: 100;
+	margin-left: 5px;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+	border-bottom: dotted 1px #CCC;
+	margin-top: 20px;
+}
+
+#chart h2:first-child
+{
+	margin-top: 0px;
+}
+
+#chart h2 span
+{
+	float: right;
+	color: #888;
+	font-style: italic;
+}
+
+.comment
+{
+	font-family: 'HelveticaNeue-Light', sans-serif;
+	font-weight: 100;
+	font-size: 14px;
+	white-space: nowrap;
+	padding: 3px 5px 3px 5px;
+}
+
+.comment:hover
+{
+	background-color: #EEE;
+}
+
+.comment .score
+{
+	display: inline-block;
+	background-color: #EEE;
+	margin-right: 3px;
+	padding: 2px 4px 2px 4px;
+	border-radius: 3px;
+	width: 40px;
+}
+
+/*** Legend ***/
+#legend-container
+{
+	display: none;
+}
+
+#legend
+{
+	background-color: #FFF;
+	border-bottom: dotted 1px #9b59b6;
+	padding: 5px 0px 5px 0px;
+}
+
+#legend span
+{
+	display: inline-block;
+	cursor: pointer;
+	margin: 5px;
+	padding: 5px 5px 5px 5px;
+	border-radius: 3px;
+	font-family: 'HelveticaNeue-Light', sans-serif;
+	font-size: 12px;
+	background-color: #CCC;
+	color: #FFF;
+}
+
+#legend span.disabled
+{
+	text-decoration: line-through;
+	opacity: 0.3;
+}
+
+#view-mode
+{
+	position: absolute;
+	font-size: 14px;
+	font-family: 'HelveticaNeue-Light', sans-serif;
+	right: 10px;
+	margin-top: -30px;
+	color: #CCC;
+}
+
+#view-mode span
+{
+	cursor: pointer;
+	text-decoration: underline;
+	color: #61B4E9;
+}
+
+/*** Submit Button ***/
+#submit
+{
+	display: none;
+	cursor: pointer;
+	position: absolute;
+	right: 10px;
+	margin-top: -60px;
+	background-color: #3498db;
+	color: #FFF;
+	padding: 0px 10px 0px 10px;
+	height: 40px;
+	line-height: 40px;
+	border-radius: 5px;
+}
+
+#submit.visible
+{
+	display: inline-block;
+}
+
+#submit:hover
+{
+	background-color: #61B4E9;
+}
+
+/*** Loading Block ***/
+#loading
+{
+	position: absolute;
+	width: 600px;
+	height: 100%;
+	border-radius: 0px 0px 5px 5px;
+	background-color: rgba(0,0,0,0.7);
+	text-align: center;
+	z-index: 1000;
+	padding-top: 100px;
+	color: #FFF;
+	font-family: 'Varela Round', sans-serif;
+}
+
+#loading h3
+{
+	font-weight: bold;
+	font-size: 16px;
+	margin-bottom: 10px;
+}
+
+#loading h4
+{
+	font-style: italic;
+	font-family: 'HelveticaNeue-Light', sans-serif;
+	font-weight: 100;
+	font-size: 14px;
+	margin-bottom: 20px;
+}
+
+#loading i
+{
+	margin-top: 10px;
+	font-size: 40px;
+	color: #FFF;
+}

@@ -27,6 +27,7 @@ module.exports = function(grunt) {
     { slug: 'video-toolbox', dist: 'JavaScript/video-toolbox'},
     { slug: 'video-metadata', dist: 'JavaScript/video-metadata'},
     { slug: 'amazon-miner', dist: 'JavaScript/amazon-miner'},
+    { slug: 'social-image-rec', dist: 'JavaScript/social-image-rec'},
   ];
 
   var awsS3Config = {

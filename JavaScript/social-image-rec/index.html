@@ -1,0 +1,180 @@
+<%= header_begin %>
+
+<title>Social Media Image Recommender  - Algorithmia</title>
+<link rel="canonical" href="http://demos.algorithmia.com/video-transform/">
+<meta name="description" content="Get image recommendations based on text content"/>
+<meta name="robots" content="index,follow">
+
+<!-- FB -->
+<meta property="og:title" content="Get image recommendations based on text content">
+<meta property="og:url" content="http://demos.algorithmia.com/social-image-rec/">
+<meta property="og:description" content="Use machine learning to get image recommendations based on text content">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:image" content="http://demos.algorithmia.com/social-image-rec/public/images/fbshare.jpg">
+<meta property="og:site_name" content="Algorithmia">
+
+<!-- TWTR -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@algorithmia">
+<meta name="twitter:title" content="Get image recommendations based on text content">
+<meta name="twitter:description" content="Use machine learning to get image recommendations based on text content">
+<meta name="twitter:image" content="http://demos.algorithmia.com/social-image-rec/public/images/twshare.jpg">
+<meta name="twitter:creator" content="@algorithmia">
+
+<!-- OTHER -->
+<meta itemprop="name" content="Get image recommendations based on text content">
+<meta itemprop="description" content="Use machine learning to get image recommendations based on text content">
+
+<%= header_end %>
+
+<section class="purple-grad-background hero">
+  <div class="container" id="content">
+    <div class="row">
+      <div class="col-md-7">
+        <h1>Social Medial Image Recommendations</h1>
+        <h4 class="light whitespace-md">Use machine learning to get image recommendations based on text content</h4>
+      </div>
+      <div class="col-sm-12 col-md-7">
+        <div class="card">
+          <h3>1. CHOOSE IMAGES</h3>
+          <div class="row whitespace sample-videos">
+            <div class="col-xs-6 col-sm-3 sample-image">
+              <a onclick="toggleImage('massage')"><img src="public/images/massage.png" alt="massage" id="image-thumb-massage" class="image-thumb"></a>
+            </div>
+            <div class="col-xs-6 col-sm-3 sample-image">
+              <a onclick="toggleImage('india1643')"><img src="public/images/india1643.png" alt="india1643" id="image-thumb-india1643" class="image-thumb"></a>
+            </div>
+            <div class="col-xs-6 col-sm-3 sample-image">
+              <a onclick="toggleImage('city730')"><img src="public/images/city730.png" alt="city730" id="image-thumb-city730" class="image-thumb"></a>
+            </div>
+            <!--<div class="col-xs-6 col-sm-3 sample-image">-->
+              <!--<a onclick="toggleImage('india8698')"><img src="public/images/india8698.png" alt="india8698" id="image-thumb-india8698" class="image-thumb"></a>-->
+            <!--</div>-->
+            <div class="col-xs-6 col-sm-3 sample-image">
+              <a onclick="toggleImage('dance4428')"><img src="public/images/dance4428.png" alt="dance4428" id="image-thumb-dance4428" class="image-thumb"></a>
+            </div>
+            <!--<div class="col-xs-6 col-sm-3 sample-image">-->
+              <!--<a onclick="toggleImage('wiffle')"><img src="public/images/wiffle.png" alt="wiffle" id="image-thumb-wiffle" class="image-thumb"></a>-->
+            <!--</div>-->
+            <!--<div class="col-xs-6 col-sm-3 sample-image">-->
+              <!--<a onclick="toggleImage('motorcycle')"><img src="public/images/motorcycle.png" alt="motorcycle" id="image-thumb-motorcycle" class="image-thumb"></a>-->
+            <!--</div>-->
+            <div class="col-xs-6 col-sm-3 sample-image">
+              <a onclick="toggleImage('slapping64')"><img src="public/images/slapping64.png" alt="slapping64" id="image-thumb-slapping64" class="image-thumb"></a>
+            </div>
+            <!--<div class="col-xs-6 col-sm-3 sample-image">-->
+              <!--<a onclick="toggleImage('training1194')"><img src="public/images/training1194.png" alt="training1194" id="image-thumb-training1194" class="image-thumb"></a>-->
+            <!--</div>-->
+            <div class="col-xs-6 col-sm-3 sample-image">
+              <a onclick="toggleImage('woman87')"><img src="public/images/woman87.png" alt="woman87" id="image-thumb-woman87" class="image-thumb"></a>
+            </div>
+            <div class="col-xs-6 col-sm-3 sample-image">
+              <a onclick="toggleImage('crowd6582')"><img src="public/images/crowd6582.png" alt="crowd6582" id="image-thumb-crowd6582" class="image-thumb"></a>
+            </div>
+            <div class="col-xs-6 col-sm-3 sample-image">
+              <a onclick="toggleImage('busstation6094')"><img src="public/images/busstation6094.png" alt="busstation6094" id="image-thumb-busstation6094" class="image-thumb"></a>
+            </div>
+          </div>
+          <h3>2. CHOOSE A SIZE</h3>
+          <div class="whitespace-md radio-btns">
+            <button name="selectedAlgorithm" class="btn btn-radio" id="button-facebook" onclick="selectSize('facebook')">Facebook</button>
+            <button name="selectedAlgorithm" class="btn btn-radio" id="button-twitter" onclick="selectSize('twitter')">Twitter</button>
+          </div>
+          <form class="form-group" onsubmit="analyze(); return false">
+            <button class="btn btn-primary">
+                <span>
+                  <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                  <span id="analyze-button-text">Recommend Images</span>
+                </span>
+            </button>
+          </form>
+          <div id="status-label"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="overlay" class="container hidden">
+  <div class="dots-text-container">
+    <h3 class="dots-text">Boom...</h3>
+  </div>
+  <div class="dots-container">
+      <div class="dot dot1"></div>
+      <div class="dot dot2"></div>
+      <div class="dot dot3"></div>
+      <div class="dot dot4"></div>
+  </div>
+</div>
+
+<section class="container hidden results" id="results-algo">
+  <div class="row">
+    <h4 class="result-title col-sm-12"></h4>
+    <textarea class="result-output col-sm-6"></textarea>
+  </div>
+</section>
+
+<!-- EXPLANATION -->
+<div class="grey-background">
+<section class="container">
+  <div class="row row-md">
+    <div class="col-md-12">
+      <h2 class="whitespace-none">How it works</h2>
+      <h4>Applying machine learning algorithms to get image recommendations based on text content</h4>
+    </div>
+  </div>
+  <div class="row row-md">
+    <div class="col-md-8">
+      <h3>Tools used</h3>
+      <ul>
+        <li><a href="https://algorithmia.com/algorithms/web/SocialMediaImageRecommender">SocialMediaImageRecommender</a> – get image recommendations based on text content</li>
+      </ul>
+    </div>
+  </div>
+  <div class="row row-md">
+    <div class="col-md-8">
+      <h3>Method</h3>
+      <p>TBD</p>
+    </div>
+  </div>
+  <div class="row row-md">
+    <div class="col-md-8">
+      <h3>Takeaway</h3>
+      <p>TBD</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- BUILT FOR DEVS -->
+  <section class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <h2 class="whitespace-sm">Built For Developers</h2>
+        <h4 class="whitespace-md">A simple, scalable API for machine intelligence</h4>
+          <p class="item-title">SAMPLE INPUT</p>
+          <pre class="whitespace-md"><code class="python">import Algorithmia
+
+client = Algorithmia.client('_API_KEY_')
+algo = client.algo('web/SocialMediaImageRecommender/0.5.0')
+input = {
+}
+print algo.pipe(input)
+</code></pre>
+            <p class="item-title">SAMPLE OUTPUT</p>
+            <pre><code class="json">{
+}</code></pre>
+        <a href="https://algorithmia.com/algorithms/web/SocialMediaImageRecommender" class="btn btn-primary-inverse">
+          LEARN MORE
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- JS -->
+  <script src="public/js/TweenMax.min.js"></script>
+  <script src="public/js/dots.js"></script>
+  <script src="public/js/dropzone.js"></script>
+
+  <%= footer %>

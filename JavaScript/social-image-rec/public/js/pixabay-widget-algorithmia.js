@@ -1,4 +1,13 @@
 /*
+
+    Modified by Algorithmia, September 2017:
+    - embed pixabay API key
+    - include random parameter in API call to avoid cache errors
+    - add class 'i,age-thumb' to thumbnails
+    - clicking thumbnail calls toggleImage()
+    - clicking prev/next calls handlePagination()
+    - force attribution link to target '_blank'
+
     Pixabay Image Gallery Widget v1.0.4
     Copyright (c) 2014 Simon Steinberger / Pixabay
     GitHub: https://github.com/Pixabay/JavaScript-PixabayWidget
@@ -13,6 +22,10 @@
 */
 
 (function(){
+
+    var pixabayWidget = { 'key': '6251700-3f06a784139c9c059a1acfc3b' };
+    var randint = new Date().getTime();
+
     var cache = {}, counter = 0, o = {
         class_name: 'pixabay_widget',
         row_height: 170,
@@ -91,11 +104,11 @@
             var is_paginated = data.totalHits > per_page && prev && next;
             if (is_paginated || br) {
                 nav += '<div class="noselect '+o.class_name+'_nav">';
-                if (br) nav += '<div class="branding">Powered by <a href="https://pixabay.com/" target="'+target+'">Pixabay</a></div>';
+                if (br) nav += '<div class="branding">Powered by <a href="https://pixabay.com/" target="_blank">Pixabay</a></div>';
                 if (is_paginated) {
-                    if (page > 1) nav += '<b class="'+o.class_name+'_prev">'+prev+'&nbsp;</b>';
+                    if (page > 1) nav += '<b onclick="handlePagination()" class="'+o.class_name+'_prev">'+prev+'&nbsp;</b>';
                     else nav += '<span>'+prev+'&nbsp;</span>';
-                    if (page*per_page < data.totalHits) nav += '<b class="'+o.class_name+'_next">&nbsp; '+next+'</b>';
+                    if (page*per_page < data.totalHits) nav += '<b onclick="handlePagination()" class="'+o.class_name+'_next">&nbsp; '+next+'</b>';
                     else nav += '<span>&nbsp; '+next+'</span>';
                 }
                 nav += '</div>';
@@ -106,7 +119,7 @@
             for (var i=0,hits=data.hits;i<hits.length;i++) {
                 var w = hits[i].previewWidth, h = hits[i].previewHeight, src = hits[i].previewURL;
                 if (rh > h-10) w = w*(180/(h+1)), h = 180, src = src.replace('_150', '__180');
-                html += '<div class="item" data-w="'+w+'" data-h="'+h+'"><a title="'+escapeHTML(toTitleCase(hits[i].tags))+'" href="'+hits[i].pageURL+'" target="'+target+'"><img src="https://pixabay.com/static/img/blank.gif" data-src="'+src+'"></a></div>';
+                html += '<div class="item" data-w="'+w+'" data-h="'+h+'"><a title="'+escapeHTML(toTitleCase(hits[i].tags))+'" onclick="toggleImage(\''+src+'\')"><img class="image-thumb src="https://pixabay.com/static/img/blank.gif" data-src="'+src+'"></a></div>';
             }
             if (navpos == 'bottom') html += nav;
 
@@ -154,7 +167,7 @@
                     user = n.getAttribute('data-user')||'';
                 per_page = per_page > 100 ? 100 : per_page;
                 if (user) q = 'user:'+user+' '+q;
-                var url = 'https://pixabay.com/api/?key='+o.key+'&lang='+(n.getAttribute('data-lang')||o.lang)+'&order='+(n.getAttribute('data-order')||o.order)+'&image_type='+(n.getAttribute('data-image-type')||o.image_type)+'&safesearch='+(n.getAttribute('data-safesearch')||o.safesearch)+'&editors_choice='+(n.getAttribute('data-editors-choice')||o.editors_choice)+'&per_page='+per_page+'&page='+page+'&q='+encodeURIComponent(q);
+                var url = 'https://pixabay.com/api/?rand='+randint+'&key='+o.key+'&lang='+(n.getAttribute('data-lang')||o.lang)+'&order='+(n.getAttribute('data-order')||o.order)+'&image_type='+(n.getAttribute('data-image-type')||o.image_type)+'&safesearch='+(n.getAttribute('data-safesearch')||o.safesearch)+'&editors_choice='+(n.getAttribute('data-editors-choice')||o.editors_choice)+'&per_page='+per_page+'&page='+page+'&q='+encodeURIComponent(q);
                 if (n.getAttribute('data-prefilled')) { n.removeAttribute('data-prefilled'); APIResponse(false, n, page, per_page, url); }
                 else if (url in cache) APIResponse(cache[url], n, page, per_page, url);
                 else { var script = document.createElement('script'); script.src = url+'&callback='+callback_name(APIResponse, n, page, per_page, url); document.body.appendChild(script); }

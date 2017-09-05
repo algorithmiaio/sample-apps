@@ -21,14 +21,8 @@ video {
   margin-bottom: 16px;
   border: 3px solid transparent;
 }
-.image-thumb:hover,
-.image-thumb:focus,
 .image-thumb.active {
   border: 3px solid #5000BE;
-}
-
-.sample-image:nth-child(2n+1) {
-  clear: left;
 }
 
 .radio-btns .btn-radio {

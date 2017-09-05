@@ -1,8 +1,8 @@
 // init the Algorithmia client with your API key from https://algorithmia.com/user#credentials
-var algoClient = Algorithmia.client('simeyUbLXQ/R8Qga/3ZCRGcr2oR1');
+var algoClient = Algorithmia.client('simIPuiSZMMAbfq1AeKQU5zjkd/1');
 
 var algorithms = {
-  SMIR: 'web/SocialMediaImageRecommender/0.1.0'
+  SMIR: 'web/SocialMediaImageRecommender/0.1.3'
 };
 
 var outputDimensions = {
@@ -26,16 +26,52 @@ $(document).ready(function() {
   setInviteCode('socialimagerec');
 });
 
-var toggleImage = function(name) {
-  if(selectedImages[name]) {
-    $('#image-thumb-'+name).removeClass('active');
-    delete selectedImages[name];
+/**
+ * select or deselect a thumbnail
+ * @param href
+ */
+var toggleImage = function(href) {
+  if(selectedImages[href]) {
+    delete selectedImages[href];
   } else {
-    $('#image-thumb-'+name).addClass('active');
-    selectedImages[name] = true;
+    selectedImages[href] = true;
   }
+  highlightImages();
 };
 
+/**
+ * search for new pixabay images
+ */
+var searchImages = function() {
+  $('.pixabay_widget').attr('data-search', $('#imageTopic').val());
+  initPixabayWidget();
+  selectedImages = {};
+};
+
+/**
+ * react to pagination events
+ */
+var handlePagination = function() {
+  setTimeout(highlightImages,500);
+};
+
+/**
+ * ensure (only) selected images have 'active' class set
+ */
+var highlightImages = function() {
+  $('.pixabay_widget img.image-thumb').each(function(i,elem) {
+    if (elem.src&&selectedImages[elem.src]) {
+      $(elem).addClass('active');
+    } else {
+      $(elem).removeClass('active')
+    }
+  });
+};
+
+/**
+ * pick size of output image
+ * @param name
+ */
 var selectSize = function(name) {
   $('button').removeClass('active');
   $('#button-'+name).addClass('active');

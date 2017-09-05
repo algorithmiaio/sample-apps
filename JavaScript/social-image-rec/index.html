@@ -38,44 +38,8 @@
       <div class="col-sm-12 col-md-7">
         <div class="card">
           <h3>1. CHOOSE IMAGES</h3>
-          <div class="row whitespace sample-videos">
-            <div class="col-xs-6 col-sm-3 sample-image">
-              <a onclick="toggleImage('massage')"><img src="public/images/massage.png" alt="massage" id="image-thumb-massage" class="image-thumb"></a>
-            </div>
-            <div class="col-xs-6 col-sm-3 sample-image">
-              <a onclick="toggleImage('india1643')"><img src="public/images/india1643.png" alt="india1643" id="image-thumb-india1643" class="image-thumb"></a>
-            </div>
-            <div class="col-xs-6 col-sm-3 sample-image">
-              <a onclick="toggleImage('city730')"><img src="public/images/city730.png" alt="city730" id="image-thumb-city730" class="image-thumb"></a>
-            </div>
-            <!--<div class="col-xs-6 col-sm-3 sample-image">-->
-              <!--<a onclick="toggleImage('india8698')"><img src="public/images/india8698.png" alt="india8698" id="image-thumb-india8698" class="image-thumb"></a>-->
-            <!--</div>-->
-            <div class="col-xs-6 col-sm-3 sample-image">
-              <a onclick="toggleImage('dance4428')"><img src="public/images/dance4428.png" alt="dance4428" id="image-thumb-dance4428" class="image-thumb"></a>
-            </div>
-            <!--<div class="col-xs-6 col-sm-3 sample-image">-->
-              <!--<a onclick="toggleImage('wiffle')"><img src="public/images/wiffle.png" alt="wiffle" id="image-thumb-wiffle" class="image-thumb"></a>-->
-            <!--</div>-->
-            <!--<div class="col-xs-6 col-sm-3 sample-image">-->
-              <!--<a onclick="toggleImage('motorcycle')"><img src="public/images/motorcycle.png" alt="motorcycle" id="image-thumb-motorcycle" class="image-thumb"></a>-->
-            <!--</div>-->
-            <div class="col-xs-6 col-sm-3 sample-image">
-              <a onclick="toggleImage('slapping64')"><img src="public/images/slapping64.png" alt="slapping64" id="image-thumb-slapping64" class="image-thumb"></a>
-            </div>
-            <!--<div class="col-xs-6 col-sm-3 sample-image">-->
-              <!--<a onclick="toggleImage('training1194')"><img src="public/images/training1194.png" alt="training1194" id="image-thumb-training1194" class="image-thumb"></a>-->
-            <!--</div>-->
-            <div class="col-xs-6 col-sm-3 sample-image">
-              <a onclick="toggleImage('woman87')"><img src="public/images/woman87.png" alt="woman87" id="image-thumb-woman87" class="image-thumb"></a>
-            </div>
-            <div class="col-xs-6 col-sm-3 sample-image">
-              <a onclick="toggleImage('crowd6582')"><img src="public/images/crowd6582.png" alt="crowd6582" id="image-thumb-crowd6582" class="image-thumb"></a>
-            </div>
-            <div class="col-xs-6 col-sm-3 sample-image">
-              <a onclick="toggleImage('busstation6094')"><img src="public/images/busstation6094.png" alt="busstation6094" id="image-thumb-busstation6094" class="image-thumb"></a>
-            </div>
-          </div>
+          Search for: <input type="text" value="outside" id="imageTopic" onchange="searchImages()"><button onclick="searchImages()">search</button>
+          <div class="row whitespace sample-videos pixabay_widget" data-search="outside" data-max-rows="3"></div>
           <h3>2. CHOOSE A SIZE</h3>
           <div class="whitespace-md radio-btns">
             <button name="selectedAlgorithm" class="btn btn-radio" id="button-facebook" onclick="selectSize('facebook')">Facebook</button>
@@ -176,5 +140,6 @@ print algo.pipe(input)
   <script src="public/js/TweenMax.min.js"></script>
   <script src="public/js/dots.js"></script>
   <script src="public/js/dropzone.js"></script>
+  <script src="public/js/pixabay-widget-algorithmia.js"></script>
 
   <%= footer %>

@@ -31,12 +31,23 @@ $(document).ready(function() {
  * @param href
  */
 var toggleImage = function(href) {
+  setError();
   if(selectedImages[href]) {
     delete selectedImages[href];
   } else {
-    selectedImages[href] = true;
+    if(Object.keys(selectedImages).length>9) {
+      setError("You cannot select more than 10 images")
+    } else {
+      selectedImages[href] = true;
+    }
   }
+  updateImageCount();
   highlightImages();
+};
+
+var updateImageCount = function() {
+  var count = Object.keys(selectedImages).length;
+  $('#imageCount').text(count?('('+count+' images selected)'):'');
 };
 
 /**
@@ -46,12 +57,14 @@ var searchImages = function() {
   $('.pixabay_widget').attr('data-search', $('#imageTopic').val());
   initPixabayWidget();
   selectedImages = {};
+  updateImageCount();
 };
 
 /**
  * react to pagination events
  */
 var handlePagination = function() {
+  setTimeout(highlightImages);
   setTimeout(highlightImages,500);
 };
 
@@ -113,10 +126,9 @@ var showResults = function(selectedSize, json) {
 var showWait = function() {
   $('.dots-text').text("Getting results...");
   $('#overlay').removeClass('hidden');
-  $('#status-label').empty();
+  setError();
   $('#results-algo .result-output').empty();
 };
-
 
 /**
  * close overlay and either reveal results or display errorMessage
@@ -125,7 +137,7 @@ var showWait = function() {
 var hideWait = function(errorMessage) {
   $("#overlay").addClass("hidden");
   if(errorMessage) {
-    $('#status-label').html('<div class="alert alert-danger" role="alert">' + errorMessage+ '</div>');
+    setError(errorMessage);
     $('#results-algo').addClass('hidden');
   } else {
     $('#results-algo').removeClass('hidden');
@@ -134,3 +146,15 @@ var hideWait = function(errorMessage) {
     }, 1000);
   }
 };
+
+/**
+ * display errorMessage
+ * @param errorMessage
+ */
+function setError(errorMessage) {
+  if(errorMessage) {
+    $('#status-label').html('<div class="alert alert-danger" role="alert">' + errorMessage + '</div>');
+  } else {
+    $('#status-label').empty();
+  }
+}

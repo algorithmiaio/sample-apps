@@ -37,11 +37,24 @@
       </div>
       <div class="col-sm-12 col-md-7">
         <div class="card">
-          <h3>1. Pick Text</h3>
-          <div class="form-group">
+          <h3 class="whitespace">1. Text</h3>
+          <h5>Select a URL for text content</h5>
+          <div class="form-group whitespace">
+            <select class="form-control">
+              <option value="Option #1">Option #1</option>
+              <option value="Option #2">Option #2</option>
+              <option value="Option #3">Option #3</option>
+              <option value="Option #4">Option #4</option>
+              <option value="Option #5">Option #5</option>
+            </select>
+          </div>
+          <h5>Or enter your own text</h5>
+          <div class="form-group whitespace-md">
             <textarea id="inputText" class="form-control"></textarea>
           </div>
-          <h3>2. Choose up to 10 Images <span id="imageCount"></span></h3>
+          <h3 class="whitespace">2. Image set</h3>
+          <h5>Define an image set to make the recommendation. Select up to 10 images.</h5>
+          <h5 id="imageCount"></h5>
           
             <div class="form-group">
               <div class="input-group imageSearch">
@@ -53,7 +66,8 @@
             </div>
           
           <div class="sample-videos pixabay_widget" data-search="outside" data-max-rows="3"></div>
-          <h3>3. Choose a Size</h3>
+          <h3 class="whitespace">3. Output dimension</h3>
+          <h5>Chose a dimension to smart crop the recommended image.</h5>
           <div class="whitespace-md radio-btns">
             <button name="selectedAlgorithm" class="btn btn-radio" id="button-facebook" onclick="selectSize('facebook')">Facebook</button>
             <button name="selectedAlgorithm" class="btn btn-radio" id="button-twitter" onclick="selectSize('twitter')">Twitter</button>

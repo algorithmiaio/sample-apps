@@ -131,7 +131,7 @@ var showResults = function(selectedSize, recommendations) {
   if(!recommendations.length) {
     return 'No results. Either your text was too short, or the images you selected had nothing in common with the text'
   }
-  var html='<div class="col-md-3 result-title">SCORE</div><div class="col-md-9 result-title">'+selectedSize.toUpperCase()+' IMAGE</div>';
+  var html='<div class="col-md-3 result-title">score</div><div class="col-md-9 result-title">'+selectedSize+' image</div>';
   for(var i in recommendations) {
     html += '<div class="col-md-3 result-row">'+Math.round(recommendations[i].score*100)/100+'</div>';
     html += '<div class="col-md-9 result-row"><a href="'+recommendations[i].social_image+'"><img src="'+recommendations[i].original_image+'"></a></div>';

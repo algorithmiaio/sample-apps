@@ -32,17 +32,28 @@
   <div class="container" id="content">
     <div class="row">
       <div class="col-md-7">
-        <h1>Social Medial Image Recommendations</h1>
+        <h1>Social Media Image Recommender</h1>
         <h4 class="light whitespace-md">Use machine learning to get image recommendations based on text content</h4>
       </div>
       <div class="col-sm-12 col-md-7">
         <div class="card">
-          <h3>1. PICK TEXT</h3>
-          <textarea id="inputText"></textarea>
-          <h3>2. CHOOSE IMAGES <span id="imageCount"></span></h3>
-          Search for: <input type="text" value="outside" id="imageTopic" onchange="searchImages()"><button onclick="searchImages()">search</button>
-          <div class="row whitespace sample-videos pixabay_widget" data-search="outside" data-max-rows="3"></div>
-          <h3>3. CHOOSE A SIZE</h3>
+          <h3>1. Pick Text</h3>
+          <div class="form-group">
+            <textarea id="inputText" class="form-control"></textarea>
+          </div>
+          <h3>2. Choose up to 10 Images <span id="imageCount"></span></h3>
+          
+            <div class="form-group">
+              <div class="input-group imageSearch">
+                <input type="text" class="form-control" value="outside" id="imageTopic" onchange="searchImages()">
+                <span class="input-group-btn">
+                  <button onclick="searchImages()" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                </span>
+              </div>
+            </div>
+          
+          <div class="sample-videos pixabay_widget" data-search="outside" data-max-rows="3"></div>
+          <h3>3. Choose a Size</h3>
           <div class="whitespace-md radio-btns">
             <button name="selectedAlgorithm" class="btn btn-radio" id="button-facebook" onclick="selectSize('facebook')">Facebook</button>
             <button name="selectedAlgorithm" class="btn btn-radio" id="button-twitter" onclick="selectSize('twitter')">Twitter</button>

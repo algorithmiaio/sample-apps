@@ -51,7 +51,7 @@ var toggleImage = function(href) {
 
 var updateImageCount = function() {
   var count = Object.keys(selectedImages).length;
-  $('#imageCount').text(count?('('+count+' images selected)'):'');
+  $('#imageCount').text(count?('('+count+' selected)'):'');
 };
 
 /**

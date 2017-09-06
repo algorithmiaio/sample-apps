@@ -2,7 +2,7 @@
 var algoClient = Algorithmia.client('simIPuiSZMMAbfq1AeKQU5zjkd/1');
 
 var algorithms = {
-  SMIR: 'web/SocialMediaImageRecommender/0.1.3'
+  SMIR: 'demo/SocialMediaImageRecommenderDemo/0.1.1' // web/SocialMediaImageRecommender/0.1.3
 };
 
 var outputDimensions = {
@@ -11,6 +11,10 @@ var outputDimensions = {
     height: 100
   },
   twitter: {
+    width: 100,
+    height: 100
+  },
+  linkedin: {
     width: 100,
     height: 100
   }
@@ -95,15 +99,22 @@ var selectSize = function(name) {
  * call API on URL and display results
  */
 var analyze = function() {
-  if(!Object.keys(selectedImages).length&&selectedSize) {return hideWait("Please select image(s) and a size");}
+  var inputText = $('#inputText').val().trim();
+  var images = Object.keys(selectedImages);
+  if(!inputText) {return hideWait("Please enter some text");}
+  if(images.length<2) {return hideWait("Please select at least two images");}
+  if(!selectedSize) {return hideWait("Please select an output size");}
   showWait();
-  var data = {}; //TBD
+  var data = {
+    text: inputText,
+    images: images,
+    dimension: outputDimensions[selectedSize]
+  };
   algoClient.algo(algorithms.SMIR).pipe(data).then(function(output) {
     if (output.error) {
-      console.log(output);
       hideWait(output.error.message);
     } else {
-      showResults(selectedSize, output.result);
+      showResults(selectedSize, output.result.recommendations);
     }
   },function(error) {
     console.log(error);
@@ -114,10 +125,19 @@ var analyze = function() {
 /**
  * reveal resultant JSON metadata
  * @param selectedSize display name of output image size
- * @param json JSON algo results
+ * @param recommendations) [{social_image:string,score:number}]
  */
-var showResults = function(selectedSize, json) {
-  $('#results-algo .result-output').text(json);
+var showResults = function(selectedSize, recommendations) {
+  if(!recommendations.length) {
+    return 'No results. Either your text was too short, or the images you selected had nothing in common with the text'
+  }
+  var html='<div class="col-md-3 result-title">SCORE</div><div class="col-md-9 result-title">'+selectedSize.toUpperCase()+' IMAGE</div>';
+  for(var i in recommendations) {
+    html += '<div class="col-md-3 result-row">'+Math.round(recommendations[i].score*100)/100+'</div>';
+    html += '<div class="col-md-9 result-row"><a href="'+recommendations[i].social_image+'"><img src="'+recommendations[i].original_image+'"></a></div>';
+  }
+  $('#results-algo .result-output').html(html);
+  hideWait();
 };
 
 /**

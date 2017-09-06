@@ -61,12 +61,17 @@ video {
 .result-timestamp {float: left;}
 .result-toggle {float: right;}
 .result-output {
+  max-height: 350px;
   -webkit-overflow-scrolling: touch;
   overflow-y: scroll;
   font-size: 0.75rem;
 }
-.results .row {
+.result-title, .result-row {
   margin-bottom: 1rem;
+  text-transform: capitalize;
+}
+.result-row img {
+  max-height: 100px;
 }
 #results-sequence .result-output {
   overflow-y: auto;

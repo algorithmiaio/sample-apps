@@ -172,6 +172,9 @@ var selectSize = function(name) {
 var analyze = function() {
   var inputText = $('#inputText').val().trim();
   var images = Object.keys(selectedImages);
+  for (var i in images) {
+    images[i]=images[i].replace('_150', '_1280').replace('__180', '_1280');
+  }
   if(!inputText) {return hideWait("Please enter some text");}
   if(images.length<2) {return hideWait("Please select at least two images");}
   if(!selectedSize) {return hideWait("Please select an output size");}
@@ -207,10 +210,11 @@ var showResults = function(selectedSize, recommendations) {
   for(var i in recommendations) {
     var rec = recommendations[i];
     var filename = rec.social_image.substring(rec.social_image.lastIndexOf('/')+1);
-    html += '<div class="col-md-3 result-row">' +
-      '<a href="'+rec.original_image+'" download="'+filename+'"><img src="'+rec.original_image+'" width="'+size.width+'px" height="'+size.width+'px"></a>'
-      +'<div>Score: '+Math.round(rec.score*100)/100+'</div>' +
-      '</div>';
+    var style = 'width:'+size.width+'px;height:'+size.height+'px;display:none';
+    html += '<div class="col-md-3 result-row">'
+      + '<div>Score: '+Math.round(rec.score*100)/100+'</div>'
+      + '<a href="'+rec.original_image+'" download="'+filename+'"><img src="'+rec.original_image+'" style="'+style+'"><div class="aspinner"></div></a>'
+      + '</div>';
   }
   $('#results-algo .result-output').html(html);
   hideWait();
@@ -229,10 +233,13 @@ var showResults = function(selectedSize, recommendations) {
 function fixResultSources(srcUrl,dataUri) {
   algoClient.algo(algorithms.Data2Base64).pipe(dataUri).then(function(output) {
     if (output.error) {
+      $('.results a[href="' + srcUrl + '"] .aspinner').hide();
+      $('.results img[src="' + srcUrl + '"]').show();
       console.error(output.error.message);
     } else {
       var src = 'data:image/png;base64,' + output.result;
-      $('.results img[src="' + srcUrl + '"]').attr('src', src);
+      $('.results a[href="' + srcUrl + '"] .aspinner').hide();
+      $('.results img[src="' + srcUrl + '"]').attr('src', src).show('slow');
       $('.results a[href="' + srcUrl + '"]').attr('href', src);
     }
   });

@@ -16,8 +16,9 @@
 video {
   max-width: 100vw;
 }
-textarea {
-  margin-bottom: 8px;  
+.input__textarea {
+  margin-bottom: 8px;
+  min-height: 180px!important;
 }
 .imageSearch {
   margin-bottom: 8px;
@@ -71,15 +72,20 @@ textarea {
 .result-output {
   max-height: 350px;
   -webkit-overflow-scrolling: touch;
-  overflow-y: scroll;
   font-size: 0.75rem;
 }
 .result-title, .result-row {
   margin-bottom: 1rem;
   text-transform: capitalize;
 }
+.result-row {
+  margin-bottom: 2rem;
+}
+.result-row a:hover {
+  opacity: .7;
+}
 .result-row img {
-  max-height: 100px;
+  max-height: 180px;
 }
 #results-sequence .result-output {
   overflow-y: auto;

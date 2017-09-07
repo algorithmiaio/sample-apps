@@ -131,10 +131,9 @@ var showResults = function(selectedSize, recommendations) {
   if(!recommendations.length) {
     return 'No results. Either your text was too short, or the images you selected had nothing in common with the text'
   }
-  var html='<div class="col-md-3 result-title">score</div><div class="col-md-9 result-title">'+selectedSize+' image</div>';
+  var html='<div class="result-title col-md-12">Smart cropped for '+selectedSize+'</div>';
   for(var i in recommendations) {
-    html += '<div class="col-md-3 result-row">'+Math.round(recommendations[i].score*100)/100+'</div>';
-    html += '<div class="col-md-9 result-row"><a href="'+recommendations[i].social_image+'"><img src="'+recommendations[i].original_image+'"></a></div>';
+    html += '<div class="col-md-3 result-row"><a href="'+recommendations[i].social_image+'"><img src="'+recommendations[i].original_image+'"></a>'+'<div>Score: '+Math.round(recommendations[i].score*100)/100+'</div></div>';
   }
   $('#results-algo .result-output').html(html);
   hideWait();
@@ -144,7 +143,7 @@ var showResults = function(selectedSize, recommendations) {
  * show overlay, clear results
  */
 var showWait = function() {
-  $('.dots-text').text("Getting results...");
+  $('.dots-text').text("Making recommendations...");
   $('#overlay').removeClass('hidden');
   setError();
   $('#results-algo .result-output').empty();

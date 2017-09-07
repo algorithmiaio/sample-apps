@@ -211,7 +211,7 @@ var showResults = function(selectedSize, recommendations) {
     var rec = recommendations[i];
     var filename = rec.social_image.substring(rec.social_image.lastIndexOf('/')+1);
     var style = 'width:'+size.width+'px;height:'+size.height+'px;display:none';
-    html += '<div class="col-md-3 result-row">'
+    html += '<div class="col-xs-6 col-sm-6 col-md-3 result-row">'
       + '<div>Score: '+Math.round(rec.score*100)/100+'</div>'
       + '<a href="'+rec.original_image+'" download="'+filename+'"><img src="'+rec.original_image+'" style="'+style+'"><div class="aspinner"></div></a>'
       + '</div>';

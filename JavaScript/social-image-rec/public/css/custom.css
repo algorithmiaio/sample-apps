@@ -81,10 +81,14 @@ video {
 .result-row {
   margin-bottom: 2rem;
 }
+.results-row:nth-of-type(2n+1) {
+  clear: both;
+}
 .result-row a:hover {
   opacity: .7;
 }
 .result-row img {
+  width: auto;
   max-height: 180px;
 }
 #results-sequence .result-output {
@@ -133,6 +137,12 @@ video {
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   .feature {margin-bottom: 0;}
+  .results-row:nth-of-type(n) {
+    clear: none;
+  }
+  .results-row:nth-of-type(4n+1) {
+    clear: both;
+  }
 }
 
 /* Large devices (large desktops, 1200px and up) */

@@ -66,6 +66,7 @@ video {
 .rating {}
 .rating.g {color: green;}
 .rating.r {color: darkred;}
+.results img {object-fit: contain;}
 .result-wrapper {text-align: center;}
 .result-timestamp {float: left;}
 .result-toggle {float: right;}

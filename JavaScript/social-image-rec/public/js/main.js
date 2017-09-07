@@ -2,7 +2,13 @@
 var algoClient = Algorithmia.client('simIPuiSZMMAbfq1AeKQU5zjkd/1');
 
 var algorithms = {
-  SMIR: 'demo/SocialMediaImageRecommenderDemo/0.1.1' // web/SocialMediaImageRecommender/0.1.3
+  ScrapeRSS: 'tags/ScrapeRSS/0.1.6',
+  Html2Text: 'util/Html2Text/0.1.6',
+  SocialMediaImageRecommender: 'demo/SocialMediaImageRecommenderDemo/0.1.1' // web/SocialMediaImageRecommender/0.1.3
+};
+
+var newsfeeds = {
+  yahoo: 'https://www.yahoo.com/news/rss/mostviewed'
 };
 
 var outputDimensions = {
@@ -28,7 +34,71 @@ var selectedSize = null;
  */
 $(document).ready(function() {
   setInviteCode('socialimagerec');
+  initTextSelector();
 });
+
+/**
+ * fill inputTextUrlSelector with news feed links
+ */
+var initTextSelector = function() {
+  $('#inputTextUrlEntry').on('keypress', function(e) {
+    if ((e.keyCode||e.which) == '13') {
+      prefillText();
+    }
+  });
+  var inputTextUrlSelector = $('#inputTextUrlSelector');
+    algoClient.algo(algorithms.ScrapeRSS).pipe(newsfeeds.yahoo).then(function(output) {
+    if (output.error) {
+      console.error(output.error.message);
+    } else {
+      inputTextUrlSelector.find("option").remove();
+      inputTextUrlSelector.append(new Option('Select one...', ''));
+      for (var i=0; i<Math.min(output.result.length,5); i++) {
+        inputTextUrlSelector.append(new Option($("<textarea/>").html(output.result[i].title).val(), output.result[i].url));
+      }
+    }
+    inputTextUrlSelector.append(new Option('custom', 'Enter URL'));
+    inputTextUrlSelector.prop("disabled",false);
+  },function(error) {
+    console.error(error);
+  });
+};
+
+/**
+ * hide manual URL entry and reveal selector
+ */
+var cancelTextUrlEntry = function () {
+  $('#inputTextUrlEntryWrapper').hide();
+  $('#inputTextUrlSelector').show();
+};
+
+/**
+ * fill inputText with content from selected URL
+ */
+var prefillText = function() {
+  var inputTextUrlEntryWrapper = $('#inputTextUrlEntryWrapper');
+  var inputTextUrlEntry = $('#inputTextUrlEntry');
+  var inputTextUrlSelector = $('#inputTextUrlSelector');
+  var url = inputTextUrlEntryWrapper.is(':visible')?inputTextUrlEntry.val():inputTextUrlSelector.find(':selected').val();
+  var inputText = $('#inputText');
+  if(url=='Enter URL') {
+  inputTextUrlEntryWrapper.show();
+  inputTextUrlSelector.hide();
+  } else if(url) {
+    inputText.val('Loading...');
+    algoClient.algo(algorithms.Html2Text).pipe(url).then(function(output) {
+      if (output.error) {
+        inputText.val('Cannot load '+url);
+        console.error(output.error.message);
+      } else {
+        inputText.val(output.result);
+      }
+    },function(error) {
+      inputText.val('Cannot load '+url);
+      console.error(error);
+    });
+  }
+};
 
 /**
  * select or deselect a thumbnail
@@ -39,8 +109,8 @@ var toggleImage = function(href) {
   if(selectedImages[href]) {
     delete selectedImages[href];
   } else {
-    if(Object.keys(selectedImages).length>9) {
-      setError("You cannot select more than 10 images")
+    if(Object.keys(selectedImages).length>=5) {
+      setError("You cannot select more than 5 images")
     } else {
       selectedImages[href] = true;
     }
@@ -110,14 +180,14 @@ var analyze = function() {
     images: images,
     dimension: outputDimensions[selectedSize]
   };
-  algoClient.algo(algorithms.SMIR).pipe(data).then(function(output) {
+  algoClient.algo(algorithms.SocialMediaImageRecommender).pipe(data).then(function(output) {
     if (output.error) {
       hideWait(output.error.message);
     } else {
       showResults(selectedSize, output.result.recommendations);
     }
   },function(error) {
-    console.log(error);
+    console.error(error);
     hideWait(error);
   });
 };

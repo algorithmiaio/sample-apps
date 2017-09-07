@@ -41,13 +41,12 @@
           <h3 class="whitespace">1. Select Text Content</h3>
           <h5>From a URL</h5>
           <div class="form-group whitespace">
-            <select class="form-control">
-              <option value="Option #1">Option #1</option>
-              <option value="Option #2">Option #2</option>
-              <option value="Option #3">Option #3</option>
-              <option value="Option #4">Option #4</option>
-              <option value="Option #5">Option #5</option>
+            <select class="form-control" id="inputTextUrlSelector" disabled="true" onchange="prefillText()">
+              <option value="">Loading...</option>
             </select>
+            <div id="inputTextUrlEntryWrapper" style="display: none">
+              <div class="col-md-8"><input type="text" id="inputTextUrlEntry" value="http://"></div><button onclick="prefillText()">Go</button> <button onclick="cancelTextUrlEntry()">Cancel</button>
+            </div>
           </div>
           <h5>Or enter your own</h5>
           <div class="form-group whitespace-md">

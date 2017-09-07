@@ -14,16 +14,16 @@ var newsfeeds = {
 
 var outputDimensions = {
   facebook: {
-    width: 100,
-    height: 100
+    width: 1200,
+    height: 628
   },
   twitter: {
-    width: 100,
-    height: 100
+    width: 1024,
+    height: 576
   },
   linkedin: {
-    width: 100,
-    height: 100
+    width: 552,
+    height: 368
   }
 };
 

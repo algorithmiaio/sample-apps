@@ -4,7 +4,8 @@ var algoClient = Algorithmia.client('simIPuiSZMMAbfq1AeKQU5zjkd/1');
 var algorithms = {
   ScrapeRSS: 'tags/ScrapeRSS/0.1.6',
   Html2Text: 'util/Html2Text/0.1.6',
-  SocialMediaImageRecommender: 'demo/SocialMediaImageRecommenderDemo/0.1.1' // web/SocialMediaImageRecommender/0.1.3
+  SocialMediaImageRecommender: 'demo/SocialMediaImageRecommenderDemo/0.1.1', // web/SocialMediaImageRecommender/0.1.3
+  Data2Base64: 'util/Data2Base64/0.1.0'
 };
 
 var newsfeeds = {
@@ -202,12 +203,40 @@ var showResults = function(selectedSize, recommendations) {
     return 'No results. Either your text was too short, or the images you selected had nothing in common with the text'
   }
   var html='<div class="result-title col-md-12">Smart cropped for '+selectedSize+'</div>';
+  var size = outputDimensions[selectedSize];
   for(var i in recommendations) {
-    html += '<div class="col-md-3 result-row"><a href="'+recommendations[i].social_image+'"><img src="'+recommendations[i].original_image+'"></a>'+'<div>Score: '+Math.round(recommendations[i].score*100)/100+'</div></div>';
+    var rec = recommendations[i];
+    var filename = rec.social_image.substring(rec.social_image.lastIndexOf('/')+1);
+    html += '<div class="col-md-3 result-row">' +
+      '<a href="'+rec.original_image+'" download="'+filename+'"><img src="'+rec.original_image+'" width="'+size.width+'px" height="'+size.width+'px"></a>'
+      +'<div>Score: '+Math.round(rec.score*100)/100+'</div>' +
+      '</div>';
   }
   $('#results-algo .result-output').html(html);
   hideWait();
+  setTimeout(function(){
+    for (var i in recommendations) {
+      fixResultSources(recommendations[i].original_image,recommendations[i].social_image);
+    }
+  },500);
 };
+
+/**
+ * replace src and href of result image with the resized social image
+ * @param srcUrl URL of original image
+ * @param dataUri Data URI to replace srcUrl with
+ */
+function fixResultSources(srcUrl,dataUri) {
+  algoClient.algo(algorithms.Data2Base64).pipe(dataUri).then(function(output) {
+    if (output.error) {
+      console.error(output.error.message);
+    } else {
+      var src = 'data:image/png;base64,' + output.result;
+      $('.results img[src="' + srcUrl + '"]').attr('src', src);
+      $('.results a[href="' + srcUrl + '"]').attr('href', src);
+    }
+  });
+}
 
 /**
  * show overlay, clear results

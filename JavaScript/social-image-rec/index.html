@@ -37,7 +37,7 @@
       </div>
       <div class="col-sm-12 col-md-7">
         <div class="card">
-          <p>This demo will analyze a body of text plus multiple images and give recommendations on which image will score the highest on related-to-text/SEO/understanding/accessibility</p>
+          <p>Select the next of a news article or blogpost, and pick several images you think might be a good fit. Our Mmachine learning algorithms analyze your images, and tell you which ones are best to use in the article.</p>
           <h3 class="whitespace">1. Select Text Content</h3>
           <h5>From a URL</h5>
           <div class="form-group whitespace">
@@ -122,6 +122,7 @@
     <div class="col-md-12">
       <h2 class="whitespace-none">How it works</h2>
       <h4>Applying machine learning algorithms to get image recommendations based on text content</h4>
+      <p>Want help Selecting the best image to go with your news article or blogpost? Social Media Image Recommender examines your text to find the most relevant keywords, then does the same with any images you have supplied. It then ranks your images, from most relevant to least, based on how strongly each image relates to the text's content.</p>
     </div>
   </div>
   <div class="row row-md">
@@ -135,7 +136,14 @@
   <div class="row row-md">
     <div class="col-md-8">
       <h3>Method</h3>
-      <p>TBD</p>
+      <p><ol>
+        <li>You first provide text, tags or both.</li>
+        <li>The algorithm uses <a href="https://algorithmia.com/algorithms/StanfordNLP/SentenceSplit">StanfordNLP/SentenceSplit</a> and <a href="https://algorithmia.com/algorithms/nlp/LDA">nlp/LDA</a> to extract tags if the text is given, and merges them if tags were also given.</li>
+        <li>Later, it uses <a href="https://algorithmia.com/algorithms/translation/GoogleTranslate">translation/GoogleTranslate</a> to detect the language of the content. If it's other than English, it translates the tags to English.</li>
+        <li>It uses <a href="https://algorithmia.com/algorithms/opencv/SmartThumbnail">opencv/SmartThumbnail</a> to resize the images to the required image dimensions.</li>
+        <li>It uses <a href="https://algorithmia.com/algorithms/deeplearning/InceptionNet">deeplearning/InceptionNet</a> to extract tags from images.</li>
+        <li>It uses <a href="https://algorithmia.com/algorithms/nlp/Word2Vec">nlp/Word2Vec</a> to calculate the similarity score between text and image tags and scores the images accordingly.</li>
+      </ol></p>
     </div>
   </div>
   <div class="row row-md">

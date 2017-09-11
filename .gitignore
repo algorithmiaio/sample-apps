@@ -5,3 +5,4 @@ node_modules
 .idea/
 build
 package-lock.json
+*/.Rhistory

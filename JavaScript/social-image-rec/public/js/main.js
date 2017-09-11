@@ -27,8 +27,26 @@ var outputDimensions = {
   }
 };
 
+var waitMessages = [
+  'Scanning text...',
+  'Extracting main keywords...',
+  'Searching Reddit for dank memes...',
+  'Inspecting images...',
+  'Putting in contact lenses...',
+  'Identifying shapes and colors...',
+  'Reticulating splines...',
+  'Calling mom for advice...',
+  'Calculating cross-product of word intersections...',
+  'Questioning the meaning of life, the universe, and everything...',
+  'Math.ceil(6.48074^2)...',
+  'Optimizing search tree...',
+  'Breeding army of sentient Roombas...',
+  'Getting next image...'
+];
+
 var selectedImages = {};
 var selectedSize = null;
+var waitMessageIndex = 0;
 
 /**
  * once DOM is ready, update vars and add handlers
@@ -58,7 +76,7 @@ var initTextSelector = function() {
         inputTextUrlSelector.append(new Option($("<textarea/>").html(output.result[i].title).val(), output.result[i].url));
       }
     }
-    inputTextUrlSelector.append(new Option('custom', 'Enter URL'));
+    inputTextUrlSelector.append(new Option('Custom', 'Enter URL'));
     inputTextUrlSelector.prop("disabled",false);
   },function(error) {
     console.error(error);
@@ -246,11 +264,24 @@ function fixResultSources(srcUrl,dataUri) {
 }
 
 /**
+ * show a new wait message
+ */
+var rotateOverlayText = function() {
+  waitMessageIndex = (waitMessageIndex+1)%waitMessages.length;
+  $('.dots-text').text(waitMessages[waitMessageIndex]);
+  if (!$('#overlay').hasClass('hidden')) {
+    window.setTimeout(rotateOverlayText, 5000);
+  }
+};
+
+/**
  * show overlay, clear results
  */
 var showWait = function() {
-  $('.dots-text').text("Making recommendations...");
+  waitMessageIndex = 0;
+  $('.dots-text').text(waitMessages[0]);
   $('#overlay').removeClass('hidden');
+  window.setTimeout(rotateOverlayText, 5000);
   setError();
   $('#results-algo .result-output').empty();
 };

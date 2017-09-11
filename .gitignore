@@ -5,4 +5,4 @@ node_modules
 .idea/
 build
 package-lock.json
-*/.Rhistory
+/JavaScript/social-image-rec/public/js/.Rhistory

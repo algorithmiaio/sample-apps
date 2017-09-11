@@ -8,7 +8,7 @@
 <!-- FB -->
 <meta property="og:title" content="Get image recommendations based on text content">
 <meta property="og:url" content="http://demos.algorithmia.com/social-image-rec/">
-<meta property="og:description" content="Use machine learning to get image recommendations based on text content">
+<meta property="og:description" content="Use machine learning to get image recommendations based on text content, improving post virality and SEO">
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="website">
 <meta property="og:image" content="http://demos.algorithmia.com/social-image-rec/public/images/fbshare.jpg">
@@ -18,13 +18,13 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@algorithmia">
 <meta name="twitter:title" content="Get image recommendations based on text content">
-<meta name="twitter:description" content="Use machine learning to get image recommendations based on text content">
+<meta name="twitter:description" content="Use machine learning to get image recommendations based on text content, improving post virality and SEO">
 <meta name="twitter:image" content="http://demos.algorithmia.com/social-image-rec/public/images/twshare.jpg">
 <meta name="twitter:creator" content="@algorithmia">
 
 <!-- OTHER -->
 <meta itemprop="name" content="Get image recommendations based on text content">
-<meta itemprop="description" content="Use machine learning to get image recommendations based on text content">
+<meta itemprop="description" content="Use machine learning to get image recommendations based on text content, improving post virality and SEO">
 
 <%= header_end %>
 
@@ -33,13 +33,13 @@
     <div class="row">
       <div class="col-md-12">
         <h1>Social Media Image Recommender</h1>
-        <h4 class="light whitespace-md">Use machine learning to get image recommendations based on text content</h4>
+        <h4 class="light whitespace-md">Use machine learning to get image recommendations based on text content, improving post virality and SEO</h4>
       </div>
       <div class="col-sm-12 col-md-7">
         <div class="card">
-          <p>Select the next of a news article or blogpost, and pick several images you think might be a good fit. Our Mmachine learning algorithms analyze your images, and tell you which ones are best to use in the article.</p>
+          <p>Select the next of a news article or blogpost, and pick several images you think might be a good fit. Our machine learning algorithms analyze your images, and tell you which ones are best to use when sharing the article on social networks, improving your post's virality and search ranking.</p>
           <h3 class="whitespace">1. Select Text Content</h3>
-          <h5>From a URL</h5>
+          <h5>From a URL: </h5>
           <div class="form-group whitespace">
             <select class="form-control" id="inputTextUrlSelector" disabled="true" onchange="prefillText()">
               <option value="">Loading...</option>
@@ -56,13 +56,12 @@
           </div>
 
           </div>
-          <h5>Or enter your own</h5>
+          <h5>Or enter your own:</h5>
           <div class="form-group whitespace-md">
             <textarea id="inputText" class="form-control input__textarea"></textarea>
           </div>
           <h3 class="whitespace">2. Choose Images related to the text content</h3>
-          <h5>Select up to 5 images to get recommended</h5>
-          <h5 id="imageCount"></h5>
+          <h5>Select up to 5 images to get recommended <span id="imageCount"></span>:</h5>
           <div class="form-group">
             <div class="input-group imageSearch">
               <input type="text" class="form-control" value="outside" id="imageTopic" onchange="searchImages()">
@@ -74,7 +73,7 @@
           
           <div class="sample-videos pixabay_widget" data-search="outside" data-max-rows="3"></div>
           <h3 class="whitespace">3. Output dimension</h3>
-          <h5>Chose a dimension to smart crop the recommended images.</h5>
+          <h5>Chose a dimension to smart crop the recommended images:</h5>
           <div class="whitespace-md radio-btns">
             <button name="selectedAlgorithm" class="btn btn-radio" id="button-facebook" onclick="selectSize('facebook')">Facebook</button>
             <button name="selectedAlgorithm" class="btn btn-radio" id="button-twitter" onclick="selectSize('twitter')">Twitter</button>
@@ -137,19 +136,18 @@
     <div class="col-md-8">
       <h3>Method</h3>
       <p><ol>
-        <li>You first provide text, tags or both.</li>
-        <li>The algorithm uses <a href="https://algorithmia.com/algorithms/StanfordNLP/SentenceSplit">StanfordNLP/SentenceSplit</a> and <a href="https://algorithmia.com/algorithms/nlp/LDA">nlp/LDA</a> to extract tags if the text is given, and merges them if tags were also given.</li>
-        <li>Later, it uses <a href="https://algorithmia.com/algorithms/translation/GoogleTranslate">translation/GoogleTranslate</a> to detect the language of the content. If it's other than English, it translates the tags to English.</li>
-        <li>It uses <a href="https://algorithmia.com/algorithms/opencv/SmartThumbnail">opencv/SmartThumbnail</a> to resize the images to the required image dimensions.</li>
-        <li>It uses <a href="https://algorithmia.com/algorithms/deeplearning/InceptionNet">deeplearning/InceptionNet</a> to extract tags from images.</li>
-        <li>It uses <a href="https://algorithmia.com/algorithms/nlp/Word2Vec">nlp/Word2Vec</a> to calculate the similarity score between text and image tags and scores the images accordingly.</li>
+        <li><a href="https://algorithmia.com/algorithms/StanfordNLP/SentenceSplit">StanfordNLP/SentenceSplit</a> and <a href="https://algorithmia.com/algorithms/nlp/LDA">nlp/LDA</a> extract tags from the provided text</li>
+        <li><a href="https://algorithmia.com/algorithms/translation/GoogleTranslate">translation/GoogleTranslate</a> detects the language of the content, translating to English if necessary</li>
+        <li><a href="https://algorithmia.com/algorithms/opencv/SmartThumbnail">opencv/SmartThumbnail</a> resizes the images to the desired dimensions</li>
+        <li><a href="https://algorithmia.com/algorithms/deeplearning/InceptionNet">deeplearning/InceptionNet</a> extracts tags the images</li>
+        <li><a href="https://algorithmia.com/algorithms/nlp/Word2Vec">nlp/Word2Vec</a> calculates a similarity score between the text and image tags, scoring the images accordingly</li>
       </ol></p>
     </div>
   </div>
   <div class="row row-md">
     <div class="col-md-8">
       <h3>Takeaway</h3>
-      <p>TBD</p>
+      <p>When publishing online, your choice of images affects how often your post will be shared on social networks and where it will be ranked in search results. Social Image Recommender gives you an objective score for how well each image matches your content, so you can make better decisions and improve you post's virality.</p>
     </div>
   </div>
 </section>

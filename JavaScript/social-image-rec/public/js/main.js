@@ -5,13 +5,11 @@ var algorithms = {
   ScrapeRSS: 'tags/ScrapeRSS/0.1.6',
   Html2Text: 'util/Html2Text/0.1.6',
   GetImageLinks: 'diego/Getimagelinks/0.1.0',
-  SocialMediaImageRecommender: 'demo/SocialMediaImageRecommenderDemo/0.1.1', // web/SocialMediaImageRecommender/0.1.3
+  SocialMediaImageRecommender: 'demo/SocialMediaImageRecommenderDemo/0.1.2', // web/SocialMediaImageRecommender/0.1.4
   Data2Base64: 'util/Data2Base64/0.1.0'
 };
 
-var newsfeeds = {
-  yahoo: 'https://www.yahoo.com/news/rss/mostviewed'
-};
+var newsfeed = 'http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml';
 
 var outputDimensions = {
   facebook: {
@@ -45,7 +43,7 @@ var waitMessages = [
   'Getting next image...'
 ];
 
-var selectedImages = {};
+var selectedImages = [];
 var selectedSize = null;
 var waitMessageIndex = 0;
 
@@ -67,13 +65,16 @@ var initTextSelector = function() {
     }
   });
   var inputTextUrlSelector = $('#inputTextUrlSelector');
-    algoClient.algo(algorithms.ScrapeRSS).pipe(newsfeeds.yahoo).then(function(output) {
+    algoClient.algo(algorithms.ScrapeRSS).pipe(newsfeed).then(function(output) {
     if (output.error) {
       console.error(output.error.message);
     } else {
       inputTextUrlSelector.find("option").remove();
       inputTextUrlSelector.append(new Option('Select one...', ''));
-      for (var i=0; i<Math.min(output.result.length,5); i++) {
+      output.result = output.result.filter(function(e) {
+        return !/(trump|clinton|sanders)/i.test(e.title);
+      });
+      for (var i=0; i<Math.min(output.result.length,10); i++) {
         inputTextUrlSelector.append(new Option($("<textarea/>").html(output.result[i].title).val(), output.result[i].url));
       }
     }
@@ -96,37 +97,41 @@ var cancelTextUrlEntry = function () {
  * fill inputText with content from selected URL
  */
 var prefillText = function() {
+  $('#status-label').empty();
   var inputTextUrlEntryWrapper = $('#inputTextUrlEntryWrapper');
   var inputTextUrlEntry = $('#inputTextUrlEntry');
   var inputTextUrlSelector = $('#inputTextUrlSelector');
   var url = inputTextUrlEntryWrapper.is(':visible')?inputTextUrlEntry.val():inputTextUrlSelector.find(':selected').val();
-  var inputText = $('#inputText');
+  var inputTextDiv = $('#inputText');
+  var imageDiv = $('#images');
   if(url=='Enter URL') {
   inputTextUrlEntryWrapper.show();
   inputTextUrlSelector.hide();
   } else if(url) {
-    inputText.val('Loading...');
+    $('#inputs').show('fast');
+    inputTextDiv.text('Loading article...');
+    imageDiv.html('<div class="col-xs-12 sample-image">Loading images...</div>');
     algoClient.algo(algorithms.Html2Text).pipe(url).then(function(output) {
       if (output.error) {
-        inputText.val('Cannot load '+url);
+        inputTextDiv.text('Cannot load '+url);
         console.error(output.error.message);
       } else {
-        inputText.val(output.result);
-        algoClient.algo(algorithms.GetImageLinks).pipe(url).then(function(output) {
-          if (output.error || !output.result) {
-            inputText.val('Cannot load images from '+url);
-            console.error(output.error.message);
-          } else {
-            selectedImages = unique(output.result).slice(0, 4);
-            updateImageCount();
-          }
-        },function(error) {
-          inputText.val('Cannot load images from '+url);
-          console.error(error);
-        });
+        inputTextDiv.text(output.result);
       }
     },function(error) {
-      inputText.val('Cannot load '+url);
+      inputTextDiv.text('Cannot load '+url);
+      console.error(error);
+    });
+    algoClient.algo(algorithms.GetImageLinks).pipe(url).then(function(output) {
+      if (output.error || !output.result || !output.result.length) {
+        imageDiv.text('Cannot load images from '+url);
+        console.error(output.error.message);
+      } else {
+        selectedImages = unique(output.result).slice(0, 4);
+        updateImages();
+      }
+    },function(error) {
+      imageDiv.text('Cannot load images from '+url);
       console.error(error);
     });
   }
@@ -143,9 +148,12 @@ var unique = function(arr) {
   });
 };
 
-var updateImageCount = function() {
-  var count = selectedImages.length;
-  $('#imageCount').text(count?(count+' images'):'');
+var updateImages = function() {
+  var html = '';
+  selectedImages.forEach(function(img){
+    html += '<div class="col-xs-6 col-sm-3 sample-image"><img src="'+img+'"></div>';
+  });
+  $('#images').html(html);
 };
 
 /**
@@ -158,22 +166,33 @@ var selectSize = function(name) {
   selectedSize = name;
 };
 
+function cleanString(input) {
+    var output = "";
+    for (var i=0; i<input.length; i++) {
+        if (input.charCodeAt(i) <= 127) {
+            output += input.charAt(i);
+        }
+    }
+    return output;
+}
+
 /**
  * call API on URL and display results
  */
 var analyze = function() {
-  var inputText = $('#inputText').val().trim();
-  if(!inputText) {return hideWait("Please enter some text");}
-  if(selectedImages.length<2) {return hideWait("Please select at least two images");}
+  var inputText = $('#inputText').text().trim();
+  if(!inputText) {return hideWait("Please select an article");}
+  if(selectedImages.length<2) {return hideWait("At least two images are required");}
   if(!selectedSize) {return hideWait("Please select an output size");}
   showWait();
   var data = {
-    text: inputText,
+    text: inputText.substring(0,6000),
     images: selectedImages,
     dimension: outputDimensions[selectedSize]
   };
   algoClient.algo(algorithms.SocialMediaImageRecommender).pipe(data).then(function(output) {
     if (output.error) {
+      console.error(error);
       hideWait(output.error.message);
     } else {
       showResults(selectedSize, output.result.recommendations);

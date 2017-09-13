@@ -18,7 +18,8 @@ video {
 }
 .input__textarea {
   margin-bottom: 8px;
-  min-height: 180px!important;
+  height: 90px!important;
+  overflow: scroll;
 }
 .imageSearch {
   margin-bottom: 8px;
@@ -60,6 +61,18 @@ video {
 }
 #analyze-button-text {
   font-size: 0.65rem;
+}
+
+#images {
+  text-align: center;
+}
+
+.sample-image {
+  text-align: center;
+}
+
+.sample-image img {
+  max-height: 90px;
 }
 
 /* results */

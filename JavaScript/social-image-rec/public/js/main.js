@@ -166,16 +166,6 @@ var selectSize = function(name) {
   selectedSize = name;
 };
 
-function cleanString(input) {
-    var output = "";
-    for (var i=0; i<input.length; i++) {
-        if (input.charCodeAt(i) <= 127) {
-            output += input.charAt(i);
-        }
-    }
-    return output;
-}
-
 /**
  * call API on URL and display results
  */

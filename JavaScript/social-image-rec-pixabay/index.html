@@ -44,21 +44,35 @@
             <select class="form-control" id="inputTextUrlSelector" disabled="true" onchange="prefillText()">
               <option value="">Loading...</option>
             </select>
-            <div id="inputTextUrlEntryWrapper" style="display: none" class="form-group">
-              <div class="input-group imageSearch">
-                <input type="text" class="form-control" id="inputTextUrlEntry" value="http://">
-                <span class="input-group-btn">
-                  <button class="btn btn-default" onclick="cancelTextUrlEntry()">Cancel</button>
-                  <button class="btn btn-primary" onclick="prefillText()">Go</button>
-                </span>
-              </div>
+
+          <div id="inputTextUrlEntryWrapper" style="display: none" class="form-group">
+            <div class="input-group imageSearch">
+              <input type="text" class="form-control" id="inputTextUrlEntry" value="http://">
+              <span class="input-group-btn">
+                <button class="btn btn-default" onclick="cancelTextUrlEntry()">Cancel</button>
+                <button class="btn btn-primary" onclick="prefillText()">Go</button>
+              </span>
             </div>
           </div>
+
+          </div>
+          <h5>Or enter your own:</h5>
           <div class="form-group whitespace-md">
             <textarea id="inputText" class="form-control input__textarea"></textarea>
-            <div id="imageCount"></div>
           </div>
-          <h3 class="whitespace">2. Select output size</h3>
+          <h3 class="whitespace">2. Choose Images related to the text content</h3>
+          <h5>Select up to 5 images to get recommended <span id="imageCount"></span>:</h5>
+          <div class="form-group">
+            <div class="input-group imageSearch">
+              <input type="text" class="form-control" value="outside" id="imageTopic" onchange="searchImages()">
+              <span class="input-group-btn">
+                <button onclick="searchImages()" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+              </span>
+            </div>
+          </div>
+          
+          <div class="sample-videos pixabay_widget" data-search="outside" data-max-rows="3"></div>
+          <h3 class="whitespace">3. Output dimension</h3>
           <h5>Chose a dimension to smart crop the recommended images:</h5>
           <div class="whitespace-md radio-btns">
             <button name="selectedAlgorithm" class="btn btn-radio" id="button-facebook" onclick="selectSize('facebook')">Facebook</button>
@@ -196,5 +210,6 @@ print algo.pipe(input)
   <script src="public/js/TweenMax.min.js"></script>
   <script src="public/js/dots.js"></script>
   <script src="public/js/dropzone.js"></script>
+  <script src="public/js/pixabay-widget-algorithmia.js"></script>
 
   <%= footer %>

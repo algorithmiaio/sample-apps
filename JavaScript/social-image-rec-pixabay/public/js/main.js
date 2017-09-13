@@ -4,7 +4,6 @@ var algoClient = Algorithmia.client('simIPuiSZMMAbfq1AeKQU5zjkd/1');
 var algorithms = {
   ScrapeRSS: 'tags/ScrapeRSS/0.1.6',
   Html2Text: 'util/Html2Text/0.1.6',
-  GetImageLinks: 'diego/Getimagelinks/0.1.0',
   SocialMediaImageRecommender: 'demo/SocialMediaImageRecommenderDemo/0.1.1', // web/SocialMediaImageRecommender/0.1.3
   Data2Base64: 'util/Data2Base64/0.1.0'
 };
@@ -112,18 +111,6 @@ var prefillText = function() {
         console.error(output.error.message);
       } else {
         inputText.val(output.result);
-        algoClient.algo(algorithms.GetImageLinks).pipe(url).then(function(output) {
-          if (output.error || !output.result) {
-            inputText.val('Cannot load images from '+url);
-            console.error(output.error.message);
-          } else {
-            selectedImages = unique(output.result).slice(0, 4);
-            updateImageCount();
-          }
-        },function(error) {
-          inputText.val('Cannot load images from '+url);
-          console.error(error);
-        });
       }
     },function(error) {
       inputText.val('Cannot load '+url);
@@ -133,19 +120,58 @@ var prefillText = function() {
 };
 
 /**
- * remove duplicates from array
- * @param arr
- * @return []
+ * select or deselect a thumbnail
+ * @param href
  */
-var unique = function(arr) {
-  return arr.filter(function(value, index, self) {
-    return self.indexOf(value)===index;
-  });
+var toggleImage = function(href) {
+  setError();
+  if(selectedImages[href]) {
+    delete selectedImages[href];
+  } else {
+    if(Object.keys(selectedImages).length>=5) {
+      setError("You cannot select more than 5 images")
+    } else {
+      selectedImages[href] = true;
+    }
+  }
+  updateImageCount();
+  highlightImages();
 };
 
 var updateImageCount = function() {
-  var count = selectedImages.length;
-  $('#imageCount').text(count?(count+' images'):'');
+  var count = Object.keys(selectedImages).length;
+  $('#imageCount').text(count?('('+count+' selected)'):'');
+};
+
+/**
+ * search for new pixabay images
+ */
+var searchImages = function() {
+  $('.pixabay_widget').attr('data-search', $('#imageTopic').val());
+  initPixabayWidget();
+  selectedImages = {};
+  updateImageCount();
+};
+
+/**
+ * react to pagination events
+ */
+var handlePagination = function() {
+  setTimeout(highlightImages);
+  setTimeout(highlightImages,500);
+};
+
+/**
+ * ensure (only) selected images have 'active' class set
+ */
+var highlightImages = function() {
+  $('.pixabay_widget img.image-thumb').each(function(i,elem) {
+    if (elem.src&&selectedImages[elem.src]) {
+      $(elem).addClass('active');
+    } else {
+      $(elem).removeClass('active')
+    }
+  });
 };
 
 /**
@@ -163,13 +189,17 @@ var selectSize = function(name) {
  */
 var analyze = function() {
   var inputText = $('#inputText').val().trim();
+  var images = Object.keys(selectedImages);
+  for (var i in images) {
+    images[i]=images[i].replace('_150', '_1280').replace('__180', '_1280');
+  }
   if(!inputText) {return hideWait("Please enter some text");}
-  if(selectedImages.length<2) {return hideWait("Please select at least two images");}
+  if(images.length<2) {return hideWait("Please select at least two images");}
   if(!selectedSize) {return hideWait("Please select an output size");}
   showWait();
   var data = {
     text: inputText,
-    images: selectedImages,
+    images: images,
     dimension: outputDimensions[selectedSize]
   };
   algoClient.algo(algorithms.SocialMediaImageRecommender).pipe(data).then(function(output) {

@@ -212,7 +212,7 @@ var showResults = function(selectedSize, recommendations) {
   if(!recommendations.length) {
     return 'No results. Either your text was too short, or the images you selected had nothing in common with the text'
   }
-  var html='<div class="result-title col-md-6">Your images have been smart cropped, and ranked based on how relevant they are to the article. The image with the highest score is likely the best image to use when sharing your article on '+selectedSize+'</div>';
+  var html='<div class="result-title col-md-12">Your images have been smart cropped, and ranked based on how relevant they are to the article. The image with the highest score is likely the best image to use when sharing your article on '+selectedSize+'</div>';
   var size = outputDimensions[selectedSize];
   for(var i in recommendations) {
     var rec = recommendations[i];

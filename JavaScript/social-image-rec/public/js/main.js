@@ -72,7 +72,7 @@ var initTextSelector = function() {
       inputTextUrlSelector.find("option").remove();
       inputTextUrlSelector.append(new Option('Select one...', ''));
       output.result = output.result.filter(function(e) {
-        return !/(trump|clinton|sanders)/i.test(e.title);
+        return !(/(trump|clinton|dead|death)/i.test(e.title)||/(\/politics|\/briefing)/i.test(e.url));
       });
       for (var i=0; i<Math.min(output.result.length,10); i++) {
         inputTextUrlSelector.append(new Option($("<textarea/>").html(output.result[i].title).val(), output.result[i].url));

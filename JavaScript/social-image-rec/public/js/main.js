@@ -72,7 +72,7 @@ var initTextSelector = function() {
       inputTextUrlSelector.find("option").remove();
       inputTextUrlSelector.append(new Option('Select one...', ''));
       output.result = output.result.filter(function(e) {
-        return !(/(trump|clinton|dead|death)/i.test(e.title)||/(\/politics|\/briefing)/i.test(e.url));
+        return !(/(trump|clinton|dead|death)/i.test(e.title)||/(\/video|\/crosswords|\/politics|\/briefing)/i.test(e.url));
       });
       for (var i=0; i<Math.min(output.result.length,10); i++) {
         inputTextUrlSelector.append(new Option($("<textarea/>").html(output.result[i].title).val(), output.result[i].url));
@@ -97,13 +97,15 @@ var cancelTextUrlEntry = function () {
  * fill inputText with content from selected URL
  */
 var prefillText = function() {
-  $('#status-label').empty();
   var inputTextUrlEntryWrapper = $('#inputTextUrlEntryWrapper');
   var inputTextUrlEntry = $('#inputTextUrlEntry');
   var inputTextUrlSelector = $('#inputTextUrlSelector');
   var url = inputTextUrlEntryWrapper.is(':visible')?inputTextUrlEntry.val():inputTextUrlSelector.find(':selected').val();
+  var inputUrlDisplay = $('#inputUrlDisplay');
   var inputTextDiv = $('#inputText');
   var imageDiv = $('#images');
+  inputUrlDisplay.empty();
+  $('#status-label').empty();
   if(url=='Enter URL') {
   inputTextUrlEntryWrapper.show();
   inputTextUrlSelector.hide();
@@ -116,7 +118,8 @@ var prefillText = function() {
         inputTextDiv.text('Cannot load '+url);
         console.error(output.error.message);
       } else {
-        inputTextDiv.text(output.result);
+        inputTextDiv.text(output.result.replace(/^Advertisement /i,''));
+        inputUrlDisplay.html('<a target="_blank" href="'+url+'">'+(url.indexOf('?')>0?url.substring(0,url.indexOf('?')):url)+'</a>')
       }
     },function(error) {
       inputTextDiv.text('Cannot load '+url);

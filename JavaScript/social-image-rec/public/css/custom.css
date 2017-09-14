@@ -20,6 +20,15 @@ video {
   margin-bottom: 8px;
   height: 120px!important;
   overflow-y: scroll;
+  overflow-x:hidden;
+}
+#inputUrlDisplay {
+  text-align: right;
+  font-size: .5rem;
+  margin: -5px 0 10px 0;
+}
+#inputUrlDisplay a {
+  color: #111111;
 }
 .imageSearch {
   margin-bottom: 8px;

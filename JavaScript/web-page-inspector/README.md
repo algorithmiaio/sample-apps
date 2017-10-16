@@ -15,7 +15,7 @@ With this demo, one can instantly examine a webpage, summarize the content and s
 
 ## See this demo in action
 
-This demo can be viewed at http://demos.algorithmia.com/web-page-inspector
+This demo can be viewed at https://demos.algorithmia.com/web-page-inspector
 
 ## Run it yourself
 

@@ -6,7 +6,7 @@ This is a demo of Algorithmia's [VideoMetadataExtraction](https://algorithmia.co
 
 ## See this demo in action
 
-This demo can be viewed at [http://demos.algorithmia.com/video-search/](http://demos.algorithmia.com/video-search/)
+This demo can be viewed at [https://demos.algorithmia.com/video-search/](https://demos.algorithmia.com/video-search/)
 
 ## Run it yourself
 

@@ -6,7 +6,7 @@ This is a demo of the [IllustrationTagger](https://algorithmia.com/algorithms/de
 
 ## See this demo in action
 
-This demo can be viewed at http://demos.algorithmia.com/image-tagger
+This demo can be viewed at https://demos.algorithmia.com/image-tagger
 
 ## Run it yourself
 

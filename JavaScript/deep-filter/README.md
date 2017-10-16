@@ -6,7 +6,7 @@ This is a demo of Algorithmia's [DeepFilter](https://algorithmia.com/algorithms/
 
 ## See this demo in action
 
-This demo can be viewed at http://demos.algorithmia.com/deep-style
+This demo can be viewed at https://demos.algorithmia.com/deep-style
 
 ## Run it yourself
 

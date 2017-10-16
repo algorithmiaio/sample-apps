@@ -14,7 +14,7 @@ With this demo, one can quickly crawl an entire website, rank its pages, summari
 
 ## See this demo in action
 
-This demo can be viewed at http://demos.algorithmia.com/sitemap
+This demo can be viewed at https://demos.algorithmia.com/sitemap
 
 ## Run it yourself
 

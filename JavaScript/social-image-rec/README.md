@@ -6,7 +6,7 @@ This is a demo of Algorithmia's [SocialMediaImageRecommender](https://algorithmi
 
 ## See this demo in action
 
-This demo can be viewed at [http://demos.algorithmia.com/social-image-rec/](http://demos.algorithmia.com/social-image-rec/)
+This demo can be viewed at [https://demos.algorithmia.com/social-image-rec/](https://demos.algorithmia.com/social-image-rec/)
 
 ## Run it yourself
 

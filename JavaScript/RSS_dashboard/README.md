@@ -13,7 +13,7 @@ This tool takes a URL for an RSS feed, and automatically generates tags, text su
 
 ## See this demo in action
 
-This demo can be viewed at http://demos.algorithmia.com/rss-dashboard
+This demo can be viewed at https://demos.algorithmia.com/rss-dashboard
 
 ## Run it yourself
 

@@ -6,7 +6,7 @@ This is a demo of Algorithmia's [VideoTransform](https://algorithmia.com/algorit
 
 ## See this demo in action
 
-This demo can be viewed at [http://demos.algorithmia.com/video-toolbox/](http://demos.algorithmia.com/video-toolbox/)
+This demo can be viewed at [https://demos.algorithmia.com/video-toolbox/](https://demos.algorithmia.com/video-toolbox/)
 
 ## Run it yourself
 

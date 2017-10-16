@@ -6,7 +6,7 @@ This is a demo of the [Places365Classifier](https://algorithmia.com/algorithms/d
 
 ## See this demo in action
 
-This demo can be viewed at http://demos.algorithmia.com/classify-places
+This demo can be viewed at https://demos.algorithmia.com/classify-places
 
 ## Run it yourself
 

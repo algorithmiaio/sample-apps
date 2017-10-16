@@ -6,7 +6,7 @@ This is a demo of the [NudityDetectioni2v](https://algorithmia.com/algorithms/sf
 
 ## See this demo in action
 
-This demo can be viewed at http://demos.algorithmia.com/isitnude
+This demo can be viewed at https://demos.algorithmia.com/isitnude
 
 ## Run it yourself
 

@@ -6,7 +6,7 @@ This is a demo of the [DeepFashion](https://algorithmia.com/algorithms/deeplearn
 
 ## See this demo in action
 
-This demo can be viewed at http://demos.algorithmia.com/deep-fashion
+This demo can be viewed at https://demos.algorithmia.com/deep-fashion
 
 ## Run it yourself
 

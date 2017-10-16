@@ -15,7 +15,7 @@ With this demo, one can analyze Socrata Open Data; forecast, auto-correlate, and
 
 ## See this demo in action
 
-This demo can be viewed at http://demos.algorithmia.com/timeseries
+This demo can be viewed at https://demos.algorithmia.com/timeseries
 
 ## Run it yourself
 

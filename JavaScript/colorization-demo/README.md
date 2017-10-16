@@ -7,7 +7,7 @@ microservice.  Upload or provide an image URL, and color will be automatically a
 
 ## See this demo in action
 
-This demo can be viewed at http://demos.algorithmia.com/colorize-photos
+This demo can be viewed at https://demos.algorithmia.com/colorize-photos
 
 ## Run it yourself
 

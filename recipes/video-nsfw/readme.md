@@ -4,7 +4,7 @@ The [Video Nudity Detection microservice](https://algorithmia.com/algorithms/sfw
 
 We can make use of this service, along with video-editing libraries, to strip out NSFW content from videos.
 
-For the full blog post related to this recipe, see https://blog.algorithmia.com/video-nudity-detection-microservice/.
+For the full blog post related to this recipe, see [Remove NSFW Sections of Video using the VideoNudityDetection Microservice](https://blog.algorithmia.com/video-nudity-detection-microservice/).
 
 ## Getting Started
 

@@ -21,4 +21,4 @@ This sample app will show you two screens, the first one displays a button that 
 
 ## Next steps
 
-Explore the various algorithms on the marketplace and try replacing the Car Make and Model Recognition algorithm with another image-based algorithm you're interested in. Try something like [Color Scheme Extraction)(https://algorithmia.com/algorithms/vagrant/ColorSchemeExtraction) or find out the gender of a person in an image with [Gender Classification](https://algorithmia.com/algorithms/deeplearning/GenderClassification). Then make sure the input you provide to your new algorithm matches the expected input, and hit run! 
+Explore the various algorithms on the marketplace and try replacing the Car Make and Model Recognition algorithm with another image-based algorithm you're interested in. Try something like [Color Scheme Extraction](https://algorithmia.com/algorithms/vagrant/ColorSchemeExtraction) or find out the gender of a person in an image with [Gender Classification](https://algorithmia.com/algorithms/deeplearning/GenderClassification). Then make sure the input you provide to your new algorithm matches the expected input, and hit run! 

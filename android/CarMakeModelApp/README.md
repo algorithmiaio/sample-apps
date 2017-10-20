@@ -10,7 +10,7 @@ This sample app will show you two screens, the first one displays a button that 
 
 1. Open the project by selecting Open existing project and navigating to this directory. Then select the `build.gradle` file to open the project.
 
-2. Change the default API key to your API key in the string resources file. You will see an entry under `app/res/values/strings.xml` that looks like this: `<string name="algorithmia_api_key">simXnLpXIeVXJDRXrcCYHzg7ceh1</string>`. Simply replace the string contents with your API key here. Find your API key by navigating to the Credential section under your profile on Algorithmia.com.
+2. Change the default API key to your API key in the string resources file. You will see an entry under `app/res/values/strings.xml` that looks like this: `<string name="algorithmia_api_key">YOUR_API_KEY</string>`. Simply replace the string contents with your API key here. Find your API key by navigating to the Credential section under your profile on Algorithmia.com.
 
 3. Select "Run app" from "run" in the menu bar of Android Studio or use `^R` to launch the app in your emulator or on a device.
 

@@ -90,5 +90,5 @@ if __name__ == "__main__":
     images = format_images(image_index_input_path)
     points = points_maker(annotations)
     filtered_images = filter_images(images, valid_image_ids)
-    save_data(images, image_index_output_path)
+    save_data(filtered_images, image_index_output_path)
     save_data(points, point_output_path)

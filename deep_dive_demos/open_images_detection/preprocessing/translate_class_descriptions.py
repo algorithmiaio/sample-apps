@@ -30,3 +30,9 @@ parser.add_argument('--trainable_translated_path', dest='trainable_translated_pa
 
 if __name__ == '__main__':
     args = parser.parse_args()
+    trainable_classes_path = args.trainable_classes
+    description_path = args.class_description
+    translated_path = args.trainable_translated_path
+    translated = translate_class_descriptions(trainable_classes_path, description_path)
+    save_classes(translated, translated_path)
+

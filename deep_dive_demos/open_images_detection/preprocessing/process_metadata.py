@@ -36,7 +36,7 @@ def format_images(images_path):
     with open(images_path, 'rb') as f:
         reader = csv.reader(f)
         dataset = list(reader)
-        for row in dataset:
+        for row in tqdm(dataset, desc="reformatting image data"):
             image = {'id': row[0], 'url': row[2]}
             images.append(image)
     return images
@@ -45,7 +45,7 @@ def format_images(images_path):
 # Lets check each image and only keep it if it's ID has a bounding box annotation associated with it.
 def filter_images(dataset, ids):
     output_list = []
-    for element in dataset:
+    for element in tqdm(dataset, desc="filtering out non-essential images"):
         if element['id'] in ids:
             output_list.append(element)
     return output_list

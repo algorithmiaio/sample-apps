@@ -11,7 +11,8 @@ def save_label_map(label_map_path, data):
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--trainable_classes_path', dest='trainable_classes', required=True)
-parser.add_argument('--label_map_path', dest='label_map_path', required=True)
+parser.add_argument('--class_description_path', dest='class_description', required=True)
+parser.add_argument('--label_map_save_path', dest='label_map_path', required=True)
 
 if __name__ == '__main__':
     args = parser.parse_args()

@@ -1,5 +1,5 @@
 // init the Algorithmia client with your API key from https://algorithmia.com/user#credentials
-var algoClient = Algorithmia.client('simYU7sWtoiMToSYQC9uVqdAURb1');
+var algoClient = Algorithmia.client('simhK/jp217MEKHHMtrc3aHsmSe1');
 
 var algorithms = {
   colorize: 'algorithmiahq/ColorizationDemo/1.1.19'

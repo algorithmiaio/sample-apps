@@ -37,7 +37,15 @@ module.exports = function(grunt) {
         bucket: 'demos.algorithmia.com',
         region: 'us-east-1',
         uploadConcurrency: 5,
-        differential: true
+        differential: true,
+      }
+  };
+  var cloudfrontConfig = {
+      options: {
+        accessKeyId: '<%= aws.key %>',
+        secretAccessKey: '<%= aws.secret %>',
+        distributionId: 'E17KLXK0RTG18V',
+        path: "/*"
       }
   };
   var cleanConfig = {};
@@ -81,6 +89,7 @@ module.exports = function(grunt) {
         }
       ]
     };
+    cloudfrontConfig[demo.slug] = {};
     templateConfig[demo.slug] = {
       options: {
         data: {
@@ -110,6 +119,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     aws: grunt.file.readJSON('aws-keys.json'),
     aws_s3: awsS3Config,
+    cloudfront_invalidate: cloudfrontConfig,
     clean: cleanConfig,
     copy: copyConfig,
     template: templateConfig,
@@ -117,13 +127,14 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-aws-s3');
+  grunt.loadNpmTasks('grunt-cloudfront-invalidate');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-template');
 
   demos.forEach(function(demo) {
-    grunt.registerTask('publish:' + demo.slug, "Publish the " + demo.slug + " demo", ['clean:' + demo.slug, 'copy:' + demo.slug, 'template:' + demo.slug, 'aws_s3:' + demo.slug]);
+    grunt.registerTask('publish:' + demo.slug, "Publish the " + demo.slug + " demo", ['clean:' + demo.slug, 'copy:' + demo.slug, 'template:' + demo.slug, 'aws_s3:' + demo.slug, 'cloudfront_invalidate:' + demo.slug]);
     grunt.registerTask('build:' + demo.slug, "Build the " + demo.slug + " demo", ['clean:' + demo.slug, 'copy:' + demo.slug, 'template:' + demo.slug]);
   });
 

@@ -4,7 +4,7 @@ import json
 
 
 def translate_class_descriptions(trainable_classes_file, descriptions_file):
-    with open(trainable_classes_file, 'rb') as file:
+    with open(trainable_classes_file, 'rt') as file:
         trainable_classes = file.read().replace(' ', '').split('\n')
     description_table = {}
     with open(descriptions_file) as f:

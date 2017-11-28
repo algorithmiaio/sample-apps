@@ -46,7 +46,7 @@ def format_images(images_path):
 def filter_images(dataset, ids):
     output_list = []
     for element in tqdm(dataset, desc="filtering out non-essential images"):
-        if element['id'] in ids:
+        if element['id'] in set(ids):
             output_list.append(element)
     return output_list
 

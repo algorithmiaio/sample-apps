@@ -1,3 +1,4 @@
+// this API Key will only work on Algorithmia's website; get your own key at https://algorithmia.com/user#credentials
 var apiKey = "simS8vo8pYJJkQRQNhm2MYFfYke1";
 
 var AmazonMiner =

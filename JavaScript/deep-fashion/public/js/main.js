@@ -1,4 +1,4 @@
-// init the Algorithmia client with your API key from https://algorithmia.com/user#credentials
+// this API Key will only work on Algorithmia's website; get your own key at https://algorithmia.com/user#credentials
 var algoClient1 = Algorithmia.client('simDcapLUQmHq9hv3P6ILOEKuNv1');
 
 var algorithms = {

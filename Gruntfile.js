@@ -12,22 +12,22 @@ module.exports = function(grunt) {
   //    slug: generates a publish-<slug> task that publishes to demos.algorithmia.com/<slug>
   //    dist: the directory containing a static files to publish (index.html should be in this directory)
   var demos = [
+    { slug: 'amazon-miner', dist: 'JavaScript/amazon-miner'},
     { slug: 'analyze-tweets', dist: 'JavaScript/analyze-tweets'},
-    { slug: 'image-tagger', dist: 'JavaScript/image-tagger' },
     { slug: 'colorize-photos', dist: 'JavaScript/colorization-demo' },
-    { slug: 'classify-places', dist: 'JavaScript/places-demo'},
     { slug: 'deep-fashion', dist: 'JavaScript/deep-fashion'},
     { slug: 'deep-style', dist: 'JavaScript/deep-filter'},
-    { slug: 'web-page-inspector', dist: 'JavaScript/web-page-inspector'},
-    { slug: 'video-search', dist: 'JavaScript/video-search'},
+    { slug: 'image-tagger', dist: 'JavaScript/image-tagger' },
+    { slug: 'isitnude', dist: 'JavaScript/isitnude'},
+    { slug: 'classify-places', dist: 'JavaScript/places-demo'},
     { slug: 'rss-dashboard', dist: 'JavaScript/RSS_dashboard'},
     { slug: 'sitemap', dist: 'JavaScript/site-mapper'},
-    { slug: 'timeseries', dist: 'JavaScript/time-series'},
-    { slug: 'isitnude', dist: 'JavaScript/isitnude'},
-    { slug: 'video-toolbox', dist: 'JavaScript/video-toolbox'},
-    { slug: 'video-metadata', dist: 'JavaScript/video-metadata'},
-    { slug: 'amazon-miner', dist: 'JavaScript/amazon-miner'},
     { slug: 'social-image-rec', dist: 'JavaScript/social-image-rec'},
+    { slug: 'timeseries', dist: 'JavaScript/time-series'},
+    { slug: 'video-metadata', dist: 'JavaScript/video-metadata'},
+    { slug: 'video-search', dist: 'JavaScript/video-search'},
+    { slug: 'video-toolbox', dist: 'JavaScript/video-toolbox'},
+    { slug: 'web-page-inspector', dist: 'JavaScript/web-page-inspector'},
   ];
 
   var awsS3Config = {

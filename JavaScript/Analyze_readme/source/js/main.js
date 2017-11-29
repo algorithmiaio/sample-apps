@@ -1,6 +1,8 @@
 // main.js
 
 window.Algorithmia = window.Algorithmia || {};
+
+// this API Key will only work on Algorithmia's website; get your own key at https://algorithmia.com/user#credentials
 Algorithmia.api_key = "simSJMCYD/jeK7QUVl51Tdw8Qao1"
 
 function callAlgorithm() {

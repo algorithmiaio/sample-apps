@@ -1,4 +1,4 @@
-// init the Algorithmia client with your API key from https://algorithmia.com/user#credentials
+// this API Key will only work on Algorithmia's website; get your own key at https://algorithmia.com/user#credentials
 var algoClient = Algorithmia.client('simnxB3dwTN8kds9p6SGMpGoOJC1');
 var algorithmAutotag = 'outofstep/MegaAnalyzeURL/0.1.6';
 

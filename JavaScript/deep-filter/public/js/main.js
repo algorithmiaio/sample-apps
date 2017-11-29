@@ -17,7 +17,10 @@ var downloadLink = document.getElementById("resultLink");
 var currentImg = "";
 
 window.Algorithmia = window.Algorithmia || {};
+
+// this API Key will only work on Algorithmia's website; get your own key at https://algorithmia.com/user#credentials
 Algorithmia.api_key = "simZfwrSvLraXpTAgJpIL53Ugji1";
+
 var numTasks = 0;
 
 // Update the style thumbnail view state

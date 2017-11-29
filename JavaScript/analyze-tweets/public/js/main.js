@@ -11,7 +11,7 @@ var FRDemo =
 		// listen to analyze button
 		$("#demo a").on("click", FRDemo.analyzeTweets);
 
-		// initialize Algorithmia with demo key
+		// this API Key will only work on Algorithmia's website; get your own key at https://algorithmia.com/user#credentials
 		FRDemo.client = Algorithmia.client("simNMhdEKNIckcZwmYzR+ILpXZc1");
 
 		// hide loading

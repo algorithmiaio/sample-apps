@@ -29,15 +29,17 @@ def process_images(saved_images_path, resized_images_path, points):
                 stored_path = os.path.join(saved_images_path, point['id'] + '.jpg')
                 im = Image.open(stored_path)
                 im.verify()
+                im.close()
+                im = Image.open(stored_path)
                 # Now that the image is verified,
                 # lets rescale it and overwrite.
                 im.thumbnail((256, 256))
                 if resized_images_path:
                     resized_path = os.path.join(resized_images_path, point['id'] + '.jpg')
-                    im.save(resized_path, 'JPG')
+                    im.save(resized_path, 'JPEG')
                 else:
                     os.remove(stored_path)
-                    im.save(stored_path, 'JPG')
+                    im.save(stored_path, 'JPEG')
                 cleaned_points.append(point)
             except:
                 pass
@@ -54,7 +56,7 @@ if __name__ == "__main__":
     images_directory = args.image_directory_path
     resized_directory = args.resized_directory_path
     points_input_path = args.datapoints_input_path
-    points_save_path = args.datapoints_save_path
+    points_save_path = args.datapoints_output_path
     points = load_dataset(points_input_path)
     filtered_points = process_images(images_directory, resized_directory, points)
     save_dataset(filtered_points, points_save_path)

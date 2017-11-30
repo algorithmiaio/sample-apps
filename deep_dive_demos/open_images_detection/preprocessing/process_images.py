@@ -29,15 +29,17 @@ def process_images(saved_images_path, resized_images_path, points):
                 stored_path = os.path.join(saved_images_path, point['id'] + '.jpg')
                 im = Image.open(stored_path)
                 im.verify()
+                im.close()
+                im = Image.open(stored_path)
                 # Now that the image is verified,
                 # lets rescale it and overwrite.
                 im.thumbnail((256, 256))
                 if resized_images_path:
                     resized_path = os.path.join(resized_images_path, point['id'] + '.jpg')
-                    im.save(resized_path, 'JPG')
+                    im.save(resized_path, 'JPEG')
                 else:
                     os.remove(stored_path)
-                    im.save(stored_path, 'JPG')
+                    im.save(stored_path, 'JPEG')
                 cleaned_points.append(point)
             except:
                 pass

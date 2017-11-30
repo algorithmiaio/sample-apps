@@ -54,7 +54,7 @@ if __name__ == "__main__":
     images_directory = args.image_directory_path
     resized_directory = args.resized_directory_path
     points_input_path = args.datapoints_input_path
-    points_save_path = args.datapoints_save_path
+    points_save_path = args.datapoints_output_path
     points = load_dataset(points_input_path)
     filtered_points = process_images(images_directory, resized_directory, points)
     save_dataset(filtered_points, points_save_path)

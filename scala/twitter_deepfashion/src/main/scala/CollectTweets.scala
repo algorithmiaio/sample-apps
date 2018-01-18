@@ -43,7 +43,7 @@ object CollectTweets {
       .mapPartitions { partition =>
         // Create client per-partition, since it may be distributed across cluster
         val client = Algorithmia.client(auth.algorithmiaApiKey)
-        val algo = client.algo("algo://algorithmiahq/DeepFashion/0.1.1")
+        val algo = client.algo("algo://algorithmiahq/DeepFashion/1.2.x")
         // Send urls to Algorithmia for tagging:
         partition.map(url => algo.pipe(url).as[Result])
       }

@@ -20,7 +20,7 @@ var algorithmsUserSelectable = {
     displaytext: "Identify Cars"
   },
   deepfashion: {
-    algorithm: "algorithmiahq/DeepFashion/0.1.1",
+    algorithm: "algorithmiahq/DeepFashion/1.2.2",
     displaytext: "Tag Video"
   },
   places: {

@@ -2,7 +2,7 @@
 var algoClient1 = Algorithmia.client('simDcapLUQmHq9hv3P6ILOEKuNv1');
 
 var algorithms = {
-  tagger: 'algorithmiahq/DeepFashion/0.1.1',
+  tagger: 'algorithmiahq/DeepFashion/1.2.2',
   imagedownload: 'util/SmartImageDownloader/0.2.5'
 };
 

@@ -2,7 +2,7 @@
 var algoClient = Algorithmia.client('simhK/jp217MEKHHMtrc3aHsmSe1');
 
 var algorithms = {
-  colorize: 'algorithmiahq/ColorizationDemo/1.1.20'
+  colorize: 'algorithmiahq/ColorizationDemo/1.1.21'
 };
 
 /**

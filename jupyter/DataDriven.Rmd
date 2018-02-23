@@ -1,0 +1,39 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+install.packages("algorithmia")
+```
+
+```{r}
+library("algorithmia")
+```
+
+```{r}
+client <- getAlgorithmiaClient("sim12DBBcpHLe3k3wkdTWgurNln1")
+```
+
+```{r}
+#Specify the path to the algorithm
+algoPath = "demo/s1extract/"
+#Create an algorithm object using the algorithm path defined above
+algo <- client$algo(algoPath)
+```
+
+```{r}
+#Specify the path to the data
+dataPath = "Twitter"
+#Run the algorithm object using the data path defined above
+result <- algo$pipe(dataPath)$result
+```
+
+```{r}
+print(result)
+```
+
+
+
+
+

@@ -1,3 +1,7 @@
+#intercom-container {
+	display: none;
+}
+
 .hero {
     background-image: url(../images/colorize-black-and-white-photos-hero.jpg);
     background-size: cover;

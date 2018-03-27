@@ -95,7 +95,9 @@ module.exports = function(grunt) {
         data: {
           header_begin: getTemplate('JavaScript/common/header_begin.html'),
           header_end: getTemplate('JavaScript/common/header_end.html'),
-          footer: getTemplate('JavaScript/common/footer.html')
+          footer: getTemplate('JavaScript/common/footer.html'),
+          ga_script: getTemplate('JavaScript/common/ga_script.html'),
+          segment_script: getTemplate('JavaScript/common/segment_script.html')
         }
       },
       files: [

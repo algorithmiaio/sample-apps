@@ -12,19 +12,11 @@ var sampleInputs = {
 
 var waitMessages = [
   'Scanning text...',
-  'Extracting main keywords...',
-  'Searching Reddit for dank memes...',
-  'Inspecting images...',
-  'Putting in contact lenses...',
-  'Identifying shapes and colors...',
+  'Running Doc2Vec...',
+  'Loading KNN...',
+  'Hi-di-ho, neighbor!',
   'Reticulating splines...',
-  'Calling mom for advice...',
-  'Calculating cross-product of word intersections...',
-  'Questioning the meaning of life, the universe, and everything...',
-  'Math.ceil(6.48074^2)...',
-  'Optimizing search tree...',
-  'Breeding army of sentient Roombas...',
-  'Getting next image...'
+  'You have been eaten by a grue'
 ];
 
 var waitMessageIndex = 0;
@@ -112,7 +104,7 @@ var showWait = function() {
   waitMessageIndex = 0;
   $('.dots-text').text(waitMessages[0]);
   $('#overlay').removeClass('hidden');
-  window.setTimeout(rotateOverlayText, 5000);
+  window.setTimeout(rotateOverlayText, 2500);
   setError();
   $('#results-algo .result-output').empty();
 };

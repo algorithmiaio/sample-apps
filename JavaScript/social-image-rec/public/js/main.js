@@ -185,7 +185,7 @@ var analyze = function() {
   };
   algoClient.algo(algorithms.SocialMediaImageRecommender).pipe(data).then(function(output) {
     if (output.error) {
-      console.error(error);
+      console.error(output.error);
       hideWait(output.error.message);
     } else {
       showResults(selectedSize, output.result.recommendations);

@@ -1,0 +1,201 @@
+<%= header_begin %>
+
+<%= segment_script %>
+
+<title>Document Classifier - Algorithmia</title>
+<link rel="canonical" href="https://demos.algorithmia.com/doc-classifier/">
+<meta name="description" content="Train a Machine to Recognize User Input, and Classify it into Custom Keywords or Responses"/>
+<meta name="robots" content="index,follow">
+
+<!-- FB -->
+<meta property="og:title" content="Get image recommendations based on text content">
+<meta property="og:url" content="https://demos.algorithmia.com/doc-classifier/">
+<meta property="og:description" content="Train a Machine to Recognize User Input, and Classify it into Custom Keywords or Responses">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://demos.algorithmia.com/doc-classifier/public/images/fbshare.jpg">
+<meta property="og:site_name" content="Algorithmia">
+
+<!-- TWTR -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@algorithmia">
+<meta name="twitter:title" content="Turn user input into custom responses">
+<meta name="twitter:description" content="Train a Machine to Recognize User Input, and Classify it into Custom Keywords or Responses">
+<meta name="twitter:image" content="https://demos.algorithmia.com/doc-classifier/public/images/twshare.jpg">
+<meta name="twitter:creator" content="@algorithmia">
+
+<!-- OTHER -->
+<meta itemprop="name" content="Turn user input into custom responses">
+<meta itemprop="description" content="Train a Machine to Recognize User Input, and Classify it into Custom Keywords or Responses">
+
+<%= header_end %>
+
+<section class="purple-grad-background hero">
+  <div class="container" id="content">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Document Classifier</h1>
+        <h4 class="light whitespace-md">Train a Machine to Recognize User Input, and Classify it into Custom Keywords/Responses</h4>
+      </div>
+      <div class="col-sm-12 col-md-7">
+        <div class="card">
+          <p>To create your own models (classifiers which turn text input into custom keywords), you'll need to <a href="https://algorithmia.com/signup?invite=demo" target="_blank" class="invite_link">create an account</a>, but we've created a few sample models that you can try out right away:</p>
+          <h3 class="whitespace">1. Select a pre-trained model that we've created for you</h3>
+          <div class="form-group whitespace">
+            <select class="form-control" id="namespaceSelector" disabled="true" onchange="handleNamespaceSelection()">
+              <option value="">Loading...</option>
+            </select>
+          </div>
+          <h3 class="whitespace">2. Enter some text</h3>
+          <h5>For example, something a user might say in a chat session</h5>
+          <div class="form-group whitespace-md" id="inputs">
+            <div id="inputText" class="form-control input__textarea"></div>
+          </div>
+          <div class="whitespace-md radio-btns">
+            <button name="selectedAlgorithm" class="btn btn-radio" id="button-facebook" onclick="selectSize('facebook')">Facebook</button>
+            <button name="selectedAlgorithm" class="btn btn-radio" id="button-twitter" onclick="selectSize('twitter')">Twitter</button>
+            <button name="selectedAlgorithm" class="btn btn-radio" id="button-linkedin" onclick="selectSize('linkedin')">LinkedIn</button>
+          </div>
+          <form class="form-group" onsubmit="analyze(); return false">
+            <button class="btn btn-primary">
+                <span>
+                  <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                  <span id="analyze-button-text">Get Recommendations</span>
+                </span>
+            </button>
+          </form>
+          <div id="status-label"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="overlay" class="container hidden">
+  <div class="dots-text-container">
+    <h3 class="dots-text">Boom...</h3>
+  </div>
+  <div class="dots-container">
+      <div class="dot dot1"></div>
+      <div class="dot dot2"></div>
+      <div class="dot dot3"></div>
+      <div class="dot dot4"></div>
+  </div>
+</div>
+
+<section class="container hidden results" id="results-algo">
+  <div class="row">
+    <div class="col-md-12">
+      <h4 class="result-title">Results</h4>
+      <div class="result-output row"></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPLANATION -->
+<div class="grey-background">
+<section class="container">
+  <div class="row row-md">
+    <div class="col-md-8">
+      <h2 class="whitespace-none">How it works</h2>
+      <h4>Applying machine learning algorithms to get custom responses to user input</h4>
+      <p>Whether creating a chatbot, and email autoresponder, or a recommendation engine, there are several different approaches one can use to turn abstract user input ("documents") into custom responses. A common approach is Keyword Mapping: searching for specific words or phrases in the input, and returning predefined keywords/responses when they are found. However, this approach is labor-intensice to create, and often inaccurate. Developers must identify specific key phrases and their synonyms, and it is difficult or impossible to list all possible variations of certain phrases. This approach also fails to understand context, and can easily return the wrong response if a keyword is used in a different way.</p>
+      <p>Algorithmia's Document Classifier uses the power of machine learning -- training a model to automatically recognize variations of similar questions. By providing it with a list of sample inputs (chat transcripts, emails, or any other text input) and a list of known keywords for each input (for example, the tags or categories assigned to the chat session or email), it learns to predict the correct keyword responses for new inputs. You can use these predictions to auto-tag new conversations and automatically send an appropriate response, or simply to tag a set of existing documents.</p>
+    </div>
+  </div>
+  <div class="row row-md">
+    <div class="col-md-8">
+      <h3>Tools used</h3>
+      <ul>
+        <li><a href="https://algorithmia.com/algorithms/nlp/DocumentClassifier">Document Classifier</a>: classify documents into custom keywords</li>
+      </ul>
+    </div>
+  </div>
+  <div class="row row-md">
+    <div class="col-md-8">
+      <h3>More info</h3>
+      <ul>
+        <li><a href="https://blog.algorithmia.com/train-machine-documents-into-keywords/">Train a Machine to Turn Documents into Keywords via Document Classification</a></li>
+        <li><a href="https://blog.algorithmia.com/acquiring-data-for-document-classification/">Acquiring Data for Document Classification</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- BUILT FOR DEVS -->
+  <section class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <h2 class="whitespace-sm">Built For Developers</h2>
+        <h4 class="whitespace-md">A simple, scalable API for machine intelligence</h4>
+          <p class="item-title">SAMPLE INPUT (training)</p>
+          <pre class="whitespace-md"><code class="python">import Algorithmia
+
+client = Algorithmia.client('_API_KEY_')
+algo = client.algo('nlp/DocumentClassifier/0.4.0')
+input = {
+   "data":"data://.my/collection/training_data.json",
+   "namespace":"data://nlp/arxiv_model",
+   "mode":"train"
+}
+print algo.pipe(input)
+</code></pre>
+          <p class="item-title">SAMPLE INPUT (prediction)</p>
+          <pre class="whitespace-md"><code class="python">import Algorithmia
+
+client = Algorithmia.client('_API_KEY_')
+algo = client.algo('nlp/DocumentClassifier/0.4.0')
+input = {
+   "data":[{
+            "text":"Attention-based neural encoder-decoder frameworks have been widely adopted for image captioning. Most methods force visual attention to be active for every generated word. However, the decoder likely requires little to no visual information from the image to predict non-visual words such as the and of. Other words that may seem visual can often be predicted reliably just from the language model e.g., sign after behind a red stop or phone following talking on a cell."
+         }],
+   "namespace":"data://nlp/arxiv_model",
+   "mode":"predict"
+}
+print algo.pipe(input)
+</code></pre>
+            <p class="item-title">SAMPLE OUTPUT</p>
+            <pre><code class="json">{
+  "predictions": [
+    {
+      "topN": [
+        {
+          "confidence": 0.8935607075691223,
+          "prediction": "language"
+        },
+        {
+          "confidence": 0.8852054476737976,
+          "prediction": "deep learning"
+        },
+        {
+          "confidence": 0.8461561799049377,
+          "prediction": "galaxy"
+        },
+        {
+          "confidence": 0.8438877463340759,
+          "prediction": "world war 2"
+        },
+        {
+          "confidence": 0.8197631239891052,
+          "prediction": "biological"
+        }
+      ],
+      "text": "Attention-based neural encoder-decoder frameworks have been widely adopted for image captioning. Most methods force visual attention to be active for every generated word. However, the decoder likely requires little to no visual information from the image to predict non-visual words such as the and of. Other words that may seem visual can often be predicted reliably just from the language model e.g., sign after behind a red stop or phone following talking on a cell."
+    }
+  ]
+}
+</code></pre>
+        <a href="https://algorithmia.com/algorithms/nlp/DocumentClassifier/" class="btn btn-primary-inverse">
+          LEARN MORE
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- JS -->
+  <script src="public/js/TweenMax.min.js"></script>
+  <script src="public/js/dots.js"></script>
+  <script src="public/js/dropzone.js"></script>
+
+  <%= footer %>

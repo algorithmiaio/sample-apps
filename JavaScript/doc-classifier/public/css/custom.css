@@ -1,0 +1,172 @@
+.hero {
+  position: relative;
+  background-image: url(../images/bg-hero.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0% 30%;
+}
+
+.form-group {margin-bottom: 0;}
+/* For smaller screens */
+.form-group input {
+  margin-bottom: .5rem;
+  width: 100%;
+}
+
+video {
+  max-width: 100vw;
+}
+.input__textarea {
+  margin-bottom: 8px;
+  height: 120px!important;
+  overflow-y: scroll;
+  overflow-x:hidden;
+}
+#inputUrlDisplay {
+  text-align: right;
+  font-size: .5rem;
+  margin: -5px 0 10px 0;
+}
+#inputUrlDisplay a {
+  color: #111111;
+}
+.imageSearch {
+  margin-bottom: 8px;
+}
+.pixabay_widget {
+  margin-bottom: 32px;
+}
+.image-thumb {
+  margin-bottom: 16px;
+  border: 3px solid transparent;
+}
+.image-thumb.active {
+  border: 3px solid #5000BE;
+}
+
+.radio-btns .btn-radio {
+  margin-right: 16px;
+}
+.radio-btns .btn-radio:last-of-type {
+  margin-right: 0;
+}
+.btn-radio {
+  font-size: 12px;
+  padding:         6px 6px;
+  color:            #0055BE;
+  background-color: #FFFFFF;
+  border: 1px solid #0055BE;
+  margin-bottom: 8px;
+}
+.btn-radio:hover,
+.btn-radio:focus,
+.btn-radio.active {
+  color:            #FFFFFF;
+  background-color: #0055BE;
+  border: 1px solid #FFFFFF;
+}
+.btn-suppressed {
+  opacity: 0.5;
+}
+#analyze-button-text {
+  font-size: 0.65rem;
+}
+
+#images {
+  text-align: center;
+}
+
+.sample-image {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.sample-image img {
+  max-height: 90px;
+}
+
+/* results */
+.rating {}
+.rating.g {color: green;}
+.rating.r {color: darkred;}
+.results img {object-fit: contain;}
+.result-wrapper {text-align: center;}
+.result-timestamp {float: left;}
+.result-toggle {float: right;}
+.result-output {
+  max-height: 350px;
+  -webkit-overflow-scrolling: touch;
+  font-size: 0.75rem;
+}
+.result-title, .result-row {
+  margin-bottom: 1rem;
+}
+.result-row {
+  margin-bottom: 2rem;
+}
+.results-row:nth-of-type(2n+1) {
+  clear: both;
+}
+.result-row a:hover {
+  opacity: .7;
+}
+.result-row img {
+  width: auto;
+  max-height: 180px;
+}
+#results-sequence .result-output {
+  overflow-y: auto;
+}
+#results-sequence, #results-sequence {
+  padding-top: 0;
+}
+#timeline-html {
+  padding-top: 25px;
+}
+.tl-storyslider, .tl-menubar {
+  display: none;
+}
+
+/* $MEDIA QUERIES */
+/* Extra small devices (phones, less than 768px) */
+/* This should be the default AKA no styles here */
+/*@media (min-width: @screen-xs-min) {}*/
+
+/* Small devices (tablets, 768px and up) */
+@media (max-width: 767px) {
+  .result-input {padding-right: 5vw;}
+  .result-output {width: 93vw;}
+  .result-timestamp {margin-left: 4vw;}
+  .result-toggle {margin-right: 4vw;}
+}
+@media (min-width: 768px) {
+  form {
+    /* vertical center */
+    display:        flex;
+    align-items:    center;
+  }
+  .form-group input {margin-bottom: 0;}
+  .sample-image {
+    /*margin-bottom: 0;*/
+  }
+  .sample-image:nth-child(n) {
+    clear: none;
+  }
+  .sample-image:nth-child(4n+1) {
+    clear: left;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .feature {margin-bottom: 0;}
+  .results-row:nth-of-type(n) {
+    clear: none;
+  }
+  .results-row:nth-of-type(4n+1) {
+    clear: both;
+  }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}

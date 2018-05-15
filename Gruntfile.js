@@ -15,6 +15,7 @@ module.exports = function(grunt) {
     { slug: 'amazon-miner', dist: 'JavaScript/amazon-miner'},
     { slug: 'analyze-tweets', dist: 'JavaScript/analyze-tweets'},
     { slug: 'colorize-photos', dist: 'JavaScript/colorization-demo' },
+    { slug: 'doc-classifier', dist: 'JavaScript/doc-classifier'},
     { slug: 'deep-fashion', dist: 'JavaScript/deep-fashion'},
     { slug: 'deep-style', dist: 'JavaScript/deep-filter'},
     { slug: 'image-tagger', dist: 'JavaScript/image-tagger' },
@@ -110,7 +111,7 @@ module.exports = function(grunt) {
       ]
     };
     watchConfig[demo.slug] = {
-      files: [demo.dist+'/**/*.htm*', demo.dist+'/**/*.css', demo.dist+'/**/*.js'],
+      files: [demo.dist+'/**/*.htm*', demo.dist+'/**/*.css', demo.dist+'/**/*.js', demo.dist+'/**/*.md', demo.dist+'/**/*.png', demo.dist+'/**/*.jpg'],
       tasks: ['copy:' + demo.slug, 'template:' + demo.slug],
       options: {
         spawn: false

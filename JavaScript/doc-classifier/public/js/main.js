@@ -46,7 +46,6 @@ var waitMessages = [
   'Getting next image...'
 ];
 
-var selectedImages = [];
 var selectedSize = null;
 var waitMessageIndex = 0;
 
@@ -79,61 +78,26 @@ var handleNamespaceSelection = function() {
   var inputTextDiv = $('#inputText');
   $('#status-label').empty();
   $('#inputs').show('fast');
-  inputTextDiv.text('Loading article...');
-  algoClient.algo(algorithms.Html2Text).pipe(url).then(function(output) {
-    if (output.error) {
-      inputTextDiv.text('Cannot load '+url);
-      console.error(output.error.message);
-    } else {
-      inputTextDiv.text(output.result.replace(/^Advertisement /i,''));
-    }
-  },function(error) {
-    inputTextDiv.text('Cannot load '+url);
-    console.error(error);
-  });
-};
-
-/**
- * remove duplicates from array
- * @param arr
- * @return []
- */
-var unique = function(arr) {
-  return arr.filter(function(value, index, self) {
-    return self.indexOf(value)===index;
-  });
-};
-
-/**
- * pick size of output image
- * @param name
- */
-var selectSize = function(name) {
-  $('button').removeClass('active');
-  $('#button-'+name).addClass('active');
-  selectedSize = name;
+  inputTextDiv.text('Sample input TBD...');
 };
 
 /**
  * call API on URL and display results
  */
 var analyze = function() {
+  // TBD: check namespaceSelector
   var inputText = $('#inputText').text().trim();
-  if(!inputText) {return hideWait("Please select an article");}
-  if(selectedImages.length<2) {return hideWait("At least two images are required");}
-  if(!selectedSize) {return hideWait("Please select an output size");}
+  if(!inputText) {return hideWait("Please select a model");}
   showWait();
   var data = {
-    text: inputText.substring(0,6000),
-    images: selectedImages,
-    dimension: outputDimensions[selectedSize]
+    document: inputText
   };
   algoClient.algo(algorithms.SocialMediaImageRecommender).pipe(data).then(function(output) {
     if (output.error) {
       console.error(error);
       hideWait(output.error.message);
     } else {
-      showResults(selectedSize, output.result.recommendations);
+      showResults(output.result);
     }
   },function(error) {
     console.error(error);
@@ -143,52 +107,13 @@ var analyze = function() {
 
 /**
  * reveal resultant JSON metadata
- * @param selectedSize display name of output image size
- * @param recommendations) [{social_image:string,score:number}]
+ * @param results
  */
-var showResults = function(selectedSize, recommendations) {
-  if(!recommendations.length) {
-    return 'No results. Either your text was too short, or the images you selected had nothing in common with the text'
-  }
-  var html='<div class="result-title col-md-7">Your images have been smart cropped, and ranked based on how relevant they are to the article. The image with the highest score is likely the best image to use when sharing your article on '+selectedSize+'</div><div class="clearfix"></div>';
-  var size = outputDimensions[selectedSize];
-  for(var i in recommendations) {
-    var rec = recommendations[i];
-    var filename = rec.social_image.substring(rec.social_image.lastIndexOf('/')+1);
-    var style = 'width:'+size.width+'px;height:'+size.height+'px;display:none';
-    html += '<div class="col-xs-6 col-sm-6 col-md-3 result-row">'
-      + '<div>Score: '+Math.round(rec.score*100)/100+'</div>'
-      + '<a href="'+rec.original_image+'" download="'+filename+'"><img src="'+rec.original_image+'" style="'+style+'"><div class="aspinner"></div></a>'
-      + '</div>';
-  }
+var showResults = function(results) {
+  var html='<div class="result-title col-md-7">'+JSON.stringify(results)+'</div>';
   $('#results-algo .result-output').html(html);
   hideWait();
-  setTimeout(function(){
-    for (var i in recommendations) {
-      fixResultSources(recommendations[i].original_image,recommendations[i].social_image);
-    }
-  },500);
 };
-
-/**
- * replace src and href of result image with the resized social image
- * @param srcUrl URL of original image
- * @param dataUri Data URI to replace srcUrl with
- */
-function fixResultSources(srcUrl,dataUri) {
-  algoClient.algo(algorithms.Data2Base64).pipe(dataUri).then(function(output) {
-    if (output.error) {
-      $('.results a[href="' + srcUrl + '"] .aspinner').hide();
-      $('.results img[src="' + srcUrl + '"]').show();
-      console.error(output.error.message);
-    } else {
-      var src = 'data:image/png;base64,' + output.result;
-      $('.results a[href="' + srcUrl + '"] .aspinner').hide();
-      $('.results img[src="' + srcUrl + '"]').attr('src', src).show('slow');
-      $('.results a[href="' + srcUrl + '"]').attr('href', src);
-    }
-  });
-}
 
 /**
  * show a new wait message

@@ -1,32 +1,13 @@
 // this API Key will only work on Algorithmia's website; get your own key at https://algorithmia.com/user#credentials
-var algoClient = Algorithmia.client('simIPuiSZMMAbfq1AeKQU5zjkd/1');
+var algoClient = Algorithmia.client('simuIA0J68bR0L27q8M7X6dj0KT1');
 
 var algorithms = {
-  ScrapeRSS: 'tags/ScrapeRSS/0.1.6',
-  Html2Text: 'util/Html2Text/0.1.6',
-  GetImageLinks: 'diego/Getimagelinks/0.1.0',
-  SocialMediaImageRecommender: 'demo/SocialMediaImageRecommenderDemo/0.1.2', // web/SocialMediaImageRecommender/0.1.4
-  Data2Base64: 'util/Data2Base64/0.1.0'
+  DocumentClassifier: 'nlp/DocumentClassifier/0.4.0'
 };
 
-var namespaces = [
-  ['Chatbot Demo TBD','data://demo/docclassify_chat_model'],
-  ['Scientific Document Classification','data://nlp/arxiv_model']
-];
-
-var outputDimensions = {
-  facebook: {
-    width: 1200,
-    height: 628
-  },
-  twitter: {
-    width: 1024,
-    height: 576
-  },
-  linkedin: {
-    width: 552,
-    height: 368
-  }
+var sampleInputs = {
+  "data://demo/docclassify_chat_model":"Sorry, the Chatbot Demo has not yet been trained!",
+  "data://nlp/arxiv_model":"Attention-based neural encoder-decoder frameworks have been widely adopted for image captioning. Most methods force visual attention to be active for every generated word. However, the decoder likely requires little to no visual information from the image to predict non-visual words such as the and of. Other words that may seem visual can often be predicted reliably just from the language model e.g., sign after behind a red stop or phone following talking on a cell."
 };
 
 var waitMessages = [
@@ -46,7 +27,6 @@ var waitMessages = [
   'Getting next image...'
 ];
 
-var selectedSize = null;
 var waitMessageIndex = 0;
 
 /**
@@ -54,50 +34,39 @@ var waitMessageIndex = 0;
  */
 $(document).ready(function() {
   setInviteCode('demo');
-  initTextSelector();
 });
-
-/**
- * fill namespaceSelector with news feed links
- */
-var initTextSelector = function() {
-  var namespaceSelector = $('#namespaceSelector');
-  namespaceSelector.find("option").remove();
-  namespaceSelector.append(new Option('Select one...', ''));
-  for (var i=0; i<namespaces.length; i++) {
-    namespaceSelector.append(new Option($("<textarea/>").html(namespaces[i][0]).val(), namespaces[i][1]));
-  }
-  namespaceSelector.prop("disabled",false);
-};
 
 /**
  * fill inputText with content from selected URL
  */
 var handleNamespaceSelection = function() {
-  var namespaceSelector = $('#namespaceSelector');
-  var inputTextDiv = $('#inputText');
+  var namespace = $('#namespaceSelector').val();
   $('#status-label').empty();
-  $('#inputs').show('fast');
-  inputTextDiv.text('Sample input TBD...');
+  $('#inputText').val(sampleInputs[namespace]);
 };
 
 /**
  * call API on URL and display results
  */
 var analyze = function() {
-  // TBD: check namespaceSelector
-  var inputText = $('#inputText').text().trim();
-  if(!inputText) {return hideWait("Please select a model");}
+  var namespace = $('#namespaceSelector').val();
+  if(!namespace) {return hideWait("Please select a model");}
+  var inputText = $('#inputText').val().trim();
+  if(!inputText) {return hideWait("Please enter some text to predict against");}
   showWait();
   var data = {
-    document: inputText
+    "namespace": namespace,
+    "mode": "predict",
+    "data": [{
+      "text": inputText
+    }]
   };
-  algoClient.algo(algorithms.SocialMediaImageRecommender).pipe(data).then(function(output) {
+  algoClient.algo(algorithms.DocumentClassifier).pipe(data).then(function(output) {
     if (output.error) {
-      console.error(error);
+      console.error(output.error);
       hideWait(output.error.message);
     } else {
-      showResults(output.result);
+      showResults(output.result.predictions);
     }
   },function(error) {
     console.error(error);
@@ -107,10 +76,20 @@ var analyze = function() {
 
 /**
  * reveal resultant JSON metadata
- * @param results
+ * @param predictions [{text, topN[{confidence,predictions}]}]
  */
-var showResults = function(results) {
-  var html='<div class="result-title col-md-7">'+JSON.stringify(results)+'</div>';
+var showResults = function(predictions) {
+  var html = '';
+  console.log(predictions)
+  for(var i in predictions) {
+    if (!predictions[i].topN.length) {
+      return hideWait('No prediction could be made: try typing more text or using a different model');
+    }
+    for(var j in predictions[i].topN) {
+      var p =  predictions[i].topN[j];
+      html += '<div class="col-sm-12 result-row">'+Math.round(100*p.confidence)+'% '+p.prediction+'</div>';
+    }
+  }
   $('#results-algo .result-output').html(html);
   hideWait();
 };

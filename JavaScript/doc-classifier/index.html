@@ -42,14 +42,16 @@
           <p>To create your own models (classifiers which turn text input into custom keywords), you'll need to <a href="https://algorithmia.com/signup?invite=demo" target="_blank" class="invite_link">create an account</a>, but we've created a few sample models that you can try out right away:</p>
           <h3 class="whitespace">1. Select a pre-trained model that we've created for you</h3>
           <div class="form-group whitespace">
-            <select class="form-control" id="namespaceSelector" disabled="true" onchange="handleNamespaceSelection()">
-              <option value="">Loading...</option>
+            <select class="form-control" id="namespaceSelector" onchange="handleNamespaceSelection()">
+              <option disabled="disabled" selected="selected" value="">Select one...</option>
+              <option value="data://demo/docclassify_chat_model">Chatbot Demo</option>
+              <option value="data://nlp/arxiv_model">Scientific Document Classification</option>
             </select>
           </div>
           <h3 class="whitespace">2. Enter some text</h3>
           <h5>For example, something a user might say in a chat session</h5>
-          <div class="form-group whitespace-md" id="inputs">
-            <div id="inputText" class="form-control input__textarea"></div>
+          <div class="form-group whitespace-md">
+            <textarea id="inputText" class="form-control input__textarea"></textarea>
           </div>
           <form class="form-group" onsubmit="analyze(); return false">
             <button class="btn btn-primary">

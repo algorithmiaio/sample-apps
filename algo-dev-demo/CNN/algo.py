@@ -36,7 +36,7 @@ labels = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship',
 # API calls begin at the apply() method
 def apply(imgPath):
     # Download image from URL: details at algorithmia.com/algorithms/util/SmartImageDownloader
-    imgPath = client.algo('util/SmartImageDownloader/0.2.18').pipe(input).result['savePath'][0]
+    imgPath = client.algo('util/SmartImageDownloader/0.2.18').pipe(imgPath).result['savePath'][0]
     imgFile = client.file(imgPath).getName()
     # Predict, and return text label
     prediction = predict(imgFile)

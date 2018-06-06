@@ -37,7 +37,7 @@ labels = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship',
 def apply(imgPath):
     # Download image from URL: details at algorithmia.com/algorithms/util/SmartImageDownloader
     imgPath = client.algo('util/SmartImageDownloader/0.2.18').pipe(imgPath).result['savePath'][0]
-    imgFile = client.file(imgPath).getName()
+    imgFile = client.file(imgPath).getFile().name
     # Predict, and return text label
     prediction = predict(imgFile)
     return labels[prediction]

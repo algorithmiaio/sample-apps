@@ -53,7 +53,7 @@ var colorize = function(img) {
         } else {
             $('#resultLink').attr('href','#');
         }
-        createTwoface(imgOriginal, imgColorized);
+        createTwoface(imgColorized, imgOriginal);
       }
     });
 };

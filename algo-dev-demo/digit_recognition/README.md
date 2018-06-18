@@ -23,4 +23,4 @@ BSD
 
 #### CREDIT
 adapted from
-[guillaume-chevalier/scikit-learn-digit-recognition](https://raw.githubusercontent.com/guillaume-chevalier/scikit-learn-digit-recognition)
+[guillaume-chevalier/scikit-learn-digit-recognition](https://github.com/guillaume-chevalier/scikit-learn-digit-recognition)

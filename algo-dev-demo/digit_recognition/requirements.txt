@@ -1,0 +1,6 @@
+algorithmia>=1.0.0,<2.0
+six
+numpy
+Pillow
+scikit-learn == 0.15
+scipy

@@ -14,6 +14,6 @@
 1. Click "Algorithmia Web IDE" in the subscript near the bottom of the popup
 1. Copy-and-paste the content of `algo.py` into the code editor, replacing the default code
 2. In the code, replace `data://username/demo/simplecnn.pt` with the URI you copied earlier 
-1. Click the Dependencies button and paste the content of requirements.txt, replacing the default content
+1. Click the Dependencies button and paste the content of `requirements.txt`, replacing the default content
 1. Click compile and wait for the indicator to stop spinning
 3. Paste `"https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/CNN/images/bird.jpg"` (**including** the quotes) into the console below the editor and press Enter

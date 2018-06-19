@@ -3,4 +3,3 @@ six
 numpy
 Pillow
 scikit-learn == 0.15
-scipy

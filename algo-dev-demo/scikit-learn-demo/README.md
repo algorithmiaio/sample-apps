@@ -1,38 +1,38 @@
 # Scikit-Learn Demo
 
-## In this demo we'll go through how to deploy your pre-trained Scikit-Learn model. We'll also cover how to call your algorithm once it's created.
+In this demo we'll go through how to host your data on Algorithmia, you'll learn how to deploy your pre-trained Scikit-Learn model and finally we'll call the algorithm once it's been deployed to make inferences.
 
-### Prerequisites
-While the following steps aren't necessary for hosting your model, you'll want to get your environment ready to call your algorithm once your model has been created. By doing this ahead of time, we can get through more during the demo session.
+## Prerequisites 
 
-* install [conda](https://conda.io/docs/user-guide/install/index.html) or [virtualenv](https://docs.python.org/3/tutorial/venv.html)
+Fork this repository so you have access to the code and data files. While we will use the Algorithmia Web IDE in this demo, note that you can use the [CLI](https://algorithmia.com/developers/clients/cli/) to deploy your model instead once you've [Created an Algorithm](https://algorithmia.com/developers/algorithm-development/languages/python/#create-an-algorithm) and cloned your repository.
 
-If you installed conda, create a new Python3 environment:
+## Upload Your Data To Data Collections
 
-`conda create --name /path/to/new/virtual/environment python=3.6`
+In this demo, we are going to host our data on the Algorithmia platform in [Data Collections](https://algorithmia.com/developers/data/hosted/). 
 
-If you installed through venv, create a new Python3 environment:
+Now you'll want to create a data collection to host your pickled model and your test data: 
 
-`python3 -m venv /path/to/new/virtual/environment`
+- Login to your Algorithmia account and click your avatar which will show a dropdown of choices. Click **"Manage Data"**
 
-Now, activate your environments.
+- Then in the left panel on the page of data collection options, go ahead and click **"My Hosted Data"**
 
-For conda:
+- Click on **“Add Collection”** under the “My Collections” section on your data collections page. Let's name ours "Scikit-Learn-demo"
 
-`source activate /path/to/new/virtual/environment`
+- After you create your collection you can set the read and write access on your data collection. We are going to select **"Private"** since only you will be calling this algorithm. 
 
-For venv:
-`source /path/to/new/virtual/environment/bin/activate`
+- Now, let's put some data into your newly created data collection. You can either drag and drop the files [scikit-demo-boston-regression.pkl](sample-apps/algo-dev-demo/scikit-learn-demo/data/scikit-demo-boston-regression.pkl) and [boston_test_data.csv](sample-apps/algo-dev-demo/scikit-learn-demo/data/boston_test_data.csv) or you can click **"Drop files here to upload"** from where you stored the repo on your computer.
 
-Then install the necessary packages:
+## Create Your Algorithm
 
-`conda install scikitlearn` OR `pip install scikitlearn`
+Now we are ready to deploy our model.
 
-And then:
-
-`pip install algorithmia`
-
-Now you're ready to follow along with the demo. For your convenience, the code samples are available in this repo including the test data file, the pickled model, and the source code for making inferences.
+### First create an algorithm
+- Click the **"Plus"** icon at the top right of the navbar
+- Let's go through the form together
+- Go through the tabs and discover the web IDE
+- Click on the tab **"Source"** and you'll notice boilerplate code for Hello World.
+- Let's delete that code, and copy and paste the code from the file [boston-housing-prices.py](sample-apps/algo-dev-demo/scikit-learn-demo/demo/boston-housing-prices.py)
+- Note that you'll need to change the name of the data collection to the one we created earlier. Recall our data collection is called "Scikit-Learn-demo".
 
 
 

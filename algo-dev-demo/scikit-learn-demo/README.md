@@ -34,5 +34,21 @@ Now we are ready to deploy our model.
 - Let's delete that code, and copy and paste the code from the file [boston-housing-prices.py](sample-apps/algo-dev-demo/scikit-learn-demo/demo/boston-housing-prices.py)
 - Note that you'll need to change the name of the data collection to the one we created earlier. Recall our data collection is called "Scikit-Learn-demo".
 
+### Add Dependencies
+- Click the **"Dependencies"** button in the grey navbar.
+- Add Dependencies to the requirements.txt file under the ones that already exist:
+ --numpy
+ --sklearn
+ 
+### Walkthrough Code
+
+### Compile Code
+- Click the **"Compile"** button in the top right of the grey navbar
+- The first time you compile it will take longer than subsequent calls
+- Now test your code in the console by passing in the data file we stored in our data collection.
+
+In this case we simply passed in a string, but we recommend to create a more robust data structure such as a Python dictionary, or an R list. That way you can let users pass in input files, output files, and other customizations.
+
+
 
 

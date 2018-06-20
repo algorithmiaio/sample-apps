@@ -58,8 +58,9 @@ In this case we simply passed in a string, but we recommend to create a more rob
 ### Publishing Your Model
 We'll cover adding your sample I/O, versioning, release notes, and best practices of creating your algorithms.
 
-## Questions
+## Documentation
 
 - [Documentation for Scikit-Learn](https://algorithmia.com/developers/algorithm-development/model-guides/scikit/)
 - [Documentation for Tensorflow](https://algorithmia.com/developers/algorithm-development/model-guides/tensorflow/)
+- [Working with Data](https://algorithmia.com/developers/data/)
 

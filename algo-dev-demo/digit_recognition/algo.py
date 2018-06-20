@@ -1,28 +1,27 @@
 import Algorithmia
-import numpy as np
-import pickle
+from sklearn.externals import joblib
 from PIL import Image
+import numpy as np
 
 client = Algorithmia.client()
 
 # load model from Data URI - see https://algorithmia.com/developers/data/
-modelFile = client.file('data://username/demo/digit_classifier.pickle').getFile().name
-rbm, logistic, classifier, metrics_results = pickle.load(open(modelFile, 'rb'))
+modelFile = client.file('data://username/demo/digits_classifier.pkl').getFile().name
+model = joblib.load(modelFile)
 
 def apply(imgPath):
     # (optional) use SmartDownloader to download image safely - see https://algorithmia.com/algorithms/util/SmartImageDownloader
     imgPath = client.algo('util/SmartImageDownloader/0.2.18').pipe(imgPath).result['savePath'][0]
     imgFile = client.file(imgPath).getFile().name
-    # resize and greyscale image
     img = Image.open(imgFile)
-    img = img.resize((16, 16), Image.BICUBIC)
-    img = greyscale_img(img)
+    # resize and greyscale image
+    img = img.resize((8, 8), Image.BICUBIC)
+    img = greyscale(img)
     # predict using pre-loaded classifier
-    predicted_num = classifier.predict(img.flatten())[0]
-    return int(predicted_num)
+    return int(model.predict([img.flatten()])[0])
 
-def greyscale_img(color_image):
-    img = np.array(color_image)
+def greyscale(img):
+    img = np.array(img)
     greyscale = np.zeros((img.shape[0], img.shape[1]))
     for rownum in range(len(img)):
         for colnum in range(len(img[rownum])):

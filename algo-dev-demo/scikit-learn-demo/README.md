@@ -60,6 +60,6 @@ We'll cover adding your sample I/O, versioning, release notes, and best practice
 
 ## Questions
 
-[Documentation for Scikit-Learn](https://algorithmia.com/developers/algorithm-development/model-guides/scikit/)
-[Documentation for Tensorflow](https://algorithmia.com/developers/algorithm-development/model-guides/tensorflow/)
+- [Documentation for Scikit-Learn](https://algorithmia.com/developers/algorithm-development/model-guides/scikit/)
+- [Documentation for Tensorflow](https://algorithmia.com/developers/algorithm-development/model-guides/tensorflow/)
 

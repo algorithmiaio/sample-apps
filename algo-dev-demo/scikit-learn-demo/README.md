@@ -40,7 +40,8 @@ Now we are ready to deploy our model.
  --numpy
  --sklearn
  
-### Walkthrough Code
+### Code Example
+- This will be a brief description of the code example including where to load the model
 
 ### Compile Code
 - Click the **"Compile"** button in the top right of the grey navbar
@@ -49,6 +50,7 @@ Now we are ready to deploy our model.
 
 In this case we simply passed in a string, but we recommend to create a more robust data structure such as a Python dictionary, or an R list. That way you can let users pass in input files, output files, and other customizations.
 
-
+### Publishing Your Model
+We'll cover adding your sample I/O, versioning, release notes, and best practices of creating your algorithms.
 
 

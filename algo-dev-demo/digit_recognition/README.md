@@ -10,7 +10,9 @@
 
 #### Create your algorithm
 1. Click the "+" on [algorithmia.com](https://algorithmia.com/) to create a new algorithm
-2. Give your algorithm any name, pick "Python 2", "Full access to internet", "Can call other algorithms", and "Advanced GPU" -- then click Create Algorithm
+2. Give your algorithm any name, pick "Python 2", "Full access to
+   internet" and "Can call other algorithms" (not "Advanced GPU") -- then
+   click Create Algorithm
 3. Click "Algorithmia Web IDE" in the subscript near the bottom of the popup
 4. Copy-and-paste the content of `algo.py` into the code editor, replacing the default code
 5. In the code, replace `data://username/demo/digits_classifier.pkl` with the URI you copied earlier

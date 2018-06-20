@@ -39,8 +39,10 @@ Recall our data collection is called "Scikit-Learn-demo" and you'll need to chan
 ### Add Dependencies
 - Click the **"Dependencies"** button in the grey navbar.
 - Add Dependencies to the requirements.txt file under the ones that already exist, adding:
+```
  --numpy
  --sklearn
+```
  
 ### Code Example
 - This will be a brief description of the code example including where to load the model. 
@@ -56,4 +58,8 @@ In this case we simply passed in a string, but we recommend to create a more rob
 ### Publishing Your Model
 We'll cover adding your sample I/O, versioning, release notes, and best practices of creating your algorithms.
 
+## Questions
+
+[Documentation for Scikit-Learn](https://algorithmia.com/developers/algorithm-development/model-guides/scikit/)
+[Documentation for Tensorflow](https://algorithmia.com/developers/algorithm-development/model-guides/tensorflow/)
 

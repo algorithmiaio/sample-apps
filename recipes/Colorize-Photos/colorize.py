@@ -34,7 +34,7 @@ def recursivelyColorize(algo, path, directory):
     # Start by doing all the files
     colorizeFilesInDirectory(algo, path, directory)
 
-    for d in directory.folders():
+    for d in directory.dirs():
         recursivelyColorize(algo, posixpath.join(path, d.getName()), d)
 
 def main():

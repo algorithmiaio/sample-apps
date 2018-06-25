@@ -40,8 +40,8 @@ Recall our data collection is called "Scikit-Learn-demo" and you'll need to chan
 - Click the **"Dependencies"** button in the grey navbar.
 - Add Dependencies to the requirements.txt file under the ones that already exist, adding:
 ```
- --numpy
- --sklearn
+ numpy
+ scikit-learn>=0.14,<0.18
 ```
  
 ### Code Example

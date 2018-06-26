@@ -16,7 +16,7 @@ You'll want to create a data collection to host your pickled model and your test
 
 - Then in the left panel on the page of data collection options, go ahead and click **"My Hosted Data"**
 
-- Click on **“Add Collection”** under the “My Collections” section on your data collections page. Let's name ours "Scikit-Learn-demo"
+- Click on **“Add Collection”** under the “My Collections” section on your data collections page. Let's name ours "scikit_learn_demo"
 
 - After you create your collection you can set the read and write access on your data collection. We are going to select **"Private"** since only you will be calling your algorithm in this instance. 
 
@@ -33,8 +33,8 @@ Now we are ready to deploy our model.
 - Let's delete that code, and copy and paste the code from the file [boston-housing-prices.py](sample-apps/algo-dev-demo/scikit-learn-demo/demo/boston-housing-prices.py)
 - Note that you'll need to change the name of the data collection to the one we created earlier. 
 
-Recall our data collection is called "Scikit-Learn-demo" and you'll need to change the username "demo" to your username:
-`file_path = 'data://YOUR_USERNAME/Scikit-Learn-demo/scikit-demo-boston-regression.pkl'`
+Recall our data collection is called "scikit_learn_demo" and you'll need to change the username "demo" to your username:
+`file_path = 'data://YOUR_USERNAME/scikit_learn_demo/scikit-demo-boston-regression.pkl'`
 
 ### Add Dependencies
 - Click the **"Dependencies"** button in the grey navbar.

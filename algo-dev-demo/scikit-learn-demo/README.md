@@ -30,7 +30,7 @@ Now we are ready to deploy our model.
 - Click the **"Plus"** icon at the top right of the navbar
 - Let's go through the form together to create our algorithm
 - Click on the tab **"Source"** and you'll notice boilerplate code for Hello World.
-- Let's delete that code, and copy and paste the code from the file [boston-housing-prices.py](sample-apps/algo-dev-demo/scikit-learn-demo/demo/boston-housing-prices.py)
+- Let's delete that code, and copy and paste the code from the file [boston-housing-prices.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/scikit-learn-demo/demo/boston-housing-prices.py)
 - Note that you'll need to change the name of the data collection to the one we created earlier. 
 
 Recall our data collection is called "scikit_learn_demo" and you'll need to change the username "demo" to your username:

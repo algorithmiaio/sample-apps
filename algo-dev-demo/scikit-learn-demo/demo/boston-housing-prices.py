@@ -12,7 +12,7 @@ client = Algorithmia.client()
 def load_model():
     # Get file by name
     # Open file and load model
-    file_path = 'data://demo/demo/scikit-demo-boston-regression.pkl'
+    file_path = 'data://YOUR_USERNAME/scikit_learn_demo/scikit-demo-boston-regression.pkl'
     model_path = client.file(file_path).getFile().name
     # Open file and load model
     with open(model_path, 'rb') as f:

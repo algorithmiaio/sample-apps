@@ -33,8 +33,9 @@ Now we are ready to deploy our model.
 - Let's delete that code, and copy and paste the code from the file [boston-housing-prices.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/scikit-learn-demo/demo/boston-housing-prices.py)
 - Note that you'll need to change the name of the data collection to the one we created earlier. 
 
-Recall our data collection is called "scikit_learn_demo" and you'll need to change the username "demo" to your username:
-`file_path = 'data://YOUR_USERNAME/scikit_learn_demo/scikit-demo-boston-regression.pkl'`
+Recall our data collection is called "scikit_learn_demo" and you'll need
+to change "YOUR_USERNAME" to your own username: `file_path =
+'data://YOUR_USERNAME/scikit_learn_demo/scikit-demo-boston-regression.pkl'`
 
 ### Add Dependencies
 - Click the **"Dependencies"** button in the grey navbar.

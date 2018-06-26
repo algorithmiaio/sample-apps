@@ -20,7 +20,7 @@ You'll want to create a data collection to host your pickled model and your test
 
 - After you create your collection you can set the read and write access on your data collection. We are going to select **"Private"** since only you will be calling your algorithm in this instance. 
 
-- Now, let's put some data into your newly created data collection. You can either drag and drop the files [scikit-demo-boston-regression.pkl](sample-apps/algo-dev-demo/scikit-learn-demo/data/scikit-demo-boston-regression.pkl) and [boston_test_data.csv](sample-apps/algo-dev-demo/scikit-learn-demo/data/boston_test_data.csv) or you can click **"Drop files here to upload"** from where you stored the repo on your computer.
+- Now, let's put some data into your newly created data collection. You can either drag and drop the files [scikit-demo-boston-regression.pkl](https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/scikit-learn-demo/data/scikit-demo-boston-regression.pkl) and [boston_test_data.csv](https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/scikit-learn-demo/data/boston_test_data.csv) or you can click **"Drop files here to upload"** from where you stored the repo on your computer.
 
 ## Create Your Algorithm
 

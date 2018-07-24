@@ -45,8 +45,9 @@ def format_images(images_path):
 # Lets check each image and only keep it if it's ID has a bounding box annotation associated with it.
 def filter_images(dataset, ids):
     output_list = []
+    unique_ids = set(ids)
     for element in tqdm(dataset, desc="filtering out non-essential images"):
-        if element['id'] in set(ids):
+        if element['id'] in unique_ids:
             output_list.append(element)
     return output_list
 

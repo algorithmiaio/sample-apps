@@ -4,7 +4,7 @@ Video editing is a complicated process and when you need a family-friendly censo
 
 Earlier this week we wrote a [blog post](https://blog.algorithmia.com/censoring-faces-automatically/) about an algorithm that censors faces for you called [Censorface](https://algorithmia.com/algorithms/cv/CensorFace) which we'll also cover using this recipe. 
 
-For the full blog post related to this recipe, see [How to Censor Faces with Video Processing Algorithms](http://blog.algorithmia.com/how-to-censor-faces-with-video-processing-algorithms).
+For the full blog post related to this recipe, see [How to Censor Faces with Video Processing Algorithms](https://blog.algorithmia.com/censor-faces-with-video-processing-algorithms/).
 
 ## Getting Started
 

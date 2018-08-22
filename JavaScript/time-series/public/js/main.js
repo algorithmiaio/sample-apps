@@ -1,6 +1,6 @@
 // this API Key will only work on Algorithmia's website; get your own key at https://algorithmia.com/user#credentials
 var algoClient = Algorithmia.client('simajuFPlJfbQ3yDMiOIgOE/3eW1');
-var algorithmBuildingPermits = 'ETL/GetBuildingPermitData/0.1.5';
+var algorithmBuildingPermits = 'ETL/GetBuildingPermitData/0.1.7';
 
 var chart, timeseries, timestamps, timeseriesFiltered, timeseriesAnalysis;
 

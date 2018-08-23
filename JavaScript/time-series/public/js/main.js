@@ -142,7 +142,7 @@ var updateChart = function() {
   var timestampsAdjusted = timestamps;
   var chartOptions = defaultChartOptions;
   switch ($('#dataAnalysis').val()) {
-    case "/timeseries/Forecast/0.2.0":
+    case "/timeseries/Forecast/0.2.x":
       var dataSize = timestamps.length;
       var forecastSize = timeseriesAnalysis.length;
       var lastDate = timestamps[timestamps.length - 1];
@@ -159,7 +159,7 @@ var updateChart = function() {
         }
       }
       break;
-    case "/timeseries/AutoCorrelate/0.2.0":
+    case "/timeseries/AutoCorrelate/0.2.x":
       chartOptions = copy(defaultChartOptions);
       chartOptions.series[2].targetAxisIndex = 1;
       chartOptions.vAxes[1] = {textPosition: 'none'};

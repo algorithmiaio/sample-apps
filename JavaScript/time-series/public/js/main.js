@@ -2,7 +2,7 @@
 var algoClient = Algorithmia.client('simajuFPlJfbQ3yDMiOIgOE/3eW1');
 var algorithmBuildingPermits = 'ETL/GetBuildingPermitData/0.1.7';
 
-var chart, timeseries, timestamps, timeseriesFiltered, timeseriesAnalysis;
+var chart, timeseries, timestamps, timeseriesFiltered, timeseriesAnalysis=[];
 
 /**
  * once DOM is ready, update vars

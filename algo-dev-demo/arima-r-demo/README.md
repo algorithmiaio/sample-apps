@@ -63,7 +63,8 @@ We'll cover adding your sample I/O, versioning, release notes, and best practice
 
 ## Documentation
 
-- [Documentation for Scikit-Learn](https://algorithmia.com/developers/algorithm-development/model-guides/scikit/)
-- [Documentation for Tensorflow](https://algorithmia.com/developers/algorithm-development/model-guides/tensorflow/)
+- [R Client Guides](https://algorithmia.com/developers/algorithm-development/languages/r/)
+- [Documentation for Scikit-Learn](https://algorithmia.com/developers/model-deployment/scikit/)
+- [Documentation for Tensorflow](https://algorithmia.com/developers/model-deployment/tensorflow/)
 - [Working with Data](https://algorithmia.com/developers/data/)
 

@@ -1,0 +1,3 @@
+testthat
+algorithmia
+e1071

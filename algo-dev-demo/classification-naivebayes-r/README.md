@@ -16,11 +16,11 @@ You'll want to create a data collection to host your pickled model and your test
 
 - Then in the left panel on the page of data collection options, go ahead and click **"My Hosted Data"**
 
-- Click on **“Add Collection”** under the “My Collections” section on your data collections page. Let's name ours "arima_r_demo"
+- Click on **“Add Collection”** under the “My Collections” section on your data collections page. Let's name ours "iris_r_demo"
 
 - After you create your collection you can set the read and write access on your data collection. We are going to select **"Private"** since only you will be calling your algorithm in this instance. 
 
-- Now, let's put some data into your newly created data collection. You can either drag and drop the files [auto_arima_model.rds](https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/arima-r-demo/auto_arima_model.rds) or you can click **"Drop files here to upload"** from where you stored the repo on your computer.
+- Now, let's put some data into your newly created data collection. You can either drag and drop the files [naive_bayes_iris.rds](https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/classification-naivebayes-r/naive_bayes_iris.rds) or you can click **"Drop files here to upload"** from where you stored the repo on your computer.
 
 ## Create Your Algorithm
 
@@ -30,21 +30,18 @@ Now we are ready to deploy our model.
 - Click the **"Plus"** icon at the top right of the navbar
 - Let's go through the form together to create our algorithm
 - Click on the tab **"Source"** and you'll notice boilerplate code for Hello World.
-- Let's delete that code, and copy and paste the code from the file [demo.R](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/arima-r-demo/demo.R)
+- Let's delete that code, and copy and paste the code from the file [demo.R](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/classification-naivebayes-r/demo.R)
 - Note that you'll need to change the name of the data collection to the one we created earlier. 
 
-Recall our data collection is called "arima_r_demo" and you'll need
+Recall our data collection is called "iris_r_demo" and you'll need
 to change "YOUR_USERNAME" to your own username: `file_path =
-'data://YOUR_USERNAME/arima_r_demo/auto_arima_model.rds'`
+'data://YOUR_USERNAME/iris_r_demo/naive_bayes_iris.rds'`
 
 ### Add Dependencies
 - Click the **"Dependencies"** button in the grey navbar.
 - Add Dependencies to the CRAN file under the ones that already exist, adding:
 ```
-lubridate
-dplyr
--t https://cran.r-project.org/src/contrib/R6_2.2.2.tar.gz
--t https://cran.r-project.org/src/contrib/Archive/forecast/forecast_5.3.tar.gz
+e1071
 ```
  
 ### Code Example

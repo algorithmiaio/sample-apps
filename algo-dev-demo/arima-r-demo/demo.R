@@ -12,7 +12,7 @@ library(dplyr)
 client <- getAlgorithmiaClient()
 
 load_model <- function(){
-    model_path <- "data://demo/zillow_r_mortgage_demo/auto_arima_model.rds"
+    model_path <- "data://YOUR_USERNAME/zillow_r_mortgage_demo/auto_arima_model.rds"
     model <- client$file(model_path)$getFile()
     loaded_model <- readRDS(model, refhook = NULL)
     return(loaded_model)

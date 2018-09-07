@@ -19,8 +19,8 @@ load_model <- function(){
 }
 
 # Load ARIMA fitted model outside of the algorithm function 
-# this way the model will be loaded once and subsequent models 
-# will load faster
+# this way the model will be loaded once and subsequent calls
+# will be faster because the model will already be loaded in memory
 auto_arima_fit <- load_model()
 
 generate_forecast_arima <- function(input){

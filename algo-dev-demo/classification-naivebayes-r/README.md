@@ -52,6 +52,7 @@ Note you always want to initialize the model outside of the algorithm function (
 ### Compile Code
 - Click the **"Compile"** button in the top right of the grey navbar
 - Now test your code in the console by passing in the data file we stored in our data collection.
+- **REMEMBER:** Change YOUR_USERNAME to your own name in the model path on line 15 of the code example.
 
 In this case we simply passed in a string, but we recommend to create a more robust data structure such as an R list or Python dictionary. That way you can allow for various input types, output files, and other customizations.
 

@@ -1,10 +1,10 @@
-# Arima R Demo
+# Naive Bayes Classification Demo
 
 In this demo we'll go through how to host your data on Algorithmia, you'll learn how to deploy your pre-trained R model and finally we'll call the algorithm once it's been deployed to make inferences.
 
 ## Prerequisites 
 
-Fork this repository so you have access to the code and data files. While we will use the Algorithmia Web IDE in this demo, note that you can use the [CLI](https://algorithmia.com/developers/clients/cli/) to deploy your model instead once you've [Created an Algorithm](https://algorithmia.com/developers/algorithm-development/languages/python/#create-an-algorithm) and cloned your repository.
+Fork this repository so you have access to the code and data files. While we will use the Algorithmia Web IDE in this demo, note that you can use the [CLI](https://algorithmia.com/developers/clients/cli/) to deploy your model instead once you've [Created an Algorithm](https://algorithmia.com/developers/algorithm-development/languages/r/#create-an-algorithm) and cloned your repository.
 
 ## Upload Your Data To Data Collections
 
@@ -16,7 +16,7 @@ You'll want to create a data collection to host your pickled model and your test
 
 - Then in the left panel on the page of data collection options, go ahead and click **"My Hosted Data"**
 
-- Click on **“Add Collection”** under the “My Collections” section on your data collections page. Let's name ours "iris_r_demo"
+- Click on **“Add Collection”** under the “My Collections” section on your data collections page. Let's name ours "classication-naive-bayes"
 
 - After you create your collection you can set the read and write access on your data collection. We are going to select **"Private"** since only you will be calling your algorithm in this instance. 
 
@@ -54,6 +54,9 @@ Note you always want to initialize the model outside of the algorithm function (
 - Now test your code in the console by passing in the data file we stored in our data collection.
 
 In this case we simply passed in a string, but we recommend to create a more robust data structure such as an R list or Python dictionary. That way you can allow for various input types, output files, and other customizations.
+
+### Pass in user Input
+- In the web console, paste in: "data://YOUR_USERNAME/iris_r_demo/naive_bayes_iris.csv" string.
 
 ### Publishing Your Model
 We'll cover adding your sample I/O, versioning, release notes, and best practices of creating your algorithms.

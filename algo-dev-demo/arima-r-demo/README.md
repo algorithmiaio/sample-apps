@@ -4,7 +4,7 @@ In this demo we'll go through how to host your data on Algorithmia, you'll learn
 
 ## Prerequisites 
 
-Fork this repository so you have access to the code and data files. While we will use the Algorithmia Web IDE in this demo, note that you can use the [CLI](https://algorithmia.com/developers/clients/cli/) to deploy your model instead once you've [Created an Algorithm](https://algorithmia.com/developers/algorithm-development/languages/python/#create-an-algorithm) and cloned your repository.
+Fork this repository so you have access to the code and data files. While we will use the Algorithmia Web IDE in this demo, note that you can use the [CLI](https://algorithmia.com/developers/clients/cli/) to deploy your model instead once you've [Created an Algorithm](https://algorithmia.com/developers/algorithm-development/languages/r/#create-an-algorithm) and cloned your repository.
 
 ## Upload Your Data To Data Collections
 
@@ -57,6 +57,9 @@ Note you always want to initialize the model outside of the algorithm function (
 - Now test your code in the console by passing in the data file we stored in our data collection.
 
 In this case we simply passed in a string, but we recommend to create a more robust data structure such as an R list or Python dictionary. That way you can allow for various input types, output files, and other customizations.
+
+### Pass in Input
+- Pass in the string: "data://YOUR_USERNAME/arima_r_demo/auto_arima_model.rds"
 
 ### Publishing Your Model
 We'll cover adding your sample I/O, versioning, release notes, and best practices of creating your algorithms.

@@ -16,7 +16,7 @@ You'll want to create a data collection to host your pickled model and your test
 
 - Then in the left panel on the page of data collection options, go ahead and click **"My Hosted Data"**
 
-- Click on **“Add Collection”** under the “My Collections” section on your data collections page. Let's name ours "classication_naive_bayes"
+- Click on **“Add Collection”** under the “My Collections” section on your data collections page. Let's name ours "iris_r_demo"
 
 - After you create your collection you can set the read and write access on your data collection. We are going to select **"Private"** since only you will be calling your algorithm in this instance. 
 

@@ -16,7 +16,7 @@ You'll want to create a data collection to host your pickled model and your test
 
 - Then in the left panel on the page of data collection options, go ahead and click **"My Hosted Data"**
 
-- Click on **“Add Collection”** under the “My Collections” section on your data collections page. Let's name ours "classication-naive-bayes"
+- Click on **“Add Collection”** under the “My Collections” section on your data collections page. Let's name ours "classication_naive_bayes"
 
 - After you create your collection you can set the read and write access on your data collection. We are going to select **"Private"** since only you will be calling your algorithm in this instance. 
 
@@ -30,7 +30,7 @@ Now we are ready to deploy our model.
 - Click the **"Plus"** icon at the top right of the navbar
 - Let's go through the form together to create our algorithm
 - Click on the tab **"Source"** and you'll notice boilerplate code for Hello World.
-- Let's delete that code, and copy and paste the code from the file [demo.R](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/classification-naivebayes-r/demo.R)
+- Let's delete that code, and copy and paste the code from the file [demo.R](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/classification_naivebayes_r/demo.R)
 - Note that you'll need to change the name of the data collection to the one we created earlier. 
 
 Recall our data collection is called "iris_r_demo" and you'll need

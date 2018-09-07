@@ -4,7 +4,9 @@ In this demo we'll go through how to host your data on Algorithmia, you'll learn
 
 ## Prerequisites 
 
-Fork this repository so you have access to the code and data files. While we will use the Algorithmia Web IDE in this demo, note that you can use the [CLI](https://algorithmia.com/developers/clients/cli/) to deploy your model instead once you've [Created an Algorithm](https://algorithmia.com/developers/algorithm-development/languages/r/#create-an-algorithm) and cloned your repository.
+Clone this repository so you have access to the code and data files. While we will use the Algorithmia Web IDE in this demo, note that you can use the [CLI](https://algorithmia.com/developers/clients/cli/) to deploy your model instead once you've [Created an Algorithm](https://algorithmia.com/developers/algorithm-development/languages/r/#create-an-algorithm) and cloned your repository.
+
+Alternatively you can simply download the repository as a .zip and get the data and code.
 
 ## Upload Your Data To Data Collections
 

@@ -3,26 +3,23 @@
 # Zillow data on 30 year fixed loan rates for jumbo mortgages downloaded from data world 
 # https://data.world/zillow-data/jumbo-30-year-fixed-mortgage-rates
 
-# Input example:{"h":20, "level": 99.5, "output_arima_plot": "data://demo/zillow_r_mortgage_demo/output_arima_plot.png"} 
+# Input example:{"h":20, "level": 99.5} 
 library(algorithmia)
 library(lubridate)
-library(forecast)
 library(dplyr)
+library(forecast)
 
 client <- getAlgorithmiaClient()
-
 load_model <- function(){
     model_path <- "data://YOUR_USERNAME/YOUR_DATA_COLLECTION/auto_arima_model.rds"
     model <- client$file(model_path)$getFile()
     loaded_model <- readRDS(model, refhook = NULL)
     return(loaded_model)
 }
-
 # Load ARIMA fitted model outside of the algorithm function 
-# this way the model will be loaded once and subsequent calls
-# will be faster because the model will already be loaded in memory
+# this way the model will be loaded once and subsequent models 
+# will load faster
 auto_arima_fit <- load_model()
-
 generate_forecast_arima <- function(input){
     user_input <- list(input)
     # h = Number of periods for forecasting
@@ -30,31 +27,26 @@ generate_forecast_arima <- function(input){
     forecast_arima <- forecast(auto_arima_fit,h=input$h,level=c(input$level))
     return(forecast_arima)
 }
-
 create_plot <- function(input){
     forecast_arima <- generate_forecast_arima(input)
     # Create a tmp file to store the plot
-    tempFileName <- "output_arima_plot"
+    tempFileName <- 'mortgage_data_plot'
     png(filename=tempFileName)
   
     # Plot mortgage forecast time series
     plot <- plot(forecast_arima, col="#00B8D4", lwd=1.25, main="")
     dev.off()
-  
-    # Move the output file to the proper output location in the Algorithmia data api
+
     tryCatch({
-        str(input$output_arima_plot)
-        client$file(input$output_arima_plot)$putFile(tempFileName)
-        paste0("Successfully saved the plot to: ", input$output_arima_plot)
-        data_files <- toJSON(list("output_plot"=input$output_arima_plot))
-        return(data_files)
+        data_path <- "data://.algo/YOUR_USERNAME/rdemo/temp/mortgage_data_plot.png"
+        client$file(data_path)$putFile(tempFileName)
+        return(plot)
     }, 
     error = function(e) {
         print("Please check your folder and file paths.")
         stop(e)
     }) 
 }
-
 algorithm <- function(input){
     # Create plot showing ARIMA forecast
     create_plot(input)

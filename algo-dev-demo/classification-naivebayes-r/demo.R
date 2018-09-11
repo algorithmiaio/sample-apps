@@ -12,7 +12,7 @@ read_data <- function(file_path) {
 
 load_model <- function() {
     # Load model that was saved as .rds file from data collections
-    file_path <- "data://YOUR_USERNAME/iris_r_demo/naive_bayes_iris.rds"
+    file_path <- "data://YOUR_USERNAME/naive_bayes_iris/naive_bayes_iris.rds"
     rds_file <- client$file(file_path)$getFile()
     loaded_model <- readRDS(rds_file, refhook = NULL)
     return(loaded_model)

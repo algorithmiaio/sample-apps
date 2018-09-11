@@ -35,7 +35,7 @@ Now we are ready to deploy our model.
 - Let's delete that code, and copy and paste the code from the file [demo.R](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/classification_naivebayes_r/demo.R)
 - Note that you'll need to change the name of the data collection path to the one we created earlier. 
 
-Recall our data collection is called "iris_r_demo" and you'll need
+Recall our data collection is called "naive_bayes_iris" and you'll need
 to change "YOUR_USERNAME" to your own username: `file_path =
 'data://YOUR_USERNAME/iris_r_demo/naive_bayes_iris.rds'`
 

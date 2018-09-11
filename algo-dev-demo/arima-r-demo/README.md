@@ -44,9 +44,6 @@ to change "YOUR_USERNAME" to your own username: `file_path =
 - Add Dependencies to the CRAN file under the ones that already exist, adding:
 ```
 lubridate
-dplyr
--t https://cran.r-project.org/src/contrib/R6_2.2.2.tar.gz
--t https://cran.r-project.org/src/contrib/Archive/forecast/forecast_5.3.tar.gz
 ```
  
 ### Code Example

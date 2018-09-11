@@ -6,7 +6,7 @@
 # Input example:{"h":20, "level": 99.5} 
 library(algorithmia)
 library(lubridate)
-library(dplyr)
+install.packages("forecast")
 library(forecast)
 
 client <- getAlgorithmiaClient()
@@ -38,7 +38,7 @@ create_plot <- function(input){
     dev.off()
 
     tryCatch({
-        data_path <- "data://.algo/YOUR_USERNAME/rdemo/temp/mortgage_data_plot.png"
+        data_path <- "data://.algo/YOUR_USERNAME/YOUR_ALGO_NAME/temp/mortgage_data_plot.png"
         client$file(data_path)$putFile(tempFileName)
         return(plot)
     }, 

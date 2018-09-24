@@ -12,7 +12,7 @@ In this demo, we are going to host our data on the Algorithmia platform in [Data
 
 You'll want to create a data collection to host your pickled model and your test data: 
 
-- Login to your Algorithmia account and click your avatar which will show a dropdown of choices. Click **"Manage Data"**
+- Log in to your Algorithmia account and click your avatar which will show a dropdown of choices. Click **"Manage Data"**
 
 - Then in the left panel on the page of data collection options, go ahead and click **"My Hosted Data"**
 

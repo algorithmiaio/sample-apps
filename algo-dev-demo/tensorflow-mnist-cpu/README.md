@@ -42,10 +42,7 @@ Now that you have created your algorithm, you'll get a modal with information ab
 Then note that there is another file in the repo called [load-mnist-data.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/tensorflow-mnist-cpu/load-mnist-data.py).
 
 3. Create a file in the directory structure to the left of your code in the Web IDE by clicking on "**+** New File" and call it "load-mnist-data.py" then copy and paste from [load-mnist-data.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/tensorflow-mnist-cpu/load-mnist-data.py).
-
-**Note** that you'll need to change the name of the data collection path to the one we created earlier. 
-
-Recall our data collection is called "tensorflow_mnist_data" and you'll need
+4. Recall our data collection is called "tensorflow_mnist_data" and you'll need
 to change "YOUR_USERNAME" to your own username: `file_path =
 'data://YOUR_USERNAME/tensorflow_mnist_data/model.zip'` on line 41.
 

@@ -1,4 +1,4 @@
-# Tensorflow Mnist Running On CPU's Demo
+# Tensorflow MNIST Running On CPU's Demo
 
 In this hands-on tutorial, we'll go through how to host a pre-trained Tensorflow model and the associated data on Algorithmia, learn how to deploy that model into production, and then call the algorithm once it's been deployed to make inferences.
 

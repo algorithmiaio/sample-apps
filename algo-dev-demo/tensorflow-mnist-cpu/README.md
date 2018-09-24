@@ -36,10 +36,12 @@ Now we are ready to deploy our model.
 Now that you have created your algorithm, you'll get a modal with information about using the CLI and Git. Every algorithm has a Git repo behind it so you can experiment with different I/O in development mode by calling the hash version.
 
 ### Add Code Samples
-4. Click on the tab **"Source"** and you'll notice boilerplate code for Hello World.
-5. Let's delete that code, and copy and paste the code from the file [demo.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/tensorflow-mnist-cpu/demo.py)
-6. Then note that there is another file in the repo called [load-mnist-data.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/tensorflow-mnist-cpu/load-mnist-data.py).
-7. Create a file in the directory structure to the left of your code in the Web IDE by clicking on "**+** New File" and call it "load-mnist-data.py" then copy and paste from [load-mnist-data.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/tensorflow-mnist-cpu/load-mnist-data.py).
+1. Click on the tab **"Source"** and you'll notice boilerplate code for Hello World.
+2. Let's delete that code, and copy and paste the code from the file [demo.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/tensorflow-mnist-cpu/demo.py)
+
+Then note that there is another file in the repo called [load-mnist-data.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/tensorflow-mnist-cpu/load-mnist-data.py).
+
+4. Create a file in the directory structure to the left of your code in the Web IDE by clicking on "**+** New File" and call it "load-mnist-data.py" then copy and paste from [load-mnist-data.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/tensorflow-mnist-cpu/load-mnist-data.py).
 
 **Note** that you'll need to change the name of the data collection path to the one we created earlier. 
 

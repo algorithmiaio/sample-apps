@@ -32,12 +32,14 @@ Now we are ready to deploy our model.
 - Click the **"Plus"** icon at the top right of the navbar
 - Let's go through the form together to create our algorithm
 - Click on the tab **"Source"** and you'll notice boilerplate code for Hello World.
-- Let's delete that code, and copy and paste the code from the file [REPLACE WITH MODEL FILE](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/tensorflow-mnist-cpu/REPLACE)
+- Let's delete that code, and copy and paste the code from the file [demo.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/tensorflow-mnist-cpu/demo.py)
+- Then note that there is another file in the repo called [load-mnist-data.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/tensorflow-mnist-cpu/load-mnist-data.py).
+- Create a file in the directory structure to the left of your code in the Web IDE by clicking on "**+** New File" and call it "load-mnist-data.py" then copy and paste from [load-mnist-data.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/tensorflow-mnist-cpu/load-mnist-data.py).
 - Note that you'll need to change the name of the data collection path to the one we created earlier. 
 
 Recall our data collection is called "tensorflow_mnist_data" and you'll need
 to change "YOUR_USERNAME" to your own username: `file_path =
-'data://YOUR_USERNAME/tensorflow_mnist_data/REPLACE'`
+'data://YOUR_USERNAME/tensorflow_mnist_data/model.zip'` on line 41.
 
 ### Add Dependencies
 - Click the **"Dependencies"** button in the grey navbar.
@@ -55,8 +57,6 @@ Note you always want to initialize the model outside of the apply() function. Th
 - Click the **"Compile"** button in the top right of the grey navbar
 - Now test your code in the console by passing in the data file we stored in our data collection.
 - **REMEMBER:** Change YOUR_USERNAME to your own name in the model path on line REPLACE of the code example.
-
-We recommend to create a robust data structure such as a Python dictionary. That way you can allow for various input types, output files, and other customizations.
 
 ### Developer Center
 - While the first commit and compile is occuring, this is a good opportunity to introduce where to find the documentation. Welcome to the [Developer Center](https://algorithmia.com/developers/) where you can find documentation on [R algorithm development](https://algorithmia.com/developers/algorithm-development/languages/r/) and an [R Shiny app example](https://algorithmia.com/developers/tutorials/sample-apps/shiny-app/).

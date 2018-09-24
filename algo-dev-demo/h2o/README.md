@@ -52,7 +52,7 @@ Note: once you've done this, you can delete `main.java`, since the `apply()` met
 3. Click "Compile" and wait for success (ignore any warnings about "dependency.SystemPath"), then test your algo by giving it empty String input (`""`) on the Web Console below the IDE
 4. Click "Publish" and walk through the dialogs
 5. Test out your new Algorithm by clicking "Run Example"; you should get back a result like `{"Prediction":"YES","Probability 0":0.4319916897116479,"Probability 1":0.5680083102883521}`
-6. Write some brief documentation in the "Docs" tab of your algorithm's webpage
+6. Write some brief documentation in the "Docs" tab of your algorithm's webpage (or the `README.md` file in its repo)
 
 #### Alter your algorithm to accept inputs
 1. Alter the `apply` method to accept a Map (`apply` does not support overloading, so instead we'll use a Map to pass parameters)

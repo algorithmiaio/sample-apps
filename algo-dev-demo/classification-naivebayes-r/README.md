@@ -1,6 +1,6 @@
 # Naive Bayes Classification Demo
 
-In this hands-on tutorial, we'll go through how to host a pre-trained R model and data on Algorithmia, learn how to deploy a that model into production, and then call the algorithm once it's been deployed to make inferences.
+In this hands-on tutorial, we'll go through how to host a pre-trained R model and it's associated data on Algorithmia, learn how to deploy that model into production, and then call the algorithm once it's been deployed to make inferences.
 
 ## Prerequisites 
 

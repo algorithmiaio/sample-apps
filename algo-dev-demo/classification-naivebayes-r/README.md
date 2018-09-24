@@ -4,7 +4,7 @@ In this hands-on tutorial, we'll go through how to host a pre-trained R model an
 
 ## Prerequisites 
 
-Clone [this repository](https://github.com/algorithmiaio/sample-apps/) so you have access to the code and data files. While we will use the Algorithmia Web IDE in this demo, note that you can use the [CLI](https://algorithmia.com/developers/clients/cli/) to deploy your model instead once you've [Created an Algorithm](https://algorithmia.com/developers/algorithm-development/languages/r/#create-an-algorithm) and cloned your repository.
+Clone [this repository](https://github.com/algorithmiaio/sample-apps/) so you have access to the code and data files. While we will use the Algorithmia Web IDE in this demo, note that you can use the [CLI](https://algorithmia.com/developers/clients/cli/) to deploy your model instead once you've created an algorithm and cloned your repository.
 
 Alternatively you can simply download the repository as a .zip and get the data and code from `sample-apps/algo-dev-demo/classification-naivebayes-r/`
 
@@ -14,7 +14,7 @@ In this demo, we are going to host our data on the Algorithmia platform in [Data
 
 You'll want to create a data collection to host your saved model and your test data: 
 
-- Login to your Algorithmia account and click your avatar which will show a dropdown of choices. Click **"Manage Data"**
+- Log in to your Algorithmia account and click your avatar which will show a dropdown of choices. Click **"Manage Data"**
 
 - Then in the left panel on the page of data collection options, go ahead and click **"My Hosted Data"**
 

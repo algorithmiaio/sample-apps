@@ -22,7 +22,7 @@ You'll want to create a data collection to host your saved model and your test d
 
 - After you create your collection you can set the read and write access on your data collection. We are going to select **"Private"** since only you will be calling your algorithm in this instance. 
 
-- Now, let's put some data into your newly created data collection. You can either drag and drop the files [TF MNIST FILE REPLACE](https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/tensorflow-mnist-cpu/) or you can click **"Drop files here to upload"** from where you stored the repo on your computer.
+- Now, let's put some data into your newly created data collection. You can either drag and drop the files in the folder: [tensorflow-mnist-cpu/data](https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/tensorflow-mnist-cpu/data) or you can click **"Drop files here to upload"** from where you stored the repo on your computer.
 
 ## Create Your Algorithm
 
@@ -56,7 +56,6 @@ Note you always want to initialize the model outside of the apply() function. Th
 ### Compile Code
 - Click the **"Compile"** button in the top right of the grey navbar
 - Now test your code in the console by passing in the data file we stored in our data collection.
-- **REMEMBER:** Change YOUR_USERNAME to your own name in the model path on line REPLACE of the code example.
 
 ### Developer Center
 - While the first commit and compile is occuring, this is a good opportunity to introduce where to find the documentation. Welcome to the [Developer Center](https://algorithmia.com/developers/) where you can find documentation on [R algorithm development](https://algorithmia.com/developers/algorithm-development/languages/r/) and an [R Shiny app example](https://algorithmia.com/developers/tutorials/sample-apps/shiny-app/).

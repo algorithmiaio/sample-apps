@@ -58,7 +58,7 @@ Note you always want to initialize the model outside of the apply() function. Th
 - Now test your code in the console by passing in the data file we stored in our data collection.
 
 ### Developer Center
-- While the first commit and compile is occuring, this is a good opportunity to introduce where to find the documentation. Welcome to the [Developer Center](https://algorithmia.com/developers/) where you can find documentation on [R algorithm development](https://algorithmia.com/developers/algorithm-development/languages/r/) and an [R Shiny app example](https://algorithmia.com/developers/tutorials/sample-apps/shiny-app/).
+- While the first commit and compile is occuring, this is a good opportunity to introduce where to find the documentation. Welcome to the [Developer Center](https://algorithmia.com/developers/) where you can find documentation on [Python algorithm development](https://algorithmia.com/developers/algorithm-development/languages/python/) and the full documentation on [Tensorflow](https://algorithmia.com/developers/model-deployment/tensorflow/).
 
 ### Pass in user Input
 - In the web console, paste in: "{"mnist_images": "data://YOUR_USERNAME/tensorflow_mnist_data/t10k-images-idx3-ubyte.gz", "mnist_labels": "data://YOUR_USERNAME/tensorflow_mnist_data/t10k-labels-idx1-ubyte.gz"}" string.

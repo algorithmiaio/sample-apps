@@ -9,9 +9,9 @@
 1. Click the "+" on [algorithmia.com](https://algorithmia.com/) to create a new algorithm
 2. Give your algorithm any name (referred to in the rest of these instructions as YOUR_ALGO_NAME), pick "Java", "Full access to internet" and "Can call other algorithms" (not "Advanced GPU")
 3. Click Create Algorithm
-4. Copy the GIT command, open up a local console in a directory of your choosing, and run the GIT command to pull down the algorithm's repo
+4. Copy the Git command, open up a local console in a directory of your choosing, and run the Git command to pull down the algorithm's repo
 
-Note: you can always find the GIT command in the "manage" tab of [your algorithm's webpage](https://algorithmia.com/user#))
+Note: you can always find the Git command in the "manage" tab of [your algorithm's webpage](https://algorithmia.com/user#))
 
 #### Modify/add files to the algorithm repo
 1. Copy `gbm_pojo_test.java` into `src/main/java/YOUR_USERNAME/YOUR_ALGO_NAME/` and add a package declaration so that the first line reads `package YOUR_USERNAME.YOUR_ALGO_NAME;`
@@ -47,7 +47,7 @@ Note: you can always find the GIT command in the "manage" tab of [your algorithm
 Note: once you've done this, you can delete `main.java`, since the `apply()` method of `YOUR_ALGO_NAME.java` is now the algorithm's main entry point
 
 #### Publish your algorithm
-1. GIT Add, Commit, and Push your changes
+1. Git Add, Commit, and Push your changes
 2. Head back to your algorithm's webpage and click the "Source" tab to start up the Web IDE
 3. Click "Compile" and wait for success (ignore any warnings about "dependency.SystemPath"), then test your algo by giving it empty String input (`""`) on the Web Console below the IDE
 4. Click "Publish" and walk through the dialogs

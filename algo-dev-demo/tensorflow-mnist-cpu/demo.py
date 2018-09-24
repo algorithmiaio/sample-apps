@@ -36,7 +36,7 @@ def extract_zip():
     Get zipped model file from data collections
     """
     # Saved model protocol buffer and variables 
-    filename = "data://YOUR_USERNAME/tensorflow_mnist_model/model.zip"
+    filename = "data://YOUR_USERNAME/tensorflow_mnist_data/model.zip"
     model_file = client.file(filename).getFile().name
     return model_file
     

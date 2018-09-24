@@ -38,10 +38,8 @@ Note: you can always find the Git command in the "manage" tab of [your algorithm
 ```
     BinomialModelPrediction p = model.predictBinomial(row);
     HashMap outs = new HashMap();
-    outs.put("Prediction",p.label);
-    for (int i = 0; i < p.classProbabilities.length; i++) {
-        outs.put("Probability "+i, p.classProbabilities[i]);
-    }
+    outs.put("prediction",p.label);
+    outs.put("probabilities", p.classProbabilities);
     return outs;
 ```
 Note: once you've done this, you can delete `main.java`, since the `apply()` method of `YOUR_ALGO_NAME.java` is now the algorithm's main entry point
@@ -69,3 +67,5 @@ for (String k: params) {
   }
 }
 ```
+
+You can view a completed (and slightly more optimized) version of this algorithm at [algorithmia.com/algorithms/jpeck/h2o_demo](https://algorithmia.com/algorithms/jpeck/h2o_demo) and inspect its source code via the "Source" tab

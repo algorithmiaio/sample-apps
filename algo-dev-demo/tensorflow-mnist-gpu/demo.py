@@ -15,15 +15,15 @@ client = Algorithmia.client()
     
 def load_data(input):
     """
-    Pass in {"mnist_images": "data://demo/tensorflow_mnist_data/t10k-images-idx3-ubyte.gz", 
-        "mnist_labels": "data://demo/tensorflow_mnist_data/t10k-labels-idx1-ubyte.gz"
+    Pass in {"mnist_images": "data://YOUR_USERNAME/tensorflow_mnist_data/t10k-images-idx3-ubyte.gz", 
+        "mnist_labels": "data://YOUR_USERNAME/tensorflow_mnist_data/t10k-labels-idx1-ubyte.gz"
     }
     """
     if input["mnist_images"].startswith("data://"):
-        # "data://demo/tensorflow_mnist_data/t10k-images-idx3-ubyte.gz"
+        # "data://YOUR_USERNAME/tensorflow_mnist_data/t10k-images-idx3-ubyte.gz"
         mnist_images = client.file(input["mnist_images"]).getFile().name
     if input["mnist_labels"].startswith("data://"):
-        # "data://demo/tensorflow_mnist_data/t10k-labels-idx1-ubyte.gz"
+        # "data://YOUR_USERNAME/tensorflow_mnist_data/t10k-labels-idx1-ubyte.gz"
         mnist_labels = client.file(input["mnist_labels"]).getFile().name
     try:
         # load_mnist is a function from loadmnistdata.py to one hot encode images
@@ -38,7 +38,7 @@ def extract_zip():
     Get zipped model file from data collections
     """
     # Saved model protocol buffer and variables 
-    filename = "data://demo/tensorflow_mnist_model/model.zip"
+    filename = "data://YOUR_USERNAME/tensorflow_mnist_model/model.zip"
     model_file = client.file(filename).getFile().name
     return model_file
     

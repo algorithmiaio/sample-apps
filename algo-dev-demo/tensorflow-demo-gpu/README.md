@@ -6,7 +6,7 @@ In this hands-on tutorial, we'll go through how to host a pre-trained Tensorflow
 
 Clone [this repository](https://github.com/algorithmiaio/sample-apps/) so you have access to the code and data files. While we will use the Algorithmia Web IDE in this demo, note that you can use the [CLI](https://algorithmia.com/developers/clients/cli/) to deploy your model instead once you've created your algorithm and cloned your repository.
 
-Alternatively you can simply download the repository as a .zip and get the data and code from `sample-apps/algo-dev-demo/tensorflow-mnist-ppu`
+Alternatively you can simply download the repository as a .zip and get the data and code from `sample-apps/algo-dev-demo/tensorflow-mnist-gpu`
 
 ## Upload Your Data To Data Collections
 

@@ -37,7 +37,7 @@ Now that you have created your algorithm, you'll get a modal with information ab
 
 ### Add Code Samples
 1. Let's delete that code, and copy and paste the code from the file [demo.R](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/classification_naivebayes_r/demo.R)
-2. Recall our data collection is called "naive_bayes_iris" and you'll need to change "YOUR_USERNAME" to your own username: `file_path ='data://YOUR_USERNAME/iris_r_demo/naive_bayes_iris.rds'`
+2. Recall our data collection is called "iris_r_demo" and you'll need to change "YOUR_USERNAME" to your own username: `file_path ='data://YOUR_USERNAME/iris_r_demo/naive_bayes_iris.rds'`
 
 ### Add Dependencies
 1. Click the **"Dependencies"** button in the grey navbar.

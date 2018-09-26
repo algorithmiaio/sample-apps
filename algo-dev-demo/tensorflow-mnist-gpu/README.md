@@ -50,7 +50,7 @@ to change "YOUR_USERNAME" to your own username: `file_path =
 1. Click the **"Dependencies"** button in the grey navbar.
 2. Add Dependencies to the CRAN file under the ones that already exist, adding:
 ```
-tensorflow
+tensorflow-gpu==1.2.0
 ```
  
 ### Code Description

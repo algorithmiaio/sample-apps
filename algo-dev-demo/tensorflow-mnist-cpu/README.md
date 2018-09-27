@@ -31,7 +31,8 @@ Now we are ready to deploy our model.
 ### First Create an Algorithm
 1. Click the **"Plus"** icon at the top right of the navbar
 2. Let's go through the form together to create our algorithm
-3. Click on the purple "Create Algorithm".
+3. Click on the purple "Create Algorithm"
+4. Give it a name, pick "Python 3", and be sure to select "Standard Execution Env" (all other settings are optional)
 
 Now that you have created your algorithm, you'll get a modal with information about using the CLI and Git. Every algorithm has a Git repo behind it so you can experiment with different I/O in development mode by calling the hash version.
 

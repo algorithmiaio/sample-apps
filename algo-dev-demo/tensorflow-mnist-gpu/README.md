@@ -39,13 +39,13 @@ Now that you have created your algorithm, you'll get a modal with information ab
 ### Add Code Samples
 1. Click on the tab **"Source"** and you'll notice boilerplate code for Hello World.
 2. Let's delete that code, and copy and paste the code from the file [demo.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/tensorflow-mnist-gpu/demo.py)
+3. Recall our data collection is called "tensorflow_mnist_data" and you'll need
+to change "YOUR_USERNAME" to your own username: `file_path =
+'data://YOUR_USERNAME/tensorflow_mnist_data/model.zip'` on line 41.
 
 Then note that there is another file in the repo called [loadmnistdata.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/tensorflow-mnist-gpu/loadmnistdata.py).
 
-3. Create a file in the directory structure to the left of your code in the Web IDE by clicking on "**+** New File" and call it "loadmnistdata.py" then copy and paste from [loadmnistdata.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/tensorflow-mnist-gpu/loadmnistdata.py).
-4. Recall our data collection is called "tensorflow_mnist_data" and you'll need
-to change "YOUR_USERNAME" to your own username: `file_path =
-'data://YOUR_USERNAME/tensorflow_mnist_data/model.zip'` on line 41.
+4. Create a file in the directory structure to the left of your code in the Web IDE by clicking on "**+** New File" and call it "loadmnistdata.py" then copy and paste from [loadmnistdata.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/tensorflow-mnist-gpu/loadmnistdata.py).
 
 ### Add Dependencies
 1. Click the **"Dependencies"** button in the grey navbar.

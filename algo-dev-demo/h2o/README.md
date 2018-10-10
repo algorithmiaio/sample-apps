@@ -55,12 +55,12 @@ Note: once you've done this, you can delete `main.java`, since the `apply()` met
 #### Alter your algorithm to accept inputs
 1. Alter the `apply` method to accept a Map (`apply` does not support overloading, so instead we'll use a Map to pass parameters)
 2. Remove the hard-coded values for "Year", "Month", etc and extract them from the Map instead (e.g. `input.get("Year")`)
-3. Compile, then test: in the Web IDE, pass a JSON Object like `{"Year":"1987", "Month":"10", "DayOfMonth":"14", "DayOfWeek":"3", "CRSDepTime":"730", "UniqueCarrier":"PS", "Origin":"SAN", "Dest":"SFO"}`
+3. Compile, then test: in the Web IDE, pass a JSON Object like `{"Year":"1987", "Month":"10", "DayofMonth":"14", "DayOfWeek":"3", "CRSDepTime":"730", "UniqueCarrier":"PS", "Origin":"SAN", "Dest":"SFO"}`
 4. Publish and document these changes
 
-Note: if you get a `NullPointerException` at this last step, it likely indicates that a required parameter (e.g. `s.get("Year")`) was missing from the input; to help the user avoid this problem, check your parameters before using them:
+Note: if you get a `NullPointerException` at this last step, it likely indicates that a required parameter (e.g. `s.get("Year")`) was missing from the input; to help the user avoid this problem, check your parameters before using them (also note that DayofMonth has a lowercase 'o', while DayOfMonth does not):
 ```
-String[] params = {"Year","Month","DayOfMonth","DayOfWeek","CRSDepTime","UniqueCarrier","Origin","Dest"};
+String[] params = {"Year","Month","DayofMonth","DayOfWeek","CRSDepTime","UniqueCarrier","Origin","Dest"};
 for (String k: params) {
   if(input.get(k)==null) {
     throw new Exception(k+" is missing");

@@ -62,7 +62,7 @@ Note: if you get a `NullPointerException` at this last step, it likely indicates
 ```
 String[] params = {"Year","Month","DayOfMonth","DayOfWeek","CRSDepTime","UniqueCarrier","Origin","Dest"};
 for (String k: params) {
-  if(s.get(k)==null) {
+  if(input.get(k)==null) {
     throw new Exception(k+" is missing");
   }
 }

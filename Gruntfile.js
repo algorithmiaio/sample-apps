@@ -99,7 +99,8 @@ module.exports = function(grunt) {
           header_end: getTemplate('JavaScript/common/header_end.html'),
           footer: getTemplate('JavaScript/common/footer.html'),
           ga_script: getTemplate('JavaScript/common/ga_script.html'),
-          segment_script: getTemplate('JavaScript/common/segment_script.html')
+          segment_script: getTemplate('JavaScript/common/segment_script.html'),
+          play_header_embed: getTemplate('JavaScript/common/play_header_embed.html')
         }
       },
       files: [

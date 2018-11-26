@@ -15,6 +15,7 @@ module.exports = function(grunt) {
     { slug: 'amazon-miner', dist: 'JavaScript/amazon-miner'},
     { slug: 'analyze-tweets', dist: 'JavaScript/analyze-tweets'},
     { slug: 'colorize-photos', dist: 'JavaScript/colorization-demo' },
+    { slug: 'cluster', dist: 'Javascript/cluster' },
     { slug: 'doc-classifier', dist: 'JavaScript/doc-classifier'},
     { slug: 'deep-fashion', dist: 'JavaScript/deep-fashion'},
     { slug: 'deep-style', dist: 'JavaScript/deep-filter'},

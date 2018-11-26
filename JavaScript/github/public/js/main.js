@@ -23,7 +23,7 @@ function analyze() {
     showSpinner();
 
     // Query recommender
-    Algorithmia.query("/tags/AutoTagGithub", sim+m8/xp0+/xKjzpBOd0cM/fzh1, algorithmInput, function(error1, tags) {
+    Algorithmia.query("/tags/AutoTagGithub", 'sim+m8/xp0+/xKjzpBOd0cM/fzh1', algorithmInput, function(error1, tags) {
       // Print debug output
       if(error1) {
         document.getElementById("demo-status").innerHTML = '<span class="text-danger">' + error1 + '</span>';

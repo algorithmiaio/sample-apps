@@ -1,0 +1,155 @@
+<%= header_begin %>
+
+<%= segment_script %>
+
+<title>Document Classifier - Algorithmia</title>
+<link rel="canonical" href="https://demos.algorithmia.com/doc-classifier/">
+<meta name="description" content="Train a Machine to Recognize User Input, and Classify it into Custom Keywords or Responses"/>
+<meta name="robots" content="index,follow">
+
+<!-- FB -->
+<meta property="og:title" content="Get image recommendations based on text content">
+<meta property="og:url" content="https://demos.algorithmia.com/doc-classifier/">
+<meta property="og:description" content="Train a Machine to Recognize User Input, and Classify it into Custom Keywords or Responses">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://demos.algorithmia.com/doc-classifier/public/images/fbshare.jpg">
+<meta property="og:site_name" content="Algorithmia">
+
+<!-- TWTR -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@algorithmia">
+<meta name="twitter:title" content="Turn user input into custom responses">
+<meta name="twitter:description" content="Train a Machine to Recognize User Input, and Classify it into Custom Keywords or Responses">
+<meta name="twitter:image" content="https://demos.algorithmia.com/doc-classifier/public/images/twshare.jpg">
+<meta name="twitter:creator" content="@algorithmia">
+
+<!-- OTHER -->
+<meta itemprop="name" content="Turn user input into custom responses">
+<meta itemprop="description" content="Train a Machine to Recognize User Input, and Classify it into Custom Keywords or Responses">
+
+<%= header_end %>
+
+<div class="well">
+  <header>Algorithmia Clustering</header>
+  <p>
+    Cluster analysis or clustering is the task of partitioning a set of objects into groups called clusters, with the goal of grouping similar objects into the same cluster.
+    It is a main tool of exploratory data mining, and a common technique for statistical data analysis, used in many fields, including machine learning, pattern recognition, image analysis, information retrieval, and bioinformatics.
+    In this demo we generate a group of data points and feed them to the <a href="http://en.wikipedia.org/wiki/K-means_clustering">k-means</a> clustering algorithm that classifies them into a given number of clusters.
+  </p>
+  <div class="form-group">
+    <label>Number of clusters</label>
+    <div><input class="input" id="numClusters" type="number" value="3" style="width: 40px; min-height: 12px; margin-bottom: 0;"></div>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-default" onclick="generateData()">Generate data</button>
+    <button class="btn btn-primary" onclick="cluster()">Cluster</button>
+    <span id="demo-status"></span>
+    <span class="aspinner algo-spinner demo-spinner"></span>
+  </div>
+
+  <div class="viz-container">
+    <svg class="viz"></svg>
+  </div>
+
+  <!-- Print debug input / output from the algorithms -->
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#demo-code" data-toggle="tab">Demo Code</a></li>
+    <li><a href="#cluster-in" data-toggle="tab">K-means Input</a></li>
+    <li><a href="#cluster-out" data-toggle="tab">K-means Output</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content debug-container">
+    <div class="tab-pane debug active" id="demo-code">
+      <pre>
+Algorithmia.client(api_key).algo("/kenny/WekaCluster").pipe([
+dataPoints,
+numClusters
+]).then(console.log);</pre>
+    </div>
+    <div class="tab-pane debug" id="cluster-in">...</div>
+    <div class="tab-pane debug" id="cluster-out">...</div>
+  </div>
+
+</div>
+<style>
+svg.viz {
+  width:            100%;
+  height:           500px;
+}
+</style>
+<script src="public/js/d3.v3.min.js" type="text/javascript"></script>
+<script src="public/js/algorithmia.d3.js" type="text/javascript"></script>
+<script>
+  var svg = d3.select("svg.viz");
+
+  var n = 40;           // Number of points
+  var dataPoints = [];  // Point data
+
+  // Color scale
+  var colorScale = d3.scale.category10();
+
+  var client = Algorithmia.client(Algorithmia.demo.demo_api_key, "/v1/algo");
+
+  // Generate initial data
+  window.addEventListener("load", function() {
+    generateData();
+    updateD3();
+  });
+
+  // Setup mappings from data to visualization using D3
+  function updateD3() {
+    Algorithmia.viz.drawPoints(svg, dataPoints, "points", 4, colorScale);
+  };
+
+  // Generate random data
+  function generateData() {
+    var width = $(".viz-container").width();
+    var height = $(".viz-container").height();
+
+    dataPoints.length = 0;
+    for(var i = 0; i < n; i++) {
+      randomPoint = [Math.random() * width, Math.random() * height];
+      dataPoints.push(randomPoint);
+    }
+
+    // Print debug output
+    var numTopics = document.getElementById("numClusters").value;
+    var algorithmInput = [dataPoints, numTopics];
+    // document.getElementById("geodata-out").innerHTML = "<pre>" + JSON.stringify(algorithmInput, null, 2) + "</pre>";
+    document.getElementById("cluster-in").innerHTML = "<pre>" + JSON.stringify(algorithmInput, null, 2) + "</pre>";
+    document.getElementById("cluster-out").innerHTML = "";
+
+    updateD3();
+  };
+
+  // Cluster the dataPoints using Algorithmia k-means clustering
+  function cluster() {
+    document.getElementById("demo-status").innerHTML = "";
+
+    // Algorithm input
+    var numTopics = document.getElementById("numClusters").value;
+    var algorithmInput = [dataPoints, numTopics];
+    document.getElementById("cluster-in").innerHTML = "<pre>" + JSON.stringify(algorithmInput, null, 2) + "</pre>";
+
+    // Query Algorithmia /kenny/WekaCluster
+    client.algo("/kenny/WekaCluster").pipe(algorithmInput).then(function(result) {
+      // Print debug output
+      if(result.error) {
+        document.getElementById("cluster-out").innerHTML = '<div class="text-danger">' + (result.error.message || result.error) + '</div>';
+        document.getElementById("demo-status").innerHTML = '<span class="text-danger">' + (result.error.message || result.error) + '</span>';
+        return;
+      }
+      algorithmOutput = result.result;
+      document.getElementById("cluster-out").innerHTML = "<pre>" + JSON.stringify(algorithmOutput, null, 2) + "</pre>";
+      // Save result
+      dataPoints = algorithmOutput;
+      // Update visualization
+      updateD3();
+    });
+  };
+</script>
+
+<%= footer %>

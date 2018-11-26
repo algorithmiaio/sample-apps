@@ -21,7 +21,8 @@
 
   clickDrag = [];
 
-  client = Algorithmia.client('apikey');
+  // this API Key will only work on Algorithmia's website; get your own key at https://algorithmia.com/user#credentials
+  client = Algorithmia.client('simYGhuyUpyFFAIRynUx1CKzWdI1');
 
   window.addEventListener("load", function() {
     canvas = document.getElementById("canvas");

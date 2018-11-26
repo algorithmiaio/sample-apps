@@ -19,7 +19,7 @@
     if (Algorithmia.apiAddress !== void 0) {
       return Algorithmia.apiAddress;
     } else {
-      return "https://api.algorithmia.com/v1/web/algo";
+      return "https://algorithmia.com/v1/web/algo";
     }
   };
 

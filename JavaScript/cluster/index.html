@@ -35,18 +35,6 @@
   <link rel="stylesheet" href="public/css/core.cat.min.css">
 
   <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-
-  <script type="text/javascript">
-    window.Algorithmia = window.Algorithmia || {};
-    window.Algorithmia.demo = window.Algorithmia.demo || {};
-
-    Algorithmia.demo.demo_api_key = ""
-  </script>
-
-  <script type="text/javascript">
-    window.Algorithmia = window.Algorithmia || {};
-    Algorithmia.apiAddress = "/v1/algo";
-  </script>
   <script src="public/js/algorithmia-0.2.0.js"></script>
 </head>
 <body>
@@ -113,7 +101,7 @@ Algorithmia.client(api_key).algo("/kenny/WekaCluster").pipe([
       // Color scale
       var colorScale = d3.scale.category10();
 
-      var client = Algorithmia.client(Algorithmia.demo.demo_api_key, "/v1/algo");
+      var client = Algorithmia.client('apikey', 'https://api.algorithmia.com/v1/web/algo');
 
       // Generate initial data
       window.addEventListener("load", function() {

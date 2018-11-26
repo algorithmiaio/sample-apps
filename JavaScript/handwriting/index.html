@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Algorithmia Handwriting Recognition Demo</title>
+<link rel="stylesheet" media="screen" href="public/css/algo.min.css">
+<link rel="stylesheet" media="screen" href="public/css/bootstrap.min.css">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+<script src="public/js/algorithmia.js"></script>
+<script src="public/js/main.js" type="text/javascript"></script>
+<style>
+  table {
+    border-collapse: separate;
+    border-spacing: 2px;
+  }
+  table th {
+    padding: 4px;
+    padding-right: 16px;
+  }
+  table td {
+    font-size: 26pt;
+    padding: 4px;
+  }
+</style>
+</head>
+<body style="background-color: white; margin: 10px;">
+  <div>
+    <div>Draw a single-digit number:</div>
+    <canvas id="canvas" width="300" height="300" style="border:2px solid; background-color: white;">
+      Your browser does not support canvas element.
+    </canvas>
+    <canvas id="miniCanvas" width="28" height="28" style="border:1px solid; background-color: white; visibility: hidden;"></canvas>
+    <div>
+      <input type="button" value="Classify" id="btn" size="30" onclick="classify()" class="btn btn-primary btn-wide btn-lg">
+      <input type="button" value="Clear" id="clr" size="23" onclick="erase()" class="btn btn-default btn-wide btn-lg">
+      <span class="aspinner algo-spinner"></span>
+    </div>
+    <!-- <div id="demo-status"></div> -->
+    <table>
+      <tr>
+        <th>Mahout</th>
+        <th>WEKA</th>
+      </tr>
+      <tr>
+        <td id="mahout-out"></td>
+        <td id="weka-out"></td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>

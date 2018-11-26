@@ -1,5 +1,8 @@
 var topics = [];
 
+// this API Key will only work on Algorithmia's website; get your own key at https://algorithmia.com/user#credentials
+var apiKey = 'sim+m8/xp0+/xKjzpBOd0cM/fzh1'
+
 // Choose random dropdown option on load
 var dropdown = document.getElementById("urlDD");
 dropdown.selectedIndex = 1 + Math.floor(Math.random() * (dropdown.options.length - 1));
@@ -23,7 +26,7 @@ function analyze() {
     showSpinner();
 
     // Query recommender
-    Algorithmia.query("/tags/AutoTagGithub", 'sim+m8/xp0+/xKjzpBOd0cM/fzh1', algorithmInput, function(error1, tags) {
+    Algorithmia.query("/tags/AutoTagGithub", apiKey, algorithmInput, function(error1, tags) {
       // Print debug output
       if(error1) {
         document.getElementById("demo-status").innerHTML = '<span class="text-danger">' + error1 + '</span>';
@@ -47,7 +50,7 @@ function analyze() {
         document.getElementById("inputTags").innerHTML = topicLabels.join('');
 
         // Query recommender...
-        Algorithmia.query("/tags/RecommendGitHubFromTags", Algorithmia.demo.demo_api_key, tags, function(error2, repos) {
+        Algorithmia.query("/tags/RecommendGitHubFromTags", apiKey, tags, function(error2, repos) {
           hideSpinner();
           // Print debug output
           if(error2) {

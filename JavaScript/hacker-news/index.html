@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" type="text/css" href="https://news.ycombinator.com/news.css">
+<link rel="shortcut icon" href="https://news.ycombinator.com/favicon.ico">
+<title>Hacker News</title>
+<script src="public/js/algorithmia.js"></script>
+<script>
+
+var client = Algorithmia.client('api key');
+
+function scrape() {
+  document.getElementById("output").innerHTML = "";
+  document.getElementById("errors").innerHTML = "";
+
+  // Query HackerNews scraper
+  client.algo("/tags/ScrapeHN?redis=1").pipe([]).then(function(result) {
+    // Print debug output
+    if(result.error) {
+      document.getElementById("errors").innerHTML = '<span class="text-danger">' + error + '</span>';
+      return;
+    }
+    var items = result.result;
+    console.log("items", items);
+
+    var output = document.getElementById("output");
+
+    // TRIM ITEMS
+    // items.length = 20;
+
+    // Query autotagger for each url
+    for(var i in items) {
+
+      // Create closure to capture item
+      (function() {
+        var index = i;
+        var item = items[i];
+
+        // Add to table
+        var row = document.createElement("tr");
+        output.appendChild(row);
+        row.innerHTML += '<td>' + (Number(index) + 1) + '.</td>';
+        row.innerHTML += '<td>';
+        row.innerHTML += '<div><a href="' + item.url + '">' + item.title + '</a></div>';
+        row.innerHTML += '<div class="subtext"><a href="' + item.comments + '">comments</a></div>';
+        row.innerHTML += '</td>';
+
+        // console.log("item", item);
+
+        client.algo("/tags/AutoTagURL?redis=1").pipe(item.url).then(function(result) {
+          // Print debug output
+          if(result.error) {
+            document.getElementById("errors").innerHTML = '<span class="text-danger">' + error + '</span>';
+            return;
+          }
+
+          var tags = result.result;
+          if(tags) {
+
+            topics = Object.keys(tags);
+
+            var topicLabels = [];
+            for(var key in topics) {
+               topicLabels.push(' <span class="label">' + topics[key] + '</span> ');
+            }
+
+            row.innerHTML += '<td>' + topicLabels.join('') + '</td>';
+          }
+
+        }); // End API call
+      })(); // End closure
+    } // End loop
+  }); // End API call
+}
+</script>
+<style>
+* {
+  font-family: Verdana;
+  color: #828282;
+  font-size: 10pt;
+}
+a,
+a:visited {
+  color:#000000;
+  text-decoration: none;
+}
+.subtext {
+  font-size: 7pt;
+}
+.subtext a {
+  color: #828282;
+}
+table {
+  padding: 2px;
+  background-color: #f6f6ef;
+  width: 95%;
+}
+table thead tr {
+  background-color: #ff6600;
+}
+table thead td {
+  line-height:12pt;
+  height:10px;
+  font-size: 10pt;
+}
+table tbody td {
+  vertical-align: top;
+  padding-bottom: 8px;
+}
+
+.label {
+    display: inline;
+    padding: 0.2em 0.6em 0.3em;
+    font-size: 75%;
+    font-weight: bold;
+    line-height: 2;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25em;
+    background-color: #5d9cec;
+}
+
+</style>
+</head>
+<body onload="scrape()">
+<center>
+
+<div id="errors"></div>
+
+<table border="0" cellpadding="0" cellspacing="0">
+  <thead>
+    <tr>
+      <td style="width:18px;padding-right:4px">
+        <a href="https://news.ycombinator.com/"><img src="https://news.ycombinator.com/y18.gif" width="18" height="18" style="border:1px #ffffff solid;"></a>
+      </td>
+      <td style="line-height:12pt; height:10px;">
+        <b><a href="https://news.ycombinator.com/">Hacker News</a></b>
+
+        <a href="https://news.ycombinator.com/newest">new</a>
+        |
+        <a href="https://news.ycombinator.com/newcomments">comments</a>
+        |
+        <a href="https://news.ycombinator.com/ask">ask</a>
+        |
+        <a href="https://news.ycombinator.com/jobs">jobs</a>
+        |
+        <a href="https://news.ycombinator.com/submit">submit</a>
+      </td>
+      <td style="text-align:right;padding-right:4px;">
+        <span class="pagetop"><a href="newslogin?whence=%6e%65%77%73">login</a></span>
+      </td>
+    </tr>
+  </thead>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="95%">
+  <tbody id="output">
+  </tbody>
+</table>
+</center>
+
+</body>
+</html>

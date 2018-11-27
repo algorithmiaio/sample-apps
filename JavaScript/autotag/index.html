@@ -53,6 +53,7 @@
         var inputUrl = document.getElementById("inputStrings").value;
 
           // Query topic analysis
+          // this API Key will only work on Algorithmia's website; get your own key at https://algorithmia.com/user#credentials
           Algorithmia.query("/tags/AutoTagURL", 'simJUo/pd7eWdEf5HuO6855UhF51', inputUrl, function(error, topicsOutput) {
             // Print debug output
             if(error) {

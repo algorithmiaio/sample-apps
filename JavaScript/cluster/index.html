@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <%= segment_script %>
+
+  <meta charset="utf-8">
+  <meta name="description" content="Algorithmia makes applications smarter, by building a community around algorithm development, where state of the art algorithms are always live and accessible to anyone." ng-non-bindable>
+  <meta name="twitter:description" content="Algorithmia makes applications smarter, by building a community around algorithm development, where state of the art algorithms are always live and accessible to anyone." ng-non-bindable>
+  <meta property="og:description" content="Algorithmia makes applications smarter, by building a community around algorithm development, where state of the art algorithms are always live and accessible to anyone." ng-non-bindable>
+
+  <title itemprop="name" ng-non-bindable>Clustering - Algorithmia</title>
+  <meta property="og:title" content="Clustering - Algorithmia" ng-non-bindable>
+  <meta property="og:url" content="https://algorithmia.com/demo/cluster">
+  <meta property="og:image" content="public/images/meta-img.png">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Algorithmia">
+  <meta name="twitter:title" content="Clustering - Algorithmia" ng-non-bindable>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="public/images/meta-img.png">
+  <meta name="twitter:site" content="@algorithmia">
+  <meta name="google-site-verification" content="W56duc7XBEgUfYQYbbaRnEepD-smVg967X8n8RbL_PA" />
+  <meta name="google-site-verification" content="_vNFIFiIamwZlLUjRbM3U78h8vAcrmjYelaV4pukFX4" />
+  <link rel="canonical" href="https://algorithmia.com/demo/cluster" itemprop="url">
+
+
+  <meta name="robots" content="noindex,nofollow">
+
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=0.75">
+
+  <link rel="shortcut icon" href="public/images/favicon-bw.png" type="image/png">
+
+  <link rel="stylesheet" href="public/css/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="public/css/core.cat.min.css">
+
+  <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="public/js/algorithmia-0.2.0.js"></script>
+</head>
+<body>
+  <div class="container content-container">
+    <div class="well">
+      <header>Algorithmia Clustering</header>
+      <p>
+        Cluster analysis or clustering is the task of partitioning a set of objects into groups called clusters, with the goal of grouping similar objects into the same cluster.
+        It is a main tool of exploratory data mining, and a common technique for statistical data analysis, used in many fields, including machine learning, pattern recognition, image analysis, information retrieval, and bioinformatics.
+        In this demo we generate a group of data points and feed them to the <a href="http://en.wikipedia.org/wiki/K-means_clustering">k-means</a> clustering algorithm that classifies them into a given number of clusters.
+      </p>
+      <div class="form-group">
+        <label>Number of clusters</label>
+        <div><input class="input" id="numClusters" type="number" value="3" style="width: 40px; min-height: 12px; margin-bottom: 0;"></div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-default" onclick="generateData()">Generate data</button>
+        <button class="btn btn-primary" onclick="cluster()">Cluster</button>
+        <span id="demo-status"></span>
+        <span class="aspinner algo-spinner demo-spinner"></span>
+      </div>
+
+      <div class="viz-container">
+        <svg class="viz"></svg>
+      </div>
+
+      <!-- Print debug input / output from the algorithms -->
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#demo-code" data-toggle="tab">Demo Code</a></li>
+        <li><a href="#cluster-in" data-toggle="tab">K-means Input</a></li>
+        <li><a href="#cluster-out" data-toggle="tab">K-means Output</a></li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content debug-container">
+        <div class="tab-pane debug active" id="demo-code">
+          <pre>
+Algorithmia.client(api_key).algo("/kenny/WekaCluster").pipe([
+  dataPoints,
+  numClusters
+]).then(console.log);</pre>
+        </div>
+        <div class="tab-pane debug" id="cluster-in">...</div>
+        <div class="tab-pane debug" id="cluster-out">...</div>
+      </div>
+
+    </div>
+    <style>
+    svg.viz {
+      width:            100%;
+      height:           500px;
+    }
+    </style>
+    <script src="public/js/common.cat.js" type="text/javascript"></script>
+    <script src="public/js/d3.v3.min.js" type="text/javascript"></script>
+    <script src="public/js/algorithmia.d3.js" type="text/javascript"></script>
+    <script src="public/js/main.js" type="text/javascript"></script>
+  </div>
+</body>

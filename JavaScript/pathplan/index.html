@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Algorithmia makes applications smarter, by building a community around algorithm development, where state of the art algorithms are always live and accessible to anyone." ng-non-bindable>
+    <meta name="twitter:description" content="Algorithmia makes applications smarter, by building a community around algorithm development, where state of the art algorithms are always live and accessible to anyone." ng-non-bindable>
+    <meta property="og:description" content="Algorithmia makes applications smarter, by building a community around algorithm development, where state of the art algorithms are always live and accessible to anyone." ng-non-bindable>
+
+    <title itemprop="name" ng-non-bindable>Path Planning - Algorithmia</title>
+    <meta property="og:title" content="Path Planning - Algorithmia" ng-non-bindable>
+    <meta property="og:url" content="https://algorithmia.com/demo/pathplan">
+    <meta property="og:image" content="https://cdn.algorithmia.com/versioned/images/1df84db89aeb9c51b452a1549b0ee46a-meta-img.png">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Algorithmia">
+    <meta name="twitter:title" content="Path Planning - Algorithmia" ng-non-bindable>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://cdn.algorithmia.com/versioned/images/1df84db89aeb9c51b452a1549b0ee46a-meta-img.png">
+    <meta name="twitter:site" content="@algorithmia">
+    <meta name="google-site-verification" content="W56duc7XBEgUfYQYbbaRnEepD-smVg967X8n8RbL_PA" />
+    <meta name="google-site-verification" content="_vNFIFiIamwZlLUjRbM3U78h8vAcrmjYelaV4pukFX4" />
+    <link rel="canonical" href="https://algorithmia.com/demo/pathplan" itemprop="url">
+
+
+    <meta name="robots" content="index,follow">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=0.75">
+
+    <link rel="shortcut icon" href="public/images/favicon-bw.png" type="image/png">
+
+    <link rel="stylesheet" href="public/css/font-awesome/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="public/css/core.cat.min.css">
+
+    <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+    <script src="public/js/algorithmia.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <script src="public/js/common.cat.min.js" type="text/javascript"></script>
+    <div class="container content-container">
+      <div class="well">
+        <header>Algorithmia Path Planning</header>
+        <p>
+          In this demo we can see 2 algorithms available in the Algorithmia API used together.
+          The first is a maze generation algorithm that uses <a href="http://en.wikipedia.org/wiki/Backtracking">Recursive Backtracking Search</a> to generate the maze.
+          We then feed the results to a path planning algorithm that finds the shortest path through the maze using <a href="http://en.wikipedia.org/wiki/Dijkstra's_algorithm">Dijkstra's Algorithm</a>.
+        </p>
+        <div>
+          <button class="btn btn-default" onclick="Algorithmia.demo.generateMaze()">Generate Maze</button>
+          <button class="btn btn-primary" onclick="Algorithmia.demo.randomStartGoal()">Solve Maze</button>
+          <span id="demo-status"></span>
+          <span class="aspinner algo-spinner demo-spinner"></span>
+        </div>
+
+        <div class="viz-container">
+          <svg class="viz">
+            <g class="viewport">
+              <g class="bottom"></g>
+              <g class="middle"></g>
+              <g class="top"></g>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Print debug input / output from the algorithms -->
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#demo-code" data-toggle="tab">Demo Code</a></li>
+          <li><a href="#maze-in" data-toggle="tab">Maze Input</a></li>
+          <li><a href="#maze-out" data-toggle="tab">Maze Output</a></li>
+          <li><a href="#path-in" data-toggle="tab">Dijkstra Input</a></li>
+          <li><a href="#path-out" data-toggle="tab">Dijkstra Output</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content debug-container">
+          <div class="tab-pane debug active" id="demo-code">
+            <pre>
+Algorithmia.client(apiKey).algo("/kenny/MazeGen").pipe(searchString).then(function(maze) {
+    if(maze.error) return console.error(maze.error);
+    var pathplanInput = [maze.result.vertices, maze.result.edges, start, goal];
+    Algorithmia.client(apiKey).algo("/kenny/Dijkstra").pipe(pathplanInput).then(function(path) {
+        if(path.error) return console.error(path.error);
+        console.log(path.result);
+    });
+});</pre>
+          </div>
+          <div class="tab-pane debug" id="maze-in">...</div>
+          <div class="tab-pane debug" id="maze-out">...</div>
+          <div class="tab-pane debug" id="path-in">...</div>
+          <div class="tab-pane debug" id="path-out">...</div>
+        </div>
+      </div>
+      <script src="public/js/d3.min.js" type="text/javascript"></script>
+      <script src="public/js/algorithmia.d3.js" type="text/javascript"></script>
+      <script src="public/js/main.js" type="text/javascript"></script>
+    </div>
+  </body>
+</html>

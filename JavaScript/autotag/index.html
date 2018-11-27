@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <title>Auto-generate Tags - Algorithmia</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400,600,700" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="public/images/favicon-bw.png" type="image/png">
+    <link rel="stylesheet" media="screen" href="public/css/bootstrap3.min.css">
+    <link rel="stylesheet" media="screen" href="public/css/algo.min.css">
+    <script src="public/js/algorithmia.js" type="text/javascript"></script>
+    <script>
+    function run() {
+        var e = document.getElementById("urlDD");
+        var usrSel = e.options[e.selectedIndex].value;
+
+        document.getElementById("inputStrings").value = usrSel;
+    }
+    </script>
+  </head>
+  <body>
+    <div class="well">
+      <header>Autogenerate tags for any URL</header>
+      <p>
+        A combination of algorithms that allows you generate subject tags automatically for any URL
+      </p>
+      <div class="form-group" style="margin-bottom: 6px;">
+        <label class="block">Select one of our example URLs, or choose your own</label>
+        <select id="urlDD" class="form-control" onchange="run()" style="max-width: 350px; width: 95%;">
+          <option>Select an example site</option>
+          <option value="http://automl.org">AutoML.org (website)</option>
+          <option value="http://www.djangobook.com/en/2.0/chapter01.html">Django Handbook (documentation)</option>
+          <option value="https://raw.githubusercontent.com/mbernste/machine-learning/master/README.md">GitHub Repo mbernste/machine-learning</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <input class="form-control" style="max-width: 350px; width: 95%;" id="inputStrings">
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary" onclick="analyze()">Generate Tags</button>
+        <span id="demo-status"></span>
+        <span class="aspinner algo-spinner"></span>
+      </div>
+    </div>
+
+    <div id="output" style="padding-left:10px"></div>
+
+    <script>
+      var topics = [];
+
+      function analyze() {
+        var topicLabels = []
+        document.getElementById("demo-status").innerHTML = "";
+
+        // Build instance
+        var inputUrl = document.getElementById("inputStrings").value;
+
+          // Query topic analysis
+          Algorithmia.query("/tags/AutoTagURL", 'simJUo/pd7eWdEf5HuO6855UhF51', inputUrl, function(error, topicsOutput) {
+            // Print debug output
+            if(error) {
+              document.getElementById("demo-status").innerHTML = '<span class="text-danger">' + error + '</span>';
+              return;
+            }
+            topics = Object.keys(topicsOutput);
+            for (var key in topics) {
+              topicLabels.push('<span class="label label-info">' + topics[key] + '</span> ');
+            }
+            document.getElementById("output").innerHTML = topicLabels.join('');
+          });
+      };
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+
+
+
+      <meta name="description" content="Algorithmia makes applications smarter, by building a community around algorithm development, where state of the art algorithms are always live and accessible to anyone." ng-non-bindable>
+      <meta name="twitter:description" content="Algorithmia makes applications smarter, by building a community around algorithm development, where state of the art algorithms are always live and accessible to anyone." ng-non-bindable>
+      <meta property="og:description" content="Algorithmia makes applications smarter, by building a community around algorithm development, where state of the art algorithms are always live and accessible to anyone." ng-non-bindable>
+
+    <title itemprop="name" ng-non-bindable>Topic Analysis - Algorithmia</title>
+    <meta property="og:title" content="Topic Analysis - Algorithmia" ng-non-bindable>
+    <meta property="og:url" content="https://algorithmia.com/demo/lda">
+    <meta property="og:image" content="https://cdn.algorithmia.com/versioned/images/1df84db89aeb9c51b452a1549b0ee46a-meta-img.png">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Algorithmia">
+    <meta name="twitter:title" content="Topic Analysis - Algorithmia" ng-non-bindable>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://cdn.algorithmia.com/versioned/images/1df84db89aeb9c51b452a1549b0ee46a-meta-img.png">
+    <meta name="twitter:site" content="@algorithmia">
+    <meta name="google-site-verification" content="W56duc7XBEgUfYQYbbaRnEepD-smVg967X8n8RbL_PA" />
+    <meta name="google-site-verification" content="_vNFIFiIamwZlLUjRbM3U78h8vAcrmjYelaV4pukFX4" />
+    <link rel="canonical" href="https://algorithmia.com/demo/lda" itemprop="url">
+
+
+    <meta name="robots" content="index,follow">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=0.75">
+    <link rel="shortcut icon" href="public/images/favicon-bw.png" type="image/png">
+
+    <link rel="stylesheet" href="public/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="public/css/core.cat.css">
+
+    <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+    <script src="public/js/algorithmia.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <script src="common.cat.js" type="text/javascript"></script>
+    <div class="container content-container">
+      <div class="well">
+        <header>Algorithmia Topic Analysis</header>
+        <p>
+          The following is an example of topic analysis in Algorithmia. Search Twitter for any string (i.e: "Microsoft") , select the number of topics and let our algorithm analyze the topics associated with your search.
+        </p>
+        <div class="form-group">
+          <label>What string do you want to find topics for:</label>
+          <div><input class="input" id="inputStrings" value="algorithmia"></div>
+        </div><div class="form-group">
+          <label>Number of topics</label>
+          <div><input class="input" id="numTopics" type="number" value="2" style="width: 40px; min-height: 12px; margin-bottom: 0;"></div>
+        </div><div class="form-group">
+          <button class="btn btn-primary" onclick="analyze()">Analyze Topics</button>
+          <span class="aspinner algo-spinner demo-spinner"></span>
+          <span id="demo-status"></span>
+        </div>
+
+        <div class="viz-container">
+          <svg class="viz"></svg>
+        </div>
+
+        <!-- Print debug input / output from the algorithms -->
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#demo-code" data-toggle="tab">Demo Code</a></li>
+          <li><a href="#tweets-in" data-toggle="tab">Twitter Input</a></li>
+          <li><a href="#tweets-out" data-toggle="tab">Twitter Output</a></li>
+          <li><a href="#topics-in" data-toggle="tab">LDA Input</a></li>
+          <li><a href="#topics-out" data-toggle="tab">LDA Output</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content debug-container">
+          <div class="tab-pane debug active" id="demo-code">
+            <pre>
+Algorithmia.client(apiKey).algo("/diego/GetTweetsWithKeyword").pipe(searchString).then(function(tweets) {
+    if(tweets.error) return console.error(tweets.error);
+    Algorithmia.client(apiKey).algo("/nlp/LDA").pipe([tweets.result, numTopics]), function(topics) {
+        if(topics.error) return console.error(topics.error);
+        console.log(topics.result);
+    });
+});</pre>
+          </div>
+          <div class="tab-pane debug" id="tweets-in">...</div>
+          <div class="tab-pane debug" id="tweets-out">...</div>
+          <div class="tab-pane debug" id="topics-in">...</div>
+          <div class="tab-pane debug" id="topics-out">...</div>
+        </div>
+      </div>
+    <style>
+    circle {
+      stroke: #5d9cec;
+      stroke-width: 2px;
+      fill: transparent;
+    }
+    .leaf circle {
+      stroke: transparent;
+      fill: #5d9cec;
+    }
+    .leaf text {
+      fill: white;
+    }
+    </style>
+    <script src="public/js/d3.min.js" type="text/javascript"></script>
+    <script src="public/js/algorithmia.d3.js" type="text/javascript"></script>
+    <script src="public/js/main.js" type="text/javascript"></script>
+  </div>
+</body>

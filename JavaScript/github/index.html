@@ -1,0 +1,96 @@
+<html>
+  <head>
+    <title>GitHub Recommender - Algorithmia</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400,600,700" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="public/images/favicon-bw.png" type="image/png">
+    <link rel="stylesheet" href="public/css/font-awesome/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" media="screen" href="public/css/bootstrap3.min.css">
+    <link rel="stylesheet" media="screen" href="public/css/algo.min.css">
+    <script src="public/js/algorithmia.js"></script>
+    <style>
+    a {
+      /* blog colors */
+      color: #430FA2;
+    }
+    input.input {
+      border: 1px solid #ddd;
+      margin-right: 6px;
+      margin-left: 6px;
+      vertical-align: baseline;
+    }
+    .slash {
+      color: #444;
+      font-size: 26px;
+      line-height: 24px;
+      vertical-align: middle;
+    }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="well">
+      <header>GitHub Repository Recommender</header>
+      <p>
+        Enter a public git repository, and this tool will use collaborative filtering recommendation algorithms to suggest related repositories.
+      </p>
+      <div class="form-group">
+        <label>Choose one of our example URLs, or enter your own</label>
+        <br>
+        <select id="urlDD" onchange="updateDropdown()" style="max-width: 352px; width: 95%;">
+          <option disabled>Select an example repository...</option>
+          <option value="/apache/spark">Apache Spark</option>
+          <option value="/rails/rails">Ruby on Rails</option>
+          <option value="/defunkt/dotjs">dotjs (chrome extension)</option>
+          <option value="/ipython/ipython">IPython</option>
+          <option value="/codahale/bcrypt-ruby">BCrypt Ruby</option>
+          <option value="/jekyll/jekyll">Jekyll</option>
+          <!-- <option value="/puppetslabs/puppet">Puppet</option> -->
+          <option value="/jshint/jshint">JSHint</option>
+          <option value="/scikit-learn/scikit-learn">scikit-learn</option>
+          <option value="/harthur/brain">harthur/brain</option>
+          <option value="/twbs/bootstrap">Bootstrap</option>
+          <option value="/rust-lang/rust">Rust</option>
+        </select>
+      </div>
+      <table style="padding-top: 15px;">
+        <tr>
+          <td>
+            <label>GitHub User Name</label>
+          </td>
+          <td>
+            <label>GitHub Repository Name</label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="slash">/</span><input class="input" style="max-width: 180px; width: 95%;" id="username" placeholder="username">
+          </td>
+          <td>
+            <span class="slash">/</span><input class="input" style="max-width: 180px; width: 95%;" id="reponame" placeholder="repository_name">
+          </td>
+        </tr>
+      </table>
+      <div class="form-group" style="margin-top: 15px;">
+        <button class="btn btn-primary" onclick="analyze()">Generate Recommendations</button>
+        <span class="aspinner hidden" id="algo-spinner" style="position: relative; top: 8px; left: 5px;"></span>
+        <span id="demo-status"></span>
+      </div>
+
+    </div>
+
+    <div style="padding-left: 8px;">
+      <h3 id="input"></h3>
+      <div>
+        <label style="display: block;">Tags</label>
+        <span id="inputTags" style="position: relative; top: -4px; margin-left: 10px;"></span>
+      </div>
+      <div>
+        <label style="display: block; margin-top: 8px;">Recommended Repositories</label>
+        <ul id="output" style="padding-left: 10px; margin-top: 4px; list-style: none;"></ul>
+      </div>
+    </div>
+
+  <script src="public/js/main.js" type="text/javascript"></script>
+  </body>
+</html>

@@ -25,6 +25,7 @@ module.exports = function(grunt) {
     { slug: 'sitemap', dist: 'JavaScript/site-mapper'},
     { slug: 'social-image-rec', dist: 'JavaScript/social-image-rec'},
     { slug: 'timeseries', dist: 'JavaScript/time-series'},
+    { slug: 'valentines', dist: 'JavaScript/valentines' },
     { slug: 'video-metadata', dist: 'JavaScript/video-metadata'},
     { slug: 'video-search', dist: 'JavaScript/video-search'},
     { slug: 'video-toolbox', dist: 'JavaScript/video-toolbox'},

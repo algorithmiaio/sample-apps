@@ -28,6 +28,7 @@ module.exports = function(grunt) {
     { slug: 'image-tagger', dist: 'JavaScript/image-tagger' },
     { slug: 'isitnude', dist: 'JavaScript/isitnude'},
     { slug: 'lda', dist: 'JavaScript/lda' },
+    { slug: 'lda2', dist: 'JavaScript/lda2' },
     { slug: 'othello', dist: 'JavaScript/othello' },
     { slug: 'pathplan', dist: 'JavaScript/pathplan' },
     { slug: 'rss-dashboard', dist: 'JavaScript/RSS_dashboard'},

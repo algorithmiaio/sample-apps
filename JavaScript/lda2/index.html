@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <meta name="description" content="Algorithmia makes applications smarter, by building a community around algorithm development, where state of the art algorithms are always live and accessible to anyone." ng-non-bindable>
+      <meta name="twitter:description" content="Algorithmia makes applications smarter, by building a community around algorithm development, where state of the art algorithms are always live and accessible to anyone." ng-non-bindable>
+      <meta property="og:description" content="Algorithmia makes applications smarter, by building a community around algorithm development, where state of the art algorithms are always live and accessible to anyone." ng-non-bindable>
+
+      <title itemprop="name" ng-non-bindable>Topic Analysis - Algorithmia</title>
+      <meta property="og:title" content="Topic Analysis - Algorithmia" ng-non-bindable>
+      <meta property="og:url" content="https://algorithmia.com/demo/lda2">
+      <meta property="og:image" content="public/images/meta-img.png">
+      <meta property="og:locale" content="en_US">
+      <meta property="og:type" content="website">
+      <meta property="og:site_name" content="Algorithmia">
+      <meta name="twitter:title" content="Topic Analysis - Algorithmia" ng-non-bindable>
+      <meta name="twitter:card" content="summary">
+      <meta name="twitter:image" content="public/images/meta-img.png">
+      <meta name="twitter:site" content="@algorithmia">
+      <meta name="google-site-verification" content="W56duc7XBEgUfYQYbbaRnEepD-smVg967X8n8RbL_PA" />
+      <meta name="google-site-verification" content="_vNFIFiIamwZlLUjRbM3U78h8vAcrmjYelaV4pukFX4" />
+      <link rel="canonical" href="https://algorithmia.com/demo/lda2" itemprop="url">
+
+
+    <meta name="robots" content="index,follow">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=0.75">
+    <link rel="shortcut icon" href="public/images/favicon-bw.png" type="image/png">
+
+    <link rel="stylesheet" href="public/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="public/css/core.cat.min.css">
+
+    <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+    <script src="public/js/algorithmia.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <script src="public/js/common.cat.js" type="text/javascript"></script>
+    <div class="container content-container">
+      <div class="well">
+        <header>Algorithmia Topic Analysis</header>
+        <p>
+          The following is an example of topic analysis in Algorithmia. Search Twitter for any string , select the number of topics and let our algorithm analyze the topics associated with your search.
+        </p>
+        <div class="form-group">
+          <label>What strings do you want to find topics for? (each line is one string)</label>
+          <textarea id="inputStrings" style="font-size: small; width: 100%; max-width: 100%; min-height: 120px;">
+The equipartition theorem is a formula from statistical mechanics that relates the temperature of a system with its average energies. The original idea of equipartition was that, in thermal equilibrium, energy is shared equally among its various forms; for example, the average kinetic energy in the translational motion of a molecule should equal the average kinetic energy in its rotational motion. Like the virial theorem, the equipartition theorem gives the total average kinetic and potential energies for a system at a given temperature, from which the system's heat capacity can be computed. However, equipartition also gives the average values of individual components of the energy. It can be applied to any classical system in thermal equilibrium, no matter how complicated. The equipartition theorem can be used to derive the classical ideal gas law, and the Dulong–Petit law for the specific heat capacities of solids. It can also be used to predict the properties of stars, even white dwarfs and neutron stars, since it holds even when relativistic effects are considered. Although the equipartition theorem makes very accurate predictions in certain conditions, it becomes inaccurate when quantum effects are significant, namely at low enough temperatures.
+The rings of Uranus were discovered on March 10, 1977, by James L. Elliot, Edward W. Dunham, and Douglas J. Mink. Two additional rings were discovered in 1986 by the Voyager 2 spacecraft, and two outer rings were found in 2003–2005 by the Hubble Space Telescope. A number of faint dust bands and incomplete arcs may exist between the main rings. The rings are extremely dark—the Bond albedo of the rings' particles does not exceed 2%. They are likely composed of water ice with the addition of some dark radiation-processed organics. The majority of Uranus's rings are opaque and only a few kilometres wide. The ring system contains little dust overall; it consists mostly of large bodies 0.2–20 m in diameter. The relative lack of dust in the ring system is due to aerodynamic drag from the extended Uranian exosphere—corona. The rings of Uranus are thought to be relatively young, at not more than 600 million years. The mechanism that confines the narrow rings is not well understood. The Uranian ring system probably originated from the collisional fragmentation of a number of moons that once existed around the planet. After colliding, the moons broke up into numerous particles, which survived as narrow and optically dense rings only in strictly confined zones of maximum stability.
+      </textarea>
+        </div>
+        <div class="form-group">
+          <label>Number of topics</label>
+          <div><input class="input" id="numTopics" type="number" value="2" style="width: 40px; min-height: 12px; margin-bottom: 0;"></div>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary" onclick="analyze()">Analyze Topics</button>
+          <span class="aspinner algo-spinner demo-spinner"></span>
+          <span id="demo-status"></span>
+        </div>
+
+        <div class="viz-container">
+          <svg class="viz"></svg>
+        </div>
+
+        <!-- Print debug input / output from the algorithms -->
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#demo-code" data-toggle="tab">Demo Code</a></li>
+          <li><a href="#topics-in" data-toggle="tab">LDA Input</a></li>
+          <li><a href="#topics-out" data-toggle="tab">LDA Output</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content debug-container">
+          <div class="tab-pane debug active" id="demo-code">
+            <pre>
+Algorithmia.client(apiKey).algo("/nlp/LDA").pipe([strings, numTopics]).then(function(topics) {
+    if(topics.error) return console.error(topics.error);
+    console.log(topics.result);
+});</pre>
+          </div>
+          <div class="tab-pane debug" id="topics-in">...</div>
+          <div class="tab-pane debug" id="topics-out">...</div>
+        </div>
+      </div>
+      <style>
+      circle {
+        stroke: #5d9cec;
+        stroke-width: 2px;
+        fill: transparent;
+      }
+      .leaf circle {
+        stroke: transparent;
+        fill: #5d9cec;
+      }
+      .leaf text {
+        fill: white;
+      }
+      </style>
+      <script src="public/js/d3.min.js" type="text/javascript"></script>
+      <script src="public/js/algorithmia.d3.js" type="text/javascript"></script>
+      <script src="public/js/main.js" type="text/javascript"></script>
+    </div>
+  </body>
+</html>

@@ -14,6 +14,7 @@ module.exports = function(grunt) {
   var demos = [
     { slug: 'amazon-miner', dist: 'JavaScript/amazon-miner'},
     { slug: 'analyze-tweets', dist: 'JavaScript/analyze-tweets'},
+    { slug: 'classify-places', dist: 'JavaScript/places-demo'},
     { slug: 'colorize-photos', dist: 'JavaScript/colorization-demo' },
     { slug: 'cluster', dist: 'Javascript/cluster' },
     { slug: 'doc-classifier', dist: 'JavaScript/doc-classifier'},
@@ -24,7 +25,7 @@ module.exports = function(grunt) {
     { slug: 'handwriting', dist: 'JavaScript/handwriting' },
     { slug: 'image-tagger', dist: 'JavaScript/image-tagger' },
     { slug: 'isitnude', dist: 'JavaScript/isitnude'},
-    { slug: 'classify-places', dist: 'JavaScript/places-demo'},
+    { slug: 'pathplan', dist: 'JavaScript/pathplan' },
     { slug: 'rss-dashboard', dist: 'JavaScript/RSS_dashboard'},
     { slug: 'sitemap', dist: 'JavaScript/site-mapper'},
     { slug: 'social-image-rec', dist: 'JavaScript/social-image-rec'},

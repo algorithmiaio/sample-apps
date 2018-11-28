@@ -27,6 +27,7 @@ module.exports = function(grunt) {
     { slug: 'handwriting', dist: 'JavaScript/handwriting' },
     { slug: 'image-tagger', dist: 'JavaScript/image-tagger' },
     { slug: 'isitnude', dist: 'JavaScript/isitnude'},
+    { slug: 'json', dist: 'JavaScript/json' },
     { slug: 'lda', dist: 'JavaScript/lda' },
     { slug: 'lda2', dist: 'JavaScript/lda2' },
     { slug: 'othello', dist: 'JavaScript/othello' },

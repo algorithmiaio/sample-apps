@@ -13,6 +13,7 @@ module.exports = function(grunt) {
   //    dist: the directory containing a static files to publish (index.html should be in this directory)
   var demos = [
     { slug: 'amazon-miner', dist: 'JavaScript/amazon-miner'},
+    { slug: 'autotag', dist: 'JavaScript/autotag' },
     { slug: 'analyze-tweets', dist: 'JavaScript/analyze-tweets'},
     { slug: 'classify-places', dist: 'JavaScript/places-demo'},
     { slug: 'colorize-photos', dist: 'JavaScript/colorization-demo' },

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="algorithmia">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Algorithmia makes applications smarter, by building a community around algorithm development, where state of the art algorithms are always live and accessible to anyone." ng-non-bindable>
+    <meta name="twitter:description" content="Algorithmia makes applications smarter, by building a community around algorithm development, where state of the art algorithms are always live and accessible to anyone." ng-non-bindable>
+    <meta property="og:description" content="Algorithmia makes applications smarter, by building a community around algorithm development, where state of the art algorithms are always live and accessible to anyone." ng-non-bindable>
+
+    <title itemprop="name" ng-non-bindable>JSON Transformer - Algorithmia</title>
+    <meta property="og:title" content="Topic Analysis - Algorithmia" ng-non-bindable>
+    <meta property="og:url" content="https://algorithmia.com/demo/json">
+    <meta property="og:image" content="public/images/meta-img.png">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Algorithmia">
+    <meta name="twitter:title" content="JSON Transformer - Algorithmia" ng-non-bindable>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="public/images/meta-img.png">
+    <meta name="twitter:site" content="@algorithmia">
+    <meta name="google-site-verification" content="W56duc7XBEgUfYQYbbaRnEepD-smVg967X8n8RbL_PA" />
+    <meta name="google-site-verification" content="_vNFIFiIamwZlLUjRbM3U78h8vAcrmjYelaV4pukFX4" />
+    <link rel="canonical" href="https://algorithmia.com/demo/json" itemprop="url">
+
+    <meta name="robots" content="index,follow">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=0.75">
+    <link rel="shortcut icon" href="public/images/favicon-bw.png" type="image/png">
+
+    <link rel="stylesheet" href="public/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="public/css/core.cat.min.css">
+
+    <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+  <body>
+    <script src="public/js/common.cat.js" type="text/javascript"></script>
+    <script src="public/js/core.cat.min.js" type="text/javascript"></script>
+    <div class="container content-container">
+      <div class="well" ng-controller="JsonControl" ng-init="initDrag()">
+        <header>Algorithmia JSON Transformer</header>
+        <p>
+          This tool helps you to transform JSON data.
+        </p>
+
+        <div class="row">
+          <div class="col-md-4">
+            <!-- Inputs -->
+            <label>Input JSON</label>
+            <input type="text" class="form-control" ng-model="inputJson" placeholder='{"a": 1, "b": [2,3,4]}'>
+
+            <!-- Input view -->
+            <label>Formatted input JSON</label>
+            <div class="json-view" ng-bind-html="json2html(inputJson, null, 2)"></div>
+
+            <label>Type</label>
+            <div ng-bind="autoType(inputJson)"></div>
+          </div>
+
+          <div class="col-md-4">
+            <!-- JSON Transformer -->
+            <div class="json-transformer">
+              <label>JSON Transformation</label>
+              <textarea class="form-control" ng-model="transformer"></textarea>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <!-- Transformed object -->
+            <label>Output JSON</label>
+            <div class="json-view" ng-bind="transform(inputJson, transformer)"></div>
+
+            <label>Type</label>
+            <div ng-bind="autoType(transform(inputJson, transformer))"></div>
+          </div>
+        </div>
+
+        <div class="overlay"></div>
+
+      </div>
+      <script src="public/js/algorithmia.data.js" type="text/javascript"></script>
+      <script src="public/js/main.js"></script>
+      <style>
+        .json-view {
+          min-height: 40px;
+          white-space: pre;
+          background-color: #f5f5f5;
+          border: 1px solid #ccc;
+        }
+        .json-transformer textarea {
+          max-width: 100%;
+          min-height: 100px;
+        }
+      </style>
+    </div>
+  </body>
+</html>

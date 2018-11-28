@@ -36,7 +36,7 @@ var AmazonMiner =
 	analyze: function()
 	{
 		AmazonMiner.loading.show();
-		
+
 		// fake response? used for UI testing
 		//$.get("/fake_data.json", AmazonMiner.process); AmazonMiner.loading.hide(); return;
 
@@ -101,7 +101,7 @@ var AmazonMiner =
 		AmazonMiner.legend.html("");
 
 		_.each(AmazonMiner.analysis, function(prod, index) {
-			
+
 			var button = $("<span data-prod-id='" + index + "'>" + prod.name + "</span>");
 			button.click(AmazonMiner.toggleProduct);
 

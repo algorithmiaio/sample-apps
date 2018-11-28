@@ -6,7 +6,7 @@
   app.controller("OthelloControl", function($scope, $http) {
     var client, findOpposition, flipPieces, hasLegalMove, isLegalMove, otherPlayer, radiate, waitingForHuman;
     // this API Key will only work on Algorithmia's website; get your own key at https://algorithmia.com/user#credentials
-    client = Algorithmia.client("simSaaMGzbEMkkkmoGa6A0NgvvU1");
+    client = Algorithmia.client("simAvuOVN6OJDfvZOnarXOx8M0J1");
     $scope.player1 = "human";
     $scope.player2 = "ai";
     waitingForHuman = false;

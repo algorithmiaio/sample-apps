@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="algorithmia" class="ng-scope">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Algorithmia makes applications smarter, by building a community around algorithm development, where state of the art algorithms are always live and accessible to anyone." ng-non-bindable>
+    <meta name="twitter:description" content="Algorithmia makes applications smarter, by building a community around algorithm development, where state of the art algorithms are always live and accessible to anyone." ng-non-bindable>
+    <meta property="og:description" content="Algorithmia makes applications smarter, by building a community around algorithm development, where state of the art algorithms are always live and accessible to anyone." ng-non-bindable>
+
+    <title itemprop="name" ng-non-bindable>Othello - Algorithmia</title>
+    <meta property="og:title" content="Topic Analysis - Algorithmia" ng-non-bindable>
+    <meta property="og:url" content="https://algorithmia.com/demo/othello">
+    <meta property="og:image" content="public/images/meta-img.png">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Algorithmia">
+    <meta name="twitter:title" content="Othello - Algorithmia" ng-non-bindable>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="public/images/meta-img.png">
+    <meta name="twitter:site" content="@algorithmia">
+    <meta name="google-site-verification" content="W56duc7XBEgUfYQYbbaRnEepD-smVg967X8n8RbL_PA" />
+    <meta name="google-site-verification" content="_vNFIFiIamwZlLUjRbM3U78h8vAcrmjYelaV4pukFX4" />
+    <link rel="canonical" href="https://algorithmia.com/demo/othello" itemprop="url">
+
+
+    <meta name="robots" content="index,follow">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=0.75">
+    <link rel="shortcut icon" href="public/images/favicon-bw.png" type="image/png">
+
+    <link rel="stylesheet" href="public/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="public/css/core.cat.min.css">
+
+    <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+    <script src="public/js/algorithmia.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div class="container content-container">
+      <style>
+        table {
+          background-color: #2a2;
+          margin-bottom: 40px;
+          /* transform: perspective(14px) rotateX(1deg); */
+          /* transform-origin: bottom; */
+          /* margin-top: -130px; */
+        }
+        table td {
+          border: 1px solid #060;
+          padding: 1px;
+        }
+      </style>
+      <div class="well">
+        <header>Algorithmia Othello</header>
+        <div ng-controller="OthelloControl" ng-init="newGame()">
+          <div class="row">
+            <div class="col-md-6">
+              <strong>Player 1 (Black)</strong>
+              <span class="pull-right" ng-bind="count[1]"></span>
+              <select class="form-control" ng-model="player1" ng-options="p for p in ['human','ai']" ng-change="go()"></select>
+            </div>
+            <div class="col-md-6">
+              <strong>Player 2 (White)</strong>
+              <span class="pull-right" ng-bind="count[2]"></span>
+              <select class="form-control" ng-model="player2" ng-options="p for p in ['human','ai']" ng-change="go()"></select>
+            </div>
+          </div>
+          <div>
+            <button class="btn btn-primary" ng-click="newGame()">New Game</button>
+            <span class="aspinner algo-spinner demo-spinner"></span>
+            <span id="demo-status"></span>
+          </div>
+          <div style="margin-top: 30px;">
+            <strong ng-show="player">Player <span ng-bind="playerName()"></span></strong>
+            <strong ng-hide="player"><span ng-bind="winnerName()"></span> wins!</strong>
+          </div>
+          <table>
+            <tr ng-repeat="row in board track by $index">
+              <td ng-repeat="col in row track by $index">
+                <a ng-click="makeMove($parent.$index, $index)">
+                  <img ng-src="{{pieceImg(col)}}">
+                </a>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Print debug input / output from the algorithms -->
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#demo-code" data-toggle="tab">Demo Code</a></li>
+          <li><a href="#othello-in" data-toggle="tab">Othello Input</a></li>
+          <li><a href="#othello-out" data-toggle="tab">Othello Output</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content debug-container">
+          <div class="tab-pane debug active" id="demo-code">
+            <pre>
+Algorithmia.client(apiKey).algo("/kenny/Othello").pipe([board, player]).then(function(move) {
+    if(move.error) return console.error(move.error);
+    console.log("move", move.result);
+});</pre>
+          </div>
+          <div class="tab-pane debug" id="othello-in">...</div>
+          <div class="tab-pane debug" id="othello-out">...</div>
+        </div>
+      </div>
+    </div>
+    <script src="public/js/common.cat.js" type="text/javascript"></script>
+    <script src="public/js/core.cat.min.js" type="text/javascript"></script>
+    <script src="public/js/main.js" charset="utf-8" type="text/javascript"></script>
+  </body>
+</html>

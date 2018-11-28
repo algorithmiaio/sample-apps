@@ -84,7 +84,7 @@
       var error, flow, onError, onSuccess, req;
       try {
         flow = JSON.parse(flowJson);
-        req = $http.post("https://algorithmia.com/flow", flow);
+        req = $http.post("https://algorithmia.com/flow", flow, { withCredentials: true });
         onSuccess = function() {
           return toastr.success("Flow submitted to Algorithmia for processing");
         };

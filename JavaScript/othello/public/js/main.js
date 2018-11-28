@@ -5,7 +5,8 @@
 
   app.controller("OthelloControl", function($scope, $http) {
     var client, findOpposition, flipPieces, hasLegalMove, isLegalMove, otherPlayer, radiate, waitingForHuman;
-    client = Algorithmia.client("simSaaMGzbEMkkkmoGa6A0NgvvU1", "/v1/algo");
+    // this API Key will only work on Algorithmia's website; get your own key at https://algorithmia.com/user#credentials
+    client = Algorithmia.client("simSaaMGzbEMkkkmoGa6A0NgvvU1");
     $scope.player1 = "human";
     $scope.player2 = "ai";
     waitingForHuman = false;
@@ -81,7 +82,7 @@
       }
     };
     $scope.pieceImg = function(player) {
-      return "/assets/images/demos/circle" + player + ".png";
+      return "public/images/circle" + player + ".png";
     };
     otherPlayer = function() {
       return ($scope.player % 2) + 1;

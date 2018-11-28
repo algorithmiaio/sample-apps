@@ -22,6 +22,7 @@ module.exports = function(grunt) {
     { slug: 'doc-classifier', dist: 'JavaScript/doc-classifier'},
     { slug: 'deep-fashion', dist: 'JavaScript/deep-fashion'},
     { slug: 'deep-style', dist: 'JavaScript/deep-filter'},
+    { slug: 'flow', dist: 'JavaScript/flow' },
     { slug: 'github', dist: 'JavaScript/github' },
     { slug: 'hacker-news', dist: 'JavaScript/hacker-news' },
     { slug: 'handwriting', dist: 'JavaScript/handwriting' },

@@ -6,7 +6,7 @@ In this demo we'll go through how to host your data on Algorithmia, you'll learn
 
 Fork this repository so you have access to the code and data files. While we will use the Algorithmia Web IDE in this demo, note that you can use the [CLI](https://algorithmia.com/developers/clients/cli/) to deploy your model instead once you've [Created an Algorithm](https://algorithmia.com/developers/algorithm-development/languages/python/#create-an-algorithm) and cloned your repository.
 
-Or you can simply copy and paste the code example and download the data files. Do note that since the csv file located in the data folder in this repository is rather large, it's hosted as a `.zip` file, which you'll want to unpack before - DELETE once add code to unzip file unless still getting errors
+Or you can simply copy and paste the code example and download the data files. Do note that since the csv file located in the data folder in this repository is rather large, it's hosted as a `.zip` file that you'll be uploading to a data collection.
 
 ## Upload Your Data To Data Collections
 
@@ -65,5 +65,6 @@ We'll cover adding your sample I/O, versioning, release notes, and best practice
 ## Documentation
 
 - [Documentation for Keras](https://algorithmia.com/developers/algorithm-development/model-guides/keras/)
+- [Keras Demo](https://algorithmia.com/algorithms/stephanie/keras_guide) Note: this is slightly different than this guide's code as it takes a csv file rather than the .zip file.
 - [Documentation for Tensorflow](https://algorithmia.com/developers/algorithm-development/model-guides/tensorflow/)
 - [Working with Data](https://algorithmia.com/developers/data/)

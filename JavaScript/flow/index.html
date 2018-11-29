@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="algorithmia">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Algorithmia makes applications smarter, by building a community around algorithm development, where state of the art algorithms are always live and accessible to anyone." ng-non-bindable>
+    <meta name="twitter:description" content="Algorithmia makes applications smarter, by building a community around algorithm development, where state of the art algorithms are always live and accessible to anyone." ng-non-bindable>
+    <meta property="og:description" content="Algorithmia makes applications smarter, by building a community around algorithm development, where state of the art algorithms are always live and accessible to anyone." ng-non-bindable>
+
+    <title itemprop="name" ng-non-bindable>Flow Designer - Algorithmia</title>
+    <meta property="og:title" content="Flow Designer - Algorithmia" ng-non-bindable>
+    <meta property="og:url" content="https://algorithmia.com/demo/flow">
+    <meta property="og:image" content="public/images/meta-img.png">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Algorithmia">
+    <meta name="twitter:title" content="Flow Designer - Algorithmia" ng-non-bindable>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="public/images/meta-img.png">
+    <meta name="twitter:site" content="@algorithmia">
+    <meta name="google-site-verification" content="W56duc7XBEgUfYQYbbaRnEepD-smVg967X8n8RbL_PA" />
+    <meta name="google-site-verification" content="_vNFIFiIamwZlLUjRbM3U78h8vAcrmjYelaV4pukFX4" />
+    <link rel="canonical" href="https://algorithmia.com/demo/flow" itemprop="url">
+
+
+    <meta name="robots" content="index,follow">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=0.75">
+    <link rel="shortcut icon" href="public/images/favicon-bw.png" type="image/png">
+
+    <link rel="stylesheet" href="public/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="public/css/core.cat.min.css">
+
+    <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+    <script src="public/js/algorithmia.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <script src="public/js/common.cat.js" type="text/javascript"></script>
+    <script src="public/js/core.cat.min.js" type="text/javascript"></script>
+    <div class="container content-container">
+      <div class="well" ng-controller="FlowControl">
+        <header>Algorithmia Work Flow Designer</header>
+        <p>
+          This tool helps you to test and create algorithm data work flows.
+          Flows are represented by JSON objects which specify the inputs and outputs to algorithms.
+        </p>
+        <p>
+          Enter flow json on the left panel.
+          View a preview of the work plan on the right panel.
+          Execute the job directly on Algorithmia by clicking "Execute Flow".
+        </p>
+        <p>
+          Flows can be executed programmatically by POSTing json to the flow endpoint: https://algorithmia.com/flow
+        </p>
+        <p>
+          <a ng-click="showSpec = !showSpec">Show Flow Specification &gt;&gt;&gt;</a>
+          <pre ng-show="showSpec" ng-cloak>
+Flow :=
+  FlowAlgorithm |
+  [FlowAlgorithm,...]
+
+FlowAlgorithm := {
+  "algorithm": String,
+  "inputs": [FlowInput,...],
+  "output": FlowOutput
+}
+
+FlowInput :=
+    {"type": "const", "value": JSON} |
+    {"type": "var", "value": String} |
+    {"type": "file", "value": String} |
+    {"type": "url", "value": String}
+
+FlowOutput :=
+    {"type": "var", "value": String} |
+    {"type": "file", "value": String} |
+    {"type": "void"}</pre>
+        </p>
+
+        <div class="row">
+          <div class="col-md-6">
+            <!-- Inputs -->
+            <label>Flow JSON</label>
+            <textarea class="form-control flow-json" ng-model="flow"></textarea>
+            <button class="btn btn-primary" ng-click="executeFlow(flow)">Execute Flow</button>
+          </div>
+
+          <div class="col-md-6">
+            <!-- Flow chart -->
+            <label>Flow Chart</label>
+            <div class="flow-view"></div>
+          </div>
+        </div>
+
+      </div>
+      <script src="public/js/algorithmia.data.js" type="text/javascript"></script>
+      <script src="public/js/main.js" type="text/javascript"></script>
+      <style>
+        .flow-json {
+          max-width: 100%;
+          min-height: 360px;
+        }
+        .flow-view {
+          width: 100%;
+          height: 360px;
+          overflow-y: auto;
+          background-color: #f5f5f5;
+          border: 1px solid #ccc;
+        }
+        .flow-layer {
+          margin-bottom: 12px;
+        }
+        .flow-algorithm {
+          background-color: #ddddf5;
+          border: 1px solid #aaa;
+          border-radius: 4px;
+          padding: 4px;
+          margin: 4px;
+          display: inline-block;
+          font-size: 12px;
+        }
+      </style>
+    </div>
+  </body>
+</html>

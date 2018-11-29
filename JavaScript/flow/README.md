@@ -6,11 +6,11 @@ This is a tool to create and test algorithm data work flows.
 
 ## See this demo in action
 
-This demo can be viewed at https://algorithmia.com/demo/flow
+This demo can be viewed at https://demos.algorithmia.com/flow
 
-## Run it yourself
+## Build This Demo
 
-This demo only contains frontend code and requires no specialized hosting (or even a server).
+**NOTE:** This demo is built to run on [demos.algorithmia.com](https://demos.algorithmia.com/flow), and some functionality will not work when running locally.
 1. download the repository
 2. if you have not already, run the **setup** steps outlined in [/PUBLISH.md](../../PUBLISH.md)
 3. build the demo: `grunt build:flow`

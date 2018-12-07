@@ -22,7 +22,7 @@ You'll want to create a data collection to host the pre-trained Keras model and 
 
 - After you create your collection you can set the read and write access on your data collection. We are going to select **"Private"** since only you will be calling your algorithm in this instance. 
 
-- Now, let's put some data into your newly created data collection. You can either drag and drop the files [mnist_model.h5](https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/keras-mnist/data/mnist_model.h5) and [test_keras_data.csv](https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/keras-mnist/data/test_keras_data.csv) or you can click **"Drop files here to upload"** from where you stored the repo on your computer.
+- Now, let's put some data into your newly created data collection. You can either drag and drop the files [mnist_model.h5](https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/keras-mnist/data/mnist_model.h5) and [test_keras_data.csv.zip](https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/keras-mnist/data/test_keras_data.csv.zip) or you can click **"Drop files here to upload"** from where you stored the repo on your computer.
 
 ## Create Your Algorithm
 

@@ -39,7 +39,7 @@ h5py
 Review the code, verifying that you've replaced the `data://` URI correctly.  Also note that the model is initialized outside of the apply function (in R it's called the algorithm function). This way, after the model is initially loaded, subsequent calls will be much faster within that session.
 
 1. Click the **"Compile"** button in the top right of the grey navbar, and wait for the indicator to stop spinning
-2. Test your code in the console by pasting in the URI of the zipped csv you uploaded earlier (`data://YOUR_USERNAME/keras_model/mnist_model.h5` with `YOUR_USERNAME` replaced).
+2. Test your code in the console by pasting in the quoted URI of the zipped csv you uploaded earlier (`"data://YOUR_USERNAME/keras_model/test_keras_data.csv.zip"` with `YOUR_USERNAME` replaced).
 
 Note that we are passing in a JSON serializable object and recommend that your algorithm takes a robust data structure that allows for various input types, output files, and other customizations.
 

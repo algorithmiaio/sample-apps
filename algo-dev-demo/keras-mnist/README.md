@@ -2,65 +2,50 @@
 
 In this demo we'll go through how to host your data on Algorithmia, you'll learn how to deploy your pre-trained Keras model and finally we'll call the algorithm once it's been deployed to make inferences.
 
-## Prerequisites 
+While we will use the Algorithmia Web IDE in this demo, note that you can use the [CLI](https://algorithmia.com/developers/clients/cli/) to deploy your model instead once you've [Created an Algorithm](https://algorithmia.com/developers/algorithm-development/languages/python/#create-an-algorithm) and cloned your repository.
 
-Fork this repository so you have access to the code and data files. While we will use the Algorithmia Web IDE in this demo, note that you can use the [CLI](https://algorithmia.com/developers/clients/cli/) to deploy your model instead once you've [Created an Algorithm](https://algorithmia.com/developers/algorithm-development/languages/python/#create-an-algorithm) and cloned your repository.
+#### Before you begin
+1. Create an account on [algorithmia.com](https://algorithmia.com/)
 
-Or you can simply copy and paste the code example and download the data files. Do note that since the csv file located in the data folder in this repository is rather large, it's hosted as a `.zip` file that you'll be uploading to a data collection.
+#### Upload your model
+In this demo, we are going to host our data on the Algorithmia platform in [Data Collections](https://algorithmia.com/developers/data/hosted/).  We'll download the pre-trained Keras model and sample data from this repository, create a data collection on Algorithmia, and upload the files there.
 
-## Upload Your Data To Data Collections
+1. Download [mnist_model.h5](https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/keras-mnist/data/mnist_model.h5) and [test_keras_data.csv.zip](https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/keras-mnist/data/test_keras_data.csv.zip) from this repository
+2. Click **"Data"** in the header nav at [algorithmia.com](https://algorithmia.com/), then click "[My Hosted Data](https://algorithmia.com/data/hosted)"
+3. Click **"Add Collection"** under the **"My Collections"** section on your data collections page, and name the new collection **"keras_model"**
+4. Upload **"mnist_model.h5"** and **"test_keras_data.csv.zip"** via the **"Drop files here to upload"** box
+5. Take note of the URIs which appear below the uploaded files (e.g. **"data://username/keras_model/mnist_model.h5"**)
 
-In this demo, we are going to host our data on the Algorithmia platform in [Data Collections](https://algorithmia.com/developers/data/hosted/). 
+#### Create your algorithm
+1. Click the **"+"** in the upper-right of [algorithmia.com](https://algorithmia.com/) to create a new algorithm
+2. Give your algorithm any name, pick **"Python 3"**, **"Full access to
+   internet"** and **"Can call other algorithms"** (not "Advanced GPU") -- then
+   click Create Algorithm
+3. Click **"Algorithmia Web IDE"** in the subscript near the bottom of the popup. If you've closed the popup already,just click the **"source"** tab of the page. 
+4. Copy-and-paste the content of [demo.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/keras-mnist/demo.py) into the code editor, replacing the default code
+5. In the code, replace `data://jpeck/keras_model/mnist_model.h5` with corresponding URI from your own data collection
 
-You'll want to create a data collection to host the pre-trained Keras model and the sample data to test our algorithm with: 
-
-- Log in to your Algorithmia account and click your avatar which will show a dropdown of choices. Click **"Manage Data"**
-
-- Then in the left panel on the page of data collection options, go ahead and click **"My Hosted Data"**
-
-- Click on **“Add Collection”** under the “My Collections” section on your data collections page. Let's name ours "keras_model_demo"
-
-- After you create your collection you can set the read and write access on your data collection. We are going to select **"Private"** since only you will be calling your algorithm in this instance. 
-
-- Now, let's put some data into your newly created data collection. You can either drag and drop the files [mnist_model.h5](https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/keras-mnist/data/mnist_model.h5) and [test_keras_data.csv.zip](https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/keras-mnist/data/test_keras_data.csv.zip) or you can click **"Drop files here to upload"** from where you stored the repo on your computer.
-
-## Create Your Algorithm
-
-Now we are ready to deploy our model.
-
-### First create an algorithm
-- Click the **"Plus"** icon at the top right of the navbar
-- Let's go through the form together to create our algorithm
-- Click on the tab **"Source"** and you'll notice boilerplate code for Hello World.
-- Let's delete that code, and copy and paste the code from the file [demo.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/keras-mnist/demo.py)
-- Note that you'll need to change the name of the data collection to the one we created earlier. 
-
-Recall our data collection is called "keras_model_demo" and you'll need
-to change "YOUR_USERNAME" to your own username: `file_path =
-'data://YOUR_USERNAME/keras_model_demo/mnist_model.h5'`
-
-### Add Dependencies
-- Click the **"Dependencies"** button in the grey navbar.
-- Add Dependencies to the requirements.txt file under the ones that already exist, adding:
+#### Add dependencies
+1. Click the **"Dependencies"** button in the grey navbar.
+2. Add Dependencies to the requirements.txt file under the ones that already exist, adding:
 ```
 tensorflow
 keras
 h5py
 ```
- 
-### Code Example
-- This will be a brief description of the code example including where to load the model. 
 
-Note you always want to initialize the model outside of the apply function (in R it's called the algorithm function). This way, after the model is initially loaded, subsequent calls will be much faster within that session.
+#### Compile and test your algorithm
 
-### Compile Code
-- Click the **"Compile"** button in the top right of the grey navbar
-- Now test your code in the console by passing in the data file we stored in our data collection.
+Review the code, verifying that you've replaced the `data://` URI correctly.  Also note that the model is initialized outside of the apply function (in R it's called the algorithm function). This way, after the model is initially loaded, subsequent calls will be much faster within that session.
+
+1. Click the **"Compile"** button in the top right of the grey navbar, and wait for the indicator to stop spinning
+2. Test your code in the console by pasting in the URI of the zipped csv you uploaded earlier (`data://YOUR_USERNAME/keras_model/mnist_model.h5` with `YOUR_USERNAME` replaced).
 
 Note that we are passing in a JSON serializable object and recommend that your algorithm takes a robust data structure that allows for various input types, output files, and other customizations.
 
-### Publishing Your Model
-We'll cover adding your sample I/O, versioning, release notes, and best practices of creating your algorithms.
+### Publishing your algorithm
+1. Click "publish" and walk through the dialogs, setting the modified `data://YOUR_USERNAME/keras_model/mnist_model.h5` as the sample input
+2. Test out your new Algorithm by clicking "Run Example"
 
 ## Documentation
 

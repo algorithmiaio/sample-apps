@@ -58,7 +58,7 @@ def process_input(input):
             # Predict only on the first ten images.
             return np_array[:10]
         except Exception as e:
-            raise Ecxeption("Could not create numpy array from data", e)
+            raise Exception("Could not create numpy array from data", e)
     else:
         raise Exception('Please provide input of the form {"test_data":"data://YOUR_USERNAME/keras_model/test_keras_data.csv.zip"}')
 

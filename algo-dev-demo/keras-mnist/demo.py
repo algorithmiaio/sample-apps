@@ -49,7 +49,7 @@ def extract_data(input_file):
 def process_input(input):
     """Get saved data model and turn into numpy array."""
     # Create numpy array from csv file passed as input in apply()
-    if "test_data" in input and input["test_data"].startswith('data:'):
+    if isinstance(input, dict) and "test_data" in input and input["test_data"].startswith('data:'):
         zipped_input = input["test_data"]
         input_file = extract_data(zipped_input)
         try:
@@ -59,8 +59,7 @@ def process_input(input):
         except Exception as e:
             print("Could not create numpy array from data", e)
     else:
-        url = "https://algorithmia.com/developers/data/"
-        print("Incorrect url: Check how to host your data: {0}".format(url))
+        raise Exception('Please provide input of the form {"test_data":"data://YOUR_USERNAME/keras_model/test_keras_data.csv.zip"}')
 
 
 def predict(input):

@@ -8,6 +8,7 @@ import numpy as np
 from keras.models import load_model
 import zipfile
 import os
+from shutil import rmtree
 import Algorithmia
 
 client = Algorithmia.client()
@@ -29,18 +30,21 @@ def load_keras_model():
 # Function to load model gets called one time
 classifier = load_keras_model()
 
+
 def extract_data(input_file):
     """
     Unzip data file from data collections
     """
     input_zip = client.file(input_file).getFile().name
     # Create directory to unzip model files into
-    os.mkdir("unzipped_file")
+    if os.path.exists("unzipped_file"):
+      rmtree('unzipped_file',onerror=del_evenReadonly)
+    else:
+      os.mkdir("unzipped_file")
     zipped_file = zipfile.ZipFile(input_zip)
     # Extract unzipped files into directory created earlier returns none
     file_path = "./unzipped_file/"
     return zipped_file.extract("test_keras_data.csv", file_path)
-
 
 
 def process_input(input):

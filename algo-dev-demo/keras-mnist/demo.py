@@ -34,11 +34,8 @@ def extract_data(input_file):
     Unzip data file from data collections
     """
     input_zip = client.file(input_file).getFile().name
-    try:
-        # Create directory to unzip model files into
-        os.mkdir("unzipped_file")
-    except Exception as e:
-      print(e)
+    # Create directory to unzip model files into
+    os.mkdir("unzipped_file")
     zipped_file = zipfile.ZipFile(input_zip)
     # Extract unzipped files into directory created earlier returns none
     file_path = "./unzipped_file/"
@@ -57,7 +54,7 @@ def process_input(input):
             # Predict only on the first ten images.
             return np_array[:10]
         except Exception as e:
-            print("Could not create numpy array from data", e)
+            raise Ecxeption("Could not create numpy array from data", e)
     else:
         raise Exception('Please provide input of the form {"test_data":"data://YOUR_USERNAME/keras_model/test_keras_data.csv.zip"}')
 

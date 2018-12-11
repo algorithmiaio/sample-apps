@@ -5,7 +5,7 @@ In this demo we'll go through how to host your data on Algorithmia, you'll learn
 While we will use the Algorithmia Web IDE in this demo, note that you can use the [CLI](https://algorithmia.com/developers/clients/cli/) to deploy your model instead once you've [Created an Algorithm](https://algorithmia.com/developers/algorithm-development/languages/python/#create-an-algorithm) and cloned your repository.
 
 #### Before you begin
-1. Create an account on [algorithmia.com](https://algorithmia.com/)
+1. Sign in to your cluster or create an account on your cluster if you haven't yet.
 
 #### Upload your model
 In this demo, we are going to host our data on the Algorithmia platform in [Data Collections](https://algorithmia.com/developers/data/hosted/).  We'll download the pre-trained Keras model and sample data from this repository, create a data collection on Algorithmia, and upload the files there.

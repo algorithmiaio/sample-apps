@@ -38,7 +38,7 @@ def extract_data(input_file):
     input_zip = client.file(input_file).getFile().name
     # Create directory to unzip model files into
     if os.path.exists("unzipped_file"):
-      rmtree('unzipped_file',onerror=del_evenReadonly)
+      rmtree('unzipped_file',ignore_errors=True)
     else:
       os.mkdir("unzipped_file")
     zipped_file = zipfile.ZipFile(input_zip)

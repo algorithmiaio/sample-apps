@@ -46,7 +46,7 @@ Also note that the model is initialized outside of the apply function (in R it's
 Note that we are passing in a JSON serializable object and recommend that your algorithm takes a robust data structure that allows for various input types, output files, and other customizations.
 
 ## Publishing your algorithm
-1. Click "publish" and walk through the dialogs, setting the modified `{"test_data":"data://YOUR_USERNAME/keras_model/test_keras_data.csv.zip"}` as the sample input
+1. Click "publish" and walk through the dialogs, setting the modified `{"test_data":"data://YOUR_USERNAME/keras_model/test_keras_data.csv.zip"}` as the sample input **Note:** set your algorithm to "Private" so you can delete it if you want later.
 2. Test out your new Algorithm by clicking "Run Example"
 
 ## Documentation

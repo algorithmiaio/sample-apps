@@ -11,7 +11,7 @@ While we will use the Algorithmia Web IDE in this demo, note that you can use th
 In this demo, we are going to host our data on the Algorithmia platform in [Data Collections](https://algorithmia.com/developers/data/hosted/).  We'll download the pre-trained Keras model and sample data from this repository, create a data collection on Algorithmia, and upload the files there.
 
 1. Download [mnist_model.h5](https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/keras-mnist/data/mnist_model.h5) and [test_keras_data.csv.zip](https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/keras-mnist/data/test_keras_data.csv.zip) from this repository
-2. Click **"Data"** in the header nav at [algorithmia.com](https://algorithmia.com/), then click "[My Hosted Data](https://algorithmia.com/data/hosted)"
+2. Click **"Data"** in the header nav on your instance, then click "[My Hosted Data](https://algorithmia.com/data/hosted)"
 3. Click **"Add Collection"** under the **"My Collections"** section on your data collections page, and name the new collection **"keras_model"**
 4. Upload **"mnist_model.h5"** and **"test_keras_data.csv.zip"** via the **"Drop files here to upload"** box
 5. Take note of the URIs which appear below the uploaded files (e.g. **"data://YOUR_USERNAME/keras_model/mnist_model.h5"**)

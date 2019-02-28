@@ -48,13 +48,13 @@ def extract_model():
     input_zip = extract_zip()
     try:
         # Create directory to unzip model files into
-        os.mkdir("unzipped_files")
+        os.mkdir("/tmp/unzipped_files")
         print("Created directory")
     except:
         print("Error in creating directory")
     zipped_file = zipfile.ZipFile(input_zip)
     # Extract unzipped files into directory created earlier returns none
-    return zipped_file.extractall("unzipped_files")
+    return zipped_file.extractall("/tmp/unzipped_files")
     
 # Unzip model files to directory 
 extract_model()
@@ -62,7 +62,7 @@ extract_model()
 # Load model outside of apply() in global state so it only gets loaded one time
 def create_session():
     session = tf.Session()
-    path_to_graph = "./unzipped_files/model"
+    path_to_graph = "/tmp/unzipped_files/model"
     
     tf.saved_model.loader.load(
         session,

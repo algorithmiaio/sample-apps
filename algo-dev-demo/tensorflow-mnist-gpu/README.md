@@ -32,7 +32,7 @@ Now we are ready to deploy our model.
 1. Click the **"Plus"** icon at the top right of the navbar
 2. Let's go through the form together to create our algorithm
 3. Click on the purple "Create Algorithm"
-4. Give it a name, pick "Python 3", and be sure to select "Advanced GPU" (all other settings are optional)
+4. Give it a name, pick "Python3.x Beta" which will reveal package sets and choose "Python 3.6 + Tensorflow GPU 1.12".
 
 Now that you have created your algorithm, you'll get a modal with information about using the CLI and Git. Every algorithm has a Git repo behind it so you can experiment with different I/O in development mode by calling the hash version.
 
@@ -48,10 +48,9 @@ Then note that there is another file in the repo called [loadmnistdata.py](https
 4. Create a file in the directory structure to the left of your code in the Web IDE by clicking on "**+** New File" and call it "loadmnistdata.py" then copy and paste from [loadmnistdata.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/tensorflow-mnist-gpu/loadmnistdata.py).
 
 ### Add Dependencies
-1. Click the **"Dependencies"** button in the grey navbar.
-2. Add Dependencies to the CRAN file under the ones that already exist, adding:
+1. Click the **"Dependencies"** button in the grey navbar and note that the following dependency is already added:
 ```
-tensorflow-gpu==1.2.0
+tensorflow-gpu==1.12
 ```
  
 ### Code Description

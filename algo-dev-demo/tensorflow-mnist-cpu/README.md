@@ -14,11 +14,12 @@ In this demo, we are going to host our data on the Algorithmia platform in [Data
 
 You'll want to create a data collection to host your saved model and your test data: 
 
+
 1. Log in to your Algorithmia account and click your avatar which will show a dropdown of choices. Click **"Manage Data"**
 
 2. Then in the left panel on the page of data collection options, go ahead and click **"My Hosted Data"**
 
-3. Click on **“Add Collection”** under the “My Collections” section on your data collections page. Let's name ours "tensorflow_mnist_data"
+3. Click on **“New Collection”** under the “My Hosted Data” section on your data collections page. Let's name ours "tensorflow_mnist_data"
 
 4. After you create your collection you can set the read and write access on your data collection. We are going to select **"Private"** since only you will be calling your algorithm in this instance. 
 

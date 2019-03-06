@@ -77,6 +77,7 @@ We'll cover adding your sample I/O, versioning, release notes, and best practice
 
 - [Python Client Guides](https://algorithmia.com/developers/algorithm-development/languages/python/)
 - [Documentation for Tensorflow](https://algorithmia.com/developers/model-deployment/tensorflow/)
-- [Documentation for Scikit-Learn](https://algorithmia.com/developers/model-deployment/scikit/)
+- [Demo for PyTorch Using jit.trace](https://algorithmia.com/algorithms/stephanie/pytorchjitgpu)
+- [Demo for Scikit-learn XGBoost](https://algorithmia.com/algorithms/demo/scikitlearnxgboostdemo)
 - [Working with Data](https://algorithmia.com/developers/data/)
 

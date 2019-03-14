@@ -1,6 +1,6 @@
-# PyTorch MNIST Running On CPU's Demo
+# PyTorch CIFAR-10 Running On CPU's Demo
 
-In this hands-on tutorial, we'll go through how to host a pre-trained Tensorflow model and the associated data on Algorithmia, learn how to deploy that model into production, and then call the algorithm once it's been deployed to make inferences.
+In this hands-on tutorial, we'll go through how to host a pre-trained PyTorch model and the associated data on Algorithmia, learn how to deploy that model into production, and then call the algorithm once it's been deployed to make inferences.
 
 ## Prerequisites 
 
@@ -42,13 +42,14 @@ Now that you have created your algorithm, you'll get a modal with information ab
 2. Let's delete that code, and copy and paste the code from the file [demo.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/pytorch-cifar-cpu/demo.py)
 3. Recall our data collection is called "pytorch_cifar_data" and you'll need
 to change "YOUR_USERNAME" to your own username: `file_path =
-'data://YOUR_USERNAME/pytorch_cifar_data/model.zip'` on line 41.
+'data://YOUR_USERNAME/pytorch_cifar_data/demo_model.t7'` on line 41.
 
 ### Add Dependencies
 1. Click the **"Dependencies"** button in the grey navbar.
-2. Add Dependencies to the CRAN file under the ones that already exist, adding:
+2. Add Dependencies to the requirements.txt file under the ones that already exist, adding:
 ```
 torch
+torchvision
 ```
  
 ### Code Description

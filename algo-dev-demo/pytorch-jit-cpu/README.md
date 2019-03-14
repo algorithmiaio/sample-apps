@@ -19,11 +19,11 @@ You'll want to create a data collection to host your saved model and your test d
 
 2. Then in the left panel on the page of data collection options, go ahead and click **"My Hosted Data"**
 
-3. Click on **“New Collection”** under the “My Hosted Data” section on your data collections page. Let's name ours "pytorch_cifar_data"
+3. Click on **“New Collection”** under the “My Hosted Data” section on your data collections page. Let's name ours "pytorch_cifar_model"
 
 4. After you create your collection you can set the read and write access on your data collection. We are going to select **"Private"** since only you will be calling your algorithm in this instance. 
 
-5. Now, let's put some data into your newly created data collection. You can either drag and drop the files in the folder: [pytorch-cifar-cpu/data](https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/pytorch-cifar-cpu/data) or you can click **"Drop files here to upload"** from where you stored the repo on your computer.
+5. Now, let's put some data into your newly created data collection. You can either drag and drop the files in the folder: [pytorch-cifar-cpu/model](https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/pytorch-cifar-cpu/model) or you can click **"Drop files here to upload"** from where you stored the repo on your computer.
 
 ## Create Your Algorithm
 
@@ -40,9 +40,10 @@ Now that you have created your algorithm, you'll get a modal with information ab
 ### Add Code Samples
 1. Click on the tab **"Source"** and you'll notice boilerplate code for Hello World.
 2. Let's delete that code, and copy and paste the code from the file [demo.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/pytorch-cifar-cpu/demo.py)
-3. Recall our data collection is called "pytorch_cifar_data" and you'll need
+3. Recall our data collection is called "pytorch_cifar_model" and you'll need
 to change "YOUR_USERNAME" to your own username: `file_path =
-'data://YOUR_USERNAME/pytorch_cifar_data/demo_model.t7'` on line 41.
+'data://YOUR_USERNAME/pytorch_cifar_model/demo_model.t7'` on line 41.
+4. Let's make another data collection here, and name if "pytorch_cifar_data". 
 
 ### Add Dependencies
 1. Click the **"Dependencies"** button in the grey navbar.
@@ -64,10 +65,10 @@ Note you always want to initialize the model outside of the apply() function. Th
 2. Now test your code in the console by passing in the data file we stored in our data collection.
 
 ### Developer Center
-While the first commit and compile is occuring, this is a good opportunity to introduce where to find the documentation. Welcome to the [Developer Center](https://algorithmia.com/developers/) where you can find documentation on [Python algorithm development](https://algorithmia.com/developers/algorithm-development/languages/python/) and the full documentation on [Tensorflow](https://algorithmia.com/developers/model-deployment/tensorflow/).
+While the first commit and compile is occuring, this is a good opportunity to introduce where to find the documentation. Welcome to the [Developer Center](https://algorithmia.com/developers/) where you can find documentation on [Python algorithm development](https://algorithmia.com/developers/algorithm-development/languages/python/) and the full documentation on [PyTorch](https://algorithmia.com/developers/model-deployment/pytorch/).
 
 ### Pass in user Input
-In the web console, paste in: `data path to image`
+In the web console, paste in: `data://USERNAME/pytorch_cifar_data/plane1.jpg`
 
 ## Deploy Your Model
 We'll cover adding your sample I/O, versioning, release notes, and best practices of creating your algorithms.

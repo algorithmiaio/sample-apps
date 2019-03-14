@@ -19,11 +19,11 @@ You'll want to create a data collection to host your saved model and your test d
 
 2. Then in the left panel on the page of data collection options, go ahead and click **"My Hosted Data"**
 
-3. Click on **“New Collection”** under the “My Hosted Data” section on your data collections page. Let's name ours "pytorch_mnist_data"
+3. Click on **“New Collection”** under the “My Hosted Data” section on your data collections page. Let's name ours "pytorch_cifar_data"
 
 4. After you create your collection you can set the read and write access on your data collection. We are going to select **"Private"** since only you will be calling your algorithm in this instance. 
 
-5. Now, let's put some data into your newly created data collection. You can either drag and drop the files in the folder: [pytorch-mnist-cpu/data](https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/pytorch-mnist-cpu/data) or you can click **"Drop files here to upload"** from where you stored the repo on your computer.
+5. Now, let's put some data into your newly created data collection. You can either drag and drop the files in the folder: [pytorch-cifar-cpu/data](https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/pytorch-cifar-cpu/data) or you can click **"Drop files here to upload"** from where you stored the repo on your computer.
 
 ## Create Your Algorithm
 
@@ -39,14 +39,10 @@ Now that you have created your algorithm, you'll get a modal with information ab
 
 ### Add Code Samples
 1. Click on the tab **"Source"** and you'll notice boilerplate code for Hello World.
-2. Let's delete that code, and copy and paste the code from the file [demo.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/tensorflow-mnist-cpu/demo.py)
-3. Recall our data collection is called "pytorch_mnist_data" and you'll need
+2. Let's delete that code, and copy and paste the code from the file [demo.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/pytorch-cifar-cpu/demo.py)
+3. Recall our data collection is called "pytorch_cifar_data" and you'll need
 to change "YOUR_USERNAME" to your own username: `file_path =
-'data://YOUR_USERNAME/pytorch_mnist_data/model.zip'` on line 41.
-
-Then note that there is another file in the repo called [loadmnistdata.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/tensorflow-mnist-cpu/loadmnistdata.py).
-
-4. Create a file in the directory structure to the left of your code in the Web IDE by clicking on "**+** New File" and call it "loadmnistdata.py" then copy and paste from [loadmnistdata.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/tensorflow-mnist-cpu/loadmnistdata.py).
+'data://YOUR_USERNAME/pytorch_cifar_data/model.zip'` on line 41.
 
 ### Add Dependencies
 1. Click the **"Dependencies"** button in the grey navbar.
@@ -70,7 +66,7 @@ Note you always want to initialize the model outside of the apply() function. Th
 While the first commit and compile is occuring, this is a good opportunity to introduce where to find the documentation. Welcome to the [Developer Center](https://algorithmia.com/developers/) where you can find documentation on [Python algorithm development](https://algorithmia.com/developers/algorithm-development/languages/python/) and the full documentation on [Tensorflow](https://algorithmia.com/developers/model-deployment/tensorflow/).
 
 ### Pass in user Input
-In the web console, paste in: `{"mnist_images": "data://YOUR_USERNAME/pytorch_mnist_data/t10k-images-idx3-ubyte.gz", "mnist_labels": "data://YOUR_USERNAME/tensorflow_mnist_data/t10k-labels-idx1-ubyte.gz"}`
+In the web console, paste in: `data path to image`
 
 ## Deploy Your Model
 We'll cover adding your sample I/O, versioning, release notes, and best practices of creating your algorithms.

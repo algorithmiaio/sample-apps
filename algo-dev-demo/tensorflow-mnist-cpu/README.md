@@ -50,7 +50,7 @@ Then note that there is another file in the repo called [loadmnistdata.py](https
 
 ### Add Dependencies
 1. Click the **"Dependencies"** button in the grey navbar.
-2. Add Dependencies to the CRAN file under the ones that already exist, adding:
+2. Add Dependencies to the requirements.txt file under the ones that already exist, adding:
 ```
 tensorflow
 ```

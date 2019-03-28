@@ -1,6 +1,8 @@
 # Naive Bayes Classification Demo
 
-In this hands-on tutorial, we'll go through how to host a pre-trained R model and it's associated data on Algorithmia, learn how to deploy that model into production, and then call the algorithm once it's been deployed to make inferences.
+In this hands-on tutorial, we'll go through how to host a pre-trained R model, and it's associated data on Algorithmia, learn how to deploy that model into production, and then call the algorithm once it's been deployed to make inferences.
+
+This model is trained on the classic Iris dataset and classifies Iris species using a Naive Bayes model.
 
 ## Prerequisites 
 

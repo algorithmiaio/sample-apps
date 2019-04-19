@@ -34,6 +34,8 @@ Now we are ready to deploy our model.
 3. Click on the purple "Create Algorithm"
 4. Give it a name, pick "Python3.x Beta" which will reveal package sets and choose "Python 3.6 + Tensorflow GPU 1.12".
 
+Note: That if you are following along in this tutorial and are instructed to instead choose Python 3.x, please select that as your language.
+
 Now that you have created your algorithm, you'll get a modal with information about using the CLI and Git. Every algorithm has a Git repo behind it so you can experiment with different I/O in development mode by calling the hash version.
 
 ### Add Code Samples
@@ -51,6 +53,10 @@ Then note that there is another file in the repo called [loadmnistdata.py](https
 1. Click the **"Dependencies"** button in the grey navbar and note that the following dependency is already added:
 ```
 tensorflow-gpu==1.12
+```
+Note: that if you are following along and we've created an algorithm chosing Python3.x instead of Python3.x Beta, you'll need to add this as your dependency:
+```
+tensorflow-gpu==1.2.0
 ```
  
 ### Code Description

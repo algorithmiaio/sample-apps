@@ -2,6 +2,9 @@ import json
 from pyspark import SparkContext
 from pyspark.streaming import StreamingContext
 import Algorithmia
+import keys
+
+creds = keys.get_config()
 
 
 # Create a local StreamingContext with two working threads and batch
@@ -29,7 +32,7 @@ def get_articles(tweet_url):
     }
     # If running on multiple clusters should be created in each partition
     # for performance rather than creating the client on each rdd
-    client = Algorithmia.client('YOUR_API_KEY')
+    client = Algorithmia.client(creds["algorithmiaApiKey"])
     algo = client.algo('algorithmiahq/DeepFashion/1.3.0', 'YOUR_API_ENDPOINT')
     # algo.set_options(timeout=300) # optional
     return algo.pipe(input).result['articles']

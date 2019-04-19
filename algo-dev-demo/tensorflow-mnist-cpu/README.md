@@ -2,6 +2,8 @@
 
 In this hands-on tutorial, we'll go through how to host a pre-trained Tensorflow model and the associated data on Algorithmia, learn how to deploy that model into production, and then call the algorithm once it's been deployed to make inferences.
 
+This trained model is a basic shallow network for the purpose of demoing image classiciation of handwritten digits trained on the [MNIST](http://yann.lecun.com/exdb/mnist/) dataset. We'll be deploying the serialized pre-trained model into production and run the model using test data that the model wasn't trained on to receive the predicted handwritten digits of new images.
+
 ## Prerequisites 
 
 Clone [this repository](https://github.com/algorithmiaio/sample-apps/) so you have access to the code and data files. While we will use the Algorithmia Web IDE in this demo, note that you can use the [CLI](https://algorithmia.com/developers/clients/cli/) to deploy your model instead once you've created your algorithm and cloned your repository.

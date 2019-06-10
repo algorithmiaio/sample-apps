@@ -8,7 +8,7 @@ def find_horizon(infile):
     """Find the horizon line on an image"""
     algo = client.algo('ukyvision/deephorizon/0.1.0')
     image = base64.b64encode(open(infile, "rb").read())
-    return algo.pipe({'image':'data:image/jpg;base64,'+image}).result
+    return algo.pipe({'image':'data:image/jpg;base64,'+image.decode("utf-8")}).result
 
 
 def calculate_rotation(coords):

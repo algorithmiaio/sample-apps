@@ -3,7 +3,7 @@
 
 #### Upload your model
 1. Download [digits_classifier.pkl](https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/digit_recognition/digits_classifier.pkl) from this repository
-2. Click "Data Sourcews" in the navbar at [algorithmia.com](https://algorithmia.com/), then click "[My Hosted Data](https://algorithmia.com/data/hosted)"
+2. Click "Data Sources" in the navbar at [algorithmia.com](https://algorithmia.com/), then click "[My Hosted Data](https://algorithmia.com/data/hosted)"
 3. Click "New Collection" and name it "demo"
 4. Upload `digits_classifier.pkl` via the "Upload Files" box
 5. copy the URI which appears below the filename (e.g. `data://username/demo/digits_classifier.pkl`)

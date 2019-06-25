@@ -37,13 +37,13 @@ def extract_data(input_file):
     """
     input_zip = client.file(input_file).getFile().name
     # Create directory to unzip model files into
-    if os.path.exists("unzipped_file"):
+    if os.path.exists("/tmp/unzipped_file/"):
       rmtree('unzipped_file',ignore_errors=True)
     else:
-      os.mkdir("unzipped_file")
+      os.mkdir("/tmp/unzipped_file/")
     zipped_file = zipfile.ZipFile(input_zip)
     # Extract unzipped files into directory created earlier returns none
-    file_path = "./unzipped_file/"
+    file_path = "/tmp/unzipped_file/"
     return zipped_file.extract("test_keras_data.csv", file_path)
 
 

@@ -9,7 +9,6 @@ classes = ('plane', 'car', 'bird', 'cat',
 
 def preprocessing(image_path):
     image_file = client.file(image_path).getFile().name
-    # TODO: make it take a list of images
     # Normalize and resize image
     normalize = transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
     preprocess = transforms.Compose(
@@ -37,7 +36,7 @@ def predict(image):
 # API calls will begin at the apply() method, with the request body passed as 'input'
 # For more details, see algorithmia.com/developers/algorithm-development/languages
 def apply(input):
-    # "data://YOUR_USERNAMR/YOUR_DATACOLLECTION/sample_plane1.jpg"
+    # "data://YOUR_USERNAME/YOUR_DATACOLLECTION/sample_plane1.jpg"
     processed_data = preprocessing(input)
     prediction = predict(processed_data)
     predictions = [classes[prediction[j]] for j in range(1)]

@@ -40,7 +40,5 @@ def apply(input):
     # "data://YOUR_USERNAMR/YOUR_DATACOLLECTION/sample_plane1.jpg"
     processed_data = preprocessing(input)
     prediction = predict(processed_data)
-    tensor_size = processed_data.size()
-    # TODO: update to take more than one input
     predictions = [classes[prediction[j]] for j in range(1)]
-    return "Predicted class is:  {0}, {1}".format(predictions, tensor_size)
+    return "Predicted class is:  {0}".format(predictions)

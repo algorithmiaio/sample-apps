@@ -13,6 +13,16 @@ Complete, runnable end-to-end web application using:
 
 More info coming soon!
 
+## Setup
+
+0. [install MongoDB](https://docs.mongodb.com/manual/installation/#mongodb-community-edition-installation-tutorials)
+0. [install Python 3](https://www.python.org/downloads/)
+0. [run install.sh](install.sh): this will install all the packages in [requirements.txt](requirements.txt)
+
+## Run
+
+0. [run start.sh](start.sh): this will run a local Flask server which can be accessed at [http://127.0.0.1:5000](http://127.0.0.1:5000/)
+
 ## Further learning
 
 0. [Algorithmia Learning Center](https://learn.algorithmia.com/)

@@ -15,8 +15,8 @@ More info coming soon!
 
 ## Setup
 
-0. [install MongoDB](https://docs.mongodb.com/manual/installation/#mongodb-community-edition-installation-tutorials)
-0. [install Python 3](https://www.python.org/downloads/)
+0. [install MongoDB](https://docs.mongodb.com/manual/installation/#mongodb-community-edition-installation-tutorials) (on OSX: `brew install mongodb`, or `brew upgrade mongodb` to upgrade to 4.x)
+0. [install Python 3](https://www.python.org/downloads/) (OSX comes with 2.7)
 0. [run install.sh](install.sh): this will install all the packages in [requirements.txt](requirements.txt)
 
 ## Run

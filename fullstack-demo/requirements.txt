@@ -1,2 +1,4 @@
 flask >= 1.1
 flask-login
+social-auth-app-flask
+# social-auth-app-flask-mongoengine

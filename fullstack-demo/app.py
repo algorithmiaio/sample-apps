@@ -1,11 +1,23 @@
 import flask
 import flask_login
+from social_flask.routes import social_auth
+from social_core.exceptions import SocialAuthBaseException
 
 app = flask.Flask(__name__)
 app.secret_key = 'CHANGE_ME!'
+# SOCIAL_AUTH_STORAGE = 'social_flask_mongoengine.models.FlaskStorage'
+app.register_blueprint(social_auth)
+# from social_flask_mongoengine.models import init_social
+# init_social(app, session)
+SOCIAL_AUTH_USER_MODEL = 'User'
+
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
 users = {'foo@bar.tld': {'password': 'secret'}}
+
+# @app.before_request
+# def global_user():
+#     g.user = get_current_logged_in_user
 
 @app.route('/')
 def home():
@@ -67,6 +79,11 @@ def protected():
 def unauthorized_handler():
     return 'Unauthorized'
 
+
+@app.errorhandler(500)
+def error_handler(error):
+    if isinstance(error, SocialAuthBaseException):
+        return redirect('/socialerror')
 
 if __name__ == '__main__':
    app.run()

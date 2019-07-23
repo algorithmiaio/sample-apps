@@ -6,3 +6,7 @@ node_modules
 build
 package-lock.json
 /JavaScript/social-image-rec/public/js/.Rhistory
+fullstack-demo/cert.pem
+fullstack-demo/key.pem
+cert.pem
+key.pem

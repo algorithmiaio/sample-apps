@@ -8,6 +8,7 @@ login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
 users = {'foo@bar.tld': {'password': '95c7fbca92ac5083afda62a564a3d014fc3b72c9140e3cb99ea6bf12'}} #secret
 
+
 @app.route('/')
 def home():
     message='Hello World!!'
@@ -37,6 +38,11 @@ def request_loader(request):
     return user
 
 
+@login_manager.unauthorized_handler
+def unauthorized_handler():
+    return 'Unauthorized'
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if flask.request.method == 'GET':
@@ -63,10 +69,5 @@ def protected():
     return 'Logged in as: ' + flask_login.current_user.id
 
 
-@login_manager.unauthorized_handler
-def unauthorized_handler():
-    return 'Unauthorized'
-
-
 if __name__ == '__main__':
-   app.run()
+    app.run()

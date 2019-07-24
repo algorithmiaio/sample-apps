@@ -1,7 +1,10 @@
 import flask
 import flask_login
 from hashlib import sha224
+from pymongo import MongoClient
 
+
+dbclient = MongoClient()
 app = flask.Flask(__name__)
 app.secret_key = 'CHANGE_ME!'
 login_manager = flask_login.LoginManager()

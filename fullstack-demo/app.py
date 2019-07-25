@@ -58,15 +58,14 @@ def home():
     return flask.render_template('index.htm', message=message)
 
 
-@app.route('/protected')
+@app.route('/account')
 @flask_login.login_required
-def protected():
+def account():
     if not flask_login.current_user:
         return flask.redirect('/')
     return 'Logged in as: ' + flask_login.current_user.id
 
 
-# routes for flask_login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if flask.request.method == 'GET':
@@ -74,8 +73,23 @@ def login():
     user = user_loader(flask.request.form['email'], flask.request.form['password'])
     if user:
         flask_login.login_user(user)
-        return flask.redirect('/protected')
+        return flask.redirect('/account')
     return 'Bad login'
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if flask.request.method == 'GET':
+        return flask.render_template('login.htm')
+    email = flask.request.form['email']
+    password = flask.request.form['password']
+    existing_user = user_loader(flask.request.form['email'])
+    if existing_user:
+        return flask.render_template('login.htm', message='A user with that email already exists')
+    user = User(email, password)
+    users.insert_one(user.__dict__)
+    flask_login.login_user(user)
+    return flask.redirect('/account')
 
 
 @app.route('/logout')
@@ -85,10 +99,8 @@ def logout():
 
 
 # init db
-if not user_loader('foo@bar.tld', 'secret'):
+if not db.users.list_indexes().alive:
     db.users.create_index('id', unique=True)
-    dummy_user = User('foo@bar.tld', 'secret')
-    users.insert_one(dummy_user.__dict__)
 
 
 # to start server: "python3 ./app.py"

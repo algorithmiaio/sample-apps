@@ -1,18 +1,9 @@
 import flask
 import flask_login
 from hashlib import sha224
+from os.path import splitext
 from pymongo import MongoClient
-
-
-# datastructures
-class User(flask_login.UserMixin):
-    def __init__(self, email, password, passhash=None):
-        self.id = email
-        self.passhash = passhash if passhash else User.hashpass(password)
-    @staticmethod
-    def hashpass(password):
-        return sha224(password.encode('utf-8')).hexdigest()
-
+from werkzeug.utils import secure_filename
 
 # init flask app
 app = flask.Flask(__name__)
@@ -27,6 +18,22 @@ db_client = MongoClient()
 db = db_client.fullstack_demo
 users = db.users
 
+# datastructures
+class User(flask_login.UserMixin):
+    def __init__(self, email, password, avatar='static/avatar.png', bio=''):
+        self.id = email
+        self.passhash = User.hashpass(password) if password else None
+        self.avatar = avatar
+        self.bio = bio
+    @staticmethod
+    def hashpass(password):
+        return sha224(password.encode('utf-8')).hexdigest()
+    @staticmethod
+    def from_dict(user_dict):
+        user = User(user_dict['id'], None, user_dict['avatar'], user_dict['bio'])
+        user.passhash = user_dict['passhash']
+        return user
+
 
 # login helper functions
 @login_manager.user_loader
@@ -35,15 +42,12 @@ def user_loader(email, password=None):
         user_dict = users.find_one({'id': email, 'passhash': User.hashpass(password)})
     else:
         user_dict = users.find_one({'id': email})
-    return User(user_dict['id'], None, user_dict['passhash']) if user_dict else None
+    return User.from_dict(user_dict) if user_dict else None
 
 
 @login_manager.request_loader
 def request_loader(request):
-    user = user_loader(request.form.get('email'), request.form.get('password'))
-    if user:
-        user.is_authenticated = True
-    return user
+    return user_loader(request.form.get('email'), request.form.get('password'))
 
 
 @login_manager.unauthorized_handler
@@ -54,16 +58,24 @@ def unauthorized_handler():
 # routes for webapp
 @app.route('/')
 def home():
-    message = 'Hello World!!'
-    return flask.render_template('index.htm', message=message)
+    return flask.render_template('index.htm')
 
 
-@app.route('/account')
+@app.route('/account', methods=['GET', 'POST'])
 @flask_login.login_required
 def account():
-    if not flask_login.current_user:
+    user = flask_login.current_user
+    if not user:
         return flask.redirect('/')
-    return 'Logged in as: ' + flask_login.current_user.id
+    if flask.request.method == 'POST':
+        if 'bio' in flask.request.form:
+            user.bio = flask.request.form['bio']
+        if 'avatar' in flask.request.files:
+            avatar = flask.request.files['avatar']
+            user.avatar = 'static/%s%s' % (user.id, splitext(avatar.filename)[1])
+            avatar.save(user.avatar)
+    users.replace_one({'id': user.id}, user.__dict__)
+    return flask.render_template('account.htm', avatar=user.avatar, bio=user.bio, id=user.id)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -74,17 +86,17 @@ def login():
     if user:
         flask_login.login_user(user)
         return flask.redirect('/account')
-    return 'Bad login'
+    return flask.render_template('login.htm', message='No user found with that password')
 
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if flask.request.method == 'GET':
         return flask.render_template('login.htm')
+    flask_login.logout_user()
     email = flask.request.form['email']
     password = flask.request.form['password']
-    existing_user = user_loader(flask.request.form['email'])
-    if existing_user:
+    if user_loader(email):
         return flask.render_template('login.htm', message='A user with that email already exists')
     user = User(email, password)
     users.insert_one(user.__dict__)

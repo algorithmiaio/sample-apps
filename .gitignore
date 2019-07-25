@@ -10,3 +10,4 @@ fullstack-demo/cert.pem
 fullstack-demo/key.pem
 cert.pem
 key.pem
+static/foo@bar.tld.jpeg

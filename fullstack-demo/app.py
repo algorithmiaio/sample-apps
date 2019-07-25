@@ -27,12 +27,6 @@ db_client = MongoClient()
 db = db_client.fullstack_demo
 users = db.users
 
-# init db
-if not user_loader('foo@bar.tld', 'secret'):
-    db.users.create_index('id', unique=True)
-    dummy_user = User('foo@bar.tld', 'secret')
-    users.insert_one(dummy_user.__dict__)
-
 
 # login helper functions
 @login_manager.user_loader
@@ -88,6 +82,13 @@ def login():
 def logout():
     flask_login.logout_user()
     return 'Logged out'
+
+
+# init db
+if not user_loader('foo@bar.tld', 'secret'):
+    db.users.create_index('id', unique=True)
+    dummy_user = User('foo@bar.tld', 'secret')
+    users.insert_one(dummy_user.__dict__)
 
 
 # to start server: "python3 ./app.py"

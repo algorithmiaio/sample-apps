@@ -27,6 +27,13 @@ db_client = MongoClient()
 db = db_client.fullstack_demo
 users = db.users
 
+# init db
+if not user_loader('foo@bar.tld', 'secret'):
+    db.users.create_index('id', unique=True)
+    dummy_user = User('foo@bar.tld', 'secret')
+    users.insert_one(dummy_user.__dict__)
+
+
 # login helper functions
 @login_manager.user_loader
 def user_loader(email, password=None):
@@ -86,8 +93,3 @@ def logout():
 # to start server: "python3 ./app.py"
 if __name__ == '__main__':
     app.run()
-    # init db
-    if not user_loader('foo@bar.tld', 'secret'):
-        db.users.create_index('id', unique=True)
-        dummy_user = User('foo@bar.tld', 'secret')
-        users.insert_one(dummy_user.__dict__)

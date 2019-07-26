@@ -2,6 +2,7 @@ import Algorithmia
 import flask
 import flask_login
 from hashlib import sha224
+from sys import stderr
 import os
 from shutil import copyfile
 import tempfile
@@ -9,8 +10,16 @@ import tempfile
 from pymongo import MongoClient
 
 # init flask app
-app = flask.Flask(__name__)
+app = flask.Flask(__name__, static_url_path='')
 app.secret_key = 'CHANGE_ME!'
+
+# development server: disable browser cache
+@app.after_request
+def set_response_headers(response):
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '0'
+    return response
 
 # set up flask_login
 login_manager = flask_login.LoginManager()
@@ -33,7 +42,7 @@ if not client.dir(algo_temp_dir).exists():
 
 # datastructures
 class User(flask_login.UserMixin):
-    def __init__(self, email, password, avatar='static/avatar.png', bio=''):
+    def __init__(self, email, password, avatar='/default_avatar.png', bio=''):
         self.id = email
         self.passhash = User.hashpass(password) if password else None
         self.avatar = avatar
@@ -48,8 +57,6 @@ class User(flask_login.UserMixin):
         return user
 
 
-
-
 # Algorithmia helper functions
 def upload_file_algorithmia(local_filename, unique_id):
     remote_file = algo_temp_dir + unique_id
@@ -58,8 +65,12 @@ def upload_file_algorithmia(local_filename, unique_id):
 
 
 def is_nude(remote_file):
-    algo = client.algo('sfw/NudityDetectioni2v/0.2.13')
-    return algo.pipe(remote_file).result['nude']
+    try:
+        algo = client.algo('sfw/NudityDetectioni2v/0.2.13')
+        return algo.pipe(remote_file).result['nude']
+    except Exception as x:
+        print('ERROR: unable to check %s for nudity: %s' % (remote_file, x), file=stderr)
+        return False
 
 
 def auto_crop(remote_file, height, width):
@@ -68,8 +79,12 @@ def auto_crop(remote_file, height, width):
         'width': width,
         'image': remote_file
     }
-    algo = client.algo('media/ContentAwareResize/0.1.3')
-    return algo.pipe(input).result['output']
+    try:
+        algo = client.algo('media/ContentAwareResize/0.1.3')
+        return algo.pipe(input).result['output']
+    except Exception as x:
+        print('ERROR: unable to auto-crop %s: %s' % (remote_file, x), file=stderr)
+        return remote_file
 
 
 # login helper functions
@@ -95,7 +110,7 @@ def unauthorized_handler():
 # routes for webapp
 @app.route('/')
 def home():
-    return flask.render_template('index.htm')
+    return flask.send_file('static/index.htm')
 
 
 @app.route('/account', methods=['GET', 'POST'])
@@ -110,17 +125,15 @@ def account():
         if 'avatar' in flask.request.files:
             avatar = flask.request.files['avatar']
             file_ext = os.path.splitext(avatar.filename)[1]
-            f = tempfile.NamedTemporaryFile(suffix=file_ext)
-            avatar.save(f)
-            remote_file = upload_file_algorithmia(f.name, user.id+file_ext)
+            with tempfile.NamedTemporaryFile(suffix=file_ext) as f:
+                avatar.save(f)
+                remote_file = upload_file_algorithmia(f.name, user.id+file_ext)
             if is_nude(remote_file):
-                f.close()
                 return flask.render_template('account.htm', message='It appears that image contains nudity; please try again', user=user)
             cropped_remote_file = auto_crop(remote_file, 280, 280)
             cropped_file = client.file(cropped_remote_file).getFile()
-            user.avatar = ('static/%s%s' % (user.id, file_ext)).lower()
-            copyfile(cropped_file.name, user.avatar)
-            f.close()
+            user.avatar = ('/avatars/%s%s' % (user.id, file_ext)).lower()
+            copyfile(cropped_file.name, 'static/'+user.avatar)
     users.replace_one({'id': user.id}, user.__dict__)
     return flask.render_template('account.htm', user=user)
 
@@ -154,7 +167,7 @@ def register():
 @app.route('/logout')
 def logout():
     flask_login.logout_user()
-    return 'Logged out'
+    return flask.render_template('login.htm', message='You have been logged out')
 
 
 # init db

@@ -1,6 +1,6 @@
 mongodb
-static/*
-!static/avatar.png
+static/avatars/*
+!static/avatars/index.htm
 
 # Created by .ignore support plugin (hsz.mobi)
 ### Python template

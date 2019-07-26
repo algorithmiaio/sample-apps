@@ -158,8 +158,11 @@ def logout():
 
 
 # init db
-if not db.users.list_indexes().alive:
-    db.users.create_index('id', unique=True)
+try:
+    if not db.users.list_indexes().alive:
+        db.users.create_index('id', unique=True)
+except:
+    raise SystemExit('Unable to connect to database: please run "mongod --fork --dbpath ./mongodb --logpath ./mongodb/mongodb.log"')
 
 
 # to start server: "python3 ./app.py"

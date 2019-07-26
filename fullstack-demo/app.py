@@ -62,9 +62,14 @@ def is_nude(remote_file):
     return algo.pipe(remote_file).result['nude']
 
 
-def auto_crop(remote_file):
-    algo = client.algo('anowell/corpfoto/0.1.2')
-    return algo.pipe(remote_file).result
+def auto_crop(remote_file, height, width):
+    input = {
+        'height': height,
+        'width': width,
+        'image': remote_file
+    }
+    algo = client.algo('media/ContentAwareResize/0.1.3')
+    return algo.pipe(input).result['output']
 
 
 # login helper functions
@@ -111,7 +116,7 @@ def account():
             if is_nude(remote_file):
                 f.close()
                 return flask.render_template('account.htm', message='It appears that image contains nudity; please try again', user=user)
-            cropped_remote_file = auto_crop(remote_file)
+            cropped_remote_file = auto_crop(remote_file, 280, 280)
             cropped_file = client.file(cropped_remote_file).getFile()
             user.avatar = ('static/%s%s' % (user.id, file_ext)).lower()
             copyfile(cropped_file.name, user.avatar)

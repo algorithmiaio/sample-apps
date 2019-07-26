@@ -12,14 +12,7 @@ from pymongo import MongoClient
 # init flask app
 app = flask.Flask(__name__, static_url_path='')
 app.secret_key = 'CHANGE_ME!'
-
-# development server: disable browser cache
-@app.after_request
-def set_response_headers(response):
-    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-    response.headers['Pragma'] = 'no-cache'
-    response.headers['Expires'] = '0'
-    return response
+app.send_file_max_age_default = 0
 
 # set up flask_login
 login_manager = flask_login.LoginManager()

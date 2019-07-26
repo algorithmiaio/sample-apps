@@ -48,12 +48,23 @@ class User(flask_login.UserMixin):
         return user
 
 
-# check for nudity via Algorithmia
-def is_nude(filename, file_id):
-    remote_file = algo_temp_dir+file_id
-    client.file(remote_file).putFile(filename)
+
+
+# Algorithmia helper functions
+def upload_file_algorithmia(local_filename, unique_id):
+    remote_file = algo_temp_dir + unique_id
+    client.file(remote_file).putFile(local_filename)
+    return remote_file
+
+
+def is_nude(remote_file):
     algo = client.algo('sfw/NudityDetectioni2v/0.2.13')
     return algo.pipe(remote_file).result['nude']
+
+
+def auto_crop(remote_file):
+    algo = client.algo('anowell/corpfoto/0.1.2')
+    return algo.pipe(remote_file).result
 
 
 # login helper functions
@@ -96,11 +107,14 @@ def account():
             file_ext = os.path.splitext(avatar.filename)[1]
             f = tempfile.NamedTemporaryFile(suffix=file_ext)
             avatar.save(f)
-            if is_nude(f.name, user.id+file_ext):
+            remote_file = upload_file_algorithmia(f.name, user.id+file_ext)
+            if is_nude(remote_file):
                 f.close()
                 return flask.render_template('account.htm', message='It appears that image contains nudity; please try again', user=user)
+            cropped_remote_file = auto_crop(remote_file)
+            cropped_file = client.file(cropped_remote_file).getFile()
             user.avatar = ('static/%s%s' % (user.id, file_ext)).lower()
-            copyfile(f.name, user.avatar)
+            copyfile(cropped_file.name, user.avatar)
             f.close()
     users.replace_one({'id': user.id}, user.__dict__)
     return flask.render_template('account.htm', user=user)

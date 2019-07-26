@@ -22,7 +22,10 @@ db = db_client.fullstack_demo
 users = db.users
 
 # create an Algorithmia client and temp dir in Hosted Data
-algorithmia_api_key = os.environ['ALGORITHMIA_API_KEY']
+try:
+    algorithmia_api_key = os.environ['ALGORITHMIA_API_KEY']
+except KeyError:
+    raise SystemExit('Please set the evironment variable ALGORITHMIA_API_KEY, obtained from https://algorithmia.com/user#credentials')
 client = Algorithmia.client(algorithmia_api_key)
 algo_temp_dir = 'data://.my/temp/'
 if not client.dir(algo_temp_dir).exists():

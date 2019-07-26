@@ -2,12 +2,12 @@ import Algorithmia
 import flask
 from flask import request
 import flask_login
-from hashlib import sha224
-from pymongo import MongoClient
-from sys import stderr
 from os import environ, path
+from pymongo import MongoClient
 from shutil import copyfile
+from sys import stderr
 from tempfile import NamedTemporaryFile
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # init flask app
 app = flask.Flask(__name__, static_url_path = '')
@@ -42,7 +42,7 @@ class User(flask_login.UserMixin):
         self.bio = bio
     @staticmethod
     def hashpass(password):
-        return sha224(password.encode('utf-8')).hexdigest()
+        return generate_password_hash(password)
     @staticmethod
     def from_dict(user_dict):
         user = User(user_dict['id'], None, user_dict['avatar'], user_dict['bio'])
@@ -83,11 +83,12 @@ def auto_crop(remote_file, height, width):
 # login helper functions
 @login_manager.user_loader
 def user_loader(email, password=None):
-    if password:
-        user_dict = users.find_one({'id': email, 'passhash': User.hashpass(password)})
-    else:
-        user_dict = users.find_one({'id': email})
-    return User.from_dict(user_dict) if user_dict else None
+    user_dict = users.find_one({'id': email})
+    if not user_dict:
+        return None
+    if password and not check_password_hash(user_dict['passhash'], password):
+        return None
+    return User.from_dict(user_dict)
 
 
 @login_manager.request_loader

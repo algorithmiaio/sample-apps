@@ -1,22 +1,21 @@
 import Algorithmia
+from datetime import datetime, timedelta
 import flask
 from flask import request
-import flask_login
+from functools import wraps
+import jwt
 from os import environ, path
 from pymongo import MongoClient
 from shutil import copyfile
 from sys import stderr
 from tempfile import NamedTemporaryFile
+from uuid import uuid4
 from werkzeug.security import generate_password_hash, check_password_hash
 
 # init flask app
 app = flask.Flask(__name__, static_url_path = '')
-app.secret_key = 'CHANGE_ME!'
+app.secret_key = str(uuid4())
 app.send_file_max_age_default = 0
-
-# set up flask_login
-login_manager = flask_login.LoginManager()
-login_manager.init_app(app)
 
 # connect to db
 db_client = MongoClient()
@@ -34,15 +33,17 @@ if not client.dir(algo_temp_dir).exists():
     client.dir(algo_temp_dir).create()
 
 # datastructures
-class User(flask_login.UserMixin):
+class User():
+
     def __init__(self, email, password, avatar='/default_avatar.png', bio=''):
         self.id = email
-        self.passhash = User.hashpass(password) if password else None
+        self.passhash = generate_password_hash(password) if password else None
         self.avatar = avatar
         self.bio = bio
-    @staticmethod
-    def hashpass(password):
-        return generate_password_hash(password)
+
+    def to_dict(self):
+        return dict(id=self.id, avatar=self.avatar, bio=self.bio)
+
     @staticmethod
     def from_dict(user_dict):
         user = User(user_dict['id'], None, user_dict['avatar'], user_dict['bio'])
@@ -80,8 +81,48 @@ def auto_crop(remote_file, height, width):
         return remote_file
 
 
-# login helper functions
-@login_manager.user_loader
+@app.route('/register', methods=('POST',))
+def register():
+    data = request.get_json()
+    if user_loader(data['email']):
+        return flask.jsonify({'message':'A user with that email already exists','authenticated':False}), 409
+    user = User(data['email'],data['password'])
+    users.insert_one(user.__dict__)
+    return flask.jsonify(user.to_dict()), 201
+
+
+@app.route('/login', methods=('POST',))
+def login():
+    data = request.get_json()
+    user = user_loader(data['email'],data['password'])
+    if not user:
+        return flask.jsonify({'message':'Invalid credentials','authenticated':False}), 401
+    token = jwt.encode({
+        'id': user.id,
+        'iat': datetime.utcnow(),
+        'exp': datetime.utcnow() + timedelta(minutes=30)},
+        app.config['SECRET_KEY'])
+    return flask.jsonify({'token': token.decode('UTF-8')})
+
+
+def token_required(f):
+    @wraps(f)
+    def _verify(*args, **kwargs):
+        auth_headers = request.headers.get('Authorization', '').split()
+        try:
+            if len(auth_headers) != 2:
+                raise jwt.InvalidTokenError()
+            token = auth_headers[1]
+            data = jwt.decode(token, app.config['SECRET_KEY'])
+            user = user_loader(data['id'])
+            if not user:
+                return flask.jsonify({'message':'Invalid credentials','authenticated':False}), 401
+            return f(user, *args, **kwargs)
+        except (jwt.ExpiredSignatureError, jwt.InvalidTokenError):
+            return flask.jsonify({'message':'Invalid or expired token','authenticated':False}), 401
+    return _verify
+
+
 def user_loader(email, password=None):
     user_dict = users.find_one({'id': email})
     if not user_dict:
@@ -91,77 +132,40 @@ def user_loader(email, password=None):
     return User.from_dict(user_dict)
 
 
-@login_manager.request_loader
-def request_loader(request):
-    return user_loader(request.form.get('email'), request.form.get('password'))
-
-
-@login_manager.unauthorized_handler
-def unauthorized_handler():
-    return flask.redirect('/login')
-
-
 # routes for webapp
 @app.route('/')
 def home():
     return flask.send_file('static/index.htm')
 
 
-@app.route('/account', methods=['GET', 'POST'])
-@flask_login.login_required
+@app.route('/account', methods=['GET'])
 def account():
-    user = flask_login.current_user
-    if not user:
-        return flask.redirect('/')
-    if request.method == 'POST':
-        if 'bio' in request.form:
-            user.bio = request.form['bio']
-        if 'avatar' in request.files:
-            avatar = request.files['avatar']
-            file_ext = path.splitext(avatar.filename)[1]
-            with NamedTemporaryFile(suffix=file_ext) as f:
-                avatar.save(f)
-                remote_file = upload_file_algorithmia(f.name, user.id+file_ext)
-            if is_nude(remote_file):
-                return flask.render_template('account.htm', message='It appears that image contains nudity; please try again', user=user)
-            cropped_remote_file = auto_crop(remote_file, 280, 280)
-            cropped_file = client.file(cropped_remote_file).getFile()
-            user.avatar = ('/avatars/%s%s' % (user.id, file_ext)).lower()
-            copyfile(cropped_file.name, 'static/'+user.avatar)
-    users.replace_one({'id': user.id}, user.__dict__)
-    return flask.render_template('account.htm', user=user)
-
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'GET':
-        return flask.render_template('login.htm')
-    user = user_loader(request.form['email'], request.form['password'])
+    data = request.args
+    user = user_loader(data['id']) if 'id' in data else None
     if user:
-        flask_login.login_user(user)
-        return flask.redirect('/account')
-    return flask.render_template('login.htm', message='No user found with that password')
+        return flask.jsonify(user.to_dict()), 201
+    return flask.jsonify({'message':'No such user'}), 404
 
 
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    if request.method == 'GET':
-        return flask.render_template('login.htm')
-    flask_login.logout_user()
-    email = request.form['email']
-    password = request.form['password']
-    if user_loader(email):
-        return flask.render_template('login.htm', message='A user with that email already exists')
-    user = User(email, password)
-    users.insert_one(user.__dict__)
-    flask_login.login_user(user)
-    return flask.redirect('/account')
-
-
-@app.route('/logout')
-def logout():
-    flask_login.logout_user()
-    return flask.render_template('login.htm', message='You have been logged out')
+@app.route('/account', methods=['POST'])
+@token_required
+def post_account(user):
+    if 'bio' in request.form:
+        user.bio = request.form['bio']
+    if 'avatar' in request.files:
+        avatar = request.files['avatar']
+        file_ext = path.splitext(avatar.filename)[1]
+        with NamedTemporaryFile(suffix=file_ext) as f:
+            avatar.save(f)
+            remote_file = upload_file_algorithmia(f.name, user.id+file_ext)
+        if is_nude(remote_file):
+            return flask.render_template('account.htm', message='It appears that image contains nudity; please try again', user=user)
+        cropped_remote_file = auto_crop(remote_file, 280, 280)
+        cropped_file = client.file(cropped_remote_file).getFile()
+        user.avatar = ('/avatars/%s%s' % (user.id, file_ext)).lower()
+        copyfile(cropped_file.name, 'static/'+user.avatar)
+    users.replace_one({'id': user.id}, user.__dict__)
+    return flask.jsonify(user.to_dict()), 201
 
 
 # init db

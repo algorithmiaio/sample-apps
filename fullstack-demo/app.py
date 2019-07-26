@@ -1,16 +1,16 @@
 import Algorithmia
 import flask
+from flask import request
 import flask_login
 from hashlib import sha224
-from sys import stderr
-import os
-from shutil import copyfile
-import tempfile
-
 from pymongo import MongoClient
+from sys import stderr
+from os import environ, path
+from shutil import copyfile
+from tempfile import NamedTemporaryFile
 
 # init flask app
-app = flask.Flask(__name__, static_url_path='')
+app = flask.Flask(__name__, static_url_path = '')
 app.secret_key = 'CHANGE_ME!'
 app.send_file_max_age_default = 0
 
@@ -25,7 +25,7 @@ users = db.users
 
 # create an Algorithmia client and temp dir in Hosted Data
 try:
-    algorithmia_api_key = os.environ['ALGORITHMIA_API_KEY']
+    algorithmia_api_key = environ['ALGORITHMIA_API_KEY']
 except KeyError:
     raise SystemExit('Please set the evironment variable ALGORITHMIA_API_KEY, obtained from https://algorithmia.com/user#credentials')
 client = Algorithmia.client(algorithmia_api_key)
@@ -112,13 +112,13 @@ def account():
     user = flask_login.current_user
     if not user:
         return flask.redirect('/')
-    if flask.request.method == 'POST':
-        if 'bio' in flask.request.form:
-            user.bio = flask.request.form['bio']
-        if 'avatar' in flask.request.files:
-            avatar = flask.request.files['avatar']
-            file_ext = os.path.splitext(avatar.filename)[1]
-            with tempfile.NamedTemporaryFile(suffix=file_ext) as f:
+    if request.method == 'POST':
+        if 'bio' in request.form:
+            user.bio = request.form['bio']
+        if 'avatar' in request.files:
+            avatar = request.files['avatar']
+            file_ext = path.splitext(avatar.filename)[1]
+            with NamedTemporaryFile(suffix=file_ext) as f:
                 avatar.save(f)
                 remote_file = upload_file_algorithmia(f.name, user.id+file_ext)
             if is_nude(remote_file):
@@ -133,9 +133,9 @@ def account():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if flask.request.method == 'GET':
+    if request.method == 'GET':
         return flask.render_template('login.htm')
-    user = user_loader(flask.request.form['email'], flask.request.form['password'])
+    user = user_loader(request.form['email'], request.form['password'])
     if user:
         flask_login.login_user(user)
         return flask.redirect('/account')
@@ -144,11 +144,11 @@ def login():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    if flask.request.method == 'GET':
+    if request.method == 'GET':
         return flask.render_template('login.htm')
     flask_login.logout_user()
-    email = flask.request.form['email']
-    password = flask.request.form['password']
+    email = request.form['email']
+    password = request.form['password']
     if user_loader(email):
         return flask.render_template('login.htm', message='A user with that email already exists')
     user = User(email, password)

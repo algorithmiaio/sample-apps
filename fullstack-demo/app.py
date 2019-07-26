@@ -159,7 +159,7 @@ def post_account(user):
             avatar.save(f)
             remote_file = upload_file_algorithmia(f.name, user.id+file_ext)
         if is_nude(remote_file):
-            return flask.render_template('account.htm', message='It appears that image contains nudity; please try again', user=user)
+            return flask.jsonify({'message':'It appears that image contains nudity'}), 422
         cropped_remote_file = auto_crop(remote_file, 280, 280)
         cropped_file = client.file(cropped_remote_file).getFile()
         user.avatar = ('/avatars/%s%s' % (user.id, file_ext)).lower()

@@ -1,9 +1,12 @@
+import Algorithmia
 import flask
 import flask_login
 from hashlib import sha224
-from os.path import splitext
+import os
+from shutil import copyfile
+import tempfile
+
 from pymongo import MongoClient
-from werkzeug.utils import secure_filename
 
 # init flask app
 app = flask.Flask(__name__)
@@ -17,6 +20,13 @@ login_manager.init_app(app)
 db_client = MongoClient()
 db = db_client.fullstack_demo
 users = db.users
+
+# create an Algorithmia client and temp dir in Hosted Data
+algorithmia_api_key = os.environ['ALGORITHMIA_API_KEY']
+client = Algorithmia.client(algorithmia_api_key)
+algo_temp_dir = 'data://.my/temp/'
+if not client.dir(algo_temp_dir).exists():
+    client.dir(algo_temp_dir).create()
 
 # datastructures
 class User(flask_login.UserMixin):
@@ -33,6 +43,14 @@ class User(flask_login.UserMixin):
         user = User(user_dict['id'], None, user_dict['avatar'], user_dict['bio'])
         user.passhash = user_dict['passhash']
         return user
+
+
+# check for nudity via Algorithmia
+def is_nude(filename, file_id):
+    remote_file = algo_temp_dir+file_id
+    client.file(remote_file).putFile(filename)
+    algo = client.algo('sfw/NudityDetectioni2v/0.2.13')
+    return algo.pipe(remote_file).result['nude']
 
 
 # login helper functions
@@ -72,10 +90,17 @@ def account():
             user.bio = flask.request.form['bio']
         if 'avatar' in flask.request.files:
             avatar = flask.request.files['avatar']
-            user.avatar = 'static/%s%s' % (user.id, splitext(avatar.filename)[1])
-            avatar.save(user.avatar)
+            file_ext = os.path.splitext(avatar.filename)[1]
+            f = tempfile.NamedTemporaryFile(suffix=file_ext)
+            avatar.save(f)
+            if is_nude(f.name, user.id+file_ext):
+                f.close()
+                return flask.render_template('account.htm', message='It appears that image contains nudity; please try again', user=user)
+            user.avatar = ('static/%s%s' % (user.id, file_ext)).lower()
+            copyfile(f.name, user.avatar)
+            f.close()
     users.replace_one({'id': user.id}, user.__dict__)
-    return flask.render_template('account.htm', avatar=user.avatar, bio=user.bio, id=user.id)
+    return flask.render_template('account.htm', user=user)
 
 
 @app.route('/login', methods=['GET', 'POST'])

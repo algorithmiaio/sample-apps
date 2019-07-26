@@ -1,11 +1,13 @@
-<h3>Welcome, {{id}}</h3>
+<h3>Welcome, {{user.id}}</h3>
 
-<img src="{{avatar}}" alt="avatar">
+<h3>{{message}}</h3>
 
-<p>Bio: {{bio}}</p>
+<img src="{{user.avatar}}" alt="avatar">
+
+<p>Bio: {{user.bio}}</p>
 
 <form action='account' method='POST' enctype='multipart/form-data'>
-  <p><textarea name='bio' id='bio' placeholder='bio'>{{bio}}</textarea></p>
+  <p><textarea name='bio' id='bio' placeholder='bio'>{{user.bio}}</textarea></p>
   <p><input type='file' name='avatar' id='avatar' accept='image/gif, image/jpg, image/jpeg, image/png'/></p>
   <p><input type='submit' name='submit'/></p>
 </form>

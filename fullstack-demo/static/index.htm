@@ -8,20 +8,20 @@
 
 <div id="app">
 
-  <h3>{{message}}</h3>
+  <h3>Simple CRM</h3>
 
   <div v-if="user">
     
-    <img :src="user.avatar" class="w-25" alt="avatar">
-    <p>Bio: {{user.bio}}</p>
+    <p class="w-25"><img :src="user.avatar" alt="avatar"></p>
+    <p><button @click="logOut">Upload New Avatar</button></p>
 
-    <form action='account' method='POST' enctype='multipart/form-data'>
-      <p><textarea name='bio' id='bio' placeholder='bio'>{{user.bio}}</textarea></p>
+    <p><textarea name='bio' v-model="user.bio" v-on:change="updateBio"></textarea></p>
+
+    <form action='account' method='POST' enctype='multipart/form-data' class="d-none">
       <p><input type='file' name='avatar' id='avatar' accept='image/gif, image/jpg, image/jpeg, image/png'/></p>
-      <p><input type='submit' name='submit'/></p>
     </form>
 
-    <button @click="logOut">Log Out</button>
+    <p><button @click="logOut">Log Out</button></p>
     
   </div>
 

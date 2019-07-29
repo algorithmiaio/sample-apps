@@ -144,19 +144,18 @@ def login():
 
 
 @app.route('/account', methods=['GET'])
-def account():
-    data = request.args
-    user = user_loader(data['id']) if 'id' in data else None
-    if user:
-        return jsonify(user.to_dict()), 201
-    return jsonify({'message':'No such user'}), 404
+@token_required
+def get_account(user):
+    token = generate_jwt(user)
+    return jsonify({'token': token.decode('UTF-8'), 'user': user.to_dict()})
 
 
 @app.route('/account', methods=['POST'])
 @token_required
 def post_account(user):
-    if 'bio' in request.form:
-        user.bio = request.form['bio']
+    data = request.get_json()
+    if 'bio' in data:
+        user.bio = data['bio']
     if 'avatar' in request.files:
         avatar = request.files['avatar']
         file_ext = path.splitext(avatar.filename)[1]

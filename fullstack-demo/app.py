@@ -1,7 +1,6 @@
 import Algorithmia
 from datetime import datetime, timedelta
-import flask
-from flask import request
+from flask import Flask, jsonify, request, send_file
 from functools import wraps
 import jwt
 from os import environ, path
@@ -13,7 +12,7 @@ from uuid import uuid4
 from werkzeug.security import generate_password_hash, check_password_hash
 
 # init flask app
-app = flask.Flask(__name__, static_url_path = '')
+app = Flask(__name__, static_url_path='')
 app.secret_key = str(uuid4())
 app.send_file_max_age_default = 0
 
@@ -81,28 +80,13 @@ def auto_crop(remote_file, height, width):
         return remote_file
 
 
-@app.route('/register', methods=('POST',))
-def register():
-    data = request.get_json()
-    if user_loader(data['email']):
-        return flask.jsonify({'message':'A user with that email already exists','authenticated':False}), 409
-    user = User(data['email'],data['password'])
-    users.insert_one(user.__dict__)
-    return flask.jsonify(user.to_dict()), 201
-
-
-@app.route('/login', methods=('POST',))
-def login():
-    data = request.get_json()
-    user = user_loader(data['email'],data['password'])
-    if not user:
-        return flask.jsonify({'message':'Invalid credentials','authenticated':False}), 401
-    token = jwt.encode({
+# auth helper functions
+def generate_jwt(user):
+    return jwt.encode({
         'id': user.id,
         'iat': datetime.utcnow(),
         'exp': datetime.utcnow() + timedelta(minutes=30)},
         app.config['SECRET_KEY'])
-    return flask.jsonify({'token': token.decode('UTF-8')})
 
 
 def token_required(f):
@@ -116,10 +100,10 @@ def token_required(f):
             data = jwt.decode(token, app.config['SECRET_KEY'])
             user = user_loader(data['id'])
             if not user:
-                return flask.jsonify({'message':'Invalid credentials','authenticated':False}), 401
+                return jsonify({'message':'Invalid credentials','authenticated':False}), 401
             return f(user, *args, **kwargs)
         except (jwt.ExpiredSignatureError, jwt.InvalidTokenError):
-            return flask.jsonify({'message':'Invalid or expired token','authenticated':False}), 401
+            return jsonify({'message':'Invalid or expired token','authenticated':False}), 401
     return _verify
 
 
@@ -133,9 +117,30 @@ def user_loader(email, password=None):
 
 
 # routes for webapp
-@app.route('/')
+@app.route('/', methods=['GET'])
 def home():
-    return flask.send_file('static/index.htm')
+    return send_file('static/index.htm')
+
+
+@app.route('/register', methods=('POST',))
+def register():
+    data = request.get_json()
+    if user_loader(data['email']):
+        return jsonify({'message':'A user with that email already exists','authenticated':False}), 409
+    user = User(data['email'],data['password'])
+    users.insert_one(user.__dict__)
+    token = generate_jwt(user)
+    return jsonify({'token': token.decode('UTF-8'), 'user': user.to_dict()}), 201
+
+
+@app.route('/login', methods=('POST',))
+def login():
+    data = request.get_json()
+    user = user_loader(data['email'],data['password'])
+    if not user:
+        return jsonify({'message':'Invalid credentials','authenticated':False}), 401
+    token = generate_jwt(user)
+    return jsonify({'token': token.decode('UTF-8'), 'user': user.to_dict()})
 
 
 @app.route('/account', methods=['GET'])
@@ -143,8 +148,8 @@ def account():
     data = request.args
     user = user_loader(data['id']) if 'id' in data else None
     if user:
-        return flask.jsonify(user.to_dict()), 201
-    return flask.jsonify({'message':'No such user'}), 404
+        return jsonify(user.to_dict()), 201
+    return jsonify({'message':'No such user'}), 404
 
 
 @app.route('/account', methods=['POST'])
@@ -159,13 +164,13 @@ def post_account(user):
             avatar.save(f)
             remote_file = upload_file_algorithmia(f.name, user.id+file_ext)
         if is_nude(remote_file):
-            return flask.jsonify({'message':'It appears that image contains nudity'}), 422
+            return jsonify({'message':'It appears that image contains nudity'}), 422
         cropped_remote_file = auto_crop(remote_file, 280, 280)
         cropped_file = client.file(cropped_remote_file).getFile()
         user.avatar = ('/avatars/%s%s' % (user.id, file_ext)).lower()
         copyfile(cropped_file.name, 'static/'+user.avatar)
     users.replace_one({'id': user.id}, user.__dict__)
-    return flask.jsonify(user.to_dict()), 201
+    return jsonify({'user': user.to_dict()}), 201
 
 
 # init db

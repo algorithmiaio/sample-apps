@@ -10,19 +10,20 @@
 
   <h3>Simple CRM</h3>
 
+  <div class="text-danger">{{error}}</div>
   <div v-if="user">
     
-    <div class="col-md-6">
-      <img :src="user.avatar" alt="avatar" v-on:click="triggerAvatar" class="img-responsive">
-      <div class="carousel-caption"><h3 class="text-secondary">Click to change</h3></div>
-      
+    <div class="col-md-6" v-on:click="triggerAvatar">
+      <img :src="user.avatar" alt="avatar" class="img-responsive">
+      <div class="carousel-caption mb-0 pb-0"><p class="text-secondary bg-white">&#9998; Click to edit</p></div>
+      <form action="account" class="d-none" method="POST" enctype="multipart/form-data" v-on:submit.prevent>
+        <input type="file" id="avatar" ref="avatar" accept="image/gif, image/jpg, image/jpeg, image/png" v-on:change="updateAvatar"/>
+      </form>
     </div>
-
-    <form action="account" class="w-25, d-none" method="POST" enctype="multipart/form-data" v-on:submit.prevent>
-      <input type="file" id="avatar" ref="avatar" accept="image/gif, image/jpg, image/jpeg, image/png" v-on:change="updateAvatar"/>
-    </form>
-
-    <p><textarea name="bio" v-model="user.bio" v-on:change="updateBio"></textarea></p>
+    
+    <div class="col-md-6">
+      <textarea name="bio" v-model="user.bio" v-on:change="updateBio"></textarea>
+    </div>
 
     <p><button @click="logOut">Log Out</button></p>
     
@@ -37,8 +38,6 @@
       </form>
     
   </div>
-
-  <div class="text-danger">{{error}}</div>
 
 </div>
 

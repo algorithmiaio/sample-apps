@@ -12,13 +12,14 @@
 
   <div v-if="user">
     
-    <p class="w-25"><img :src="user.avatar" alt="avatar" v-on:click="triggerAvatar"></p>
+    <div class="col-md-6">
+      <img :src="user.avatar" alt="avatar" v-on:click="triggerAvatar" class="img-responsive">
+      <div class="carousel-caption"><h3 class="text-secondary">Click to change</h3></div>
+      
+    </div>
 
     <form action="account" class="w-25, d-none" method="POST" enctype="multipart/form-data" v-on:submit.prevent>
-      <div class="custom-file">
-        <input type="file" class="custom-file-input" id="avatar" ref="avatar" accept="image/gif, image/jpg, image/jpeg, image/png" v-on:change="updateAvatar"/>
-        <label class="custom-file-label" for="avatar">Change Avatar</label>
-      </div>
+      <input type="file" id="avatar" ref="avatar" accept="image/gif, image/jpg, image/jpeg, image/png" v-on:change="updateAvatar"/>
     </form>
 
     <p><textarea name="bio" v-model="user.bio" v-on:change="updateBio"></textarea></p>

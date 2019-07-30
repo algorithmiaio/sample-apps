@@ -154,7 +154,7 @@ def get_account(user):
 @token_required
 def post_account(user):
     data = request.get_json()
-    if 'bio' in data:
+    if data and 'bio' in data:
         user.bio = data['bio']
     if 'avatar' in request.files:
         avatar = request.files['avatar']

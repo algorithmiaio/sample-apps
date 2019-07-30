@@ -12,24 +12,28 @@
 
   <div v-if="user">
     
-    <p class="w-25"><img :src="user.avatar" alt="avatar"></p>
-    <p><button @click="logOut">Upload New Avatar</button></p>
+    <p class="w-25"><img :src="user.avatar" alt="avatar" v-on:click="triggerAvatar"></p>
 
-    <p><textarea name='bio' v-model="user.bio" v-on:change="updateBio"></textarea></p>
-
-    <form action='account' method='POST' enctype='multipart/form-data' class="d-none">
-      <p><input type='file' name='avatar' id='avatar' accept='image/gif, image/jpg, image/jpeg, image/png'/></p>
+    <form action="account" class="w-25, d-none" method="POST" enctype="multipart/form-data" v-on:submit.prevent>
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="avatar" ref="avatar" accept="image/gif, image/jpg, image/jpeg, image/png" v-on:change="updateAvatar"/>
+        <label class="custom-file-label" for="avatar">Change Avatar</label>
+      </div>
     </form>
+
+    <p><textarea name="bio" v-model="user.bio" v-on:change="updateBio"></textarea></p>
 
     <p><button @click="logOut">Log Out</button></p>
     
   </div>
 
   <div v-if="!user">
-
-      <input type="text" placeholder="email" v-model="login.email"/>
-      <input type="password" placeholder="password" v-model="login.password"/>
-      <button @click="logIn">Log In</button> or <button @click="register">Register</button>
+    
+      <form v-on:submit.prevent>
+        <input type="text" placeholder="email" autocomplete="username" v-model="login.email"/>
+        <input type="password" placeholder="password" autocomplete="current-password" v-model="login.password"/>
+        <button @click="logIn">Log In</button> or <button @click="register">Register</button>
+      </form>
     
   </div>
 

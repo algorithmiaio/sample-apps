@@ -66,6 +66,29 @@ var app = new Vue({
           app.error = err.response.data.message;
         }
       );
+    },
+    triggerAvatar: function() {
+      this.$refs.avatar.click()
+    },
+    updateAvatar: function() {
+      var formData=new FormData();
+      fileList=this.$refs.avatar.files;
+      if(!fileList.length) return;
+      formData.append('avatar',fileList[0],fileList[0].name);
+      var url=API_URL+'/account';
+      app.error="Processing your image...";
+      axios.post(url,formData, {headers: {Authorization: 'Bearer: '+app.token, 'Content-Type': 'multipart/form-data'}} ).then(
+        function(response) {
+          app.user = response.data.user;
+          app.error = null;
+        },
+        function(err) {
+          if(err.response.status==401) {
+            return app.logOut();
+          }
+          app.error = err.response.data.message;
+        }
+      );
     }
   },
   mounted: function() {

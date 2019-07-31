@@ -22,32 +22,30 @@ var app = new Vue({
     },
     register: function() {
       app.error = null;
-      axios.post(API_URL+'/register', {email: app.login.email, password: app.login.password}).then(
-        function (response) {
-          console.log(response);
-          app.token = response.data.token;
-          localStorage.token = app.token;
-          app.user = response.data.user;
-          app.update_time = Date.now();
-        },
-        function (err) {
-          app.error = err.response.data.message;
-        }
-      );
+      axios.post(API_URL+'/register', {email: app.login.email, password: app.login.password})
+      .then(response => {
+        console.log(response);
+        app.token = response.data.token;
+        localStorage.token = app.token;
+        app.user = response.data.user;
+        app.update_time = Date.now();
+      })
+      .catch(err => {
+        app.error = err.response.data.message;
+      });
     },
     logIn: function() {
       app.error = null;
-      axios.post(API_URL+'/login', {email: app.login.email, password: app.login.password}).then(
-        function (response) {
-          app.token = response.data.token;
-          localStorage.token = app.token;
-          app.user = response.data.user;
-          app.update_time = Date.now();
-        },
-        function (err) {
-          app.error = err.response.data.message;
-        }
-      );
+      axios.post(API_URL+'/login', {email: app.login.email, password: app.login.password})
+      .then(response => {
+        app.token = response.data.token;
+        localStorage.token = app.token;
+        app.user = response.data.user;
+        app.update_time = Date.now();
+      })
+      .catch(err => {
+        app.error = err.response.data.message;
+      });
     },
     logOut: function() {
       app.error = null;
@@ -58,19 +56,18 @@ var app = new Vue({
     },
     updateUser: function() {
       app.error = null;
-      axios.post(API_URL+'/account', app.user, {headers: {Authorization: 'Bearer: '+app.token}}).then(
-        function (response) {
-          app.error = "Your changes have been saved";
-          app.user = response.data.user;
-          app.update_time = Date.now();
-        },
-        function (err) {
-          if(err.response.status==401) {
-            return app.logOut();
-          }
-          app.error = err.response.data.message;
+      axios.post(API_URL+'/account', app.user, {headers: {Authorization: 'Bearer: '+app.token}})
+      .then(response => {
+        app.error = "Your changes have been saved";
+        app.user = response.data.user;
+        app.update_time = Date.now();
+      })
+      .catch(err => {
+        if(err.response.status==401) {
+          return app.logOut();
         }
-      );
+        app.error = err.response.data.message;
+      });
     },
     triggerAvatar: function() {
       this.$refs.avatar.click()
@@ -83,34 +80,32 @@ var app = new Vue({
       var url=API_URL+'/account';
       app.error="Processing your image...";
       app.avatar_loading = true;
-      axios.post(url,formData, {headers: {Authorization: 'Bearer: '+app.token, 'Content-Type': 'multipart/form-data'}} ).then(
-        function(response) {
-          app.error = null;
-          app.avatar_loading = false;
-          app.user = response.data.user;
-          app.update_time = Date.now();
-        },
-        function(err) {
-          if(err.response.status==401) {
-            return app.logOut();
-          }
-          app.error = err.response.data.message;
-          app.avatar_loading = false;
+      axios.post(url,formData, {headers: {Authorization: 'Bearer: '+app.token, 'Content-Type': 'multipart/form-data'}} )
+      .then(response => {
+        app.error = null;
+        app.avatar_loading = false;
+        app.user = response.data.user;
+        app.update_time = Date.now();
+      })
+      .catch(err => {
+        if(err.response.status==401) {
+          return app.logOut();
         }
-      );
+        app.error=err.response.data.message;
+        app.avatar_loading=false;
+      });
     }
   },
   mounted: function() {
     var token = localStorage.token;
     if (this.isValidJwt(token)) {
-      axios.get(API_URL+'/account', {headers: {Authorization: 'Bearer: '+token}}).then(
-        function (response) {
-          app.token = response.data.token;
-          localStorage.token = app.token;
-          app.user = response.data.user;
-          app.update_time = Date.now();
-        }
-      );
+      axios.get(API_URL+'/account', {headers: {Authorization: 'Bearer: '+token}})
+      .then(response => {
+        app.token = response.data.token;
+        localStorage.token = app.token;
+        app.user = response.data.user;
+        app.update_time = Date.now();
+      });
     }
   }
 });

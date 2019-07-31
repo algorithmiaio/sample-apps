@@ -4,7 +4,9 @@ var app = new Vue({
   el: '#app',
   data: {
     error: null,
+    avatar_loading: false,
     user: null,
+    update_time: null,
     login: {email: null, password: null},
     token: null
   },
@@ -26,6 +28,7 @@ var app = new Vue({
           app.token = response.data.token;
           localStorage.token = app.token;
           app.user = response.data.user;
+          app.update_time = Date.now();
         },
         function (err) {
           app.error = err.response.data.message;
@@ -39,6 +42,7 @@ var app = new Vue({
           app.token = response.data.token;
           localStorage.token = app.token;
           app.user = response.data.user;
+          app.update_time = Date.now();
         },
         function (err) {
           app.error = err.response.data.message;
@@ -47,17 +51,18 @@ var app = new Vue({
     },
     logOut: function() {
       app.error = null;
-      app.token = null;
       app.user = null;
       app.login = {email: null, password: null};
       app.token = null;
       localStorage.token = null;
     },
-    updateBio: function() {
+    updateUser: function() {
       app.error = null;
-      axios.post(API_URL+'/account', {bio: app.user.bio}, {headers: {Authorization: 'Bearer: '+app.token}}).then(
+      axios.post(API_URL+'/account', app.user, {headers: {Authorization: 'Bearer: '+app.token}}).then(
         function (response) {
+          app.error = "Your changes have been saved";
           app.user = response.data.user;
+          app.update_time = Date.now();
         },
         function (err) {
           if(err.response.status==401) {
@@ -77,16 +82,20 @@ var app = new Vue({
       formData.append('avatar',fileList[0],fileList[0].name);
       var url=API_URL+'/account';
       app.error="Processing your image...";
+      app.avatar_loading = true;
       axios.post(url,formData, {headers: {Authorization: 'Bearer: '+app.token, 'Content-Type': 'multipart/form-data'}} ).then(
         function(response) {
-          app.user = response.data.user;
           app.error = null;
+          app.avatar_loading = false;
+          app.user = response.data.user;
+          app.update_time = Date.now();
         },
         function(err) {
           if(err.response.status==401) {
             return app.logOut();
           }
           app.error = err.response.data.message;
+          app.avatar_loading = false;
         }
       );
     }
@@ -99,6 +108,7 @@ var app = new Vue({
           app.token = response.data.token;
           localStorage.token = app.token;
           app.user = response.data.user;
+          app.update_time = Date.now();
         }
       );
     }

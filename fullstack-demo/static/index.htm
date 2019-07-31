@@ -6,36 +6,61 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!-- development version of VueJS (use https://cdn.jsdelivr.net/npm/vue@2.6.10 in production) -->
 
-<div id="app">
+<div id="app" class="container text-center">
 
-  <h3>Simple CRM</h3>
-
-  <div class="text-danger">{{error}}</div>
-  <div v-if="user">
+  <h2 class="text-center text-secondary">Welcome to EmptyApp!</h2>
+  
+  <div v-if="user" class="row justify-content-md-center border border-info p-2" style="min-width: 700px">
     
-    <div class="col-md-6" v-on:click="triggerAvatar">
-      <img :src="user.avatar" alt="avatar" class="img-responsive">
-      <div class="carousel-caption mb-0 pb-0"><p class="text-secondary bg-white">&#9998; Click to edit</p></div>
-      <form action="account" class="d-none" method="POST" enctype="multipart/form-data" v-on:submit.prevent>
-        <input type="file" id="avatar" ref="avatar" accept="image/gif, image/jpg, image/jpeg, image/png" v-on:change="updateAvatar"/>
+    <div class="col-4">
+      <div class="mt-1">
+        <img v-if="avatar_loading" class="img-fluid" src="/loading.gif" alt="avatar" style="max-width: 200px">
+        <img v-else class="img-fluid" :src="user.avatar+'?'+update_time" alt="avatar" style="max-width: 200px">
+      </div>
+      <div class="btn btn-outline-dark mt-1" @click="triggerAvatar">Change image</div>
+      <form action="account" class="d-none" method="POST" enctype="multipart/form-data" @submit.prevent>
+        <input type="file" id="avatar" ref="avatar" accept="image/gif, image/jpg, image/jpeg, image/png" @change="updateAvatar"/>
       </form>
     </div>
     
-    <div class="col-md-6">
-      <textarea name="bio" v-model="user.bio" v-on:change="updateBio"></textarea>
+    <div class="col-8">
+      <div class="row mt-3">
+        <div class="col-12 text-center text-danger" style="min-height: 1.5rem">{{error}}</div>
+      </div>
+      <div class="row mt-3">
+        <h5 class="col-2 text-right">Email:</h5><input class="col-9" name="bio" v-model="user.id" />
+      </div>
+      <div class="row mt-3">
+        <h5 class="col-2 text-right">Name:</h5><input class="col-9" name="bio" v-model="user.name" />
+      </div>
+      <div class="row mt-3">
+        <h5 class="col-2 text-right">Bio:</h5><input class="col-9" name="bio" v-model="user.bio" />
+      </div>
+      <div class="row mt-4">
+        <div class="col-6 text-right"><div class="btn btn-outline-dark" @click="updateUser">Save</div></div>
+        <div class="col-6 text-left"><div class="btn btn-outline-dark" @click="logOut">Log Out</div></div>
+      </div>
     </div>
-
-    <p><button @click="logOut">Log Out</button></p>
     
   </div>
 
-  <div v-if="!user">
+  <div v-else class="row justify-content-md-center border border-info p-2" style="min-width: 700px">
     
-      <form v-on:submit.prevent>
-        <input type="text" placeholder="email" autocomplete="username" v-model="login.email"/>
-        <input type="password" placeholder="password" autocomplete="current-password" v-model="login.password"/>
-        <button @click="logIn">Log In</button> or <button @click="register">Register</button>
-      </form>
+    <div class="col-12">
+      <div class="row mt-3">
+        <div class="col-12 text-center text-danger" style="min-height: 1.5rem">{{error}}</div>
+      </div>
+      <div class="row mt-3">
+        <h5 class="col-2 text-right">Email:</h5><input class="col-9" name="email" autocomplete="username" v-model="login.email" />
+      </div>
+      <div class="row mt-3">
+        <h5 class="col-2 text-right">Password:</h5><input class="col-9" name="password" autocomplete="current-password" v-model="login.password" />
+      </div>
+      <div class="row mt-4">
+        <div class="col-6 text-right"><div class="btn btn-outline-dark" @click="logIn">Log In</div></div>
+        <div class="col-6 text-left"><div class="btn btn-outline-dark" @click="register">Register</div></div>
+      </div>
+    </div>
     
   </div>
 

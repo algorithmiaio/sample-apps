@@ -4,6 +4,8 @@ from flask import Flask, jsonify, request, send_file
 from functools import wraps
 import jwt
 from os import environ, path
+from PIL import Image
+from resizeimage import resizeimage
 from pymongo import MongoClient
 from shutil import copyfile
 from sys import stderr
@@ -34,18 +36,19 @@ if not client.dir(algo_temp_dir).exists():
 # datastructures
 class User():
 
-    def __init__(self, email, password, avatar='/default_avatar.png', bio=''):
+    def __init__(self, email, password, avatar='/default_avatar.png', name='', bio=''):
         self.id = email
         self.passhash = generate_password_hash(password) if password else None
         self.avatar = avatar
+        self.name = name
         self.bio = bio
 
     def to_dict(self):
-        return dict(id=self.id, avatar=self.avatar, bio=self.bio)
+        return dict(id=self.id, avatar=self.avatar, name=self.name, bio=self.bio)
 
     @staticmethod
     def from_dict(user_dict):
-        user = User(user_dict['id'], None, user_dict['avatar'], user_dict['bio'])
+        user = User(user_dict['id'], None, user_dict['avatar'], user_dict['name'], user_dict['bio'])
         user.passhash = user_dict['passhash']
         return user
 
@@ -156,15 +159,22 @@ def post_account(user):
     data = request.get_json()
     if data and 'bio' in data:
         user.bio = data['bio']
+    if data and 'name' in data:
+        user.name = data['name']
     if 'avatar' in request.files:
         avatar = request.files['avatar']
         file_ext = path.splitext(avatar.filename)[1]
         with NamedTemporaryFile(suffix=file_ext) as f:
-            avatar.save(f)
-            remote_file = upload_file_algorithmia(f.name, user.id+file_ext)
+            with Image.open(avatar) as img:
+                try:
+                    cover = resizeimage.resize_cover(img, [400, 400])
+                    cover.save(f, img.format)
+                except:
+                    img.save(f)
+                remote_file = upload_file_algorithmia(f.name, user.id+file_ext)
         if is_nude(remote_file):
-            return jsonify({'message':'It appears that image contains nudity'}), 422
-        cropped_remote_file = auto_crop(remote_file, 280, 280)
+            return jsonify({'message':'That image may contain nudity'}), 422
+        cropped_remote_file = auto_crop(remote_file, 200, 200)
         cropped_file = client.file(cropped_remote_file).getFile()
         user.avatar = ('/avatars/%s%s' % (user.id, file_ext)).lower()
         copyfile(cropped_file.name, 'static/'+user.avatar)

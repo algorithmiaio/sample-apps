@@ -1,4 +1,6 @@
 algorithmia
 flask >= 1.1
+pillow
+python-resize-image
 pyjwt
 pymongo

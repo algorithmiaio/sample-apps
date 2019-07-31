@@ -77,7 +77,7 @@ var app = new Vue({
       fileList=this.$refs.avatar.files;
       if(!fileList.length) return;
       formData.append('avatar',fileList[0],fileList[0].name);
-      var url=API_URL+'/account';
+      var url=API_URL+'/avatar';
       app.error="Processing your image...";
       app.avatar_loading = true;
       axios.post(url,formData, {headers: {Authorization: 'Bearer: '+app.token, 'Content-Type': 'multipart/form-data'}} )

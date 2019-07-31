@@ -157,27 +157,31 @@ def get_account(user):
 @token_required
 def post_account(user):
     data = request.get_json()
-    if data and 'bio' in data:
-        user.bio = data['bio']
-    if data and 'name' in data:
-        user.name = data['name']
-    if 'avatar' in request.files:
-        avatar = request.files['avatar']
-        file_ext = path.splitext(avatar.filename)[1]
-        with NamedTemporaryFile(suffix=file_ext) as f:
-            with Image.open(avatar) as img:
-                try:
-                    cover = resizeimage.resize_cover(img, [400, 400])
-                    cover.save(f, img.format)
-                except:
-                    img.save(f)
-                remote_file = upload_file_algorithmia(f.name, user.id+file_ext)
-        if is_nude(remote_file):
-            return jsonify({'message':'That image may contain nudity'}), 422
-        cropped_remote_file = auto_crop(remote_file, 200, 200)
-        cropped_file = client.file(cropped_remote_file).getFile()
-        user.avatar = ('/avatars/%s%s' % (user.id, file_ext)).lower()
-        copyfile(cropped_file.name, 'static/'+user.avatar)
+    user.name = data.get('name',user.name)
+    user.bio = data.get('bio',user.bio)
+    users.replace_one({'id': user.id}, user.__dict__)
+    return jsonify({'user': user.to_dict()}), 201
+
+
+@app.route('/avatar', methods=['POST'])
+@token_required
+def post_avatar(user):
+    avatar = request.files['avatar']
+    file_ext = path.splitext(avatar.filename)[1]
+    with NamedTemporaryFile(suffix=file_ext) as f:
+        with Image.open(avatar) as img:
+            try:
+                cover = resizeimage.resize_cover(img, [400, 400])
+                cover.save(f, img.format)
+            except:
+                img.save(f)
+            remote_file = upload_file_algorithmia(f.name, user.id+file_ext)
+    if is_nude(remote_file):
+        return jsonify({'message':'That image may contain nudity'}), 422
+    cropped_remote_file = auto_crop(remote_file, 200, 200)
+    cropped_file = client.file(cropped_remote_file).getFile()
+    user.avatar = ('/avatars/%s%s' % (user.id, file_ext)).lower()
+    copyfile(cropped_file.name, 'static/'+user.avatar)
     users.replace_one({'id': user.id}, user.__dict__)
     return jsonify({'user': user.to_dict()}), 201
 

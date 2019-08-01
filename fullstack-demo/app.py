@@ -8,7 +8,6 @@ from PIL import Image
 from resizeimage import resizeimage
 from pymongo import MongoClient
 from shutil import copyfile
-from sys import stderr
 from tempfile import NamedTemporaryFile
 from uuid import uuid4
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -65,7 +64,7 @@ def is_nude(remote_file):
         algo = client.algo('sfw/NudityDetectioni2v/0.2.13')
         return algo.pipe(remote_file).result['nude']
     except Exception as x:
-        print('ERROR: unable to check %s for nudity: %s' % (remote_file, x), file=stderr)
+        print('ERROR: unable to check %s for nudity: %s' % (remote_file, x))
         return False
 
 
@@ -79,7 +78,7 @@ def auto_crop(remote_file, height, width):
         algo = client.algo('media/ContentAwareResize/0.1.3')
         return algo.pipe(input).result['output']
     except Exception as x:
-        print('ERROR: unable to auto-crop %s: %s' % (remote_file, x), file=stderr)
+        print('ERROR: unable to auto-crop %s: %s' % (remote_file, x))
         return remote_file
 
 

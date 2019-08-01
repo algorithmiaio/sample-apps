@@ -23,27 +23,27 @@ var app = new Vue({
     register: function() {
       app.error = null;
       axios.post(API_URL+'/register', {email: app.login.email, password: app.login.password})
-      .then(response => {
+      .then(function(response) {
         console.log(response);
         app.token = response.data.token;
         localStorage.token = app.token;
         app.user = response.data.user;
         app.update_time = Date.now();
-      })
-      .catch(err => {
+      },
+      function(err) {
         app.error = err.response.data.message;
       });
     },
     logIn: function() {
       app.error = null;
       axios.post(API_URL+'/login', {email: app.login.email, password: app.login.password})
-      .then(response => {
+      .then(function(response) {
         app.token = response.data.token;
         localStorage.token = app.token;
         app.user = response.data.user;
         app.update_time = Date.now();
-      })
-      .catch(err => {
+      },
+      function(err) {
         app.error = err.response.data.message;
       });
     },
@@ -57,12 +57,12 @@ var app = new Vue({
     updateUser: function() {
       app.error = null;
       axios.post(API_URL+'/account', app.user, {headers: {Authorization: 'Bearer: '+app.token}})
-      .then(response => {
+      .then(function(response) {
         app.error = "Your changes have been saved";
         app.user = response.data.user;
         app.update_time = Date.now();
-      })
-      .catch(err => {
+      },
+      function(err) {
         if(err.response.status==401) {
           return app.logOut();
         }
@@ -81,13 +81,13 @@ var app = new Vue({
       app.error="Processing your image...";
       app.avatar_loading = true;
       axios.post(url,formData, {headers: {Authorization: 'Bearer: '+app.token, 'Content-Type': 'multipart/form-data'}} )
-      .then(response => {
+      .then(function(response) {
         app.error = null;
         app.avatar_loading = false;
         app.user = response.data.user;
         app.update_time = Date.now();
-      })
-      .catch(err => {
+      },
+      function(err) {
         if(err.response.status==401) {
           return app.logOut();
         }
@@ -100,7 +100,7 @@ var app = new Vue({
     var token = localStorage.token;
     if (this.isValidJwt(token)) {
       axios.get(API_URL+'/account', {headers: {Authorization: 'Bearer: '+token}})
-      .then(response => {
+      .then(function(response) {
         app.token = response.data.token;
         localStorage.token = app.token;
         app.user = response.data.user;

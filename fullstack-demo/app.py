@@ -75,7 +75,7 @@ def auto_crop(remote_file, height, width):
         'image': remote_file
     }
     try:
-        algo = client.algo('media/ContentAwareResize/0.1.3')
+        algo = client.algo('opencv/SmartThumbnail/2.2.3')
         return algo.pipe(input).result['output']
     except Exception as x:
         print('ERROR: unable to auto-crop %s: %s' % (remote_file, x))

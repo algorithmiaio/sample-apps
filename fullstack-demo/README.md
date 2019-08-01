@@ -13,7 +13,7 @@ In this repo, you can find a runnable fullstack web app, with a basic user regis
  - MongoDB (NoSQL database)
  - Algorithmia (machine learning model hosting)
 
-When the user uploads their profile picture, Algorithmia's [Nudity Detection](https://algorithmia.com/algorithms/sfw/NudityDetectioni2v) and [Content-Aware Resize](https://algorithmia.com/algorithms/media/ContentAwareResize) services are used to ensure that the image is safe-for-work, and to auto-crop the avatar without removing important features such as faces.  
+When the user uploads their profile picture, Algorithmia's [Nudity Detection](https://algorithmia.com/algorithms/sfw/NudityDetectioni2v) and [Smart Thumbnail](https://algorithmia.com/algorithms/opencv/SmartThumbnail) services are used to ensure that the image is safe-for-work, and to auto-crop the avatar without removing important the most salient features (such as faces).
 
 Read the full writeup at [learn.algorithmia.com](https://learn.algorithmia.com/optional-building-a-fullstack-app-with-algorithmia), then clone this repo to try it out yourself: 
 

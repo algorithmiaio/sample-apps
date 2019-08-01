@@ -1,17 +1,21 @@
-# Algorithmia Fullstack Demo
+![webapp screenshot](static/screenshot.png)
 
-## Learn to use Algorithmia in a Fullstack Web Application
+# Learn to use Algorithmia in a Fullstack Web Application
 
-Complete, runnable end-to-end web application using:
+[Algorithmia](https://algorithmia.com/) provides a platform for running Machine Learning models as API Endpoints: you can create and upload your own models, or take advantage of over [9,000 ready-to-run models](https://algorithmia.com/algorithms).
+
+This allows you to instantly and scalably incorporate machine learning into your own website, mobile app, or scripts.
+
+In this repo, you can find a runnable fullstack web app, with a basic user registration and profile page, built on:
+
  - VueJS (frontend)
- - Python/Flask (backend/webserver)
+ - Python & Flask (backend / webserver)
  - MongoDB (NoSQL database)
- - Algorithmia (machine learning algorithm hosting)
- - third-party APIs TBA
+ - Algorithmia (machine learning model hosting)
 
-## This is a work-in-progress
+When the user uploads their profile picture, Algorithmia's [Nudity Detection](https://algorithmia.com/algorithms/sfw/NudityDetectioni2v) and [Content-Aware Resize](https://algorithmia.com/algorithms/media/ContentAwareResize) services are used to ensure that the image is safe-for-work, and to auto-crop the avatar without removing important features such as faces.  
 
-More info coming soon!
+Read the full writeup at [learn.algorithmia.com](https://learn.algorithmia.com/optional-building-a-fullstack-app-with-algorithmia), then clone this repo to try it out yourself: 
 
 ## Setup
 

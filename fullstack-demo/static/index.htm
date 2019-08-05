@@ -19,10 +19,10 @@
         <img v-else class="img-fluid" :src="user.avatar+'?'+update_time" alt="avatar" style="max-width: 200px">
       </div>
       <!-- button triggers form, since cannot style file inputs directly -->
-      <button class="btn btn-outline-dark mt-1" @click="triggerAvatar" :disabled="avatar_loading">Change image</button>
       <form action="account" class="d-none" method="POST" enctype="multipart/form-data" @submit.prevent>
         <input type="file" id="avatar" ref="avatar" accept="image/gif, image/jpg, image/jpeg, image/png" @change="updateAvatar"/>
       </form>
+      <button class="btn btn-outline-dark mt-1" @click="triggerAvatar" :disabled="avatar_loading">Change image</button>
     </div>
     
     <div class="col-8">

@@ -22,6 +22,13 @@ db_client = MongoClient()
 db = db_client.fullstack_demo
 users = db.users
 
+# init db
+try:
+    if not db.users.list_indexes().alive:
+        db.users.create_index('id', unique=True)
+except:
+    raise SystemExit('Unable to connect to database: please run "mongod --fork --dbpath ./mongodb --logpath ./mongodb/mongodb.log"')
+
 # create an Algorithmia client and temp dir in Hosted Data
 try:
     algorithmia_api_key = environ['ALGORITHMIA_API_KEY']
@@ -31,6 +38,7 @@ client = Algorithmia.client(algorithmia_api_key)
 algo_temp_dir = 'data://.my/temp/'
 if not client.dir(algo_temp_dir).exists():
     client.dir(algo_temp_dir).create()
+
 
 # datastructures
 class User():
@@ -50,6 +58,15 @@ class User():
         user = User(user_dict['id'], None, user_dict['avatar'], user_dict['name'], user_dict['bio'])
         user.passhash = user_dict['passhash']
         return user
+
+
+def user_loader(email, password=None):
+    user_dict = users.find_one({'id': email})
+    if not user_dict:
+        return None
+    if password and not check_password_hash(user_dict['passhash'], password):
+        return None
+    return User.from_dict(user_dict)
 
 
 # Algorithmia helper functions
@@ -107,15 +124,6 @@ def token_required(f):
         except (jwt.ExpiredSignatureError, jwt.InvalidTokenError):
             return jsonify({'message':'Invalid or expired token','authenticated':False}), 401
     return _verify
-
-
-def user_loader(email, password=None):
-    user_dict = users.find_one({'id': email})
-    if not user_dict:
-        return None
-    if password and not check_password_hash(user_dict['passhash'], password):
-        return None
-    return User.from_dict(user_dict)
 
 
 # routes for webapp
@@ -183,14 +191,6 @@ def post_avatar(user):
     copyfile(cropped_file.name, 'static/'+user.avatar)
     users.replace_one({'id': user.id}, user.__dict__)
     return jsonify({'user': user.to_dict()}), 201
-
-
-# init db
-try:
-    if not db.users.list_indexes().alive:
-        db.users.create_index('id', unique=True)
-except:
-    raise SystemExit('Unable to connect to database: please run "mongod --fork --dbpath ./mongodb --logpath ./mongodb/mongodb.log"')
 
 
 # to start server: "python3 ./app.py"

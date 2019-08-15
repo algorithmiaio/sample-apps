@@ -11,7 +11,7 @@ model = joblib.load(modelFile)
 
 def apply(imgPath):
     # (optional) use SmartDownloader to download image safely - see https://algorithmia.com/algorithms/util/SmartImageDownloader
-    imgPath = client.algo('util/SmartImageDownloader/0.2.18').pipe(imgPath).result['savePath'][0]
+    imgPath = client.algo('util/SmartImageDownloader/').pipe(imgPath).result['savePath'][0]
     imgFile = client.file(imgPath).getFile().name
     img = Image.open(imgFile)
     # resize and greyscale image

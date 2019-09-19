@@ -3,7 +3,7 @@
 	<%= segment_script %>
 
 	<title>Extract Structured Data From Web Sites – Algorithmia</title>
-	<link rel="canonical" href="https://demos.algorithmia.com/web-page-inspector/" />
+	<link rel="canonical" href="https://demos.algorithmia.com/<%= slug %>" />
 	<meta name="description" content="An API to instantly retrieve clean, structured data from any URL, returned as useful JSON.">
 
 	<!-- FB -->
@@ -53,16 +53,16 @@
 						<h4 class="dark whitespace-sm">Or, try these sample articles:</h4>
 						<div class="row whitespace-none sample-images">
 							<div class="col-xs-3 col-sm-2 sample-image">
-								<a onclick="analyzeUrl('http://thenewstack.io/algorithmia-new-algorithm-economy/')"><img src="public/images/newstack.png"></a>
+								<a onclick="analyzeUrl('http://thenewstack.io/algorithmia-new-algorithm-economy/')"><img src="<%= slug %>/public/images/newstack.png"></a>
 							</div>
 							<div class="col-xs-3 col-sm-2 sample-image">
-								<a onclick="analyzeUrl('https://medium.com/emergent-future/machine-learning-trends-and-the-future-of-artificial-intelligence-2016-15c15cd6c129#.7vvstzebt')"><img src="public/images/machines.jpg"></a>
+								<a onclick="analyzeUrl('https://medium.com/emergent-future/machine-learning-trends-and-the-future-of-artificial-intelligence-2016-15c15cd6c129#.7vvstzebt')"><img src="<%= slug %>/public/images/machines.jpg"></a>
 							</div>
 							<div class="col-xs-3 col-sm-2 sample-image">
-								<a onclick="analyzeUrl('http://blog.algorithmia.com/predictive-algorithms-track-real-time-health-trends/')"><img src="public/images/predictive.jpg"></a>
+								<a onclick="analyzeUrl('http://blog.algorithmia.com/predictive-algorithms-track-real-time-health-trends/')"><img src="<%= slug %>/public/images/predictive.jpg"></a>
 							</div>
 							<div class="col-xs-3 col-sm-2 sample-image">
-								<a onclick="analyzeUrl('http://www.wired.com/2014/08/algorithmia/')"><img src="public/images/wired.jpg"></a>
+								<a onclick="analyzeUrl('http://www.wired.com/2014/08/algorithmia/')"><img src="<%= slug %>/public/images/wired.jpg"></a>
 							</div>
 						</div>
 					</div>
@@ -214,7 +214,7 @@ algo = client.algo(<span class="hljs-string">'outofstep/MegaAnalyzeURL/0.1.1'</s
   </section>
 
   <!-- JS -->
-  <script src="public/js/TweenMax.min.js"></script>
-  <script src="public/js/dots.js"></script>
+  <script src="<%= slug %>/public/js/TweenMax.min.js"></script>
+  <script src="<%= slug %>/public/js/dots.js"></script>
 
   <%= footer %>

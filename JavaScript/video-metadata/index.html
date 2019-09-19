@@ -3,7 +3,7 @@
 <%= segment_script %>
 
 <title>Video metadata extraction - Algorithmia</title>
-<link rel="canonical" href="https://demos.algorithmia.com/video-metadata/">
+<link rel="canonical" href="https://demos.algorithmia.com/<%= slug %>">
 <meta name="description" content="Video transformations and data extraction"/>
 <meta name="robots" content="index,follow">
 
@@ -29,8 +29,8 @@
 <meta itemprop="description" content="Use machine learning to extract information from your videos">
 
 <!-- CSS -->
-<link rel="stylesheet" href="public/css/font.knightlab.css">
-<link title="timeline-styles" rel="stylesheet" href="public/css/timeline.css">
+<link rel="stylesheet" href="<%= slug %>/public/css/font.knightlab.css">
+<link title="timeline-styles" rel="stylesheet" href="<%= slug %>/public/css/timeline.css">
 
 <%= header_end %>
 
@@ -46,40 +46,40 @@
           <h3>1. CHOOSE A VIDEO</h3>
           <div class="row whitespace sample-videos">
             <div class="col-xs-6 col-sm-3 sample-image">
-              <a onclick="selectVideo('massage')"><img src="public/images/massage.png" alt="massage" id="video-thumb-massage" class="video-thumb"></a>
+              <a onclick="selectVideo('massage')"><img src="<%= slug %>/public/images/massage.png" alt="massage" id="video-thumb-massage" class="video-thumb"></a>
             </div>
             <div class="col-xs-6 col-sm-3 sample-image">
-              <a onclick="selectVideo('india1643')"><img src="public/images/india1643.png" alt="india1643" id="video-thumb-india1643" class="video-thumb"></a>
+              <a onclick="selectVideo('india1643')"><img src="<%= slug %>/public/images/india1643.png" alt="india1643" id="video-thumb-india1643" class="video-thumb"></a>
             </div>
             <div class="col-xs-6 col-sm-3 sample-image">
-              <a onclick="selectVideo('city730')"><img src="public/images/city730.png" alt="city730" id="video-thumb-city730" class="video-thumb"></a>
-            </div>
-            <!--<div class="col-xs-6 col-sm-3 sample-image">-->
-              <!--<a onclick="selectVideo('india8698')"><img src="public/images/india8698.png" alt="india8698" id="video-thumb-india8698" class="video-thumb"></a>-->
-            <!--</div>-->
-            <div class="col-xs-6 col-sm-3 sample-image">
-              <a onclick="selectVideo('dance4428')"><img src="public/images/dance4428.png" alt="dance4428" id="video-thumb-dance4428" class="video-thumb"></a>
+              <a onclick="selectVideo('city730')"><img src="<%= slug %>/public/images/city730.png" alt="city730" id="video-thumb-city730" class="video-thumb"></a>
             </div>
             <!--<div class="col-xs-6 col-sm-3 sample-image">-->
-              <!--<a onclick="selectVideo('wiffle')"><img src="public/images/wiffle.png" alt="wiffle" id="video-thumb-wiffle" class="video-thumb"></a>-->
-            <!--</div>-->
-            <!--<div class="col-xs-6 col-sm-3 sample-image">-->
-              <!--<a onclick="selectVideo('motorcycle')"><img src="public/images/motorcycle.png" alt="motorcycle" id="video-thumb-motorcycle" class="video-thumb"></a>-->
+              <!--<a onclick="selectVideo('india8698')"><img src="<%= slug %>/public/images/india8698.png" alt="india8698" id="video-thumb-india8698" class="video-thumb"></a>-->
             <!--</div>-->
             <div class="col-xs-6 col-sm-3 sample-image">
-              <a onclick="selectVideo('slapping64')"><img src="public/images/slapping64.png" alt="slapping64" id="video-thumb-slapping64" class="video-thumb"></a>
+              <a onclick="selectVideo('dance4428')"><img src="<%= slug %>/public/images/dance4428.png" alt="dance4428" id="video-thumb-dance4428" class="video-thumb"></a>
             </div>
             <!--<div class="col-xs-6 col-sm-3 sample-image">-->
-              <!--<a onclick="selectVideo('training1194')"><img src="public/images/training1194.png" alt="training1194" id="video-thumb-training1194" class="video-thumb"></a>-->
+              <!--<a onclick="selectVideo('wiffle')"><img src="<%= slug %>/public/images/wiffle.png" alt="wiffle" id="video-thumb-wiffle" class="video-thumb"></a>-->
+            <!--</div>-->
+            <!--<div class="col-xs-6 col-sm-3 sample-image">-->
+              <!--<a onclick="selectVideo('motorcycle')"><img src="<%= slug %>/public/images/motorcycle.png" alt="motorcycle" id="video-thumb-motorcycle" class="video-thumb"></a>-->
             <!--</div>-->
             <div class="col-xs-6 col-sm-3 sample-image">
-              <a onclick="selectVideo('woman87')"><img src="public/images/woman87.png" alt="woman87" id="video-thumb-woman87" class="video-thumb"></a>
+              <a onclick="selectVideo('slapping64')"><img src="<%= slug %>/public/images/slapping64.png" alt="slapping64" id="video-thumb-slapping64" class="video-thumb"></a>
+            </div>
+            <!--<div class="col-xs-6 col-sm-3 sample-image">-->
+              <!--<a onclick="selectVideo('training1194')"><img src="<%= slug %>/public/images/training1194.png" alt="training1194" id="video-thumb-training1194" class="video-thumb"></a>-->
+            <!--</div>-->
+            <div class="col-xs-6 col-sm-3 sample-image">
+              <a onclick="selectVideo('woman87')"><img src="<%= slug %>/public/images/woman87.png" alt="woman87" id="video-thumb-woman87" class="video-thumb"></a>
             </div>
             <div class="col-xs-6 col-sm-3 sample-image">
-              <a onclick="selectVideo('crowd6582')"><img src="public/images/crowd6582.png" alt="crowd6582" id="video-thumb-crowd6582" class="video-thumb"></a>
+              <a onclick="selectVideo('crowd6582')"><img src="<%= slug %>/public/images/crowd6582.png" alt="crowd6582" id="video-thumb-crowd6582" class="video-thumb"></a>
             </div>
             <div class="col-xs-6 col-sm-3 sample-image">
-              <a onclick="selectVideo('busstation6094')"><img src="public/images/busstation6094.png" alt="busstation6094" id="video-thumb-busstation6094" class="video-thumb"></a>
+              <a onclick="selectVideo('busstation6094')"><img src="<%= slug %>/public/images/busstation6094.png" alt="busstation6094" id="video-thumb-busstation6094" class="video-thumb"></a>
             </div>
           </div>
           <h3>2. CHOOSE AN ALGORITHM</h3>
@@ -217,9 +217,9 @@ print algo.pipe(input)
   </section>
 
   <!-- JS -->
-  <script src="public/js/TweenMax.min.js"></script>
-  <script src="public/js/dots.js"></script>
-  <script src="public/js/dropzone.js"></script>
-  <script src="public/js/timeline-min.js"></script>
+  <script src="<%= slug %>/public/js/TweenMax.min.js"></script>
+  <script src="<%= slug %>/public/js/dots.js"></script>
+  <script src="<%= slug %>/public/js/dropzone.js"></script>
+  <script src="<%= slug %>/public/js/timeline-min.js"></script>
 
   <%= footer %>

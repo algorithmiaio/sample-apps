@@ -3,7 +3,7 @@
 <%= segment_script %>
 
 <title>#isitnude - nudity detector - Algorithmia</title>
-<link rel="canonical" href="https://demos.algorithmia.com/isitnude/">
+<link rel="canonical" href="https://demos.algorithmia.com/<%= slug %>">
 <meta name="description" content="Machine-learning microservice for detecting nudity in images"/>
 <meta name="robots" content="index,follow">
 
@@ -53,19 +53,19 @@
             <h4 class="dark whitespace-sm">Or, try these sample images:</h4>
             <div class="row whitespace-none sample-images">
               <div class="col-xs-4 col-sm-2">
-                <a onclick="analyzeImage('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/sunglasses-love-woman-flowers.jpg')"><img src="public/images/thumb01.png" alt="woman"></a>
+                <a onclick="analyzeImage('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/sunglasses-love-woman-flowers.jpg')"><img src="<%= slug %>/public/images/thumb01.png" alt="woman"></a>
               </div>
               <div class="col-xs-4 col-sm-2 sample-image">
-                <a onclick="analyzeImage('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/obama.jpg')"><img src="public/images/thumb02.png" alt="Obama Swimsuit"></a>
+                <a onclick="analyzeImage('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/obama.jpg')"><img src="<%= slug %>/public/images/thumb02.png" alt="Obama Swimsuit"></a>
               </div>
               <div class="col-xs-4 col-sm-2 sample-image">
-                <a onclick="analyzeImage('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/venus.jpg')"><img src="public/images/thumb03.png" alt="The Birth of Venus"></a>
+                <a onclick="analyzeImage('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/venus.jpg')"><img src="<%= slug %>/public/images/thumb03.png" alt="The Birth of Venus"></a>
               </div>
               <div class="col-xs-4 col-sm-2 sample-image">
-                <a onclick="analyzeImage('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/family-guy.jpg')"><img src="public/images/thumb04.jpg" alt="Family Guy Peter"></a>
+                <a onclick="analyzeImage('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/family-guy.jpg')"><img src="<%= slug %>/public/images/thumb04.jpg" alt="Family Guy Peter"></a>
               </div>
               <div class="col-xs-4 col-sm-2 sample-image">
-                <a onclick="analyzeImage('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/cosimo-medici-orpheus.jpg')"><img src="public/images/thumb05.png" alt="Cosimo Medici as Orpheus"></a>
+                <a onclick="analyzeImage('http://www.isitnude.com.s3-website-us-east-1.amazonaws.com/assets/images/sample/cosimo-medici-orpheus.jpg')"><img src="<%= slug %>/public/images/thumb05.png" alt="Cosimo Medici as Orpheus"></a>
               </div>
             </div>
           </div>
@@ -159,8 +159,8 @@ print algo.pipe(input)
   </section>
 
   <!-- JS -->
-  <script src="public/js/TweenMax.min.js"></script>
-  <script src="public/js/dots.js"></script>
-  <script src="public/js/dropzone.js"></script>
+  <script src="<%= slug %>/public/js/TweenMax.min.js"></script>
+  <script src="<%= slug %>/public/js/dots.js"></script>
+  <script src="<%= slug %>/public/js/dropzone.js"></script>
 
   <%= footer %>

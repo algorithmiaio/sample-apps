@@ -3,7 +3,7 @@
 <%= segment_script %>
 
 <title>Video transformations - Algorithmia</title>
-<link rel="canonical" href="https://demos.algorithmia.com/video-toolbox/">
+<link rel="canonical" href="https://demos.algorithmia.com/<%= slug %>">
 <meta name="description" content="Video transformations, powered by Machine Learning"/>
 <meta name="robots" content="index,follow">
 
@@ -42,16 +42,16 @@
           <h3>1. CHOOSE A VIDEO</h3>
           <div class="row whitespace sample-videos">
             <div class="col-xs-6 col-sm-3">
-              <a onclick="selectVideo('beach')"><img src="public/images/beach.png" alt="beach" id="video-thumb-beach" class="video-thumb"></a>
+              <a onclick="selectVideo('beach')"><img src="<%= slug %>/public/images/beach.png" alt="beach" id="video-thumb-beach" class="video-thumb"></a>
             </div>
             <div class="col-xs-6 col-sm-3 sample-image">
-              <a onclick="selectVideo('office')"><img src="public/images/office.png" alt="office" id="video-thumb-office" class="video-thumb"></a>
+              <a onclick="selectVideo('office')"><img src="<%= slug %>/public/images/office.png" alt="office" id="video-thumb-office" class="video-thumb"></a>
             </div>
             <div class="col-xs-6 col-sm-3 sample-image">
-              <a onclick="selectVideo('dog')"><img src="public/images/dog.png" alt="dog" id="video-thumb-dog" class="video-thumb"></a>
+              <a onclick="selectVideo('dog')"><img src="<%= slug %>/public/images/dog.png" alt="dog" id="video-thumb-dog" class="video-thumb"></a>
             </div>
             <div class="col-xs-6 col-sm-3 sample-image">
-              <a onclick="selectVideo('keyboard')"><img src="public/images/keyboard.png" alt="keyboard" id="video-thumb-keyboard" class="video-thumb"></a>
+              <a onclick="selectVideo('keyboard')"><img src="<%= slug %>/public/images/keyboard.png" alt="keyboard" id="video-thumb-keyboard" class="video-thumb"></a>
             </div>
           </div>
           <h3>2. CHOOSE A MODIFIER</h3>
@@ -186,8 +186,8 @@ print algo.pipe(input)
   </section>
 
   <!-- JS -->
-  <script src="public/js/TweenMax.min.js"></script>
-  <script src="public/js/dots.js"></script>
-  <script src="public/js/dropzone.js"></script>
+  <script src="<%= slug %>/public/js/TweenMax.min.js"></script>
+  <script src="<%= slug %>/public/js/dots.js"></script>
+  <script src="<%= slug %>/public/js/dropzone.js"></script>
 
   <%= footer %>

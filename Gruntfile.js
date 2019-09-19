@@ -16,8 +16,7 @@ module.exports = function(grunt) {
     { slug: 'autotag', dist: 'JavaScript/autotag' },
     { slug: 'analyze-tweets', dist: 'JavaScript/analyze-tweets'},
     { slug: 'classify-places', dist: 'JavaScript/places-demo'},
-    { slug: 'colorize-photos', dist: 'JavaScript/colorization-demo' },
-    { slug: 'cluster', dist: 'Javascript/cluster' },
+    { slug: 'cluster', dist: 'JavaScript/cluster' },
     { slug: 'colorize-photos', dist: 'JavaScript/colorization-demo' },
     { slug: 'doc-classifier', dist: 'JavaScript/doc-classifier'},
     { slug: 'deep-fashion', dist: 'JavaScript/deep-fashion'},
@@ -73,19 +72,47 @@ module.exports = function(grunt) {
     }
   };
 
-  var dateString = new Date().getTime();
-  var getTemplate = function(template) {
-    return grunt.file.read(template).split('[[VERSION]]').join(dateString);
-  };
+  const getTemplate = (template, slug) =>
+    grunt.file
+      .read(template)
+      .replace(new RegExp("<%= slug %>", "g"), slug)
+      .split("[[VERSION]]")
+      .join(new Date().getTime());
+
+  const isIndexHTML = filepath => /index\.html$/.test(filepath);
 
   demos.forEach(function(demo) {
+    const file = {
+      expand: true,
+      cwd: "build/" + demo.slug,
+      src: ["**"],
+      dest: demo.slug,
+      filter: filepath => !isIndexHTML(filepath)
+    };
+
     awsS3Config[demo.slug] = {
-      files: [{
-        expand: true,
-        cwd: 'build/'+demo.slug,
-        src: ['**'],
-        dest: demo.slug
-      }]
+      files: [
+        // Non index.html files are uploaded to S3 directly.
+        file,
+        // index.html files are given metadata value to enable 301 redirect
+        // e.g., site.com/foo/index.html and site.com/foo/ will both redirect
+        // to site.com/foo
+        {
+          ...file,
+          filter: isIndexHTML,
+          params: {
+            WebsiteRedirectLocation: `/${demo.slug}`
+          }
+        },
+        // Upload the equivalent of index.html, but without an extension and
+        // renamed to the demo.slug value so that the 301 doesn't 404.
+        {
+          ...file,
+          filter: isIndexHTML,
+          dest: "/",
+          rename: () => demo.slug
+        }
+      ]
     };
     cleanConfig[demo.slug] = ['build/'+demo.slug];
     copyConfig[demo.slug] = {
@@ -108,11 +135,12 @@ module.exports = function(grunt) {
     templateConfig[demo.slug] = {
       options: {
         data: {
-          header_begin: getTemplate('JavaScript/common/header_begin.html'),
-          header_end: getTemplate('JavaScript/common/header_end.html'),
-          footer: getTemplate('JavaScript/common/footer.html'),
-          ga_script: getTemplate('JavaScript/common/ga_script.html'),
-          segment_script: getTemplate('JavaScript/common/segment_script.html')
+          slug: demo.slug,
+          header_begin: getTemplate('JavaScript/common/header_begin.html', demo.slug),
+          header_end: getTemplate('JavaScript/common/header_end.html', demo.slug),
+          footer: getTemplate('JavaScript/common/footer.html', demo.slug),
+          ga_script: getTemplate('JavaScript/common/ga_script.html', demo.slug),
+          segment_script: getTemplate('JavaScript/common/segment_script.html', demo.slug)
         }
       },
       files: [
@@ -151,8 +179,22 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-template');
 
   demos.forEach(function(demo) {
-    grunt.registerTask('publish:' + demo.slug, "Publish the " + demo.slug + " demo", ['clean:' + demo.slug, 'copy:' + demo.slug, 'template:' + demo.slug, 'aws_s3:' + demo.slug, 'cloudfront_invalidate:' + demo.slug]);
-    grunt.registerTask('build:' + demo.slug, "Build the " + demo.slug + " demo", ['clean:' + demo.slug, 'copy:' + demo.slug, 'template:' + demo.slug]);
+    grunt.registerTask(
+      "publish:" + demo.slug,
+      "Publish the " + demo.slug + " demo",
+      [
+        "clean:" + demo.slug,
+        "copy:" + demo.slug,
+        "template:" + demo.slug,
+        "aws_s3:" + demo.slug,
+        "cloudfront_invalidate:" + demo.slug
+      ]
+    );
+    grunt.registerTask(
+      "build:" + demo.slug,
+      "Build the " + demo.slug + " demo",
+      ["clean:" + demo.slug, "copy:" + demo.slug, "template:" + demo.slug]
+    );
   });
 
 };

@@ -3,7 +3,7 @@
 <%= segment_script %>
 
 	<title>Deep Learning to Classify Clothing and Fashion Items in Images – Algorithmia</title>
-	<link rel="canonical" href="https://demos.algorithmia.com/deep-fashion/" />
+	<link rel="canonical" href="https://demos.algorithmia.com/<%= demo_root %>" />
 	<meta name="description" content="Use deep learning algorithms to identify clothing and accessories in images with the Fashion Classifier microservice">
 	<meta name="robots" content="index,follow">
 
@@ -50,19 +50,19 @@
 						<h4 class="dark whitespace-sm">Or, try these sample images:</h4>
 						<div class="row whitespace-none sample-images">
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="getTags('https://s3.amazonaws.com/algorithmia-assets/deep-fashion/fashion1.jpg')"><img src="public/images/fashion1_sm.jpg"></a>
+								<a onclick="getTags('https://s3.amazonaws.com/algorithmia-assets/deep-fashion/fashion1.jpg')"><img src="<%= demo_root %>/public/images/fashion1_sm.jpg"></a>
 							</div>
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="getTags('https://s3.amazonaws.com/algorithmia-assets/deep-fashion/fashion2.jpg')"><img src="public/images/fashion2_sm.jpg"></a>
+								<a onclick="getTags('https://s3.amazonaws.com/algorithmia-assets/deep-fashion/fashion2.jpg')"><img src="<%= demo_root %>/public/images/fashion2_sm.jpg"></a>
 							</div>
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="getTags('https://s3.amazonaws.com/algorithmia-assets/deep-fashion/fashion3.jpg')"><img src="public/images/fashion3_sm.jpg"></a>
+								<a onclick="getTags('https://s3.amazonaws.com/algorithmia-assets/deep-fashion/fashion3.jpg')"><img src="<%= demo_root %>/public/images/fashion3_sm.jpg"></a>
 							</div>
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="getTags('https://s3.amazonaws.com/algorithmia-assets/deep-fashion/fashion4.jpg')"><img src="public/images/fashion4_sm.jpg"></a>
+								<a onclick="getTags('https://s3.amazonaws.com/algorithmia-assets/deep-fashion/fashion4.jpg')"><img src="<%= demo_root %>/public/images/fashion4_sm.jpg"></a>
 							</div>
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="getTags('https://s3.amazonaws.com/algorithmia-assets/deep-fashion/fashion5.jpg')"><img src="public/images/fashion5_sm.jpg"></a>
+								<a onclick="getTags('https://s3.amazonaws.com/algorithmia-assets/deep-fashion/fashion5.jpg')"><img src="<%= demo_root %>/public/images/fashion5_sm.jpg"></a>
 							</div>
 						</div>
 					</div>
@@ -164,8 +164,8 @@ algo = client.algo(<span class="hljs-string">'algorithmiahq/DeepFashion/1.2.2'</
   </section>
 
   <!-- JS -->
-  <script src="public/js/TweenMax.min.js"></script>
-  <script src="public/js/dots.js"></script>
-  <script src="public/js/dropzone.js"></script>
+  <script src="<%= demo_root %>/public/js/TweenMax.min.js"></script>
+  <script src="<%= demo_root %>/public/js/dots.js"></script>
+  <script src="<%= demo_root %>/public/js/dropzone.js"></script>
 
   <%= footer %>

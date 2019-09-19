@@ -3,7 +3,7 @@
 <%= segment_script %>
 
 	<title>Deep Learning to Classify Places, Locations, and Scenes in Images – Algorithmia</title>
-	<link rel="canonical" href="https://demos.algorithmia.com/classify-places/" />
+	<link rel="canonical" href="https://demos.algorithmia.com/<%= demo_root %>" />
 	<meta name="description" content="Use deep learning algorithms to identify places in images with the Places365 Classifier microservice, trained on 1.8 million images to recognize 365 scenes">
 	<meta name="robots" content="index,follow">
 
@@ -50,19 +50,19 @@
 						<h4 class="dark whitespace-sm">Or, try these sample images:</h4>
 						<div class="row whitespace-none sample-images">
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="getPlaces('https://s3.amazonaws.com/algorithmia-assets/classifyplaces_static_content/alley_lg.jpg')"><img src="public/images/alley_sm.jpg"></a>
+								<a onclick="getPlaces('https://s3.amazonaws.com/algorithmia-assets/classifyplaces_static_content/alley_lg.jpg')"><img src="<%= demo_root %>/public/images/alley_sm.jpg"></a>
 							</div>
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="getPlaces('https://s3.amazonaws.com/algorithmia-assets/classifyplaces_static_content/dock_lg.jpg')"><img src="public/images/dock_sm.jpg"></a>
+								<a onclick="getPlaces('https://s3.amazonaws.com/algorithmia-assets/classifyplaces_static_content/dock_lg.jpg')"><img src="<%= demo_root %>/public/images/dock_sm.jpg"></a>
 							</div> 
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="getPlaces('https://s3.amazonaws.com/algorithmia-assets/classifyplaces_static_content/canyon_lg.jpg')"><img src="public/images/canyon_sm.jpg"></a>
+								<a onclick="getPlaces('https://s3.amazonaws.com/algorithmia-assets/classifyplaces_static_content/canyon_lg.jpg')"><img src="<%= demo_root %>/public/images/canyon_sm.jpg"></a>
 							</div>
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="getPlaces('https://s3.amazonaws.com/algorithmia-assets/classifyplaces_static_content/skyscraper_lg.jpg')"><img src="public/images/skyscraper_sm.jpg"></a>
+								<a onclick="getPlaces('https://s3.amazonaws.com/algorithmia-assets/classifyplaces_static_content/skyscraper_lg.jpg')"><img src="<%= demo_root %>/public/images/skyscraper_sm.jpg"></a>
 							</div>
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="getPlaces('https://s3.amazonaws.com/algorithmia-assets/classifyplaces_static_content/airplane_lg.jpg')"><img src="public/images/airplane_sm.jpg"></a>
+								<a onclick="getPlaces('https://s3.amazonaws.com/algorithmia-assets/classifyplaces_static_content/airplane_lg.jpg')"><img src="<%= demo_root %>/public/images/airplane_sm.jpg"></a>
 							</div>
 						</div>
 					</div>
@@ -160,8 +160,8 @@ algo = client.algo(<span class="hljs-string">'deeplearning/Places365Classifier/0
   </section>
 
   <!-- JS -->
-  <script src="public/js/TweenMax.min.js"></script>
-  <script src="public/js/dots.js"></script>
-  <script src="public/js/dropzone.js"></script>
+  <script src="<%= demo_root %>/public/js/TweenMax.min.js"></script>
+  <script src="<%= demo_root %>/public/js/dots.js"></script>
+  <script src="<%= demo_root %>/public/js/dropzone.js"></script>
 
   <%= footer %>

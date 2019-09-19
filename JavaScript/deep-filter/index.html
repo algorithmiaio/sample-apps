@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<title>Style Transfer Using Deep Learning – Algorithmia</title>
-	<link rel="canonical" href="https://demos.algorithmia.com/deep-style/" />
+	<link rel="canonical" href="https://demos.algorithmia.com/<%= demo_root %>" />
 	<meta name="description" content="Reimagine images in new artistic styles using deep learning and style transfer.">
 	<meta name="robots" content="index,follow">
 
@@ -32,11 +32,11 @@
 	<meta itemprop="description" content="Reimagine images in new artistic styles using deep learning and style transfer.">
 
 	<!-- CSS -->
-    <link rel="shortcut icon" href="public/images/favicon-bw.png" type="image/png">
-	<link href="public/css/bootstrap.min.css" rel="stylesheet">
-	<link href="public/css/all.css" rel="stylesheet">
-	<link href="public/css/custom.css" rel="stylesheet">
-	<link href="public/css/styles/monokai.css" rel="stylesheet">
+    <link rel="shortcut icon" href="<%= demo_root %>/public/images/favicon-bw.png" type="image/png">
+	<link href="<%= demo_root %>/public/css/bootstrap.min.css" rel="stylesheet">
+	<link href="<%= demo_root %>/public/css/all.css" rel="stylesheet">
+	<link href="<%= demo_root %>/public/css/custom.css" rel="stylesheet">
+	<link href="<%= demo_root %>/public/css/styles/monokai.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Raleway:300,400" rel="stylesheet">
 
 	<!--   Google Analytics -->
@@ -62,7 +62,7 @@
 					<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="https://algorithmia.com/">
-					<img src="public/images/algoWhite.svg" alt="Algorithmia">
+					<img src="<%= demo_root %>/public/images/algoWhite.svg" alt="Algorithmia">
 				</a>
 			</div>
 			<div class="navbar-collapse collapse">
@@ -109,16 +109,16 @@
 						<h4 class="has-subcontent">Or, filter a sample image</h4>
 						<div class="row">
 							<div class="col-xs-6 col-sm-3 col-md-3 sample-center">
-								<a onclick="analyzeDefault('https://images.unsplash.com/photo-1479088360436-ef9dbade3214?w=1600&ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=b37ce33a6c3b8540e2386b7feceb02ef')"><img src="public/images/sample01.jpeg" class="sample-img"></a>
+								<a onclick="analyzeDefault('https://images.unsplash.com/photo-1479088360436-ef9dbade3214?w=1600&ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=b37ce33a6c3b8540e2386b7feceb02ef')"><img src="<%= demo_root %>/public/images/sample01.jpeg" class="sample-img"></a>
 							</div>
 							<div class="col-xs-6 col-sm-3 col-md-3 sample-center">
-								<a onclick="analyzeDefault('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?dpr=2&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=')"><img src="public/images/sample02.jpeg" class="sample-img"></a>
+								<a onclick="analyzeDefault('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?dpr=2&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=')"><img src="<%= demo_root %>/public/images/sample02.jpeg" class="sample-img"></a>
 							</div>
 							<div class="col-xs-6 col-sm-3 col-md-3 sample-center">
-								<a onclick="analyzeDefault('https://images.unsplash.com/photo-1430026996702-608b84ce9281?w=1600&ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=bc612c816d9b222124db4eb20ee53c6c')"><img src="public/images/sample03.jpeg" class="sample-img"></a>
+								<a onclick="analyzeDefault('https://images.unsplash.com/photo-1430026996702-608b84ce9281?w=1600&ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=bc612c816d9b222124db4eb20ee53c6c')"><img src="<%= demo_root %>/public/images/sample03.jpeg" class="sample-img"></a>
 							</div>
 							<div class="col-xs-6 col-sm-3 col-md-3 sample-center">
-								<a onclick="analyzeDefault('https://images.unsplash.com/photo-1466657718950-8f9346c04f8f?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=42f94fdaf70349ae0cf274c9aa8d0a41')"><img src="public/images/sample04.jpeg" class="sample-img"></a>
+								<a onclick="analyzeDefault('https://images.unsplash.com/photo-1466657718950-8f9346c04f8f?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=42f94fdaf70349ae0cf274c9aa8d0a41')"><img src="<%= demo_root %>/public/images/sample04.jpeg" class="sample-img"></a>
 							</div>
 						</div>
 					</div>
@@ -156,8 +156,8 @@
 				</div>
 				<!-- <span class="download"><a href=""><span class="glyphicon glyphicon-download" aria-hidden="true"></span> DOWNLOAD</a></span> -->
 				<span class="share">
-					<a href="https://twitter.com/intent/tweet?text=Style Transfer Using Deep Learning https://demos.algorithmia.com/deep-style/ @Algorithmia"><img src="public/images/twitter.svg"></a>
-					<a href="https://www.facebook.com/sharer/sharer.php?u=https://demos.algorithmia.com/deep-style/"><img src="public/images/facebook.svg"></a></a>
+					<a href="https://twitter.com/intent/tweet?text=Style Transfer Using Deep Learning https://demos.algorithmia.com/deep-style/ @Algorithmia"><img src="<%= demo_root %>/public/images/twitter.svg"></a>
+					<a href="https://www.facebook.com/sharer/sharer.php?u=https://demos.algorithmia.com/deep-style/"><img src="<%= demo_root %>/public/images/facebook.svg"></a></a>
 				</span>
 			</div>
 			<!-- THUMBNAILS -->
@@ -165,27 +165,27 @@
 				<div class="tab-pane active" id="filters" role="tabpanel">
 					<div class="row thumbnails">
 						<div class="col-xs-6 col-sm-4 col-md-2 thumb style-thumb" data-style="none">
-							<img src="public/images/thumb/unfiltered.jpg">
+							<img src="<%= demo_root %>/public/images/thumb/unfiltered.jpg">
 							<p class="secondary">Unfiltered</p>
 						</div>
 						<div class="col-xs-6 col-sm-4 col-md-2 thumb style-thumb" data-style="smooth_ride">
-							<img src="public/images/thumb/smooth_ride.jpg">
+							<img src="<%= demo_root %>/public/images/thumb/smooth_ride.jpg">
 							<p class="secondary">Smooth Ride</p>
 						</div>
 						<div class="col-xs-6 col-sm-4 col-md-2 thumb style-thumb" data-style="crafty_painting">
-							<img src="public/images/thumb/crafty_painting.jpg">
+							<img src="<%= demo_root %>/public/images/thumb/crafty_painting.jpg">
 							<p class="secondary">Crafty Painting</p>
 						</div>
 						<div class="col-xs-6 col-sm-4 col-md-2 thumb style-thumb" data-style="purple_pond">
-							<img src="public/images/thumb/purple_pond.jpg">
+							<img src="<%= demo_root %>/public/images/thumb/purple_pond.jpg">
 							<p class="secondary">Purple Pond</p>
 						</div>
 						<div class="col-xs-6 col-sm-4 col-md-2 thumb style-thumb" data-style="sunday">
-							<img src="public/images/thumb/sunday.jpg">
+							<img src="<%= demo_root %>/public/images/thumb/sunday.jpg">
 							<p class="secondary">Sunday</p>
 						</div>
 						<div class="col-xs-6 col-sm-4 col-md-2 thumb style-thumb" data-style="oily_mcoilface">
-							<img src="public/images/thumb/oily_mcoilface.jpg">
+							<img src="<%= demo_root %>/public/images/thumb/oily_mcoilface.jpg">
 							<p class="secondary">Oily McOilface</p>
 						</div>
 					</div>
@@ -315,14 +315,14 @@ print algo.pipe(input)
 	</footer>
 
 	<!-- JS -->
-	<script src="public/js/jquery.min.js"></script>
-	<script src="public/js/bootstrap.min.js"></script>
-	<script src="public/js/TweenMax.min.js"></script>
-    <script src="public/js/dots.js"></script>
-	<script src="public/js/algorithmia-0.2.0.js"></script>
-	<script src="public/js/highlight.pack.js"></script>
-	<script src="public/js/dropzone.js"></script>
-	<script src="public/js/main.js"></script>
+	<script src="<%= demo_root %>/public/js/jquery.min.js"></script>
+	<script src="<%= demo_root %>/public/js/bootstrap.min.js"></script>
+	<script src="<%= demo_root %>/public/js/TweenMax.min.js"></script>
+    <script src="<%= demo_root %>/public/js/dots.js"></script>
+	<script src="<%= demo_root %>/public/js/algorithmia-0.2.0.js"></script>
+	<script src="<%= demo_root %>/public/js/highlight.pack.js"></script>
+	<script src="<%= demo_root %>/public/js/dropzone.js"></script>
+	<script src="<%= demo_root %>/public/js/main.js"></script>
 	<script>hljs.initHighlightingOnLoad();</script>
 	<script>
 	  window.intercomSettings = {

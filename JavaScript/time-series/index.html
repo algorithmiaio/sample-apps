@@ -3,7 +3,7 @@
 	<%= segment_script %>
 
 	<title>Time Series – Algorithmia</title>
-	<link rel="canonical" href="https://demos.algorithmia.com/timeseries/" />
+	<link rel="canonical" href="https://demos.algorithmia.com/<%= demo_root %>" />
 	<meta name="description" content="Track economic development with open data and predictive algorithms">
 	<meta name="robots" content="index,follow">
 
@@ -174,7 +174,7 @@ Algorithmia.client(<span class="hljs-string"><span class="hljs-string">"YOUR_API
 	</script>
 
     <!-- JS -->
-	<script src="public/js/d3.min.js"></script>
-	<script src="public/js/algorithmia.d3.js"></script>
+	<script src="<%= demo_root %>/public/js/d3.min.js"></script>
+	<script src="<%= demo_root %>/public/js/algorithmia.d3.js"></script>
 
 	<%= footer %>

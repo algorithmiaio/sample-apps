@@ -3,7 +3,7 @@
 <%= segment_script %>
 
   <title>Site Mapper - Algorithmia</title>
-	<link rel="canonical" href="https://demos.algorithmia.com/sitemap/" />
+	<link rel="canonical" href="https://demos.algorithmia.com/<%= demo_root %>" />
 	<meta name="description" content="Crawl a website, rank the pages, and extract content with Algorithmia's microservices.">
 
 	<!-- FB -->
@@ -197,9 +197,9 @@ algo = client.algo(<span class="hljs-string">'web/GetLinks/0.1.5'</span>)
 
 
   <!-- JS -->
-  <script src="public/js/TweenMax.min.js"></script>
-  <script src="public/js/dots.js"></script>
-  <script src="public/js/d3.min.js"></script>
-  <script src="public/js/algorithmia.d3.js"></script>
+  <script src="<%= demo_root %>/public/js/TweenMax.min.js"></script>
+  <script src="<%= demo_root %>/public/js/dots.js"></script>
+  <script src="<%= demo_root %>/public/js/d3.min.js"></script>
+  <script src="<%= demo_root %>/public/js/algorithmia.d3.js"></script>
 
   <%= footer %>

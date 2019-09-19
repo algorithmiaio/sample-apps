@@ -3,7 +3,7 @@
 <%= segment_script %>
 
 <title>Document Classifier - Algorithmia</title>
-<link rel="canonical" href="https://demos.algorithmia.com/doc-classifier/">
+<link rel="canonical" href="https://demos.algorithmia.com/<%= demo_root %>">
 <meta name="description" content="Train a Machine to Recognize User Input, and Classify it into Custom Keywords or Responses"/>
 <meta name="robots" content="index,follow">
 
@@ -191,8 +191,8 @@ print algo.pipe(input)
   </section>
 
   <!-- JS -->
-  <script src="public/js/TweenMax.min.js"></script>
-  <script src="public/js/dots.js"></script>
-  <script src="public/js/dropzone.js"></script>
+  <script src="<%= demo_root %>/public/js/TweenMax.min.js"></script>
+  <script src="<%= demo_root %>/public/js/dots.js"></script>
+  <script src="<%= demo_root %>/public/js/dropzone.js"></script>
 
   <%= footer %>

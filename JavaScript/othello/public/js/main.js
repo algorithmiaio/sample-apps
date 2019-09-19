@@ -82,7 +82,7 @@
       }
     };
     $scope.pieceImg = function(player) {
-      return "public/images/circle" + player + ".png";
+      return "othello/public/images/circle" + player + ".png";
     };
     otherPlayer = function() {
       return ($scope.player % 2) + 1;

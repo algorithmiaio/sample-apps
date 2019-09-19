@@ -3,7 +3,7 @@
 	<%= segment_script %>
 
 	<title>Search Unstructured Video – Algorithmia</title>
-	<link rel="canonical" href="https://demos.algorithmia.com/<%= demo_root %>" />
+	<link rel="canonical" href="https://demos.algorithmia.com/<%= slug %>" />
 	<meta name="description" content="Automatically search unstructured videos using Algorithmia video tagging.">
 
 	<!-- FB -->
@@ -119,7 +119,7 @@
 							<p class="lg item-title">1. Download video</p>
 						</div>
 						<div class="col-sm-3">
-							<img class="" src="<%= demo_root %>/public/images/step01.png">
+							<img class="" src="<%= slug %>/public/images/step01.png">
 						</div>
 						<div class="col-sm-9 col-md-6">
 							<p>The video file is downloaded from YouTube, Dropbox, S3, or another source, and its file format is examined before proceeding.</p>
@@ -134,7 +134,7 @@
 							<p>The <a href="https://algorithmia.com/algorithms/media/VideoMetadataExtraction">Video Metadata Extraction</a> algorithm splits the video into frames, then processes them in batches.</p>
 						</div>
 						<div class="col-sm-3">
-							<img src="<%= demo_root %>/public/images/step02.png">
+							<img src="<%= slug %>/public/images/step02.png">
 						</div>
 					</li>
 					<li class="row">
@@ -142,7 +142,7 @@
 							<p class="lg item-title">3. Auto-generate frame tags</p>
 						</div>
 						<div class="col-sm-3">
-							<img src="<%= demo_root %>/public/images/step03.png">
+							<img src="<%= slug %>/public/images/step03.png">
 						</div>
 						<div class="col-sm-9 col-md-6">
 							<p>Tags and annotations describing each frame are generated using <a href="https://algorithmia.com/algorithms/deeplearning/InceptionNet">InceptionNet</a> and other image classification/extraction algorithms.</p>
@@ -157,7 +157,7 @@
 							<p>After the video is processed, timestamps are assigned to each extracted tag, allowing users to search across one or many videos for specific tags.</p>
 						</div>
 						<div class="col-sm-3">
-							<img src="<%= demo_root %>/public/images/step04.png">
+							<img src="<%= slug %>/public/images/step04.png">
 						</div>
 					</li>
 				</ul>
@@ -201,7 +201,7 @@ algo = client.algo(<span class="hljs-string">'media/VideoMetadataExtraction/0.1.
   </section>
 
   <!-- JS -->
-  <script src="<%= demo_root %>/public/js/TweenMax.min.js"></script>
-  <script src="<%= demo_root %>/public/js/dots.js"></script>
+  <script src="<%= slug %>/public/js/TweenMax.min.js"></script>
+  <script src="<%= slug %>/public/js/dots.js"></script>
 
   <%= footer %>

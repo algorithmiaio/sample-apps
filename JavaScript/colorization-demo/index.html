@@ -3,17 +3,17 @@
 	<%= ga_script %>
 
 	<title>Colorize Black and White Photos – Algorithmia</title>
-	<link rel="canonical" href="https://demos.algorithmia.com/<%= demo_root %>" />
+	<link rel="canonical" href="https://demos.algorithmia.com/<%= slug %>" />
 	<meta name="description" content="Automatically colorize black and white photos, pictures, and images using the Colorful Image Colorization microservice.">
 	<meta name="robots" content="index,follow">
 
 	<!-- FB -->
 	<meta property="og:title" content="Colorize Black and White Photos">
-	<meta property="og:url" content="https://demos.algorithmia.com/<%= demo_root %>">
+	<meta property="og:url" content="https://demos.algorithmia.com/<%= slug %>">
 	<meta property="og:description" content="Automatically colorize black and white photos, pictures, and images using the Colorful Image Colorization microservice">
 	<meta property="og:locale" content="en_US" />
 	<meta property="og:type" content="website" />
-	<meta property="og:image" content="<%= demo_root %>/public/images/fbshare.png" />
+	<meta property="og:image" content="<%= slug %>/public/images/fbshare.png" />
 	<meta property="og:site_name" content="Algorithmia" />
 
 	<!-- TWTR -->
@@ -21,7 +21,7 @@
 	<meta name="twitter:site" content="@algorithmia" />
 	<meta name="twitter:title" content="Colorize Black and White Photos" />
 	<meta name="twitter:description" content="Automatically colorize black and white photos, pictures, and images using the Colorful Image Colorization microservice" />
-	<meta name="twitter:image" content="<%= demo_root %>/public/images/twshare.png" />
+	<meta name="twitter:image" content="<%= slug %>/public/images/twshare.png" />
 	<meta name="twitter:creator" content="@algorithmia" />
 
 	<!-- OTHER -->
@@ -52,19 +52,19 @@
 						<h4 class="dark whitespace-sm">Or, try these sample images:</h4>
 						<div class="row whitespace-none sample-images">
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="callAlgorithm('https://upload.wikimedia.org/wikipedia/commons/e/ef/Ocean_beach_at_low_tide_against_the_sun.jpg')"><img src="<%= demo_root %>/public/images/water.png"></a>
+								<a onclick="callAlgorithm('https://upload.wikimedia.org/wikipedia/commons/e/ef/Ocean_beach_at_low_tide_against_the_sun.jpg')"><img src="<%= slug %>/public/images/water.png"></a>
 							</div>
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="callAlgorithm('https://upload.wikimedia.org/wikipedia/commons/c/ce/MaynardYingst_SprintCar.jpg')"><img src="<%= demo_root %>/public/images/car.png" class="sample-image"></a>
+								<a onclick="callAlgorithm('https://upload.wikimedia.org/wikipedia/commons/c/ce/MaynardYingst_SprintCar.jpg')"><img src="<%= slug %>/public/images/car.png" class="sample-image"></a>
 							</div>
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="callAlgorithm('https://upload.wikimedia.org/wikipedia/commons/7/7d/Yosemite_(14359652100).jpg')"><img src="<%= demo_root %>/public/images/yosemite.png" class="sample-image"></a>
+								<a onclick="callAlgorithm('https://upload.wikimedia.org/wikipedia/commons/7/7d/Yosemite_(14359652100).jpg')"><img src="<%= slug %>/public/images/yosemite.png" class="sample-image"></a>
 							</div>
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="callAlgorithm('https://upload.wikimedia.org/wikipedia/commons/e/e5/Fire-breather_CIELAB_L*.jpg')"><img src="<%= demo_root %>/public/images/fire.png" class="sample-image"></a>
+								<a onclick="callAlgorithm('https://upload.wikimedia.org/wikipedia/commons/e/e5/Fire-breather_CIELAB_L*.jpg')"><img src="<%= slug %>/public/images/fire.png" class="sample-image"></a>
 							</div>
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="callAlgorithm('https://upload.wikimedia.org/wikipedia/commons/4/4d/Beef_Portrait_(5210343960).jpg')"><img src="<%= demo_root %>/public/images/cows.png" class="sample-image"></a>
+								<a onclick="callAlgorithm('https://upload.wikimedia.org/wikipedia/commons/4/4d/Beef_Portrait_(5210343960).jpg')"><img src="<%= slug %>/public/images/cows.png" class="sample-image"></a>
 							</div>
 						</div>
 					</div>
@@ -151,9 +151,9 @@ algo = client.algo(<span class="hljs-string">'deeplearning/ColorfulImageColoriza
   </section>
 
   <!-- JS -->
-  <script src="<%= demo_root %>/public/js/TweenMax.min.js"></script>
-  <script src="<%= demo_root %>/public/js/dots.js"></script>
-  <script src="<%= demo_root %>/public/js/twoimages.js"></script>
-  <script src="<%= demo_root %>/public/js/dropzone.js"></script>
+  <script src="<%= slug %>/public/js/TweenMax.min.js"></script>
+  <script src="<%= slug %>/public/js/dots.js"></script>
+  <script src="<%= slug %>/public/js/twoimages.js"></script>
+  <script src="<%= slug %>/public/js/dropzone.js"></script>
 
   <%= footer %>

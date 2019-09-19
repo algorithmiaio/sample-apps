@@ -24,17 +24,17 @@
 
     <meta name="robots" content="index,follow">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=0.75">
-    <link rel="shortcut icon" href="<%= demo_root %>/public/images/favicon-bw.png" type="image/png">
+    <link rel="shortcut icon" href="<%= slug %>/public/images/favicon-bw.png" type="image/png">
 
-    <link rel="stylesheet" href="<%= demo_root %>/public/css/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="<%= demo_root %>/public/css/core.cat.min.css">
+    <link rel="stylesheet" href="<%= slug %>/public/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<%= slug %>/public/css/core.cat.min.css">
 
     <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-    <script src="<%= demo_root %>/public/js/algorithmia.js" type="text/javascript"></script>
+    <script src="<%= slug %>/public/js/algorithmia.js" type="text/javascript"></script>
   </head>
   <body>
-    <script src="<%= demo_root %>/public/js/common.cat.js" type="text/javascript"></script>
+    <script src="<%= slug %>/public/js/common.cat.js" type="text/javascript"></script>
     <div class="container content-container">
       <div class="well">
         <header>Algorithmia Topic Analysis</header>
@@ -99,9 +99,9 @@ Algorithmia.client(apiKey).algo("/diego/GetTweetsWithKeyword").pipe(searchString
         fill: white;
       }
       </style>
-      <script src="<%= demo_root %>/public/js/d3.min.js" type="text/javascript"></script>
-      <script src="<%= demo_root %>/public/js/algorithmia.d3.js" type="text/javascript"></script>
-      <script src="<%= demo_root %>/public/js/main.js" type="text/javascript"></script>
+      <script src="<%= slug %>/public/js/d3.min.js" type="text/javascript"></script>
+      <script src="<%= slug %>/public/js/algorithmia.d3.js" type="text/javascript"></script>
+      <script src="<%= slug %>/public/js/main.js" type="text/javascript"></script>
     </div>
   </body>
 </html>

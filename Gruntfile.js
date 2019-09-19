@@ -76,7 +76,7 @@ module.exports = function(grunt) {
   const getTemplate = (template, slug) =>
     grunt.file
       .read(template)
-      .replace(new RegExp("<%= demo_root %>", "g"), slug)
+      .replace(new RegExp("<%= slug %>", "g"), slug)
       .split("[[VERSION]]")
       .join(new Date().getTime());
 
@@ -136,7 +136,7 @@ module.exports = function(grunt) {
     templateConfig[demo.slug] = {
       options: {
         data: {
-          demo_root: demo.slug,
+          slug: demo.slug,
           header_begin: getTemplate('JavaScript/common/header_begin.html', demo.slug),
           header_end: getTemplate('JavaScript/common/header_end.html', demo.slug),
           footer: getTemplate('JavaScript/common/footer.html', demo.slug),

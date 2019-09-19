@@ -16,8 +16,7 @@ module.exports = function(grunt) {
     { slug: 'autotag', dist: 'JavaScript/autotag' },
     { slug: 'analyze-tweets', dist: 'JavaScript/analyze-tweets'},
     { slug: 'classify-places', dist: 'JavaScript/places-demo'},
-    { slug: 'colorize-photos', dist: 'JavaScript/colorization-demo' },
-    { slug: 'cluster', dist: 'Javascript/cluster' },
+    { slug: 'cluster', dist: 'JavaScript/cluster' },
     { slug: 'colorize-photos', dist: 'JavaScript/colorization-demo' },
     { slug: 'doc-classifier', dist: 'JavaScript/doc-classifier'},
     { slug: 'deep-fashion', dist: 'JavaScript/deep-fashion'},
@@ -49,7 +48,8 @@ module.exports = function(grunt) {
       options: {
         accessKeyId: '<%= aws.key %>',
         secretAccessKey: '<%= aws.secret %>',
-        bucket: 'algorithmia-synapse',
+        sessionToken: '<%= aws.session %>',
+        bucket: 'demos.algorithmia.com',
         region: 'us-east-1',
         uploadConcurrency: 5,
         differential: true,
@@ -165,7 +165,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     aws: grunt.file.readJSON('aws-keys.json'),
     aws_s3: awsS3Config,
-    // cloudfront_invalidate: cloudfrontConfig,
+    cloudfront_invalidate: cloudfrontConfig,
     clean: cleanConfig,
     copy: copyConfig,
     template: templateConfig,
@@ -173,7 +173,7 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-aws-s3');
-  // grunt.loadNpmTasks('grunt-cloudfront-invalidate');
+  grunt.loadNpmTasks('grunt-cloudfront-invalidate');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -188,7 +188,7 @@ module.exports = function(grunt) {
         "copy:" + demo.slug,
         "template:" + demo.slug,
         "aws_s3:" + demo.slug,
-        // "cloudfront_invalidate:" + demo.slug
+        "cloudfront_invalidate:" + demo.slug
       ]
     );
     grunt.registerTask(

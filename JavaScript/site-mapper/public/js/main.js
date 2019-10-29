@@ -25,7 +25,7 @@ var existsError = false;
  */
 $(document).ready(function() {
   setInviteCode('sitemapper');
-  $('#siteUrl').val("http://algorithmia.com/");
+  $('#siteUrl').val("http://yahoo.com/");
   $('#depthLimit').val(depthLimit).change(function(){this.value=Math.max(1,Math.min(this.value,5));});
   $('#siteUrl').change(function(){this.value=cleanUrl(this.value);});
 });

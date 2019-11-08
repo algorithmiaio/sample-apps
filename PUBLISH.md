@@ -39,7 +39,8 @@ You'll need to create `aws-keys.json` in the repo root:
 ```json
 {
   "key": "<ACCESS_KEY_ID>",
-  "secret": "<SECRET_ACCESS_KEY>"
+  "secret": "<SECRET_ACCESS_KEY>",
+  "session": "<SESSION_TOKEN>"
 }
 ```
 

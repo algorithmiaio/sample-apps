@@ -48,6 +48,7 @@ module.exports = function(grunt) {
       options: {
         accessKeyId: '<%= aws.key %>',
         secretAccessKey: '<%= aws.secret %>',
+        sessionToken: '<%= aws.session %>',
         bucket: 'demos.algorithmia.com',
         region: 'us-east-1',
         uploadConcurrency: 5,

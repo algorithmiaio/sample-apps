@@ -50,22 +50,22 @@
 						<h4 class="dark whitespace-sm">Or, try these sample images:</h4>
 						<div class="row whitespace-none sample-images">
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="getInfo('https://demos.algorithmia.com/image-tagger/public/images/dog.jpg')"><img src="<%= slug %>/public/images/dog.jpg"></a>
+								<a onclick="getInfo('https://demos.algorithmia.com/image-tagger/public/images/dog_safe.jpg')"><img src="<%= slug %>/public/images/dog_safe.jpg"></a>
 							</div>
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="getInfo('https://demos.algorithmia.com/image-tagger/public/images/yosemite.jpg')"><img src="<%= slug %>/public/images/yosemite.jpg"></a>
+								<a onclick="getInfo('https://demos.algorithmia.com/image-tagger/public/images/yosemite_safe.jpg')"><img src="<%= slug %>/public/images/yosemite_safe.jpg"></a>
 							</div>
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="getInfo('https://demos.algorithmia.com/image-tagger/public/images/obama.jpg')"><img src="<%= slug %>/public/images/obama.jpg"></a>
+								<a onclick="getInfo('https://demos.algorithmia.com/image-tagger/public/images/obama_safe.jpg')"><img src="<%= slug %>/public/images/obama_safe.jpg"></a>
 							</div>
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="getInfo('https://demos.algorithmia.com/image-tagger/public/images/train.jpg')"><img src="<%= slug %>/public/images/train.jpg"></a>
+								<a onclick="getInfo('https://demos.algorithmia.com/image-tagger/public/images/train_safe.jpg')"><img src="<%= slug %>/public/images/train_safe.jpg"></a>
 							</div>
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="getInfo('https://demos.algorithmia.com/image-tagger/public/images/convertible.jpg')"><img src="<%= slug %>/public/images/convertible.jpg"></a>
+								<a onclick="getInfo('https://demos.algorithmia.com/image-tagger/public/images/mini_safe.jpg')"><img src="<%= slug %>/public/images/mini_safe.jpg"></a>
 							</div>
 							<div class="col-xs-4 col-sm-2 sample-image">
-								<a onclick="getInfo('https://demos.algorithmia.com/image-tagger/public/images/modelcar.jpg')"><img src="<%= slug %>/public/images/modelcar.jpg"></a>
+								<a onclick="getInfo('https://demos.algorithmia.com/image-tagger/public/images/teddy_safe.jpg')"><img src="<%= slug %>/public/images/teddy_safe.jpg"></a>
 							</div>
 						</div>
 					</div>
@@ -185,7 +185,19 @@ tagger2 = client.algo(<span class="hljs-string">"deeplearning/InceptionNet/1.0.3
           LEARN MORE
         </a>
       </div>
-    </div>
+		</div>
+		
+		<div class="col-md-9" style="padding: 1em; margin-bottom: 1em; background-color: #eee;">
+			<h3>Image Credits</h3>
+			<ul>
+				<li> <a rel="nofollow" href="https://commons.wikimedia.org/wiki/File:Terrier_mixed-breed_dog.jpg">Terrier mixed-breed</a>" by <a rel="nofollow" href="https://www.flickr.com/photos/95609644@N00">Chris Barber</a> is licensed under <a rel="nofollow" href="https://creativecommons.org/licenses/by/2.0/deed.en">CC BY 2.0</a></li>
+				<li> <a rel="nofollow" href="https://commons.wikimedia.org/wiki/File:Tunnel_View,_Yosemite_Valley,_Yosemite_NP_-_Diliff.jpg">Tunnel View, Yosemite Valley, Yosemite NP</a>" by <a rel="nofollow" href="https://commons.wikimedia.org/wiki/User:Diliff">David Iliff</a> is licensed under <a rel="nofollow" href="https://creativecommons.org/licenses/by-sa/3.0/deed.en">CC BY-SA 3.0</a></li>
+				<li> <a rel="nofollow" href="https://commons.wikimedia.org/wiki/File:President_Barack_Obama.jpg">President Barack Obama</a>" by <a rel="nofollow" href="https://en.wikipedia.org/wiki/Pete_Souza">Pete Souza</a> is in the <a rel="nofollow" href="https://en.wikipedia.org/wiki/public_domain">public domain</a></li>
+				<li> <a rel="nofollow" href="https://commons.wikimedia.org/wiki/File:BNSF_5350_20040808_Prairie_du_Chien_WI.jpg">Train</a>" by <a rel="nofollow" href="https://commons.wikimedia.org/wiki/User:Slambo">Sean Lamb</a> is licensed under <a rel="nofollow" href="https://creativecommons.org/licenses/by-sa/2.0/deed.en">CC BY-SA 2.0</a></li>
+				<li> <a rel="nofollow" href="https://commons.wikimedia.org/wiki/File:Morris_Mini-Minor_1959_(621_AOK).jpg">Mini</a>" by <a rel="nofollow" href="https://commons.wikimedia.org/wiki/User:DeFacto">DeFacto</a> is licensed under <a rel="nofollow" href="https://creativecommons.org/licenses/by-sa/2.5/deed.en">CC BY-SA 2.5</a></li>
+				<li> <a rel="nofollow" href="https://commons.wikimedia.org/wiki/File:Pierre_Despereax_09.19.2012_(8004871773).jpg">Teddy Bear</a>" by <a rel="nofollow" href="https://www.flickr.com/photos/thepeachpeddler/8004871773/">Pierre Despereax</a> is licensed under <a rel="nofollow" href="https://creativecommons.org/licenses/by-sa/2.0/deed.en">CC BY-SA 2.0</a></li>
+			</ul>
+		</div>
   </section>
 
   <!-- JS -->

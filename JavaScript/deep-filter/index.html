@@ -108,17 +108,17 @@
 					<div class="sample-images grey-background">
 						<h4 class="has-subcontent">Or, filter a sample image</h4>
 						<div class="row">
-							<div class="col-xs-6 col-sm-3 col-md-3 sample-center">
-								<a onclick="analyzeDefault('https://images.unsplash.com/photo-1479088360436-ef9dbade3214?w=1600&ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=b37ce33a6c3b8540e2386b7feceb02ef')"><img src="<%= slug %>/public/images/sample01.jpeg" class="sample-img"></a>
+							<div class="col-xs-6 col-sm-3 col-md-3 sample-center sample-image">
+								<a onclick="analyzeDefault('<%= slug %>/public/images/beetle.jpg')"><img src="<%= slug %>/public/images/beetle.jpg" class="sample-img"></a>
 							</div>
-							<div class="col-xs-6 col-sm-3 col-md-3 sample-center">
-								<a onclick="analyzeDefault('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?dpr=2&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=')"><img src="<%= slug %>/public/images/sample02.jpeg" class="sample-img"></a>
+							<div class="col-xs-6 col-sm-3 col-md-3 sample-center sample-image">
+								<a onclick="analyzeDefault('<%= slug %>/public/images/castle.jpg')"><img src="<%= slug %>/public/images/castle.jpg" class="sample-img"></a>
 							</div>
-							<div class="col-xs-6 col-sm-3 col-md-3 sample-center">
-								<a onclick="analyzeDefault('https://images.unsplash.com/photo-1430026996702-608b84ce9281?w=1600&ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=bc612c816d9b222124db4eb20ee53c6c')"><img src="<%= slug %>/public/images/sample03.jpeg" class="sample-img"></a>
+							<div class="col-xs-6 col-sm-3 col-md-3 sample-center sample-image">
+								<a onclick="analyzeDefault('<%= slug %>/public/images/face.jpg')"><img src="<%= slug %>/public/images/face.jpg" class="sample-img"></a>
 							</div>
-							<div class="col-xs-6 col-sm-3 col-md-3 sample-center">
-								<a onclick="analyzeDefault('https://images.unsplash.com/photo-1466657718950-8f9346c04f8f?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=42f94fdaf70349ae0cf274c9aa8d0a41')"><img src="<%= slug %>/public/images/sample04.jpeg" class="sample-img"></a>
+							<div class="col-xs-6 col-sm-3 col-md-3 sample-center sample-image">
+								<a onclick="analyzeDefault('<%= slug %>/public/images/lioness.jpg')"><img src="<%= slug %>/public/images/lioness.jpg" class="sample-img"></a>
 							</div>
 						</div>
 					</div>
@@ -232,6 +232,16 @@ print algo.pipe(input)
 						LEARN MORE
 					</a>
 				</div>
+			</div>
+
+			<div class="col-md-9" style="padding: 1em; margin-bottom: 1em; background-color: #eee;">
+				<h3>Image Credits</h3>
+				<ul>
+					<li>"<a rel="nofollow" href="https://commons.wikimedia.org/wiki/File:VW_1302_(2013-09-15_2307_Spu).JPG">VW  1302</a>" by <a rel="nofollow" href="https://commons.wikimedia.org/wiki/User:Spurzem">Lothar Spurzem</a> is licensed under <a rel="nofollow" href="https://creativecommons.org/licenses/by-sa/2.0/de/deed.en">CC BY-SA 2.0 DE</a></li>
+					<li>"<a rel="nofollow" href="https://commons.wikimedia.org/wiki/File:Schloss_Neuschwanstein_2013.jpg">Neuschwanstein Castle</a>" by <a rel="nofollow" href="https://commons.wikimedia.org/wiki/User:Der_Wolf_im_Wald">Thomas Wolf</a> is licensed under <a rel="nofollow" href="https://creativecommons.org/licenses/by-sa/3.0/de/deed.en">CC BY-SA 3.0 DE</a></li>
+					<li>"<a rel="nofollow" href="https://commons.wikimedia.org/wiki/File:Sabaa_Nissan_Militiaman.jpg">Sabaa Nissan Militiaman</a>" by <a rel="nofollow" href="https://commons.wikimedia.org/wiki/User:Christiaan">Christiaan Briggs</a> is licensed under <a rel="nofollow" href="https://creativecommons.org/licenses/by-sa/3.0/deed.en">CC BY-SA 3.0</a></li>
+					<li>"<a rel="nofollow" href="https://commons.wikimedia.org/wiki/File:Okonjima_Lioness.jpg">Okonjima Lioness</a>" by <a rel="nofollow" href="https://commons.wikimedia.org/wiki/User:Falense">Falense</a> is licensed under <a rel="nofollow" href="https://creativecommons.org/licenses/by-sa/3.0/deed.en">CC BY-SA 3.0</a></li>
+				</ul>
 			</div>
 		</div>
 	</section>

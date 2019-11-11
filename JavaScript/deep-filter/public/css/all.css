@@ -75,13 +75,6 @@ p.primary {
   font-weight: 300;
 }
 
-ul {-webkit-padding-start: 0;}
-
-li {
-  list-style-type: none;
-  display: inline-block;
-}
-
 /* Links */
 a,
 a:focus {color: #5000BE; text-decoration: none;}
@@ -133,6 +126,25 @@ a:hover {
   color: #5000BE;
 }
 .tab-content {margin-bottom: 32px;}
+
+.row {
+  margin-bottom: 4rem;
+}
+
+.sample-image a {
+  display: block;
+  position: relative;
+  padding-top: 100%;
+}
+
+.sample-image img {
+  object-fit: cover;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
 
 /* BUTTONS */
 .btn {

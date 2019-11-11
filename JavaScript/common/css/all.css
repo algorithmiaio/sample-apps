@@ -388,6 +388,21 @@ pre {
     border-radius: 0;
 }
 
+.sample-image a {
+    display: block;
+    position: relative;
+    padding-top: 100%;
+}
+
+.sample-image img {
+    object-fit: cover;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
 /* $MEDIA QUERIES */
 /* Extra small devices (phones, less than 768px) */
 /* This should be the default AKA no styles here */

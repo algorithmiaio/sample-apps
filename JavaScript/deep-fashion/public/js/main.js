@@ -21,9 +21,8 @@ $(document).ready(function() {
  */
 var getTags = function(url) {
   if(url) {
-    $('#imgUrl').val(
-      url.startsWith('http') ? url : `${window.location.origin}/${url}`
-    );
+    url = url.startsWith('http') ? url : `${window.location.origin}/${url}`
+    $('#imgUrl').val(url)
   } else {
     url = $('#imgUrl').val();
   }

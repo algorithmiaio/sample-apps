@@ -21,7 +21,9 @@ $(document).ready(function() {
  */
 var getInfo = function(url) {
   if(url) {
-    $('#imgUrl').val(url.indexOf('http')==0?url:''); //only display http URLs
+    $('#imgUrl').val(
+      url.startsWith('http') ? url : `${window.location.origin}/${url}`
+    )
   } else {
     url = $('#imgUrl').val();
   }

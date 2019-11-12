@@ -21,7 +21,9 @@ $(document).ready(function() {
  */
 var getTags = function(url) {
   if(url) {
-    if(url.indexOf('http')==0) {$('#imgUrl').val(url);} //only display http URLs
+    $('#imgUrl').val(
+      url.startsWith('http') ? url : `${window.location.origin}/${url}`
+    );
   } else {
     url = $('#imgUrl').val();
   }

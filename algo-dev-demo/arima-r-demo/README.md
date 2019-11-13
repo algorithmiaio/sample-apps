@@ -53,15 +53,10 @@ Note you always want to initialize the model outside of the algorithm function (
 
 ### Compile Code
 - Click the **"Compile"** button in the top right of the grey navbar
-- Now test your code in the console by passing in the data file we stored in our data collection.
-
-In this case we simply passed in a string, but we recommend to create a more robust data structure such as an R list or Python dictionary. That way you can allow for various input types, output files, and other customizations.
-
-### Pass in Input
-- Pass in the string: "data://YOUR_USERNAME/arima_r_demo/auto_arima_model.rds"
+- Now test your code in the console by passing in some test data: `{"h":20, "level": 99.5}`
 
 ### Publishing Your Model
-We'll cover adding your sample I/O, versioning, release notes, and best practices of creating your algorithms.
+- Click "publish" and walk through the dialogs, setting `{"h":20, "level": 99.5}` as the sample input. Then test out your new Algorithm by clicking "Run Example"
 
 ## Documentation
 

@@ -56,7 +56,8 @@ Note you always want to initialize the model outside of the algorithm function (
 - Now test your code in the console by passing in some test data: `{"h":20, "level": 99.5}`
 
 ### Publishing Your Model
-- Click "publish" and walk through the dialogs, setting `{"h":20, "level": 99.5}` as the sample input. Then test out your new Algorithm by clicking "Run Example"
+- Click "publish" and walk through the dialogs, setting `{"h":20, "level": 99.5}` as the sample input
+- After publishing, test out your new Algorithm by clicking "Run Example"
 
 ## Documentation
 

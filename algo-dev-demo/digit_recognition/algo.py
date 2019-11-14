@@ -13,6 +13,9 @@ def apply(imgPath):
     # (optional) use SmartDownloader to download image safely - see https://algorithmia.com/algorithms/util/SmartImageDownloader
     imgPath = client.algo('util/SmartImageDownloader/').pipe(imgPath).result['savePath'][0]
     imgFile = client.file(imgPath).getFile().name
+    # NOTE: if util/SmartImageDownloader is not available, replace the prior two lines with:
+    #import urllib.request
+    #(imgFile, _) = urllib.request.urlretrieve(imgPath)
     img = Image.open(imgFile)
     # resize and greyscale image
     img = img.resize((8, 8), Image.BICUBIC)

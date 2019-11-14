@@ -52,7 +52,7 @@ Note you always want to initialize the model outside of the apply function (in R
 
 ### Compile Code
 - Click the **"Compile"** button in the top right of the grey navbar
-- Now test your code in the console by passing in the data file we stored in our data collection.
+- Now test your code in the console by passing in the data file we stored in our data collection: "data://YOUR_USERNAME/scikit_learn_demo/boston_test_data.csv"
 
 In this case we simply passed in a string, but we recommend to create a more robust data structure such as a Python dictionary, or an R list. That way you can allow for various input types, output files, and other customizations.
 

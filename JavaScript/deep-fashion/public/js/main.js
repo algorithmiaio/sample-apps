@@ -34,10 +34,10 @@ var getTags = function(url) {
   $('#userImg').attr('src',url);
   algoClient1.algo(algorithms.tagger).pipe(input).then(function (output) {
     if (output.error) {
-      endWait(output.error.message);
+      hideWait(output.error.message);
     } else {
       showPredictions(output.result.articles);
-      endWait();
+      hideWait();
     }
   });
 };
@@ -126,7 +126,7 @@ var initDropzone = function() {
   });
   dropzone.on("error", function(file, err) {
     dropzone.removeFile(file);
-    endWait(err);
+    hideWait(err);
   });
 };
 

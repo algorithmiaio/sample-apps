@@ -40,7 +40,7 @@ var search = function(query) {
       // Render search results
       try {
         renderSearchResults(query, output.result);
-        endWait(true);
+        hideWait(true);
       } catch(e) {
         console.log("error rendering", e);
         showError(e.message)
@@ -123,7 +123,7 @@ var showWait = function() {
  * hide dots, reveal button, enable links
  * @param showResults should the results section be revealed?
  */
-var endWait = function(showResults) {
+var hideWait = function(showResults) {
   $('#overlay').addClass('hidden');
   $("#analyze-button-text").removeClass("no-viz");
   $('#search-query').removeAttr('disabled');
@@ -142,5 +142,5 @@ var endWait = function(showResults) {
 
 var showError = function(message) {
   $("#status-label").html('<div class="alert alert-danger" role="alert">'+message+' </div>');
-  endWait(false);
+  hideWait(false);
 };

@@ -36,10 +36,10 @@ var getPlaces = function(url) {
   $('#userImg').attr('src',url);
   algoClient.algo(algorithms.tagger).pipe(input).then(function (output) {
     if (output.error) {
-      endWait(output.error.message);
+      hideWait(output.error.message);
     } else {
       showPredictions(output.result.predictions);
-      endWait();
+      hideWait();
     }
   });
 };
@@ -116,6 +116,6 @@ var initDropzone = function() {
   });
   dropzone.on("error", function(file, err) {
     dropzone.removeFile(file);
-    endWait(err);
+    hideWait(err);
   });
 };

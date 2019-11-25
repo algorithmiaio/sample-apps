@@ -28,7 +28,7 @@ var analyzeUrl = function(url) {
       if (output.error) {
         console.log("There was an error", output.error.message);
         $("#status-label").html('<div class="alert alert-danger" role="alert">' + output.error.message + ' </div>');
-        endWait();
+        hideWait();
       } else {
         // Add results to page
         showResults(output.result);
@@ -37,7 +37,7 @@ var analyzeUrl = function(url) {
   } else {
     // Error Handling
     $("#status-label").html('<div class="alert alert-danger" role="alert">Please enter a valid URL.</div>');
-    endWait();
+    hideWait();
   }
 };
 
@@ -137,7 +137,7 @@ var showResults = function(data){
   }
 
   // reveal and smooth-scroll to results section
-  endWait(true);
+  hideWait(true);
 
 };
 
@@ -183,7 +183,7 @@ var showWait = function() {
  * hide overlay & dots, reveal button
  * @param showResults should the results section be revealed?
  */
-var endWait = function(showResults) {
+var hideWait = function(showResults) {
   $("#overlay").addClass("hidden");
   $("#analyze-button-text").removeClass("no-viz");
   $(".dots-container").addClass("hidden");

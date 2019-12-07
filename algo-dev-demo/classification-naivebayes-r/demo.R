@@ -33,5 +33,5 @@ prediction <- function(data) {
 algorithm <- function(input) {
     example_data <- read_data(input)
     predictions <- prediction(example_data)
-    return(predictions)
+    return(table(predictions))
 }

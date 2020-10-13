@@ -10,7 +10,7 @@ Install the Algorithmia client from PyPi:
 
 ```pip install algorithmia```
 
-You’ll also need a free Algorithmia account, which includes 5,000 free credits a month.
+You’ll also need a free Algorithmia account.
 
 Sign up [here](https://algorithmia.com/), and then grab your [API key](algorithmia.com/user#credentials).
 

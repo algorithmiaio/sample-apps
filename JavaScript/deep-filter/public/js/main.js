@@ -108,7 +108,7 @@ function generateStylizedImage(img, filterName) {
   };
 
   Algorithmia.client(Algorithmia.api_key)
-    .algo("algo://algorithmiahq/DeepFilterDemo/0.1.10")
+    .algo("algo://algorithmiahq/DeepFilterDemo/0.1.11")
     .pipe(algoInput)
     .then(function(output) {
       if(output.error) {

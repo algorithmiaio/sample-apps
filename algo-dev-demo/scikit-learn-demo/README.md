@@ -34,7 +34,7 @@ Let's go through the form together to create our algorithm.
 Now click on the **Source Code** tab to go to the Web IDE.
 
 - Open the file with the same name as the algorithm, on this case it would be: `scikit_learn_demo.py`
-- Delete that code, and copy and paste the code from the file [demo/boston-housing-prices.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/scikit-learn-demo/demo/boston-housing-prices.py)
+- Delete that code, and copy and paste the code from the file [src/boston-housing-prices.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/scikit-learn-demo/src/boston-housing-prices.py)
 - Change the name of the data collection to the one we created earlier.
 
 Recall our data collection is called `scikit_learn_demo` and you'll also need

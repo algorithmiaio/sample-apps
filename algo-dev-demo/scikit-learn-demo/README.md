@@ -57,7 +57,8 @@ The new dependencies should be:
 
 ```
 algorithmia>=1.0.0,<2.0
-numpy
+numpy==1.19.4
+scipy==1.5.3
 scikit-learn==0.23.2
 ```
 

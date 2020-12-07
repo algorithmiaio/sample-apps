@@ -1,6 +1,4 @@
 import sys
-import csv
-import json
 
 import joblib
 import numpy as np

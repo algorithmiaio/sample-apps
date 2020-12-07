@@ -5,6 +5,7 @@ import numpy as np
 import Algorithmia
 from Algorithmia.errors import AlgorithmException
 
+
 client = Algorithmia.client()
 
 

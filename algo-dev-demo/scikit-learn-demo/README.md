@@ -1,6 +1,6 @@
 # scikit-learn Demo
 
-In this demo we'll go through deploying a pre-trained [scikit-learn](https://scikit-learn.org/) model, querying this model to make inferences, how to host your data on Algorithmia, and finally we'll call the algorithm in batch mode on the data we uploaded to Algorithmia.
+In this demo, we'll go through deploying a pre-trained [scikit-learn](https://scikit-learn.org/) model, querying this model to make inferences, how to host your data on Algorithmia, and finally, we'll call the algorithm in batch mode on the data we uploaded to Algorithmia.
 
 ## Prerequisites
 
@@ -33,7 +33,7 @@ Let's go through the form together to create our algorithm.
 
 Now click on the **Source Code** tab to go to the Web IDE.
 
-- Open the file with the same name as the algorithm, on this case it would be: `scikit_learn_demo.py`
+- Open the file with the same name as the algorithm, in this case, it would be: `scikit_learn_demo.py`
 - Delete that code, and copy and paste the code from the file [src/boston-housing-prices.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/scikit-learn-demo/src/boston-housing-prices.py)
 - Change the name of the data collection to the one we created earlier.
 
@@ -62,11 +62,11 @@ scipy==1.5.3
 scikit-learn==0.23.2
 ```
 
-Click on **Save dependencies** so that this get saved to the `requirements.txt` file.
+Click on **Save dependencies** so that it gets saved to the `requirements.txt` file.
 
 ### Compile Algorithm
 
-Click the **Build** button in the top right to compile the algorithm, this will take a around 1 minute.
+Click the **Build** button in the top right to compile the algorithm, this will take around 1 minute.
 You will see something like `Algorithm version algo://USERNAME/scikit_learn_demo/ad9bb8c0ae1d9c267ea3803bfa9b7c2652bb1921 is now online` when its done.
 
 ### Making predictions

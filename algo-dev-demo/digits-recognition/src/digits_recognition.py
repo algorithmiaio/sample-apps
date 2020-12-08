@@ -32,7 +32,8 @@ def apply(query):
     return query
     if isinstance(query, dict):
         if "url" in query.keys():
-            # use SmartDownloader to download image safely - see https://algorithmia.com/algorithms/util/SmartImageDownloader
+            # Use SmartDownloader to download image safely
+            # See https://algorithmia.com/algorithms/util/SmartImageDownloader
             img_path = (
                 client.algo("util/SmartImageDownloader/")
                 .pipe(query["url"])
@@ -40,7 +41,7 @@ def apply(query):
             )
             img_fpath = client.file(img_path).getFile().name
 
-            # NOTE: if util/SmartImageDownloader is not available, replace the prior two lines with:
+            # NOTE: if util/SmartImageDownloader is not available, replace the prior lines with:
             # import urllib.request
             # (img_fpath, _) = urllib.request.urlretrieve(img_path)
         elif "base64" in query.keys():

@@ -74,7 +74,7 @@ You will see something like `Algorithm version algo://<USERNAME>/digits_recognit
 Now you can make inferences on external images by passing an URL to an image, for example:
 
 ```
-> {"url": "https://raw.githubusercontent.com/algorithmiaio/sample-apps/master/algo-dev-demo/digit_recognition/images/digit_2.png"}
+> {"url": "https://raw.githubusercontent.com/algorithmiaio/sample-apps/master/algo-dev-demo/digits-recognition/images/digit_2.png"}
 2
 ```
 

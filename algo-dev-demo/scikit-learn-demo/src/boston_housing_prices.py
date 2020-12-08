@@ -7,12 +7,12 @@ from Algorithmia.errors import AlgorithmException
 
 
 client = Algorithmia.client()
+model_file_path = "data://<USERNAME>/scikit_learn_demo/boston-regression.joblib"
 
 
 def load_model():
     # Get file by name
-    file_path = "data://USERNAME/scikit_learn_demo/scikit-demo-boston-regression.joblib"
-    model_path = client.file(file_path).getFile().name
+    model_path = client.file().getFile().name
 
     # Open file and load model
     with open(model_path, "rb") as f:
@@ -55,8 +55,8 @@ def process_input(fpath):
 
 
 if __name__ == "__main__":
-    pass
     # fmt: off
+    pass
     # print(apply({"predict": [[0.01778,95,1.47,0,0.403,7.135,13.9,7.6534,3,402,17,384.3,4.45]]}))
     # print(apply({"batch": "data/boston_test_data.csv"}))
     # print(apply({"batch": "data://YOUR_USERNAME/boston_test_data.csv"}))

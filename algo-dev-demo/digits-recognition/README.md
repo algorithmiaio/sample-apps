@@ -7,8 +7,8 @@ The trained model is based on the [scikit-learn documentation](https://scikit-le
 This demo features:
 
 - Hosting models in the Algorithmia platform
-- Calling other algorithms as part of the inference pipeline, on this case for image preprocessing
-- Use of multiple query types, on this case: url and base64
+- Calling other algorithms as part of the inference pipeline, in this case for image preprocessing
+- Use of multiple query types, in this case: url and base64
 
 ## Prerequisites
 
@@ -66,8 +66,8 @@ Click on **Save dependencies** so that it gets saved to the `requirements.txt` f
 
 ## Compile Algorithm
 
-Click the **Build** button in the top right to compile the algorithm, this will take around 1-2 minute.
-You will see something like `Algorithm version algo://<USERNAME>/digits_recognition/ad9bb8c0ae1d9c267ea3803bfa9b7c2652bb1921 is now online` when the model its built, now we can use it to make predictions.
+Click the **Build** button in the top right to compile the algorithm, this will take around 1-2 minutes.
+You will see something like `Algorithm version algo://<USERNAME>/digits_recognition/ad9bb8c0ae1d9c267ea3803bfa9b7c2652bb1921 is now online` when the model is built, now we can use it to make predictions.
 
 ## Making predictions
 

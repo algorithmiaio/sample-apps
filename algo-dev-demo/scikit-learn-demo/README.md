@@ -38,13 +38,13 @@ Now click on the **Source Code** tab to go to the Web IDE.
 - Change the name of the data collection to the one we created earlier.
 
 Recall our data collection is called `scikit_learn_demo` and you'll also need
-to change `USERNAME` to your own username on this line:
+to change `USERNAME` to your own username or organization on this line:
 
 ```
 file_path = "data://USERNAME/scikit_learn_demo/scikit-demo-boston-regression.pkl"
 ```
 
-Be sure to save this changes.
+Be sure to save these changes.
 
 Note that you always want to initialize the model outside of the apply function.
 This way, after the model is initially loaded, subsequent calls will be much faster within that session.

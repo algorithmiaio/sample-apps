@@ -1,67 +1,94 @@
-# Scikit-Learn Demo
+# scikit-learn Demo
 
-In this demo we'll go through how to host your data on Algorithmia, you'll learn how to deploy your pre-trained Scikit-Learn model and finally we'll call the algorithm once it's been deployed to make inferences.
+In this demo, we'll go through deploying a pre-trained [scikit-learn](https://scikit-learn.org/) model, querying this model to make inferences, how to host your data on Algorithmia, and finally, we'll call the algorithm in batch mode on the data we uploaded to Algorithmia.
 
-## Prerequisites 
+## Prerequisites
 
-Fork this repository so you have access to the code and data files. While we will use the Algorithmia Web IDE in this demo, note that you can use the [CLI](https://algorithmia.com/developers/clients/cli/) to deploy your model instead once you've [Created an Algorithm](https://algorithmia.com/developers/algorithm-development/languages/python/#create-an-algorithm) and cloned your repository.
+Fork this repository so you have access to the code and data files. While we will use the Algorithmia Web IDE in this demo note that you can also use a repository from Github or you can use the [CLI](https://algorithmia.com/developers/clients/cli/) to deploy your model instead once you've [created an algorithm](https://algorithmia.com/developers/algorithm-development/languages/python/#create-an-algorithm) and cloned your repository.
 
-## Upload Your Data To Data Collections
+## Workflow
 
-In this demo, we are going to host our data on the Algorithmia platform in [Data Collections](https://algorithmia.com/developers/data/hosted/). 
+### Upload pre-trained model to Data Collections
 
-You'll want to create a data collection to host your pickled model and your test data: 
+In this demo, we are going to host the serialized pre-trained model and the test data on the Algorithmia platform, for more info look at the [Data Collections docs](https://algorithmia.com/developers/data/hosted/).
 
-- Log in to your Algorithmia account and click your avatar which will show a dropdown of choices. Click **"Manage Data"**
+To create a Data Collection:
 
-- Then in the left panel on the page of data collection options, go ahead and click **"My Hosted Data"**
+- Log in to your Algorithmia account and click on **Data Sources** on the left navigation sidebar
+- Click on **New Data Source** on the top right corner, select **Hosted Data Collection** and name it `scikit_learn_demo`
+- You can now either select or drag and drop the files [data/scikit-demo-boston-regression.joblib](https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/scikit-learn-demo/data/scikit-demo-boston-regression.joblib) and [data/boston_test_data.csv](https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/scikit-learn-demo/data/boston_test_data.csv) to upload them
 
-- Click on **“Add Collection”** under the “My Collections” section on your data collections page. Let's name ours "scikit_learn_demo"
+### Create the Algorithm
 
-- After you create your collection you can set the read and write access on your data collection. We are going to select **"Private"** since only you will be calling your algorithm in this instance. 
+From the home page click the **Create new** button at the top right of the navbar and select **Algorithm**.
+Let's go through the form together to create our algorithm.
 
-- Now, let's put some data into your newly created data collection. You can either drag and drop the files [scikit-demo-boston-regression.pkl](https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/scikit-learn-demo/data/scikit-demo-boston-regression.pkl) and [boston_test_data.csv](https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/scikit-learn-demo/data/boston_test_data.csv) or you can click **"Drop files here to upload"** from where you stored the repo on your computer.
+- Name the Algorithm `scikit_learn_demo`
+- On the **Source Code** section select Algorithmia and **Source Code visibility**: **Restricted**
+- On the **Environment** section select **Language**: **Python 3** and **Environment**: **Python 3.7**.
+- You can leave the other values as the default ones
+- Click on **Create new algorithm**
 
-## Create Your Algorithm
+### Add the source code
 
-Now we are ready to deploy our model.
+Now click on the **Source Code** tab to go to the Web IDE.
 
-### First create an algorithm
-- Click the **"Plus"** icon at the top right of the navbar
-- Let's go through the form together to create our algorithm
-- Click on the tab **"Source"** and you'll notice boilerplate code for Hello World.
-- Let's delete that code, and copy and paste the code from the file [boston-housing-prices.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/scikit-learn-demo/demo/boston-housing-prices.py)
-- Note that you'll need to change the name of the data collection to the one we created earlier. 
+- Open the file with the same name as the algorithm, in this case, it would be: `scikit_learn_demo.py`
+- Delete that code, and copy and paste the code from the file [src/boston-housing-prices.py](https://github.com/algorithmiaio/sample-apps/blob/master/algo-dev-demo/scikit-learn-demo/src/boston-housing-prices.py)
+- Change the name of the data collection to the one we created earlier.
 
-Recall our data collection is called "scikit_learn_demo" and you'll need
-to change "YOUR_USERNAME" to your own username: `file_path =
-'data://YOUR_USERNAME/scikit_learn_demo/scikit-demo-boston-regression.pkl'`
+Recall our data collection is called `scikit_learn_demo` and you'll also need
+to change `USERNAME` to your own username or organization on this line:
+
+```
+file_path = "data://USERNAME/scikit_learn_demo/scikit-demo-boston-regression.pkl"
+```
+
+Be sure to save these changes.
+
+Note that you always want to initialize the model outside of the apply function.
+This way, after the model is initially loaded, subsequent calls will be much faster within that session.
+That is something we do on this example source code.
 
 ### Add Dependencies
-- Click the **"Dependencies"** button in the grey navbar.
-- Add Dependencies to the requirements.txt file under the ones that already exist, adding:
+
+Click the **"Dependencies"** button in the top navigation.
+The new dependencies should be:
+
 ```
- numpy
- scikit-learn>=0.14,<0.18
+algorithmia>=1.0.0,<2.0
+numpy==1.19.4
+scipy==1.5.3
+scikit-learn==0.23.2
 ```
- 
-### Code Example
-- This will be a brief description of the code example including where to load the model. 
 
-Note you always want to initialize the model outside of the apply function (in R it's called the algorithm function). This way, after the model is initially loaded, subsequent calls will be much faster within that session.
+Click on **Save dependencies** so that it gets saved to the `requirements.txt` file.
 
-### Compile Code
-- Click the **"Compile"** button in the top right of the grey navbar
-- Now test your code in the console by passing in the data file we stored in our data collection: "data://YOUR_USERNAME/scikit_learn_demo/boston_test_data.csv"
+### Compile Algorithm
 
-In this case we simply passed in a string, but we recommend to create a more robust data structure such as a Python dictionary, or an R list. That way you can allow for various input types, output files, and other customizations.
+Click the **Build** button in the top right to compile the algorithm, this will take around 1 minute.
+You will see something like `Algorithm version algo://USERNAME/scikit_learn_demo/ad9bb8c0ae1d9c267ea3803bfa9b7c2652bb1921 is now online` when its done.
 
-### Publishing Your Model
-We'll cover adding your sample I/O, versioning, release notes, and best practices of creating your algorithms.
+### Making predictions
 
-## Documentation
+Now you can make a real time inference on the model by, for example:
+
+```
+> {"predict": [[0.01778,95,1.47,0,0.403,7.135,13.9,7.6534,3,402,17,384.3,4.45]]}
+[31.048342563320485]
+```
+
+Finally, you can pass the path to the file we uploaded earlier to make a batch prediction:
+
+```
+> {"batch": "data://danielfrg/scikit_learn_demo/boston_test_data.csv"}
+[31.048342563320485,28.91587252133459 ... ]
+```
+
+Note that these different query types are defined in the source code we copy/pasted earlier
+you can make the algorithms as simple or complex as you need.
+
+## More documentation
 
 - [Documentation for Scikit-Learn](https://algorithmia.com/developers/algorithm-development/model-guides/scikit/)
-- [Documentation for Tensorflow](https://algorithmia.com/developers/algorithm-development/model-guides/tensorflow/)
 - [Working with Data](https://algorithmia.com/developers/data/)
-

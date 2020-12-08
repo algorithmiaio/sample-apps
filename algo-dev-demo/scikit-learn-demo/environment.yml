@@ -1,0 +1,8 @@
+name: scikit-learn-demo
+dependencies:
+- python=3.7
+- numpy
+- scikit-learn
+- pip
+- pip:
+  - algorithmia

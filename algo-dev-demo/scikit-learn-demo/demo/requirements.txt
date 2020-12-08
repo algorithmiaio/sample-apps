@@ -1,2 +1,0 @@
-numpy
-scikit-learn>=0.14,<0.18

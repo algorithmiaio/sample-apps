@@ -16,7 +16,7 @@ Fork this repository so you have access to the algorithm code and data files. We
 
 ## Upload pre-trained model to Data Collections
 
-We are going to host the serialized pre-trained model on the Algorithmia platform, for more info look at the [Data Collections docs](https://algorithmia.com/developers/data/hosted/).
+We are going to host the serialized pre-trained model on the Algorithmia platform, for more info look at the [Data Collections docs](https://algorithmia.com/developers/data/hosted).
 
 To create a Data Collection:
 

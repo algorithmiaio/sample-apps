@@ -10,4 +10,4 @@ X_train, X_test, y_train, y_test = train_test_split(data.data, data.target)
 clf = LinearRegression()
 clf.fit(X_train, y_train)
 
-dump(clf, "data/scikit-demo-boston-regression.joblib")
+dump(clf, "data/boston-regression.joblib")

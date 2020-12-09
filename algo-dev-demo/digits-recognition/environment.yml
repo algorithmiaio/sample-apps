@@ -1,0 +1,10 @@
+name: digits-recognition-demo
+dependencies:
+- python=3.7
+- pip
+- numpy
+- scikit-learn
+- pillow
+- matplotlib
+- pip:
+  - Algorithmia

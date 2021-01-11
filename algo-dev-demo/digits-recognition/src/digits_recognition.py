@@ -29,7 +29,6 @@ model = load_model()
 
 
 def apply(query):
-    return query
     if isinstance(query, dict):
         if "url" in query.keys():
             # Use SmartDownloader to download image safely
@@ -48,7 +47,7 @@ def apply(query):
             tempfile_ = base64_to_file(query["base64"])
             img_fpath = tempfile_.name
         elif "path" in query.keys():
-            img_fpath = query["path"]
+            img_fpath = client.file(query["path"]).getFile().name
         else:
             raise AlgorithmException(
                 "Invalid input JSON format, only `predict` and `batch` are valid fields"

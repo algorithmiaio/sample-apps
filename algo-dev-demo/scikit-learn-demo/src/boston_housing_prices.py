@@ -12,7 +12,7 @@ model_file_path = "data://<USERNAME>/scikit_learn_demo/boston-regression.joblib"
 
 def load_model():
     # Get file by name
-    model_path = client.file().getFile().name
+    model_path = client.file(model_file_path).getFile().name
 
     # Open file and load model
     with open(model_path, "rb") as f:

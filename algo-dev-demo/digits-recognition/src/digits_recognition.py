@@ -29,7 +29,6 @@ model = load_model()
 
 
 def apply(query):
-    return query
     if isinstance(query, dict):
         if "url" in query.keys():
             # Use SmartDownloader to download image safely
@@ -43,15 +42,17 @@ def apply(query):
 
             # NOTE: if util/SmartImageDownloader is not available, replace the prior lines with:
             # import urllib.request
+            # img_path = query["url"]
             # (img_fpath, _) = urllib.request.urlretrieve(img_path)
         elif "base64" in query.keys():
             tempfile_ = base64_to_file(query["base64"])
             img_fpath = tempfile_.name
         elif "path" in query.keys():
-            img_fpath = query["path"]
+            img_path = query["path"]
+            img_fpath = client.file(img_path).getFile().name
         else:
             raise AlgorithmException(
-                "Invalid input JSON format, only `predict` and `batch` are valid fields"
+                "Invalid input JSON format, only `url`, `base64`, and `path` are valid fields"
             )
     else:
         raise AlgorithmException("Input should be JSON")
@@ -85,6 +86,13 @@ if __name__ == "__main__":
     # print(apply({"path": "data/digit_1.png"}))
     # print(apply({"path": "data/digit_2.png"}))
     # print(apply({"path": "data/digit_3.png"}))
-    # print(apply({"url": "https://raw.githubusercontent.com/algorithmiaio/sample-apps/master/algo-dev-demo/digits-recognition/images/digit_1.png"}))
-    # print(apply({"url": "https://raw.githubusercontent.com/algorithmiaio/sample-apps/master/algo-dev-demo/digits-recognition/images/digit_2.png"}))
-    # print(apply({"url": "https://raw.githubusercontent.com/algorithmiaio/sample-apps/master/algo-dev-demo/digits-recognition/images/digit_3.png"}))
+    # print(apply({"path": "data://YOUR_USERNAME/digits_recognition/digit_1.png"}))
+    # print(apply({"path": "data://YOUR_USERNAME/digits_recognition/digit_2.png"}))
+    # print(apply({"path": "data://YOUR_USERNAME/digits_recognition/digit_3.png"}))
+    # print(apply({"url": "https://raw.githubusercontent.com/algorithmiaio/sample-apps/master/algo-dev-demo/digits-recognition/data/digit_1.png"}))
+    # print(apply({"url": "https://raw.githubusercontent.com/algorithmiaio/sample-apps/master/algo-dev-demo/digits-recognition/data/digit_2.png"}))
+    # print(apply({"url": "https://raw.githubusercontent.com/algorithmiaio/sample-apps/master/algo-dev-demo/digits-recognition/data/digit_3.png"}))
+
+# {"path": "data://YOUR_USERNAME/digits_recognition/digit_1.png"}
+# {"path": "data://YOUR_USERNAME/digits_recognition/digit_2.png"}
+# {"path": "data://YOUR_USERNAME/digits_recognition/digit_3.png"}

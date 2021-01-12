@@ -12,7 +12,7 @@ model_file_path = "data://<USERNAME>/scikit_learn_demo/boston-regression.joblib"
 
 def load_model():
     # Get file by name
-    model_path = client.file().getFile().name
+    model_path = client.file(model_file_path).getFile().name
 
     # Open file and load model
     with open(model_path, "rb") as f:
@@ -59,4 +59,7 @@ if __name__ == "__main__":
     pass
     # print(apply({"predict": [[0.01778,95,1.47,0,0.403,7.135,13.9,7.6534,3,402,17,384.3,4.45]]}))
     # print(apply({"batch": "data/boston_test_data.csv"}))
-    # print(apply({"batch": "data://YOUR_USERNAME/boston_test_data.csv"}))
+    # print(apply({"batch": "data://YOUR_USERNAME/scikit_learn_demo/boston_test_data.csv"}))
+
+# {"predict": [[0.01778,95,1.47,0,0.403,7.135,13.9,7.6534,3,402,17,384.3,4.45]]}
+# {"batch": "data://YOUR_USERNAME/scikit_learn_demo/boston_test_data.csv"}

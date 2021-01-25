@@ -26,7 +26,7 @@ To create a Data Collection:
 - Log in to your Algorithmia account and click on **Data Sources** on the left navigation sidebar
 - Click on **New Data Source** on the top right corner, select **Hosted Data Collection** and name it `h2o_demo`
 - You can now select or drag and drop the pre-trained model: [data/DeepLearning_model_python_1611090304383_1.zip](https://github.com/algorithmiaio/sample-apps/raw/master/algo-dev-demo/h2o-python-mojo/data/DeepLearning_model_python_1611090304383_1.zip) to upload it to the Algorithmia Hosted Collection
-- Once the file it's uploaded you can copy the URI by clicking the triple dots to the right of the file name (e.g. `data://<USERNAME>/h2o_demo/DeepLearning_model_python_1611090304383_1.zip`)
+- Once the file is uploaded you can copy the URI by clicking the triple dots to the right of the file name (e.g. `data://<USERNAME>/h2o_demo/DeepLearning_model_python_1611090304383_1.zip`)
 
 ## Create the Algorithm
 

@@ -10,7 +10,7 @@ This demo features:
 
 ## Prerequisites
 
-Fork this repository so you have access to the code and data files. While we will use the Algorithmia Web IDE in this demo note that you can also use a repository from Github or you can use the [CLI](https://algorithmia.com/developers/clients/cli/) to deploy your model instead once you've [created an algorithm](https://algorithmia.com/developers/algorithm-development/languages/python/#create-an-algorithm) and cloned your repository.
+Clone this repository so you have access to the code and data files. While we will use the Algorithmia Web IDE in this demo note that you can also use a repository from Github or you can use the [CLI](https://algorithmia.com/developers/clients/cli/) to deploy your model instead once you've [created an algorithm](https://algorithmia.com/developers/algorithm-development/languages/python/#create-an-algorithm) and cloned your repository.
 
 ## Upload pre-trained model to Data Collections
 

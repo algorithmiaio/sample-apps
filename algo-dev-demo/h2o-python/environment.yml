@@ -1,0 +1,9 @@
+name: h2o-python
+dependencies:
+- python=3.7
+- pip
+- black
+- pylint
+- pip:
+  - h2o==3.32.0.2
+  - pandas==1.0.5

@@ -6,10 +6,10 @@ This whole demo uses the [H2O python library](http://h2o-release.s3.amazonaws.co
 The model was trained using the `train.py` script located on this directory
 but it could also have been trained and serialized in other languages that H2O supports.
 
-This demo features the usage of an special environment designed to run H2O models in algorithmia.
+This demo features the usage of an special environment designed to run H2O models in Algorithmia.
 
 Other examples with H2O:
-- Deploying MOJO models
+- [Deploying H2O MOJO models (Python)](https://github.com/algorithmiaio/sample-apps/tree/master/algo-dev-demo/h2o-python-mojo)
 
 ## Prerequisites
 

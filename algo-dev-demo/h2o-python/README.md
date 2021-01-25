@@ -13,7 +13,7 @@ Other examples with H2O:
 
 ## Prerequisites
 
-Fork this repository so you have access to the algorithm code and data files. We will use the Algorithmia Web IDE in this demo but note that you can also use a repository [from Github](https://algorithmia.com/developers/algorithm-development/source-code-management) or you can use the [CLI](https://algorithmia.com/developers/clients/cli/) to deploy your model instead once you've [created an algorithm](https://algorithmia.com/developers/algorithm-development/languages/python/#create-an-algorithm) and cloned your repository.
+Clone this repository so you have access to the algorithm code and data files. We will use the Algorithmia Web IDE in this demo but note that you can also use a repository [from Github](https://algorithmia.com/developers/algorithm-development/source-code-management) or you can use the [CLI](https://algorithmia.com/developers/clients/cli/) to deploy your model instead once you've [created an algorithm](https://algorithmia.com/developers/algorithm-development/languages/python/#create-an-algorithm) and cloned your repository.
 
 ## Upload pre-trained model to Data Collections
 

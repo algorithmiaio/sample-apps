@@ -1,0 +1,4 @@
+algorithmia>=1.0.0,<2.0
+six
+h2o==3.32.0.2
+pandas==1.0.5

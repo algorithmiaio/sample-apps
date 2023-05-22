@@ -1,4 +1,4 @@
 algorithmia==1.0.5
 enum34==1.1.6
-requests==2.10.0
+requests==2.31.0
 six==1.10.0
